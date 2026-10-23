@@ -80,8 +80,14 @@ def validate_config(config):
         if config['method'] != 'tqg' or isinstance(seed, bool) or not isinstance(seed, int) or seed < 0:
             raise ValueError('Permuted query labels require TQG and a nonnegative permutation seed')
     predictor = config['adaptation'].get('feedback_predictor', 'responses')
-    if predictor not in ('responses', 'mean_residual', 'responses_with_intercept'):
+    if predictor not in ('responses', 'mean_residual', 'responses_with_intercept', 'pseudo_labels'):
         raise ValueError('Unknown feedback predictor')
+    if predictor == 'pseudo_labels':
+        threshold = config['adaptation'].get('confidence_threshold', .9)
+        if isinstance(threshold, bool) or not isinstance(threshold, (int, float)) or not math.isfinite(threshold) or not 0 <= threshold <= 1:
+            raise ValueError('confidence_threshold must be finite and between zero and one')
+        if mode != 'true':
+            raise ValueError('Pseudo labels do not use the source-query permutation control')
     if predictor != 'responses' and config['method'] != 'tqg':
         raise ValueError('Residual-predictor controls require the TQG data roles')
     if 'update_budget' in config['warmup']:

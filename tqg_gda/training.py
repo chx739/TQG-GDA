@@ -175,6 +175,22 @@ def _finite_parameters(model):
         raise FloatingPointError('Nonfinite network parameters')
 
 
+def pseudo_label_loss(logits, threshold):
+    """Hard, stopped pseudo labels; normalize by retained graphs, never labels.
+
+    Confidence and labels are both taken from the current pre-update snapshot.
+    The empty-selection value stays attached to logits with exactly zero gradient.
+    """
+    with torch.no_grad():
+        confidence, labels = logits.detach().softmax(-1).max(-1)
+        retained = confidence >= threshold
+    loss = (F.cross_entropy(logits[retained], labels[retained])
+            if retained.any() else logits.sum() * 0.)
+    count = int(retained.sum())
+    return loss, dict(status='pseudo_labels', retained_count=count,
+        target_graphs=len(logits), retained_fraction=count / len(logits), threshold=threshold)
+
+
 class TQGTrainer:
     def __init__(self, model, config):
         self.model = model
@@ -196,28 +212,36 @@ class TQGTrainer:
         batch, fit_ids = task.sample(c['source_pool'], c['fit_batch_size'], self.batch_rngs['fit'], p.device, p.dtype)
         self.optimizer.zero_grad(set_to_none=True)
         feedback, query_ids, target_ids, label_control = None, (), (), None
+        pseudo_auxiliary, pseudo_statistics = None, None
         started = time.perf_counter()
         if self.config['method'] == 'tqg':
-            query, query_ids = task.sample('query', c['query_batch_size'], self.batch_rngs['query'], p.device, p.dtype)
-            target, target_ids = task.sample('target', c['target_batch_size'], self.batch_rngs['target'], p.device, p.dtype)
-            labels = query.y
-            if self.label_rng is not None:
-                permutation = torch.randperm(len(labels), generator=self.label_rng).to(labels.device)
-                labels = labels[permutation]
-            label_control = dict(mode=self.label_mode, graphs=len(labels), changed=int((labels != query.y).sum()),
-                                 permutation_seed=c.get('query_permutation_seed'))
             predictor = c.get('feedback_predictor', 'responses')
-            if predictor == 'mean_residual':
-                feedback = build_mean_feedback(self.model, query, labels, target)
-            elif predictor == 'responses':
-                feedback = build_feedback(self.model, query, labels, target, self.probes, self.probe_rng)
+            if predictor == 'pseudo_labels':
+                target, target_ids = task.sample('target', c['target_batch_size'], self.batch_rngs['target'], p.device, p.dtype)
+                pseudo_auxiliary, pseudo_statistics = pseudo_label_loss(
+                    self.model(target), c.get('confidence_threshold', .9))
             else:
-                feedback = build_feedback(self.model, query, labels, target, self.probes, self.probe_rng,
-                                          predictor=predictor)
+                query, query_ids = task.sample('query', c['query_batch_size'], self.batch_rngs['query'], p.device, p.dtype)
+                target, target_ids = task.sample('target', c['target_batch_size'], self.batch_rngs['target'], p.device, p.dtype)
+                labels = query.y
+                if self.label_rng is not None:
+                    permutation = torch.randperm(len(labels), generator=self.label_rng).to(labels.device)
+                    labels = labels[permutation]
+                label_control = dict(mode=self.label_mode, graphs=len(labels), changed=int((labels != query.y).sum()),
+                                     permutation_seed=c.get('query_permutation_seed'))
+                if predictor == 'mean_residual':
+                    feedback = build_mean_feedback(self.model, query, labels, target)
+                elif predictor == 'responses':
+                    feedback = build_feedback(self.model, query, labels, target, self.probes, self.probe_rng)
+                else:
+                    feedback = build_feedback(self.model, query, labels, target, self.probes, self.probe_rng,
+                                              predictor=predictor)
         ce = F.cross_entropy(self.model(batch), batch.y)
         auxiliary = (feedback_loss(self.model, target, feedback)
                      if feedback is not None and (feedback.target_features.shape[-1] or feedback.intercept is not None)
                      else ce.new_zeros(()))
+        if pseudo_auxiliary is not None:
+            auxiliary = pseudo_auxiliary
         total = ce + c['feedback_weight'] * auxiliary
         if not torch.isfinite(total):
             raise FloatingPointError('Nonfinite total loss')
@@ -229,7 +253,8 @@ class TQGTrainer:
         self.step_count += 1
         return dict(step=self.step_count, source_ce=float(ce.detach()), feedback_loss=float(auxiliary.detach()),
             total_loss=float(total.detach()), gradient_norm=gradient_norm, seconds=time.perf_counter() - started,
-            query=feedback.statistics if feedback is not None else {'status': 'source_only_baseline'},
+            query=(pseudo_statistics if pseudo_statistics is not None else
+                   feedback.statistics if feedback is not None else {'status': 'source_only_baseline'}),
             batches=dict(fit=list(fit_ids), query=list(query_ids), target=list(target_ids)), query_label_control=label_control)
 
     def state(self):
