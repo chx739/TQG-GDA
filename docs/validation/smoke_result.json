@@ -1,0 +1,20 @@
+{
+  "status": "PASSED",
+  "from_zero_source_and_adaptation": true,
+  "adaptation_steps": 3,
+  "exact_source_resume": true,
+  "exact_adaptation_resume": true,
+  "target_label_poisoning_bitwise_invariant": true,
+  "cli_ablations": [
+    "source_only_same_fit",
+    "source_only_all_labels",
+    "random_probes",
+    "source_probes",
+    "odd_only",
+    "linear_jvp"
+  ],
+  "float32_graph_run": true,
+  "separate_target_evaluation": true,
+  "formal_paper_result": false,
+  "outputs": "/home/hxchen/tqg_gda_validation_20261023"
+}
