@@ -1,0 +1,40 @@
+{
+  "revision_id": "mutagenicity_sega_20261026",
+  "arm": "B_fit",
+  "seed": 3406,
+  "task": "0_to_2",
+  "git_commit": "b59cbd737983f972c1f35b541c5608916f3041fe",
+  "config_sha256": "c3ea8a2d7229799a27b296a7ee6b3dd081b3b6392ecb4de9ab753b43d7a8e7b8",
+  "hardware": {
+    "cpu": "Intel(R) Xeon(R) Gold 6226R CPU @ 2.90GHz",
+    "threads": 1,
+    "device": "cpu",
+    "platform": "Linux-6.2.0-33-generic-x86_64-with-glibc2.35",
+    "logical_cpus": 64,
+    "python": "3.12.4",
+    "torch": "2.5.1",
+    "pyg": "2.6.1",
+    "cuda_available": false,
+    "code_sha256": {
+      "__init__.py": "eca3f80f71805b0b3e150f19d2c5b7b4d11f107fa35822b3728c78f1527b3e6f",
+      "data.py": "b4f5845cf7883d891bd6fe235b923606faa3e3e6e994ee8eefc4ecd09a721501",
+      "diagnostics.py": "535898e0531a8c54b29803faa6e2fce962361afb87b61844cdfe952d72594d98",
+      "experiment_io.py": "186333983702ed595113837c1d34701f093acbcc2ec8e779c44fd1a830fd3c98",
+      "feedback.py": "e43eaecb2f86be83468f33068007f61ed5311e8024f7f37f66108fef016bc8c3",
+      "matching.py": "9a077d3a371523b0688f79d618cf93c52d1b680c8920528e2aaea7cf89d04c73",
+      "metrics.py": "3378f7162a93933aea8a2445017fd616a7c535d366e384cd49a4d5c36a8a05cf",
+      "models.py": "a93a38b97acaf1b7bd20d5bf4fe086f9ef4e1b1a18879eda69594b2cdb242210",
+      "residual_solver.py": "6a3f72869c253decabd9c788e9105ae09b3632bbdb0e06b7574bc9a0718f9bc9",
+      "revision.py": "7f65be607c29c360d19b0cf5968fb46179d10d25a536474c39b217e5cd896822",
+      "training.py": "e4413d655e3bafffc92f81fb0a23b84416565019f5bc0fc983f615cb75032ad8",
+      "utils.py": "794ba269a612cc34b0a42d299c1d382ea8f7247493d2d629faee29ab57c10563"
+    }
+  },
+  "gpu_hours": 0,
+  "source_checkpoint": "/home/hxchen/runs/2026-10-26-tqg-mutagenicity-sega/stage3_execution/warmups/3406/fit/best.pt",
+  "source_checkpoint_sha256": "c24654e9d5c7a6a6b291d4abbf5517e87cd4aceaf42eaa2bb662e4a0395fc7fc",
+  "final_target_labels_allowed": false,
+  "target_labels_used": false,
+  "initialization": "fresh_adaptation_Adam",
+  "training_then_offline_evaluation": true
+}

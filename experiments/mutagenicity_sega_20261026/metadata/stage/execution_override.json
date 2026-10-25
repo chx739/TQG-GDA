@@ -1,0 +1,38 @@
+{
+  "original_workers": 2,
+  "actual_workers": 5,
+  "seed_partition": "one model seed per process",
+  "num_threads_per_process": 1,
+  "frozen_config_file_unchanged": true,
+  "numerical_hyperparameters_unchanged": true,
+  "restarts": [
+    {
+      "seed": 3405,
+      "task": "0_to_1",
+      "arm": "Q_all_O",
+      "model_optimizer_RNG_restored": true
+    },
+    {
+      "seed": 3406,
+      "task": "0_to_1",
+      "arm": "Q_all_O",
+      "model_optimizer_RNG_restored": true
+    }
+  ],
+  "launcher_sources": {
+    "/home/hxchen/runs/2026-10-26-tqg-mutagenicity-sega/orchestrate.py": "406a1d1af8720c3f6fa4bf61287bfc9bfa21d5779ea9dd0194aa09c16ee0fa61",
+    "/home/hxchen/runs/2026-10-26-tqg-mutagenicity-sega/seed_worker.py": "554688aaf0c8de62cced8c1a15c276f885c40154b3772334495b129d1885629a"
+  },
+  "effective_seed_commands": [
+    "python -u /home/hxchen/runs/2026-10-26-tqg-mutagenicity-sega/seed_worker.py 3405",
+    "python -u /home/hxchen/runs/2026-10-26-tqg-mutagenicity-sega/seed_worker.py 3406",
+    "python -u /home/hxchen/runs/2026-10-26-tqg-mutagenicity-sega/seed_worker.py 3407",
+    "python -u /home/hxchen/runs/2026-10-26-tqg-mutagenicity-sega/seed_worker.py 3408",
+    "python -u /home/hxchen/runs/2026-10-26-tqg-mutagenicity-sega/seed_worker.py 3409"
+  ],
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  }
+}

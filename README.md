@@ -14,7 +14,7 @@ Target-Queried Gradient Learning for graph-level domain adaptation 的研究代�
 
 方向、响应、源残差、组合权重和参考输出均停止梯度；普通 GNN 参数仍正常优化。推断阶段只需要普通 GNN 前向。
 
-## 最新实验
+## PROTEINS实验
 
 PROTEINS 共1,113张图，任务为图级二分类。四个域沿用 SEGA 代码包提供的边数域索引，**属于实验构造的图规模迁移，不是 PROTEINS 官方的四个域**。0域整体边数最多，3域最少；0→1、0→2、0→3分别以0域为源、其余域为目标。
 
@@ -43,9 +43,30 @@ odd记录正反扰动之间的带方向输出变化；even记录正反扰动平�
 
 完整证据：[执行报告](docs/experiments/latest/run_report.md)、[逐种子结果](docs/experiments/latest/results.csv)、[汇总 JSON](docs/experiments/latest/results_summary.json)、[复现范围与限制](docs/experiments/latest/REPRODUCIBILITY.md)。
 
-## 训练日志与模型归档
+## Mutagenicity：SEGA配置下的完整对照
 
-最新实验的原始运行文件已集中到 [experiments/proteins_full_query_20261026/](experiments/proteins_full_query_20261026/README.md)：
+新增三个迁移方向、五个种子的完整实验，采用SEGA边数域索引和通用源训练配置。骨干为GINE（14维节点标签、3维边标签），32维、2层、mean readout、float64。源预训练100 epoch（fit 2,500次更新／全源3,100次更新），TQG适配200 step；没有使用SEGA几何/OT适配模块。
+
+源域1,084张＝975训练＋109验证；训练图进一步分为779 fit＋196 query。目标开发集各542张，final标签未评价。下表为固定200步的balanced accuracy（%），均值±五种子样本标准差。
+
+| 方法 | 0→1 | 0→2 | 0→3 |
+|---|---:|---:|---:|
+| fit-only 源模型不动 | 76.72 ± 1.38 | 67.34 ± 2.56 | 61.67 ± 3.36 |
+| 继续源 fit 训练 | 76.91 ± 2.21 | 67.45 ± 2.88 | 62.05 ± 3.34 |
+| 全源标签训练 | 77.20 ± 0.49 | 68.37 ± 1.65 | 63.11 ± 3.00 |
+| 简单置信度伪标签 | 76.96 ± 2.18 | 67.70 ± 2.67 | 61.80 ± 3.29 |
+| query196，odd | 76.79 ± 1.79 | 67.12 ± 2.92 | 62.62 ± 3.85 |
+| query196，odd＋even | 76.85 ± 1.78 | 66.92 ± 2.86 | 62.48 ± 4.00 |
+| 全源975，odd | 76.85 ± 2.07 | 67.41 ± 2.81 | 62.16 ± 3.23 |
+| 全源975，odd＋even | 76.93 ± 2.10 | 67.46 ± 2.73 | 62.18 ± 3.34 |
+
+query196＋odd在0→3较继续fit监督提高0.56个百分点，五个种子4胜1负，但其余方向没有提升；所有TQG设置的平均值均未超过各方向全源监督基线。even未体现稳定增量。源验证选点结果与配对比较见[完整报告](experiments/mutagenicity_sega_20261026/results/run_report.md)。这轮尚未获得跨任务稳定收益。
+
+[实验归档](experiments/mutagenicity_sega_20261026/README.md)包含115份训练日志、755份checkpoint、225条评价索引、配置与来源记录，约260 MiB。更换数据集同时改变了GNN结构与预训练更新预算，不能把与PROTEINS的差异单独解释为数据量作用。
+
+## PROTEINS训练日志与模型归档
+
+该轮PROTEINS实验的原始运行文件已集中到 [experiments/proteins_full_query_20261026/](experiments/proteins_full_query_20261026/README.md)：
 
 | 内容 | 数量 | 未压缩大小 |
 |---|---:|---:|
@@ -111,7 +132,8 @@ python scripts/prepare_source_split.py \
 - `tqg_gda/`：模型、参数探测、有限响应、残差回归、目标反馈、训练与数学模块。
 - `scripts/`：基础训练、恢复、独立评价、诊断与消融入口。
 - `scripts/archive_full_query.py`、`scripts/verify_experiment_archive.py`：归档既有实验、验证文件和指标对应关系；不训练模型。
-- `configs/full_query/0_to_1.json`、`configs/full_query/0_to_2_3.json`：最新两阶段的原始实验设置。
+- `configs/full_query/0_to_1.json`、`configs/full_query/0_to_2_3.json`：PROTEINS两阶段的原始实验设置。
+- `configs/mutagenicity/sega_full_query.json`：Mutagenicity的SEGA源配置、TQG矩阵与协议边界。
 - `configs/revision_v1/`：改进方案和合成测试使用的归档计划；状态字段是历史记录。
 - `docs/TQG_Graph_Level_GDA_Design.md`：原始方法设计稿。
 - `docs/TQG_Improvement_Experiment_Plan_v1.md`、`docs/失败原因与改进方案.md`：改进设计与失败分析，不代表其中所有实验均已完成。

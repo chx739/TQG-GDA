@@ -9,7 +9,9 @@
 
 ## 当前实验与原始记录
 
-- [最新三方向完整结果](experiments/latest/run_report.md)
+- [PROTEINS三方向完整结果](experiments/latest/run_report.md)
+- [Mutagenicity三方向完整结果](../experiments/mutagenicity_sega_20261026/results/run_report.md)
+- [Mutagenicity日志与模型](../experiments/mutagenicity_sega_20261026/README.md)
 - [结果白话解读](experiments/latest/结果解读.md)
 - [复现范围与限制](experiments/latest/REPRODUCIBILITY.md)
 - [训练日志、checkpoint与来源索引](../experiments/proteins_full_query_20261026/README.md)
