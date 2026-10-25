@@ -112,10 +112,12 @@ class RevisionTrainer:
             if getattr(target, 'y', None) is not None:
                 raise PermissionError('Target training batch contains labels')
         if method in ('tqg', 'weighted_source_query_CE'):
-            query_ids = schedule['query32'][:arm['n']]
+            query_role = arm.get('query_role', 'query')
+            query_ids = (tuple(sorted(task.ids(query_role))) if arm.get('full_query_pool')
+                         else schedule['query32'][:arm['n']])
             if len(query_ids) != arm['n']:
                 raise ValueError('Insufficient distinct source query graphs')
-            query = task.batch(query_ids, 'query', parameter.device, parameter.dtype)
+            query = task.batch(query_ids, query_role, parameter.device, parameter.dtype)
             dictionary = ResponseDictionary.build(self.model, query, target, rngs['probes'],
                 K=arm['K'], response=arm['response'], direction=arm['direction'])
             cv_order = torch.randperm(len(query_ids), generator=rngs['CV'])
