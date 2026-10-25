@@ -1,0 +1,62 @@
+{
+  "cap_seconds": 7200,
+  "consumed_seconds": 1118.7042251639068,
+  "records": [
+    {
+      "phase": "full_query_acceptance",
+      "seconds": 2.877066157758236,
+      "status": "completed",
+      "finished_unix": 1792944407.2639334
+    },
+    {
+      "phase": "acceptance_startup_overhead",
+      "seconds": 5.909104589372873,
+      "status": "completed"
+    },
+    {
+      "phase": "full_query_profile",
+      "seconds": 16.818839982151985,
+      "status": "completed",
+      "finished_unix": 1792944430.8703272
+    },
+    {
+      "phase": "profile_startup_overhead",
+      "seconds": 3.13229288905859,
+      "status": "completed"
+    },
+    {
+      "phase": "full_query_train",
+      "seconds": 1076.6345963217318,
+      "status": "completed",
+      "finished_unix": 1792945519.7135649
+    },
+    {
+      "phase": "train_startup_overhead",
+      "seconds": 3.075123280286789,
+      "status": "completed"
+    },
+    {
+      "phase": "full_query_evaluate",
+      "seconds": 1.9714209660887718,
+      "status": "completed",
+      "finished_unix": 1792945525.6406672
+    },
+    {
+      "phase": "evaluate_startup_overhead",
+      "seconds": 3.2876813896000385,
+      "status": "completed"
+    },
+    {
+      "phase": "full_query_audit",
+      "seconds": 1.7839976213872433,
+      "status": "completed",
+      "finished_unix": 1792945531.3534029
+    },
+    {
+      "phase": "audit_startup_overhead",
+      "seconds": 3.21410196647048,
+      "status": "completed"
+    }
+  ],
+  "gpu_hours": 0
+}

@@ -43,6 +43,29 @@ odd记录正反扰动之间的带方向输出变化；even记录正反扰动平�
 
 完整证据：[执行报告](docs/experiments/latest/run_report.md)、[逐种子结果](docs/experiments/latest/results.csv)、[汇总 JSON](docs/experiments/latest/results_summary.json)、[复现范围与限制](docs/experiments/latest/REPRODUCIBILITY.md)。
 
+## 训练日志与模型归档
+
+最新实验的原始运行文件已集中到 [experiments/proteins_full_query_20261026/](experiments/proteins_full_query_20261026/README.md)：
+
+| 内容 | 数量 | 未压缩大小 |
+|---|---:|---:|
+| 逐步训练日志 `history.jsonl` | 115份 | 66.3 MiB |
+| 原始模型 checkpoint | 755份 | 125.7 MiB |
+| 配置、数据角色、环境与阶段记录等 | 配套归档 | 约2.9 MiB |
+
+范围包括本轮新跑的85次适配、复用的20次基线适配，以及共享的10次源预训练；15个冻结基线引用这些源模型，不重复保存。每个文件与原运行目录逐字节校验，归档总大小约195 MiB。
+
+- 按任务、种子、方法查找：[训练索引](experiments/proteins_full_query_20261026/job_index.csv)。
+- 从表格指标找到实际模型：[评价索引](experiments/proteins_full_query_20261026/evaluation_index.csv)，覆盖225条末步、源验证选点及冻结模型评价记录。
+- 浏览原始文件：[日志](experiments/proteins_full_query_20261026/logs/)、[checkpoint](experiments/proteins_full_query_20261026/checkpoints/)、[配置与来源](experiments/proteins_full_query_20261026/metadata/)。
+- 下载后核验，不需要 PyTorch：
+
+```bash
+python scripts/verify_experiment_archive.py experiments/proteins_full_query_20261026
+```
+
+checkpoint目录包含源模型的 `best.pt` / `last.pt`，以及适配的 `step_0/10/50/100/200.pt`、`last.pt`、`selected.pt`。源验证选点可能选中step0。图数据缓存仍需自行提供；原始记录中的绝对路径保留为来源信息，索引提供仓库内对应路径。
+
 ## 安装与合成检查
 
 推荐使用独立 Python 环境。已有验证环境为 Python 3.12、PyTorch 2.5.1、PyG 2.6.1；根据机器选择匹配的 CPU/CUDA PyTorch。
@@ -70,7 +93,7 @@ python scripts/run_experiment.py all \
   --seed 3405 --device cpu --output /tmp/tqg-basic-new
 ```
 
-此配置是基础 TQG 的 query16示例，不能直接逐位重现最新全查询表格。完整实验编排依赖原运行目录的清单、源 checkpoint 和执行锁；[复现说明](docs/experiments/latest/REPRODUCIBILITY.md)明确列出已包含和未包含的资产。图缓存与模型权重不随仓库上传。
+此配置是基础 TQG 的 query16示例，不能直接逐位重现最新全查询表格。源模型、适配模型和训练记录已归档；完整实验编排仍依赖原目录结构与数据缓存。[复现说明](docs/experiments/latest/REPRODUCIBILITY.md)列出使用已归档模型与重跑实验的区别。
 
 如果自行重新处理的数据缓存哈希不同，应显式建立新的源划分清单，并说明与旧实验的区别：
 
@@ -87,11 +110,14 @@ python scripts/prepare_source_split.py \
 
 - `tqg_gda/`：模型、参数探测、有限响应、残差回归、目标反馈、训练与数学模块。
 - `scripts/`：基础训练、恢复、独立评价、诊断与消融入口。
+- `scripts/archive_full_query.py`、`scripts/verify_experiment_archive.py`：归档既有实验、验证文件和指标对应关系；不训练模型。
 - `configs/full_query/0_to_1.json`、`configs/full_query/0_to_2_3.json`：最新两阶段的原始实验设置。
 - `configs/revision_v1/`：改进方案和合成测试使用的归档计划；状态字段是历史记录。
 - `docs/TQG_Graph_Level_GDA_Design.md`：原始方法设计稿。
 - `docs/TQG_Improvement_Experiment_Plan_v1.md`、`docs/失败原因与改进方案.md`：改进设计与失败分析，不代表其中所有实验均已完成。
 - `docs/experiments/latest/`：最新结果、图表、核查与来源哈希。
-- `README_framework.md`、`README_pilot.md`、`README_revision.md`：历史阶段说明，含原运行环境路径。
+- `experiments/`：实际训练日志、checkpoint、运行配置与文件索引，见[实验目录](experiments/README.md)。
+- `docs/`：方法、改进设计和结果文档，见[文档目录](docs/README.md)。
+- `docs/history/`：历史框架、pilot、revision说明与初始源清单，含原运行环境路径。
 
-代码历史保留原实验提交：`8923cc9`对应0→2/0→3全查询实验，`3ea6b72`对应0→1扩展。仓库整理仅补充文档、归档数据及合成测试的方案路径回退，没有重新训练或改变原结果。
+代码历史保留原实验提交：`8923cc9`对应0→2/0→3全查询实验，`3ea6b72`对应0→1扩展。仓库整理补充文档、实验文件、来源索引及方案路径回退；数值训练实现与原实验结果未改动，也未启动新的真实数据训练。

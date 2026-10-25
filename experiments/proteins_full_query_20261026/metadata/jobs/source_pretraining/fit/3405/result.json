@@ -1,0 +1,35 @@
+{
+  "status": "completed",
+  "training_mode": "exact_update_budget",
+  "completed_updates": 700,
+  "selected_update": 679,
+  "source_graphs_processed": 19900,
+  "source_validation": {
+    "ce": 0.24837711802351764,
+    "accuracy": 0.8571428571428571,
+    "balanced_accuracy": 0.6000000014901161,
+    "confusion": [
+      [
+        23,
+        0
+      ],
+      [
+        4,
+        1
+      ]
+    ],
+    "class_counts": [
+      23,
+      5
+    ],
+    "class_recall": [
+      1.0,
+      0.20000000298023224
+    ],
+    "graphs": 28,
+    "auroc": 0.9739130434782609
+  },
+  "seconds": 27.53360767289996,
+  "target_labels_used": false,
+  "formal_paper_result": false
+}

@@ -6,7 +6,7 @@ runs/
 dist/
 build/
 outputs/
-checkpoints/
+/checkpoints/
 *.pt
 *.pth
 *.ckpt
@@ -17,3 +17,6 @@ data/**/processed/
 !.env.example
 *.pem
 *.key
+
+# Explicitly published, immutable experiment snapshots.
+!/experiments/proteins_full_query_20261026/checkpoints/**/*.pt

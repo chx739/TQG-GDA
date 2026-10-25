@@ -1,0 +1,88 @@
+{
+  "method": "tqg",
+  "seed": 3405,
+  "dtype": "float64",
+  "num_threads": 1,
+  "deterministic": true,
+  "use_node_attributes": false,
+  "model": {
+    "hidden_dim": 32,
+    "num_layers": 2,
+    "readout": "mean"
+  },
+  "split": {
+    "fit_fraction": 0.8,
+    "seed": 431
+  },
+  "warmup": {
+    "epochs": 100,
+    "batch_size": 32,
+    "lr": 0.003,
+    "source_pool": "fit",
+    "update_budget": 700,
+    "validation_interval_updates": 7
+  },
+  "adaptation": {
+    "steps": 200,
+    "optimizer": "Adam",
+    "learning_rate": 0.0003,
+    "adam": {
+      "beta1": 0.9,
+      "beta2": 0.999,
+      "epsilon": 1e-08,
+      "weight_decay": 0,
+      "amsgrad": false
+    },
+    "optimizer_state_at_start": "fresh_for_every_arm",
+    "fit_batch_size": 16,
+    "target_batch_size": 16,
+    "query_batch_size_default": 32,
+    "feedback_weight": 0.1,
+    "feedback_denominator": "original_target_batch_size_not_accepted_count",
+    "feedback_rebuild": "every_step_one_update_then_discard",
+    "source_validation_interval": 10,
+    "primary_checkpoint": "fixed_step_200",
+    "secondary_checkpoint": "minimum_source_validation_CE_including_step_0",
+    "complete_state_checkpoints": [
+      0,
+      10,
+      50,
+      100,
+      200
+    ]
+  },
+  "probes": {
+    "count": 4,
+    "radius": 0.05,
+    "ridge": 0.01,
+    "epsilon": 1e-08,
+    "direction": "target",
+    "responses": "odd_even"
+  },
+  "formal_paper_result": false,
+  "revision": {
+    "method": "tqg",
+    "predictor": "weighted_ridge",
+    "initialization": "fit_warmup",
+    "direction": "target",
+    "n": 250,
+    "K": 4,
+    "response": "odd",
+    "ridge": 0.01,
+    "matching": "uniform",
+    "projection": false,
+    "gate": false,
+    "training": true,
+    "phase": "full_query",
+    "arm": "Q250_O",
+    "query_role": "all_source",
+    "full_query_pool": true,
+    "pretraining_fit_overlap": 199
+  },
+  "task": "0_to_2",
+  "revision_id": "tqg_full_query_2026_10_25",
+  "source_checkpoint": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3405/artifacts/best.pt",
+  "source_checkpoint_sha256": "5eeee18afe078d4e16447ab4a9e0862354b706319c92ec883be2f5795ce7cd10",
+  "git_commit": "8923cc90121a2ec74593a1aa9e26bc49f9369eae",
+  "target_labels_used": false
+}

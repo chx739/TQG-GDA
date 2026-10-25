@@ -1,0 +1,85 @@
+{
+  "method": "tqg",
+  "seed": 3409,
+  "dtype": "float64",
+  "num_threads": 1,
+  "deterministic": true,
+  "use_node_attributes": false,
+  "model": {
+    "hidden_dim": 32,
+    "num_layers": 2,
+    "readout": "mean"
+  },
+  "split": {
+    "fit_fraction": 0.8,
+    "seed": 431
+  },
+  "warmup": {
+    "epochs": 100,
+    "batch_size": 32,
+    "lr": 0.003,
+    "source_pool": "fit",
+    "update_budget": 700,
+    "validation_interval_updates": 7
+  },
+  "adaptation": {
+    "steps": 200,
+    "optimizer": "Adam",
+    "learning_rate": 0.0003,
+    "adam": {
+      "beta1": 0.9,
+      "beta2": 0.999,
+      "epsilon": 1e-08,
+      "weight_decay": 0,
+      "amsgrad": false
+    },
+    "optimizer_state_at_start": "fresh_for_every_arm",
+    "fit_batch_size": 16,
+    "target_batch_size": 16,
+    "query_batch_size_default": 32,
+    "feedback_weight": 0.1,
+    "feedback_denominator": "original_target_batch_size_not_accepted_count",
+    "feedback_rebuild": "every_step_one_update_then_discard",
+    "source_validation_interval": 10,
+    "primary_checkpoint": "fixed_step_200",
+    "secondary_checkpoint": "minimum_source_validation_CE_including_step_0",
+    "complete_state_checkpoints": [
+      0,
+      10,
+      50,
+      100,
+      200
+    ]
+  },
+  "probes": {
+    "count": 4,
+    "radius": 0.05,
+    "ridge": 0.01,
+    "epsilon": 1e-08,
+    "direction": "target",
+    "responses": "odd_even"
+  },
+  "formal_paper_result": false,
+  "revision": {
+    "method": "source_fit_CE",
+    "predictor": "weighted_ridge",
+    "initialization": "fit_warmup",
+    "direction": "target",
+    "n": 32,
+    "K": 4,
+    "response": "odd",
+    "ridge": "source_CV",
+    "matching": "uniform",
+    "projection": false,
+    "gate": false,
+    "training": true,
+    "phase": "full_query",
+    "arm": "B_fit"
+  },
+  "task": "0_to_1",
+  "revision_id": "tqg_full_query_domain1_2026_10_26",
+  "source_checkpoint": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3409/artifacts/best.pt",
+  "source_checkpoint_sha256": "44e2fbe54b203e6b2029dc34fb18679d33197498f47d4c097e397a48345a5d2f",
+  "git_commit": "3ea6b728e82c6f0c7a4d912b1fe011735624cd1a",
+  "target_labels_used": false
+}

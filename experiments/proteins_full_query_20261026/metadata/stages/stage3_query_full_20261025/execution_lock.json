@@ -1,0 +1,189 @@
+{
+  "revision": "full_query_20261025",
+  "inputs": {
+    "design_method.md": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage2_revision_v1/method.md",
+      "sha256": "8a3765b3b62f7fdaf780c2c0ee9c6f8c20de7440f2c59e8ba7405a6f61922e1b"
+    },
+    "design_experiment_plan.yaml": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage2_revision_v1/experiment_plan.yaml",
+      "sha256": "8085bec589f0a9bbceb2c071279c800e50bbbf87f8574159fbdf67c0d72a1652"
+    },
+    "design_resolved_arms_preview.json": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage2_revision_v1/resolved_arms_preview.json",
+      "sha256": "ebaf7a001c323718727f454fcd9b42eabfdcd73e14613bbb2dc399c6ff7ce2b4"
+    },
+    "design_pseudocode.py": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage2_revision_v1/pseudocode.py",
+      "sha256": "1c69b02272b320886466c5190eedb0882438d8020718db8303cc2da2ab2128fd"
+    },
+    "human_method": {
+      "path": "/home/hxchen/TQG_GDA/docs/TQG_Improvement_Experiment_Plan_v1.md",
+      "sha256": "8a3765b3b62f7fdaf780c2c0ee9c6f8c20de7440f2c59e8ba7405a6f61922e1b"
+    },
+    "data": {
+      "path": "/home/hxchen/TQG_data/PROTEINS_official_20261023/PROTEINS/processed/data.pt",
+      "sha256": "ba6437e6a8ea4083e1ff21fab96d206cb88ec8e8d4f1804abc7457648c0cf473"
+    },
+    "source_protocol": {
+      "path": "/home/hxchen/TQG_data/PROTEINS_official_20261023/source_protocol_official.json",
+      "sha256": "349276de80138f26aa3f34809ea93f9e3b79662102a13071ed9fc3b7387a72ba"
+    },
+    "roles_manifest": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage2_method/data_roles/manifest.json",
+      "sha256": "17d535a2b2b02ffa8cade73079cc22ef77008038cdd7bb641fa4f4ca1fb275cf"
+    },
+    "old_training_manifest": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/training_manifest.json",
+      "sha256": "ed659292bba2e7b1f7bc740dc0f16e77e7bcccce667d3f3036d8cf223bba5652"
+    },
+    "domain_2": {
+      "path": "/home/hxchen/TQG_GDA/idx/idx_PROTEINS_2.npy",
+      "sha256": "96885b7aea84d74a9cd7dd996c444dd23dc6e985d481cbe9bd852ae317e7eb0d"
+    },
+    "2_development_ids": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage2_method/data_roles/PROTEINS_domain2_development_ids.npy",
+      "sha256": "d608408196327c8aefb60319b6774eb570af72c59cc473cbfcaf844fa19d9418"
+    },
+    "2_final_ids": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage2_method/data_roles/PROTEINS_domain2_final_ids.npy",
+      "sha256": "19117abb20eeea6a571e2b2efebf064a23543ad9a59a7f12ef27d546fc87dca2"
+    },
+    "domain_3": {
+      "path": "/home/hxchen/TQG_GDA/idx/idx_PROTEINS_3.npy",
+      "sha256": "1e403ed63dd28ddf9658bb8452ce11a38f98ff8290e5c004c165859ef1a4b643"
+    },
+    "3_development_ids": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage2_method/data_roles/PROTEINS_domain3_development_ids.npy",
+      "sha256": "9e45e69e17b2b1f9e8742333fd6222c90a93e3449c8bca71fcc7b87c561e8195"
+    },
+    "3_final_ids": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage2_method/data_roles/PROTEINS_domain3_final_ids.npy",
+      "sha256": "af1f229f684024f51c3f7eccbc226c75492aa7901f835459931e5aea01697717"
+    },
+    "source_5": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_all_source_3405/artifacts/best.pt",
+      "sha256": "3bc4a3faa319b53cefe986e798c8f3386814abcd92c78cd7d5663da8351d2ccf"
+    },
+    "source_6": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_all_source_3406/artifacts/best.pt",
+      "sha256": "7541d49932bdb56e940f1c0a0fdffda1c0f15d8c0d8ac8a36056e91337568ea7"
+    },
+    "source_7": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_all_source_3407/artifacts/best.pt",
+      "sha256": "5c79197545e3e0d6de4711b44dc7a49f7b726da0819fb29883749db22652b0b4"
+    },
+    "source_8": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_all_source_3408/artifacts/best.pt",
+      "sha256": "018e755d32b12cac2ce1fc719571a18aa56b66f8a85bc78e512fc3801cae38b3"
+    },
+    "source_9": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_all_source_3409/artifacts/best.pt",
+      "sha256": "a3a1e3bafe52d205cd00fb60a6a58fd7e690a1cfe40d62ec743231af1f276cd2"
+    },
+    "source_10": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3405/artifacts/best.pt",
+      "sha256": "5eeee18afe078d4e16447ab4a9e0862354b706319c92ec883be2f5795ce7cd10"
+    },
+    "historical_final_10": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/domain2_original_TQG_target_probes_3405/artifacts/last.pt",
+      "sha256": "7a08cacac4cdfac24f89911261a3e0437ed4b73351d58721abdc028052f5bc48"
+    },
+    "source_11": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3406/artifacts/best.pt",
+      "sha256": "9643d5359274cff9fe5e11d8262681b270c469e2532fc70532081ad2ca66c401"
+    },
+    "historical_final_11": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/domain2_original_TQG_target_probes_3406/artifacts/last.pt",
+      "sha256": "09e8afc2d3b95aa0cb34162b84732eea117eab2f5967d73eb429432e9220de69"
+    },
+    "source_12": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3407/artifacts/best.pt",
+      "sha256": "7233a7cd6080e1fdda434f964add0ea04bc888bae046b3e7aeb6d704a6b5eb6b"
+    },
+    "historical_final_12": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/domain2_original_TQG_target_probes_3407/artifacts/last.pt",
+      "sha256": "cc622157f30dd0bb4c38c734a0776785039fe069d6f930a9f49cbe0035d36341"
+    },
+    "source_13": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3408/artifacts/best.pt",
+      "sha256": "f8d6560cd5ec9bb76f34d5b138688ad7c449c978fd4fc35771b43d01ee2ea0dc"
+    },
+    "historical_final_13": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/domain2_original_TQG_target_probes_3408/artifacts/last.pt",
+      "sha256": "d539299858b5505ab43249970d3cf5f3fcfffcee3b8fd08e17c26f1dad74a55b"
+    },
+    "source_14": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3409/artifacts/best.pt",
+      "sha256": "44e2fbe54b203e6b2029dc34fb18679d33197498f47d4c097e397a48345a5d2f"
+    },
+    "historical_final_14": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/domain2_original_TQG_target_probes_3409/artifacts/last.pt",
+      "sha256": "b4864839d2390f24a8778dd2b612c421ecd0d10d610e1be810b0b81c79a57f83"
+    },
+    "source_35": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_all_source_3405/artifacts/best.pt",
+      "sha256": "3bc4a3faa319b53cefe986e798c8f3386814abcd92c78cd7d5663da8351d2ccf"
+    },
+    "source_36": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_all_source_3406/artifacts/best.pt",
+      "sha256": "7541d49932bdb56e940f1c0a0fdffda1c0f15d8c0d8ac8a36056e91337568ea7"
+    },
+    "source_37": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_all_source_3407/artifacts/best.pt",
+      "sha256": "5c79197545e3e0d6de4711b44dc7a49f7b726da0819fb29883749db22652b0b4"
+    },
+    "source_38": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_all_source_3408/artifacts/best.pt",
+      "sha256": "018e755d32b12cac2ce1fc719571a18aa56b66f8a85bc78e512fc3801cae38b3"
+    },
+    "source_39": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_all_source_3409/artifacts/best.pt",
+      "sha256": "a3a1e3bafe52d205cd00fb60a6a58fd7e690a1cfe40d62ec743231af1f276cd2"
+    },
+    "source_40": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3405/artifacts/best.pt",
+      "sha256": "5eeee18afe078d4e16447ab4a9e0862354b706319c92ec883be2f5795ce7cd10"
+    },
+    "historical_final_40": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/domain3_original_TQG_target_probes_3405/artifacts/last.pt",
+      "sha256": "5c00913af75b986af348b0b70c009dd1811c382ff432fceb1d7efb1359647a48"
+    },
+    "source_41": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3406/artifacts/best.pt",
+      "sha256": "9643d5359274cff9fe5e11d8262681b270c469e2532fc70532081ad2ca66c401"
+    },
+    "historical_final_41": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/domain3_original_TQG_target_probes_3406/artifacts/last.pt",
+      "sha256": "f8f21c6ec044ab17ce2c8cfa1dd123c04a8fd9b705144705ca47ceaf9579be92"
+    },
+    "source_42": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3407/artifacts/best.pt",
+      "sha256": "7233a7cd6080e1fdda434f964add0ea04bc888bae046b3e7aeb6d704a6b5eb6b"
+    },
+    "historical_final_42": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/domain3_original_TQG_target_probes_3407/artifacts/last.pt",
+      "sha256": "07268c839ba7a8ba161c7411b6795b0527e7be7c6ee194c4b7497ce80f38a812"
+    },
+    "source_43": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3408/artifacts/best.pt",
+      "sha256": "f8d6560cd5ec9bb76f34d5b138688ad7c449c978fd4fc35771b43d01ee2ea0dc"
+    },
+    "historical_final_43": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/domain3_original_TQG_target_probes_3408/artifacts/last.pt",
+      "sha256": "d49fb9fa2a25975eccc15b4c9426402ab50cd3d970a1afd20ec755fe94c3c5ed"
+    },
+    "source_44": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/warmup_fit_3409/artifacts/best.pt",
+      "sha256": "44e2fbe54b203e6b2029dc34fb18679d33197498f47d4c097e397a48345a5d2f"
+    },
+    "historical_final_44": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs/domain3_original_TQG_target_probes_3409/artifacts/last.pt",
+      "sha256": "d3603e00c99f8f0b6e3cd45d428ffee5bc8d8e5d46c80913a0a579d07b29d6d8"
+    },
+    "full_query_new_plan": {
+      "path": "/home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_query_full_20261025/code/configs/full_query_20261025.json",
+      "sha256": "21f803d9ec1bb734b3ee9e5b24145b7f38a70d90d1f566ce1965cfe56f6ec774"
+    }
+  }
+}
