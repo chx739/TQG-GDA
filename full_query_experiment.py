@@ -18,7 +18,7 @@ from tqg_gda.training import load_model
 from tqg_gda.utils import sha256, seed_everything
 
 V1 = RUN / 'stage3_revision_v1'
-PLAN = CODE / 'configs/full_query_20261025.json'
+PLAN = CODE / 'configs' / 'full_query' / '0_to_1.json'
 LABELS = dict(B_frozen='fit-only 源模型不动', B_fit='继续源 fit 训练',
               B_full='全源标签训练', B_pseudo='简单置信度伪标签',
               Q51_OE='全部 query 51，odd+even', Q51_O='全部 query 51，odd',

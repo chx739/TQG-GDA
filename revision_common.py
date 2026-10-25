@@ -20,7 +20,10 @@ from tqg_gda.utils import sha256, write_json
 CODE = Path(__file__).resolve().parent
 STAGE = CODE.parent
 RUN = STAGE.parent
-DESIGN = RUN / 'stage2_revision_v1'
+_WORKSPACE_DESIGN = RUN / 'stage2_revision_v1'
+# A standalone checkout carries the archived plan used by synthetic tests.
+# Original experiment workspaces keep resolving their unchanged sibling assets.
+DESIGN = _WORKSPACE_DESIGN if _WORKSPACE_DESIGN.is_dir() else CODE / 'configs' / 'revision_v1'
 OLD = RUN / 'stage3_execution'
 
 

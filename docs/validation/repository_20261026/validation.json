@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-26",
+  "unit_tests": {
+    "passed": true,
+    "count": 93,
+    "log": "unit_tests.log"
+  },
+  "synthetic_cli_smoke": {
+    "passed": true,
+    "log": "smoke_test.log"
+  },
+  "copied_provenance_files_verified": 20,
+  "credential_pattern_scan_files": 162,
+  "core_numerical_and_test_code_matches_commit": "3ea6b728e82c6f0c7a4d912b1fe011735624cd1a",
+  "packaging_changes": [
+    "README and evidence archive",
+    "archive plan path fallback in revision_common.py",
+    "full-query configuration directory and matching read path",
+    "ignore raw data, checkpoints and credential files"
+  ],
+  "new_real_data_training_runs": 0
+}
