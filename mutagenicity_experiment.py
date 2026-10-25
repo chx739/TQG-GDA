@@ -145,6 +145,8 @@ def warmup(ctx,seed,pool):
     cfg.update(seed=seed,model={k:sega[k] for k in ('hidden_dim','num_layers','readout')})
     cfg['warmup']=dict(ctx.plan['warmup'],source_pool=pool)
     cfg['adaptation']['source_pool']=pool
+    if pool=='all_source':
+        cfg['method']='source_only'
     run_warmup(task(all_source=pool=='all_source'),cfg,output)
     writer=tensorboard_writer(output)
     for line in (output/'history.jsonl').read_text().splitlines():
