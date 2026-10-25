@@ -37,6 +37,16 @@ class FullContext(Context):
             internal_resource_ceiling_seconds=self.full_plan['resource_cap_seconds'])
         self.plan['status'] = 'USER_REQUESTED_EXECUTION'
         self.arms = self.full_plan['arms']
+        self.roles['domains']['1'] = read(STAGE/'roles_domain1.json')
+        self.plan['datasets'][0]['tasks'] = ['0_to_1']
+        # Warmups trained only on domain0; target metadata is checked separately.
+        reusable=[]
+        for record in self.old_manifest['records']:
+            if record['task']=='0_to_2' and record['arm'] in ('original_TQG_target_probes','full_source_CE_700plus200'):
+                reusable.append(dict(task='0_to_1',seed=record['seed'],arm=record['arm'],
+                    warmup_checkpoint=record['warmup_checkpoint'],
+                    **({'warmup_checkpoint_sha256':record['warmup_checkpoint_sha256']} if 'warmup_checkpoint_sha256' in record else {})))
+        self.old_manifest['records'].extend(reusable)
 
 
 def assert_tree_equal(a, b):
@@ -68,22 +78,27 @@ def trainer(ctx, domain, seed, arm):
 
 def acceptance(ctx):
     checks = []
-    # New selector must not alter any inherited baseline behavior.
-    for domain in ctx.full_plan['tasks']:
-        for seed in ctx.plan['seeds']:
-            for arm in ('B_fit', 'B_full'):
-                item = trainer(ctx, domain, seed, arm)
-                for _ in range(10):
-                    item.step()
-                old = torch.load(V1 / 'jobs' / f'0_to_{domain}' / str(seed) /
-                                 arm / 'step_10.pt', weights_only=False)
-                assert_tree_equal(item.model.state_dict(), old['model'])
-                assert_tree_equal(item.optimizer.state_dict(), old['optimizer'])
-    checks.append('20 baseline first-ten-step model and Adam states reproduce bitwise')
+    for seed in ctx.plan['seeds']:
+        for arm in ('B_fit','B_full'):
+            item=trainer(ctx,1,seed,arm)
+            expected=copy.deepcopy(item.model)
+            settings=ctx.plan['adaptation'];adam=settings['adam']
+            opt=torch.optim.Adam(expected.parameters(),lr=settings['learning_rate'],
+                betas=(adam['beta1'],adam['beta2']),eps=adam['epsilon'],
+                weight_decay=adam['weight_decay'],amsgrad=adam['amsgrad'])
+            schedule,_=paired_ids(item.task,seed,1,1)
+            role='all_source' if arm=='B_full' else 'fit'
+            batch=item.task.batch(schedule[role],role)
+            loss=torch.nn.functional.cross_entropy(expected(batch),batch.y)
+            loss.backward();opt.step()
+            item.step()
+            assert_tree_equal(item.model.state_dict(),expected.state_dict())
+            assert_tree_equal(item.optimizer.state_dict(),opt.state_dict())
+    checks.append('10 fresh baseline handlers match independent ordinary source CE update')
     for arm in ('Q51_OE', 'Q51_O', 'Q250_OE', 'Q250_O'):
-        item = trainer(ctx, 2, 3405, arm)
+        item = trainer(ctx, 1, 3405, arm)
         before = copy.deepcopy(item.model.state_dict())
-        schedule, _ = paired_ids(item.task, 3405, 2, 1)
+        schedule, _ = paired_ids(item.task, 3405, 1, 1)
         cfg = ctx.arm(arm)
         expected = set(item.task.ids(cfg['query_role']))
         assert len(expected) == cfg['n'] and not expected & set(item.task.validation_ids)
@@ -92,7 +107,7 @@ def acceptance(ctx):
         t = item.task.batch(schedule['target'], 'target')
         assert getattr(t, 'y', None) is None
         dictionary = ResponseDictionary.build(item.model, q, t,
-            __import__('revision_common').generator(910000,3405,2,1,2),
+            __import__('revision_common').generator(910000,3405,1,1,2),
             K=4,response=cfg['response'],direction='target')
         pred = ResidualPredictor(dictionary,q,cfg,torch.arange(len(expected))).predict(
             t,phi=dictionary.feedback.target_features)
@@ -111,11 +126,11 @@ def acceptance(ctx):
         assert all(p.requires_grad for p in item.model.parameters())
         checks.append(arm+' full source roles, stopped feedback, paired batches, single update')
     # Deterministic query-set extension must also preserve exact recovery.
-    a=trainer(ctx,2,3405,'Q250_OE')
+    a=trainer(ctx,1,3405,'Q250_OE')
     a.step()
     state=copy.deepcopy(a.state())
     a.step()
-    b=trainer(ctx,2,3405,'Q250_OE')
+    b=trainer(ctx,1,3405,'Q250_OE')
     b.restore(state)
     b.step()
     assert_tree_equal(a.model.state_dict(),b.model.state_dict())
@@ -141,25 +156,12 @@ def verify_result(folder):
 
 
 def baseline_records(ctx):
-    if hasattr(ctx, '_verified_baseline_records'):
-        return copy.deepcopy(ctx._verified_baseline_records)
     rows=[]
-    for domain in ctx.full_plan['tasks']:
-        for seed in ctx.plan['seeds']:
-            for arm in ('B_fit','B_full'):
-                folder=V1/'jobs'/f'0_to_{domain}'/str(seed)/arm
-                result=verify_result(folder)
-                _,_,source=ctx.source(domain,seed,arm=='B_full')
-                assert result['source_checkpoint_sha256']==sha256(source)
-                rows.append(dict(domain=domain,seed=seed,arm=arm,reused=True,
-                    output=str(folder),result_sha256=sha256(folder/'result.json'),
-                    training_commit=result['git_commit'],
-                    final_checkpoint=str(folder/'last.pt'),selected_checkpoint=str(folder/'selected.pt')))
-            _,_,source=ctx.source(domain,seed)
-            rows.append(dict(domain=domain,seed=seed,arm='B_frozen',reused=True,
-                training_commit=ctx.old_manifest['git_commit'],output=str(source.parent),
-                final_checkpoint=str(source),selected_checkpoint=None))
-    ctx._verified_baseline_records=copy.deepcopy(rows)
+    for seed in ctx.plan['seeds']:
+        _,_,source=ctx.source(1,seed)
+        rows.append(dict(domain=1,seed=seed,arm='B_frozen',reused=True,
+            training_commit=ctx.old_manifest['git_commit'],output=str(source.parent),
+            final_checkpoint=str(source),selected_checkpoint=None))
     return rows
 
 
@@ -181,14 +183,14 @@ def train(ctx,budget,profile=False):
             result_sha256=sha256(folder/'result.json'),training_commit=ctx.commit,
             final_checkpoint=str(folder/'last.pt'),selected_checkpoint=str(folder/'selected.pt'))
         combined=list(rows.values())+baseline_records(ctx)
-        atomic_json(registry,dict(commit=ctx.commit,expected_new_jobs=50,
+        atomic_json(registry,dict(commit=ctx.commit,expected_new_jobs=35,
             new_jobs_completed=sum(x.get('status')=='completed' for x in rows.values()),
             records=combined,target_labels_used=False))
         print(json.dumps(dict(event='job_finished',job=i,total=len(selected),arm=arm,
                              status=result['status'],seconds=result['seconds'])),flush=True)
     if profile:
         return
-    assert len(rows)==50 and all(x['status']=='completed' for x in rows.values())
+    assert len(rows)==35 and all(x['status']=='completed' for x in rows.values())
     manifest=read(registry)
     hashes={str(registry):sha256(registry)}
     for row in manifest['records']:
@@ -199,16 +201,16 @@ def train(ctx,budget,profile=False):
             hashes[str(folder/'result.json')]=sha256(folder/'result.json')
             for name,value in info['artifact_hashes'].items():
                 hashes[str(folder/name)]=value
-    atomic_json(STAGE/'training_seal.json',dict(complete=True,new_training_jobs=50,
-        reused_training_jobs=20,frozen_references=10,records=manifest['records'],
+    atomic_json(STAGE/'training_seal.json',dict(complete=True,new_training_jobs=35,
+        reused_training_jobs=0,frozen_references=5,records=manifest['records'],
         artifact_hashes=hashes,target_labels_used=False))
-    print(json.dumps(dict(event='all_training_sealed',new_jobs=50)),flush=True)
+    print(json.dumps(dict(event='all_training_sealed',new_jobs=35)),flush=True)
 
 
 def evaluate(ctx):
     # Import target-label access only after all training is complete and sealed.
     seal=read(STAGE/'training_seal.json')
-    assert seal['complete'] and seal['new_training_jobs']==50
+    assert seal['complete'] and seal['new_training_jobs']==35
     for file,digest in seal['artifact_hashes'].items():
         assert sha256(file)==digest,file
     from revision_evaluation import DevelopmentLabels,full_metrics
@@ -238,7 +240,7 @@ def evaluate(ctx):
                 target_final_labels_used=False,metrics=metrics)
             atomic_json(out/f'{domain}_{seed}_{arm}_{selection}.json',report)
             predictions.append(report)
-    assert len(predictions)==150
+    assert len(predictions)==75
     fields=['task','seed','arm','method','selection','balanced_accuracy','accuracy','CE',
             'class_recall','predicted_class_proportions','reused_training',
             'training_commit','evaluation_commit','checkpoint','checkpoint_sha256']
@@ -280,22 +282,16 @@ def evaluate(ctx):
                 wins=sum(v>1e-12 for v in delta),ties=sum(abs(v)<=1e-12 for v in delta),
                 losses=sum(v< -1e-12 for v in delta),per_seed_difference_pp=[v*100 for v in delta]))
     atomic_json(STAGE/'results_summary.json',dict(groups=groups,paired=paired,
-        new_training_jobs=50,reused_training_jobs=20,frozen_references=10,
-        evaluations=150,final_labels_evaluated=False))
-    report='# 全量源查询与响应消融结果\n\n'
-    report+='四组均使用相同 fit-only 源预训练起点、源 fit 主损失、目标方向、K4、ρ=.05、λ=.01、β=.1、Adam lr=.0003，适配200步。仅改变源响应回归的样本池与 odd/odd+even；不加投影或局部匹配。\n\n'
-    report+='n51使用完整query池；n250使用完整源训练池，包含预训练已用的199-fit图，因此同时改变样本量及样本角色。全部源验证图排除。目标final标签未评价。\n\n'
-    report+='新训练50作业，其中四TQG组40个、匹配调度伪标签10个；fit CE/全源CE复用已验证20个旧训练，冻结源参考10个。复用保留真实版本和路径。\n\n'
-    report+='## 固定200步 balanced accuracy（%，均值±五种子标准差）\n\n| 方法 | 0→2 | 0→3 |\n|---|---:|---:|\n'
+        new_training_jobs=35,reused_training_jobs=0,frozen_references=5,
+        evaluations=75,final_labels_evaluated=False))
+    report='# 全量查询补充：0→1\n\n'
+    report+='使用原有0→1开发/保留ID，源预训练只来自源0；本轮35个新适配，5个冻结参考。四个TQG组及三个训练基线全部按本轮配对调度重新运行。\n\n'
+    report+='n51/n250与odd/odd+even为主变量；源fit分类损失、相同源模型、K4、rho=.05、ridge=.01、beta=.1、Adam lr=.0003、200步固定。n250包含预训练用过的199张源fit图。\n\n'
+    report+='| 方法 | 0→1 balanced accuracy（%，均值±SD） |\n|---|---:|\n'
     for arm in ['B_frozen','B_fit','B_full','B_pseudo','Q51_OE','Q51_O','Q250_OE','Q250_O']:
-        values=[next(x for x in groups if (x['domain'],x['arm'],x['selection'])==(d,arm,'fixed_200'))['metrics']['balanced_accuracy'] for d in (2,3)]
-        report+=f"| {LABELS[arm]} | {values[0]['mean']*100:.2f} ± {values[0]['sd']*100:.2f} | {values[1]['mean']*100:.2f} ± {values[1]['sd']*100:.2f} |\n"
-    report+='\n## 配对差值（百分点）\n\n| 比较 | 0→2，差值／胜平负 | 0→3，差值／胜平负 |\n|---|---|---|\n'
-    for left,right in [('Q51_OE','B_fit'),('Q51_O','B_fit'),('Q250_OE','B_fit'),('Q250_O','B_fit'),('Q250_OE','Q51_OE'),('Q250_O','Q51_O'),('Q51_OE','Q51_O'),('Q250_OE','Q250_O')]:
-        values=[next(x for x in paired if (x['domain'],x['left'],x['right'])==(d,left,right)) for d in (2,3)]
-        text=[f"{v['mean_difference_pp']:+.3f} / {v['wins']}胜{v['ties']}平{v['losses']}负" for v in values]
-        report+=f'| {left} − {right} | {text[0]} | {text[1]} |\n'
-    report+='\n源验证选点为补充结果，完整每种子指标见 results.csv 与 results_summary.json。不能依据目标分数挑最佳checkpoint或临时更换主设置。单数据集开发结果不代表独立确认。\n'
+        metric=next(x for x in groups if (x['domain'],x['arm'],x['selection'])==(1,arm,'fixed_200'))['metrics']['balanced_accuracy']
+        report+=f"| {LABELS[arm]} | {metric['mean']*100:.2f} ± {metric['sd']*100:.2f} |\n"
+    report+='\n完整每种子结果及配对差见results.csv/results_summary.json。目标final标签未评价，仍为开发探索。\n'
     (STAGE/'run_report.md').write_text(report)
     print(json.dumps(dict(event='evaluation_complete',records=len(predictions))),flush=True)
 
@@ -323,21 +319,13 @@ def audit(ctx):
         assert checkpoint['step']==200
         assert all(int(x['step'])==200 for x in checkpoint['optimizer']['state'].values())
     requests=[json.loads(l) for l in (STAGE/'development_label_access.jsonl').read_text().splitlines()]
-    assert len(requests)==80
-    allowed=set(ctx.development_ids(2))|set(ctx.development_ids(3))
+    assert len(requests)==40
+    allowed=set(ctx.development_ids(1))
     assert all(set(x['ids'])<=allowed for x in requests)
     summary=read(STAGE/'results_summary.json')
-    assert summary['evaluations']==150
-    # Reused baselines must agree with their previous paired scores.
-    with (V1/'results.csv').open() as f:old=list(csv.DictReader(f))
-    for d in (2,3):
-        for arm in ('B_fit','B_full','B_frozen'):
-            group=next(g for g in summary['groups'] if (g['domain'],g['arm'],g['selection'])==(d,arm,'fixed_200'))
-            for x in group['per_seed']:
-                oldrow=next(v for v in old if (v['task'],int(v['seed']),v['config_name'],v['selection'])==(f'0_to_{d}',x['seed'],arm,'fixed_200'))
-                assert abs(x['balanced_accuracy']-float(oldrow['primary_metric']))<1e-7
-    atomic_json(STAGE/'completion_audit.json',dict(passed=True,new_jobs=50,reused_jobs=20,
-        frozen_references=10,evaluations=150,all_updates=200,
+    assert summary['evaluations']==75
+    atomic_json(STAGE/'completion_audit.json',dict(passed=True,new_jobs=35,reused_jobs=0,
+        frozen_references=5,evaluations=75,all_updates=200,
         source_roles_and_paired_batches_verified=True,Adam_step_counts_verified=True,
         final_labels_evaluated=False,commit=ctx.commit))
     print(json.dumps(dict(event='completion_audit_passed')),flush=True)

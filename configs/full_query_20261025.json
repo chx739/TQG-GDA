@@ -1,9 +1,8 @@
 {
-  "revision_id": "tqg_full_query_2026_10_25",
+  "revision_id": "tqg_full_query_domain1_2026_10_26",
   "parent_commit": "d286fa4b5622c5a3f8fbaa298f92e69f6c06a48e",
   "tasks": [
-    2,
-    3
+    1
   ],
   "seeds": [
     3405,
@@ -192,22 +191,22 @@
   "source_query_protocol": "Q51 uses all held-out query; Q250 deliberately reuses all 199 fit plus 51 query labels for coefficient fitting; source validation excluded",
   "pairing": "unchanged revision-v1 fit/target batch schedules and probe seed derivation",
   "reuse_baselines": [
-    "B_frozen",
-    "B_fit",
-    "B_full"
+    "B_frozen"
   ],
   "new_training_arms": [
     "Q250_OE",
     "Q51_OE",
     "Q51_O",
     "Q250_O",
-    "B_pseudo"
+    "B_pseudo",
+    "B_fit",
+    "B_full"
   ],
-  "new_training_jobs": 50,
-  "reused_adaptation_jobs": 20,
-  "frozen_references": 10,
+  "new_training_jobs": 35,
+  "reused_adaptation_jobs": 0,
+  "frozen_references": 5,
   "new_source_warmups": 0,
-  "resource_cap_seconds": 14400,
+  "resource_cap_seconds": 7200,
   "GPU_hours": 0,
   "target_final_labels_allowed": false,
   "development_labels_after_training_seal_only": true,
