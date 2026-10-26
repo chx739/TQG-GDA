@@ -1,0 +1,59 @@
+{
+  "status": "completed",
+  "spec": {
+    "domain": 1,
+    "seed": 3405,
+    "arm": "B_fit"
+  },
+  "git_commit": "7280cdd48ed1c3ba306c9661162f3411d53f03ba",
+  "plan_sha256": "3871dc8d19caa58f17481160eca1f33fe355960968d68737030f38a956ca1053",
+  "output": "/home/hxchen/runs/2026-10-26-tqg-v2-mutagenicity/stage3_execution/jobs/0_to_1/3405/B_fit/attempt_01",
+  "artifacts": {
+    "last.pt": {
+      "path": "/home/hxchen/runs/2026-10-26-tqg-v2-mutagenicity/stage3_execution/jobs/0_to_1/3405/B_fit/attempt_01/last.pt",
+      "sha256": "2562da7d746e7b51e05494a95c66260fd036eb1ed864d80da597f22fab7a99fe"
+    },
+    "selected.pt": {
+      "path": "/home/hxchen/runs/2026-10-26-tqg-v2-mutagenicity/stage3_execution/jobs/0_to_1/3405/B_fit/attempt_01/selected.pt",
+      "sha256": "7126921356501af98c88d92d6a3909a45ce4c099342252874a17b4e7d4180952"
+    },
+    "history.jsonl": {
+      "path": "/home/hxchen/runs/2026-10-26-tqg-v2-mutagenicity/stage3_execution/jobs/0_to_1/3405/B_fit/attempt_01/history.jsonl",
+      "sha256": "0d67aadd3176447a97a0e769f5505a18f349605646a55e55a6cf6711eaf222a9"
+    },
+    "config.json": {
+      "path": "/home/hxchen/runs/2026-10-26-tqg-v2-mutagenicity/stage3_execution/jobs/0_to_1/3405/B_fit/attempt_01/config.json",
+      "sha256": "83c8ac512db47a12064690a92faf42c7846f0562a2a7b1faec001d02c2bbd1a8"
+    },
+    "data_roles.json": {
+      "path": "/home/hxchen/runs/2026-10-26-tqg-v2-mutagenicity/stage3_execution/jobs/0_to_1/3405/B_fit/attempt_01/data_roles.json",
+      "sha256": "636dd4f68c8b4e9acde4b7530ba4600e3f6e7d64cd795153c08891798a735dbc"
+    },
+    "environment.json": {
+      "path": "/home/hxchen/runs/2026-10-26-tqg-v2-mutagenicity/stage3_execution/jobs/0_to_1/3405/B_fit/attempt_01/environment.json",
+      "sha256": "5aae8b6032df29927c0941882ce8f17b97d2633095b21ba508f52832f5ea00c5"
+    },
+    "result.json": {
+      "path": "/home/hxchen/runs/2026-10-26-tqg-v2-mutagenicity/stage3_execution/jobs/0_to_1/3405/B_fit/attempt_01/result.json",
+      "sha256": "3f8ccf5f4c09a015e781ffd6793729cc08e4fe49f50c910e26db6d99a6ab48be"
+    }
+  },
+  "event_flags": [
+    "clean"
+  ],
+  "attempts": 1,
+  "gpu_hours": 0,
+  "wall_seconds": 16.23116683959961,
+  "result": {
+    "status": "completed",
+    "method": "source_only",
+    "completed_steps": 200,
+    "selected_step": 0,
+    "selected_source_validation_ce": 0.3543748555348935,
+    "seconds": 10.82590240240097,
+    "target_labels_used": false,
+    "target_evaluated": false,
+    "formal_paper_result": false,
+    "resumed_from": null
+  }
+}

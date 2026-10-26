@@ -44,7 +44,7 @@ def main():
         p.error('--resume-adapt requires stage adapt')
     if args.resume_source and args.stage == 'adapt':
         p.error('--resume-source requires source or all')
-    target_required = args.stage != 'source' and config['method'] == 'tqg'
+    target_required = args.stage != 'source' and config['method'] in ('tqg', 'tqg_v2')
     if target_required and not args.target_policy:
         p.error('TQG adaptation requires --target-policy transductive-unlabeled')
     common = dict(cache_path=args.data_path, source_split=args.source_split,

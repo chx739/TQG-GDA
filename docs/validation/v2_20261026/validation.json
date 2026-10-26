@@ -1,0 +1,37 @@
+{
+  "status": "PASSED",
+  "base_commit": "cdd8abc088a431c6ee4ed450f638e405ec5ff642",
+  "worktree_changes": true,
+  "python": "3.12.4",
+  "torch": "2.5.1",
+  "pyg": "2.6.1",
+  "design_sha256": "907382b0cc56103e38da8ae0182ec5a0fb93c6490ef86f73d570cb7f433fc915",
+  "tests": 116,
+  "new_v2_tests": 23,
+  "core_and_config_sha256": {
+    "tqg_gda/calibration_v2.py": "c326d1fc99cf6af12faa177606a9f5fb75240bd20693a7607322b42139500b04",
+    "tqg_gda/feedback_v2.py": "e479209e1542a5e2ddec548dd4dc353ab245d6b3c5279a01aae66e5527d84b88",
+    "tqg_gda/training.py": "c64603b25bd1a44185fb73881f870b205739c6853750972397aa7da6350aaf0c",
+    "tqg_gda/utils.py": "8c6b48f563d3f662fc7d00d5e40047b11024fb5c3b9eeebedf09107de4c35668",
+    "scripts/run_experiment.py": "2d259142b179d3ba3b349967ccfd8ab7d0009dca5b5c0b3c838bec0432f602d8",
+    "scripts/smoke_v2.py": "738b27e70f23720a00858e1734bc6f18dfd6c8f85befa2e1f1104b580c8bd6d9",
+    "tests/test_v2_math.py": "7e1f7fccce741679f79f0c999f7c98d01f6eccdd995e23cc8283d1f0d8c91d59",
+    "tests/test_v2_training.py": "ebcd3bb472f1de745d3b98219099bcd472d070d86a6c251e6b3c7ea35a3fab0b",
+    "configs/v2/mean_only_krr.json": "860ed3fd73141f6bdc18d1ff3df285f93cf1f617581571a1b7d1a13b4b22de9f",
+    "configs/v2/permuted_labels.json": "efabf82d752d5090cf5d45f5dc76527cf4685dc9e8e6b1576103f102cd1548ac",
+    "configs/v2/pseudo_labels_sgd.json": "607a5ce8740ed73eb3eee8b46eb8996d1b8e6cf7317eb66bd295bbbfb32f9070",
+    "configs/v2/representation_only.json": "14167d82bd52d420ac569070901c656bb48f7322a7f7fefa3d68c91cb227eded",
+    "configs/v2/source_all_sgd.json": "0109e64067e08b508b45e0b13f879e166ad2004f2e3d29f21dd995900b174633",
+    "configs/v2/source_only_sgd.json": "ddc5a8b4dca0c7b18f3b4388fe2348739caa5c94d343c416ec3cd702b0ac46d4",
+    "configs/v2/tqg_v2.json": "0754aef1e3df80cb4a33785dd04fd0929388786c52fcf3aa3321b9c69bbd9512"
+  },
+  "evidence_sha256": {
+    "unit_tests.log": "9ad1bece273169130a5fd3b5562b16329c022da0c21d81e23eb208eaa5d9811a",
+    "synthetic_smoke.json": "b4a94852a852bcf749ada628cf78c3c793948d0060c260fa7e6e9130107a144e",
+    "real_data_smoke.json": "6d9f5a0a849cd7caae621fc87595a518df05e75a0ef60d8a7e044081f2b97450"
+  },
+  "original_outputs": "/home/hxchen/runs/2026-10-26-tqg-v2-implementation",
+  "target_labels_evaluated": false,
+  "formal_paper_result": false,
+  "cuda_tested": false
+}

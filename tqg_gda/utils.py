@@ -50,8 +50,8 @@ def load_config(path, seen=()):
 
 
 def validate_config(config):
-    if config['method'] not in ('tqg', 'source_only'):
-        raise ValueError('method must be tqg or source_only')
+    if config['method'] not in ('tqg', 'tqg_v2', 'source_only'):
+        raise ValueError('method must be tqg, tqg_v2 or source_only')
     if config['dtype'] not in ('float32', 'float64'):
         raise ValueError('Finite differences require float32 or float64')
     for key in ('warmup', 'adaptation'):
@@ -60,7 +60,7 @@ def validate_config(config):
             raise ValueError('source_pool must be fit or all_source')
         if not math.isfinite(c['lr']) or c['lr'] <= 0:
             raise ValueError('Learning rate must be finite and positive')
-    if config['method'] == 'tqg' and any(config[k]['source_pool'] != 'fit' for k in ('warmup', 'adaptation')):
+    if config['method'] in ('tqg', 'tqg_v2') and any(config[k]['source_pool'] != 'fit' for k in ('warmup', 'adaptation')):
         raise ValueError('Standard TQG reserves query graphs from warmup and source CE')
     counts = (config['num_threads'], config['warmup']['epochs'], config['warmup']['batch_size'],
               config['adaptation']['steps'], config['adaptation']['fit_batch_size'],
@@ -77,7 +77,7 @@ def validate_config(config):
         raise ValueError('Unknown query label control')
     if mode != 'true':
         seed = config['adaptation'].get('query_permutation_seed')
-        if config['method'] != 'tqg' or isinstance(seed, bool) or not isinstance(seed, int) or seed < 0:
+        if config['method'] not in ('tqg', 'tqg_v2') or isinstance(seed, bool) or not isinstance(seed, int) or seed < 0:
             raise ValueError('Permuted query labels require TQG and a nonnegative permutation seed')
     predictor = config['adaptation'].get('feedback_predictor', 'responses')
     if predictor not in ('responses', 'mean_residual', 'responses_with_intercept', 'pseudo_labels'):
@@ -90,6 +90,16 @@ def validate_config(config):
             raise ValueError('Pseudo labels do not use the source-query permutation control')
     if predictor != 'responses' and config['method'] != 'tqg':
         raise ValueError('Residual-predictor controls require the TQG data roles')
+    optimizer = config['adaptation'].get('optimizer', 'sgd' if config['method'] == 'tqg_v2' else 'adam')
+    if optimizer not in ('adam', 'sgd'):
+        raise ValueError('adaptation.optimizer must be adam or momentum-free sgd')
+    if config['method'] == 'tqg_v2':
+        from .feedback_v2 import V2Config
+        V2Config(**config.get('v2', {}))
+        if optimizer != 'sgd':
+            raise ValueError('The v2 execution rule requires momentum-free SGD')
+        if config['adaptation']['query_batch_size'] < 2:
+            raise ValueError('v2 requires at least two source query graphs')
     if 'update_budget' in config['warmup']:
         for key in ('update_budget', 'validation_interval_updates'):
             value = config['warmup'].get(key)

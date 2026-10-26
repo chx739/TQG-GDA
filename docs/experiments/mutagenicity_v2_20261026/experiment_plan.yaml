@@ -1,0 +1,156 @@
+{
+  "run_id": "2026-10-26-tqg-v2-mutagenicity",
+  "dataset": "Mutagenicity",
+  "seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "domains": [
+    1,
+    2,
+    3
+  ],
+  "source_counts": {
+    "domain": 1084,
+    "train": 975,
+    "validation": 109,
+    "fit": 779,
+    "query": 196
+  },
+  "target_policy": "transductive-unlabeled",
+  "target_development": 542,
+  "target_final_labels_evaluated": false,
+  "cache": "/home/hxchen/TQG_data/Mutagenicity_official_20261026/Mutagenicity/processed/data.pt",
+  "cache_sha256": "c4a03120edd2494ab82bcc9792605ea7e71d52024985624313ae11d9f37b4fab",
+  "source_archive": "/home/hxchen/TQG-GDA/experiments/mutagenicity_sega_20261026",
+  "source_pretraining": {
+    "reuse_existing": true,
+    "epochs": 100,
+    "batch_size": 32,
+    "lr": 0.003,
+    "fit_updates": 2500,
+    "full_updates": 3100
+  },
+  "adaptation": {
+    "steps": 200,
+    "lr": 0.0003,
+    "optimizer": "sgd",
+    "momentum": 0.0,
+    "weight_decay": 0.0,
+    "fit_batch_size": 16,
+    "query_batch_size": 196,
+    "target_batch_size": 16,
+    "feedback_weight": 0.1,
+    "validation_interval": 10,
+    "checkpoint_interval": 50
+  },
+  "v2": {
+    "scale_epsilon": 1e-08,
+    "signature": "representation_response",
+    "calibration": {
+      "lambda_w": 0.01,
+      "gap_atol": 1e-08,
+      "gap_rtol": 1e-06,
+      "max_iterations": 200,
+      "initial_step": 1.0,
+      "max_backtracks": 40,
+      "mode": "joint"
+    }
+  },
+  "arms": {
+    "B_fit": {
+      "label": "继续源 fit 训练（SGD）",
+      "method": "source_only",
+      "pool": "fit"
+    },
+    "B_full": {
+      "label": "全源标签训练（SGD）",
+      "method": "source_only",
+      "pool": "all_source"
+    },
+    "B_pseudo": {
+      "label": "置信度伪标签（SGD）",
+      "method": "tqg",
+      "pool": "fit",
+      "feedback_predictor": "pseudo_labels",
+      "confidence_threshold": 0.9
+    },
+    "KRR": {
+      "label": "普通核回归（平均误差）",
+      "method": "tqg_v2",
+      "pool": "fit",
+      "calibration_mode": "mean_only"
+    },
+    "V2_repr": {
+      "label": "v2 仅表示核",
+      "method": "tqg_v2",
+      "pool": "fit",
+      "signature": "representation_only"
+    },
+    "V2_permute": {
+      "label": "v2 打乱源查询标签",
+      "method": "tqg_v2",
+      "pool": "fit",
+      "query_label_mode": "permute_within_batch",
+      "query_permutation_seed": 113
+    },
+    "V2_joint": {
+      "label": "v2 联合校准主版本",
+      "method": "tqg_v2",
+      "pool": "fit"
+    }
+  },
+  "execution_order": [
+    "V2_joint",
+    "KRR",
+    "V2_repr",
+    "V2_permute",
+    "B_fit",
+    "B_pseudo",
+    "B_full"
+  ],
+  "primary": {
+    "selection": "fixed_200",
+    "metric": "balanced_accuracy",
+    "aggregation": "five seeds mean and sample SD",
+    "hypotheses": [
+      "V2_joint has positive mean paired BA difference vs B_fit on at least 2/3 tasks, with >=3/5 seed wins on those tasks.",
+      "Joint calibration adds value over KRR only if V2_joint has positive mean paired BA difference on at least 2/3 tasks.",
+      "Response signature and true source labels are assessed separately against V2_repr and V2_permute; no claim from a single seed."
+    ]
+  },
+  "secondary_metrics": [
+    "accuracy",
+    "ce",
+    "auroc",
+    "class_recall",
+    "confusion"
+  ],
+  "secondary_selection": "source_validation_ce",
+  "label_boundary": "Train complete 105 jobs and seal hashes before any development label evaluation; final labels prohibited.",
+  "workers": 5,
+  "num_threads_per_worker": 1,
+  "dtype": "float64",
+  "device": "cpu",
+  "budget": {
+    "wall_hours_cap": 8,
+    "gpu_hours_cap": 0,
+    "warn_fraction": 0.5,
+    "request_fraction": 0.8
+  },
+  "monitoring": {
+    "expected_step_seconds": 30,
+    "hang_multiplier": 5,
+    "loss_window": 100,
+    "loss_no_decrease": "warn_only",
+    "max_failure_attempts": 5,
+    "no_automatic_hyperparameter_changes": true
+  },
+  "precision_reason": "Use verified FP64 GNN, Jacobian and calibration; mixed precision would alter the prescribed numerical method.",
+  "exploratory": true,
+  "development_sets_previously_observed": true,
+  "formal_paper_result": false
+}

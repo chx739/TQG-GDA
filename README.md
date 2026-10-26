@@ -4,7 +4,9 @@ Target-Queried Gradient Learning for graph-level domain adaptation 的研究代�
 
 本仓库依据 TQG 设计稿实现实验框架，沿用用户提供的 SEGA 图网络结构与域索引。**截至2026-10-26，在 PROTEINS 上尚未获得跨迁移任务的稳定收益。** 这里保留代码、负面结果及审计证据，供后续改进。
 
-## 方法在做什么
+新增 [v2 方法实现](docs/TQG_V2_IMPLEMENTATION.md)：完整目标分类梯度空间、核查询联合校准、参数坐标反馈与无动量 SGD。Mutagenicity 三方向五种子的[v2完整验证](docs/experiments/mutagenicity_v2_20261026/run_report.md)已经完成，当前配置仍未获得跨任务稳定收益。v2 配置位于 `configs/v2/`，原配置继续使用原流程；原版与 v2 结果分开记录。
+
+## 原版方法在做什么
 
 1. 用有标签的源图预训练 GNN。
 2. 用无标签目标图选择参数探测方向。
@@ -63,6 +65,25 @@ odd记录正反扰动之间的带方向输出变化；even记录正反扰动平�
 query196＋odd在0→3较继续fit监督提高0.56个百分点，五个种子4胜1负，但其余方向没有提升；所有TQG设置的平均值均未超过各方向全源监督基线。even未体现稳定增量。源验证选点结果与配对比较见[完整报告](experiments/mutagenicity_sega_20261026/results/run_report.md)。这轮尚未获得跨任务稳定收益。
 
 [实验归档](experiments/mutagenicity_sega_20261026/README.md)包含115份训练日志、755份checkpoint、225条评价索引、配置与来源记录，约260 MiB。更换数据集同时改变了GNN结构与预训练更新预算，不能把与PROTEINS的差异单独解释为数据量作用。
+
+## Mutagenicity：v2完整验证
+
+复用相同源预训练模型，运行0→1/2/3、五个种子，每步使用全部196张独立query图，适配200步；所有适配方法采用无动量SGD，lr0.0003、反馈权重0.1。105次适配及225行开发评价全部完成。指标为balanced accuracy（%），均值±五种子样本标准差。
+
+| 方法 | 0→1 | 0→2 | 0→3 |
+|---|---:|---:|---:|
+| fit-only 源模型不动 | 76.72 ± 1.38 | 67.34 ± 2.56 | 61.67 ± 3.36 |
+| 继续源fit（SGD） | 76.76 ± 1.50 | 67.37 ± 2.76 | 61.82 ± 3.48 |
+| 全源监督（SGD） | 77.09 ± 0.67 | 68.43 ± 1.73 | 63.00 ± 2.94 |
+| 置信度伪标签（SGD） | 76.72 ± 1.39 | 67.41 ± 2.68 | 61.95 ± 3.45 |
+| 普通核回归（KRR） | 76.99 ± 1.53 | 67.23 ± 2.83 | 61.84 ± 3.57 |
+| v2：仅表示核 | 76.84 ± 2.06 | 67.20 ± 3.05 | 62.21 ± 3.83 |
+| v2：打乱query标签 | 77.28 ± 1.73 | 67.13 ± 2.76 | 61.95 ± 3.35 |
+| v2：完整方法 | 77.02 ± 1.28 | 67.29 ± 2.94 | 61.81 ± 3.61 |
+
+完整方法相对继续源fit为+0.264/−0.077/−0.0015个百分点，未满足至少两个方向获益的预设主条件。0→1提升主要来自一个种子；与KRR差别很小，打乱query标签也没有稳定变差。主版本3000个查询步骤均达到求解容差，参数更新等式与标签访问审计通过；这些执行检查不证明监督估计正确。final标签未读。
+
+[完整报告与源验证选点结果](docs/experiments/mutagenicity_v2_20261026/run_report.md)、[逐种子结果](docs/experiments/mutagenicity_v2_20261026/results.csv)、[独立审计](docs/experiments/mutagenicity_v2_20261026/independent_audit.json)。[本轮实验归档](experiments/mutagenicity_v2_20261026/README.md)包含115份训练日志、650份checkpoint、225条评价索引及执行代码快照，约140 MiB。10次源预训练来自上一轮，105次适配为本轮新训练；归档操作没有重新训练模型。
 
 ## PROTEINS训练日志与模型归档
 
@@ -131,7 +152,7 @@ python scripts/prepare_source_split.py \
 
 - `tqg_gda/`：模型、参数探测、有限响应、残差回归、目标反馈、训练与数学模块。
 - `scripts/`：基础训练、恢复、独立评价、诊断与消融入口。
-- `scripts/archive_full_query.py`、`scripts/verify_experiment_archive.py`：归档既有实验、验证文件和指标对应关系；不训练模型。
+- `scripts/archive_full_query.py`、`scripts/archive_v2.py`、`scripts/verify_experiment_archive.py`：归档既有实验、验证文件和指标对应关系；不训练模型。
 - `configs/full_query/0_to_1.json`、`configs/full_query/0_to_2_3.json`：PROTEINS两阶段的原始实验设置。
 - `configs/mutagenicity/sega_full_query.json`：Mutagenicity的SEGA源配置、TQG矩阵与协议边界。
 - `configs/revision_v1/`：改进方案和合成测试使用的归档计划；状态字段是历史记录。
@@ -142,4 +163,6 @@ python scripts/prepare_source_split.py \
 - `docs/`：方法、改进设计和结果文档，见[文档目录](docs/README.md)。
 - `docs/history/`：历史框架、pilot、revision说明与初始源清单，含原运行环境路径。
 
-代码历史保留原实验提交：`8923cc9`对应0→2/0→3全查询实验，`3ea6b72`对应0→1扩展。仓库整理补充文档、实验文件、来源索引及方案路径回退；数值训练实现与原实验结果未改动，也未启动新的真实数据训练。
+代码历史保留原实验提交：`8923cc9`对应0→2/0→3全查询实验，`3ea6b72`对应0→1扩展。这些原版结果作为历史记录保留；v2方法和本轮Mutagenicity实验另列配置、报告与归档。
+
+后续完成代码修改或实验后，默认更新文档、核验产物并同步此GitHub仓库，项目约定见[AGENTS.md](AGENTS.md)。

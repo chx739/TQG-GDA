@@ -1,0 +1,61 @@
+{
+  "status": "PASSED",
+  "evaluations": 225,
+  "jobs": 105,
+  "summary_independently_recomputed": true,
+  "frozen_reference_matches_previous_run": true,
+  "all_fit_schedules_exactly_paired": true,
+  "all_query_steps_use_disjoint_full_196_pool": true,
+  "all_optimizer_states_momentum_free_sgd": true,
+  "all_model_values_finite": true,
+  "total_logged_steps": 21000,
+  "query_steps": 12000,
+  "rank_histogram": {
+    "16": 11939,
+    "15": 61
+  },
+  "approximate_solver_steps": [
+    {
+      "domain": 1,
+      "seed": 3406,
+      "arm": "V2_repr",
+      "step": 57,
+      "termination": "iteration_limit",
+      "gap": 1.578063436218427e-08,
+      "tolerance": 1.4852305435955228e-08,
+      "gap_over_tolerance": 1.0625040287672576
+    },
+    {
+      "domain": 1,
+      "seed": 3406,
+      "arm": "V2_repr",
+      "step": 197,
+      "termination": "iteration_limit",
+      "gap": 2.784832244450905e-08,
+      "tolerance": 1.823490186002316e-08,
+      "gap_over_tolerance": 1.5271989209638488
+    },
+    {
+      "domain": 1,
+      "seed": 3408,
+      "arm": "V2_repr",
+      "step": 147,
+      "termination": "iteration_limit",
+      "gap": 4.648508537818952e-08,
+      "tolerance": 4.125259616258723e-08,
+      "gap_over_tolerance": 1.1268402404294673
+    }
+  ],
+  "event_counts": {
+    "job_complete": 105,
+    "no_decrease_warning": 55,
+    "worker_launch": 5
+  },
+  "development_label_reads": 1626,
+  "final_label_reads": 0,
+  "labels_read_only_after_training_seal": true,
+  "job_wall_seconds_sum": 18018.476601600647,
+  "scientific_hyperparameters_changed_during_training": false,
+  "stage3_code_commit": "7280cdd48ed1c3ba306c9661162f3411d53f03ba",
+  "target_labels_reread_by_this_audit": false
+}

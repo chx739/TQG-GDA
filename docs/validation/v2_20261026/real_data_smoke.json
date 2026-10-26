@@ -1,0 +1,423 @@
+{
+  "status": "PASSED",
+  "kind": "engineering_smoke_only",
+  "steps_per_arm": 2,
+  "target_labels_evaluated": false,
+  "formal_paper_result": false,
+  "records": [
+    {
+      "dataset": "PROTEINS",
+      "arm": "v2_joint",
+      "source_checkpoint_sha256": "5eeee18afe078d4e16447ab4a9e0862354b706319c92ec883be2f5795ce7cd10",
+      "config": {
+        "method": "tqg_v2",
+        "seed": 3405,
+        "dtype": "float64",
+        "num_threads": 1,
+        "deterministic": true,
+        "use_node_attributes": false,
+        "model": {
+          "hidden_dim": 32,
+          "num_layers": 2,
+          "readout": "mean"
+        },
+        "split": {
+          "fit_fraction": 0.8,
+          "seed": 431
+        },
+        "warmup": {
+          "epochs": 100,
+          "batch_size": 32,
+          "lr": 0.003,
+          "source_pool": "fit",
+          "update_budget": 700,
+          "validation_interval_updates": 7
+        },
+        "adaptation": {
+          "steps": 2,
+          "lr": 0.0003,
+          "source_pool": "fit",
+          "fit_batch_size": 16,
+          "query_batch_size": 51,
+          "target_batch_size": 16,
+          "feedback_weight": 0.1,
+          "validation_interval": 1,
+          "checkpoint_interval": 1,
+          "optimizer": "sgd"
+        },
+        "formal_paper_result": false,
+        "v2": {}
+      },
+      "steps": [
+        {
+          "step": 1,
+          "query": {
+            "version": "v2",
+            "status": "gradient_feedback",
+            "target_labels_used": false,
+            "rank": 16,
+            "rank_tolerance": 4.203948120569403e-11,
+            "largest_singular_value": 56.28091316671005,
+            "smallest_retained_singular_value": 0.19002134767525883,
+            "rank_policy": "all_numerically_nonzero",
+            "target_jacobian_rows": 16,
+            "parameter_count": 3364,
+            "scale_h_squared": 2.2908717309015154,
+            "scale_a_squared": 29.56166818153986,
+            "scale_h_at_floor": false,
+            "scale_a_at_floor": false,
+            "signature": "representation_response",
+            "source_target_kernel_mean": 0.33746736661735427,
+            "source_target_kernel_max": 0.9649321386550086,
+            "calibration": {
+              "mode": "joint",
+              "converged": true,
+              "iterations": 2,
+              "termination": "gap_tolerance",
+              "gap": 1.1743071599568111e-06,
+              "primal": 12.20032594925611,
+              "dual": 12.20032477494895,
+              "mean_error": 0.7472786590771819,
+              "max_error": 11.446753686044266,
+              "weight_norm": 3.1732895574559037,
+              "backtracks": 0
+            },
+            "source_query_graphs": 51,
+            "target_graphs": 16,
+            "residual_norm": 3.3720399826175704,
+            "coefficient_norm": 2.6439683975070336
+          },
+          "execution": {
+            "feedback_gradient_norm": 2.643968397507034,
+            "feedback_gradient_identity_error": 0.0,
+            "optimizer": "sgd",
+            "momentum": 0.0,
+            "weight_decay": 0.0,
+            "source_gradient_norm": 1.6225425810725091,
+            "actual_step_norm": 0.0005633194337415943,
+            "sgd_step_identity_error": 4.0831108323330456e-16
+          },
+          "seconds": 6.361505892127752
+        },
+        {
+          "step": 2,
+          "query": {
+            "version": "v2",
+            "status": "gradient_feedback",
+            "target_labels_used": false,
+            "rank": 16,
+            "rank_tolerance": 3.0375295007019714e-11,
+            "largest_singular_value": 40.6653291542458,
+            "smallest_retained_singular_value": 0.33340483349985894,
+            "rank_policy": "all_numerically_nonzero",
+            "target_jacobian_rows": 16,
+            "parameter_count": 3364,
+            "scale_h_squared": 2.2794568055348154,
+            "scale_a_squared": 30.99638266221132,
+            "scale_h_at_floor": false,
+            "scale_a_at_floor": false,
+            "signature": "representation_response",
+            "source_target_kernel_mean": 0.35067779276203764,
+            "source_target_kernel_max": 0.9799402855217063,
+            "calibration": {
+              "mode": "joint",
+              "converged": true,
+              "iterations": 3,
+              "termination": "gap_tolerance",
+              "gap": 4.09931769640437e-07,
+              "primal": 1.7139385260964775,
+              "dual": 1.7139381161647078,
+              "mean_error": 0.12013690919988046,
+              "max_error": 1.589164533742883,
+              "weight_norm": 2.7238452683554297,
+              "backtracks": 0
+            },
+            "source_query_graphs": 51,
+            "target_graphs": 16,
+            "residual_norm": 3.3713470209782743,
+            "coefficient_norm": 1.9846000497782388
+          },
+          "execution": {
+            "feedback_gradient_norm": 1.9846000497782386,
+            "feedback_gradient_identity_error": 0.0,
+            "optimizer": "sgd",
+            "momentum": 0.0,
+            "weight_decay": 0.0,
+            "source_gradient_norm": 1.5739580898542116,
+            "actual_step_norm": 0.0005259412484026395,
+            "sgd_step_identity_error": 4.1988602496812413e-16
+          },
+          "seconds": 0.464726559817791
+        }
+      ],
+      "parameter_difference_from_source_sgd": 0.00013637485860316156
+    },
+    {
+      "dataset": "PROTEINS",
+      "arm": "source_sgd",
+      "source_checkpoint_sha256": "5eeee18afe078d4e16447ab4a9e0862354b706319c92ec883be2f5795ce7cd10",
+      "config": {
+        "method": "source_only",
+        "seed": 3405,
+        "dtype": "float64",
+        "num_threads": 1,
+        "deterministic": true,
+        "use_node_attributes": false,
+        "model": {
+          "hidden_dim": 32,
+          "num_layers": 2,
+          "readout": "mean"
+        },
+        "split": {
+          "fit_fraction": 0.8,
+          "seed": 431
+        },
+        "warmup": {
+          "epochs": 100,
+          "batch_size": 32,
+          "lr": 0.003,
+          "source_pool": "fit",
+          "update_budget": 700,
+          "validation_interval_updates": 7
+        },
+        "adaptation": {
+          "steps": 2,
+          "lr": 0.0003,
+          "source_pool": "fit",
+          "fit_batch_size": 16,
+          "query_batch_size": 51,
+          "target_batch_size": 16,
+          "feedback_weight": 0.1,
+          "validation_interval": 1,
+          "checkpoint_interval": 1,
+          "optimizer": "sgd"
+        },
+        "formal_paper_result": false,
+        "v2": {}
+      },
+      "steps": [
+        {
+          "step": 1,
+          "query": {
+            "status": "source_only_baseline"
+          },
+          "execution": null,
+          "seconds": 0.005368005484342575
+        },
+        {
+          "step": 2,
+          "query": {
+            "status": "source_only_baseline"
+          },
+          "execution": null,
+          "seconds": 0.0045975856482982635
+        }
+      ]
+    },
+    {
+      "dataset": "Mutagenicity",
+      "arm": "v2_joint",
+      "source_checkpoint_sha256": "d73790b7a3718a3058e231fca0750992de0015bdbff62fdf4856ec8e3761b623",
+      "config": {
+        "method": "tqg_v2",
+        "seed": 3405,
+        "dtype": "float64",
+        "num_threads": 1,
+        "deterministic": true,
+        "use_node_attributes": false,
+        "model": {
+          "hidden_dim": 32,
+          "num_layers": 2,
+          "readout": "mean"
+        },
+        "split": {
+          "fit_fraction": 0.8,
+          "seed": 431
+        },
+        "warmup": {
+          "epochs": 100,
+          "batch_size": 32,
+          "lr": 0.003,
+          "source_pool": "fit"
+        },
+        "adaptation": {
+          "steps": 2,
+          "lr": 0.0003,
+          "source_pool": "fit",
+          "fit_batch_size": 16,
+          "query_batch_size": 196,
+          "target_batch_size": 16,
+          "feedback_weight": 0.1,
+          "validation_interval": 1,
+          "checkpoint_interval": 1,
+          "optimizer": "sgd"
+        },
+        "formal_paper_result": false,
+        "v2": {}
+      },
+      "steps": [
+        {
+          "step": 1,
+          "query": {
+            "version": "v2",
+            "status": "gradient_feedback",
+            "target_labels_used": false,
+            "rank": 16,
+            "rank_tolerance": 4.4881144472138504e-11,
+            "largest_singular_value": 51.827360389919065,
+            "smallest_retained_singular_value": 1.397978177152027,
+            "rank_policy": "all_numerically_nonzero",
+            "target_jacobian_rows": 16,
+            "parameter_count": 3900,
+            "scale_h_squared": 5.132966701806941,
+            "scale_a_squared": 236.93041094920363,
+            "scale_h_at_floor": false,
+            "scale_a_at_floor": false,
+            "signature": "representation_response",
+            "source_target_kernel_mean": 0.33228065136149204,
+            "source_target_kernel_max": 0.9753785167435555,
+            "calibration": {
+              "mode": "joint",
+              "converged": true,
+              "iterations": 4,
+              "termination": "gap_tolerance",
+              "gap": 2.6065431990573984e-07,
+              "primal": 2.364478688879827,
+              "dual": 2.364478428225507,
+              "mean_error": 0.22580369154083846,
+              "max_error": 2.09577031627971,
+              "weight_norm": 8.285378065896909,
+              "backtracks": 0
+            },
+            "source_query_graphs": 196,
+            "target_graphs": 16,
+            "residual_norm": 8.390620789153942,
+            "coefficient_norm": 5.111728098742548
+          },
+          "execution": {
+            "feedback_gradient_norm": 5.111728098742552,
+            "feedback_gradient_identity_error": 0.0,
+            "optimizer": "sgd",
+            "momentum": 0.0,
+            "weight_decay": 0.0,
+            "source_gradient_norm": 2.863428956871367,
+            "actual_step_norm": 0.0009975944440603296,
+            "sgd_step_identity_error": 6.84799643008248e-16
+          },
+          "seconds": 1.2946895994246006
+        },
+        {
+          "step": 2,
+          "query": {
+            "version": "v2",
+            "status": "gradient_feedback",
+            "target_labels_used": false,
+            "rank": 16,
+            "rank_tolerance": 4.2106204028310983e-11,
+            "largest_singular_value": 48.622944813304464,
+            "smallest_retained_singular_value": 0.664284713960453,
+            "rank_policy": "all_numerically_nonzero",
+            "target_jacobian_rows": 16,
+            "parameter_count": 3900,
+            "scale_h_squared": 5.134141083288217,
+            "scale_a_squared": 246.88942319929913,
+            "scale_h_at_floor": false,
+            "scale_a_at_floor": false,
+            "signature": "representation_response",
+            "source_target_kernel_mean": 0.3155357757644657,
+            "source_target_kernel_max": 0.9825743346465067,
+            "calibration": {
+              "mode": "joint",
+              "converged": true,
+              "iterations": 4,
+              "termination": "gap_tolerance",
+              "gap": 8.914132809678676e-08,
+              "primal": 2.4957864706234743,
+              "dual": 2.495786381482146,
+              "mean_error": 0.22636494617126285,
+              "max_error": 2.2041356436528794,
+              "weight_norm": 10.220440757566749,
+              "backtracks": 0
+            },
+            "source_query_graphs": 196,
+            "target_graphs": 16,
+            "residual_norm": 8.388097731603567,
+            "coefficient_norm": 4.364032064070241
+          },
+          "execution": {
+            "feedback_gradient_norm": 4.364032064070241,
+            "feedback_gradient_identity_error": 0.0,
+            "optimizer": "sgd",
+            "momentum": 0.0,
+            "weight_decay": 0.0,
+            "source_gradient_norm": 2.6345688312949638,
+            "actual_step_norm": 0.0007866442023897552,
+            "sgd_step_identity_error": 6.517228171885284e-16
+          },
+          "seconds": 1.0288115628063679
+        }
+      ],
+      "parameter_difference_from_source_sgd": 0.00026246229100178667
+    },
+    {
+      "dataset": "Mutagenicity",
+      "arm": "source_sgd",
+      "source_checkpoint_sha256": "d73790b7a3718a3058e231fca0750992de0015bdbff62fdf4856ec8e3761b623",
+      "config": {
+        "method": "source_only",
+        "seed": 3405,
+        "dtype": "float64",
+        "num_threads": 1,
+        "deterministic": true,
+        "use_node_attributes": false,
+        "model": {
+          "hidden_dim": 32,
+          "num_layers": 2,
+          "readout": "mean"
+        },
+        "split": {
+          "fit_fraction": 0.8,
+          "seed": 431
+        },
+        "warmup": {
+          "epochs": 100,
+          "batch_size": 32,
+          "lr": 0.003,
+          "source_pool": "fit"
+        },
+        "adaptation": {
+          "steps": 2,
+          "lr": 0.0003,
+          "source_pool": "fit",
+          "fit_batch_size": 16,
+          "query_batch_size": 196,
+          "target_batch_size": 16,
+          "feedback_weight": 0.1,
+          "validation_interval": 1,
+          "checkpoint_interval": 1,
+          "optimizer": "sgd"
+        },
+        "formal_paper_result": false,
+        "v2": {}
+      },
+      "steps": [
+        {
+          "step": 1,
+          "query": {
+            "status": "source_only_baseline"
+          },
+          "execution": null,
+          "seconds": 0.00425054132938385
+        },
+        {
+          "step": 2,
+          "query": {
+            "status": "source_only_baseline"
+          },
+          "execution": null,
+          "seconds": 0.004035975784063339
+        }
+      ]
+    }
+  ]
+}

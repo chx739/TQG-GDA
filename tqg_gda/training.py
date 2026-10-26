@@ -11,6 +11,7 @@ from torch.nn import functional as F
 import torch_geometric
 
 from .feedback import ProbeConfig, build_feedback, build_mean_feedback, feedback_loss
+from .feedback_v2 import V2Config, build_gradient_feedback, parameter_feedback_loss
 from .metrics import evaluate_source
 from .models import GraphClassifier
 from .utils import (atomic_save, cpu_state, restore_rng, rng_state, seed_everything,
@@ -195,7 +196,14 @@ class TQGTrainer:
     def __init__(self, model, config):
         self.model = model
         self.config = copy.deepcopy(config)
-        self.optimizer = torch.optim.Adam(model.parameters(), lr=config['adaptation']['lr'], weight_decay=0.)
+        self.is_v2 = config['method'] == 'tqg_v2'
+        if self.is_v2:
+            validate_config(config)
+        optimizer = config['adaptation'].get('optimizer', 'sgd' if self.is_v2 else 'adam')
+        if optimizer not in ('adam', 'sgd') or (self.is_v2 and optimizer != 'sgd'):
+            raise ValueError('v2 requires SGD; supported optimizers are adam and sgd')
+        factory = torch.optim.SGD if optimizer == 'sgd' else torch.optim.Adam
+        self.optimizer = factory(model.parameters(), lr=config['adaptation']['lr'], weight_decay=0.)
         # Isolate roles so source-only and TQG see identical fit batch sequences.
         self.batch_rngs = {role: torch.Generator().manual_seed(config['seed'] + offset)
                            for role, offset in (('fit', 201), ('query', 202), ('target', 203))}
@@ -203,7 +211,8 @@ class TQGTrainer:
         self.label_mode = config['adaptation'].get('query_label_mode', 'true')
         self.label_rng = (torch.Generator().manual_seed(config['seed'] + 10000 + config['adaptation']['query_permutation_seed'])
                           if self.label_mode == 'permute_within_batch' else None)
-        self.probes = ProbeConfig(**config['probes'])
+        self.probes = None if self.is_v2 else ProbeConfig(**config.get('probes', {}))
+        self.v2 = V2Config(**config.get('v2', {})) if self.is_v2 else None
         self.step_count = 0
 
     def step(self, task):
@@ -214,7 +223,7 @@ class TQGTrainer:
         feedback, query_ids, target_ids, label_control = None, (), (), None
         pseudo_auxiliary, pseudo_statistics = None, None
         started = time.perf_counter()
-        if self.config['method'] == 'tqg':
+        if self.config['method'] in ('tqg', 'tqg_v2'):
             predictor = c.get('feedback_predictor', 'responses')
             if predictor == 'pseudo_labels':
                 target, target_ids = task.sample('target', c['target_batch_size'], self.batch_rngs['target'], p.device, p.dtype)
@@ -229,7 +238,9 @@ class TQGTrainer:
                     labels = labels[permutation]
                 label_control = dict(mode=self.label_mode, graphs=len(labels), changed=int((labels != query.y).sum()),
                                      permutation_seed=c.get('query_permutation_seed'))
-                if predictor == 'mean_residual':
+                if self.is_v2:
+                    feedback = build_gradient_feedback(self.model, query, labels, target, self.v2)
+                elif predictor == 'mean_residual':
                     feedback = build_mean_feedback(self.model, query, labels, target)
                 elif predictor == 'responses':
                     feedback = build_feedback(self.model, query, labels, target, self.probes, self.probe_rng)
@@ -237,25 +248,47 @@ class TQGTrainer:
                     feedback = build_feedback(self.model, query, labels, target, self.probes, self.probe_rng,
                                               predictor=predictor)
         ce = F.cross_entropy(self.model(batch), batch.y)
-        auxiliary = (feedback_loss(self.model, target, feedback)
-                     if feedback is not None and (feedback.target_features.shape[-1] or feedback.intercept is not None)
-                     else ce.new_zeros(()))
+        if self.is_v2:
+            auxiliary = parameter_feedback_loss(self.model, feedback)
+        else:
+            auxiliary = (feedback_loss(self.model, target, feedback)
+                         if feedback is not None and (feedback.target_features.shape[-1] or feedback.intercept is not None)
+                         else ce.new_zeros(()))
         if pseudo_auxiliary is not None:
             auxiliary = pseudo_auxiliary
         total = ce + c['feedback_weight'] * auxiliary
         if not torch.isfinite(total):
             raise FloatingPointError('Nonfinite total loss')
+        execution = {}
+        if self.is_v2:
+            active = tuple(p for p in self.model.parameters() if p.requires_grad)
+            before = torch.cat([p.detach().reshape(-1) for p in active]).clone()
+            feedback_parts = torch.autograd.grad(auxiliary, active, retain_graph=True, allow_unused=True)
+            feedback_gradient = torch.cat([(g if g is not None else torch.zeros_like(p)).reshape(-1)
+                                          for p, g in zip(active, feedback_parts)]).detach()
+            execution.update(feedback_gradient_norm=float(feedback_gradient.norm()),
+                feedback_gradient_identity_error=float((feedback_gradient-feedback.gradient).norm()),
+                optimizer='sgd', momentum=0., weight_decay=0.)
         total.backward()
         _finite_gradients(self.model)
         gradient_norm = sum(float(p.grad.detach().square().sum()) for p in self.model.parameters() if p.grad is not None) ** .5
+        if self.is_v2:
+            full_gradient = torch.cat([(p.grad if p.grad is not None else torch.zeros_like(p)).reshape(-1)
+                                       for p in active]).detach().clone()
+            execution['source_gradient_norm'] = float((full_gradient-c['feedback_weight']*feedback_gradient).norm())
         self.optimizer.step()  # Exactly ONE update; all feedback is discarded afterwards.
         _finite_parameters(self.model)
+        if self.is_v2:
+            increment = torch.cat([p.detach().reshape(-1) for p in active])-before
+            execution.update(actual_step_norm=float(increment.norm()),
+                sgd_step_identity_error=float((increment+c['lr']*full_gradient).norm()))
         self.step_count += 1
         return dict(step=self.step_count, source_ce=float(ce.detach()), feedback_loss=float(auxiliary.detach()),
             total_loss=float(total.detach()), gradient_norm=gradient_norm, seconds=time.perf_counter() - started,
             query=(pseudo_statistics if pseudo_statistics is not None else
                    feedback.statistics if feedback is not None else {'status': 'source_only_baseline'}),
-            batches=dict(fit=list(fit_ids), query=list(query_ids), target=list(target_ids)), query_label_control=label_control)
+            batches=dict(fit=list(fit_ids), query=list(query_ids), target=list(target_ids)),
+            query_label_control=label_control, **({'execution': execution} if self.is_v2 else {}))
 
     def state(self):
         return dict(model=cpu_state(self.model), optimizer=self.optimizer.state_dict(), step=self.step_count,
@@ -276,13 +309,16 @@ class TQGTrainer:
         restore_rng(state['rng'])
 
 
-def run_adaptation(task, config, source_checkpoint, output, device='cpu', resume=None):
+def run_adaptation(task, config, source_checkpoint, output, device='cpu', resume=None, step_callback=None):
     validate_config(config)
-    if config['method'] == 'tqg' and not task.target_ids:
+    if config['method'] in ('tqg', 'tqg_v2') and not task.target_ids:
         raise ValueError('TQG adaptation requires an explicitly declared target input pool')
     output = Path(output); output.mkdir(parents=True, exist_ok=False)
     seed_everything(config['seed'], config['num_threads'], config['deterministic'])
     model, source = load_model(source_checkpoint, device)
+    if config['method'] == 'tqg_v2' and (
+            source['kind'] == 'tqg_adaptation' or 'source_checkpoint_sha256' in source):
+        raise ValueError('v2 initialization requires a source warmup checkpoint, not an adapted model')
     source_identity, current_identity = dict(source['identity']), dict(task.identity)
     # Source warmup never loads a target pool. Only target-specific fields may differ.
     for identity in (source_identity, current_identity):
@@ -321,6 +357,15 @@ def run_adaptation(task, config, source_checkpoint, output, device='cpu', resume
 
     started = time.perf_counter()
     with (output / 'history.jsonl').open('w') as log:
+        if resume:
+            # Keep the full per-step history when continuing into a new directory.
+            previous = Path(resume).parent / 'history.jsonl'
+            rows = [json.loads(line) for line in previous.read_text().splitlines() if line]
+            rows = [row for row in rows if row['step'] <= trainer.step_count]
+            if [row['step'] for row in rows] != list(range(1, trainer.step_count + 1)):
+                raise ValueError('Resume history is incomplete before the checkpoint')
+            for row in rows:
+                log.write(json.dumps(row, allow_nan=False) + '\n')
         while trainer.step_count < config['adaptation']['steps']:
             row = trainer.step(task)
             step = trainer.step_count
@@ -332,6 +377,8 @@ def run_adaptation(task, config, source_checkpoint, output, device='cpu', resume
             log.write(json.dumps(row, allow_nan=False) + '\n'); log.flush()
             if step % config['adaptation']['checkpoint_interval'] == 0 or step == config['adaptation']['steps']:
                 save(output / f'step_{step}.pt'); save(output / 'last.pt')
+            if step_callback is not None:
+                step_callback(row)
             print(json.dumps(dict(stage='adapt', step=step, source_ce=row['source_ce'],
                                   feedback_loss=row['feedback_loss'], query=row['query'])), flush=True)
     selected = dict(**_common(model, task, config), kind='tqg_predictor', model=best_model,
