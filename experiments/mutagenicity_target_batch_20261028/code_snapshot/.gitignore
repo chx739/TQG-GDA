@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+runs/
+dist/
+build/
+outputs/
+/checkpoints/
+*.pt
+*.pth
+*.ckpt
+data/**/raw/
+data/**/processed/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Explicitly published, immutable experiment snapshots.
+!/experiments/proteins_full_query_20261026/checkpoints/**/*.pt
+!/experiments/mutagenicity_sega_20261026/checkpoints/**/*.pt

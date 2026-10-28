@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "python_files_checked": 23,
+  "dynamic_execution_or_network_alerts": [],
+  "justified_subprocess_uses": [
+    "local git status/rev-parse only",
+    "local seeded CPU workers and evaluation",
+    "local watchdog signals"
+  ],
+  "allowed_reads": [
+    "run directory",
+    "explicit public graph cache",
+    "explicit prior experiment archives",
+    "CPU metadata",
+    "existing TensorBoard runtime dependencies"
+  ],
+  "new_training_code_changes": "controllers only; numeric tqg_gda package unchanged",
+  "outputs": "run directory only"
+}

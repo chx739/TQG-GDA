@@ -12,6 +12,8 @@
 
 ## 当前实验与原始记录
 
+- [Mutagenicity目标batch16/32/64结果解读](experiments/mutagenicity_target_batch_20261028/结果解读.md)
+- [Mutagenicity目标batch对照完整报告](experiments/mutagenicity_target_batch_20261028/run_report.md)
 - [PROTEINS三方向完整结果](experiments/latest/run_report.md)
 - [Mutagenicity三方向完整结果](../experiments/mutagenicity_sega_20261026/results/run_report.md)
 - [Mutagenicity v2三方向五种子验证](experiments/mutagenicity_v2_20261026/run_report.md)

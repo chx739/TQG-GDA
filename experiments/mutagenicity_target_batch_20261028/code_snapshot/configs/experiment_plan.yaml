@@ -1,0 +1,167 @@
+{
+  "run_id": "2026-10-28-tqg-v2-target-batch-ablation",
+  "dataset": "Mutagenicity",
+  "seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "domains": [
+    1,
+    2,
+    3
+  ],
+  "source_counts": {
+    "domain": 1084,
+    "train": 975,
+    "validation": 109,
+    "fit": 779,
+    "query": 196
+  },
+  "target_policy": "transductive-unlabeled",
+  "target_development": 542,
+  "target_final_labels_evaluated": false,
+  "cache": "/home/hxchen/TQG_data/Mutagenicity_official_20261026/Mutagenicity/processed/data.pt",
+  "cache_sha256": "c4a03120edd2494ab82bcc9792605ea7e71d52024985624313ae11d9f37b4fab",
+  "source_archive": "/home/hxchen/TQG-GDA/experiments/mutagenicity_sega_20261026",
+  "source_pretraining": {
+    "reuse_existing": true,
+    "epochs": 100,
+    "batch_size": 32,
+    "lr": 0.003,
+    "fit_updates": 2500,
+    "full_updates": 3100,
+    "reuse_pools": [
+      "fit"
+    ]
+  },
+  "adaptation": {
+    "steps": 200,
+    "lr": 0.0003,
+    "optimizer": "sgd",
+    "momentum": 0.0,
+    "weight_decay": 0.0,
+    "fit_batch_size": 16,
+    "query_batch_size": 196,
+    "target_batch_size": 16,
+    "feedback_weight": 0.1,
+    "validation_interval": 10,
+    "checkpoint_interval": 50
+  },
+  "v2": {
+    "scale_epsilon": 1e-08,
+    "signature": "representation_response",
+    "calibration": {
+      "lambda_w": 0.01,
+      "gap_atol": 1e-08,
+      "gap_rtol": 1e-06,
+      "max_iterations": 200,
+      "initial_step": 1.0,
+      "max_backtracks": 40,
+      "mode": "joint"
+    }
+  },
+  "arms": {
+    "B32": {
+      "label": "TQG v2 target batch32",
+      "method": "tqg_v2",
+      "pool": "fit",
+      "target_batch_size": 32
+    },
+    "B64": {
+      "label": "TQG v2 target batch64",
+      "method": "tqg_v2",
+      "pool": "fit",
+      "target_batch_size": 64
+    }
+  },
+  "execution_order": [
+    "B32",
+    "B64"
+  ],
+  "primary": {
+    "selection": "fixed_200",
+    "metric": "balanced_accuracy",
+    "aggregation": "five paired model seeds mean and sample SD",
+    "hypotheses": [
+      "Increasing target batch to 32 or 64 helps under a fixed 200-step update budget only if its mean paired BA difference vs B16 is positive on at least 2/3 tasks, with >=3/5 positive seed differences on those tasks.",
+      "Each batch size is assessed independently; no post-hoc selection of the best batch per domain.",
+      "Feedback magnitude variability and calibration diagnostics are descriptive, not proof of accurate gradient directions."
+    ]
+  },
+  "secondary_metrics": [
+    "accuracy",
+    "ce",
+    "auroc",
+    "class_recall",
+    "confusion",
+    "rank",
+    "feedback_gradient_norm",
+    "weighted_feedback_source_gradient_ratio",
+    "norm_coefficient_of_variation",
+    "step_seconds",
+    "calibration_convergence",
+    "kernel_cross_mean"
+  ],
+  "secondary_selection": "source_validation_ce",
+  "label_boundary": "Complete and seal all 30 new jobs and the 30 reused B16/B_fit records before development evaluation; final labels prohibited.",
+  "workers": 5,
+  "num_threads_per_worker": 1,
+  "dtype": "float64",
+  "device": "cpu",
+  "budget": {
+    "wall_hours_cap": 8,
+    "gpu_hours_cap": 0,
+    "warn_fraction": 0.5,
+    "request_fraction": 0.8
+  },
+  "monitoring": {
+    "expected_step_seconds": 30,
+    "hang_multiplier": 5,
+    "loss_window": 100,
+    "loss_no_decrease": "warn_only",
+    "max_failure_attempts": 5,
+    "no_automatic_hyperparameter_changes": true,
+    "heartbeat_every_steps": 1
+  },
+  "precision_reason": "Use verified FP64 GNN, Jacobian and calibration; mixed precision would alter the prescribed numerical method.",
+  "exploratory": true,
+  "development_sets_previously_observed": true,
+  "formal_paper_result": false,
+  "reference_archive": "/home/hxchen/TQG-GDA/experiments/mutagenicity_v2_20261026",
+  "references": {
+    "B16": {
+      "original_arm": "V2_joint",
+      "label": "TQG v2 target batch16",
+      "reused": true
+    },
+    "B_fit": {
+      "original_arm": "B_fit",
+      "label": "继续源fit SGD",
+      "reused": true
+    },
+    "B_frozen": {
+      "label": "冻结源fit模型",
+      "reused": true
+    }
+  },
+  "comparability": {
+    "only_scientific_change": "adaptation.target_batch_size",
+    "fixed": [
+      "source warmup hash",
+      "fit batch 16",
+      "query full 196",
+      "200 steps",
+      "SGD lr0.0003",
+      "beta0.1",
+      "lambda_W0.01",
+      "FP64",
+      "data roles",
+      "seed list"
+    ],
+    "sampling": "independent randperm each step, without replacement within batch; same target permutation prefixes across B16/B32/B64",
+    "interpretation": "fixed updates; target examples, effective rank and runtime can all increase; not an equal-compute comparison"
+  }
+}

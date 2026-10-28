@@ -1,0 +1,59 @@
+{
+  "status": "completed",
+  "spec": {
+    "domain": 3,
+    "seed": 3408,
+    "arm": "B32"
+  },
+  "git_commit": "587072a4371e16da22cf5b6e9fc4db8a02dd90ab",
+  "plan_sha256": "96ff0ddd2ea3b4b8ea554fada43e4e72648e208ba9aab33985a56a5d96236e9f",
+  "output": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch-ablation/stage3_execution/jobs/0_to_3/3408/B32/attempt_01",
+  "artifacts": {
+    "last.pt": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch-ablation/stage3_execution/jobs/0_to_3/3408/B32/attempt_01/last.pt",
+      "sha256": "ecadd3715852ffd13de7afe75261fe5d574b7b4466fd138717e2bbbd4d9e83a0"
+    },
+    "selected.pt": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch-ablation/stage3_execution/jobs/0_to_3/3408/B32/attempt_01/selected.pt",
+      "sha256": "df0cd16573fb82f08b1d827acc3d3a35131ae4d4f299884743ee4cf37619f6bb"
+    },
+    "history.jsonl": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch-ablation/stage3_execution/jobs/0_to_3/3408/B32/attempt_01/history.jsonl",
+      "sha256": "d72117675fdf209c128746d2c9165677aa5cc25cc33a447c9350940695c74406"
+    },
+    "config.json": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch-ablation/stage3_execution/jobs/0_to_3/3408/B32/attempt_01/config.json",
+      "sha256": "60c2a38b849b4150aee9f65708b78f1696b59192851e91ef1cfe47e8313bc987"
+    },
+    "data_roles.json": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch-ablation/stage3_execution/jobs/0_to_3/3408/B32/attempt_01/data_roles.json",
+      "sha256": "103e6fdb8fd8719b597d2279b15d04dee583268d90865289264f38715fc136ed"
+    },
+    "environment.json": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch-ablation/stage3_execution/jobs/0_to_3/3408/B32/attempt_01/environment.json",
+      "sha256": "5aae8b6032df29927c0941882ce8f17b97d2633095b21ba508f52832f5ea00c5"
+    },
+    "result.json": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch-ablation/stage3_execution/jobs/0_to_3/3408/B32/attempt_01/result.json",
+      "sha256": "bc545cdefac950e55239686c47a24195d94f72b2dc4a18a350d3a5a796735531"
+    }
+  },
+  "event_flags": [
+    "clean"
+  ],
+  "attempts": 1,
+  "gpu_hours": 0,
+  "wall_seconds": 855.0365533828735,
+  "result": {
+    "status": "completed",
+    "method": "tqg_v2",
+    "completed_steps": 200,
+    "selected_step": 200,
+    "selected_source_validation_ce": 0.38765654919412784,
+    "seconds": 854.9689115695655,
+    "target_labels_used": false,
+    "target_evaluated": false,
+    "formal_paper_result": false,
+    "resumed_from": null
+  }
+}

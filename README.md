@@ -85,6 +85,24 @@ query196＋odd在0→3较继续fit监督提高0.56个百分点，五个种子4�
 
 [完整报告与源验证选点结果](docs/experiments/mutagenicity_v2_20261026/run_report.md)、[逐种子结果](docs/experiments/mutagenicity_v2_20261026/results.csv)、[独立审计](docs/experiments/mutagenicity_v2_20261026/independent_audit.json)。[本轮实验归档](experiments/mutagenicity_v2_20261026/README.md)包含115份训练日志、650份checkpoint、225条评价索引及执行代码快照，约140 MiB。10次源预训练来自上一轮，105次适配为本轮新训练；归档操作没有重新训练模型。
 
+## Mutagenicity v2：目标batch对照，2026-10-28
+
+保持源fit每步16、query全部196、相同五个源模型、适配200步、SGD lr0.0003及反馈权重0.1，仅改变目标batch16/32/64。沿用0→1/2/3和种子3405–3409。batch16及源SGD复用已核对代码、数据和模型哈希的结果；batch32/64新增30次训练。指标为开发集balanced accuracy（%），均值±五种子样本标准差。
+
+| 方法 | 0→1 | 0→2 | 0→3 |
+|---|---:|---:|---:|
+| fit-only 源模型不动 | 76.72 ± 1.38 | 67.34 ± 2.56 | 61.67 ± 3.36 |
+| 继续源fit（SGD） | 76.76 ± 1.50 | 67.37 ± 2.76 | 61.82 ± 3.48 |
+| TQG v2，目标batch16 | 77.02 ± 1.28 | 67.29 ± 2.94 | 61.81 ± 3.61 |
+| TQG v2，目标batch32 | 77.13 ± 1.40 | 67.26 ± 2.94 | 61.89 ± 3.63 |
+| TQG v2，目标batch64 | 77.08 ± 1.42 | 67.23 ± 2.89 | 61.96 ± 3.61 |
+
+相对batch16，batch32在三个方向为+0.113/−0.032/+0.080个百分点，batch64为+0.058/−0.065/+0.143个百分点；两档均仅在0→3满足至少3/5种子获胜的正向收益条件，未达到至少两个任务的预设门槛。0→1的batch32增益来自一个种子，其他四个持平。没有获得跨任务稳定的分类收益。
+
+反馈范数CV的跨任务均值从0.521降为0.448/0.380，目标图覆盖从约95%升至约99.8%/100%；但反馈相对源梯度的幅度也下降。当前CPU实现每步计时约1.29/2.42/4.55秒，batch16是历史参考，负载差异使耗时比较仅供参考。幅度波动减小不证明估计方向正确，当前证据不足以支持仅靠增大目标batch解决效果问题。
+
+[结果解读与逐任务诊断](docs/experiments/mutagenicity_target_batch_20261028/结果解读.md)、[完整报告](docs/experiments/mutagenicity_target_batch_20261028/run_report.md)、[独立审计](docs/experiments/mutagenicity_target_batch_20261028/independent_audit.json)。[完整归档](experiments/mutagenicity_target_batch_20261028/README.md)包含65份训练日志、370份checkpoint和135条评价索引，约84.8 MiB；其中30次新适配、30次复用适配、5次共享源预训练。三档9000步查询均收敛且无数值回退，final标签未读。此次没有执行按epoch洗牌对照。
+
 ## PROTEINS训练日志与模型归档
 
 该轮PROTEINS实验的原始运行文件已集中到 [experiments/proteins_full_query_20261026/](experiments/proteins_full_query_20261026/README.md)：
@@ -152,7 +170,7 @@ python scripts/prepare_source_split.py \
 
 - `tqg_gda/`：模型、参数探测、有限响应、残差回归、目标反馈、训练与数学模块。
 - `scripts/`：基础训练、恢复、独立评价、诊断与消融入口。
-- `scripts/archive_full_query.py`、`scripts/archive_v2.py`、`scripts/verify_experiment_archive.py`：归档既有实验、验证文件和指标对应关系；不训练模型。
+- `scripts/archive_full_query.py`、`scripts/archive_v2.py`、`scripts/archive_target_batch.py`、`scripts/verify_experiment_archive.py`：归档既有实验、验证文件和指标对应关系；不训练模型。
 - `configs/full_query/0_to_1.json`、`configs/full_query/0_to_2_3.json`：PROTEINS两阶段的原始实验设置。
 - `configs/mutagenicity/sega_full_query.json`：Mutagenicity的SEGA源配置、TQG矩阵与协议边界。
 - `configs/revision_v1/`：改进方案和合成测试使用的归档计划；状态字段是历史记录。

@@ -1,0 +1,49 @@
+{
+  "method": "tqg_v2",
+  "seed": 3408,
+  "dtype": "float64",
+  "num_threads": 1,
+  "deterministic": true,
+  "use_node_attributes": false,
+  "model": {
+    "hidden_dim": 32,
+    "num_layers": 2,
+    "readout": "mean"
+  },
+  "split": {
+    "fit_fraction": 0.8,
+    "seed": 431
+  },
+  "warmup": {
+    "epochs": 100,
+    "batch_size": 32,
+    "lr": 0.003,
+    "source_pool": "fit"
+  },
+  "adaptation": {
+    "steps": 200,
+    "lr": 0.0003,
+    "optimizer": "sgd",
+    "fit_batch_size": 16,
+    "query_batch_size": 196,
+    "target_batch_size": 32,
+    "feedback_weight": 0.1,
+    "validation_interval": 10,
+    "checkpoint_interval": 50,
+    "source_pool": "fit"
+  },
+  "formal_paper_result": false,
+  "v2": {
+    "scale_epsilon": 1e-08,
+    "signature": "representation_response",
+    "calibration": {
+      "lambda_w": 0.01,
+      "gap_atol": 1e-08,
+      "gap_rtol": 1e-06,
+      "max_iterations": 200,
+      "initial_step": 1.0,
+      "max_backtracks": 40,
+      "mode": "joint"
+    }
+  }
+}

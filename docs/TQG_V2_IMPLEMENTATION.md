@@ -64,6 +64,8 @@ python scripts/run_experiment.py all \
 
 ## 工程验证
 
+2026-10-28完成[目标batch16/32/64敏感性实验](experiments/mutagenicity_target_batch_20261028/结果解读.md)：固定源fit16、query196和200步，新增30次适配。增大batch降低反馈范数波动，但没有获得跨任务稳定的分类增益；训练数值代码未改动。
+
 2026-10-28完成了[对照设计稿的代码审查](validation/v2_review_20261028/README.md)：116项测试、5例独立稠密原始问题求解及运行快照/日志复核通过；没有修改训练算法。该报告同时说明KRR有效正则对照的局限。
 
 执行：

@@ -1,0 +1,94 @@
+{
+  "run_id": "2026-10-26-tqg-v2-mutagenicity",
+  "config_name": "V2_joint",
+  "spec": {
+    "domain": 3,
+    "seed": 3409,
+    "arm": "V2_joint"
+  },
+  "seed": 3409,
+  "git_commit": "7280cdd48ed1c3ba306c9661162f3411d53f03ba",
+  "plan_sha256": "3871dc8d19caa58f17481160eca1f33fe355960968d68737030f38a956ca1053",
+  "hardware": {
+    "cpu": "Intel(R) Xeon(R) Gold 6226R CPU @ 2.90GHz",
+    "device": "cpu",
+    "threads_per_worker": 1,
+    "logical_cpus": 64,
+    "python": "3.12.4",
+    "torch": "2.5.1",
+    "pyg": "2.6.1",
+    "cuda_available": false,
+    "code_sha256": {
+      "__init__.py": "eca3f80f71805b0b3e150f19d2c5b7b4d11f107fa35822b3728c78f1527b3e6f",
+      "calibration_v2.py": "c326d1fc99cf6af12faa177606a9f5fb75240bd20693a7607322b42139500b04",
+      "data.py": "b4f5845cf7883d891bd6fe235b923606faa3e3e6e994ee8eefc4ecd09a721501",
+      "diagnostics.py": "535898e0531a8c54b29803faa6e2fce962361afb87b61844cdfe952d72594d98",
+      "experiment_io.py": "186333983702ed595113837c1d34701f093acbcc2ec8e779c44fd1a830fd3c98",
+      "feedback.py": "e43eaecb2f86be83468f33068007f61ed5311e8024f7f37f66108fef016bc8c3",
+      "feedback_v2.py": "e479209e1542a5e2ddec548dd4dc353ab245d6b3c5279a01aae66e5527d84b88",
+      "matching.py": "9a077d3a371523b0688f79d618cf93c52d1b680c8920528e2aaea7cf89d04c73",
+      "metrics.py": "3378f7162a93933aea8a2445017fd616a7c535d366e384cd49a4d5c36a8a05cf",
+      "models.py": "a93a38b97acaf1b7bd20d5bf4fe086f9ef4e1b1a18879eda69594b2cdb242210",
+      "residual_solver.py": "6a3f72869c253decabd9c788e9105ae09b3632bbdb0e06b7574bc9a0718f9bc9",
+      "revision.py": "7f65be607c29c360d19b0cf5968fb46179d10d25a536474c39b217e5cd896822",
+      "training.py": "907ebe2e43475c5953019c8a737ddf1b485de9a334e769bfce90524358b66465",
+      "utils.py": "8c6b48f563d3f662fc7d00d5e40047b11024fb5c3b9eeebedf09107de4c35668"
+    }
+  },
+  "config_full": {
+    "method": "tqg_v2",
+    "seed": 3409,
+    "dtype": "float64",
+    "num_threads": 1,
+    "deterministic": true,
+    "use_node_attributes": false,
+    "model": {
+      "hidden_dim": 32,
+      "num_layers": 2,
+      "readout": "mean"
+    },
+    "split": {
+      "fit_fraction": 0.8,
+      "seed": 431
+    },
+    "warmup": {
+      "epochs": 100,
+      "batch_size": 32,
+      "lr": 0.003,
+      "source_pool": "fit"
+    },
+    "adaptation": {
+      "steps": 200,
+      "lr": 0.0003,
+      "optimizer": "sgd",
+      "fit_batch_size": 16,
+      "query_batch_size": 196,
+      "target_batch_size": 16,
+      "feedback_weight": 0.1,
+      "validation_interval": 10,
+      "checkpoint_interval": 50,
+      "source_pool": "fit"
+    },
+    "formal_paper_result": false,
+    "v2": {
+      "scale_epsilon": 1e-08,
+      "signature": "representation_response",
+      "calibration": {
+        "lambda_w": 0.01,
+        "gap_atol": 1e-08,
+        "gap_rtol": 1e-06,
+        "max_iterations": 200,
+        "initial_step": 1.0,
+        "max_backtracks": 40,
+        "mode": "joint"
+      }
+    }
+  },
+  "source_checkpoint": "/home/hxchen/runs/2026-10-26-tqg-v2-mutagenicity/stage3_execution/source_checkpoints/fit/3409/best.pt",
+  "source_checkpoint_sha256": "355171084b13c05329115250dcba5512924a19d3637973676cddd351f235e2a6",
+  "planned_gpu_hours": 0,
+  "started_at": "2026-10-26T03:36:10.318029+00:00",
+  "started_unix": 1792985770.3180492,
+  "attempt": 1,
+  "resumed_from": null
+}
