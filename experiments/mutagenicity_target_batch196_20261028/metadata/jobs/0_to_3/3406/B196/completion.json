@@ -1,0 +1,59 @@
+{
+  "status": "completed",
+  "spec": {
+    "domain": 3,
+    "seed": 3406,
+    "arm": "B196"
+  },
+  "git_commit": "3cf87ef74b7ea687a9f752f66dc13361bb407337",
+  "plan_sha256": "0029230276b5053792c8ccb8d9d817f8918211948fe55a834353891b5d7405c0",
+  "output": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch196/stage3_execution/jobs/0_to_3/3406/B196/attempt_01",
+  "artifacts": {
+    "last.pt": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch196/stage3_execution/jobs/0_to_3/3406/B196/attempt_01/last.pt",
+      "sha256": "435f742886a1cf9ccb8280dfbf7b80b38fd7c5a8c7bb0c4a0c0ba774f8350d91"
+    },
+    "selected.pt": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch196/stage3_execution/jobs/0_to_3/3406/B196/attempt_01/selected.pt",
+      "sha256": "fbd77f4a276270cd27c1a7cd4d8ab6f0b82feb297ff02077f7459b68cb1d31b9"
+    },
+    "history.jsonl": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch196/stage3_execution/jobs/0_to_3/3406/B196/attempt_01/history.jsonl",
+      "sha256": "27e557c3f514953bd785bd54ddca03556b8889e9e923d7c92cc432a430542729"
+    },
+    "config.json": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch196/stage3_execution/jobs/0_to_3/3406/B196/attempt_01/config.json",
+      "sha256": "9fe7ecad2577c418984d2c43ea7181396a940edaed7c575932e6c6e6a400e627"
+    },
+    "data_roles.json": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch196/stage3_execution/jobs/0_to_3/3406/B196/attempt_01/data_roles.json",
+      "sha256": "103e6fdb8fd8719b597d2279b15d04dee583268d90865289264f38715fc136ed"
+    },
+    "environment.json": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch196/stage3_execution/jobs/0_to_3/3406/B196/attempt_01/environment.json",
+      "sha256": "5aae8b6032df29927c0941882ce8f17b97d2633095b21ba508f52832f5ea00c5"
+    },
+    "result.json": {
+      "path": "/home/hxchen/runs/2026-10-28-tqg-v2-target-batch196/stage3_execution/jobs/0_to_3/3406/B196/attempt_01/result.json",
+      "sha256": "9898b31b03fc49b775caab060e3bc6adc91d16814d927d695ab60dff2c1087ac"
+    }
+  },
+  "event_flags": [
+    "clean"
+  ],
+  "attempts": 1,
+  "gpu_hours": 0,
+  "wall_seconds": 3471.260199546814,
+  "result": {
+    "status": "completed",
+    "method": "tqg_v2",
+    "completed_steps": 200,
+    "selected_step": 20,
+    "selected_source_validation_ce": 0.3674056038328962,
+    "seconds": 3471.197192929685,
+    "target_labels_used": false,
+    "target_evaluated": false,
+    "formal_paper_result": false,
+    "resumed_from": null
+  }
+}

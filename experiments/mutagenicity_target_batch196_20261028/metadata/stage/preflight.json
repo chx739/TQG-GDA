@@ -1,0 +1,17 @@
+{
+  "test_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /home/hxchen/anaconda3/envs/bfn4jet/bin/python -m unittest discover -s tests -v",
+  "unit_tests": 23,
+  "passed": true,
+  "initial_test_invocation": "pytest unavailable; repository uses unittest; corrected before training without package changes",
+  "launch_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /home/hxchen/anaconda3/envs/bfn4jet/bin/python -u launch.py > ../launcher_stdout.log 2>&1",
+  "new_jobs": 15,
+  "reused_adaptations": 60,
+  "source_checkpoints": 5,
+  "training_commit": "3cf87ef74b7ea687a9f752f66dc13361bb407337",
+  "plan_sha256": "0029230276b5053792c8ccb8d9d817f8918211948fe55a834353891b5d7405c0",
+  "core_numeric_code_unchanged": true,
+  "template": "from-scratch: reuse audited PyG custom Jacobian and parameter feedback training loop",
+  "mixed_precision": false,
+  "reason": "Preserve FP64 numerical method and isolate target batch size",
+  "cuda_available": false
+}

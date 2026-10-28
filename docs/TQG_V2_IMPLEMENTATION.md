@@ -80,3 +80,5 @@ python scripts/smoke_v2.py --output /path/outside/repo/v2_smoke
 2026-10-26 另复用种子 3405 的既有源模型，对 PROTEINS 和 Mutagenicity 的 0→1 各执行两步 v2 与配对源 SGD 检查。分别使用全部 51/196 张独立 query，目标批次 16 张，均保留 16 个有效方向。四次联合校准均在 2–4 次内部迭代达到容差；反馈梯度等式误差为 0，SGD 步长等式误差小于 7e-16。两数据集的 v2 参数均与源 SGD 基线不同。
 
 上述工程检查没有评价目标准确率，不能用于声称 v2 有效。随后完成了 [Mutagenicity 三方向五种子效果验证](experiments/mutagenicity_v2_20261026/run_report.md)：105次适配、225行开发评价，当前默认配置未获得跨任务稳定收益。超参数选择、等计算预算比较、与旧版及外部方法的充分对照仍待开展。早期工程验证摘要见 [validation/v2_20261026/](validation/v2_20261026/README.md)。
+
+随后完成[目标batch196追加对照](experiments/mutagenicity_target_batch196_20261028/结果解读.md)：新增15次适配，其余设置不变。196相对64没有分类收益，幅度CV更小但计算更慢。原数值代码未修改；完整采样、参数更新等式和目标标签边界审计通过。

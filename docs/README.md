@@ -12,6 +12,9 @@
 
 ## 当前实验与原始记录
 
+- [Mutagenicity目标batch196追加实验](experiments/mutagenicity_target_batch196_20261028/结果解读.md)
+- [目标batch196完整报告与16/32/64对照](experiments/mutagenicity_target_batch196_20261028/run_report.md)
+
 - [Mutagenicity目标batch16/32/64结果解读](experiments/mutagenicity_target_batch_20261028/结果解读.md)
 - [Mutagenicity目标batch对照完整报告](experiments/mutagenicity_target_batch_20261028/run_report.md)
 - [PROTEINS三方向完整结果](experiments/latest/run_report.md)

@@ -33,8 +33,12 @@ def export(run, destination):
     dirty = subprocess.check_output(['git', '-C', str(code), 'status', '--porcelain'], text=True).strip()
     if dirty or commit != manifest['git_commit'] or commit != seal['git_commit']:
         raise ValueError('Frozen execution snapshot changed')
-    if (seal['count'], len(seal['references']), len(manifest['source_models'])) != (30, 30, 5):
-        raise ValueError('Unexpected experiment scope')
+    new_count, reused_count = len(seal['jobs']), len(seal['references'])
+    source_count = len(manifest['source_models'])
+    if seal['count'] != new_count or new_count != len(manifest['jobs']):
+        raise ValueError('Sealed experiment count differs')
+    if not new_count or not reused_count or not source_count:
+        raise ValueError('Empty experiment scope')
     destination.mkdir(parents=True, exist_ok=False)
     entries, source_map, jobs = [], {}, []
 
@@ -155,18 +159,23 @@ def export(run, destination):
             writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator='\n')
             writer.writeheader()
             writer.writerows(rows)
-    statistics = dict(indexed_jobs=len(jobs), adaptation_jobs=60, new_adaptation_jobs=30,
-        reused_adaptation_jobs=30, shared_source_warmup_jobs=5,
-        frozen_evaluation_references=15, evaluation_records=len(evaluations),
+    adaptation_count = new_count + reused_count
+    frozen_count = len(plan['domains']) * len(plan['seeds'])
+    statistics = dict(indexed_jobs=len(jobs), adaptation_jobs=adaptation_count, new_adaptation_jobs=new_count,
+        reused_adaptation_jobs=reused_count, shared_source_warmup_jobs=source_count,
+        frozen_evaluation_references=frozen_count, evaluation_records=len(evaluations),
         history_files=sum(e['category'] == 'history' for e in entries),
         checkpoint_files=sum(e['category'] == 'checkpoint' for e in entries),
         total_bytes=sum(e['bytes'] for e in entries))
-    if (len(jobs), len(evaluations), statistics['history_files'], statistics['checkpoint_files']) != (65, 135, 65, 370):
+    expected_counts = (adaptation_count + source_count, 2*adaptation_count + frozen_count,
+                       adaptation_count + source_count, 6*adaptation_count + 2*source_count)
+    actual_counts = (len(jobs), len(evaluations), statistics['history_files'], statistics['checkpoint_files'])
+    if actual_counts != expected_counts:
         raise ValueError('Unexpected archive counts')
-    result = dict(schema_version=1, experiment='mutagenicity_target_batch_20261028',
-        archive_date='2026-10-28', source_run=str(run), execution_commit=commit,
+    result = dict(schema_version=1, experiment=destination.name,
+        archive_date=read(run/'stage_3_done')['finished_at'][:10], source_run=str(run), execution_commit=commit,
         plan_sha256=manifest['plan_sha256'], new_real_data_training_runs_during_export=0,
-        scope='30 new batch32/64 jobs, 30 reused batch16/source-SGD jobs, five reused source warmups; graph cache and TensorBoard events excluded; JSONL retained',
+        scope=f'{new_count} new jobs, {reused_count} reused adaptations, {source_count} reused source warmups; graph cache and TensorBoard events excluded; JSONL retained',
         statistics=statistics, files=entries)
     (destination/'manifest.json').write_text(json.dumps(result, indent=2)+'\n')
     (destination/'SHA256SUMS').write_text(''.join(e['sha256']+'  '+e['path']+'\n' for e in entries))

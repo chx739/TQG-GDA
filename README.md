@@ -85,6 +85,23 @@ query196＋odd在0→3较继续fit监督提高0.56个百分点，五个种子4�
 
 [完整报告与源验证选点结果](docs/experiments/mutagenicity_v2_20261026/run_report.md)、[逐种子结果](docs/experiments/mutagenicity_v2_20261026/results.csv)、[独立审计](docs/experiments/mutagenicity_v2_20261026/independent_audit.json)。[本轮实验归档](experiments/mutagenicity_v2_20261026/README.md)包含115份训练日志、650份checkpoint、225条评价索引及执行代码快照，约140 MiB。10次源预训练来自上一轮，105次适配为本轮新训练；归档操作没有重新训练模型。
 
+## Mutagenicity v2：目标batch196追加对照，2026-10-28
+
+新增目标batch196，0→1/2/3各五种子，共15次新适配。源fit每步16、query全部196、相同源模型起点、200步、SGD lr0.0003、反馈权重0.1及其余设置保持一致。16/32/64与源SGD使用已审计历史对照；指标为开发集balanced accuracy（%），均值±五种子样本标准差。
+
+| 方法 | 0→1 | 0→2 | 0→3 |
+|---|---:|---:|---:|
+| 源fit模型不动 | 76.72 ± 1.38 | 67.34 ± 2.56 | 61.67 ± 3.36 |
+| 继续源fit SGD | 76.76 ± 1.50 | 67.37 ± 2.76 | 61.82 ± 3.48 |
+| TQG v2，目标batch16 | 77.02 ± 1.28 | 67.29 ± 2.94 | 61.81 ± 3.61 |
+| TQG v2，目标batch32 | 77.13 ± 1.40 | 67.26 ± 2.94 | 61.89 ± 3.63 |
+| TQG v2，目标batch64 | 77.08 ± 1.42 | 67.23 ± 2.89 | 61.96 ± 3.61 |
+| TQG v2，目标batch196 | 77.08 ± 1.42 | 67.19 ± 2.88 | 61.92 ± 3.69 |
+
+**196没有带来跨任务稳定的分类收益。** 相对16，配对均值差为+0.058/−0.108/+0.103个百分点，仅1/3任务满足预设支持条件；相对64，0→1持平，另两项分别−0.043/−0.040个百分点。反馈范数CV继续从64档的0.380降至0.261，但这只表示幅度波动更小。当前CPU实现每步计时约15.83秒，64档历史参考为4.55秒；耗时受机器负载影响，仅供参考。固定200步不等计算预算。
+
+[结果解读](docs/experiments/mutagenicity_target_batch196_20261028/结果解读.md)、[完整报告](docs/experiments/mutagenicity_target_batch196_20261028/run_report.md)、[独立审计](docs/experiments/mutagenicity_target_batch196_20261028/independent_audit.json)。新归档包含80份日志、460份checkpoint、165条评价记录，约104.9 MiB原始来源文件；其中60次适配及5次源预训练复用，详见[归档说明](experiments/mutagenicity_target_batch196_20261028/README.md)。新增3000步的校准全部收敛，无数值回退，final标签未读。196是每步目标抽样数，不是目标域全量（目标池为1084/1084/1085图）。
+
 ## Mutagenicity v2：目标batch对照，2026-10-28
 
 保持源fit每步16、query全部196、相同五个源模型、适配200步、SGD lr0.0003及反馈权重0.1，仅改变目标batch16/32/64。沿用0→1/2/3和种子3405–3409。batch16及源SGD复用已核对代码、数据和模型哈希的结果；batch32/64新增30次训练。指标为开发集balanced accuracy（%），均值±五种子样本标准差。
