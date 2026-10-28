@@ -64,6 +64,8 @@ python scripts/run_experiment.py all \
 
 ## 工程验证
 
+2026-10-28完成了[对照设计稿的代码审查](validation/v2_review_20261028/README.md)：116项测试、5例独立稠密原始问题求解及运行快照/日志复核通过；没有修改训练算法。该报告同时说明KRR有效正则对照的局限。
+
 执行：
 
 ```bash

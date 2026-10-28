@@ -5,6 +5,7 @@
 - [TQG原始设计稿](TQG_Graph_Level_GDA_Design.md)
 - [TQG修订版v2设计稿](TQG_Graph_Level_GDA_Design_v2.md)
 - [v2实现、配置与验证说明](TQG_V2_IMPLEMENTATION.md)
+- [v2代码对照文档审查，2026-10-28](validation/v2_review_20261028/README.md)
 - [响应类型与原文公式对应](响应类型与原文公式对照.md)
 - [实现说明](IMPLEMENTATION_NOTES_CN.md)
 - [有效性验证路线](TQG_有效性验证路线.md)

@@ -1,0 +1,35 @@
+{
+  "reviewed_commit": "fe8698eebf558a6f4a571382e63d2bf73e628593",
+  "design_sha256": "907382b0cc56103e38da8ae0182ec5a0fb93c6490ef86f73d570cb7f433fc915",
+  "design_copy_matches": true,
+  "executed_package_matches_current": {
+    "diagnostics.py": true,
+    "revision.py": true,
+    "calibration_v2.py": true,
+    "residual_solver.py": true,
+    "data.py": true,
+    "training.py": true,
+    "matching.py": true,
+    "metrics.py": true,
+    "feedback_v2.py": true,
+    "models.py": true,
+    "feedback.py": true,
+    "__init__.py": true,
+    "utils.py": true,
+    "experiment_io.py": true
+  },
+  "adaptation_histories": 105,
+  "adaptation_steps": 21000,
+  "queried_step_statuses": {
+    "gradient_feedback": 12000
+  },
+  "queried_ranks": {
+    "16": 11939,
+    "15": 61
+  },
+  "nonconverged_queries": 3,
+  "max_feedback_gradient_identity_error": 0.0,
+  "max_sgd_step_identity_error": 1.0098526746811106e-15,
+  "target_labels_read_during_review": false,
+  "real_data_training_during_review": false
+}
