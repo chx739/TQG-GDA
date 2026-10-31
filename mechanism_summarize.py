@@ -242,7 +242,7 @@ def plots(stage,d8,real):
     for ax,method in zip(axes,['HA_JOINT','HA_MEAN','H_MEAN']):
         rows=[r for r in d8 if r['scenario'] in ['S1','S2','S3','S4'] and r['method']==method];x=np.arange(4)
         for i,(key,label) in enumerate([('c_TRUE','TRUE'),('c_PERM','PERM'),('c_SOURCE_CONDITIONAL','Source conditional oracle')]):
-            ax.bar(x+(i-1)*.24,[r[key] or 0 for r in rows],width=.24,label=label)
+            ax.bar(x+(i-1)*.24,[r[key] if r[key] is not None else np.nan for r in rows],width=.24,label=label)
         ax.axhline(0,color='k',linewidth=.7);ax.set_xticks(x,['S1','S2','S3','S4']);ax.set_title(method);ax.set_ylim(-1,1)
     axes[0].set_ylabel('Cosine with known conditional gradient');axes[-1].legend(fontsize=7)
     fig.tight_layout();fig.savefig(stage/'figures/d8_conditions.png',dpi=170);plt.close(fig)

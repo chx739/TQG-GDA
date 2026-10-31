@@ -14,6 +14,7 @@
 
 ## 当前实验与原始记录
 
+- [D8与平均／逐图残差分解，2026-10-31](experiments/tqg_d8_residual_20261031/结果解读.md) · [执行报告](experiments/tqg_d8_residual_20261031/run_report.md)
 - [H-only真实／乱标签／随机反馈对照，2026-10-31](experiments/tqg_h_only_controls_20261031/结果解读.md) · [执行报告](experiments/tqg_h_only_controls_20261031/run_report.md)
 - [D3校准／D4相似度诊断结果，2026-10-31](experiments/tqg_d3_d4_20261031/结果解读.md) · [执行报告](experiments/tqg_d3_d4_20261031/run_report.md) · [全部指标与日志](../experiments/tqg_d3_d4_20261031/README.md)
 - [P0诊断结果：D0／D1／D2，2026-10-31](experiments/tqg_v2_p0_20261031/结果解读.md)

@@ -14,6 +14,8 @@ Target-Queried Gradient Learning for graph-level domain adaptation 的研究代�
 
 新增：[H-only真实标签／乱标签／随机反馈对照](docs/experiments/tqg_h_only_controls_20261031/结果解读.md)完成。D1为0/3任务过门槛；D2为2/3（0→2、0→3），但0→2对乱标签仅2/5种子胜出，暂不进入完整训练。[原始归档](experiments/tqg_h_only_controls_20261031/README.md)。
 
+新增：[D8已知规律与平均／逐图残差分解](docs/experiments/tqg_d8_residual_20261031/结果解读.md)完成。S1共享规律下三个预定读取器均通过方向门槛；S2关系失配时源概率Oracle也不能修复。真实H-only的两任务单步收益主要来自逐图项，平均项很小，但逐图方向增量仍未过门槛。[完整记录与合成模型](experiments/tqg_d8_residual_20261031/README.md)。
+
 ## 原版方法在做什么
 
 1. 用有标签的源图预训练 GNN。
