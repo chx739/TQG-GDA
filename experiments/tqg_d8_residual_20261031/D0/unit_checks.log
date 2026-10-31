@@ -1,0 +1,24 @@
+test_conditional_gradient_is_inside_full_target_space (tests.test_mechanism_diagnostics.MechanismTests.test_conditional_gradient_is_inside_full_target_space) ... ok
+test_decomposition_additivity_and_permutation_only_preserves_global (tests.test_mechanism_diagnostics.MechanismTests.test_decomposition_additivity_and_permutation_only_preserves_global) ... ok
+test_paired_scenarios_only_change_intended_quantities (tests.test_mechanism_diagnostics.MechanismTests.test_paired_scenarios_only_change_intended_quantities) ... ok
+test_soft_CE_gradient_predicts_small_step (tests.test_mechanism_diagnostics.MechanismTests.test_soft_CE_gradient_predicts_small_step) ... ok
+test_soft_gradient_matches_analytic_binary_and_at_true_theta_is_zero (tests.test_mechanism_diagnostics.MechanismTests.test_soft_gradient_matches_analytic_binary_and_at_true_theta_is_zero) ... ok
+test_hash_split_and_sampling_preserve_role_and_no_within_batch_duplicates (tests.test_p0_diagnostics.P0DiagnosticsTests.test_hash_split_and_sampling_preserve_role_and_no_within_batch_duplicates) ... ok
+test_microbatch_gradient_is_graph_weighted_not_batch_weighted (tests.test_p0_diagnostics.P0DiagnosticsTests.test_microbatch_gradient_is_graph_weighted_not_batch_weighted) ... ok
+test_oracle_denials_happen_before_any_raw_label_access (tests.test_p0_diagnostics.P0DiagnosticsTests.test_oracle_denials_happen_before_any_raw_label_access) ... ok
+test_random_and_permuted_one_step_controls_have_true_feedback_norm (tests.test_p0_diagnostics.P0DiagnosticsTests.test_random_and_permuted_one_step_controls_have_true_feedback_norm) ... ok
+test_zero_gradients_have_undefined_cosines_and_ratios (tests.test_p0_diagnostics.P0DiagnosticsTests.test_zero_gradients_have_undefined_cosines_and_ratios) ... ok
+test_zero_reference_never_amplifies_null (tests.test_p0_diagnostics.P0DiagnosticsTests.test_zero_reference_never_amplifies_null) ... ok
+test_HA_replays_production_and_all_five_full_grams_are_PSD (tests.test_d34_diagnostics.D34Tests.test_HA_replays_production_and_all_five_full_grams_are_PSD) ... ok
+test_fixed_ISO_matches_MEAN_at_half_lambda_for_multiclass_queries (tests.test_d34_diagnostics.D34Tests.test_fixed_ISO_matches_MEAN_at_half_lambda_for_multiclass_queries) ... ok
+test_optional_details_leave_production_weights_and_original_statistics_unchanged (tests.test_d34_diagnostics.D34Tests.test_optional_details_leave_production_weights_and_original_statistics_unchanged) ... ok
+test_signature_permutation_changes_both_source_gram_axes_and_cross_rows (tests.test_d34_diagnostics.D34Tests.test_signature_permutation_changes_both_source_gram_axes_and_cross_rows) ... ok
+test_source_audit_denies_bank_fit_target_and_unsealed_access (tests.test_d34_diagnostics.D34Tests.test_source_audit_denies_bank_fit_target_and_unsealed_access) ... ok
+test_zero_rank_is_recorded_without_division_by_zero (tests.test_d34_diagnostics.D34Tests.test_zero_rank_is_recorded_without_division_by_zero) ... ok
+test_H_kernel_excludes_response_distances (tests.test_h_only_diagnostics.HOnlyTests.test_H_kernel_excludes_response_distances) ... ok
+test_nulls_permute_only_labels_and_match_random_and_step_norms (tests.test_h_only_diagnostics.HOnlyTests.test_nulls_permute_only_labels_and_match_random_and_step_norms) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.096s
+
+OK

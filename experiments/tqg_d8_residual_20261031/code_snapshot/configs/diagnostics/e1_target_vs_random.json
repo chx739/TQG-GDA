@@ -1,0 +1,30 @@
+{
+  "experiment": "E1_fixed_snapshot_target_vs_random_v1",
+  "source_seeds": [3405, 3406, 3407, 3408, 3409],
+  "blocks": 20,
+  "diagnostic_fraction": 0.5,
+  "target_split_seed": 271828,
+  "sampling_seed": 314159,
+  "source_query_count": 16,
+  "target_query_count": 16,
+  "target_eval_count": 32,
+  "directions": ["target", "random", "source"],
+  "step_fractions": [0.0001, 0.001],
+  "gradient_epsilon": 1e-12,
+  "probes": {
+    "count": 4,
+    "radius": 0.05,
+    "ridge": 0.01,
+    "epsilon": 1e-8,
+    "responses": "odd_even"
+  },
+  "decision": {
+    "minimum_seed_mean_cosine_gain": 0.05,
+    "minimum_positive_seeds": 4,
+    "required_seeds": 5,
+    "maximum_uninformative_fraction": 0.1,
+    "require_positive_target_alignment": true,
+    "require_positive_loss_gain_at_all_steps": true
+  },
+  "formal_paper_result": false
+}

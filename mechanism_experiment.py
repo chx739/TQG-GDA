@@ -315,7 +315,7 @@ class ResearchExperiment(P0):
     def run(self):
         if not read(self.stage/'D0/engineering_checks.json')['passed']:raise ValueError('D0 required')
         pilot=read(self.stage/'logs/pilot_3405/done.json')
-        estimate=pilot['elapsed_seconds']*96/self.settings['workers']*self.settings['compute_buffer']
+        estimate=pilot['elapsed_seconds']*480/self.settings['workers']*self.settings['compute_buffer']
         if estimate>self.settings['package_wall_cap_seconds']:raise ValueError('Pilot estimate exceeds cap')
         write(self.stage/'compute_estimate.json',dict(pilot_seconds=pilot['elapsed_seconds'],estimated_wall_seconds=estimate,
             note='Conservative pilot includes full generation/evaluation overhead per one graph block'))
