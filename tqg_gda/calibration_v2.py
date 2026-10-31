@@ -74,12 +74,14 @@ def project_density(matrix):
 
 
 @torch.no_grad()
-def solve_calibration(k_ss, h_st, h_tt, config=CalibrationConfig()):
+def solve_calibration(k_ss, h_st, h_tt, config=CalibrationConfig(), *, return_details=False):
     """Return W[r, b_S*q], diagnostics for the exact v2 objective.
 
     h_st = (K_ST kron I_q) B_T; h_tt = B_T.T (K_TT kron I_q) B_T.
     The reported primal/dual gap always uses a matched (Omega, W_Omega).
     mean_only removes the spectral term and is explicitly a KRR ablation.
+    return_details adds stopped matrices for offline diagnostics only; default
+    training results and JSON-compatible statistics are unchanged.
     """
     k_ss, h_st, h_tt = [x.detach().to(dtype=torch.float64) for x in (k_ss, h_st, h_tt)]
     if k_ss.ndim != 2 or k_ss.shape[0] != k_ss.shape[1] or not len(k_ss):
@@ -137,10 +139,13 @@ def solve_calibration(k_ss, h_st, h_tt, config=CalibrationConfig()):
 
     if config.mode == 'mean_only':
         w, e, base, _ = conditional(None)
-        return w, dict(mode=config.mode, converged=True, iterations=1,
+        info = dict(mode=config.mode, converged=True, iterations=1,
             termination='closed_form_krr', gap=0., primal=float(base), dual=float(base),
             mean_error=float(e.trace()/r), max_error=float(torch.linalg.eigvalsh(e)[-1]),
             weight_norm=float(w.norm()), backtracks=0)
+        if return_details:
+            info['_details'] = dict(omega=None, error=e.detach(), source_eigenvalues=eigenvalues.detach())
+        return w, info
 
     omega = identity / r
     step_size, backtracks = config.initial_step, 0
@@ -175,7 +180,11 @@ def solve_calibration(k_ss, h_st, h_tt, config=CalibrationConfig()):
             termination = 'line_search_limit'
             break
     # w, e, dual and gap all belong to the same current omega here.
-    return w.detach(), dict(mode=config.mode, converged=termination == 'gap_tolerance',
+    info = dict(mode=config.mode, converged=termination == 'gap_tolerance',
         iterations=iteration, termination=termination, gap=float(gap),
         primal=float(primal), dual=float(dual), mean_error=float(e.trace()/r),
         max_error=float(maximum), weight_norm=float(w.norm()), backtracks=backtracks)
+    if return_details:
+        info['_details'] = dict(omega=omega.detach().clone(), error=e.detach(),
+                                source_eigenvalues=eigenvalues.detach())
+    return w.detach(), info
