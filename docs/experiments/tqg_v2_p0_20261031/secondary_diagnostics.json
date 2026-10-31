@@ -1,0 +1,123 @@
+{
+  "scope": "Descriptive secondary analysis of already saved P0 outputs; no new labels or updated decision thresholds",
+  "correlation_unit": "Within task/model seed across 24 blocks; not an independent-sample p-value",
+  "correlations": [
+    {
+      "task": "0_to_1",
+      "seed": 3405,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": -0.32956521739130434
+    },
+    {
+      "task": "0_to_2",
+      "seed": 3405,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": 0.03565217391304347
+    },
+    {
+      "task": "0_to_3",
+      "seed": 3405,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": -0.42173913043478256
+    },
+    {
+      "task": "0_to_1",
+      "seed": 3406,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": 0.22434782608695653
+    },
+    {
+      "task": "0_to_2",
+      "seed": 3406,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": -0.497391304347826
+    },
+    {
+      "task": "0_to_3",
+      "seed": 3406,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": -0.38869565217391305
+    },
+    {
+      "task": "0_to_1",
+      "seed": 3407,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": 0.2756521739130435
+    },
+    {
+      "task": "0_to_2",
+      "seed": 3407,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": -0.18347826086956517
+    },
+    {
+      "task": "0_to_3",
+      "seed": 3407,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": 0.18347826086956517
+    },
+    {
+      "task": "0_to_1",
+      "seed": 3408,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": 0.09217391304347824
+    },
+    {
+      "task": "0_to_2",
+      "seed": 3408,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": -0.10782608695652172
+    },
+    {
+      "task": "0_to_3",
+      "seed": 3408,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": 0.006956521739130434
+    },
+    {
+      "task": "0_to_1",
+      "seed": 3409,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": -0.3878260869565217
+    },
+    {
+      "task": "0_to_2",
+      "seed": 3409,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": -0.49217391304347824
+    },
+    {
+      "task": "0_to_3",
+      "seed": 3409,
+      "blocks": 24,
+      "proxy_vs_gradient_error_spearman": 0.2026086956521739
+    }
+  ],
+  "first_order_incremental_feedback": [
+    {
+      "task": "0_to_1",
+      "all_blocks": 60,
+      "selected_blocks": 60,
+      "median_absolute_remainder": 1.859159678140336e-07,
+      "median_relative_remainder": 0.014397306108754476,
+      "sign_agreement": 1.0
+    },
+    {
+      "task": "0_to_2",
+      "all_blocks": 60,
+      "selected_blocks": 60,
+      "median_absolute_remainder": 1.536235680795538e-07,
+      "median_relative_remainder": 0.004528761541159221,
+      "sign_agreement": 1.0
+    },
+    {
+      "task": "0_to_3",
+      "all_blocks": 60,
+      "selected_blocks": 60,
+      "median_absolute_remainder": 3.179288049570217e-07,
+      "median_relative_remainder": 0.003899641968879217,
+      "sign_agreement": 1.0
+    }
+  ],
+  "first_order_selection_note": "Post-hoc descriptive numerical floor |actual CE increment|>1e-8; not used for primary criteria"
+}
