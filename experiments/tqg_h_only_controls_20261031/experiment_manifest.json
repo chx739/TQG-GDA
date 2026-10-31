@@ -1,0 +1,49 @@
+{
+  "git_commit": "5ca7702ca71b3f2b291fbaed95c77f5b7856ab29",
+  "plan_sha256": "cd67ab90d1bcad45bd0dfdfdca4ae07833ecbc905b90e858b19f1859cd709c35",
+  "settings": {
+    "config_name": "h_only_diagnostics_20261031",
+    "archive": "experiments/mutagenicity_target_batch196_20261028",
+    "plan_directory": "docs/research_plans/tqg_v2_20261031",
+    "workers": 5,
+    "threads_per_worker": 1,
+    "evaluation_microbatch": 32,
+    "epsilon_gradient": 1e-12,
+    "absolute_tolerance": 1e-10,
+    "relative_tolerance": 1e-08,
+    "readout_label_tolerance": 1e-10,
+    "package_wall_cap_seconds": 28800,
+    "compute_buffer": 1.3,
+    "progress_interval_seconds": 15,
+    "device": "cpu",
+    "dtype": "float64",
+    "allow_development_oracle": true,
+    "final_labels_allowed": false,
+    "p0_stage": "/home/hxchen/runs/2026-10-31-tqg-v2-diagnostic-plan/stage3_execution",
+    "d34_stage": "/home/hxchen/runs/2026-10-31-tqg-d3-d4/stage3_execution"
+  },
+  "hardware": "cpu:Intel(R) Xeon(R) Gold 6226R CPU @ 2.90GHz;threads=1;FP64",
+  "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+  "versions": {
+    "torch": "2.5.1",
+    "torch-geometric": "2.6.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2",
+    "matplotlib": "3.10.1",
+    "tensorboard": "2.20.0"
+  },
+  "gpu_available": false,
+  "no_continuous_adaptations": true,
+  "target_final_labels_allowed": false,
+  "expected_D1_blocks": 360,
+  "expected_D2_blocks": 180,
+  "expected_D2_temporary_updates": 6480,
+  "prepared_at": 1793457950.4467854,
+  "candidate_id": "V2_H_ONLY",
+  "candidate_protocol_sha256": "2dca9e6635dec2a1de5599f7de50c8ff3c05c870f1e413c4ae627b5ba4a59557",
+  "reference_runs": {
+    "P0": "/home/hxchen/runs/2026-10-31-tqg-v2-diagnostic-plan/stage3_execution",
+    "D34": "/home/hxchen/runs/2026-10-31-tqg-d3-d4/stage3_execution"
+  },
+  "scope": "H-only rerun of original D1/D2 criteria, exploratory development evidence"
+}

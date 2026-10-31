@@ -12,6 +12,8 @@ Target-Queried Gradient Learning for graph-level domain adaptation 的研究代�
 
 新增：[D3校准与D4相似度诊断](docs/experiments/tqg_d3_d4_20261031/结果解读.md)均已完成，预定增量门槛均未通过。JOINT确实改变了方向权重，但没有稳定优于匹配KRR；HA等范数单步在三个真实任务上均未超过H。保留全部原始记录、源内审计及68个CONST未收敛控制；不据此进入完整适配。[完整归档](experiments/tqg_d3_d4_20261031/README.md)。
 
+新增：[H-only真实标签／乱标签／随机反馈对照](docs/experiments/tqg_h_only_controls_20261031/结果解读.md)完成。D1为0/3任务过门槛；D2为2/3（0→2、0→3），但0→2对乱标签仅2/5种子胜出，暂不进入完整训练。[原始归档](experiments/tqg_h_only_controls_20261031/README.md)。
+
 ## 原版方法在做什么
 
 1. 用有标签的源图预训练 GNN。

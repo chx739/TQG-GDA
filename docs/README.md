@@ -14,6 +14,7 @@
 
 ## 当前实验与原始记录
 
+- [H-only真实／乱标签／随机反馈对照，2026-10-31](experiments/tqg_h_only_controls_20261031/结果解读.md) · [执行报告](experiments/tqg_h_only_controls_20261031/run_report.md)
 - [D3校准／D4相似度诊断结果，2026-10-31](experiments/tqg_d3_d4_20261031/结果解读.md) · [执行报告](experiments/tqg_d3_d4_20261031/run_report.md) · [全部指标与日志](../experiments/tqg_d3_d4_20261031/README.md)
 - [P0诊断结果：D0／D1／D2，2026-10-31](experiments/tqg_v2_p0_20261031/结果解读.md)
 - [P0完整执行报告](experiments/tqg_v2_p0_20261031/run_report.md) · [原始指标、日志与执行代码](../experiments/tqg_v2_p0_20261031/README.md)
@@ -34,7 +35,7 @@
 
 ## 失败分析与后续方案
 
-- [v2各实验最新执行状态：P0已完成](research_plans/tqg_v2_20261031_status.md)
+- [v2各实验最新执行状态](research_plans/tqg_v2_20261031_status.md)
 - [TQG v2详细实验总表与优先级方案，2026-10-31](research_plans/tqg_v2_20261031/README.md)：10项实验，各自链接详细设计；保留原始冻结状态，最新进度见执行状态表。
 - [统一数据、符号与诊断协议](research_plans/tqg_v2_20261031/method.md) · [执行预算与交付清单](research_plans/tqg_v2_20261031/execution.md)
 - [失败原因与改进方案](失败原因与改进方案.md)
