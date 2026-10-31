@@ -57,7 +57,7 @@ class ExperimentConfig:
 class ResearchExperiment:
     def __init__(self, config):
         self.config = config
-        self.repo, self.stage = Path(config.repo), Path(config.stage)
+        self.repo, self.stage = Path(config.repo).resolve(), Path(config.stage).resolve()
         self.code = Path(__file__).resolve().parent
         self.settings = read(config.config)
         self.plan_dir = self.stage.parent / 'stage2_method'
