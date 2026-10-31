@@ -5,6 +5,7 @@
 - `p0_experiment.py`：来源预检、工程验收、固定pilot、5模型种子的诊断执行。
 - `tqg_gda/p0_diagnostics.py`：无标签几何、显式development Oracle、梯度及functional单步对照。
 - `p0_summarize.py`：先在模型种子内平均块／快照／置乱，再汇总5种子；判据沿用冻结方案。
+- `p0_secondary.py`：只读取保存的结果，描述代理误差相关性及一阶近似；不替换主判据，不新增标签访问。
 - `configs/p0_diagnostics.json`：执行配置，CPU/FP64、5个单线程worker、评价微批32、8小时包上限。评价微批只控制内存，B池仍完整271张且按图加权。
 
 运行目录为 `/home/hxchen/runs/2026-10-31-tqg-v2-diagnostic-plan/stage3_execution/`，代码在其 `code/` 子目录单独保存Git历史，计划从同run的 `stage2_method/` 固定读取。初始化时复制本仓库的诊断入口、`tqg_gda/`、配置和依赖锁定文件；记录源仓库提交与全部执行文件哈希。每个结果行的git_commit指这个冻结执行副本，不随主仓库后续的结果归档提交变化。

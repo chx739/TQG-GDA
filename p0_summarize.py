@@ -40,7 +40,7 @@ def save(path,value):
 
 
 def summarize(stage):
-    stage=Path(stage)
+    stage=Path(stage).resolve()
     manifest=json.loads((stage/'experiment_manifest.json').read_text())
     plan=json.loads((stage.parent/'stage2_method/experiment_plan.yaml').read_text())
     seeds=plan['seeds']
