@@ -6,6 +6,8 @@ Target-Queried Gradient Learning for graph-level domain adaptation 的研究代�
 
 新增 [v2 方法实现](docs/TQG_V2_IMPLEMENTATION.md)：完整目标分类梯度空间、核查询联合校准、参数坐标反馈与无动量 SGD。Mutagenicity 三方向五种子的[v2完整验证](docs/experiments/mutagenicity_v2_20261026/run_report.md)已经完成，当前配置仍未获得跨任务稳定收益。v2 配置位于 `configs/v2/`，原配置继续使用原流程；原版与 v2 结果分开记录。
 
+后续参考：[TQG v2详细实验方案与优先级总表（2026-10-31）](docs/research_plans/tqg_v2_20261031/README.md)。覆盖实现验收、梯度质量、单步作用、校准／签名诊断和条件改进；优先D0→D1→D2。**该文档是待执行方案，不代表新增实验结果。**
+
 ## 原版方法在做什么
 
 1. 用有标签的源图预训练 GNN。

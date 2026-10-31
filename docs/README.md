@@ -29,6 +29,8 @@
 
 ## 失败分析与后续方案
 
+- [TQG v2详细实验总表与优先级方案，2026-10-31](research_plans/tqg_v2_20261031/README.md)：10项实验，各自链接详细设计；先D0→D1→D2。本版仅为方案，尚未执行。
+- [统一数据、符号与诊断协议](research_plans/tqg_v2_20261031/method.md) · [执行预算与交付清单](research_plans/tqg_v2_20261031/execution.md)
 - [失败原因与改进方案](失败原因与改进方案.md)
 - [改进实验计划v1](TQG_Improvement_Experiment_Plan_v1.md)
 - [E1机制实验设计](E1_首个验证实验.md)

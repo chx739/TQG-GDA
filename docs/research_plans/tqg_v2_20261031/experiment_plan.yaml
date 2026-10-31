@@ -1,0 +1,575 @@
+{
+  "schema_version": "tqg-diagnostic-plan-1.0",
+  "run_id": "2026-10-31-tqg-v2-diagnostic-plan",
+  "created_client_date": "2026-10-31",
+  "status": "designed_not_executed",
+  "execution_ready": false,
+  "scope": "Mechanism diagnosis and conditional redesign of existing TQG v2; not a submission-ready paper experiment suite.",
+  "source_repository_commit": "4104675fe6d3f06d9dd1ba96532843c55a88603c",
+  "canonical_docs": "docs/research_plans/tqg_v2_20261031",
+  "implementation_note": "Planning contract, not accepted by existing launch.py. New drivers and candidate arms require implementation and D0 checks.",
+  "first_work_package": [
+    "D0",
+    "D1",
+    "D2"
+  ],
+  "seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "tasks": [
+    "0_to_1",
+    "0_to_2",
+    "0_to_3"
+  ],
+  "datasets": [
+    {
+      "name": "Mutagenicity",
+      "role": "primary exploratory scale-shift diagnosis",
+      "graphs": 4337,
+      "source_fit": 779,
+      "source_query": 196,
+      "source_validation": 109,
+      "target_sizes": [
+        1084,
+        1084,
+        1085
+      ],
+      "development_per_task": 542,
+      "final_labels_allowed": false,
+      "domains": "SEGA provided size domains, not official domains",
+      "cache": "/home/hxchen/TQG_data/Mutagenicity_official_20261026/Mutagenicity/processed/data.pt",
+      "cache_sha256": "c4a03120edd2494ab82bcc9792605ea7e71d52024985624313ae11d9f37b4fab"
+    },
+    {
+      "name": "PROTEINS",
+      "role": "D9 conditional cross-dataset scale-shift recheck",
+      "graphs": 1113,
+      "source_fit": 199,
+      "source_query": 51,
+      "source_validation": 28,
+      "development_per_task": 139,
+      "final_labels_allowed": false,
+      "readiness": "Verify legacy cache/role hashes and freeze new v2-compatible source config before execution."
+    },
+    {
+      "name": "Controlled synthetic graphs",
+      "role": "D8 known conditional-gradient positive and negative controls",
+      "source_fit": 512,
+      "source_query": 196,
+      "source_validation": 128,
+      "source_audit": 256,
+      "target_construction": 1024,
+      "target_evaluation": 1024,
+      "new_synthetic_warmups": 5,
+      "warmup_steps": 200,
+      "conditions": [
+        "shared_rule_overlap",
+        "shortcut_reversal",
+        "unidentifiable_conditional_flip",
+        "raw_support_separation"
+      ]
+    }
+  ],
+  "label_policy": {
+    "training": "source labels plus unlabeled target inputs only",
+    "oracle": "development only in isolated diagnostic scope",
+    "final": "prohibited in every experiment of this plan",
+    "development_previously_observed": true,
+    "A_B_are_new_blind_test": false,
+    "no_oracle_model_as_training_initialization": true
+  },
+  "roles": {
+    "development_split": "SHA256(tqg-v2-diag-20261031|domain=d|id=i) lexicographic hash order, first271 A, rest271 B",
+    "split_uses_labels": false,
+    "target_query_from_A": 16,
+    "evaluate_B": 271,
+    "source_fit_per_block": 16,
+    "source_query_per_block": 196,
+    "block_seed_formula": "61000000+domain*100000+(model_seed-3405)*10000+snapshot_step*10+block_id",
+    "fit_seed_offset": 1000,
+    "query_order": "original IDs sorted"
+  },
+  "snapshots": {
+    "archive": "experiments/mutagenicity_target_batch196_20261028",
+    "index": "job_index.csv",
+    "times": [
+      0,
+      50,
+      200
+    ],
+    "zero": "source_pretraining fit best.pt",
+    "positive": "B_fit step_<t>.pt, not each method own trajectory",
+    "task_seed_snapshot_count": 45
+  },
+  "fixed_method": {
+    "hidden_dim": 32,
+    "num_layers": 2,
+    "readout": "mean",
+    "dtype": "float64",
+    "fit_batch_size": 16,
+    "query_batch_size": 196,
+    "target_batch_size": 16,
+    "optimizer": "sgd",
+    "momentum": 0,
+    "weight_decay": 0,
+    "lr": 0.0003,
+    "feedback_weight": 0.1,
+    "signature": "representation_response",
+    "calibration": {
+      "mode": "joint",
+      "lambda_w": 0.01,
+      "gap_atol": 1e-08,
+      "gap_rtol": 1e-06,
+      "max_iterations": 200
+    },
+    "rank": "all_numerically_nonzero",
+    "gradient_epsilon": 1e-12
+  },
+  "metrics": {
+    "cosine_A": {
+      "direction": "max",
+      "role": "D1 primary",
+      "zero_handling": "NA with explicit coverage"
+    },
+    "relative_gradient_error_A": {
+      "direction": "min",
+      "role": "D1 secondary"
+    },
+    "directional_gain_A": {
+      "direction": "max",
+      "role": "D1 secondary"
+    },
+    "relative_extra_CE_B_gain": {
+      "direction": "max",
+      "role": "D2 primary",
+      "definition": "(CE_B(source_step)-CE_B(mixed_step))/CE_B(initial)"
+    },
+    "CE_B": {
+      "direction": "min",
+      "role": "D2 secondary / D9 secondary"
+    },
+    "harmful_update_rate": {
+      "direction": "min",
+      "role": "D5/D6 secondary",
+      "definition": "CE_B(step) > CE_B(source_step)+1e-8"
+    },
+    "balanced_accuracy": {
+      "direction": "max",
+      "role": "D9 primary",
+      "units": "percent"
+    },
+    "auroc": {
+      "direction": "max",
+      "role": "D9 secondary"
+    },
+    "step_seconds": {
+      "direction": "min",
+      "role": "efficiency descriptor; historical load caveat"
+    },
+    "peak_memory_bytes": {
+      "direction": "min",
+      "role": "resource descriptor"
+    }
+  },
+  "diagnostic_fields": [
+    "gradient_norm",
+    "feedback_source_norm_ratio",
+    "rank",
+    "kernel_scales",
+    "kernel_cross_quantiles",
+    "readout_norm",
+    "omega_spectrum",
+    "solver_gap",
+    "zero_gradient_reason",
+    "valid_comparison_coverage"
+  ],
+  "aggregation": {
+    "unit": "model seed, after within-seed block/snapshot/null averaging",
+    "report": "mean, sample SD, paired seed differences, wins/ties/losses per task",
+    "blocks_are_independent_model_seeds": false,
+    "minimum_valid_coverage": 0.8
+  },
+  "D1": {
+    "blocks_per_snapshot": 8,
+    "total_blocks": 360,
+    "permutation_offsets": [
+      9101,
+      9102,
+      9103
+    ],
+    "random_offsets": [
+      9201,
+      9202,
+      9203
+    ],
+    "null_aggregation": "mean within block before seed aggregation",
+    "primary_null_cosine_margin": 0.05
+  },
+  "D2": {
+    "first_blocks": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "total_blocks": 180,
+    "etas": [
+      0.0001,
+      0.0003,
+      0.001
+    ],
+    "primary_eta": 0.0003,
+    "beta": 0.1,
+    "non_frozen_update_arms": 12,
+    "temporary_updates_upper": 6480,
+    "primary_gain_threshold": 0.0001
+  },
+  "D3": {
+    "alpha_grid": [
+      0.001,
+      0.005,
+      0.01,
+      0.05,
+      0.1
+    ],
+    "mean_lambda": "alpha",
+    "iso_lambda": "2*alpha",
+    "joint_lambda": "2*alpha",
+    "primary_alpha": 0.005,
+    "logical_solves": 5400
+  },
+  "D4": {
+    "kernels": [
+      "H",
+      "A",
+      "HA",
+      "CONST",
+      "HA_PERM"
+    ],
+    "source_mock_blocks": 120,
+    "target_blocks": 360,
+    "source_mock_folds": 2,
+    "source_bank_per_fold": 98,
+    "source_audit_per_fold": 98,
+    "source_split": "SHA256(D4|source_id), sorted first98/rest98; swap two folds",
+    "source_block_seed": "64000000+(model_seed-3405)*10000+snapshot_step*10+fold*1000+block_id",
+    "source_snapshots": "fit best, then 0_to_1 B_fit step50/200 only, not triplicated across real target tasks"
+  },
+  "D5": {
+    "primary_k": 64,
+    "sensitivity_k": [
+      32,
+      128
+    ],
+    "random_offsets": [
+      9301,
+      9302,
+      9303
+    ],
+    "gate_score": "clip(1-tr(E)/max(tr(H_TT),1e-12),0,1)",
+    "gate_threshold_grid": [
+      0,
+      0.25,
+      0.5
+    ],
+    "gate_threshold_selection": "source calibration only; single global threshold",
+    "gate_source_roles": [
+      98,
+      49,
+      49
+    ],
+    "gate_source_blocks_per_snapshot": 4,
+    "min_keep_fraction": 0.25,
+    "gate_source_split": "SHA256(D5-gate|source_id), sorted first98 bank, next49 calibration, last49 audit",
+    "gate_seed_base": "65000000+(model_seed-3405)*100000+snapshot_step*100+block_id*10",
+    "gate_seed_offsets": {
+      "calibration_target": 1,
+      "audit_target": 2,
+      "calibration_fit": 3,
+      "audit_fit": 4
+    },
+    "gate_calibration_blocks": 60,
+    "gate_audit_blocks": 60,
+    "gate_selection_metric": "mean relative CE gain over matched source SGD on remaining33; aggregate blocks/snapshots within model seed, then seeds",
+    "gate_tie_tolerance": 1e-08
+  },
+  "D6": {
+    "beta_grid": [
+      0,
+      0.03,
+      0.1,
+      0.3,
+      1.0
+    ],
+    "cap_kappa": 0.3,
+    "cap_base_beta": 0.1,
+    "temporary_updates_upper": 3240,
+    "normalization_amplifies_weak_feedback": false
+  },
+  "D7": {
+    "query_sizes": [
+      16,
+      32,
+      64,
+      128,
+      196
+    ],
+    "permutation_repeats": 5,
+    "snapshot_times_primary": [
+      0
+    ],
+    "bandwidth_inputs": 196,
+    "lambda_fixed": 0.01,
+    "lambda_normalized": "0.01*n/196",
+    "logical_solves_upper": 6000,
+    "duplicate_factor": 2,
+    "optional_C_new_adaptations": 30,
+    "optional_C_steps": 6000
+  },
+  "D8": {
+    "source_seed_formula": "7300+(model_seed-3405)",
+    "role_offsets": {
+      "fit": 11,
+      "query": 12,
+      "validation": 13,
+      "audit": 14,
+      "target_construction": 20,
+      "target_evaluation": 21
+    },
+    "label_rng_extra_offset": 1000,
+    "warmup_checkpoints": [
+      0,
+      50,
+      200
+    ],
+    "graph_diagnostic_blocks": 480,
+    "truth": "eta(G)=sigmoid(4*(2*t-1)), target flip only in S3",
+    "node_features": [
+      "constant1",
+      "u"
+    ],
+    "edge_dim": 1,
+    "max_automatic_generator_retries": 0,
+    "linear_model_logits": "(-theta.T x/2, theta.T x/2)",
+    "linear_fixed_theta": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        0.5,
+        -0.5
+      ]
+    ],
+    "linear_seed_formula": "27300+(model_seed-3405), same role offsets, no pretraining"
+  },
+  "D9": {
+    "candidate_limit": 2,
+    "datasets": [
+      "Mutagenicity",
+      "PROTEINS"
+    ],
+    "steps": 200,
+    "primary_selection": "fixed_200",
+    "secondary_selection": "source_validation_ce",
+    "core_adaptation_arms_upper": 8,
+    "core_adaptations_upper": 240,
+    "candidate_null_adaptations_upper": 120,
+    "total_adaptations_upper": 360,
+    "baseline_arms": [
+      "FROZEN_FIT",
+      "FIT_SGD",
+      "FIT_QUERY_CE",
+      "FULL_SOURCE_separate_initialization_group",
+      "PSEUDO_0.9",
+      "KRR_matched",
+      "V2_ORIGINAL",
+      "CANDIDATE_1",
+      "CANDIDATE_2"
+    ],
+    "same_start_label_matched_control": "g_fit16+0.1*g_query_all",
+    "per_task_gain_threshold_pp": 0.5,
+    "tasks_required_each_dataset": 2,
+    "seed_wins_required": 3,
+    "recent_mechanism_baselines_pending": [
+      {
+        "name": "RaT",
+        "url": "https://arxiv.org/abs/2603.25466",
+        "status": "reference verified; protocol reproduction and graph adaptation pending, not claimed SOTA"
+      },
+      {
+        "name": "TILT",
+        "url": "https://arxiv.org/abs/2605.14280",
+        "status": "reference verified; protocol reproduction and graph adaptation pending, not claimed SOTA"
+      }
+    ],
+    "optional_equal_wall_seconds": 600,
+    "equal_wall_max_steps": 2000,
+    "equal_wall_included_in_360_count": false,
+    "null_control_replicates_per_model_seed": 1,
+    "null_norm_reference": "Applied TRUE feedback, including beta/gate/cap, recomputed at the NULL trajectory current theta; retains TRUE source-label amplitude information"
+  },
+  "compute": {
+    "status": "proposal_requires_runtime_benchmark_not_execution_authorization",
+    "workers_proposed": 5,
+    "threads_per_worker": 1,
+    "precision": "FP64",
+    "buffer_multiplier": 1.3,
+    "suggested_per_package_wall_hours_cap": 8,
+    "warn_fraction": 0.5,
+    "request_fraction": 0.8,
+    "stop_fraction": 1.0,
+    "historical_CPU_step_seconds": {
+      "batch16": 1.29,
+      "batch64": 4.55,
+      "batch196": 15.83
+    },
+    "prohibited": "Automatic batch halving, seed dropping or threshold changes to fit time."
+  },
+  "experiments": [
+    {
+      "id": "D0",
+      "priority": "P0",
+      "document": "D0_implementation.md",
+      "depends_on": [],
+      "type": "engineering",
+      "new_real_adaptations_default": 0,
+      "status": "planned_not_executed",
+      "criterion": "All equation, state and permission checks pass; no efficacy claim."
+    },
+    {
+      "id": "D1",
+      "priority": "P0",
+      "document": "D1_gradient_quality.md",
+      "depends_on": [
+        "D0"
+      ],
+      "type": "offline_oracle",
+      "new_real_adaptations_default": 0,
+      "status": "planned_not_executed",
+      "criterion": "TRUE mean cosine >0; paired advantage vs PERM and RAND >=0.05 on >=2/3 tasks, >=3/5 seeds positive, valid coverage >=0.8."
+    },
+    {
+      "id": "D2",
+      "priority": "P0",
+      "document": "D2_one_step.md",
+      "depends_on": [
+        "D0",
+        "D1_artifacts_complete"
+      ],
+      "type": "temporary_step_oracle",
+      "new_real_adaptations_default": 0,
+      "status": "planned_not_executed",
+      "criterion": "At eta0.0003 mean relative B CE gain over source SGD >=1e-4 on >=2/3 tasks, >=3/5 seeds positive, better than normalized nulls; coverage>=0.8."
+    },
+    {
+      "id": "D3",
+      "priority": "P1",
+      "document": "D3_calibration.md",
+      "depends_on": [
+        "D0"
+      ],
+      "type": "offline_oracle",
+      "new_real_adaptations_default": 0,
+      "status": "planned_not_executed",
+      "criterion": "At alpha0.005 JOINT-ISO cosine >=0.03 on >=2/3 tasks with >=3/5 seed wins; normalized one-step B gain positive."
+    },
+    {
+      "id": "D4",
+      "priority": "P1",
+      "document": "D4_signature.md",
+      "depends_on": [
+        "D0"
+      ],
+      "type": "source_audit_and_offline_oracle",
+      "new_real_adaptations_default": 0,
+      "status": "planned_not_executed",
+      "criterion": "HA-H cosine >=0.03 on >=2/3 tasks with >=3/5 seed wins and positive normalized B-step effect."
+    },
+    {
+      "id": "D8",
+      "priority": "P1",
+      "document": "D8_synthetic.md",
+      "depends_on": [
+        "D0"
+      ],
+      "type": "synthetic_source_training",
+      "new_real_adaptations_default": 0,
+      "status": "planned_not_executed",
+      "criterion": "S1 conditional cosine>0.2 and null advantage>=0.05 on >=3/5 paired seeds; retain failed/mismatched/unsupported cases."
+    },
+    {
+      "id": "D5",
+      "priority": "P2",
+      "document": "D5_local_support.md",
+      "depends_on": [
+        "D4_evidence_or_support_failure_diagnosed"
+      ],
+      "type": "offline_candidate",
+      "new_real_adaptations_default": 0,
+      "status": "planned_not_executed",
+      "criterion": "LOCAL64 vs RANDOM64 cosine>=0.03 on >=2/3 tasks with >=3/5 seed wins and positive normalized B effect; gate harm -10pp without lower utility, keep>=0.25."
+    },
+    {
+      "id": "D6",
+      "priority": "P2",
+      "document": "D6_feedback_strength.md",
+      "depends_on": [
+        "D1_D2_direction_or_amplitude_evidence"
+      ],
+      "type": "temporary_step_oracle",
+      "new_real_adaptations_default": 0,
+      "status": "planned_not_executed",
+      "criterion": "Fixed beta candidate passes D2 criterion; CAP reduces harmful-update rate>=10pp without lower mean utility on >=2/3 tasks."
+    },
+    {
+      "id": "D7",
+      "priority": "P2",
+      "document": "D7_query_statistics.md",
+      "depends_on": [
+        "D0",
+        "D3_convention_locked"
+      ],
+      "type": "offline_and_optional_training",
+      "new_real_adaptations_default": 0,
+      "status": "planned_not_executed",
+      "criterion": "Both lambda conventions: n196 vs n16 cosine+0.03 and relative error -10% on >=2/3 tasks, >=3/5 seed wins; duplicate identities hold."
+    },
+    {
+      "id": "D9",
+      "priority": "P3",
+      "document": "D9_validation.md",
+      "depends_on": [
+        "candidate_D1_pass",
+        "candidate_D2_pass",
+        "D0_pass",
+        "runtime_manifest_and_budget_locked"
+      ],
+      "type": "full_adaptation",
+      "new_real_adaptations_default": null,
+      "status": "planned_not_executed",
+      "criterion": "Both datasets: >=2/3 tasks gain>=0.5pp over original with >=3/5 seed wins; strong-baseline means not worse, candidate-specific nulls passed."
+    }
+  ],
+  "success_criteria": [
+    "D0 all engineering and permission checks pass.",
+    "New candidate passes frozen D1 and D2 screening before D9.",
+    "D9 meets both datasets performance and mechanism criteria; no final labels."
+  ],
+  "failure_criteria": [
+    "Any unauthorized target/final label access halts the package.",
+    "D0 numerical or execution identities fail: repair before efficacy interpretation.",
+    "D1/D2 unsupported: pause training expansion; permit registered offline diagnostic branches only.",
+    "Budget exhausted is incomplete, not success.",
+    "Failed or inconclusive runs must remain in reports."
+  ],
+  "hypothesis": "At fixed shared source-only snapshots, TRUE source supervision exceeds permuted and norm-matched random feedback by >=0.05 cosine, and the same candidate adds relative B-pool CE gain >=1e-4 over source SGD on >=2/3 tasks with >=3/5 seed wins. These are staged research gates, not established results."
+}
