@@ -195,6 +195,13 @@ class ResearchExperiment:
         if findings:
             raise ValueError('AST screen failed')
 
+    def geometry(self, model, source_inputs, target_inputs, domain, seed, step, block):
+        """Candidate hook; the original P0 path remains unchanged."""
+        return unlabeled_geometry(model, source_inputs, target_inputs, self.v2)
+
+    def worker_entrypoint(self):
+        return run_worker
+
     def worker(self, seed, *, pilot=False):
         seed_everything(seed,self.settings['threads_per_worker'],True)
         name=f'pilot_{seed}' if pilot else str(seed)
@@ -235,7 +242,7 @@ class ResearchExperiment:
                         index_path=out/f'{token}_indices.json'
                         write(index_path,dict(A=list(a_ids),B=list(b_pool),fit=list(fit_ids),query=list(query_ids),block_seed=block_seed))
                         t=time.perf_counter()
-                        geo=unlabeled_geometry(model,source_inputs,a_input,self.v2)
+                        geo=self.geometry(model,source_inputs,a_input,domain,seed,step,block)
                         query_seconds=time.perf_counter()-t
                         cache_path=cache/f'{token}.npz'
                         cache_started=time.perf_counter()
@@ -356,7 +363,7 @@ class ResearchExperiment:
         print(json.dumps(dict(event='starting_full_P0',estimated_seconds=estimate)),flush=True)
         context=multiprocessing.get_context('spawn')
         with ProcessPoolExecutor(max_workers=self.settings['workers'],mp_context=context) as pool:
-            pending={pool.submit(run_worker,self.config,seed):seed for seed in self.plan['seeds']}
+            pending={pool.submit(self.worker_entrypoint(),self.config,seed):seed for seed in self.plan['seeds']}
             warned=set()
             while pending:
                 completed,_=wait(pending,timeout=self.settings['progress_interval_seconds'],return_when=FIRST_COMPLETED)
