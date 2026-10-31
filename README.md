@@ -8,7 +8,9 @@ Target-Queried Gradient Learning for graph-level domain adaptation 的研究代�
 
 后续参考：[TQG v2详细实验方案与优先级总表（2026-10-31）](docs/research_plans/tqg_v2_20261031/README.md)。覆盖实现验收、梯度质量、单步作用、校准／签名诊断和条件改进；优先D0→D1→D2。**该文档保留设计时的冻结状态；最新进度见下方执行记录。**
 
-最新：[P0诊断已完成](docs/experiments/tqg_v2_p0_20261031/结果解读.md)。D0通过；D1与D2均未达到预定研究门槛。三个任务、五个模型种子完成360个梯度诊断块和6480次独立临时单步，证据更指向反馈估计质量不足。见[执行状态](docs/research_plans/tqg_v2_20261031_status.md)及[完整原始归档](experiments/tqg_v2_p0_20261031/README.md)；最终标签未读取。
+已完成：[P0诊断](docs/experiments/tqg_v2_p0_20261031/结果解读.md)。D0通过；D1与D2均未达到预定研究门槛。三个任务、五个模型种子完成360个梯度诊断块和6480次独立临时单步，证据更指向反馈估计质量不足。见[执行状态](docs/research_plans/tqg_v2_20261031_status.md)及[完整原始归档](experiments/tqg_v2_p0_20261031/README.md)；最终标签未读取。
+
+新增：[D3校准与D4相似度诊断](docs/experiments/tqg_d3_d4_20261031/结果解读.md)均已完成，预定增量门槛均未通过。JOINT确实改变了方向权重，但没有稳定优于匹配KRR；HA等范数单步在三个真实任务上均未超过H。保留全部原始记录、源内审计及68个CONST未收敛控制；不据此进入完整适配。[完整归档](experiments/tqg_d3_d4_20261031/README.md)。
 
 ## 原版方法在做什么
 

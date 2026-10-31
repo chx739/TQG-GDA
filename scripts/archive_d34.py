@@ -28,9 +28,10 @@ def audit(stage,repo):
     for collection in [results,*rows.values()]:
         if any(r['git_commit']!=manifest['git_commit'] or r['plan_sha256']!=manifest['plan_sha256'] for r in collection):
             raise ValueError('Mixed provenance')
-    dev=set();final=set()
+    dev=set();final=set();dev_by_domain={}
     for p in (stage/'data_roles').glob('*/identity.json'):
         roles=read(p);dev.update(roles['original_development']);final.update(roles['final_ids'])
+        dev_by_domain[p.parent.name]=set(roles['original_development'])
     p0=Path(manifest['settings']['p0_stage'])
     original_query=set(read(p0/'logs/3405/1_3405_0_0_indices.json')['query'])
     target_count=source_count=denied=0
@@ -48,7 +49,8 @@ def audit(stage,repo):
                     if event['token'] not in tokens:raise ValueError('Labels accessed before seal')
                     ids=set(event['ids'])
                     if kind=='label_access.jsonl':
-                        if not ids<=dev or ids&final:raise ValueError('Forbidden target label IDs')
+                        domain=event['token'].split('_')[1]
+                        if not ids<=dev_by_domain['0_to_'+domain] or ids&final:raise ValueError('Forbidden target label IDs')
                         target_count+=len(event['ids'])
                     else:
                         role=read(path.parent/(event['token']+'_indices.json'))

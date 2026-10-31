@@ -1,0 +1,57 @@
+{
+  "passed": false,
+  "criteria": [
+    {
+      "experiment_id": "D4",
+      "scope": "source",
+      "task": "source_audit",
+      "cosine_advantage": 0.0442602282617501,
+      "cosine_advantage_SD": 0.11505811930137627,
+      "cosine_seed_wins": 3,
+      "norm_matched_B_advantage": -2.8920117961499575e-08,
+      "gradient_coverage": 1.0,
+      "step_coverage": 1.0,
+      "source_only_descriptive": true,
+      "passed": false
+    },
+    {
+      "experiment_id": "D4",
+      "scope": "target",
+      "task": "0_to_1",
+      "cosine_advantage": 0.002922106039497034,
+      "cosine_advantage_SD": 0.15215980626900136,
+      "cosine_seed_wins": 2,
+      "norm_matched_B_advantage": -2.5443716375737848e-05,
+      "gradient_coverage": 1.0,
+      "step_coverage": 1.0,
+      "source_only_descriptive": false,
+      "passed": false
+    },
+    {
+      "experiment_id": "D4",
+      "scope": "target",
+      "task": "0_to_2",
+      "cosine_advantage": -0.03408710926098488,
+      "cosine_advantage_SD": 0.2918896103267109,
+      "cosine_seed_wins": 3,
+      "norm_matched_B_advantage": -0.00019854871391768834,
+      "gradient_coverage": 1.0,
+      "step_coverage": 1.0,
+      "source_only_descriptive": false,
+      "passed": false
+    },
+    {
+      "experiment_id": "D4",
+      "scope": "target",
+      "task": "0_to_3",
+      "cosine_advantage": -0.15780939776181038,
+      "cosine_advantage_SD": 0.1778124370781542,
+      "cosine_seed_wins": 2,
+      "norm_matched_B_advantage": -0.00038924353597747437,
+      "gradient_coverage": 1.0,
+      "step_coverage": 1.0,
+      "source_only_descriptive": false,
+      "passed": false
+    }
+  ]
+}

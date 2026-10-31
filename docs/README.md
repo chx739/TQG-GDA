@@ -5,6 +5,8 @@
 - [TQG原始设计稿](TQG_Graph_Level_GDA_Design.md)
 - [TQG修订版v2设计稿](TQG_Graph_Level_GDA_Design_v2.md)
 - [v2实现、配置与验证说明](TQG_V2_IMPLEMENTATION.md)
+- [P0诊断实现与复现](P0_DIAGNOSTICS_IMPLEMENTATION.md)
+- [D3/D4诊断实现与执行细节](D34_DIAGNOSTICS_IMPLEMENTATION.md)
 - [v2代码对照文档审查，2026-10-28](validation/v2_review_20261028/README.md)
 - [响应类型与原文公式对应](响应类型与原文公式对照.md)
 - [实现说明](IMPLEMENTATION_NOTES_CN.md)
@@ -12,6 +14,7 @@
 
 ## 当前实验与原始记录
 
+- [D3校准／D4相似度诊断结果，2026-10-31](experiments/tqg_d3_d4_20261031/结果解读.md) · [执行报告](experiments/tqg_d3_d4_20261031/run_report.md) · [全部指标与日志](../experiments/tqg_d3_d4_20261031/README.md)
 - [P0诊断结果：D0／D1／D2，2026-10-31](experiments/tqg_v2_p0_20261031/结果解读.md)
 - [P0完整执行报告](experiments/tqg_v2_p0_20261031/run_report.md) · [原始指标、日志与执行代码](../experiments/tqg_v2_p0_20261031/README.md)
 - [Mutagenicity目标batch196追加实验](experiments/mutagenicity_target_batch196_20261028/结果解读.md)
