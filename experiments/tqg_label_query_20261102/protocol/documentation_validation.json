@@ -1,0 +1,1092 @@
+{
+  "schema_version": "tqg-documentation-validation-1.0",
+  "date": "2026-10-31",
+  "scope": "Documentation structure, planning arithmetic, archived file provenance; no ML or research checks executed.",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "state",
+      "passed": true,
+      "detail": "Design only; no experiment is marked executed."
+    },
+    {
+      "name": "ids",
+      "passed": true,
+      "detail": "Exactly ten uniquely identified experiments."
+    },
+    {
+      "name": "experiment_statuses",
+      "passed": true,
+      "detail": "All ten are planned_not_executed."
+    },
+    {
+      "name": "package_order",
+      "passed": true,
+      "detail": "D0 -> D1 -> D2."
+    },
+    {
+      "name": "seeds_tasks",
+      "passed": true,
+      "detail": "Five model seeds, three tasks."
+    },
+    {
+      "name": "label_boundary",
+      "passed": true,
+      "detail": "No final-label access in this plan or validation."
+    },
+    {
+      "name": "hypothesis_and_criteria",
+      "passed": true,
+      "detail": "Explicit falsifiable hypothesis and success/failure criteria."
+    },
+    {
+      "name": "logical_counts",
+      "passed": true,
+      "detail": {
+        "snapshot_units": 45,
+        "D1_blocks": 360,
+        "D2_blocks": 180,
+        "D2_updates": 6480,
+        "D3_solves": 5400,
+        "D4_source_blocks": 120,
+        "D5_calibration_blocks": 60,
+        "D5_audit_blocks": 60,
+        "D6_updates_upper": 3240,
+        "D7_logical_solves": 6000,
+        "D7C_adaptations": 30,
+        "D8_graph_blocks": 480,
+        "D9_core_upper": 240,
+        "D9_null_upper": 120
+      }
+    },
+    {
+      "name": "contract_counts",
+      "passed": true,
+      "detail": "Machine-readable totals agree with independent arithmetic."
+    },
+    {
+      "name": "metric_direction_cosine_A",
+      "passed": true,
+      "detail": "max"
+    },
+    {
+      "name": "metric_direction_relative_gradient_error_A",
+      "passed": true,
+      "detail": "min"
+    },
+    {
+      "name": "metric_direction_directional_gain_A",
+      "passed": true,
+      "detail": "max"
+    },
+    {
+      "name": "metric_direction_relative_extra_CE_B_gain",
+      "passed": true,
+      "detail": "max"
+    },
+    {
+      "name": "metric_direction_CE_B",
+      "passed": true,
+      "detail": "min"
+    },
+    {
+      "name": "metric_direction_harmful_update_rate",
+      "passed": true,
+      "detail": "min"
+    },
+    {
+      "name": "metric_direction_balanced_accuracy",
+      "passed": true,
+      "detail": "max"
+    },
+    {
+      "name": "metric_direction_auroc",
+      "passed": true,
+      "detail": "max"
+    },
+    {
+      "name": "metric_direction_step_seconds",
+      "passed": true,
+      "detail": "min"
+    },
+    {
+      "name": "metric_direction_peak_memory_bytes",
+      "passed": true,
+      "detail": "min"
+    },
+    {
+      "name": "index_D0",
+      "passed": true,
+      "detail": "Detailed document exists and master list links to it."
+    },
+    {
+      "name": "return_D0",
+      "passed": true,
+      "detail": "Detailed plan links back to the master experiment list."
+    },
+    {
+      "name": "index_D1",
+      "passed": true,
+      "detail": "Detailed document exists and master list links to it."
+    },
+    {
+      "name": "return_D1",
+      "passed": true,
+      "detail": "Detailed plan links back to the master experiment list."
+    },
+    {
+      "name": "index_D2",
+      "passed": true,
+      "detail": "Detailed document exists and master list links to it."
+    },
+    {
+      "name": "return_D2",
+      "passed": true,
+      "detail": "Detailed plan links back to the master experiment list."
+    },
+    {
+      "name": "index_D3",
+      "passed": true,
+      "detail": "Detailed document exists and master list links to it."
+    },
+    {
+      "name": "return_D3",
+      "passed": true,
+      "detail": "Detailed plan links back to the master experiment list."
+    },
+    {
+      "name": "index_D4",
+      "passed": true,
+      "detail": "Detailed document exists and master list links to it."
+    },
+    {
+      "name": "return_D4",
+      "passed": true,
+      "detail": "Detailed plan links back to the master experiment list."
+    },
+    {
+      "name": "index_D8",
+      "passed": true,
+      "detail": "Detailed document exists and master list links to it."
+    },
+    {
+      "name": "return_D8",
+      "passed": true,
+      "detail": "Detailed plan links back to the master experiment list."
+    },
+    {
+      "name": "index_D5",
+      "passed": true,
+      "detail": "Detailed document exists and master list links to it."
+    },
+    {
+      "name": "return_D5",
+      "passed": true,
+      "detail": "Detailed plan links back to the master experiment list."
+    },
+    {
+      "name": "index_D6",
+      "passed": true,
+      "detail": "Detailed document exists and master list links to it."
+    },
+    {
+      "name": "return_D6",
+      "passed": true,
+      "detail": "Detailed plan links back to the master experiment list."
+    },
+    {
+      "name": "index_D7",
+      "passed": true,
+      "detail": "Detailed document exists and master list links to it."
+    },
+    {
+      "name": "return_D7",
+      "passed": true,
+      "detail": "Detailed plan links back to the master experiment list."
+    },
+    {
+      "name": "index_D9",
+      "passed": true,
+      "detail": "Detailed document exists and master list links to it."
+    },
+    {
+      "name": "return_D9",
+      "passed": true,
+      "detail": "Detailed plan links back to the master experiment list."
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/method.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D7_query_statistics.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D7_query_statistics.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D7_query_statistics.md -> D3_calibration.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D1_gradient_quality.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D1_gradient_quality.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D1_gradient_quality.md -> D2_one_step.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D1_gradient_quality.md -> D3_calibration.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D1_gradient_quality.md -> D4_signature.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D0_implementation.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D0_implementation.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D0_implementation.md -> D1_gradient_quality.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D9_validation.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D9_validation.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D9_validation.md -> execution.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D5_local_support.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D5_local_support.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D5_local_support.md -> D4_signature.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D5_local_support.md -> D6_feedback_strength.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D5_local_support.md -> D9_validation.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/execution.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/execution.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D3_calibration.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D3_calibration.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D3_calibration.md -> D4_signature.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D3_calibration.md -> D7_query_statistics.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/stress_test.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D2_one_step.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D2_one_step.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D2_one_step.md -> D1_gradient_quality.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D2_one_step.md -> D6_feedback_strength.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> D0_implementation.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> D1_gradient_quality.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> D2_one_step.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> D3_calibration.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> D4_signature.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> D8_synthetic.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> D5_local_support.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> D6_feedback_strength.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> D7_query_statistics.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> D9_validation.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> execution.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> experiment_plan.yaml"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> pseudocode.py"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> hand_off.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> stress_test.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/README.md -> execution.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D4_signature.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D4_signature.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D4_signature.md -> D5_local_support.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D8_synthetic.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D8_synthetic.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D6_feedback_strength.md -> README.md#experiment-list"
+    },
+    {
+      "name": "local_anchor",
+      "passed": true,
+      "detail": "README.md#experiment-list"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D6_feedback_strength.md -> method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D6_feedback_strength.md -> D1_gradient_quality.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/research_plans/tqg_v2_20261031/D6_feedback_strength.md -> D2_one_step.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/TQG_V2_IMPLEMENTATION.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/mutagenicity_v2_20261026/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/research_plans/tqg_v2_20261031/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/响应类型与原文公式对照.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/latest/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/latest/results.csv"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/latest/results_summary.json"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/latest/REPRODUCIBILITY.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/mutagenicity_sega_20261026/results/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/mutagenicity_sega_20261026/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/mutagenicity_v2_20261026/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/mutagenicity_v2_20261026/results.csv"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/mutagenicity_v2_20261026/independent_audit.json"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/mutagenicity_v2_20261026/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/mutagenicity_target_batch196_20261028/结果解读.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/mutagenicity_target_batch196_20261028/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/mutagenicity_target_batch196_20261028/independent_audit.json"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/mutagenicity_target_batch196_20261028/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/mutagenicity_target_batch_20261028/结果解读.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/mutagenicity_target_batch_20261028/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/mutagenicity_target_batch_20261028/independent_audit.json"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/mutagenicity_target_batch_20261028/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/proteins_full_query_20261026/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/proteins_full_query_20261026/job_index.csv"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/proteins_full_query_20261026/evaluation_index.csv"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/proteins_full_query_20261026/logs/"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/proteins_full_query_20261026/checkpoints/"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/proteins_full_query_20261026/metadata/"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/experiments/latest/REPRODUCIBILITY.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> experiments/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> docs/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "README.md -> AGENTS.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> TQG_Graph_Level_GDA_Design.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> TQG_Graph_Level_GDA_Design_v2.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> TQG_V2_IMPLEMENTATION.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> validation/v2_review_20261028/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> 响应类型与原文公式对照.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> IMPLEMENTATION_NOTES_CN.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> TQG_有效性验证路线.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> experiments/mutagenicity_target_batch196_20261028/结果解读.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> experiments/mutagenicity_target_batch196_20261028/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> experiments/mutagenicity_target_batch_20261028/结果解读.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> experiments/mutagenicity_target_batch_20261028/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> experiments/latest/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> ../experiments/mutagenicity_sega_20261026/results/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> experiments/mutagenicity_v2_20261026/run_report.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> experiments/mutagenicity_v2_20261026/结果解读.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> ../experiments/mutagenicity_sega_20261026/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> experiments/latest/结果解读.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> experiments/latest/REPRODUCIBILITY.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> ../experiments/proteins_full_query_20261026/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> validation/"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> research_plans/tqg_v2_20261031/README.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> research_plans/tqg_v2_20261031/method.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> research_plans/tqg_v2_20261031/execution.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> 失败原因与改进方案.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> TQG_Improvement_Experiment_Plan_v1.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> E1_首个验证实验.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> E4_残差基线说明.md"
+    },
+    {
+      "name": "local_link",
+      "passed": true,
+      "detail": "docs/README.md -> history/README.md"
+    },
+    {
+      "name": "historic_reference",
+      "passed": true,
+      "detail": "docs/TQG_Graph_Level_GDA_Design_v2.md"
+    },
+    {
+      "name": "historic_reference",
+      "passed": true,
+      "detail": "docs/TQG_V2_IMPLEMENTATION.md"
+    },
+    {
+      "name": "historic_reference",
+      "passed": true,
+      "detail": "docs/experiments/mutagenicity_target_batch196_20261028/结果解读.md"
+    },
+    {
+      "name": "historic_reference",
+      "passed": true,
+      "detail": "docs/experiments/mutagenicity_v2_20261026/run_report.md"
+    },
+    {
+      "name": "historic_reference",
+      "passed": true,
+      "detail": "docs/validation/v2_review_20261028/README.md"
+    },
+    {
+      "name": "non_runnable_pseudocode",
+      "passed": true,
+      "detail": "Comments only; no Python instructions or training entry point."
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_1/3405/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_1/3405/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_1/3406/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_1/3406/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_1/3407/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_1/3407/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_1/3408/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_1/3408/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_1/3409/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_1/3409/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_2/3405/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_2/3405/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_2/3406/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_2/3406/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_2/3407/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_2/3407/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_2/3408/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_2/3408/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_2/3409/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_2/3409/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_3/3405/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_3/3405/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_3/3406/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_3/3406/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_3/3407/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_3/3407/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_3/3408/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_3/3408/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_3/3409/B_fit/step_200.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/0_to_3/3409/B_fit/step_50.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/source_pretraining/fit/3405/best.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/source_pretraining/fit/3406/best.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/source_pretraining/fit/3407/best.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/source_pretraining/fit/3408/best.pt"
+    },
+    {
+      "name": "snapshot_provenance",
+      "passed": true,
+      "detail": "checkpoints/source_pretraining/fit/3409/best.pt"
+    },
+    {
+      "name": "snapshot_ref_counts",
+      "passed": true,
+      "detail": "45 analysis references, 35 unique checkpoint files; shared starts are not independent seeds."
+    },
+    {
+      "name": "cache_sha_from_archived_protocol",
+      "passed": true,
+      "detail": "Hash compared as metadata only; dataset not opened."
+    }
+  ],
+  "local_markdown_links": 119,
+  "pinned_historical_paths": 5,
+  "snapshot_references": 45,
+  "unique_snapshot_files": 35,
+  "dataset_opened": false,
+  "target_labels_read": 0,
+  "new_training_jobs": 0,
+  "D0_to_D9_executed": false,
+  "external_network_links_checked": false
+}
