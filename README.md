@@ -16,6 +16,8 @@ Target-Queried Gradient Learning for graph-level domain adaptation 的研究代�
 
 新增：[D8已知规律与平均／逐图残差分解](docs/experiments/tqg_d8_residual_20261031/结果解读.md)完成。S1共享规律下三个预定读取器均通过方向门槛；S2关系失配时源概率Oracle也不能修复。真实H-only的两任务单步收益主要来自逐图项，平均项很小，但逐图方向增量仍未过门槛。[完整记录与合成模型](experiments/tqg_d8_residual_20261031/README.md)。
 
+新增：[H-only标签／预测归因与D7-H数量验证，2026-11-02](docs/experiments/tqg_label_query_20261102/结果解读.md)完成。稳定逐图标签增量未获支持；0→3的等幅BASE平均单步优于FULL，但仅为开发集诊断。更多query的改善依赖正则约定，两种约定共同支持的数量瓶颈门槛未过。全部配置收敛，无final读取。[完整归档](experiments/tqg_label_query_20261102/README.md)。
+
 ## 原版方法在做什么
 
 1. 用有标签的源图预训练 GNN。

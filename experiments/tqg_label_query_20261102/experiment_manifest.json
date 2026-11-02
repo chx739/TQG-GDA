@@ -1,0 +1,96 @@
+{
+  "git_commit": "0ff562783afe0be9cea331d604da6ed844633b72",
+  "plan_sha256": "cd67ab90d1bcad45bd0dfdfdca4ae07833ecbc905b90e858b19f1859cd709c35",
+  "settings": {
+    "config_name": "label_prediction_and_d7h_20261102",
+    "archive": "experiments/mutagenicity_target_batch196_20261028",
+    "plan_directory": "docs/research_plans/tqg_v2_20261031",
+    "h_stage": "/home/hxchen/runs/2026-10-31-tqg-h-only-controls/stage3_execution",
+    "workers": 5,
+    "threads_per_worker": 1,
+    "evaluation_microbatch": 64,
+    "epsilon_gradient": 1e-12,
+    "absolute_tolerance": 1e-10,
+    "relative_tolerance": 1e-08,
+    "readout_label_tolerance": 1e-10,
+    "package_wall_cap_seconds": 28800,
+    "progress_interval_seconds": 15,
+    "compute_buffer": 1.3,
+    "device": "cpu",
+    "dtype": "float64",
+    "allow_development_oracle": true,
+    "final_labels_allowed": false,
+    "label_snapshots": [
+      0,
+      50,
+      200
+    ],
+    "step_blocks": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "eta": 0.0003,
+    "beta": 0.1,
+    "query_sizes": [
+      16,
+      32,
+      64,
+      128,
+      196
+    ],
+    "query_repetitions": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "lambda_conventions": [
+      "FIXED",
+      "NORMALIZED"
+    ],
+    "base_lambda": 0.01,
+    "duplicate_engineering_lambda": 0.1,
+    "duplicate_engineering_config": {
+      "gap_atol": 1e-14,
+      "gap_rtol": 1e-12,
+      "max_iterations": 2000
+    },
+    "duplicate_tolerance": 1e-08,
+    "label_gate": {
+      "cosine_advantage": 0.05,
+      "full_relative_CE_gain": 0.0001,
+      "minimum_seed_wins": 3,
+      "minimum_tasks": 2,
+      "minimum_coverage": 0.8
+    }
+  },
+  "hardware": "cpu:Intel(R) Xeon(R) Gold 6226R CPU @ 2.90GHz;threads=1;FP64",
+  "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+  "versions": {
+    "torch": "2.5.1",
+    "torch-geometric": "2.6.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2",
+    "matplotlib": "3.10.1",
+    "tensorboard": "2.20.0"
+  },
+  "gpu_available": false,
+  "no_continuous_adaptations": true,
+  "target_final_labels_allowed": false,
+  "prepared_at": 1793602822.535486,
+  "scope": "H-only LABEL/PRED split and D7-H A/B; no new training",
+  "execution_protocol_sha256": "b92d9114dab1e9ea5d0173d03264736ddeb588ac9c33350d1f062e5f61120d44",
+  "expected": {
+    "label_blocks": 360,
+    "label_gradient_rows": 6120,
+    "label_temporary_updates": 3420,
+    "query_blocks": 120,
+    "query_logical_profiles": 6000,
+    "query_physical_solves": 4920,
+    "query_logical_steps": 3000,
+    "query_physical_steps": 2460
+  }
+}
