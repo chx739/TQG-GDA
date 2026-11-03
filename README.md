@@ -18,6 +18,8 @@ Target-Queried Gradient Learning for graph-level domain adaptation 的研究代�
 
 新增：[H-only标签／预测归因与D7-H数量验证，2026-11-02](docs/experiments/tqg_label_query_20261102/结果解读.md)完成。稳定逐图标签增量未获支持；0→3的等幅BASE平均单步优于FULL，但仅为开发集诊断。更多query的改善依赖正则约定，两种约定共同支持的数量瓶颈门槛未过。全部配置收敛，无final读取。[完整归档](experiments/tqg_label_query_20261102/README.md)。
 
+新增设计：[§3.8四项核心条件验证方案与已有证据（2026-11-03）](docs/research_plans/tqg_v2_assumptions_20261103/README.md)。逐项关联历史结果，设计同监督量的源内／跨域／目标内探针、支持诊断、签名充分性及核复杂度实验；优先A0→A1→A2-a，新增实验尚未执行。
+
 ## 原版方法在做什么
 
 1. 用有标签的源图预训练 GNN。
