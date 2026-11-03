@@ -12,4 +12,4 @@
 | v2 D8／残差分解 | [mechanism_diagnostics.json](mechanism_diagnostics.json) |
 | v2 标签／预测与D7-H | [label_query_diagnostics.json](label_query_diagnostics.json) |
 
-新的§3.8条件验证只有[设计文档](../docs/v2/plans/assumptions_20261103/README.md)，尚无可直接执行的新配置。不要把旧配置当新方案已经实现。
+§3.8第一批A0／A1／A2-a已实现并完成，配置见[assumptions_diagnostics.json](assumptions_diagnostics.json)，[结果](../docs/v2/results/tqg_assumptions_20261103/结果解读.md)。后续A2-b及A3—A6尚未实现／执行，不把本配置当全部方案入口。

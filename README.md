@@ -10,7 +10,7 @@ TQG（Target-Queried Gradient Learning）的图级域适应研究代码、实验
 |---|---|
 | 看当前方法、计划和结果 | [v2研究主页](docs/v2/README.md) |
 | 回顾odd/even原方法及早期实验 | [v1历史研究主页](docs/v1/README.md) |
-| 看下一步怎么验证四项迁移条件 | [§3.8验证方案与已有证据](docs/v2/plans/assumptions_20261103/README.md)；新实验尚未执行 |
+| 看下一步怎么验证四项迁移条件 | [§3.8验证方案与已有证据](docs/v2/plans/assumptions_20261103/README.md)；第一批A0／A1／A2-a已完成 |
 | 查哪些实验已做、结论是什么 | [v2执行状态](docs/v2/results/status.md) · [全部实验归档](experiments/README.md) |
 | 精读代码、找运行入口或配置 | [代码导航](docs/code/README.md) · [配置导航](configs/README.md) |
 | 安装、运行或核验归档 | [使用指南](docs/usage.md) |
@@ -23,6 +23,8 @@ TQG（Target-Queried Gradient Learning）的图级域适应研究代码、实验
 | v2（当前） | 目标Jacobian空间、签名核、矩阵读出与参数梯度反馈 | [方法](docs/v2/method/design.md) · [实验设计](docs/v2/plans/README.md) | [Mutagenicity及batch对照](docs/v2/results/overview.md) |
 
 v2诊断链：P0 → D3/D4 → H-only → D8／残差分解 → 标签／预测归因与D7-H。各轮均有[结果、报告和原始记录](docs/v2/results/README.md)，不把诊断单步收益当作完整训练准确率。
+
+最新：[§3.8第一批条件诊断](docs/v2/results/tqg_assumptions_20261103/结果解读.md)完成。同签名LR／MLP可在各域学习，但存在源到目标读出缺口；H支持分层三个任务均有诊断价值。下一步优先局部bank与核读取对照，尚不代表梯度反馈有效。
 
 ## 目录
 

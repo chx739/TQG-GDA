@@ -104,7 +104,7 @@ def audit(stage,repo):
 def publish(stage,repo,dest):
     proof=audit(stage,repo);dest.mkdir(exist_ok=False)
     for p in stage.iterdir():
-        if p.is_file() and p.suffix in ['.json','.csv','.md','.txt','.sh']:shutil.copy2(p,dest/p.name)
+        if p.is_file() and p.suffix in ['.json','.jsonl','.csv','.md','.txt','.sh']:shutil.copy2(p,dest/p.name)
     for name in ['D0','features','logs','figures','analysis_code']:
         if (stage/name).exists():shutil.copytree(stage/name,dest/name)
     shutil.copytree(stage/'code_formal',dest/'code_snapshot',ignore=shutil.ignore_patterns('.git','__pycache__','*.pyc'))
