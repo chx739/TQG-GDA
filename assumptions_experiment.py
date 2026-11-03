@@ -290,6 +290,14 @@ class AssumptionExperiment:
                 pred_path = out/f'{domain}_sealed_predictions.npz'
                 np.savez_compressed(pred_path, **{j['key']: j['prediction'] for j in jobs})
                 history_file.flush(); cv_file.flush()
+                artifacts = dict(domain=domain, prediction_sha256=sha256(pred_path),
+                    support_sha256=sha256(out/f'{domain}_support.json'), feature_sha256=sha256(data_path),
+                    inner_cv_prefix_bytes=(out/'inner_cv.jsonl').stat().st_size,
+                    inner_cv_prefix_sha256=sha256(out/'inner_cv.jsonl'),
+                    models=[dict(path=f'models/{job["key"]}.npz', sha256=sha256(out/f'models/{job["key"]}.npz')) for job in jobs])
+                artifact_path = out/f'{domain}_sealed_artifacts.json'
+                write(artifact_path, artifacts)
+                boundary.log(dict(event='probe_artifacts_sealed', domain=domain, sha256=sha256(artifact_path)))
                 boundary.seal(sha256(pred_path), len(jobs))
                 if pilot:
                     continue

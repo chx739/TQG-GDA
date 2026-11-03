@@ -35,7 +35,7 @@ def metrics(y, raw):
     y = np.asarray(y, dtype=int)
     raw = np.asarray(raw, dtype=float)
     if not len(y):
-        return dict(n=0, nll=None, brier=None, ba=None, outside=None)
+        return dict(n=0, nll=None, brier=None, ba=None, outside=None, residual_mse=None, n0=0, n1=0)
     if not np.isfinite(raw).all() or not set(y.tolist()) <= {0, 1}:
         raise ValueError('Nonfinite predictions or invalid binary labels')
     p = np.clip(raw, 1e-6, 1-1e-6)
