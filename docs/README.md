@@ -1,48 +1,13 @@
-# 文档目录
+# 文档导航
 
-## 方法与实现
+| 类别 | v1：有限扰动响应 | v2：Jacobian与核查询（当前） |
+|---|---|---|
+| 版本主页 | [v1总览](v1/README.md) | [v2总览](v2/README.md) |
+| 方法设计 | [原始设计稿](v1/method/design.md) · [odd/even公式](v1/method/response_formulas.md) | [v2设计稿](v2/method/design.md) |
+| 实验设计 | [v1计划与失败分析](v1/plans/README.md) | [v2计划与优先级](v2/plans/README.md) |
+| 实验结果 | [结果与证据](v1/results/README.md) | [结果与证据](v2/results/README.md) · [执行状态](v2/results/status.md) |
+| 实现说明 | [复用范围](v1/implementation/notes.md) | [公式与实现](v2/implementation/method.md) |
 
-- [TQG原始设计稿](TQG_Graph_Level_GDA_Design.md)
-- [TQG修订版v2设计稿](TQG_Graph_Level_GDA_Design_v2.md)
-- [v2实现、配置与验证说明](TQG_V2_IMPLEMENTATION.md)
-- [P0诊断实现与复现](P0_DIAGNOSTICS_IMPLEMENTATION.md)
-- [D3/D4诊断实现与执行细节](D34_DIAGNOSTICS_IMPLEMENTATION.md)
-- [v2代码对照文档审查，2026-10-28](validation/v2_review_20261028/README.md)
-- [响应类型与原文公式对应](响应类型与原文公式对照.md)
-- [实现说明](IMPLEMENTATION_NOTES_CN.md)
-- [有效性验证路线](TQG_有效性验证路线.md)
+通用资料：[安装运行](usage.md)、[代码导航](code/README.md)、[原始归档](../experiments/README.md)、[历史阶段文档](history/README.md)、[历史工程验收](validation/README.md)。
 
-## 当前实验与原始记录
-
-- [H-only标签／预测归因与D7-H，2026-11-02](experiments/tqg_label_query_20261102/结果解读.md) · [执行报告](experiments/tqg_label_query_20261102/run_report.md)
-- [D8与平均／逐图残差分解，2026-10-31](experiments/tqg_d8_residual_20261031/结果解读.md) · [执行报告](experiments/tqg_d8_residual_20261031/run_report.md)
-- [H-only真实／乱标签／随机反馈对照，2026-10-31](experiments/tqg_h_only_controls_20261031/结果解读.md) · [执行报告](experiments/tqg_h_only_controls_20261031/run_report.md)
-- [D3校准／D4相似度诊断结果，2026-10-31](experiments/tqg_d3_d4_20261031/结果解读.md) · [执行报告](experiments/tqg_d3_d4_20261031/run_report.md) · [全部指标与日志](../experiments/tqg_d3_d4_20261031/README.md)
-- [P0诊断结果：D0／D1／D2，2026-10-31](experiments/tqg_v2_p0_20261031/结果解读.md)
-- [P0完整执行报告](experiments/tqg_v2_p0_20261031/run_report.md) · [原始指标、日志与执行代码](../experiments/tqg_v2_p0_20261031/README.md)
-- [Mutagenicity目标batch196追加实验](experiments/mutagenicity_target_batch196_20261028/结果解读.md)
-- [目标batch196完整报告与16/32/64对照](experiments/mutagenicity_target_batch196_20261028/run_report.md)
-
-- [Mutagenicity目标batch16/32/64结果解读](experiments/mutagenicity_target_batch_20261028/结果解读.md)
-- [Mutagenicity目标batch对照完整报告](experiments/mutagenicity_target_batch_20261028/run_report.md)
-- [PROTEINS三方向完整结果](experiments/latest/run_report.md)
-- [Mutagenicity三方向完整结果](../experiments/mutagenicity_sega_20261026/results/run_report.md)
-- [Mutagenicity v2三方向五种子验证](experiments/mutagenicity_v2_20261026/run_report.md)
-- [Mutagenicity v2结果白话解读](experiments/mutagenicity_v2_20261026/结果解读.md)
-- [Mutagenicity日志与模型](../experiments/mutagenicity_sega_20261026/README.md)
-- [结果白话解读](experiments/latest/结果解读.md)
-- [复现范围与限制](experiments/latest/REPRODUCIBILITY.md)
-- [训练日志、checkpoint与来源索引](../experiments/proteins_full_query_20261026/README.md)
-- [历史验证摘要与测试日志](validation/)
-
-## 失败分析与后续方案
-
-- [v2各实验最新执行状态](research_plans/tqg_v2_20261031_status.md)
-- [TQG v2详细实验总表与优先级方案，2026-10-31](research_plans/tqg_v2_20261031/README.md)：10项实验，各自链接详细设计；保留原始冻结状态，最新进度见执行状态表。
-- [统一数据、符号与诊断协议](research_plans/tqg_v2_20261031/method.md) · [执行预算与交付清单](research_plans/tqg_v2_20261031/execution.md)
-- [失败原因与改进方案](失败原因与改进方案.md)
-- [改进实验计划v1](TQG_Improvement_Experiment_Plan_v1.md)
-- [E1机制实验设计](E1_首个验证实验.md)
-- [E4残差基线说明](E4_残差基线说明.md)
-
-方法设计、实验计划和实际完成结果分别记录；方案中提出的实验不代表全部已执行。历史阶段操作说明统一放在[history/](history/README.md)。
+目录规则见[仓库布局说明](REPOSITORY_LAYOUT.md)。方案是“准备做什么”，执行状态与结果是“实际做了什么”；两者分开查阅。
