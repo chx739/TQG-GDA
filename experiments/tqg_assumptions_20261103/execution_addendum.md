@@ -1,0 +1,3 @@
+# Pre-formal engineering addendum
+
+A0 and the 5% pilot used execution b6fc5d668513dc619d0e08595fd7312f8ea6beaa; no target-B labels/scores were read. The formal snapshot adds explicit empty-stratum counts and residual-MSE null fields, and seals model states, support groups and the inner-CV prefix by SHA before the existing prediction seal. No model fitting, predictions, seeds, splits, hyperparameters, metrics or thresholds change. Preserve initial code/ and freeze.json; formal code lives in code_formal/. A0 replay remains valid because geometry/calibration code is unchanged. Pilot budget estimate remains applicable.
