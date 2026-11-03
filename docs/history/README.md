@@ -9,3 +9,5 @@
 - [最初代码快照的来源哈希](initial_source_manifest.sha256)：保留原字节，针对初始快照，不是当前仓库全文件的校验清单。
 
 当前使用入口为[仓库README](../../README.md)；最新原始实验文件见[实验目录](../../experiments/README.md)。
+
+版本导航：[v1历史研究](../v1/README.md) · [v2当前研究](../v2/README.md)。本目录的历史文件不按新目录重写命令或来源SHA。
