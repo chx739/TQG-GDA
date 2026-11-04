@@ -46,6 +46,7 @@
 | D8／残差 | [mechanism_experiment.py](../../mechanism_experiment.py) | [D8实现](../v2/implementation/d8_residual.md) |
 | 标签／query | [label_query_experiment.py](../../label_query_experiment.py) | [标签／query实现](../v2/implementation/label_query.md) |
 | §3.8 A0／A1／A2-a | [assumptions_experiment.py](../../assumptions_experiment.py) | [条件诊断实现](../v2/implementation/assumptions.md) |
+| PROTEINS §3.8复验 | [PROTEINS backend](../../proteins_assumptions_experiment.py)，由共同入口按配置选择 | [方案与适配](../v2/plans/assumptions_proteins_20261104/README.md) |
 
 同名前缀的`*_summarize.py`、`*_report.py`、`*_interpretation.py`分别承担汇总、报告和后处理；不是新的训练方法。历史精确执行代码以各实验的code_snapshot与提交为准。
 

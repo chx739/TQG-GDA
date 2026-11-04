@@ -1,6 +1,6 @@
 # PROTEINS：§3.8条件诊断的跨数据集复验
 
-日期2026-11-04。状态：执行前方案。以[原A0/A1/A2-a方案](../assumptions_20261103/README.md)为依据；这是第二数据集复验，不新增完整TQG适配。
+日期2026-11-04。状态：**A0/A1/A2-a已完成**；[结果与跨数据集比较](../../results/tqg_assumptions_proteins_20261104/结果解读.md)。原执行前版本及SHA保存在该轮protocol/method.md；本页只更新进度。以[原A0/A1/A2-a方案](../assumptions_20261103/README.md)为依据；这是第二数据集复验，不新增完整TQG适配。
 
 ## 问题与假设
 

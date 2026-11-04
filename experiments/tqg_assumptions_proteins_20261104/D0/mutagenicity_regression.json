@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "scope": "six published selected predictions, no new target labels",
+  "checks": [
+    {
+      "signature": "H",
+      "family": "KRR",
+      "max_absolute_prediction_error": 6.439293542825908e-15,
+      "passed": true
+    },
+    {
+      "signature": "H",
+      "family": "LR",
+      "max_absolute_prediction_error": 0.0,
+      "passed": true
+    },
+    {
+      "signature": "H",
+      "family": "MLP",
+      "max_absolute_prediction_error": 2.220446049250313e-16,
+      "passed": true
+    },
+    {
+      "signature": "HA",
+      "family": "KRR",
+      "max_absolute_prediction_error": 5.551115123125783e-15,
+      "passed": true
+    },
+    {
+      "signature": "HA",
+      "family": "LR",
+      "max_absolute_prediction_error": 0.0,
+      "passed": true
+    },
+    {
+      "signature": "HA",
+      "family": "MLP",
+      "max_absolute_prediction_error": 2.220446049250313e-16,
+      "passed": true
+    }
+  ]
+}
