@@ -3,7 +3,7 @@ import numpy as np
 import torch
 
 from tqg_gda.optimization_diagnostics import (bandwidth_kernel, effective_lambda, ridge_grid,
-    choose_kernel, mean_readout, closest_bank, check_mean_identity)
+    choose_kernel, mean_readout, closest_bank, check_mean_identity, select_kernel, select_local, teacher_fit)
 
 
 class OptimizationChecks(unittest.TestCase):
@@ -62,6 +62,29 @@ class OptimizationChecks(unittest.TestCase):
         w=mean_readout(self.k[:10,:10],self.k[:10,10:],a,.03)
         point=self.k[10:,:10]@np.linalg.solve(self.k[:10,:10]+.03*np.eye(10),r)
         np.testing.assert_allclose(w@r,a[:,0,:].T@point/5,atol=1e-11)
+
+    def test_kernel_selection_does_not_use_evaluation_rows(self):
+        cfg=dict(signatures=['H'],bandwidth_multipliers=[.5,1],lambda_conventions=['FIXED','NORMALIZED'],kernel_lambdas=[.01,.1])
+        a,records=select_kernel(list(range(10)),{'H':self.d},self.y,self.p,cfg)
+        altered=self.d.copy();altered[10:]=1e6;altered[:,10:]=1e6
+        b,_=select_kernel(list(range(10)),{'H':altered},self.y,self.p,cfg)
+        self.assertEqual(a,b)
+        self.assertTrue(all(set(r['training_ids']).isdisjoint(r['validation_ids']) for r in records))
+
+    def test_local_source_audit_not_in_selected_bank(self):
+        cfg=dict(bank_sizes=[3,5],signatures=['H','HA'],lambda_conventions=['FIXED','NORMALIZED'],base_joint_lambda=.01)
+        selected,records=select_local(list(range(10)),{'H':self.k,'HA':self.k**2},self.y,self.p,cfg)
+        self.assertEqual(len(selected),2)
+        self.assertTrue(all(set(r['bank_ids']).isdisjoint(r['validation_ids']) for r in records))
+
+    def test_teacher_nulls_repeat_entire_selection_and_refit(self):
+        ids=list(range(10));pred,states,chosen,records=teacher_fit(ids,self.x[:10],self.y,self.x[10:],[.01,.1],1)
+        for v in range(2):
+            one,one_states,one_choice,_=teacher_fit(ids,self.x[:10],self.y[v:v+1],self.x[10:],[.01,.1],1)
+            np.testing.assert_allclose(pred[v],one[0],atol=1e-12)
+            np.testing.assert_allclose(states[v,0]['weight'],one_states[0,0]['weight'],atol=1e-12)
+            self.assertEqual(chosen[v]['penalty'],one_choice[0]['penalty'])
+        self.assertTrue(all(set(r['train_ids']).isdisjoint(r['validation_ids']) for r in records))
 
 
 if __name__=='__main__':unittest.main()
