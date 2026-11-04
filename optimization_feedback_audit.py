@@ -136,7 +136,7 @@ def audit_seed(repo,stage,phase,seed):
         kf,kstats=kernel_family(torch.from_numpy(geo['source_h']),torch.from_numpy(geo['target_h']),
             torch.from_numpy(geo['source_A']),torch.from_numpy(geo['target_A']),torch.arange(n))
         allkernels={sig:np.block([[kf[sig][0].numpy(),kf[sig][1].numpy()],[kf[sig][1].mT.numpy(),kf[sig][2].numpy()]]) for sig in ['H','HA']}
-        h=torch.from_numpy(np.concatenate((geo['source_h'],geo['target_h'])));a=torch.from_numpy(np.concatenate((geo['source_A'],geo['target_A'])).reshape(n+len(ya),-1)
+        h=torch.from_numpy(np.concatenate((geo['source_h'],geo['target_h'])));a=torch.from_numpy(np.concatenate((geo['source_A'],geo['target_A'])).reshape(n+len(ya),-1))
         dh=torch.cdist(h,h,compute_mode='donot_use_mm_for_euclid_dist').square().numpy()/kstats['scale_h_squared']
         da=torch.cdist(a,a,compute_mode='donot_use_mm_for_euclid_dist').square().numpy()/kstats['scale_a_squared']
         distances={'H':dh,'HA':dh+da};weights=dict(np.load(directory/'readouts.npz'));preds=dict(np.load(directory/'step_logits.npz'))
