@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import numpy as np
 import torch
 
-from .assumption_diagnostics import metrics
+from .assumption_diagnostics import metrics, split_folds, fit_grid, ProbeConfig
 
 
 def bandwidth_kernel(distance, multiplier):
@@ -94,3 +94,83 @@ def check_mean_identity(kss, kst, ktt, target_response, residual, penalty, calib
     iso, _ = solve_observed((kss, kst, ktt), target_response, 'ISO', 2*penalty, calibration)
     return dict(mean_vs_pointwise_max=float((w@residual-direct).abs().max()),
                 mean_vs_iso_max=float((w-iso).abs().max()))
+
+
+def select_kernel(source_ids, distances, label_variants, probabilities, settings):
+    """Source-only CV. One independently selected configuration per label variant."""
+    ids=list(map(int,source_ids));n=len(ids)
+    folds=split_folds(ids,3,'A4-inner',0)
+    variants=np.asarray(label_variants);records=[]
+    options=[];scores=[]
+    for sig in settings['signatures']:
+        for c in settings['bandwidth_multipliers']:
+            kernel=bandwidth_kernel(distances[sig][:n,:n],c)
+            cv=np.zeros((len(settings['lambda_conventions']),len(variants),len(settings['kernel_lambdas'])))
+            for f,validation in enumerate(folds):
+                va=[ids.index(i) for i in validation];tr=sorted(set(range(n))-set(va))
+                kt=kernel[np.ix_(tr,tr)];ke=kernel[np.ix_(va,tr)];factor=kernel_factor(kt)
+                for co,convention in enumerate(settings['lambda_conventions']):
+                    penalties=[effective_lambda(l,len(tr),n,convention) for l in settings['kernel_lambdas']]
+                    fitted=ridge_grid(kt,ke,variants[:,tr],probabilities[tr],probabilities[va],penalties,factor)
+                    for v in range(len(variants)):
+                        for li,base in enumerate(settings['kernel_lambdas']):
+                            score=metrics(variants[v,va],fitted.probabilities[v,li])['nll'];cv[co,v,li]+=score/3
+                            records.append(dict(variant=v,signature=sig,bandwidth=c,convention=convention,
+                                lambda_base=base,lambda_actual=penalties[li],fold=f,nll=score,training_ids=[ids[i] for i in tr],validation_ids=validation))
+            for co,convention in enumerate(settings['lambda_conventions']):
+                for li,base in enumerate(settings['kernel_lambdas']):
+                    options.append(dict(signature=sig,bandwidth=c,convention=convention,lambda_base=base))
+                    scores.append(cv[co,:,li])
+    scores=np.array(scores)
+    chosen=[]
+    for v in range(len(variants)):
+        j=min(range(len(options)),key=lambda j:(scores[j,v],-options[j]['lambda_base'],-options[j]['bandwidth'],
+            options[j]['signature']!='H',options[j]['convention']!='NORMALIZED'))
+        chosen.append(dict(options[j],cv_nll=float(scores[j,v]),option_index=j))
+    return chosen,records
+
+
+def select_local(source_ids, kernels, label_variants, probabilities, settings):
+    """Choose a local bank using source audit NLL; target inputs only rank neighbors."""
+    ids=list(map(int,source_ids));n=len(ids);ys=np.asarray(label_variants)
+    options=[dict(selector=s,n=count,convention=convention) for count in settings['bank_sizes']
+             for s in settings['signatures'] for convention in settings['lambda_conventions']]
+    cv=np.zeros((len(options),len(ys)));records=[]
+    h=kernels['H']
+    for f,validation in enumerate(split_folds(ids,4,'outer')):
+        va=[ids.index(i) for i in validation];tr=sorted(set(range(n))-set(va))
+        for j,option in enumerate(options):
+            selected=closest_bank([ids[i] for i in tr],kernels[option['selector']][np.ix_(tr,range(n,kernels[option['selector']].shape[1]))],option['n'])
+            ix=np.array(tr)[selected];count=len(ix)
+            lam=effective_lambda(settings['base_joint_lambda'],count,n,option['convention'])/2
+            fit=ridge_grid(h[np.ix_(ix,ix)],h[np.ix_(va,ix)],ys[:,ix],probabilities[ix],probabilities[va],[lam])
+            for v in range(len(ys)):
+                score=metrics(ys[v,va],fit.probabilities[v,0])['nll'];cv[j,v]+=score/4
+                records.append(dict(option,variant=v,fold=f,nll=score,proxy_mean_lambda=lam,
+                    bank_ids=[ids[i] for i in ix],validation_ids=validation))
+    selected=[]
+    for v in range(len(ys)):
+        j=min(range(len(options)),key=lambda j:(cv[j,v],-options[j]['n'],options[j]['selector']!='H',options[j]['convention']!='NORMALIZED'))
+        selected.append(dict(options[j],cv_nll=float(cv[j,v]),option_index=j))
+    return selected,records
+
+
+def teacher_fit(source_ids, features, label_variants, evaluation_features, penalties, seed):
+    """LR soft-label teacher. Entire CV/refit repeated for every shuffled label set."""
+    ids=list(map(int,source_ids));ys=np.asarray(label_variants);n=len(ids);records=[]
+    scores=np.zeros((len(ys),len(penalties)));configuration=ProbeConfig()
+    for f,validation in enumerate(split_folds(ids,3,'teacher-inner')):
+        va=[ids.index(i) for i in validation];tr=sorted(set(range(n))-set(va))
+        pred,_,info=fit_grid('LR',features[tr],ys[:,tr],np.zeros(len(tr)),features[va],np.zeros(len(va)),
+            None,None,None,penalties,seed,configuration)
+        for v in range(len(ys)):
+            for j,lam in enumerate(penalties):
+                loss=metrics(ys[v,va],pred[v,j])['nll'];scores[v,j]+=loss/3
+                records.append(dict(variant=v,fold=f,penalty=lam,nll=loss,optimization=info[v*len(penalties)+j],
+                    train_ids=[ids[i] for i in tr],validation_ids=validation))
+    chosen=[min(range(len(penalties)),key=lambda j:(scores[v,j],-penalties[j])) for v in range(len(ys))]
+    selected=[penalties[j] for j in chosen]
+    pred,states,info=fit_grid('LR',features,ys,np.zeros(n),evaluation_features,np.zeros(len(evaluation_features)),
+                            None,None,None,selected,seed,configuration,paired=True)
+    metadata=[dict(variant=v,penalty=selected[v],cv_nll=float(scores[v,chosen[v]]),optimization=info[v]) for v in range(len(ys))]
+    return pred[:,0],states,metadata,records
