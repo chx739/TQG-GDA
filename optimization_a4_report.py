@@ -132,13 +132,18 @@ def audit_and_summarize(repo,stage):
             prior_nll=float(np.mean([r['prior_nll'] for r in true])),shuffle_nll=float(np.mean(null)),
             reference_nll=float(np.mean([r['reference_nll'] for r in true])),
             selected_vs_reference_wins=sum(r['nll']<r['reference_nll'] for r in true),
-            prior_and_shuffle_wins=sum(r['nll']<r['prior_nll'] and r['nll']<v for r,v in zip(true,null)),
+            prior_and_shuffle_wins=int(sum(r['nll']<r['prior_nll'] and r['nll']<v for r,v in zip(true,null))),
             outside=float(np.mean([r['outside'] for r in true]))))
     export(stage/'A4/summary.csv',summary)
     audit=dict(passed=True,counts=dict(counts),normal_equation_max_error=max_normal,prediction_replay_max_error=max_prediction,
         metric_replay_max_error=max_metric,cv_replay_max_error=max_cv,final_labels_read=0,
         extra_logged_B_audit_labels=15*271,cpu_seconds=time.process_time()-begun)
     write(stage/'A4/audit.json',audit)
+    write_report(stage,cfg,summary,audit)
+
+
+def write_report(stage,cfg,summary,audit):
+    counts=audit['counts']
     write(stage/'A4/results_summary.json',dict(status='A4_complete_A2b_A6_pending',summary=summary,audit=audit,scope='Frozen-feature diagnostics, not adaptation'))
     lines=['# A4-a核读取学习曲线：阶段结果','',
         '已完成三任务、五模型种子、四外折/三内折，368640次逻辑拟合。没有更新GNN。全部源端选择由源内CV完成；T→T是诊断，不能当UDA算法。',
@@ -159,5 +164,17 @@ def audit_and_summarize(repo,stage):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--repo',required=True);p.add_argument('--stage',required=True);a=p.parse_args()
-    torch.set_num_threads(1);audit_and_summarize(a.repo,a.stage)
+    p=argparse.ArgumentParser();p.add_argument('--repo',required=True);p.add_argument('--stage',required=True)
+    p.add_argument('--report-only',action='store_true');a=p.parse_args();torch.set_num_threads(1)
+    if a.report_only:
+        stage=Path(a.stage);audit=read(stage/'A4/audit.json');assert audit['passed']
+        cfg=read(stage/'A4/manifest.json')['config'];summary=[]
+        with (stage/'A4/summary.csv').open() as f:
+            for r in csv.DictReader(f):
+                tags={'task','signature','train_domain','convention','pool'}
+                integers={'n','selected_vs_reference_wins','prior_and_shuffle_wins'}
+                summary.append({k:(v if k in tags else int(v) if k in integers else float(v)) for k,v in r.items()})
+        write_report(stage,cfg,summary,audit)
+        write(stage/'A4/postprocess_recovery.json',dict(reason='numpy int64 in report summary serialization',
+            corrected='explicit Python integer conversion',existing_audit_passed=True,model_refits=0,new_label_reads=0))
+    else:audit_and_summarize(a.repo,a.stage)

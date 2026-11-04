@@ -174,3 +174,31 @@ def teacher_fit(source_ids, features, label_variants, evaluation_features, penal
                             None,None,None,selected,seed,configuration,paired=True)
     metadata=[dict(variant=v,penalty=selected[v],cv_nll=float(scores[v,chosen[v]]),optimization=info[v]) for v in range(len(ys))]
     return pred[:,0],states,metadata,records
+
+
+def feedback_controls(full, base, fixed_permutations, pipeline_permutations, basis, block_seed, extra=None, epsilon=1e-12):
+    """Separate conditional label controls from whole-selection permutation controls."""
+    from .p0_diagnostics import normalized
+    label=full-base;fn=float(full.norm());ln=float(label.norm())
+    bm,bok=normalized(base,fn,epsilon)
+    vectors=dict(FULL=full,BASE=base,BASE_M=bm,LABEL=label,**(extra or {}))
+    valid={k:float(v.norm())>epsilon for k,v in vectors.items()};valid['BASE_M']=bok
+    for i,(conditional,pipeline) in enumerate(zip(fixed_permutations,pipeline_permutations),1):
+        delta,ok=normalized(conditional-base,ln,epsilon)
+        rand=torch.randn(basis.shape[1],generator=torch.Generator().manual_seed(block_seed+9200+i),dtype=torch.float64)
+        rlabel,rok=normalized(basis@rand,ln,epsilon)
+        cp,cr=base+delta,base+rlabel
+        vectors[f'CPL_{i}']=cp;vectors[f'CRL_{i}']=cr
+        valid[f'CPL_{i}']=ok and ln>epsilon;valid[f'CRL_{i}']=rok and ln>epsilon
+        for key,g in [(f'CPL_M_{i}',cp),(f'CRL_M_{i}',cr),(f'FULL_PERM_M_{i}',pipeline),(f'FULL_RAND_M_{i}',basis@rand)]:
+            value,is_valid=normalized(g,fn,epsilon);vectors[key]=value;valid[key]=is_valid and fn>epsilon
+            if key.startswith('CPL_M'):valid[key]&=valid[f'CPL_{i}']
+            if key.startswith('CRL_M'):valid[key]&=valid[f'CRL_{i}']
+    return vectors,valid
+
+
+def binary_logit_metrics(margin, labels):
+    margin=np.asarray(margin,dtype=float);y=np.asarray(labels,dtype=int)
+    ce=float(np.mean(np.logaddexp(0,margin)-y*margin))
+    recalls=[np.mean((margin[y==k]>=0)==k) for k in [0,1] if np.any(y==k)]
+    return dict(ce=ce,balanced_accuracy=float(np.mean(recalls)) if len(recalls)==2 else None)

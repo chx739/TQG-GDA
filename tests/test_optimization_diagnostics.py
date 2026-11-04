@@ -3,7 +3,8 @@ import numpy as np
 import torch
 
 from tqg_gda.optimization_diagnostics import (bandwidth_kernel, effective_lambda, ridge_grid,
-    choose_kernel, mean_readout, closest_bank, check_mean_identity, select_kernel, select_local, teacher_fit)
+    choose_kernel, mean_readout, closest_bank, check_mean_identity, select_kernel, select_local, teacher_fit,
+    feedback_controls,binary_logit_metrics)
 
 
 class OptimizationChecks(unittest.TestCase):
@@ -85,6 +86,22 @@ class OptimizationChecks(unittest.TestCase):
             np.testing.assert_allclose(states[v,0]['weight'],one_states[0,0]['weight'],atol=1e-12)
             self.assertEqual(chosen[v]['penalty'],one_choice[0]['penalty'])
         self.assertTrue(all(set(r['train_ids']).isdisjoint(r['validation_ids']) for r in records))
+
+    def test_feedback_controls_retain_base_and_match_correct_norm(self):
+        basis=torch.eye(4,dtype=torch.float64);full=torch.tensor([1.,2.,3.,4.]);base=torch.tensor([1.,0.,0.,0.])
+        full=full.double();base=base.double()
+        nulls=[full.roll(i) for i in [1,2,3]]
+        vectors,valid=feedback_controls(full,base,nulls,list(reversed(nulls)),basis,77)
+        for i in [1,2,3]:
+            self.assertAlmostEqual(float((vectors[f'CPL_{i}']-base).norm()),float((full-base).norm()),places=11)
+            for name in [f'CPL_M_{i}',f'CRL_M_{i}',f'FULL_PERM_M_{i}',f'FULL_RAND_M_{i}']:
+                self.assertAlmostEqual(float(vectors[name].norm()),float(full.norm()),places=11)
+        np.testing.assert_allclose(vectors['FULL_PERM_M_1'],nulls[-1],atol=1e-11)
+
+    def test_binary_margin_ce_matches_torch_without_probability_clipping(self):
+        z=torch.tensor([[-1.,2.],[4.,-2.],[0.,40.]],dtype=torch.float64);y=torch.tensor([1,0,0])
+        measured=binary_logit_metrics((z[:,1]-z[:,0]).numpy(),y.numpy())
+        self.assertAlmostEqual(measured['ce'],float(torch.nn.functional.cross_entropy(z,y)),places=12)
 
 
 if __name__=='__main__':unittest.main()
