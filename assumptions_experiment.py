@@ -46,7 +46,7 @@ class AssumptionExperiment:
         self.commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=self.code, text=True).strip()
         if subprocess.check_output(['git', 'status', '--porcelain'], cwd=self.code):
             raise ValueError('Execution code must be clean')
-        self.old = ResearchExperiment(ExperimentConfig(str(self.repo), self.settings['old_stage'], str(self.code/'configs/p0_diagnostics.json')))
+        self.old = self.make_backend()
         self.probe_config = ProbeConfig(**{f.name: tuple(self.settings[f.name]) if f.name.endswith('_grid') else self.settings[f.name]
                                          for f in fields(ProbeConfig)})
         self.hardware = self.old.hardware
@@ -54,12 +54,18 @@ class AssumptionExperiment:
         if self.settings['final_labels_allowed'] or self.settings['device'] != 'cpu':
             raise ValueError('CPU-only dev diagnostic protocol')
 
+    def make_backend(self):
+        return ResearchExperiment(ExperimentConfig(str(self.repo), self.settings['old_stage'], str(self.code/'configs/p0_diagnostics.json')))
+
+    def snapshot_references(self):
+        return [r for r in read(Path(self.settings['old_stage'])/'snapshot_manifest.json')['references'] if r['snapshot_step'] == 0]
+
     def prepare(self):
         self.stage.mkdir(exist_ok=True)
         for name in ['logs', 'features', 'D0', 'figures']:
             (self.stage/name).mkdir(exist_ok=True)
         findings = []
-        for file in [self.code/'assumptions_experiment.py', self.code/'tqg_gda/assumption_diagnostics.py']:
+        for file in [self.code/'assumptions_experiment.py', self.code/'tqg_gda/assumption_diagnostics.py'] + ([self.code/'proteins_assumptions_experiment.py'] if self.settings.get('dataset') == 'PROTEINS' else []):
             for node in ast.walk(ast.parse(file.read_text())):
                 if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id in ('exec', 'eval', 'compile'):
                     findings.append(dict(file=str(file), line=node.lineno))
@@ -67,7 +73,7 @@ class AssumptionExperiment:
                     findings.append(dict(file=str(file), line=node.lineno))
         assert not findings
         write(self.stage/'ast_screen.json', dict(passed=True, subprocess_justification='local git metadata and spawned CPU workers only'))
-        refs = [r for r in read(Path(self.settings['old_stage'])/'snapshot_manifest.json')['references'] if r['snapshot_step'] == 0]
+        refs = self.snapshot_references()
         assert len(refs) == 15
         for r in refs:
             assert sha256(self.repo/r['checkpoint']) == r['checkpoint_sha256']
@@ -197,8 +203,9 @@ class AssumptionExperiment:
                 boundary = ProbeLabelBoundary(task, a_pool, b_pool, role['final'], out/'label_access.jsonl')
                 source_labels = dict(zip(query, data['source_y'].tolist()))
                 distances, kernels = {}, {}
-                sh = torch.from_numpy(data['h'][:196])
-                sa = torch.from_numpy(data['a'][:196].reshape(196, -1))
+                ns = len(query)
+                sh = torch.from_numpy(data['h'][:ns])
+                sa = torch.from_numpy(data['a'][:ns].reshape(ns, -1))
                 scale_h = float(torch.quantile(torch.pdist(sh).square(), .5).clamp_min(1e-16))
                 scale_a = float(torch.quantile(torch.pdist(sa).square(), .5).clamp_min(1e-16))
                 ht, at = torch.from_numpy(data['h']), torch.from_numpy(data['a'].reshape(len(ids), -1))
@@ -211,8 +218,10 @@ class AssumptionExperiment:
                 for fold in range(3 if pilot else 4):
                     source_audit = sorted(source_folds[fold])
                     source_train = sorted(set(query)-set(source_audit))
-                    target_train = sorted(ordered(a_pool, 'target_train', domain, fold)[:147])
-                    assert len(source_train) == len(target_train) == 147 and len(source_audit) == 49
+                    ntrain = len(source_train)
+                    target_train = sorted(ordered(a_pool, 'target_train', domain, fold)[:ntrain])
+                    assert len(target_train) == ntrain and ntrain+len(source_audit) == ns
+                    assert not set(source_train)&set(source_audit)
                     target_y = boundary.read('A_train', target_train)
                     for signature in self.settings['signatures']:
                         source_idx = [position[i] for i in source_train]
@@ -226,7 +235,7 @@ class AssumptionExperiment:
                         for train_domain in ['S', 'T']:
                             train_ids = source_train if train_domain == 'S' else target_train
                             true_y = np.array([source_labels[i] for i in train_ids]) if train_domain == 'S' else target_y
-                            label_sets = [true_y]+[true_y[np.random.default_rng(stable_seed('null', seed, fold, train_domain, rep)).permutation(147)] for rep in range(3)]
+                            label_sets = [true_y]+[true_y[np.random.default_rng(stable_seed('null', seed, fold, train_domain, rep)).permutation(ntrain)] for rep in range(3)]
                             y_variants = np.asarray(label_sets)
                             train_index = [position[i] for i in train_ids]
                             eval_ids = source_audit+b_pool if train_domain == 'S' else b_pool
@@ -245,7 +254,7 @@ class AssumptionExperiment:
                                 for k, validation_ids in enumerate(inner):
                                     fit_scope[0] = f'inner_{k}'
                                     va = [train_ids.index(i) for i in validation_ids]
-                                    tr = sorted(set(range(147))-set(va))
+                                    tr = sorted(set(range(ntrain))-set(va))
                                     tr_idx, va_idx = np.array(train_index)[tr], np.array(train_index)[va]
                                     pred, _, info = fit_grid(family, x[tr_idx], y_variants[:, tr], data['p'][tr_idx, 1],
                                         x[va_idx], data['p'][va_idx, 1], kernels[signature][np.ix_(tr_idx, tr_idx)],
@@ -302,6 +311,7 @@ class AssumptionExperiment:
                 if pilot:
                     continue
                 b_y = boundary.read('B_evaluation', b_pool)
+                self.after_B_labels(domain, seed, data, b_pool, b_y, out)
                 b_labels = dict(zip(b_pool, b_y.tolist()))
                 for job in jobs:
                     meta = {k: job[k] for k in ['seed','task','fold','signature','train_domain','family','variant','penalty','key','cv_nll','inner_nonconverged']}
@@ -344,10 +354,20 @@ class AssumptionExperiment:
             for f in [metrics_file, history_file, cv_file, prediction_file]:
                 f.close()
 
+    def after_B_labels(self, domain, seed, data, b_pool, b_y, out):
+        pass
+
+
+def experiment_class(config):
+    if read(config).get('dataset') == 'PROTEINS':
+        from proteins_assumptions_experiment import ProteinsAssumptionExperiment
+        return ProteinsAssumptionExperiment
+    return AssumptionExperiment
+
 
 def worker(args):
     repo, stage, config, seed, pilot = args
-    return AssumptionExperiment(repo, stage, config).worker(seed, pilot)
+    return experiment_class(config)(repo, stage, config).worker(seed, pilot)
 
 
 def main():
@@ -358,7 +378,7 @@ def main():
     parser.add_argument('--config', default='configs/assumptions_diagnostics.json')
     args = parser.parse_args()
     seed_everything(3405, 1, True)
-    exp = AssumptionExperiment(args.repo, args.stage, args.config)
+    exp = experiment_class(args.config)(args.repo, args.stage, args.config)
     if args.action == 'prepare':
         exp.prepare()
     elif args.action == 'a0':
