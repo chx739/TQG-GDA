@@ -1,6 +1,6 @@
 # TQG 下一轮优化：依据、优先级与目标模式任务草案
 
-日期：2026-11-04。**状态：用户已review并启动目标任务，执行中。** [冻结执行协议](../optimization_execution_20261104/README.md)；[A4-a阶段结果](../../results/tqg_optimization_a4_20261104/结果解读.md)。下面保留原优化建议，实际进度见执行状态，不把条件触发项目当作已完成。
+日期：2026-11-04。**状态：本轮研究已完成，两条有限候选未通过。** [完整结论与下一步](../../results/optimization_20261104/README.md)。 [冻结执行协议](../optimization_execution_20261104/README.md)；[A4-a阶段结果](../../results/tqg_optimization_a4_20261104/结果解读.md)。下面保留原优化建议，实际进度见执行状态，不把条件触发项目当作已完成。
 
 [可复制的完整目标 prompt](goal_prompt.md) · [现有执行状态](../../results/status.md) · [原四条件方案](../assumptions_20261103/README.md)
 
