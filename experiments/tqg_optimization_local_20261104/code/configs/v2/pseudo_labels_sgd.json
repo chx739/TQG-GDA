@@ -1,0 +1,8 @@
+{
+  "extends": "../tqg_development.json",
+  "adaptation": {
+    "optimizer": "sgd",
+    "feedback_predictor": "pseudo_labels",
+    "confidence_threshold": 0.9
+  }
+}

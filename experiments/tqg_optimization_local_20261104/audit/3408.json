@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "seed": 3408,
+  "phase": "A2b",
+  "counts": {
+    "sealed_files": 120,
+    "readout_recomputations": 1392,
+    "finite_nonconverged_primary": 0,
+    "gradient_rows": 33408,
+    "profiles": 1392,
+    "step_rows": 17412,
+    "ordinary_SGD_forwards": 1392,
+    "blocks": 24,
+    "teacher_prediction_rows": 0
+  },
+  "max_relative_errors": {
+    "basis_orthogonality": 1.3322676295501878e-15,
+    "A_gradient_from_response": 1.2819036050101165e-15,
+    "ordinary_module_source_gradient": 0.0,
+    "ordinary_module_B_gradient": 1.2514748650455812e-16,
+    "readout_replay": 0.0,
+    "coefficient_control_replay": 7.987109618154904e-15,
+    "gradient_metric_replay": 2.201617302335703e-14,
+    "step_metric_replay": 0.0,
+    "ordinary_module_SGD_replay": 1.111294487148565e-16
+  },
+  "cpu_seconds": 45.982645798,
+  "final_labels_read": 0,
+  "scope": "All coefficients/CV choices/metrics; ordinary-module FULL and BASE steps, not every null parameter step"
+}
