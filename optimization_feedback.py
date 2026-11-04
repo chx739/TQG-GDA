@@ -171,6 +171,7 @@ class OptimizationFeedback(OptimizationA4):
                                         base_CE_B=baseline['ce'],source_CE_B=source_metrics['ce'],R_Q=(source_metrics['ce']-m['ce'])/baseline['ce'],valid=ok))
                             if perform:np.savez_compressed(directory/'oracle_step_logits.npz',**oracle_predictions)
                             np.savez_compressed(directory/'empirical_gradients.npz',A=ga.numpy(),B=b_grad.numpy())
+                            self.extra_evaluation(directory,profiles,ids,ay,by,common,out)
                         if model_hash(model)!=before:raise ValueError('Temporary evaluation modified the model')
                         block_count+=1;profile_count+=len(profiles);step_profiles+=len(profiles)*perform
                         progress=dict(seed=seed,domain=domain,snapshot=step,block=block,blocks=block_count,profiles=profile_count,
@@ -192,6 +193,8 @@ class OptimizationFeedback(OptimizationA4):
         return self.readout_vectors(profile,geo,labels,block_seed)
 
     def snapshot_steps(self,pilot):return [0]
+
+    def extra_evaluation(self,directory,profiles,ids,ay,by,common,out):pass
 
     def remaining_cpu(self):
         used=read(self.stage/'A4/done.json')['cpu_seconds_including_pilot_d0']
@@ -227,6 +230,9 @@ class OptimizationFeedback(OptimizationA4):
 
 
 def run_worker(repo,stage,config,seed,phase):
+    if phase=='A6':
+        from optimization_candidates import OptimizationCandidates
+        return OptimizationCandidates(repo,stage,config).worker(seed)
     return OptimizationFeedback(repo,stage,config).worker(seed)
 
 

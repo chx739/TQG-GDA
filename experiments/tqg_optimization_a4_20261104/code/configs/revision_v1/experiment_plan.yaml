@@ -1,0 +1,395 @@
+schema_version: 2
+revision_id: tqg_revision_v1_2026_10_24
+status: DESIGN_COMPLETE_NOT_IMPLEMENTED_NOT_RUN
+parent_run: /home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research
+target_venue: ICML_2027
+scope: exploratory_mechanism_redesign_then_contingent_independent_confirmation
+human_document: /home/hxchen/TQG_GDA/docs/TQG_Improvement_Experiment_Plan_v1.md
+method_contract: method.md
+implementation_exists: false
+new_training_started: false
+execution_scope_for_this_request: documentation_only
+hypothesis: >-
+  The predesignated T6 response-local residual method improves fixed-step balanced
+  accuracy by at least 1 percentage point over T5 uniform, T9 frozen-embedding,
+  and T10 current-embedding matching on each PROTEINS 0_to_2 and 0_to_3 task,
+  with positive paired differences in at least 4 of 5 model seeds per comparison.
+hypothesis_limit: >-
+  Development tasks are already observed. These are prospective criteria for a
+  new exploratory revision, not unbiased final confirmation or proven novelty.
+approval:
+  document_requested: true
+  training_requested_in_this_turn: false
+  resource_cap_proposed_cpu_serial_wall_hours: 4.0
+  resource_cap_proposed_gpu_hours: 0
+  resource_cap_approved_for_this_revision: false
+  note: Do not treat old pilot approval as automatic approval of this new scope.
+seeds: [3405, 3406, 3407, 3408, 3409]
+randomness:
+  source_split_seed: 431
+  existing_target_split_seed: 271828
+  diagnostic_block_seed_base: 910000
+  source_cv_seed_base: 920000
+  matching_permutation_seed_base: 930000
+  label_permutations: [113, 227, 349]
+  seed_derivation: >-
+    NumPy SeedSequence with explicit integer components [base, model_seed,
+    target_domain, block_or_step, role_id]; record generated state. Do not use
+    Python's randomized hash. Roles: data=1, probes=2, CV=3, weight_permutation=4.
+  pairing: >-
+    Precompute identical fit/query/target IDs per task and model seed. Query16
+    is a prefix of query32. Probe draws must not advance data RNG.
+datasets:
+  - name: PROTEINS
+    status: available
+    role: primary_exploratory_graph_size_shift
+    cache: /home/hxchen/TQG_data/PROTEINS_official_20261023/PROTEINS/processed/data.pt
+    cache_sha256: ba6437e6a8ea4083e1ff21fab96d206cb88ec8e8d4f1804abc7457648c0cf473
+    official_graph_count: 1113
+    tasks: [0_to_2, 0_to_3]
+    source_counts: {fit: 199, query: 51, validation: 28}
+    target_input_counts: {domain2: 278, domain3: 279}
+    target_development_counts: {domain2: 139, domain3: 139}
+    target_final_counts: {domain2: 139, domain3: 140}
+    target_policy: transductive_unlabeled_including_final_inputs
+    final_labels_allowed: false
+    roles_manifest: /home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage2_method/data_roles/manifest.json
+  - name: NCI1
+    status: contingent_not_executable
+    role: independent_dataset_confirmation_and_within_dataset_sample_curve
+    official_graph_count: 4110
+    existing_index_counts: [1027, 1027, 1027, 1029]
+    planned_tasks: [0_to_2, 0_to_3]
+    query_label_count_curve: [16, 32, 64, 128]
+    required_before_execution:
+      - download_and_verify_official_cache_and_index_order
+      - freeze_source_roles_and_label_blind_target_dev_final_ids
+      - verify_query_bank_has_128_and_independent_audit_32
+      - freeze_model_method_features_and_external_baseline_protocol
+      - new_compute_profile_and_explicit_scope_budget
+    official_metadata: https://chrsmrrs.github.io/datasets/docs/datasets/
+    download_url: https://www.chrsmrrs.com/graphkerneldatasets/NCI1.zip
+    causal_limit: Cross_dataset_gain_does_not_identify_dataset_size_effect
+architecture:
+  encoder: GIN
+  layers: 2
+  hidden_dim: 32
+  pooling: mean
+  node_features: original_three_node_label_onehot_dimensions
+  continuous_node_attributes: false
+  dropout: 0
+  batch_norm: false
+  dtype: float64
+initialization:
+  reuse_verified_warmups: true
+  warmup_updates: 700
+  warmup_learning_rate: 0.003
+  warmup_batch_size: 32
+  source_validation_interval: 7
+  checkpoint_root: /home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_execution/jobs
+  fit_warmup_jobs: warmup_fit_{seed}
+  full_source_warmup_jobs: warmup_all_source_{seed}
+  mandatory: Verify_source_checkpoint_hash_roles_features_and_architecture_before_reuse
+adaptation:
+  steps: 200
+  optimizer: Adam
+  learning_rate: 0.0003
+  adam: {beta1: 0.9, beta2: 0.999, epsilon: 1.0e-8, weight_decay: 0, amsgrad: false}
+  optimizer_state_at_start: fresh_for_every_arm
+  fit_batch_size: 16
+  target_batch_size: 16
+  query_batch_size_default: 32
+  feedback_weight: 0.1
+  feedback_denominator: original_target_batch_size_not_accepted_count
+  feedback_rebuild: every_step_one_update_then_discard
+  source_validation_interval: 10
+  primary_checkpoint: fixed_step_200
+  secondary_checkpoint: minimum_source_validation_CE_including_step_0
+  complete_state_checkpoints: [0, 10, 50, 100, 200]
+probes:
+  default_direction: target
+  perturbed_parameters: encoder_only
+  trainable_parameters: encoder_and_classifier_head
+  default_K: 4
+  default_response: odd
+  radius: 0.05
+  epsilon: 1.0e-8
+  direction_normalization: target_JVP_graph_RMS
+  shared_column_scale: sqrt_half_source_mean_class_norm2_plus_half_target_mean_class_norm2_plus_eps2
+  graph_axis_centering: false
+ridge:
+  fixed_bridge_value: 0.01
+  stable_rule: source_bank_4fold_global_ridge_CV_each_step
+  candidates: [0.01, 0.1, 1.0]
+  CV_score: mean_graph_sum_class_squared_residual_error
+  CV_inputs: same_frozen_features_and_scales_all_folds
+  CV_partition: independent_CV_RNG_permutation_of_bank_IDs_then_four_equal_folds
+  CV_uniform_solver_normalization: divide_Gram_and_cross_by_current_fit_fold_graph_count_not_full_bank_count
+  CV_labels: training_source_bank_only
+  CV_tie_tolerance: 1.0e-8
+  CV_tie_break: largest_lambda
+  local_regularization: same_selected_lambda_for_all_targets
+  solve: torch_linalg_solve_no_explicit_inverse
+  weighted_normalization: weights_sum_to_one_no_additional_divide_by_n
+matching:
+  primary_signature: vec_shared_scaled_response_only
+  squared_distance: mean_over_class_and_response_coordinates
+  distance_scale: median_positive_offdiagonal_source_source_squared_distance
+  positive_distance_cutoff: 1.0e-12
+  gamma: 0.75
+  temperature: 1.0
+  weight_rule: (1-gamma)/n_source_plus_gamma_softmax_negative_scaled_distance
+  degenerate_distance:
+    uninformative_ungated: uniform_weights_and_log_flag
+    uninformative_gated: zero_feedback_and_log_flag
+    nonfinite: hard_error
+  embeddings:
+    variants: [frozen_warmup_pooling, current_detached_pooling]
+    normalization: divide_by_max_L2_norm_1e-8
+    squared_distance: mean_over_embedding_coordinates
+    scale_and_weight_rule: same_as_response
+  random_weight_control: permute_weights_across_source_IDs_per_target_preserve_weight_multiset
+  gate:
+    enabled_in_primary_T6: false
+    definition: response_nearest_source_distance_and_response_weight_ESS
+    source_threshold: linear_interpolation_quantile_0.95_of_leave_one_out_nearest_source_distances
+    source_diagonal_excluded: true
+    minimum_ESS_fraction: 0.25
+    source_only_threshold_is_not_target_safety_certificate: true
+    full_rejection_behavior: source_CE_step_continues_not_frozen_model
+projection:
+  operator: Euclidean_probability_simplex_projection
+  input: p_target_plus_predicted_residual
+  output_residual: projected_probability_minus_p_target
+  proof_scope: never_increases_Euclidean_residual_error_to_any_true_class
+  no_claim: Does_not_guarantee_parameter_CE_or_Adam_improvement
+  detach: reference_weights_coefficients_gate_projection_all_detached
+diagnostics:
+  D0:
+    purpose: engineering_acceptance_no_training
+    checks:
+      - uniform_weighted_ridge_equals_global_ridge
+      - simultaneous_source_and_weight_permutation_invariance
+      - no_CV_train_audit_ID_overlap
+      - zero_gate_zero_feedback_gradient
+      - simplex_nonnegativity_sum1_and_projection_residual_inequality
+      - projected_MSE_gradient_equals_soft_CE_at_snapshot
+      - same_source_target_probe_coordinates_and_scales
+      - all_auxiliary_tensors_detached_no_parameter_mutation
+      - target_training_views_have_no_y
+      - stateless_diagnostics_preserve_model_optimizer_and_RNG
+    numeric_tolerance: 1.0e-8
+  D1:
+    purpose: source_coefficient_sample_size_not_total_dataset_size
+    model_state: warmup_fit_only
+    model_seed_count: 5
+    task_count: 2
+    blocks_per_seed_per_task: 20
+    source_outer_split: {bank: 35, audit: 16}
+    query_label_counts_nested: [8, 16, 32]
+    source_scale_input_count_fixed: 32
+    odd_column_counts_nested: [2, 4, 8]
+    fixed_ridges: [0.01, 0.1, 1.0]
+    directions: [target, random]
+    target_query_count: 16
+    target_oracle_extra_count: 16
+    target_heldout_count: 32
+    configurations_per_block: 54
+    primary_ridge_fits: 10800
+    additional_nested_CV_fits_counted_separately: true
+    outer_audit_used_for_lambda_selection: false
+    primary_H1_slice: {columns: 4, ridge: 0.01, direction: target}
+    class_coverage_control:
+      n_values: [16, 32]
+      minority_desired_counts: [4, 8]
+      insufficient_rule: take_available_minority_fill_majority_without_replacement_log_actual_counts
+      columns: 4
+      ridge: 0.01
+      role: descriptive_sampling_objective_change_not_primary_result
+  D2:
+    purpose: local_transport_expression_and_actual_parameter_execution
+    snapshot_primary: warmup_fit_only
+    snapshot_secondary: existing_final_only_if_full_optimizer_state_available
+    primary_blocks_per_seed_per_task: 20
+    secondary_blocks_per_seed_per_task: 3
+    secondary_aggregation: separate_from_primary
+    n_source: 32
+    K: 4
+    response: odd
+    ridge_rule: source_bank_4fold_CV
+    variants: [uniform, response_local, response_permuted, frozen_embedding, current_embedding, local_mean, local_label_transfer, weighted_source_CE, zero, global_mean]
+    gate_factorial: [uniform_ungated, local_ungated, uniform_response_gate, local_response_gate]
+    label_controls: [true_labels, within_bank_permutations_113_227_349]
+    permutation_recomputes_source_CV: true
+    oracle:
+      fit_target_labels: 32
+      heldout_target_labels: 32
+      same_feature_dictionary: true
+      estimator: uniform_global_ridge_same_grid_4fold_CV_inside_oracle_fit32_only
+      interpretation: labeled_global_diagnostic_not_theoretical_upper_bound_on_local_method
+      comparison: same_heldout_predictions_and_residual_error_coefficients_secondary_only
+      counted_as_UDA_method: false
+    execution:
+      direct_logit_step: 0.1
+      normalized_SGD_step_fraction: 0.0001
+      normalized_SGD_step_norm: fraction_times_max_1_full_parameter_norm
+      Adam_comparison: clone_identical_model_optimizer_state_source_only_vs_source_plus_feedback_then_discard
+      warmup_Adam_state: newly_initialized_adaptation_Adam_lr_0.0003_empty_moments_not_warmup_optimizer
+      final_Adam_state: full_actual_historical_state
+      correction_domains: d_query16_and_d_held32_generated_by_same_predictor_and_same_dictionary_not_same_vector
+      direct_held_logits: z_held_plus_0.1_times_d_held
+      parameter_held_evaluation: parameter_step_from_d_query_then_evaluate_held
+      pure_geometry_control: additionally_compare_direct_logits_and_parameter_step_on_same_query_d_and_query_graphs
+      missing_optimizer_state_rule: mark_unavailable_never_substitute_fresh_Adam_for_historical_state
+    zero_gradient_cosine: null_with_activation_rate
+    CE_effect_summary: all_blocks_including_zero_feedback_not_only_accepted_targets
+    target_label_process: separate_offline_evaluator_after_predictions_and_configs_sealed
+phases:
+  recommended_first_package: [D0, D1, D2]
+  training_A:
+    arms: [B_fit, B_full, T0, T1, T2, T3, T4, T5]
+    jobs: 80
+  training_B:
+    arms: [B_pseudo, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16]
+    jobs: 120
+    condition: >-
+      On at least one task and one mechanism metric (cosine or actual Adam CE
+      gain versus source-only), local mean must be positive, paired local-minus-
+      permuted mean must be positive, and differences must be positive on at
+      least 4 of 5 seeds. Cosine needs at least 10/20 nonzero valid blocks per
+      seed; otherwise use all-block Adam effects including zero feedback. If
+      unmet defer all B. A one-task signal is heterogeneity exploration, never
+      permission to omit the other task. This is a progression not success gate.
+  within_phase_rule: all_predeclared_arms_tasks_and_seeds_or_report_incomplete_phase
+  source_MSE_alone_is_not_target_benefit_gate: true
+arms:
+  B_frozen: {training: false, initialization: fit_warmup, method: frozen}
+  B_fit: {training: true, phase: A, initialization: fit_warmup, method: source_fit_CE}
+  B_full: {training: true, phase: A, initialization: all_source_warmup, method: all_source_CE}
+  B_pseudo: {training: true, phase: B, initialization: fit_warmup, method: hard_pseudo_labels, threshold: 0.9, target_weight: 0.1, reduction: mean_retained}
+  T0: {training: true, phase: A, n: 16, K: 4, response: odd_even, ridge: 0.01, matching: uniform, projection: false, gate: false}
+  T1: {training: true, phase: A, n: 32, K: 4, response: odd_even, ridge: 0.01, matching: uniform, projection: false, gate: false}
+  T2: {training: true, phase: A, n: 16, K: 4, response: odd, ridge: 0.01, matching: uniform, projection: false, gate: false}
+  T3: {training: true, phase: A, n: 32, K: 4, response: odd, ridge: 0.01, matching: uniform, projection: false, gate: false}
+  T4: {training: true, phase: A, n: 32, K: 4, response: odd, ridge: source_CV, matching: uniform, projection: false, gate: false}
+  T5: {training: true, phase: A, n: 32, K: 4, response: odd, ridge: source_CV, matching: uniform, projection: true, gate: false}
+  T6: {training: true, phase: B, inherits: T5, matching: response_local, primary_candidate: true}
+  T7: {training: true, phase: B, inherits: T6, gate: response_coverage_ESS}
+  T8: {training: true, phase: B, inherits: T5, gate: response_coverage_ESS_from_local_weights}
+  T9: {training: true, phase: B, inherits: T6, matching: frozen_embedding}
+  T10: {training: true, phase: B, inherits: T6, matching: current_embedding}
+  T11: {training: true, phase: B, inherits: T6, matching: permuted_response_weights}
+  T12: {training: true, phase: B, inherits: T6, predictor: weighted_mean_residual}
+  T13: {training: true, phase: B, inherits: T6, method: weighted_source_query_CE, target_feedback: false}
+  T14: {training: true, phase: B, inherits: T6, direction: random}
+  T15: {training: true, phase: B, inherits: T6, response: linear_JVP}
+  T16: {training: true, phase: B, inherits: T6, predictor: weighted_source_labels, loss: target_soft_CE}
+arm_resolution:
+  defaults: adaptation_probes_ridge_matching_projection_sections
+  base_arm_defaults: {method: tqg, predictor: weighted_ridge, initialization: fit_warmup, direction: target, n: 32, K: 4, response: odd, ridge: source_CV, matching: uniform, projection: false, gate: false}
+  inheritance_rule: recursively_resolve_parent_then_override_explicit_child_keys
+  identifier_fields_not_inherited: [primary_candidate, phase, training]
+  primary_candidate_assertion: exactly_T6
+  unused_settings: >-
+    B_frozen/B_fit/B_full/B_pseudo use their explicit baseline handlers. T12/T13/T16
+    do not solve ridge and skip unused CV. T13 has no target feedback or residual
+    projection. T16 constructs a valid soft target directly and skips projection.
+  output: resolved_config_per_arm_task_seed_with_SHA
+metrics:
+  primary: {name: balanced_accuracy, direction: max, units: fraction, headline_checkpoint: step_200}
+  secondary:
+    - {name: accuracy, direction: max, units: fraction}
+    - {name: cross_entropy, direction: min, units: nats}
+    - {name: brier, direction: min, units: mean_graph_sum_class_squared_probability_error}
+    - {name: calibration_ece, direction: min, units: fraction, bins: 15, bin_rule: equal_width_top_label_confidence}
+    - {name: per_class_recall, direction: max, units: fraction}
+    - {name: source_audit_residual_mse, direction: min, units: mean_graph_sum_class_squared_residual_error}
+    - {name: target_held_residual_mse, direction: min, units: mean_graph_sum_class_squared_residual_error}
+    - {name: target_gradient_cosine, direction: max, units: dimensionless}
+    - {name: actual_Adam_CE_gain_vs_source_only, direction: max, units: nats}
+    - {name: runtime_seconds, direction: min, units: seconds, lower_is_not_quality_claim: true}
+  diagnostic_fields_not_optimization_targets:
+    - source_class_counts
+    - ESS
+    - max_weight
+    - weight_entropy
+    - L1_distance_from_uniform_weights
+    - coverage_acceptance_rate
+    - nonzero_feedback_rate
+    - predicted_class_proportions
+    - response_stable_rank_and_spectrum
+    - ridge_effective_degrees_of_freedom
+    - correction_norm_before_after_projection
+    - feedback_source_gradient_norm_ratio_full_encoder_head
+statistics:
+  unit_of_replication: independently_trained_source_model_seed
+  aggregate_order: within_seed_blocks_then_across_five_seeds_separately_per_task
+  report: [mean, sample_SD, all_seed_values, paired_mean_delta, paired_win_count]
+  no_pseudoreplication: blocks_graphs_and_two_shared_source_tasks_are_not_new_independent_training_seeds
+  confidence_intervals: descriptive_small_seed_uncertainty_not_guaranteed_population_significance
+success_criteria:
+  - H2 primary classification hypothesis passes on both tasks with all prescribed comparisons.
+  - T6 mean BA is no lower than frozen and B_full on each task.
+  - T6 target gradient cosine exceeds permuted weights by 0.05 on each task.
+  - True source labels exceed permuted source labels in target cosine by 0.05 on each task.
+  - Mechanism means are positive and paired directions agree on at least 4 of 5 seeds per task.
+  - Independent value over T12 T13 T16 requires at least 0.5 BA percentage point per task per control.
+  - Target-direction and finite-nonlinearity subclaims require at least 0.5 BA point over T14 and T15 respectively.
+  - Full-paper claims additionally require independent data recent baseline reproduction and equal-time evidence.
+failure_criteria:
+  - Failure of an individual criterion rejects that claim; never silently change the headline candidate.
+  - Matching with no signal over permuted weights in D2 defers B as a whole, not selected seeds or tasks.
+  - Rejection above 80 percent is a degenerate feedback flag, not evidence of transferable supervision.
+  - Source audit MSE below zero-predictor gain alone does not prove target gains impossible.
+  - Any target-final label evaluation invalidates the current development protocol.
+  - Any unlogged code or config change, nonfinite value, role overlap or parameter mutation requires repair before continuing.
+  - Preserve incomplete and failed jobs; never replace them with favorable seeds.
+ablations:
+  - {comparison: T1_vs_T0_and_T3_vs_T2, component: query_label_count, prediction: lower_source_audit_error, expected_magnitude: H1_20_percent_MSE_reduction_n32_vs_n8_is_separate_static_test}
+  - {comparison: T0_T1_T2_T3, component: n_by_even_factorial, prediction: even_benefit_not_presupposed}
+  - {comparison: T4_vs_T3, component: source_CV_regularization, prediction: lower_variance_not_guaranteed_target_gain}
+  - {comparison: T5_vs_T4, component: residual_projection, prediction: nonincreasing_same_snapshot_residual_MSE_only}
+  - {comparison: T6_vs_T5_T9_T10, component: response_matching, expected_BA_difference_pp: 1.0}
+  - {comparison: T5_T6_T7_T8, component: matching_by_gating_factorial, prediction: attribute_gains_separately}
+  - {comparison: T6_vs_T11, component: correct_weight_assignment, expected_target_cosine_difference: 0.05}
+  - {comparison: T6_vs_T12_T13_T16, component: regression_beyond_simple_source_label_use, expected_BA_difference_pp: 0.5}
+  - {comparison: T6_vs_T14_T15, component: probe_origin_and_finite_response, expected_BA_difference_pp: 0.5}
+baselines:
+  executable_local_contracts: [B_frozen, B_fit, B_full, B_pseudo, T0, T9, T10, T11, T12, T13, T14, T15, T16]
+  required_for_independent_paper_stage:
+    - name: GRADATE
+      source: https://arxiv.org/html/2505.17293v2
+      strict_UDA_setting: c_equals_zero_appendix_G6
+      status: verified_paper_not_reproduced
+      must_reproduce: true
+      warning: Main_c_nonzero_uses_validation_labels_and_is_not_a_matching_protocol.
+    - name: LP-TGNN
+      source: https://proceedings.mlr.press/v280/wen25a.html
+      year: 2025
+      status: verified_paper_protocol_and_code_reproduction_pending
+      must_reproduce: true
+  no_silent_downgrade: true
+compute_estimate:
+  measured_new_method_throughput: false
+  diagnostic_seconds_assumption: 1200
+  per_adaptation_seconds_assumption: 45
+  phase_A_jobs: 80
+  phase_B_jobs: 120
+  total_training_jobs_upper_bound: 200
+  additional_real_warmups: 0
+  buffer_multiplier: 1.3
+  estimated_cpu_serial_wall_hours: 3.683333333333333
+  proposed_cap_cpu_serial_wall_hours: 4.0
+  proposed_cap_gpu_hours: 0
+  profiling: first_two_D1_blocks_then_T5_first10_only_on_entering_A_then_T6_first10_only_after_B_gate_resume_without_discard_all_counted
+  exceed_projection: reduce_whole_scope_to_Diagnostics_or_A_before_launching_B_not_fewer_seeds
+  second_dataset_and_external_baselines_included: false
+provenance:
+  frozen_parent_commit: a15887ee01bda7e3fc2279300225b043383ece3c
+  new_execution_directory: /home/hxchen/runs/2026-10-24-tqg-graph-adaptation-research/stage3_revision_v1
+  original_files_immutable: true
+  lock_before_execution: [method_SHA, plan_SHA, resolved_configs_SHA, source_checkpoints_SHA, role_IDs_SHA, data_SHA, clean_git_commit]
+  record: [hardware, Python_Torch_PyG_versions, seeds, thread_count, wall_time, total_job_seconds, GPU_hours, optimizer_state, random_states]
+  train_then_evaluate: true
+  D2_development_label_access: offline_diagnostic_only_explicitly_exploratory
+  deviations: new_version_reason_and_affected_paired_jobs_never_overwrite_original_plan
