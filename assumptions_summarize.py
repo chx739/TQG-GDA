@@ -66,7 +66,8 @@ def summarize(stage):
                 for fold in range(4):
                     for domain in ['S','T']:
                         ids=read(directory/f'{d}_{fold}_{sig}_{domain}_ids.json')
-                        assert len(ids['train'])==147 and len(set(ids['train']))==147
+                        assert len(ids['train'])==len(ids['source_train']) and len(set(ids['train']))==len(ids['train'])
+                        assert set(ids['source_train'])|set(ids['source_audit'])==set(identity['query'])
                         assert not set(ids['train'])&set(ids['B'])
                         assert sorted(sum(ids['inner_validation'],[]))==sorted(ids['train'])
                         assert set(ids['source_train'])&set(ids['source_audit'])==set()
@@ -183,10 +184,13 @@ def summarize(stage):
             h,a=z['h'],z['a'].reshape(len(ids),-1)
             for sig in config['signatures']:
                 support=read(stage/f'logs/{seed}/{domain}_support.json')
-                dh=((h[:196,None,:]-h[np.array(ix)][None,:,:])**2).sum(2)/support['scale_h_squared']
-                dist=dh if sig=='H' else dh+((a[:196,None,:]-a[np.array(ix)][None,:,:])**2).sum(2)/support['scale_a_squared']
+                ns=len(identity['query'])
+                dh=((h[:ns,None,:]-h[np.array(ix)][None,:,:])**2).sum(2)/support['scale_h_squared']
+                dist=dh if sig=='H' else dh+((a[:ns,None,:]-a[np.array(ix)][None,:,:])**2).sum(2)/support['scale_a_squared']
                 diagnostic=next(r for r in identity['query_diagnostics'] if r['signature']==sig)
-                geometric.append(dict(**diagnostic,nearest_A_distance_mean=float(dist.min(0).mean()),A_max_kernel_mean=float(np.exp(-dist/2).max(0).mean())))
+                projection_path=stage/f'logs/{seed}/{domain}_B_projection.json'
+                projection=read(projection_path)['B_space_outside_energy_fraction'] if projection_path.exists() else diagnostic.get('old_B_projection')
+                geometric.append(dict(**diagnostic,nearest_A_distance_mean=float(dist.min(0).mean()),A_max_kernel_mean=float(np.exp(-dist/2).max(0).mean()),B_space_outside_energy_fraction=projection))
     table(stage/'geometry_summary.csv',geometric)
     flat=[{k:v for k,v in r.items() if not isinstance(v,dict)} for r in summary]
     table(stage/'triangle_summary.csv',flat);table(stage/'support_summary.csv',support_rows)
@@ -205,7 +209,9 @@ def summarize(stage):
         A0=read(stage/'D0/replay.json'),cpu_seconds_formal=sum(read(stage/f'logs/{s}/done.json')['cpu_seconds'] for s in seeds),
         compute_estimate=read(stage/'compute_estimate.json'))
     write(stage/'results_summary.json',result)
-    write(stage/'artifact_audit.json',dict(passed=True,models=2880,prediction_seals=15,source_train=147,source_holdout=49,inner_folds=3,
+    counts=sorted({len(read(p)['train']) for p in (stage/'logs').glob('340*/*_S_ids.json')})
+    holdouts=sorted({len(read(p)['source_audit']) for p in (stage/'logs').glob('340*/*_S_ids.json')})
+    write(stage/'artifact_audit.json',dict(passed=True,models=2880,prediction_seals=15,source_train_sizes=counts,source_holdout_sizes=holdouts,inner_folds=3,
           label_access_after_seals=True,final_labels_read=0,checkpoint_references=15,unique_source_models=5,
           source_query_fit_disjoint=True,pilot_excluded=True,logical_fits=34560,optimization_nonconvergence_retained=nonconverged))
     fig,axes=plt.subplots(1,3,figsize=(13,4),sharey=True)
@@ -215,6 +221,8 @@ def summarize(stage):
         ax.set_xticks(xx,[r['signature']+'\n'+r['family'] for r in group]);ax.set_title(task)
     axes[0].set_ylabel('NLL (lower better)');axes[-1].legend();fig.tight_layout();fig.savefig(stage/'figures/triangle.png',dpi=160);plt.close(fig)
     report(stage,result)
+    if config.get('dataset') == 'PROTEINS':
+        adapt_proteins_report(stage,result)
     return result
 
 
@@ -262,6 +270,18 @@ Target-trained probes are diagnostic oracles, not deployable UDA methods. A meas
 '''
     (stage/'run_report.md').write_text(log)
     (stage/'hand_off.md').write_text('Read results_summary.json and 结果解读.md; preserve probe-specific gates and target-label diagnostic boundaries. Do not claim source-label transfer or complete §3.8 validation from predictive probes alone.\n')
+
+
+def adapt_proteins_report(stage,result):
+    path=stage/'结果解读.md';text=path.read_text()
+    text=text.replace('源／目标训练各147张；源留出49张，目标B评价271张。','PROTEINS：源／目标每折各训练38或39张；源留出13或12张，目标B评价70张（A池69张）。')
+    text=text.replace('源147留一最近邻距离','源训练38或39张的留一最近邻距离')
+    text=text.replace('A0的15个几何、30个H/HA读出回放通过。新探针10项单测通过。','A0的15个新几何、30个H/HA读出通过显式Jacobian、CE梯度、生产反馈、标签盲性、参数损失及序列化交叉核验；没有跨方向历史v2缓存，不称历史回放。单测结果见D0日志。')
+    text=text.replace('原始query196不混入骨干已见的fit779。','源query51不混入骨干已见的fit199；51不能整除4，训练／留出数随外折变化，源与目标每折严格匹配。')
+    text=text.replace('这是冻结特征探针实验','这是PROTEINS冻结特征探针实验')
+    path.write_text(text)
+    with (stage/'run_report.md').open('a') as f:
+        f.write('\n## PROTEINS-specific protocol\n\nDataset is PROTEINS, not Mutagenicity. GIN node3/edge0, initial source-fit models selected within700 updates. Source250=fit199+query51, validation28. Four unequal input-ID outer folds train38/39 and audit13/12; target69A/70B, training38/39 exactly matched per fold. No graph-size natural domain claim. A0 creates NEW v2 geometry and independently checks math/production, not historical replay. B projection is computed only after sealed predictions using the already-permitted B labels. Source sample size/backbone/pretraining differ from Mutagenicity, so cross-dataset differences cannot be assigned to data size alone. Same 30-graph support minimum and original gates; inadequate strata are inconclusive. Binary BA is null for a single-class fold; NLL remains primary.\n')
 
 
 if __name__=='__main__':

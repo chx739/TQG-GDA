@@ -41,7 +41,7 @@ def metrics(y, raw):
     p = np.clip(raw, 1e-6, 1-1e-6)
     recalls = [float(((raw >= .5)[y == k] == k).mean()) for k in [0, 1] if np.any(y == k)]
     return dict(n=len(y), nll=float(-(y*np.log(p)+(1-y)*np.log1p(-p)).mean()),
-                brier=float(((p-y)**2).mean()), ba=float(np.mean(recalls)),
+                brier=float(((p-y)**2).mean()), ba=float(np.mean(recalls)) if len(recalls) == 2 else None,
                 outside=float(((raw < 0) | (raw > 1)).mean()),
                 residual_mse=float(((raw-y)**2).mean()), n0=int((y == 0).sum()), n1=int((y == 1).sum()))
 

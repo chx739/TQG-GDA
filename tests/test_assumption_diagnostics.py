@@ -68,6 +68,24 @@ class AssumptionChecks(unittest.TestCase):
     def test_metrics_clipping_and_empty(self):
         m=metrics([0,1],[-2.,3.]);self.assertTrue(np.isfinite(m['nll']));self.assertEqual(m['outside'],1.)
         self.assertIsNone(metrics([],[])['nll'])
+    def test_proteins_unequal_folds_match_target_count(self):
+        folds=split_folds(range(51),4,'outer')
+        self.assertEqual([len(f) for f in folds],[13,13,13,12])
+        for fold in folds:
+            train=sorted(set(range(51))-set(fold))
+            inner=split_folds(train,3,'inner')
+            self.assertIn(len(train),[38,39])
+            self.assertEqual(sorted(sum(inner,[])),train)
+    def test_single_class_ba_is_not_two_class_accuracy(self):
+        self.assertIsNone(metrics([0,0],[.1,.2])['ba'])
+        self.assertTrue(np.isfinite(metrics([0,0],[.1,.2])['nll']))
+    def test_small_unequal_training_krr_and_nulls(self):
+        for n in [38,39]:
+            x=self.rng.normal(size=(n,3));y=np.arange(n)%2
+            k=np.exp(-((x[:,None]-x[None,:])**2).sum(2));ek=np.ones((70,n))*.1
+            pred,states,info=fit_grid('KRR',x,np.stack([y,1-y]),np.full(n,.5),np.zeros((70,3)),np.full(70,.5),k,ek,self.q,[.01,.1],71,self.cfg,paired=True)
+            self.assertEqual(pred.shape,(2,1,70));self.assertEqual(states[0,0]['alpha'].shape,(n,))
+            self.assertTrue(np.isfinite(pred).all())
     def test_evaluation_inputs_do_not_change_fit(self):
         _,states,_=self.fit('LR',self.y[None,:],[.1])
         _,other,_=fit_grid('LR',self.x,self.y[None,:],self.p,self.ex+1000,self.ep,self.k,self.ek,self.q,[.1],71,self.cfg)
