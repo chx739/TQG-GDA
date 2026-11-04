@@ -1,10 +1,12 @@
 # v2实验结果与进度
 
-先读[执行状态总表](status.md)。下面按研究阶段排列；所有链接明确区分说明与原始证据。
+先读[本轮优化研究结论](optimization_20261104/README.md)和[执行状态总表](status.md)。下面按研究阶段排列；所有链接明确区分说明与原始证据。
 
 | 阶段 | 结果解读 | 完整报告 | 原始归档 | 核心结论 |
 |---|---|---|---|---|
-| 目标研究A4-a，11-04 | [解读](tqg_optimization_a4_20261104/结果解读.md) | [报告](tqg_optimization_a4_20261104/run_report.md) | [归档](../../../experiments/tqg_optimization_a4_20261104/README.md) | 核学习曲线与审计完成；跨域读取仍弱，A6尚待验收 |
+| 目标研究A6，11-04 | [解读](tqg_optimization_feedback_20261104/结果解读.md) | [报告](tqg_optimization_feedback_20261104/run_report.md) | [归档](../../../experiments/tqg_optimization_feedback_20261104/README.md) | 两候选均0/3通过，教师及标签归因未支持TQG稳定增量 |
+| 目标研究A2-b，11-04 | [解读](tqg_optimization_local_20261104/结果解读.md) | [报告](tqg_optimization_local_20261104/run_report.md) | [归档](../../../experiments/tqg_optimization_local_20261104/README.md) | 没有局部配置通过至少两个任务；公开聚合口径敏感性 |
+| 目标研究A4-a，11-04 | [解读](tqg_optimization_a4_20261104/结果解读.md) | [报告](tqg_optimization_a4_20261104/run_report.md) | [归档](../../../experiments/tqg_optimization_a4_20261104/README.md) | 核学习曲线与审计完成；跨域读取仍弱，A6验收见本轮新结果 |
 | Mutagenicity完整训练，10-26 | [解读](mutagenicity_v2_20261026/结果解读.md) | [报告](mutagenicity_v2_20261026/run_report.md) | [归档](../../../experiments/mutagenicity_v2_20261026/README.md) | 未获跨任务稳定收益 |
 | 目标batch16／32／64，10-28 | [解读](mutagenicity_target_batch_20261028/结果解读.md) | [报告](mutagenicity_target_batch_20261028/run_report.md) | [归档](../../../experiments/mutagenicity_target_batch_20261028/README.md) | 幅度更稳定不等于分类更好 |
 | 目标batch196，10-28 | [解读](mutagenicity_target_batch196_20261028/结果解读.md) | [报告](mutagenicity_target_batch196_20261028/run_report.md) | [归档](../../../experiments/mutagenicity_target_batch196_20261028/README.md) | 没有稳定解决问题 |

@@ -1,0 +1,181 @@
+{
+  "passed": true,
+  "phase": "A2b",
+  "counts": {
+    "sealed_files": 600,
+    "readout_recomputations": 6960,
+    "finite_nonconverged_primary": 0,
+    "gradient_rows": 167040,
+    "profiles": 6960,
+    "step_rows": 87060,
+    "ordinary_SGD_forwards": 6960,
+    "blocks": 120,
+    "teacher_prediction_rows": 0
+  },
+  "max_relative_errors": {
+    "basis_orthogonality": 1.5543122344752192e-15,
+    "A_gradient_from_response": 2.4735730772358995e-15,
+    "ordinary_module_source_gradient": 0.0,
+    "ordinary_module_B_gradient": 1.8077196571144243e-16,
+    "readout_replay": 0.0,
+    "coefficient_control_replay": 1.2766202562437173e-14,
+    "gradient_metric_replay": 2.5791601068214527e-14,
+    "step_metric_replay": 0.0,
+    "ordinary_module_SGD_replay": 3.328086709328198e-16
+  },
+  "cpu_seconds": 241.89545196199998,
+  "final_labels_read": 0,
+  "auditor_commit": "4aadb84e5ddf387a38b786c7d94452e4d49118c7",
+  "workers": [
+    {
+      "passed": true,
+      "seed": 3405,
+      "phase": "A2b",
+      "counts": {
+        "sealed_files": 120,
+        "readout_recomputations": 1392,
+        "finite_nonconverged_primary": 0,
+        "gradient_rows": 33408,
+        "profiles": 1392,
+        "step_rows": 17412,
+        "ordinary_SGD_forwards": 1392,
+        "blocks": 24,
+        "teacher_prediction_rows": 0
+      },
+      "max_relative_errors": {
+        "basis_orthogonality": 1.5543122344752192e-15,
+        "A_gradient_from_response": 2.4735730772358995e-15,
+        "ordinary_module_source_gradient": 0.0,
+        "ordinary_module_B_gradient": 1.6888822600419567e-16,
+        "readout_replay": 0.0,
+        "coefficient_control_replay": 6.981456772816063e-15,
+        "gradient_metric_replay": 1.3109625432055003e-14,
+        "step_metric_replay": 0.0,
+        "ordinary_module_SGD_replay": 3.328086709328198e-16
+      },
+      "cpu_seconds": 47.61788689,
+      "final_labels_read": 0,
+      "scope": "All coefficients/CV choices/metrics; ordinary-module FULL and BASE steps, not every null parameter step"
+    },
+    {
+      "passed": true,
+      "seed": 3406,
+      "phase": "A2b",
+      "counts": {
+        "sealed_files": 120,
+        "readout_recomputations": 1392,
+        "finite_nonconverged_primary": 0,
+        "gradient_rows": 33408,
+        "profiles": 1392,
+        "step_rows": 17412,
+        "ordinary_SGD_forwards": 1392,
+        "blocks": 24,
+        "teacher_prediction_rows": 0
+      },
+      "max_relative_errors": {
+        "basis_orthogonality": 1.3877787807814457e-15,
+        "A_gradient_from_response": 1.1062248067796075e-15,
+        "ordinary_module_source_gradient": 0.0,
+        "ordinary_module_B_gradient": 7.883329844582465e-17,
+        "readout_replay": 0.0,
+        "coefficient_control_replay": 1.2766202562437173e-14,
+        "gradient_metric_replay": 2.5791601068214527e-14,
+        "step_metric_replay": 0.0,
+        "ordinary_module_SGD_replay": 2.1603087135499793e-16
+      },
+      "cpu_seconds": 53.390750690999994,
+      "final_labels_read": 0,
+      "scope": "All coefficients/CV choices/metrics; ordinary-module FULL and BASE steps, not every null parameter step"
+    },
+    {
+      "passed": true,
+      "seed": 3407,
+      "phase": "A2b",
+      "counts": {
+        "sealed_files": 120,
+        "readout_recomputations": 1392,
+        "finite_nonconverged_primary": 0,
+        "gradient_rows": 33408,
+        "profiles": 1392,
+        "step_rows": 17412,
+        "ordinary_SGD_forwards": 1392,
+        "blocks": 24,
+        "teacher_prediction_rows": 0
+      },
+      "max_relative_errors": {
+        "basis_orthogonality": 1.3322676295501878e-15,
+        "A_gradient_from_response": 1.839804473267738e-15,
+        "ordinary_module_source_gradient": 0.0,
+        "ordinary_module_B_gradient": 1.0437930950882363e-16,
+        "readout_replay": 0.0,
+        "coefficient_control_replay": 9.105639593685704e-15,
+        "gradient_metric_replay": 2.0421597616093207e-14,
+        "step_metric_replay": 0.0,
+        "ordinary_module_SGD_replay": 2.545152655216016e-16
+      },
+      "cpu_seconds": 48.642047102,
+      "final_labels_read": 0,
+      "scope": "All coefficients/CV choices/metrics; ordinary-module FULL and BASE steps, not every null parameter step"
+    },
+    {
+      "passed": true,
+      "seed": 3408,
+      "phase": "A2b",
+      "counts": {
+        "sealed_files": 120,
+        "readout_recomputations": 1392,
+        "finite_nonconverged_primary": 0,
+        "gradient_rows": 33408,
+        "profiles": 1392,
+        "step_rows": 17412,
+        "ordinary_SGD_forwards": 1392,
+        "blocks": 24,
+        "teacher_prediction_rows": 0
+      },
+      "max_relative_errors": {
+        "basis_orthogonality": 1.3322676295501878e-15,
+        "A_gradient_from_response": 1.2819036050101165e-15,
+        "ordinary_module_source_gradient": 0.0,
+        "ordinary_module_B_gradient": 1.2514748650455812e-16,
+        "readout_replay": 0.0,
+        "coefficient_control_replay": 7.987109618154904e-15,
+        "gradient_metric_replay": 2.201617302335703e-14,
+        "step_metric_replay": 0.0,
+        "ordinary_module_SGD_replay": 1.111294487148565e-16
+      },
+      "cpu_seconds": 45.982645798,
+      "final_labels_read": 0,
+      "scope": "All coefficients/CV choices/metrics; ordinary-module FULL and BASE steps, not every null parameter step"
+    },
+    {
+      "passed": true,
+      "seed": 3409,
+      "phase": "A2b",
+      "counts": {
+        "sealed_files": 120,
+        "readout_recomputations": 1392,
+        "finite_nonconverged_primary": 0,
+        "gradient_rows": 33408,
+        "profiles": 1392,
+        "step_rows": 17412,
+        "ordinary_SGD_forwards": 1392,
+        "blocks": 24,
+        "teacher_prediction_rows": 0
+      },
+      "max_relative_errors": {
+        "basis_orthogonality": 1.2212453270876722e-15,
+        "A_gradient_from_response": 1.7978441575186184e-15,
+        "ordinary_module_source_gradient": 0.0,
+        "ordinary_module_B_gradient": 1.8077196571144243e-16,
+        "readout_replay": 0.0,
+        "coefficient_control_replay": 9.705757610262792e-15,
+        "gradient_metric_replay": 2.3156222690158125e-14,
+        "step_metric_replay": 0.0,
+        "ordinary_module_SGD_replay": 2.5922369988285965e-16
+      },
+      "cpu_seconds": 46.262121481,
+      "final_labels_read": 0,
+      "scope": "All coefficients/CV choices/metrics; ordinary-module FULL and BASE steps, not every null parameter step"
+    }
+  ]
+}

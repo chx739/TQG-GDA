@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/hxchen/TQG-GDA/optimization_feedback_report.py", line 159, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/hxchen/TQG-GDA/optimization_feedback_report.py", line 149, in main
+    sa=s.groupby(keys,dropna=False)[['R_Q','CE_B','BA_B','control_valid']].mean().reset_index()
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hxchen/anaconda3/envs/bfn4jet/lib/python3.12/site-packages/pandas/core/groupby/generic.py", line 1951, in __getitem__
+    return super().__getitem__(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hxchen/anaconda3/envs/bfn4jet/lib/python3.12/site-packages/pandas/core/base.py", line 239, in __getitem__
+    raise KeyError(f"Columns not found: {str(bad_keys)[1:-1]}")
+KeyError: "Columns not found: 'control_valid'"

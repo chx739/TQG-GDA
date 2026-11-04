@@ -2,6 +2,8 @@
 
 | 实验 | 类型 | 归档 | 结果 |
 |---|---|---|---|
+| 目标研究A6，2026-11-04 | 候选/教师/标签归因/独立单步 | [归档](../tqg_optimization_feedback_20261104/README.md) | [解读](../../docs/v2/results/tqg_optimization_feedback_20261104/结果解读.md) |
+| 目标研究A2-b，2026-11-04 | 6960局部/随机bank读出配置 | [归档](../tqg_optimization_local_20261104/README.md) | [解读](../../docs/v2/results/tqg_optimization_local_20261104/结果解读.md) |
 | 目标研究A4-a，2026-11-04 | 冻结核读出学习曲线，368640次逻辑拟合 | [归档](../tqg_optimization_a4_20261104/README.md) | [解读](../../docs/v2/results/tqg_optimization_a4_20261104/结果解读.md) |
 | Mutagenicity v2，2026-10-26 | 完整训练 | [日志／650份checkpoint／来源](../mutagenicity_v2_20261026/README.md) | [报告](../../docs/v2/results/mutagenicity_v2_20261026/run_report.md) |
 | 目标batch16／32／64，2026-10-28 | 完整训练及复用对照 | [归档](../mutagenicity_target_batch_20261028/README.md) | [解读](../../docs/v2/results/mutagenicity_target_batch_20261028/结果解读.md) |

@@ -136,7 +136,7 @@ def build(root):
         budget_cpu_core_hours=24,worker_peak_rss_kib=max(x['peak_rss_kib'] for x in done['workers']),
         scope='CPU process measurements; imports, failed report export, orchestration, filesystem/Git publication overhead not completely metered. Do not call this exact total project CPU.'))
     write(root/'stage_3_done',dict(stage=phase,finished_at=time.time(),goal_completed=False,gpu_hours_consumed_so_far=0,
-        started_at=manifest.get('created_at',manifest.get('time','see manifest and history timestamps'))))
+        started_at=min(read(root/str(seed)/'RUN_INFO.json')['started_at'] for seed in range(3405,3410))))
     print(json.dumps(dict(phase=phase,reports_written=True)))
 
 
