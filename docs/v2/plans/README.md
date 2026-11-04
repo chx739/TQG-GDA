@@ -2,6 +2,7 @@
 
 | 方案 | 作用 | 状态入口 |
 |---|---|---|
+| [下一轮优化与目标模式 prompt，2026-11-04](optimization_goal_20261104/README.md) | 局部源bank、核读取、简单教师与A6验收的有限研究闭环；[完整prompt](optimization_goal_20261104/goal_prompt.md) | 供review，尚未启动；不改旧实验门槛 |
 | [四项迁移条件验证，2026-11-03](assumptions_20261103/README.md) | 对齐跨域条件稳定性、签名充分性、函数复杂度和源监督支持；包含旧结果链接及A0—A6方案 | A0／A1／A2-a已完成；[结果](../results/tqg_assumptions_20261103/结果解读.md)；后续未执行 |
 | [PROTEINS条件诊断复验，2026-11-04](assumptions_proteins_20261104/README.md) | 将A0/A1/A2-a迁到query51、匹配38/39训练图；原门槛不变 | [已完成结果](../results/tqg_assumptions_proteins_20261104/结果解读.md)；同域主门槛未过、支持分层证据不足 |
 | [D0—D9详细实验总表，2026-10-31](../../research_plans/tqg_v2_20261031/README.md) | 梯度质量、独立单步、校准、签名、合成机制及条件改进 | [最新执行状态](../results/status.md) |
