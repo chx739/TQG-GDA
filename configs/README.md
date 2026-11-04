@@ -13,3 +13,5 @@
 | v2 标签／预测与D7-H | [label_query_diagnostics.json](label_query_diagnostics.json) |
 
 §3.8第一批A0／A1／A2-a已实现并完成，配置见[assumptions_diagnostics.json](assumptions_diagnostics.json)，[结果](../docs/v2/results/tqg_assumptions_20261103/结果解读.md)。后续A2-b及A3—A6尚未实现／执行，不把本配置当全部方案入口。
+
+PROTEINS同方案复验：[assumptions_proteins.json](assumptions_proteins.json)，[结果](../docs/v2/results/tqg_assumptions_proteins_20261104/结果解读.md)。配置的query51、38/39折大小、GIN与旧源起点应整体匹配，不直接改数据路径冒充原Mutagenicity配置。

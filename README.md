@@ -24,7 +24,9 @@ TQG（Target-Queried Gradient Learning）的图级域适应研究代码、实验
 
 v2诊断链：P0 → D3/D4 → H-only → D8／残差分解 → 标签／预测归因与D7-H。各轮均有[结果、报告和原始记录](docs/v2/results/README.md)，不把诊断单步收益当作完整训练准确率。
 
-最新：[§3.8第一批条件诊断](docs/v2/results/tqg_assumptions_20261103/结果解读.md)完成。同签名LR／MLP可在各域学习，但存在源到目标读出缺口；H支持分层三个任务均有诊断价值。下一步优先局部bank与核读取对照，尚不代表梯度反馈有效。
+Mutagenicity：[§3.8第一批条件诊断](docs/v2/results/tqg_assumptions_20261103/结果解读.md)完成。同签名LR／MLP可在各域学习，但存在源到目标读出缺口；H支持分层三个任务均有诊断价值。下一步优先局部bank与核读取对照，尚不代表梯度反馈有效。
+
+最新：[PROTEINS同方案复验，2026-11-04](docs/v2/results/tqg_assumptions_proteins_20261104/结果解读.md)完成。同域稳定可学前提未过，支持分组图数不足；未复现Mutagenicity的完整证据链，不把原因简单归为数据量。
 
 ## 目录
 
