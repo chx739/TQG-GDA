@@ -1,2 +1,4 @@
 # Preserve sealed CSV bytes and recognize their standard CRLF line endings.
 experiments/tqg_optimization_*/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Historical source snapshots retain their original terminal blank line and SHA.
+experiments/tqg_optimization_*/code/full_query_experiment.py whitespace=-blank-at-eof
