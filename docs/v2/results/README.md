@@ -4,6 +4,7 @@
 
 | 阶段 | 结果解读 | 完整报告 | 原始归档 | 核心结论 |
 |---|---|---|---|---|
+| 目标研究A4-a，11-04 | [解读](tqg_optimization_a4_20261104/结果解读.md) | [报告](tqg_optimization_a4_20261104/run_report.md) | [归档](../../../experiments/tqg_optimization_a4_20261104/README.md) | 核学习曲线与审计完成；跨域读取仍弱，A6尚待验收 |
 | Mutagenicity完整训练，10-26 | [解读](mutagenicity_v2_20261026/结果解读.md) | [报告](mutagenicity_v2_20261026/run_report.md) | [归档](../../../experiments/mutagenicity_v2_20261026/README.md) | 未获跨任务稳定收益 |
 | 目标batch16／32／64，10-28 | [解读](mutagenicity_target_batch_20261028/结果解读.md) | [报告](mutagenicity_target_batch_20261028/run_report.md) | [归档](../../../experiments/mutagenicity_target_batch_20261028/README.md) | 幅度更稳定不等于分类更好 |
 | 目标batch196，10-28 | [解读](mutagenicity_target_batch196_20261028/结果解读.md) | [报告](mutagenicity_target_batch196_20261028/run_report.md) | [归档](../../../experiments/mutagenicity_target_batch196_20261028/README.md) | 没有稳定解决问题 |

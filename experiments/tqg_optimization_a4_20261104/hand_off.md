@@ -1,0 +1,1 @@
+A4-a has completed and passed its numerical/permission audit. Continue frozen A2-b and A6. Do not select an alternative candidate from targetB curves. Source-label recovery, true-label feedback and TQG-specific gains remain separate claims. Full adaptation and PROTEINS confirmation are conditional on A6, not yet run.
