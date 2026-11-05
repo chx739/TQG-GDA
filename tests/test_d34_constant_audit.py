@@ -1,7 +1,7 @@
 """Independent check of binary CONST observer; not used to alter formal solves."""
 import unittest
 import torch
-from d34_analysis import constant_binary_readout
+from workflows.v2.d34.d34_analysis import constant_binary_readout
 from tqg_gda.calibration_v2 import CalibrationConfig,solve_calibration
 
 

@@ -1,8 +1,10 @@
 # §3.8条件诊断：A0／A1／A2-a实现
 
+当前脚本已按阶段归入`workflows/`，使用`python -m`入口；旧归档命令仍对应其冻结快照。见[脚本导航](../../../workflows/README.md)。
+
 按[2026-11-03方案](../plans/assumptions_20261103/README.md)执行第一批。A2-b及A3—A6未包含在此执行器。
 
-- `assumptions_experiment.py`：旧几何回放、完整源／目标签名提取、四折／三折嵌套探针、标签权限、预测封存和运行预算。
+- `workflows/v2/assumptions/assumptions_experiment.py`：旧几何回放、完整源／目标签名提取、四折／三折嵌套探针、标签权限、预测封存和运行预算。
 - `tqg_gda/assumption_diagnostics.py`：KRR、LR、小MLP、训练折标准化、支持距离／ESS、显式A训练／B评价标签权限。
 - `configs/assumptions_diagnostics.json`：冻结快照、模型种子、探针网格、训练步数及资源预算。
 - `tests/test_assumption_diagnostics.py`：残差概率恢复、独立／批量MLP一致性、LR梯度、训练折标准化、折划分及权限边界。
@@ -15,6 +17,6 @@
 
 ## PROTEINS适配（2026-11-04）
 
-新增`proteins_assumptions_experiment.py`作为数据／初始模型／新几何backend；共同worker按query实际大小计算四折训练数，38/39源与目标监督量逐折匹配。汇总与独立审计由实际ID、配置计数推导，不再假设147／196。13单测、六组旧Mutagenicity封存预测回归通过；旧归档保持原字节。
+新增`workflows/v2/assumptions/proteins_assumptions_experiment.py`作为数据／初始模型／新几何backend；共同worker按query实际大小计算四折训练数，38/39源与目标监督量逐折匹配。汇总与独立审计由实际ID、配置计数推导，不再假设147／196。13单测、六组旧Mutagenicity封存预测回归通过；旧归档保持原字节。
 
 新A0检查现算几何的显式／生产路径一致性，不称旧PROTEINS v2缓存回放。目标B经验梯度投影仅在封存后计算。单类别评价池的BA记null，NLL主指标不变。具体[方案](../plans/assumptions_proteins_20261104/README.md)、[配置](../../../configs/assumptions_proteins.json)、[结果](../results/tqg_assumptions_proteins_20261104/结果解读.md)。

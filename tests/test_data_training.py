@@ -136,8 +136,19 @@ class DataTrainingTests(unittest.TestCase):
 
     def test_all_configs_resolve_and_full_source_baseline_uses_all_labels(self):
         from tqg_gda.utils import validate_config
-        for path in (ROOT/'configs').glob('*.json'):
-            validate_config(load_config(path))
+        # Diagnostic matrices have a different schema from trainer configs.
+        diagnostics = {
+            'assumptions_diagnostics.json', 'assumptions_proteins.json',
+            'd34_diagnostics.json', 'h_only_diagnostics.json',
+            'label_query_diagnostics.json', 'mechanism_diagnostics.json',
+            'optimization_diagnostics.json', 'p0_diagnostics.json',
+        }
+        paths = [p for p in (ROOT/'configs').glob('*.json') if p.name not in diagnostics]
+        paths += list((ROOT/'configs/v2').glob('*.json'))
+        self.assertTrue(paths)
+        for path in paths:
+            with self.subTest(config=path.name):
+                validate_config(load_config(path))
         config = merge(self.config, {'method': 'source_only', 'warmup': {'source_pool': 'all_source'},
                                      'adaptation': {'source_pool': 'all_source'}})
         task = task_from(self.files, config)

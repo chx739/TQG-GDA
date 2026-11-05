@@ -39,9 +39,11 @@ def publish(repo,stage,phase,name):
     for filename in checks:
         shutil.copy2(stage/'D0'/filename,dest/'D0'/filename)
     (dest/'publication_code').mkdir()
-    publications=['optimization_a4_report.py','optimization_plot.py'] if phase=='A4' else ['optimization_feedback_audit.py','optimization_feedback_report.py','optimization_summary_audit.py','optimization_feedback_documents.py','tests/test_optimization_report.py']
+    publications=['workflows/v2/optimization/optimization_a4_report.py','workflows/v2/optimization/optimization_plot.py'] if phase=='A4' else ['workflows/v2/optimization/optimization_feedback_audit.py','workflows/v2/optimization/optimization_feedback_report.py','workflows/v2/optimization/optimization_summary_audit.py','workflows/v2/optimization/optimization_feedback_documents.py','tests/test_optimization_report.py']
     for filename in publications+['scripts/archive_optimization_phase.py']:
-        shutil.copy2(repo/filename,dest/'publication_code'/Path(filename).name)
+        target=dest/'publication_code'/filename
+        target.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copy2(repo/filename,target)
     code_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip()
     write(dest/'publication_provenance.json',dict(repo_commit=code_commit,source_run=str(stage.parent),phase=phase,
         feature_archive='experiments/tqg_assumptions_20261103/features',original_feature_stage=read(source/'manifest.json')['config']['feature_stage'],

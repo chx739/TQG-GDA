@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from optimization_feedback_report import paired_blocks,seed_summary
+from workflows.v2.optimization.optimization_feedback_report import paired_blocks,seed_summary
 
 
 def test_incomplete_null_does_not_silently_use_two_repetitions():
