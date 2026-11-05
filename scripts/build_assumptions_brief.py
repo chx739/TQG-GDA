@@ -3,8 +3,10 @@ from collections import defaultdict
 import csv
 import hashlib
 import json
+import re
 from pathlib import Path
 import statistics
+from urllib.parse import quote
 
 REPO = Path(__file__).resolve().parents[1]
 DEST = REPO / 'docs/v2/results/assumptions_brief_20261105.md'
@@ -228,6 +230,17 @@ def main():
         document = document.replace(marker, marker + note + '\n\n', 1)
     legend = '**表格加粗说明：** 加粗的是汇报需要关注的对照差异、负方向、样本不足、关键候选及口径敏感性，**不等于该数据通过检验，也不表示挑出的最优结果**。尤其H读取核＋128张H近邻虽有方向改善，仍须同时看误差与完整门槛；所有未加粗结果也完整保留。\n\n'
     document = document.replace('## 统一设置与术语\n\n', '## 统一设置与术语\n\n' + legend, 1)
+    def github_link(match):
+        target = match.group(1)
+        if target.startswith(('https://', 'http://', '#')):
+            return match.group(0)
+        path = (DEST.parent / target).resolve()
+        assert path.is_file(), target
+        relative = path.relative_to(REPO).as_posix()
+        return '](https://github.com/chx739/TQG-GDA/blob/main/' + quote(relative, safe='/') + ')'
+    # Resolve report symlinks to their actual archived Markdown files so GitHub
+    # opens the report itself rather than a symlink's one-line path.
+    document = re.sub(r'\]\(([^)]+)\)', github_link, document)
     DEST.write_text(document.rstrip() + '\n')
     print(json.dumps(dict(document=str(DEST),source_files=len(SOURCES),triangle_rows=len(triangle),learning_curve_rows=len(learning),local_profiles=len({k[0] for k in grouped}),candidate_rows=len(selected))))
 

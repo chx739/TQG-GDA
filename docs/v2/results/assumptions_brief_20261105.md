@@ -449,23 +449,23 @@ BASE保留类比例与模型预测部分；BASE_M匹配完整反馈幅度；CPL/
 
 ## 原始数据、复核与详细报告
 
-- Mutagenicity条件诊断：[报告](tqg_assumptions_20261103/结果解读.md) · [逐种子结果](../../../experiments/tqg_assumptions_20261103/results.csv) · [原始归档](../../../experiments/tqg_assumptions_20261103/README.md)。
-- PROTEINS基础复验：[报告](tqg_assumptions_proteins_20261104/结果解读.md) · [逐种子结果](../../../experiments/tqg_assumptions_proteins_20261104/results.csv) · [原始归档](../../../experiments/tqg_assumptions_proteins_20261104/README.md)。
-- 核学习曲线：[报告](tqg_optimization_a4_20261104/结果解读.md) · [逐种子结果](../../../experiments/tqg_optimization_a4_20261104/results.csv) · [原始归档](../../../experiments/tqg_optimization_a4_20261104/README.md)。
-- 局部源bank：[报告](tqg_optimization_local_20261104/结果解读.md) · [逐种子结果](../../../experiments/tqg_optimization_local_20261104/results.csv) · [原始归档](../../../experiments/tqg_optimization_local_20261104/README.md)。
-- 反馈与教师：[报告](tqg_optimization_feedback_20261104/结果解读.md) · [逐种子结果](../../../experiments/tqg_optimization_feedback_20261104/results.csv) · [原始归档](../../../experiments/tqg_optimization_feedback_20261104/README.md)。
+- Mutagenicity条件诊断：[报告](https://github.com/chx739/TQG-GDA/blob/main/docs/v2/results/tqg_assumptions_20261103/%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB.md) · [逐种子结果](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_assumptions_20261103/results.csv) · [原始归档](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_assumptions_20261103/README.md)。
+- PROTEINS基础复验：[报告](https://github.com/chx739/TQG-GDA/blob/main/docs/v2/results/tqg_assumptions_proteins_20261104/%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB.md) · [逐种子结果](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_assumptions_proteins_20261104/results.csv) · [原始归档](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_assumptions_proteins_20261104/README.md)。
+- 核学习曲线：[报告](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_a4_20261104/%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB.md) · [逐种子结果](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_a4_20261104/results.csv) · [原始归档](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_a4_20261104/README.md)。
+- 局部源bank：[报告](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_local_20261104/%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB.md) · [逐种子结果](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_local_20261104/results.csv) · [原始归档](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_local_20261104/README.md)。
+- 反馈与教师：[报告](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_feedback_20261104/%E7%BB%93%E6%9E%9C%E8%A7%A3%E8%AF%BB.md) · [逐种子结果](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_feedback_20261104/results.csv) · [原始归档](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_feedback_20261104/README.md)。
 
-历史报告中的“下一步未执行”是当轮状态；后续A2-b/A4-a/A6现均已完成，以[完整研究结论](optimization_20261104/README.md)为准。下列SHA绑定本次直接读入的汇总输入；更底层逐图预测、标签访问、封存日志及模型参数由各归档artifact_manifest和audit追溯。
+历史报告中的“下一步未执行”是当轮状态；后续A2-b/A4-a/A6现均已完成，以[完整研究结论](https://github.com/chx739/TQG-GDA/blob/main/docs/v2/results/optimization_20261104/README.md)为准。下列SHA绑定本次直接读入的汇总输入；更底层逐图预测、标签访问、封存日志及模型参数由各归档artifact_manifest和audit追溯。
 
 | 直接输入文件 | SHA256 |
 |---|---|
-| [experiments/tqg_assumptions_20261103/support_summary.csv](../../../experiments/tqg_assumptions_20261103/support_summary.csv) | `02a9c8a87c5bfc368783de1bd0587f36b1dd89acac9aa06737bfe356b616d39e` |
-| [experiments/tqg_assumptions_20261103/triangle_summary.csv](../../../experiments/tqg_assumptions_20261103/triangle_summary.csv) | `25ee8b4f05ea87cf4bff6eafc16a5f60da72a0278769837e6126ca69abce20c3` |
-| [experiments/tqg_assumptions_proteins_20261104/support_summary.csv](../../../experiments/tqg_assumptions_proteins_20261104/support_summary.csv) | `c3bf592203b32bbbb22a172313f8077d3861a28a5ebbb62c64f30dac510ba8b9` |
-| [experiments/tqg_assumptions_proteins_20261104/triangle_summary.csv](../../../experiments/tqg_assumptions_proteins_20261104/triangle_summary.csv) | `0963e7cbe07dd2ab42af3046a4df667d38f0e32c5e5f23df8957a6c12dc63a71` |
-| [experiments/tqg_optimization_a4_20261104/summary.csv](../../../experiments/tqg_optimization_a4_20261104/summary.csv) | `3f15ce4e4fb8d42d40175d7921c070ed737ce5a5e8a3d580df24d91266fe740e` |
-| [experiments/tqg_optimization_feedback_20261104/results_summary.json](../../../experiments/tqg_optimization_feedback_20261104/results_summary.json) | `e68c74454c570ef595b4097ff1b7a756443523c06f441de24b29e1920e3c6e00` |
-| [experiments/tqg_optimization_feedback_20261104/teacher_prediction_seeds.csv](../../../experiments/tqg_optimization_feedback_20261104/teacher_prediction_seeds.csv) | `8d4ea5a2bd1d7bf2786118685ab3ea7d529c3589a490e5797d60744080e4ca21` |
-| [experiments/tqg_optimization_local_20261104/results.csv](../../../experiments/tqg_optimization_local_20261104/results.csv) | `183ccf0e54c9cd38a1c53d0765c94642f0101873c813ab59b0ef24dda1e6d4ae` |
-| [experiments/tqg_optimization_local_20261104/results_summary.json](../../../experiments/tqg_optimization_local_20261104/results_summary.json) | `30e2311f65576e6b74a77ac4a1b9c0be5cd440c16b72d6b16089b90dbd00be39` |
-| [experiments/tqg_optimization_local_20261104/summary_audit.json](../../../experiments/tqg_optimization_local_20261104/summary_audit.json) | `2ee7e81f4e165a9b150d38ad1102a94daf4a6ff5b054ca79a554bbba757ec329` |
+| [experiments/tqg_assumptions_20261103/support_summary.csv](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_assumptions_20261103/support_summary.csv) | `02a9c8a87c5bfc368783de1bd0587f36b1dd89acac9aa06737bfe356b616d39e` |
+| [experiments/tqg_assumptions_20261103/triangle_summary.csv](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_assumptions_20261103/triangle_summary.csv) | `25ee8b4f05ea87cf4bff6eafc16a5f60da72a0278769837e6126ca69abce20c3` |
+| [experiments/tqg_assumptions_proteins_20261104/support_summary.csv](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_assumptions_proteins_20261104/support_summary.csv) | `c3bf592203b32bbbb22a172313f8077d3861a28a5ebbb62c64f30dac510ba8b9` |
+| [experiments/tqg_assumptions_proteins_20261104/triangle_summary.csv](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_assumptions_proteins_20261104/triangle_summary.csv) | `0963e7cbe07dd2ab42af3046a4df667d38f0e32c5e5f23df8957a6c12dc63a71` |
+| [experiments/tqg_optimization_a4_20261104/summary.csv](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_a4_20261104/summary.csv) | `3f15ce4e4fb8d42d40175d7921c070ed737ce5a5e8a3d580df24d91266fe740e` |
+| [experiments/tqg_optimization_feedback_20261104/results_summary.json](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_feedback_20261104/results_summary.json) | `e68c74454c570ef595b4097ff1b7a756443523c06f441de24b29e1920e3c6e00` |
+| [experiments/tqg_optimization_feedback_20261104/teacher_prediction_seeds.csv](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_feedback_20261104/teacher_prediction_seeds.csv) | `8d4ea5a2bd1d7bf2786118685ab3ea7d529c3589a490e5797d60744080e4ca21` |
+| [experiments/tqg_optimization_local_20261104/results.csv](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_local_20261104/results.csv) | `183ccf0e54c9cd38a1c53d0765c94642f0101873c813ab59b0ef24dda1e6d4ae` |
+| [experiments/tqg_optimization_local_20261104/results_summary.json](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_local_20261104/results_summary.json) | `30e2311f65576e6b74a77ac4a1b9c0be5cd440c16b72d6b16089b90dbd00be39` |
+| [experiments/tqg_optimization_local_20261104/summary_audit.json](https://github.com/chx739/TQG-GDA/blob/main/experiments/tqg_optimization_local_20261104/summary_audit.json) | `2ee7e81f4e165a9b150d38ad1102a94daf4a6ff5b054ca79a554bbba757ec329` |
