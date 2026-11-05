@@ -27,8 +27,43 @@ def data(name, file):
 
 
 def table(headers, values):
+    def highlight(row):
+        cells = list(map(str, row))
+        marked = set()
+        # Formatting only: preserve all numeric strings and all rows. Bold marks
+        # discussion points, never an additional statistical success criterion.
+        if headers == ['签名','读取器','源内可学','目标内可学']:
+            marked.update([2, 3])
+        if '迁移缺口' in headers:
+            marked.add(headers.index('迁移缺口'))
+        if '选参S→S' in headers:
+            marked.update([headers.index('参照S→S'), headers.index('选参S→S')])
+            if cells[0] in ['0_to_2','0_to_3']:
+                marked.update([headers.index('选参S→T'), headers.index('诊断T→T')])
+        if '最小组图数' in headers:
+            if int(cells[3]) < 30:
+                marked.add(3)
+            marked.update([4, 6])
+        if headers == ['设置','0→1','0→2','0→3']:
+            if cells[0].startswith('H_128_NEAR_H_'):
+                marked.update([1, 2, 3])
+            else:
+                marked.update(i for i in [1, 2, 3] if cells[i].startswith('-'))
+        if '替代口径通过' in headers and cells[-1] != cells[-2]:
+            marked.update(range(2, len(cells)))
+        if headers == ['方法','0→1','0→2','0→3'] and cells[0] in ['LOCAL','KERNEL']:
+            marked.update([0, 1, 2, 3])
+        if '综合通过' in headers:
+            marked.add(len(cells)-1)
+            if cells[:2] == ['0_to_3','LOCAL']:
+                marked.update(range(2,len(cells)))
+        if '真标签更好种子' in headers:
+            marked.update([3,4])
+        if headers[-2:] == ['源内可学','目标内可学'] and 'S→S NLL' in headers:
+            marked.update([len(cells)-2,len(cells)-1])
+        return [f'**{cell}**' if i in marked else cell for i,cell in enumerate(cells)]
     return '\n'.join(['| ' + ' | '.join(headers) + ' |', '|' + '|'.join(['---'] * len(headers)) + '|'] +
-                     ['| ' + ' | '.join(map(str, row)) + ' |' for row in values]) + '\n\n'
+                     ['| ' + ' | '.join(highlight(row)) + ' |' for row in values]) + '\n\n'
 
 
 def f(value):
@@ -178,7 +213,22 @@ def main():
         text += [f'- {label}：[报告]({name}/结果解读.md) · [逐种子结果](../../../experiments/{name}/results.csv) · [原始归档](../../../experiments/{name}/README.md)。\n']
     text += ['\n历史报告中的“下一步未执行”是当轮状态；后续A2-b/A4-a/A6现均已完成，以[完整研究结论](optimization_20261104/README.md)为准。下列SHA绑定本次直接读入的汇总输入；更底层逐图预测、标签访问、封存日志及模型参数由各归档artifact_manifest和audit追溯。\n\n']
     text += [table(['直接输入文件','SHA256'],[[f'[{p}](../../../{p})',f'`{sha}`'] for p,sha in sorted(SOURCES.items())])]
-    DEST.write_text(''.join(text).rstrip() + '\n')
+    document = ''.join(text)
+    notes = {
+        '实验一：签名任务充分性': '**设置速读：** 冻结骨干；H/HA×KRR/LR/MLP；四外折、三内折；每折训练147张，源留出49张、目标B评价271张；五模型种子。\n\n**“可学”通过标准（同时满足）：** ①真实标签模型较类别比例预测的平均NLL降低≥**0.02**；②较三次乱标签模型均值的平均NLL降低≥**0.02**；③至少**4/5个模型种子同时胜过这两个对照**。NLL是给真实类别的概率取负对数后的平均值，越低越好；0.02不是准确率提高2个百分点。表中3/3表示三个迁移任务都过筛选，不是准确率100%。',
+        '实验二：跨域条件稳定性': '**设置速读：** 源训练与目标诊断训练各147张；在同一B271上比较S→T和T→T，重复五模型种子。\n\n**“迁移缺口候选”标准：** 目标内先通过实验一的可学性筛选；随后S→T的平均NLL比T→T高≥**0.02**，且至少**4/5种子**差值为正。缺口=S→T−T→T。这筛选的是迁移障碍，不是直接判定数学上的条件稳定性成立或不成立；正缺口越大，源规律迁过去损失越明显。',
+        '实验三：核读取复杂度与有限监督': '**设置速读：** H/HA；训练图数**32/64/128/147**；核带宽乘数**0.5/1/2**；正则λ为**0.001/0.01/0.1/1**；保留固定与按样本数归一化两种约定。四外折、三内折、五模型种子；按训练域内折NLL选参。\n\n**如何判断：** 本组学习曲线用于诊断，没有“源内NLL变低就说明TQG通过”的独立标准。表内对比同轮固定参数参照与选参结果；源内改善之后，KERNEL还必须通过文末A6的方向、对照、单步和稳定性门槛。目标内训练仅诊断，不能拿其参数当适配候选。',
+        '实验四：源监督支持与局部选图': '**设置速读：** 先在目标B上做近/远分层，再保持原JOINT读取器，比较源query中**64/128张**随机、H近邻、HA近邻与全**196张**。初始模型、A16、五种子；随机bank每个模型五个排列。\n\n**近远分层标准：** 远组迁移缺口比近组至少大**0.02**，至少**4/5种子**同向，且每折近/远组均≥**30张**。这是支持相关性，不是因果或数学支持证明。\n\n**局部选图标准：** 相比同数量、同读取核、同正则的随机bank，平均方向余弦提升≥**0.05**、相对梯度误差降低≥**10%**，两项各至少**4/5种子**同向，数值可比覆盖≥**80%**；至少**2/3任务**满足才算跨任务支持。单看某格余弦变大不算通过；两种误差聚合口径完整保留。',
+        '最终验收：预测改善能否变成可靠目标更新？': '**设置速读：** 源监督**0/50/200**快照；每块fit16、A16，B271评价；学习率**0.0003**、反馈权重**0.1**。所有更新各自从同一快照独立开始。\n\n**完整A6门槛：** 每任务方向余弦>0，对完整等幅置乱与随机反馈的平均余弦优势各≥**0.05**；相对源SGD额外相对CE收益≥**1e−4（即0.01%）**，且优于BASE和两类完整等幅null。各项至少**4/5种子**同向、可比覆盖≥**80%**；50/200快照不能有≥3/5种子方向或单步收益非正的普遍反向；至少**2/3任务**共同通过。对教师/MEAN增量另列，不用它替代标签归因。',
+        'PROTEINS基础复验': '**设置速读：** 独立的PROTEINS预训练模型；源query**51张（42/9两类）**；源/目标每折训练**38或39张**；目标B**70张**；五模型种子。\n\n**标准不降低：** 可学性沿用实验一的NLL改善≥**0.02**和至少**4/5种子同时胜过两对照**；支持分层仍要求每组≥**30张**。实际最小组仅**2～7张**，应记为证据不足，不应解释成“距离无用”。',
+    }
+    for heading, note in notes.items():
+        marker = f'## {heading}\n\n'
+        assert document.count(marker) == 1
+        document = document.replace(marker, marker + note + '\n\n', 1)
+    legend = '**表格加粗说明：** 加粗的是汇报需要关注的对照差异、负方向、样本不足、关键候选及口径敏感性，**不等于该数据通过检验，也不表示挑出的最优结果**。尤其H读取核＋128张H近邻虽有方向改善，仍须同时看误差与完整门槛；所有未加粗结果也完整保留。\n\n'
+    document = document.replace('## 统一设置与术语\n\n', '## 统一设置与术语\n\n' + legend, 1)
+    DEST.write_text(document.rstrip() + '\n')
     print(json.dumps(dict(document=str(DEST),source_files=len(SOURCES),triangle_rows=len(triangle),learning_curve_rows=len(learning),local_profiles=len({k[0] for k in grouped}),candidate_rows=len(selected))))
 
 
