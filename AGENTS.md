@@ -5,3 +5,4 @@
 - Push the current intended branch without force. Verify the remote commit and report the push status and commit to the user. If synchronization fails, state what remains local.
 - Distinguish engineering checks from research evidence. Preserve source/query/validation roles and target-label access boundaries; do not use final target labels for tuning or routine verification.
 - Prefer GitHub URLs for user-facing input files, published data and reports when they exist in this repository; use local paths only for unpublished artifacts. Resolve report symlinks to the actual file for GitHub links.
+- Exception to automatic publication: `docs/v2/results/assumptions_brief_20261105.md` is a local-only meeting draft at the user's request. Keep it untracked and ignored; do not force-add or republish it without explicit user authorization.
