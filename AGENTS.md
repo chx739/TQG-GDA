@@ -4,3 +4,4 @@
 - Include experiment histories and bounded model archives with provenance, checksums, and evaluation-to-checkpoint links. Keep datasets, credentials, temporary files, and incomplete runs out of Git. Preserve existing experiment artifacts instead of rewriting them.
 - Push the current intended branch without force. Verify the remote commit and report the push status and commit to the user. If synchronization fails, state what remains local.
 - Distinguish engineering checks from research evidence. Preserve source/query/validation roles and target-label access boundaries; do not use final target labels for tuning or routine verification.
+- Prefer GitHub URLs for user-facing input files, published data and reports when they exist in this repository; use local paths only for unpublished artifacts. Resolve report symlinks to the actual file for GitHub links.
