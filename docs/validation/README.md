@@ -12,4 +12,6 @@
 
 P0以后工程与权限记录随[各轮原始实验](../../experiments/v2/README.md)归档。当前进度看[v2执行状态](../v2/results/status.md)。
 
-本次整理核查：[2026-11-03路径、正文与归档完整性报告](repository_20261103/README.md)。
+文档整理核查：[2026-11-03路径、正文与归档完整性报告](repository_20261103/README.md)。
+
+实验脚本整理核查：[2026-11-05模块迁移、入口与归档检查](repository_20261105/README.md)。

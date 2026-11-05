@@ -14,7 +14,7 @@ TQG（Target-Queried Gradient Learning）的图级域适应研究代码、实验
 | 回顾odd/even原方法及早期实验 | [v1历史研究主页](docs/v1/README.md) |
 | 看下一步怎么验证四项迁移条件 | [§3.8验证方案与已有证据](docs/v2/plans/assumptions_20261103/README.md)；第一批A0／A1／A2-a已完成 |
 | 查哪些实验已做、结论是什么 | [v2执行状态](docs/v2/results/status.md) · [全部实验归档](experiments/README.md) |
-| 精读代码、找运行入口或配置 | [代码导航](docs/code/README.md) · [配置导航](configs/README.md) |
+| 精读代码、找运行入口或配置 | [代码导航](docs/code/README.md) · [实验脚本](workflows/README.md) · [配置导航](configs/README.md) |
 | 安装、运行或核验归档 | [使用指南](docs/usage.md) |
 
 ## v1与v2的区别
@@ -33,6 +33,13 @@ Mutagenicity：[§3.8第一批条件诊断](docs/v2/results/tqg_assumptions_2026
 ## 目录
 
 ```text
+tqg_gda/              共用骨干、v1/v2算法及训练模块
+workflows/            实验编排、汇总、审计与报告生成
+  v1/                 早期验证、改进实验、完整query对照
+  v2/                 按P0、D3/D4、H-only、条件验证、优化等阶段分类
+scripts/              基础运行、评价、归档与校验工具
+configs/              训练与诊断配置，按README索引
+tests/                数学、训练、诊断、权限和入口测试
 docs/
   v1/                 原方法、改进计划、实现说明、结果
   v2/                 当前方法、诊断计划、实现说明、结果
@@ -44,13 +51,13 @@ experiments/
   v1/README.md        v1原始实验归档索引
   v2/README.md        v2原始实验归档索引
   <实验名>/           原始日志、checkpoint、代码快照、SHA与评价索引
-configs/              按版本索引配置；现有运行路径保持兼容
-scripts/              基础运行、评价、归档与校验工具
-tqg_gda/              共用骨干、v1/v2算法及训练模块
-tests/                数学、训练、诊断和权限测试
+data/splits/          源划分清单
+idx/                  SEGA提供的图规模域索引
 ```
 
 主文档已按版本归组。旧文档路径保留兼容符号链接；日常浏览以本页的新路径为准。原始实验归档、冻结协议、历史快照保留原路径与字节，不改写其来源记录。详见[整理规则与路径映射](docs/REPOSITORY_LAYOUT.md)。
+
+原先散落根目录的52个Python文件已归入`workflows/`，新入口使用`python -m workflows.<版本>.<阶段>.<模块>`，例如`python -m workflows.v2.assumptions.assumptions_experiment --help`。旧文件名可查[迁移映射](docs/workflow_migration.json)；历史归档继续使用当时的代码和命令。
 
 ## 安装与检查
 

@@ -10,9 +10,9 @@ import torch
 import yaml
 
 from helpers import fixture_files, small_config, task_from
-from experiment_revision import job_keys, phase_arms, require_phase_gate, run_phase
-from revision_common import DESIGN
-from training_revision import RevisionTrainer, paired_ids, run_job
+from workflows.v1.experiment_revision import job_keys, phase_arms, require_phase_gate, run_phase
+from workflows.v1.revision_common import DESIGN
+from workflows.v1.training_revision import RevisionTrainer, paired_ids, run_job
 from tqg_gda.models import GraphClassifier
 from tqg_gda.training import model_spec, load_model
 from tqg_gda.utils import cpu_state
@@ -94,7 +94,7 @@ class RevisionTrainingTests(unittest.TestCase):
         expected_loss = torch.nn.functional.cross_entropy(expected_model(batch), batch.y)
         expected_loss.backward()
         expected_optimizer.step()
-        with patch('training_revision.ResponseDictionary.build', side_effect=AssertionError('baseline built feedback')):
+        with patch('workflows.v1.training_revision.ResponseDictionary.build', side_effect=AssertionError('baseline built feedback')):
             with patch.object(trainer.optimizer, 'step', wraps=trainer.optimizer.step) as step:
                 row = trainer.step()
                 self.assertEqual(step.call_count, 1)
@@ -125,7 +125,7 @@ class RevisionTrainingTests(unittest.TestCase):
 
     def test_profile_resume_equals_uninterrupted_training_including_adam_state(self):
         full_path, resumed_path = self.root / 'full', self.root / 'resumed'
-        with patch('training_revision.hardware', return_value={'synthetic': True}):
+        with patch('workflows.v1.training_revision.hardware', return_value={'synthetic': True}):
             full = run_job(self.context, 2, 3405, 'T5', output=full_path, writer_factory=NullWriter)
             partial = run_job(self.context, 2, 3405, 'T5', output=resumed_path,
                               stop_after=2, writer_factory=NullWriter)
@@ -159,8 +159,8 @@ class RevisionTrainingTests(unittest.TestCase):
         load_model(resumed_path / 'selected.pt')
 
     def test_step_zero_is_in_source_checkpoint_selection(self):
-        with patch('training_revision.hardware', return_value={'synthetic': True}), patch(
-                'training_revision.evaluate_source', side_effect=[dict(ce=.1), dict(ce=.2), dict(ce=.3)]):
+        with patch('workflows.v1.training_revision.hardware', return_value={'synthetic': True}), patch(
+                'workflows.v1.training_revision.evaluate_source', side_effect=[dict(ce=.1), dict(ce=.2), dict(ce=.3)]):
             result = run_job(self.context, 2, 3405, 'B_fit', output=self.root / 'selection', writer_factory=NullWriter)
         self.assertEqual(result['selected_step'], 0)
         selected = torch.load(self.root / 'selection' / 'selected.pt', weights_only=False)
@@ -201,11 +201,11 @@ class RevisionTrainingTests(unittest.TestCase):
 
     def test_completed_job_hash_verification_and_recovery_identity(self):
         output = self.root / 'verified'
-        with patch('training_revision.hardware', return_value={'synthetic': True}):
+        with patch('workflows.v1.training_revision.hardware', return_value={'synthetic': True}):
             run_job(self.context, 2, 3405, 'B_fit', output=output, writer_factory=NullWriter)
             with self.assertRaises(FileExistsError):
                 run_job(self.context, 2, 3405, 'B_fit', output=output, writer_factory=NullWriter)
-            with patch('training_revision.RevisionTrainer.step', side_effect=AssertionError('completed job reran')):
+            with patch('workflows.v1.training_revision.RevisionTrainer.step', side_effect=AssertionError('completed job reran')):
                 result = run_job(self.context, 2, 3405, 'B_fit', output=output, resume=True, writer_factory=NullWriter)
             self.assertEqual(result['status'], 'completed')
             (output / 'config.json').write_text('{}')
@@ -232,7 +232,7 @@ class RevisionTrainingTests(unittest.TestCase):
                 artifact_hashes={name: sha256(output / name) for name in names})
             (output / 'result.json').write_text(json.dumps(result))
             return result
-        with patch('experiment_revision.run_job', side_effect=fake_job):
+        with patch('workflows.v1.experiment_revision.run_job', side_effect=fake_job):
             profile = run_phase(self.context, 'A', profile=True, stage=stage)
             self.assertEqual(profile['status'], 'profile_paused')
             self.assertEqual(observed, [(2, 3405, 'T5', 10, False)])

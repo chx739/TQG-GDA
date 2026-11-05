@@ -10,7 +10,7 @@ from unittest.mock import patch
 import torch
 from torch import nn
 
-from diagnostics_sample_size import (build_block, configurations,
+from workflows.v1.diagnostics_sample_size import (build_block, configurations,
                                      evaluate_configuration, nested_stratified_indices,
                                      prefix_columns, summarize, valid_existing)
 from tqg_gda.utils import fingerprint, sha256

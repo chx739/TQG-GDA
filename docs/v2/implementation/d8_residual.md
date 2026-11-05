@@ -1,5 +1,7 @@
 # D8与残差分解执行约定
 
+当前入口：`python -m workflows.v2.mechanisms.mechanism_experiment`；汇总：`python -m workflows.v2.mechanisms.mechanism_summarize`。见[脚本导航](../../../workflows/README.md)；旧归档使用当时的冻结命令。
+
 遵守2026-10-31冻结方案D8，不改旧方案。新run在执行前保存execution_protocol.md及SHA；configs/mechanism_diagnostics.json为补充参数。复用PyG、P0函数式快照与校准器，新增合成图生成器和真实数据残差分解，不改生产训练流程。
 
 D8完全沿用指定五个生成／模型种子、角色偏移、数据量、四情形、三固定线性θ、五个GINE源模型200步warmup、0/50/200快照、480图块、三个读取器和S1阈值。线性组每θ8个16样本块；其全1024目标池包含A，只作解析／噪声诊断，不作为独立评价池。图组独立1024评价池；每快照前4块另作η0.0003、β0.1条件CE单步，比较Q、S+TRUE、S+真实源条件残差、S+等幅条件Oracle。辅助单步不作为新门槛。构造源条件残差只作Oracle，不交给方法或warmup。

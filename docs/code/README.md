@@ -1,6 +1,6 @@
 # 代码阅读与执行入口
 
-本次整理调整文档和导航；算法模块、脚本导入名、配置路径及训练行为保持兼容。所有命令从仓库根目录执行。根目录的历史编排脚本仍保留原名，避免破坏模块互相导入和冻结复现命令。
+算法模块位于`tqg_gda/`，阶段实验与报告脚本位于`workflows/`，通用CLI位于`scripts/`。所有命令从仓库根目录执行；阶段入口使用`python -m workflows...`。完整分类见[实验脚本导航](../../workflows/README.md)和[旧路径映射](../workflow_migration.json)。
 
 ## 先读共用部分
 
@@ -18,9 +18,9 @@
 | [feedback.py](../../tqg_gda/feedback.py) | 探测、有限响应、残差组合和输出纠错 |
 | [revision.py](../../tqg_gda/revision.py) | 改进实验反馈分支 |
 | [scripts/run_experiment.py](../../scripts/run_experiment.py) | 基础训练命令 |
-| [full_query_experiment.py](../../full_query_experiment.py) | PROTEINS完整query矩阵 |
-| [mutagenicity_experiment.py](../../mutagenicity_experiment.py) | Mutagenicity早期完整对照 |
-| [run_revision_pipeline.py](../../run_revision_pipeline.py) | v1改进实验历史编排 |
+| [full_query_experiment.py](../../workflows/v1/full_query_experiment.py) | PROTEINS完整query矩阵 |
+| [mutagenicity_experiment.py](../../workflows/v1/mutagenicity_experiment.py) | Mutagenicity早期完整对照 |
+| [run_revision_pipeline.py](../../workflows/v1/run_revision_pipeline.py) | v1改进实验历史编排 |
 
 [方法与实验设计](../v1/README.md) · [配置](../../configs/v1/README.md)。带原运行目录依赖的编排脚本不等于开箱即用复现入口。
 
@@ -40,13 +40,15 @@
 | 阶段 | 主入口 | 解释 |
 |---|---|---|
 | 完整训练 | [scripts/run_experiment.py](../../scripts/run_experiment.py)，配合v2配置 | [方法实现](../v2/implementation/method.md) |
-| P0 | [p0_experiment.py](../../p0_experiment.py) | [P0实现](../v2/implementation/p0.md) |
-| D3／D4 | [d34_experiment.py](../../d34_experiment.py) | [D3／D4实现](../v2/implementation/d3_d4.md) |
-| H-only | [h_only_experiment.py](../../h_only_experiment.py) | [H-only实现](../v2/implementation/h_only.md) |
-| D8／残差 | [mechanism_experiment.py](../../mechanism_experiment.py) | [D8实现](../v2/implementation/d8_residual.md) |
-| 标签／query | [label_query_experiment.py](../../label_query_experiment.py) | [标签／query实现](../v2/implementation/label_query.md) |
-| §3.8 A0／A1／A2-a | [assumptions_experiment.py](../../assumptions_experiment.py) | [条件诊断实现](../v2/implementation/assumptions.md) |
-| PROTEINS §3.8复验 | [PROTEINS backend](../../proteins_assumptions_experiment.py)，由共同入口按配置选择 | [方案与适配](../v2/plans/assumptions_proteins_20261104/README.md) |
+| P0 | [p0_experiment.py](../../workflows/v2/p0/p0_experiment.py) | [P0实现](../v2/implementation/p0.md) |
+| D3／D4 | [d34_experiment.py](../../workflows/v2/d34/d34_experiment.py) | [D3／D4实现](../v2/implementation/d3_d4.md) |
+| H-only | [h_only_experiment.py](../../workflows/v2/h_only/h_only_experiment.py) | [H-only实现](../v2/implementation/h_only.md) |
+| D8／残差 | [mechanism_experiment.py](../../workflows/v2/mechanisms/mechanism_experiment.py) | [D8实现](../v2/implementation/d8_residual.md) |
+| 标签／query | [label_query_experiment.py](../../workflows/v2/label_query/label_query_experiment.py) | [标签／query实现](../v2/implementation/label_query.md) |
+| §3.8 A0／A1／A2-a | [assumptions_experiment.py](../../workflows/v2/assumptions/assumptions_experiment.py) | [条件诊断实现](../v2/implementation/assumptions.md) |
+| PROTEINS §3.8复验 | [PROTEINS backend](../../workflows/v2/assumptions/proteins_assumptions_experiment.py)，由共同入口按配置选择 | [方案与适配](../v2/plans/assumptions_proteins_20261104/README.md) |
+
+LOCAL／核读取优化的执行、审计和报告位于[workflows/v2/optimization/](../../workflows/v2/optimization/)，对应[11月4日优化方案](../v2/plans/optimization_execution_20261104/README.md)。
 
 同名前缀的`*_summarize.py`、`*_report.py`、`*_interpretation.py`分别承担汇总、报告和后处理；不是新的训练方法。历史精确执行代码以各实验的code_snapshot与提交为准。
 

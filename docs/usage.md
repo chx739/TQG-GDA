@@ -2,6 +2,16 @@
 
 所有命令从仓库根目录执行。v1与v2使用同一包，但方法和优化器不同，先选版本再选配置。
 
+阶段实验脚本已从根目录归入`workflows/`。基础CLI继续使用`python scripts/xxx.py`；阶段实验使用模块入口：
+
+```bash
+python -m workflows.v2.assumptions.assumptions_experiment --help
+python -m workflows.v2.optimization.optimization_feedback --help
+python -m workflows.v1.full_query_experiment --help
+```
+
+[按阶段查入口](../workflows/README.md) · [旧路径映射](workflow_migration.json)。旧归档的冻结命令在对应旧代码快照中执行，不直接套到当前主分支。
+
 ## 安装与合成检查
 
 推荐使用独立 Python 环境。已有验证环境为 Python 3.12、PyTorch 2.5.1、PyG 2.6.1；根据机器选择匹配的 CPU/CUDA PyTorch。

@@ -9,7 +9,7 @@ from torch_geometric.data import Data, Batch
 from tqg_gda.models import GraphClassifier
 from tqg_gda.feedback import ProbeConfig, build_feedback
 from tqg_gda.revision import ResponseDictionary, ResidualPredictor, auxiliary_loss
-from revision_execution_diagnostics import dense_centered_jacobian, flatten, gradient, ExecutionDiagnostics
+from workflows.v1.revision_execution_diagnostics import dense_centered_jacobian, flatten, gradient, ExecutionDiagnostics
 
 
 class RevisionIntegration(unittest.TestCase):
