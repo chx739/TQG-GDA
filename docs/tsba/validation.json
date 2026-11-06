@@ -50,31 +50,38 @@
     }
   },
   "python_files": {
-    "tests/tsba/test_adapt.py": "845ceffe071309eb5576993135135a09b20875b3f1349970f7e141fda44dac5a",
-    "tests/tsba/test_math.py": "55c45d5d08f8d8c2e2bf50593195297a2d8dd9e23762abcf5663183f610b2493",
-    "tests/tsba/test_pipeline.py": "8cce0fd29ebadc6fbacf3dc9892b8cbdda937c1cf2ec99698400128331dbc625",
-    "tqg_gda/__init__.py": "d245f8fdb22c4876a08bf0f307e106cea3f940062954407570095f13d8f3bca1",
-    "tqg_gda/tsba/__init__.py": "f725f5a62538a4cd62b4e74ccef812de617cf561b78ba50d6ecdb8fdd9caabae",
-    "tqg_gda/tsba/adapt.py": "47f8fa2ec392bfd919e8267d68a4750b91deee9c192ad5d1987ae26f6d8c81bf",
-    "tqg_gda/tsba/boundary.py": "bba0b62928cbbc807bdad077794ef2e6da834c6110b5106a40b860b9ecb8fcb0",
-    "tqg_gda/tsba/classifier.py": "f90a7e6472dc932c77f99e563399e510beb86368c7df84e70aeffc5e4a0f0564",
-    "tqg_gda/tsba/config.py": "0d5c41c80f96175c08a7df4c4628ca6857021fad19508c9714cceff0571c16e8",
-    "tqg_gda/tsba/data.py": "47c683ed08a1b81dfee18061b3372eac0c16d97430d263aada84467cc67bbc29",
-    "tqg_gda/tsba/encoder.py": "9b7c51301b7f083c4c4ad492c8a334d29f2b5fc9c2a7f536601801d74945bd4a",
-    "tqg_gda/tsba/pipeline.py": "4175ec26c7b30461153aee121f587f0e08e6e4667e2c2f9705d974b3fffc974d",
-    "tqg_gda/tsba/predict.py": "0c7578dfc4b8a343c615123e3462c28363c26ce818fc1f7a8868f62efe23c4a4",
-    "tqg_gda/tsba/pretrain.py": "91ab0844773d4fa205fd0f9b26fe75dba1c49f9c537339d19831b2791bacbd28",
-    "tqg_gda/tsba/problem.py": "23cc82008cdd9a01c6161867974e59bdb7b18cdb6092da9814232f702d1d72bb",
-    "tqg_gda/tsba/score.py": "fcb176b76c36bb47640d60f1c167e22db42b503859ed9b2b8bc4fac3d9bfb08e",
-    "tqg_gda/tsba/subproblem.py": "eacfc04ee0d79fa251402c6ff7774b3aa855e72ae41b5cf8a79b18353cf03a9e",
-    "tqg_gda/tsba/utils.py": "3b95d7237a137b436529fd80c42193d0cebefb2fa2233f4bc5d31695e8450d05",
-    "workflows/__init__.py": "7cf03aa6362a3bbfc03cbc05a04fed0b7ded87df017dba56db5ef3582b36ce59",
+    "tsba/__init__.py": "f725f5a62538a4cd62b4e74ccef812de617cf561b78ba50d6ecdb8fdd9caabae",
+    "tsba/adapt.py": "47f8fa2ec392bfd919e8267d68a4750b91deee9c192ad5d1987ae26f6d8c81bf",
+    "tsba/boundary.py": "bba0b62928cbbc807bdad077794ef2e6da834c6110b5106a40b860b9ecb8fcb0",
+    "tsba/classifier.py": "f90a7e6472dc932c77f99e563399e510beb86368c7df84e70aeffc5e4a0f0564",
+    "tsba/config.py": "0d5c41c80f96175c08a7df4c4628ca6857021fad19508c9714cceff0571c16e8",
+    "tsba/data.py": "47c683ed08a1b81dfee18061b3372eac0c16d97430d263aada84467cc67bbc29",
+    "tsba/encoder.py": "9b7c51301b7f083c4c4ad492c8a334d29f2b5fc9c2a7f536601801d74945bd4a",
+    "tsba/pipeline.py": "4175ec26c7b30461153aee121f587f0e08e6e4667e2c2f9705d974b3fffc974d",
+    "tsba/predict.py": "0c7578dfc4b8a343c615123e3462c28363c26ce818fc1f7a8868f62efe23c4a4",
+    "tsba/pretrain.py": "91ab0844773d4fa205fd0f9b26fe75dba1c49f9c537339d19831b2791bacbd28",
+    "tsba/problem.py": "23cc82008cdd9a01c6161867974e59bdb7b18cdb6092da9814232f702d1d72bb",
+    "tsba/score.py": "fcb176b76c36bb47640d60f1c167e22db42b503859ed9b2b8bc4fac3d9bfb08e",
+    "tsba/subproblem.py": "eacfc04ee0d79fa251402c6ff7774b3aa855e72ae41b5cf8a79b18353cf03a9e",
+    "tsba/utils.py": "3b95d7237a137b436529fd80c42193d0cebefb2fa2233f4bc5d31695e8450d05",
+    "workflows/__init__.py": "4a2a2e8308123faf1685c67c030096cb28921ebcc29376fc2c5b04feaf7bbc52",
     "workflows/tsba/__init__.py": "70b20dbc0f4dd8dbcf9d16910385e5f30162052883f49f495e21611f1721f6cd",
-    "workflows/tsba/run_task.py": "006e42225a4ea7eed8e88d93b5f2788e09dd8e2354d1bc6844f72a7fe574688a"
+    "workflows/tsba/run_task.py": "0d0037102e49ad5e420e2f71b4dd1f443f865d3658d8f51f772bd7ee2cd23636",
+    "tests/tsba/test_adapt.py": "7e2b01a9ca4894ae651585558a80ac867246dac9f4ad22146171105ee61ad74b",
+    "tests/tsba/test_math.py": "094744dc459def8c176fb58ef5c609ea69ffd0fa9bf213cb7c5181b2e13b30e8",
+    "tests/tsba/test_pipeline.py": "80ad5cca4cb162f216406cfa6e8d0a2fca42b03d87568182dc9a3ef7f82486ee"
   },
   "limitations": [
     "GPU execution not verified",
     "Real-task effectiveness not tested",
     "Target labels not accessed"
-  ]
+  ],
+  "package_layout": {
+    "package": "tsba",
+    "previous_package": "tqg_gda.tsba",
+    "algorithm_changed": false,
+    "unit_tests_passed": 23,
+    "standalone_wheel_verified": true,
+    "pre_rename_checkpoint_predictions_identical": true
+  }
 }

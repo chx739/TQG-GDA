@@ -9,4 +9,6 @@
 - The meeting draft `docs/v2/results/assumptions_brief_20261105.md` remains local-only, untracked and ignored. Do not publish it without explicit user authorization.
 - After authorized changes, update relevant documentation, run appropriate checks, commit and synchronize to the project's GitHub origin without force. Verify the remote commit and report any local-only work or publication block. Do not bypass approval or access-control rejections.
 - Prefer GitHub URLs for published code, data and reports; use local paths for unpublished artifacts. Resolve report symlinks before publishing links.
-- Reusable TSBA code belongs in `tqg_gda/tsba/`, workflows in `workflows/tsba/`, and tests in `tests/tsba/`. The implementation request authorizes synthetic engineering checks; real-data research runs require a specified data protocol.
+- Reusable TSBA code belongs in `tsba/`, workflows in `workflows/tsba/`, and tests in `tests/tsba/`. The implementation request authorizes synthetic engineering checks; real-data research runs require a specified data protocol.
+
+- `docs/tsba/review-guide.md` is user-requested local-only material. Keep it untracked and ignored; never publish its contents without explicit subsequent authorization.
