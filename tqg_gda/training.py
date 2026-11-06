@@ -1,4 +1,7 @@
-"""Warmup and one-update-per-query adaptation; source-only checkpoint selection."""
+"""Legacy experiment/checkpoint interface, preserving historical configurations.
+
+New SEGA-style TQG runs use pretrain.py, adapt.py and pipeline.py.
+"""
 import copy
 from dataclasses import asdict
 import json

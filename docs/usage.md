@@ -2,6 +2,8 @@
 
 所有命令从仓库根目录执行。v1与v2使用同一包，但方法和优化器不同，先选版本再选配置。
 
+**当前 SEGA式实现**使用 `python -m workflows.tqg.run_task --config configs/sega_style/mutagenicity_v2.json --cache-path /path/to/Mutagenicity/processed/data.pt`。见[配置、完整运行和产物说明](code/sega_style_tqg.md)。本页后续 `scripts/run_experiment.py` 命令属于旧骨干/历史实验接口，不能加载新流水线的 checkpoint。
+
 阶段实验脚本已从根目录归入`workflows/`。基础CLI继续使用`python scripts/xxx.py`；阶段实验使用模块入口：
 
 ```bash
