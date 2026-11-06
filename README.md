@@ -1,72 +1,30 @@
 # TQG-GDA
 
-TQG（Target-Queried Gradient Learning）的图级域适应研究代码、实验设计和可核验实验记录。
+本仓库从 2026-11-06 开始准备新的研究主线，以用户提供的 `SEGA-GDA(1).zip` 作为设计范式参考。**当前阶段只完成历史分支保留和新主线初始化，尚未设计或实现新的 TQG 算法。**
 
-**当前结论（2026-11-04）：真实数据上尚未获得跨任务稳定收益，也未证明逐图源标签提供稳定迁移增量。** 友好合成数据说明机制可以成立；真实任务中的迁移条件仍待诊断。工程验收与研究有效性分别记录。
+## 分支与起点
 
-最新：[局部源经验／核读取优化完整结论](docs/v2/results/optimization_20261104/README.md)。A4、A2-b、A6均完成并审计；LOCAL/KERNEL均0/3通过，不触发连续适配。
-
-## 从这里开始
-
-| 你要做什么 | 入口 |
+| 分支 | 用途 |
 |---|---|
-| 看当前方法、计划和结果 | [v2研究主页](docs/v2/README.md) |
-| 回顾odd/even原方法及早期实验 | [v1历史研究主页](docs/v1/README.md) |
-| 看下一步怎么验证四项迁移条件 | [§3.8验证方案与已有证据](docs/v2/plans/assumptions_20261103/README.md)；第一批A0／A1／A2-a已完成 |
-| 查哪些实验已做、结论是什么 | [v2执行状态](docs/v2/results/status.md) · [全部实验归档](experiments/README.md) |
-| 精读代码、找运行入口或配置 | [代码导航](docs/code/README.md) · [实验脚本](workflows/README.md) · [配置导航](configs/README.md) |
-| 安装、运行或核验归档 | [使用指南](docs/usage.md) |
+| `main` | 新主线：设计准备、参考代码及其来源记录 |
+| `history/tqg-v2-20261106` | 完整保留之前的 TQG v1/v2 实现、文档、实验归档和提交历史 |
 
-## v1与v2的区别
+历史版本固定在 [`eb39fd7c5433420bd51f14e6330ba5067d164456`](https://github.com/chx739/TQG-GDA/tree/eb39fd7c5433420bd51f14e6330ba5067d164456)。新的主线继续保留 Git 祖先关系，历史内容可以通过该提交或历史分支完整查看；它们不再作为新主线当前目录中的实现。
 
-| 版本 | 读取方式 | 研究材料 | 完整训练结果 |
-|---|---|---|---|
-| v1 | 有限参数扰动、odd/even响应，用源残差拟合组合权重 | [方法](docs/v1/method/design.md) · [实验设计](docs/v1/plans/README.md) | [PROTEINS及Mutagenicity汇总](docs/v1/results/overview.md) |
-| v2（当前） | 目标Jacobian空间、签名核、矩阵读出与参数梯度反馈 | [方法](docs/v2/method/design.md) · [实验设计](docs/v2/plans/README.md) | [Mutagenicity及batch对照](docs/v2/results/overview.md) |
-
-v2诊断链：P0 → D3/D4 → H-only → D8／残差分解 → 标签／预测归因与D7-H。各轮均有[结果、报告和原始记录](docs/v2/results/README.md)，不把诊断单步收益当作完整训练准确率。
-
-Mutagenicity：[§3.8第一批条件诊断](docs/v2/results/tqg_assumptions_20261103/结果解读.md)完成。同签名LR／MLP可在各域学习，但存在源到目标读出缺口；H支持分层三个任务均有诊断价值。后续局部bank与核读取对照已完成，见最新优化结论；两路线均未形成稳定梯度反馈。
-
-最新：[PROTEINS同方案复验，2026-11-04](docs/v2/results/tqg_assumptions_proteins_20261104/结果解读.md)完成。同域稳定可学前提未过，支持分组图数不足；未复现Mutagenicity的完整证据链，不把原因简单归为数据量。
-
-## 目录
+## 当前内容
 
 ```text
-tqg_gda/              共用骨干、v1/v2算法及训练模块
-workflows/            实验编排、汇总、审计与报告生成
-  v1/                 早期验证、改进实验、完整query对照
-  v2/                 按P0、D3/D4、H-only、条件验证、优化等阶段分类
-scripts/              基础运行、评价、归档与校验工具
-configs/              训练与诊断配置，按README索引
-tests/                数学、训练、诊断、权限和入口测试
-docs/
-  v1/                 原方法、改进计划、实现说明、结果
-  v2/                 当前方法、诊断计划、实现说明、结果
-  code/               模块与脚本导航
-  research_plans/     保持原字节的2026-10-31冻结协议及兼容入口
-  history/            原始阶段文档与来源清单
-  validation/         历史工程验收记录
-experiments/
-  v1/README.md        v1原始实验归档索引
-  v2/README.md        v2原始实验归档索引
-  <实验名>/           原始日志、checkpoint、代码快照、SHA与评价索引
-data/splits/          源划分清单
-idx/                  SEGA提供的图规模域索引
+docs/design-baseline.md              参考范式、当前范围与待确定事项
+references/sega-gda/                 附件代码、说明及域索引的原样快照
+references/sega-gda.provenance.json   ZIP 来源、逐文件 SHA256 与省略清单
 ```
 
-主文档已按版本归组。旧文档路径保留兼容符号链接；日常浏览以本页的新路径为准。原始实验归档、冻结协议、历史快照保留原路径与字节，不改写其来源记录。详见[整理规则与路径映射](docs/REPOSITORY_LAYOUT.md)。
+[设计基准说明](docs/design-baseline.md) · [原始参考包说明](references/sega-gda/README.md) · [来源与校验记录](references/sega-gda.provenance.json) · [协作约定](AGENTS.md)
 
-原先散落根目录的52个Python文件已归入`workflows/`，新入口使用`python -m workflows.<版本>.<阶段>.<模块>`，例如`python -m workflows.v2.assumptions.assumptions_experiment --help`。旧文件名可查[迁移映射](docs/workflow_migration.json)；历史归档继续使用当时的代码和命令。
+参考快照中的 Python、依赖声明、测试和域索引均保持附件原字节。附件内的原始数据没有加入 Git，因此参考 README 中“压缩包已带原始数据”的描述适用于原附件，不代表此仓库也包含该数据。历史 TQG 代码和实验归档未复制进新主线。
 
-## 安装与检查
+## 当前工作范围
 
-```bash
-python -m pip install -r requirements.txt
-python -m pip install -e . --no-deps
-PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 python -m unittest discover -s tests -v
-```
+当前没有新增 TQG 模块、损失函数、梯度查询、适配器或实验结果，也没有修改或修复参考算法。SEGA 参考代码仍是其自身方法的实现，不能当作新的 TQG 实现或新的有效性证据。
 
-真实图缓存需自行准备；数据哈希和角色应匹配具体实验协议。PROTEINS／Mutagenicity的0→1/2/3沿用SEGA提供的图规模域索引，不是数据集官方自然域。目标final标签不用于日常诊断、调参或选模。
-
-完成修改或实验后，更新对应版本文档、核验产物并同步GitHub，约定见[AGENTS.md](AGENTS.md)。
+后续先明确如何采用该设计范式，以及数据角色、评价协议和方法边界，再开始具体实现。参考包会在其真实数据入口读取整个目标域的标签；当前阶段不运行该入口，历史 final 标签继续保留。

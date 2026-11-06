@@ -1,1 +1,0 @@
-v2/implementation/d8_residual.md

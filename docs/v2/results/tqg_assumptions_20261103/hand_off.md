@@ -1,1 +1,0 @@
-Read results_summary.json and 结果解读.md; preserve probe-specific gates and target-label diagnostic boundaries. Do not claim source-label transfer or complete §3.8 validation from predictive probes alone.

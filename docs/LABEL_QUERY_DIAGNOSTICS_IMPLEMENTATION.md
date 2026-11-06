@@ -1,1 +1,0 @@
-v2/implementation/label_query.md

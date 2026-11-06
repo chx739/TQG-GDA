@@ -1,1 +1,0 @@
-A2b is numerically audited and independently aggregation-audited. No candidate meets the multi-task continuation rule. Do not start continuous adaptation, combination, or new PROTEINS runs. Preserve the A2 error-aggregation ambiguity and all null/teacher results. Whole-goal completion still requires publication and objective audit.
