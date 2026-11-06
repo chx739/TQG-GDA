@@ -6,27 +6,20 @@ runs/
 dist/
 build/
 outputs/
+results/
 /checkpoints/
 *.pt
 *.pth
 *.ckpt
+*.zip
 data/**/raw/
 data/**/processed/
+/references/sega-gda/data/
 .env
 .env.*
 !.env.example
 *.pem
 *.key
-
-# Explicitly published, immutable experiment snapshots.
-!/experiments/proteins_full_query_20261026/checkpoints/**/*.pt
-!/experiments/mutagenicity_sega_20261026/checkpoints/**/*.pt
-!/experiments/mutagenicity_v2_20261026/checkpoints/**/*.pt
-!/experiments/mutagenicity_target_batch_20261028/checkpoints/**/*.pt
-
-!/experiments/mutagenicity_target_batch196_20261028/checkpoints/**/*.pt
-
-!/experiments/tqg_d8_residual_20261031/checkpoints/**/*.pt
 
 # User-requested local-only meeting draft; do not publish without permission.
 /docs/v2/results/assumptions_brief_20261105.md
