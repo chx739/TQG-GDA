@@ -4,6 +4,8 @@
 
 后续审查：[2026-11-07 独立代码 review 与合成检查](../validation/tqg_clean_review_20261107/README.md)。本次审查没有修改算法，尚未开展真实数据验证。
 
+审查后的真实执行：[2026-11-07 M0/M1最小验证结果](../results/tqg_sega_minimal_20261107/README.md)；[实验控制与阶段门槛执行器](../../workflows/tqg/minimal_validation/README.md)。两版都未通过研究门槛，未启动连续M2训练。
+
 ## 1. 采用什么范式，依据什么算法
 
 参考为用户提供的 [SEGA-GDA 原样代码](../../references/sega-gda/README.md)，文件清单与 SHA 见[来源记录](../../references/sega-gda.provenance.json)。方法依据为 [TQG v1](../v1/method/design.md) 和 [TQG v2](../v2/method/design.md)。

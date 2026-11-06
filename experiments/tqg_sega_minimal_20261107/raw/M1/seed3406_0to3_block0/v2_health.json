@@ -1,0 +1,59 @@
+{
+  "query": {
+    "version": "v2",
+    "status": "gradient_feedback",
+    "target_labels_used": false,
+    "rank": 16,
+    "rank_tolerance": 0.6192437605732266,
+    "largest_singular_value": 144.46681213378906,
+    "smallest_retained_singular_value": 8.163178443908691,
+    "rank_policy": "all_numerically_nonzero",
+    "target_jacobian_rows": 16,
+    "parameter_count": 35957,
+    "scale_h_squared": 92.96587637244741,
+    "scale_a_squared": 9573.52400222311,
+    "scale_h_at_floor": false,
+    "scale_a_at_floor": false,
+    "signature": "representation_response",
+    "source_target_kernel_mean": 0.3391244770750496,
+    "source_target_kernel_max": 0.880899290202755,
+    "calibration": {
+      "mode": "joint",
+      "converged": true,
+      "iterations": 3,
+      "termination": "gap_tolerance",
+      "gap": 1.6812028036383708e-07,
+      "primal": 49.68797945028586,
+      "dual": 49.68797928216558,
+      "mean_error": 3.7169204074388613,
+      "max_error": 45.38435943142902,
+      "weight_norm": 30.638527677888845,
+      "backtracks": 1
+    },
+    "source_query_graphs": 196,
+    "target_graphs": 16,
+    "residual_norm": 8.034155605487701,
+    "coefficient_norm": 11.030185853540612
+  },
+  "query_and_execution_seconds": 2.2875955440104008,
+  "primary_query_seconds": 2.28375044465065,
+  "calibration_seconds": 0.00826970860362053,
+  "gradient_identity": {
+    "absolute": 0.0,
+    "relative": 0.0
+  },
+  "space_dim": 16,
+  "deterministic_replay": false,
+  "model_hash": "17e5b08e94374c14178221cce149397c96c6367e2aeaee67c0c5c87b1e1cb9bf",
+  "state_unchanged": true,
+  "gradient_hashes": {
+    "TRUE": "d0b341110ea876fd8ca90486dafe19f98598362ddb333f7fa19569a3e8d6f9f6",
+    "MEAN-Y": "ccf6ee51267f4498649e308ca4f64a4f890ddd7e6fb0d5f0bda2ccc728912a67",
+    "PERM-1": "669863355f57d28213f9f789ef8af4203e5f8ede0b570696c3f98422accec58e",
+    "RAND-1": "c2444a54c756351c4a76c641257c3dc0a67a62040e4bb85658e609b149293675",
+    "PERM-2": "f5e154d641ad1be4a890d7f717093899c5d55408e04ee73523793f05a20b12bf",
+    "RAND-2": "c98efff39d39dba5c347b297805ebfeb5cff77c9496b7a8680944603f0b3af7c",
+    "PERM-3": "233bb26d4ff8383fa303e80da9f230b0ec1ae264729f91d474f4454eb5b0bb32",
+    "RAND-3": "d6865c4fa80f00dc2d360b3b89f945c53b77d704bd6426ec931d5ab9c04fb788"
+  }
+}

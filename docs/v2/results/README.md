@@ -1,9 +1,10 @@
 # v2实验结果与进度
 
-先读[本轮优化研究结论](optimization_20261104/README.md)和[执行状态总表](status.md)。下面按研究阶段排列；所有链接明确区分说明与原始证据。
+最新先读[新SEGA式v1/v2最小验证结果，11-07](../../results/tqg_sega_minimal_20261107/README.md)：三个新源模型、48个版本块完成，v2为0/2任务通过，M2未触发。旧骨干结论见[优化研究](optimization_20261104/README.md)和[执行状态总表](status.md)。下面明确区分说明与原始证据。
 
 | 阶段 | 结果解读 | 完整报告 | 原始归档 | 核心结论 |
 |---|---|---|---|---|
+| 新SEGA式M0/M1，11-07 | [详细结果](../../results/tqg_sega_minimal_20261107/README.md) | [原门槛与方案](../../research_plans/tqg_sega_minimal_20261106/README.md) | [归档](../../../experiments/tqg_sega_minimal_20261107/README.md) | 数值正常，v1/v2均0/2研究门槛通过，M2不触发 |
 | 目标研究A6，11-04 | [解读](tqg_optimization_feedback_20261104/结果解读.md) | [报告](tqg_optimization_feedback_20261104/run_report.md) | [归档](../../../experiments/tqg_optimization_feedback_20261104/README.md) | 两候选均0/3通过，教师及标签归因未支持TQG稳定增量 |
 | 目标研究A2-b，11-04 | [解读](tqg_optimization_local_20261104/结果解读.md) | [报告](tqg_optimization_local_20261104/run_report.md) | [归档](../../../experiments/tqg_optimization_local_20261104/README.md) | 没有局部配置通过至少两个任务；公开聚合口径敏感性 |
 | 目标研究A4-a，11-04 | [解读](tqg_optimization_a4_20261104/结果解读.md) | [报告](tqg_optimization_a4_20261104/run_report.md) | [归档](../../../experiments/tqg_optimization_a4_20261104/README.md) | 核学习曲线与审计完成；跨域读取仍弱，A6验收见本轮新结果 |

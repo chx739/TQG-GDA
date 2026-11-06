@@ -4,6 +4,8 @@
 
 当前新实现：[2026-11-06 SEGA式 TQG 工程验收](sega_style_tqg_20261106.md)；[2026-11-07 干净上下文独立代码审查](tqg_clean_review_20261107/README.md)。后者未发现新增 P1/P2/P3 缺陷，包含 42 项现有测试与 GIN/GINE、FP32/FP64 补充检查；未运行真实数据实验。
 
+后续最小实验：[新执行器23项合成验收](tqg_minimal_driver_20261107/README.md)、[真实M0/M1结果](../results/tqg_sega_minimal_20261107/README.md)及[独立复算记录](../../experiments/tqg_sega_minimal_20261107/raw/independent_audit.json)。真实数值检查通过与研究门槛未通过分别报告。
+
 | 分类 | 记录 |
 |---|---|
 | v1早期机制与数据泛化 | [E1](e1/) · [E2](e2/) · [E3](e3/) · [E4](e4/) |

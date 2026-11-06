@@ -1,0 +1,26 @@
+{
+  "encoder": {
+    "conv": "gin",
+    "hidden": 64,
+    "num_layers": 3,
+    "out_dim": 16,
+    "dropout": 0.0
+  },
+  "pretrain": {
+    "epochs": 100,
+    "batch_size": 128,
+    "lr": 0.001,
+    "weight_decay": 0.0
+  },
+  "seed": 3405,
+  "runtime": {
+    "python": "3.12.4",
+    "torch": "2.5.1",
+    "pyg": "2.6.1",
+    "device": "cpu",
+    "dtype": "float32",
+    "cuda": "12.1",
+    "num_threads": 1,
+    "deterministic": true
+  }
+}

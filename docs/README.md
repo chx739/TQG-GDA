@@ -1,6 +1,6 @@
 # 文档导航
 
-当前跨版本方案：[SEGA式新实现 v1/v2 最小验证](research_plans/tqg_sega_minimal_20261106/README.md)。包含整体列表、优先级、详细实验、继续门槛和执行准备程度；尚未启动真实训练。
+当前跨版本结果：[SEGA式新实现 v1/v2 最小验证，2026-11-07](results/tqg_sega_minimal_20261107/README.md)。三个新源模型及M0/M1已完成；两版未通过研究门槛，M2未触发。[冻结方案](research_plans/tqg_sega_minimal_20261106/README.md)保留设计登记时内容，包含整体列表、优先级和继续门槛。
 
 | 类别 | v1：有限扰动响应 | v2：Jacobian与核查询（当前） |
 |---|---|---|

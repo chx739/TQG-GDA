@@ -2,6 +2,7 @@
 
 | 实验 | 类型 | 归档 | 结果 |
 |---|---|---|---|
+| 新SEGA式最小验证，2026-11-07 | 三个新源模型、v1/v2共同M0/M1；M2不触发 | [完整归档](../tqg_sega_minimal_20261107/README.md) | [真实设置与逐种子结果](../../docs/results/tqg_sega_minimal_20261107/README.md) |
 | 目标研究A6，2026-11-04 | 候选/教师/标签归因/独立单步 | [归档](../tqg_optimization_feedback_20261104/README.md) | [解读](../../docs/v2/results/tqg_optimization_feedback_20261104/结果解读.md) |
 | 目标研究A2-b，2026-11-04 | 6960局部/随机bank读出配置 | [归档](../tqg_optimization_local_20261104/README.md) | [解读](../../docs/v2/results/tqg_optimization_local_20261104/结果解读.md) |
 | 目标研究A4-a，2026-11-04 | 冻结核读出学习曲线，368640次逻辑拟合 | [归档](../tqg_optimization_a4_20261104/README.md) | [解读](../../docs/v2/results/tqg_optimization_a4_20261104/结果解读.md) |
