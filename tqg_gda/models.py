@@ -1,6 +1,7 @@
-"""GIN/GINE backbone adapted from the user-supplied SEGA-GDA package.
+"""Legacy GIN/GINE backbone from the older SEGA_GDA_fixed_2 package.
 
-TQG keeps a linear head; no metric field, geometric classifier or OT layer.
+Preserves historical checkpoint layouts. New SEGA-GDA(1) architecture lives in
+encoder.py + classifier.py; do not silently load old weights into that model.
 """
 import torch
 from torch import nn

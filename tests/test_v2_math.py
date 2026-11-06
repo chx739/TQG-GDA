@@ -211,7 +211,7 @@ class V2MathTests(unittest.TestCase):
                                float(first.coefficients.square().sum()/2), places=12)
 
     def test_numerical_fallback_supplies_a_zero_parameter_gradient(self):
-        with patch('tqg_gda.feedback_v2.solve_calibration', side_effect=FloatingPointError('test anomaly')):
+        with patch('tqg_gda.v2.query.solve_calibration', side_effect=FloatingPointError('test anomaly')):
             feedback = build_gradient_feedback(self.model, self.source, self.labels, self.target)
         self.assertEqual(feedback.statistics['status'], 'numerical_fallback_source_only')
         self.assertTrue(torch.equal(feedback.gradient, torch.zeros_like(feedback.gradient)))

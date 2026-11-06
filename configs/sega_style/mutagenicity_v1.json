@@ -1,0 +1,38 @@
+{
+  "cache_path": "/path/to/Mutagenicity/processed/data.pt",
+  "source_split": "experiments/mutagenicity_v2_20261026/protocol/data_roles/source_protocol.json",
+  "target_index": "idx/idx_Mutagenicity_1.npy",
+  "dataset": "Mutagenicity",
+  "seed": 3405,
+  "fit_fraction": 0.8,
+  "split_seed": 431,
+  "use_node_attributes": false,
+  "encoder": {
+    "conv": "gin",
+    "hidden": 64,
+    "num_layers": 3,
+    "out_dim": 16,
+    "dropout": 0.0
+  },
+  "pretrain": {
+    "epochs": 100,
+    "batch_size": 128,
+    "lr": 0.001,
+    "weight_decay": 0.0
+  },
+  "adapt": {
+    "steps": 200,
+    "fit_batch_size": 16,
+    "query_batch_size": 196,
+    "target_batch_size": 16,
+    "lr": 0.0003,
+    "feedback_weight": 0.1,
+    "optimizer": "sgd"
+  },
+  "dtype": "float32",
+  "device": "cpu",
+  "num_threads": 1,
+  "deterministic": true,
+  "out_dir": "runs/sega_style_tqg",
+  "version": "v1"
+}

@@ -6,6 +6,7 @@
 
 | 阶段 | 目录 | 执行入口 | 汇总／报告 |
 |---|---|---|---|
+| 当前SEGA式TQG v1/v2 | [tqg/](tqg/) | [run_task.py](tqg/run_task.py)、[run_all.py](tqg/run_all.py) | 每个任务保存完整配置、历史、模型及产物SHA；[说明](../docs/code/sega_style_tqg.md) |
 | v1 早期验证 | [v1/](v1/) | [experiment.py](v1/experiment.py)、[diagnostics_pilot.py](v1/diagnostics_pilot.py) | [plot.py](v1/plot.py) |
 | v1 改进验证 | [v1/](v1/) | [run_revision_pipeline.py](v1/run_revision_pipeline.py)、[experiment_revision.py](v1/experiment_revision.py) | [summarize_revision.py](v1/summarize_revision.py) |
 | v1 完整 query 对照 | [v1/](v1/) | [full_query_experiment.py](v1/full_query_experiment.py)、[mutagenicity_experiment.py](v1/mutagenicity_experiment.py) | [mutagenicity_evaluate.py](v1/mutagenicity_evaluate.py) |

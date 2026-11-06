@@ -1,5 +1,7 @@
 # 代码阅读与执行入口
 
+**2026-11-06 起，当前主实现请先读 [SEGA式 TQG 流水线](sega_style_tqg.md)。** 阅读顺序：`pipeline.py` → `config.py`／`data.py` → `encoder.py`／`classifier.py` → `pretrain.py` → 对应版本的 `query.py`（v2 再读 `calibration.py`）→ `adapt.py` → `predict.py`。下面的实验编排和旧训练入口仍保留，用于已有研究记录。
+
 算法模块位于`tqg_gda/`，阶段实验与报告脚本位于`workflows/`，通用CLI位于`scripts/`。所有命令从仓库根目录执行；阶段入口使用`python -m workflows...`。完整分类见[实验脚本导航](../../workflows/README.md)和[旧路径映射](../workflow_migration.json)。
 
 ## 先读共用部分
@@ -7,15 +9,16 @@
 | 文件 | 内容 |
 |---|---|
 | [data.py](../../tqg_gda/data.py) | 图数据、域任务及数据角色 |
-| [models.py](../../tqg_gda/models.py) | GIN／GINE骨干与图级读出 |
-| [training.py](../../tqg_gda/training.py) | 源预训练、适配、模型恢复和更新 |
+| [encoder.py](../../tqg_gda/encoder.py)／[classifier.py](../../tqg_gda/classifier.py) | 当前SEGA骨干与TQG线性头 |
+| [pipeline.py](../../tqg_gda/pipeline.py)／[adapt.py](../../tqg_gda/adapt.py) | 当前完整流水线和逐步更新 |
+| [models.py](../../tqg_gda/models.py)／[training.py](../../tqg_gda/training.py) | 历史骨干、checkpoint与训练兼容接口 |
 | [tests/](../../tests/) | 数学、状态、训练与标签边界检查 |
 
 ## v1
 
 | 文件／入口 | 内容 |
 |---|---|
-| [feedback.py](../../tqg_gda/feedback.py) | 探测、有限响应、残差组合和输出纠错 |
+| [v1/query.py](../../tqg_gda/v1/query.py) | 探测、有限响应、残差组合和输出纠错；feedback.py保留导入兼容 |
 | [revision.py](../../tqg_gda/revision.py) | 改进实验反馈分支 |
 | [scripts/run_experiment.py](../../scripts/run_experiment.py) | 基础训练命令 |
 | [full_query_experiment.py](../../workflows/v1/full_query_experiment.py) | PROTEINS完整query矩阵 |
@@ -28,9 +31,9 @@
 
 | 顺序 | 文件 | 对应内容 |
 |---|---|---|
-| 1 | [feedback_v2.py](../../tqg_gda/feedback_v2.py) | 固定快照、目标Jacobian空间、响应、签名核、残差读取与反馈 |
-| 2 | [calibration_v2.py](../../tqg_gda/calibration_v2.py) | W的强凸校准求解、Ω及停止准则 |
-| 3 | [training.py](../../tqg_gda/training.py) | 源CE与参数反馈合并、停止梯度和SGD |
+| 1 | [v2/query.py](../../tqg_gda/v2/query.py) | 固定快照、目标Jacobian空间、响应、签名核、残差读取与反馈 |
+| 2 | [v2/calibration.py](../../tqg_gda/v2/calibration.py) | W的强凸校准求解、Ω及停止准则 |
+| 3 | [adapt.py](../../tqg_gda/adapt.py) | 源CE与参数反馈合并、停止梯度和SGD；旧training.py供历史流程使用 |
 | 4 | [p0_diagnostics.py](../../tqg_gda/p0_diagnostics.py) | 几何封存、目标标签Oracle与梯度／单步诊断 |
 | 5 | [d34_diagnostics.py](../../tqg_gda/d34_diagnostics.py) | 核与校准对照 |
 | 6 | [mechanism_diagnostics.py](../../tqg_gda/mechanism_diagnostics.py) · [query_label_diagnostics.py](../../tqg_gda/query_label_diagnostics.py) | 已知规律、残差拆分及标签／预测归因 |

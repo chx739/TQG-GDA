@@ -184,3 +184,20 @@ class GraphDomainTask:
             raise ValueError(f'No graphs in role {role}')
         chosen = tuple(pool[i] for i in torch.randperm(len(pool), generator=generator)[:count].tolist())
         return self.batch(chosen, role, device, dtype), chosen
+
+
+def load_task(config):
+    """SEGA-style pipeline adapter with TQG's fixed fit/query/validation roles.
+
+    The explicit source manifest preserves audited historical train/validation
+    membership. It is never recreated implicitly from a new model seed.
+    """
+    task = GraphDomainTask(config.cache_path, config.source_split,
+        target_index=config.target_index, target_policy='transductive-unlabeled',
+        fit_fraction=config.fit_fraction, split_seed=config.split_seed,
+        use_node_attributes=config.use_node_attributes, preprocess_pool='fit')
+    if task.manifest['dataset'] != config.dataset:
+        raise ValueError('Dataset differs from the source manifest')
+    if config.version == 'v2' and len(task.query_ids) < 2:
+        raise ValueError('v2 requires at least two actual source query graphs')
+    return task

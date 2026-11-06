@@ -2,6 +2,10 @@
 
 TQG（Target-Queried Gradient Learning）的图级域适应研究代码、实验设计和可核验实验记录。
 
+**当前开发分支：`TQG`。** 2026-11-06 按新 SEGA-GDA 代码的模块组织和编码器重建完整流水线，分别执行 v1、v2 文档。入口为 `python -m workflows.tqg.run_task`；见[新实现、公式对照与运行方式](docs/code/sega_style_tqg.md)。`TSBA` 与 `SEGA-ref` 是独立分支。
+
+新流水线已进行合成工程检查，尚未运行新的真实数据对照。下面的研究结果均来自已有实验配置和旧骨干，不能作为新实现的结果。
+
 **当前结论（2026-11-04）：真实数据上尚未获得跨任务稳定收益，也未证明逐图源标签提供稳定迁移增量。** 友好合成数据说明机制可以成立；真实任务中的迁移条件仍待诊断。工程验收与研究有效性分别记录。
 
 最新：[局部源经验／核读取优化完整结论](docs/v2/results/optimization_20261104/README.md)。A4、A2-b、A6均完成并审计；LOCAL/KERNEL均0/3通过，不触发连续适配。
@@ -11,7 +15,7 @@ TQG（Target-Queried Gradient Learning）的图级域适应研究代码、实验
 | 你要做什么 | 入口 |
 |---|---|
 | 看当前方法、计划和结果 | [v2研究主页](docs/v2/README.md) |
-| 回顾odd/even原方法及早期实验 | [v1历史研究主页](docs/v1/README.md) |
+| 阅读odd/even原方法及早期实验 | [v1研究主页](docs/v1/README.md) |
 | 看下一步怎么验证四项迁移条件 | [§3.8验证方案与已有证据](docs/v2/plans/assumptions_20261103/README.md)；第一批A0／A1／A2-a已完成 |
 | 查哪些实验已做、结论是什么 | [v2执行状态](docs/v2/results/status.md) · [全部实验归档](experiments/README.md) |
 | 精读代码、找运行入口或配置 | [代码导航](docs/code/README.md) · [实验脚本](workflows/README.md) · [配置导航](configs/README.md) |
@@ -33,8 +37,11 @@ Mutagenicity：[§3.8第一批条件诊断](docs/v2/results/tqg_assumptions_2026
 ## 目录
 
 ```text
-tqg_gda/              共用骨干、v1/v2算法及训练模块
+tqg_gda/              SEGA式共用流水线；v1/query、v2/query与calibration
+  models.py           旧骨干兼容入口，供历史checkpoint使用
+  training.py         旧训练接口，供已归档实验编排使用
 workflows/            实验编排、汇总、审计与报告生成
+  tqg/                当前v1/v2共用run_task、run_all
   v1/                 早期验证、改进实验、完整query对照
   v2/                 按P0、D3/D4、H-only、条件验证、优化等阶段分类
 scripts/              基础运行、评价、归档与校验工具
@@ -53,6 +60,7 @@ experiments/
   <实验名>/           原始日志、checkpoint、代码快照、SHA与评价索引
 data/splits/          源划分清单
 idx/                  SEGA提供的图规模域索引
+references/sega-gda/   新SEGA代码原样参考（排除原始数据）
 ```
 
 主文档已按版本归组。旧文档路径保留兼容符号链接；日常浏览以本页的新路径为准。原始实验归档、冻结协议、历史快照保留原路径与字节，不改写其来源记录。详见[整理规则与路径映射](docs/REPOSITORY_LAYOUT.md)。
