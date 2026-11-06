@@ -1,0 +1,18 @@
+test_adaptation_freezes_bn_and_dropout_and_executes_single_joint_step (test_sega_pipeline.SegaPipelineTests.test_adaptation_freezes_bn_and_dropout_and_executes_single_joint_step) ... ok
+test_cache_identity_includes_data_code_configuration_and_runtime (test_sega_pipeline.SegaPipelineTests.test_cache_identity_includes_data_code_configuration_and_runtime) ... ok
+test_config_rejects_silent_method_changes (test_sega_pipeline.SegaPipelineTests.test_config_rejects_silent_method_changes) ... ok
+test_encoder_matches_reference_gin_and_gine_in_eval_and_training (test_sega_pipeline.SegaPipelineTests.test_encoder_matches_reference_gin_and_gine_in_eval_and_training) ... ok
+test_end_to_end_cache_and_inference_for_both_versions (test_sega_pipeline.SegaPipelineTests.test_end_to_end_cache_and_inference_for_both_versions) ... ok
+test_initialization_and_cache_identity_ignore_ambient_default_dtype (test_sega_pipeline.SegaPipelineTests.test_initialization_and_cache_identity_ignore_ambient_default_dtype) ... ok
+test_numerical_failure_falls_back_to_one_source_step (test_sega_pipeline.SegaPipelineTests.test_numerical_failure_falls_back_to_one_source_step) ... ok
+test_pretrain_updates_bn_but_never_uses_query_labels (test_sega_pipeline.SegaPipelineTests.test_pretrain_updates_bn_but_never_uses_query_labels) ... ok
+test_target_label_boundary_both_versions (test_sega_pipeline.SegaPipelineTests.test_target_label_boundary_both_versions) ... ok
+test_v1_finite_responses_and_joint_gradient_on_sega_encoder (test_sega_pipeline.SegaPipelineTests.test_v1_finite_responses_and_joint_gradient_on_sega_encoder) ... ok
+test_v2_complete_space_contains_multiclass_oracle_gradient (test_sega_pipeline.SegaPipelineTests.test_v2_complete_space_contains_multiclass_oracle_gradient) ... ok
+test_v2_readout_is_label_independent_and_loss_executes_same_gradient (test_sega_pipeline.SegaPipelineTests.test_v2_readout_is_label_independent_and_loss_executes_same_gradient) ... ok
+test_zero_feedback_matches_fit_only_sgd_with_identical_fit_batches (test_sega_pipeline.SegaPipelineTests.test_zero_feedback_matches_fit_only_sgd_with_identical_fit_batches) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.084s
+
+OK

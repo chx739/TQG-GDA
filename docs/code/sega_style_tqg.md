@@ -2,6 +2,8 @@
 
 更新日期：2026-11-06。开发分支为 `TQG`，其起点为 `eb39fd7c5433420bd51f14e6330ba5067d164456`。本轮不修改 `SEGA-ref`、`TSBA` 或默认分支；已有实验、冻结协议和本地汇报稿保持原状。
 
+后续审查：[2026-11-07 独立代码 review 与合成检查](../validation/tqg_clean_review_20261107/README.md)。本次审查没有修改算法，尚未开展真实数据验证。
+
 ## 1. 采用什么范式，依据什么算法
 
 参考为用户提供的 [SEGA-GDA 原样代码](../../references/sega-gda/README.md)，文件清单与 SHA 见[来源记录](../../references/sega-gda.provenance.json)。方法依据为 [TQG v1](../v1/method/design.md) 和 [TQG v2](../v2/method/design.md)。

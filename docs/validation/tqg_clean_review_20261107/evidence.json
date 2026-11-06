@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-07",
+  "reviewed_commit": "8ff9abe7e38f5f64578f22994bcdd6d9117eaae5",
+  "branch": "TQG",
+  "reviewer_fork_turns": "none",
+  "confirmed_findings": {
+    "P1": 0,
+    "P2": 0,
+    "P3": 0
+  },
+  "existing_tests": {
+    "pipeline": 13,
+    "v1": 13,
+    "v2": 16,
+    "total": 42,
+    "status": "passed"
+  },
+  "supplemental_replay_matches": true,
+  "reference_manifest_files_checked": 30,
+  "reference_hashes_match": true,
+  "runtime": {
+    "python": "3.12.4",
+    "torch": "2.5.1",
+    "pyg": "2.6.1",
+    "device": "cpu",
+    "threads": 1
+  },
+  "real_dataset_training_started": false,
+  "real_target_labels_read": false,
+  "algorithm_modified": false,
+  "artifacts_sha256": {
+    "README.md": "cd10c331c894fcb06694443e771234ad1176bb8e7b9eb78136853937e2969fcd",
+    "pipeline.tests.log": "d724bef92948509002b87fb294c895a5005b60d3efdf9796b3bbda2457f604ab",
+    "synthetic.original.log": "10bd6ae9ebb5e2728486d3485e0984fac57c46928c32fe492838d4b95f315964",
+    "synthetic.replay.log": "10bd6ae9ebb5e2728486d3485e0984fac57c46928c32fe492838d4b95f315964",
+    "synthetic_checks.py": "6d3e28a85d86efe1b24f82a82cb032c490d468a319b6e831fe48a8c46881b52e",
+    "v1.tests.log": "f6778baf64bc9b15def3560351f82008971884fd6152c7a5fea07db14a80fea8",
+    "v2.tests.log": "21c14b4a926330227d7d02eda1b08382dd067a91b6bc52c00dd281413043f5d3"
+  }
+}

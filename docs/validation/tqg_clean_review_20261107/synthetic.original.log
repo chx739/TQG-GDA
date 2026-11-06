@@ -1,0 +1,63 @@
+[
+  {
+    "conv": "gin",
+    "dtype": "torch.float32",
+    "parameters": 35974,
+    "v1_gradient_relative_error": 9.764769970388443e-08,
+    "v1_directions": 4,
+    "v2_rank": 6,
+    "v2_gradient_error": 0.0,
+    "v2_converged": true,
+    "v2_gap": 1.0008438522390861e-11
+  },
+  {
+    "conv": "gine",
+    "dtype": "torch.float32",
+    "parameters": 36542,
+    "v1_gradient_relative_error": 0.0,
+    "v1_directions": 4,
+    "v2_rank": 6,
+    "v2_gradient_error": 0.0,
+    "v2_converged": true,
+    "v2_gap": 3.1654678878112463e-12
+  },
+  {
+    "conv": "gin",
+    "dtype": "torch.float64",
+    "parameters": 35974,
+    "v1_gradient_relative_error": 0.0,
+    "v1_directions": 4,
+    "v2_rank": 6,
+    "v2_gradient_error": 0.0,
+    "v2_converged": true,
+    "v2_gap": 2.2737367544323206e-13
+  },
+  {
+    "conv": "gine",
+    "dtype": "torch.float64",
+    "parameters": 36542,
+    "v1_gradient_relative_error": 2.397596820160719e-16,
+    "v1_directions": 4,
+    "v2_rank": 6,
+    "v2_gradient_error": 0.0,
+    "v2_converged": true,
+    "v2_gap": 2.0161650127192843e-12
+  },
+  {
+    "check": "raw_checkpoint_prediction_without_node_attributes",
+    "max_error": 0.0,
+    "class_labels": [
+      8,
+      8
+    ]
+  },
+  {
+    "check": "all_core_configs_parse_and_match_individuals",
+    "count": 15,
+    "versions": {
+      "v1": 6,
+      "v2": 6,
+      "source_only": 3
+    }
+  }
+]
