@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "plan_id": "tqg-sega-minimal-20261106",
+  "status": "designed_not_executed",
+  "algorithm_base_commit": "bc5bd81d34fff10cd953e34a331ceaf98d875992",
+  "execution_code_commit": null,
+  "input_manifest_sha256": "ecb038150f86711af36e76a5df22443b412f5f18dcb3f93465fde4e3ff65291f",
+  "dataset": "Mutagenicity",
+  "domains": [
+    1,
+    3
+  ],
+  "seeds": [
+    3405,
+    3406,
+    3407
+  ],
+  "target_labels": {
+    "training": false,
+    "development_diagnostics": true,
+    "final": false
+  },
+  "shared": {
+    "fit_batch": 16,
+    "query_graphs": 196,
+    "target_batch": 16,
+    "lr": 0.0003,
+    "beta": 0.1,
+    "optimizer": "sgd",
+    "dtype": "float32",
+    "device": "cpu"
+  },
+  "M0": {
+    "source_models": 3,
+    "epochs": 100,
+    "updates_per_model": 700,
+    "source_learning_min_seeds": 2,
+    "requires_numerical_checks": true
+  },
+  "M1": {
+    "snapshot": "selected_source_theta0",
+    "blocks_per_seed_domain": 4,
+    "paired_data_blocks": 24,
+    "version_blocks": 48,
+    "permutation_repeats": 3,
+    "random_repeats": 3,
+    "temporary_step_logical_max": 624,
+    "temporary_step_physical_max": 576,
+    "arms": [
+      "FROZEN",
+      "FIT-CE",
+      "FIT+QRY-CE",
+      "FIT+TRUE",
+      "FIT+MEAN-Y",
+      "FIT+PERM-1",
+      "FIT+PERM-2",
+      "FIT+PERM-3",
+      "FIT+RAND-1",
+      "FIT+RAND-2",
+      "FIT+RAND-3",
+      "FIT+ORACLE",
+      "TRUE-only",
+      "ORACLE-only"
+    ],
+    "gate": {
+      "cosine_positive": true,
+      "cosine_advantage": 0.05,
+      "min_positive_seeds": 2,
+      "paired_nonzero_coverage": 0.8,
+      "relative_ce_gain": 0.0001,
+      "numerical_fallback_max": 0.1,
+      "nonconverged_max": 0.1,
+      "required_tasks": 2,
+      "rule_file": "M1_feedback.md"
+    }
+  },
+  "M2": {
+    "conditional_on": "M0 and same version passing both M1 tasks",
+    "steps": 50,
+    "checkpoints": [
+      0,
+      10,
+      50
+    ],
+    "primary_checkpoint": 50,
+    "trajectories_both_versions": 30,
+    "trajectories_one_version": 18,
+    "updates_max": 1500,
+    "feedback_queries_max": 1200,
+    "controls_pending": [
+      "FIT+QRY-CE",
+      "v1 PERM",
+      "v2 PERM"
+    ],
+    "gate": {
+      "min_ba_gain_over_fit_pp": 0.5,
+      "min_positive_nll_seeds": 2,
+      "required_tasks": 2,
+      "rule_file": "M2_short_training.md"
+    }
+  },
+  "rng": {
+    "prefix": "tqg-sega-minimal-20261106",
+    "permutation": "fixed graph-ID mapping per seed shared across domains/versions",
+    "training_permutation": "perm/1",
+    "integer_derivation": "int.from_bytes(SHA256(message)[:8], big) % (2**63-1); see protocol.md for exact message"
+  },
+  "core_jobs": [
+    {
+      "version": "source_only",
+      "seed": 3405,
+      "domain": 1,
+      "config": "configs/sega_style/minimal_20261106/source_only_0_to_1_seed3405.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "source_only",
+      "seed": 3406,
+      "domain": 1,
+      "config": "configs/sega_style/minimal_20261106/source_only_0_to_1_seed3406.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "source_only",
+      "seed": 3407,
+      "domain": 1,
+      "config": "configs/sega_style/minimal_20261106/source_only_0_to_1_seed3407.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v1",
+      "seed": 3405,
+      "domain": 1,
+      "config": "configs/sega_style/minimal_20261106/v1_0_to_1_seed3405.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v1",
+      "seed": 3406,
+      "domain": 1,
+      "config": "configs/sega_style/minimal_20261106/v1_0_to_1_seed3406.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v1",
+      "seed": 3407,
+      "domain": 1,
+      "config": "configs/sega_style/minimal_20261106/v1_0_to_1_seed3407.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v1",
+      "seed": 3405,
+      "domain": 3,
+      "config": "configs/sega_style/minimal_20261106/v1_0_to_3_seed3405.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v1",
+      "seed": 3406,
+      "domain": 3,
+      "config": "configs/sega_style/minimal_20261106/v1_0_to_3_seed3406.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v1",
+      "seed": 3407,
+      "domain": 3,
+      "config": "configs/sega_style/minimal_20261106/v1_0_to_3_seed3407.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v2",
+      "seed": 3405,
+      "domain": 1,
+      "config": "configs/sega_style/minimal_20261106/v2_0_to_1_seed3405.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v2",
+      "seed": 3406,
+      "domain": 1,
+      "config": "configs/sega_style/minimal_20261106/v2_0_to_1_seed3406.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v2",
+      "seed": 3407,
+      "domain": 1,
+      "config": "configs/sega_style/minimal_20261106/v2_0_to_1_seed3407.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v2",
+      "seed": 3405,
+      "domain": 3,
+      "config": "configs/sega_style/minimal_20261106/v2_0_to_3_seed3405.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v2",
+      "seed": 3406,
+      "domain": 3,
+      "config": "configs/sega_style/minimal_20261106/v2_0_to_3_seed3406.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    },
+    {
+      "version": "v2",
+      "seed": 3407,
+      "domain": 3,
+      "config": "configs/sega_style/minimal_20261106/v2_0_to_3_seed3407.json",
+      "stage": "M2",
+      "ready_to_execute": false,
+      "gate": "M0/M1 passed and controls/evaluator implemented"
+    }
+  ],
+  "missing_before_execution": [
+    "diagnostic driver and production replay tests",
+    "fixed label mapping and MEAN-Y/RAND controls",
+    "query CE baseline",
+    "step0/10 snapshots",
+    "sealed development-only evaluator",
+    "paired summaries and gate decisions"
+  ],
+  "design_finalized": "2026-11-07"
+}

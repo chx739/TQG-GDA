@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "checked_on": "2026-11-07",
+  "scope": "design_assets_only",
+  "parsed_core_configs": 15,
+  "methods": {
+    "source_only": 3,
+    "v1": 6,
+    "v2": 6
+  },
+  "same_source_settings": true,
+  "data_roles_disjoint": true,
+  "role_and_index_hashes_match": true,
+  "diagnostic_pools_per_task": {
+    "A": 271,
+    "B": 271
+  },
+  "budget_arithmetic_matches": true,
+  "local_markdown_links_checked": 35,
+  "real_training_started": false,
+  "target_labels_read": false,
+  "algorithm_code_modified": false,
+  "pending_before_execution": [
+    "diagnostic driver and production replay tests",
+    "fixed label mapping and MEAN-Y/RAND controls",
+    "query CE baseline",
+    "step0/10 snapshots",
+    "sealed development-only evaluator",
+    "paired summaries and gate decisions"
+  ]
+}
