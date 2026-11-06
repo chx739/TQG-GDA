@@ -1,30 +1,42 @@
-# TQG-GDA
+# TSBA: Target-Score Boundary Adaptation
 
-本仓库从 2026-11-06 开始准备新的研究主线，以用户提供的 `SEGA-GDA(1).zip` 作为设计范式参考。**当前阶段只完成历史分支保留和新主线初始化，尚未设计或实现新的 TQG 算法。**
+本分支实现用户提供的 TSBA 设计：固定整图编码与坐标，以无标签目标分布的 score 提出边界法向位移，再用源 CE 和阻尼 Gauss–Newton 更新分类模块。代码遵循 SEGA 的模块划分和“候选求解 → 非线性重评估 → 接受／回溯”范式。
 
-## 分支与起点
+这是候选研究方法的工程实现，尚未进行真实数据有效性实验。测试通过不代表低密度分隔假设成立或目标准确率提高。
 
 | 分支 | 用途 |
-|---|---|
-| `main` | 新主线：设计准备、参考代码及其来源记录 |
-| `history/tqg-v2-20261106` | 完整保留之前的 TQG v1/v2 实现、文档、实验归档和提交历史 |
+| --- | --- |
+| `SEGA-ref` | 原 `main`，保留参考基线 `aff6582` |
+| `TSBA` | TSBA 实现、设计映射与合成检查 |
+| `history/tqg-v2-20261106` | 旧 TQG 实现和实验历史，固定 `eb39fd7` |
 
-历史版本固定在 [`eb39fd7c5433420bd51f14e6330ba5067d164456`](https://github.com/chx739/TQG-GDA/tree/eb39fd7c5433420bd51f14e6330ba5067d164456)。新的主线继续保留 Git 祖先关系，历史内容可以通过该提交或历史分支完整查看；它们不再作为新主线当前目录中的实现。
+## 设计与实现
 
-## 当前内容
+- [用户设计原文](docs/tsba/TSBA_Graph_Level_GDA_Design.md)：原样保存。
+- [实现映射与数值选择](docs/tsba/implementation.md)。
+- [数据角色、运行和推断](docs/tsba/usage.md)。
+- [独立 review 与修复记录](docs/tsba/review.md)。
+- [SEGA 参考及来源](docs/design-baseline.md)：参考快照保持原字节。
 
 ```text
-docs/design-baseline.md              参考范式、当前范围与待确定事项
-references/sega-gda/                 附件代码、说明及域索引的原样快照
-references/sega-gda.provenance.json   ZIP 来源、逐文件 SHA256 与省略清单
+tqg_gda/tsba/
+  config.py, data.py, encoder.py, pretrain.py
+  classifier.py, score.py, boundary.py
+  problem.py, subproblem.py, adapt.py, predict.py, pipeline.py
+workflows/tsba/run_task.py
+tests/tsba/
 ```
 
-[设计基准说明](docs/design-baseline.md) · [原始参考包说明](references/sega-gda/README.md) · [来源与校验记录](references/sega-gda.provenance.json) · [协作约定](AGENTS.md)
+## 安装与检查
 
-参考快照中的 Python、依赖声明、测试和域索引均保持附件原字节。附件内的原始数据没有加入 Git，因此参考 README 中“压缩包已带原始数据”的描述适用于原附件，不代表此仓库也包含该数据。历史 TQG 代码和实验归档未复制进新主线。
+Python >= 3.10，PyTorch >= 2.1，PyG >= 2.4。TSBA 不需要 SEGA 的 CVXPY 求解器依赖。
 
-## 当前工作范围
+```bash
+python -m pip install -e .
+python -m unittest discover -s tests/tsba -v
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.run_task --synthetic --output /tmp/tsba-smoke
+```
 
-当前没有新增 TQG 模块、损失函数、梯度查询、适配器或实验结果，也没有修改或修复参考算法。SEGA 参考代码仍是其自身方法的实现，不能当作新的 TQG 实现或新的有效性证据。
+输出目录必须不存在。`--synthetic` 仅生成小图检查工程链路，不读取真实数据或目标标签。`model.pt` 可独立推断；`result.json` 记录源风险、投影拒绝、求解残差和回溯接受结果。训练入口不计算目标准确率。
 
-后续先明确如何采用该设计范式，以及数据角色、评价协议和方法边界，再开始具体实现。参考包会在其真实数据入口读取整个目标域的标签；当前阶段不运行该入口，历史 final 标签继续保留。
+SEGA 参照分类器没有 TSBA 所需的线性分类头，不能直接导入其 checkpoint 并声称预测等价。TSBA 默认从明确的源训练池重新训练同类 GIN/GINE 架构及线性头；也可复用本实现生成且源数据、角色、配置身份匹配的 checkpoint。
