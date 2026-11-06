@@ -4,13 +4,13 @@ import unittest
 from pathlib import Path
 import torch
 from torch_geometric.data import Batch
-from tqg_gda.tsba.config import Config
-from tqg_gda.tsba.data import from_payload, load_task
-from tqg_gda.tsba.encoder import GraphEncoder
-from tqg_gda.tsba.pipeline import run_task, source_identity
-from tqg_gda.tsba.predict import load_predictor
-from tqg_gda.tsba.pretrain import graph_batches, pretrain_encoder
-from tqg_gda.tsba.score import train_score
+from tsba.config import Config
+from tsba.data import from_payload, load_task
+from tsba.encoder import GraphEncoder
+from tsba.pipeline import run_task, source_identity
+from tsba.predict import load_predictor
+from tsba.pretrain import graph_batches, pretrain_encoder
+from tsba.score import train_score
 from workflows.tsba.run_task import synthetic_task
 
 torch.set_num_threads(1)

@@ -1,10 +1,10 @@
 import dataclasses
 import unittest
 import torch
-from tqg_gda.tsba.adapt import adapt_classifier, backtrack
-from tqg_gda.tsba.classifier import ParameterMap
-from tqg_gda.tsba.problem import TsbaProblem
-from tqg_gda.tsba.subproblem import solve
+from tsba.adapt import adapt_classifier, backtrack
+from tsba.classifier import ParameterMap
+from tsba.problem import TsbaProblem
+from tsba.subproblem import solve
 from test_math import fixture, ConstantScore
 
 

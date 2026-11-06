@@ -3,9 +3,9 @@ import argparse
 import json
 from pathlib import Path
 import torch
-from tqg_gda.tsba.config import Config
-from tqg_gda.tsba.data import from_payload, load_task
-from tqg_gda.tsba.pipeline import run_task
+from tsba.config import Config
+from tsba.data import from_payload, load_task
+from tsba.pipeline import run_task
 
 
 def synthetic_task(seed=0):

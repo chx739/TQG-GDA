@@ -16,7 +16,7 @@ test = ["pytest>=7"]
 tsba = "workflows.tsba.run_task:main"
 
 [tool.setuptools.packages.find]
-include = ["tqg_gda*", "workflows*"]
+include = ["tsba*", "workflows*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests/tsba"]

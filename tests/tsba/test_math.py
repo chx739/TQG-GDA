@@ -3,13 +3,13 @@ import unittest
 import torch
 from torch import nn
 from torch.func import grad
-from tqg_gda.tsba.classifier import Coordinates, ResidualClassifier, ParameterMap
-from tqg_gda.tsba.config import Config
-from tqg_gda.tsba.boundary import build_boundaries, project
-from tqg_gda.tsba.problem import TsbaProblem
-from tqg_gda.tsba.subproblem import GGNSystem, solve
-from tqg_gda.tsba.score import bandwidth, denoising_loss
-from tqg_gda.tsba.utils import NumericalError
+from tsba.classifier import Coordinates, ResidualClassifier, ParameterMap
+from tsba.config import Config
+from tsba.boundary import build_boundaries, project
+from tsba.problem import TsbaProblem
+from tsba.subproblem import GGNSystem, solve
+from tsba.score import bandwidth, denoising_loss
+from tsba.utils import NumericalError
 
 torch.set_num_threads(1)
 

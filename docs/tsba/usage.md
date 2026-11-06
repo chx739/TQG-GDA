@@ -62,7 +62,7 @@ synthetic 默认缩小网络和预算，覆盖值全部记录。它不声称完�
 ## 独立推断
 
 ```python
-from tqg_gda.tsba.predict import load_predictor
+from tsba.predict import load_predictor
 model = load_predictor("/absolute/path/new-tsba-run/model.pt", device="cpu")
 probabilities = model.predict(unlabeled_pyg_graphs)
 classes = probabilities.argmax(dim=1)
