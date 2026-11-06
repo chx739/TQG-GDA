@@ -1,0 +1,16 @@
+test_complete_block_seals_before_development_access_and_is_reusable (test_minimal_validation.MinimalValidationTests.test_complete_block_seals_before_development_access_and_is_reusable) ... {"event": "block_complete", "seed": 3406, "domain": 1, "block": 0, "seconds": 6.11, "status": {"v1": "feedback", "v2": "gradient_feedback"}}
+ok
+test_final_label_access_and_unsealed_access_are_rejected (test_minimal_validation.MinimalValidationTests.test_final_label_access_and_unsealed_access_are_rejected) ... ok
+test_mean_y_preserves_prediction_and_centered_label_decomposition (test_minimal_validation.MinimalValidationTests.test_mean_y_preserves_prediction_and_centered_label_decomposition) ... ok
+test_numerical_failure_is_retained_as_zero_feedback (test_minimal_validation.MinimalValidationTests.test_numerical_failure_is_retained_as_zero_feedback) ... ok
+test_permutation_global_mapping_is_independent_of_batch_order (test_minimal_validation.MinimalValidationTests.test_permutation_global_mapping_is_independent_of_batch_order) ... ok
+test_permuted_training_changes_only_query_labels_and_preserves_schedule (test_minimal_validation.MinimalValidationTests.test_permuted_training_changes_only_query_labels_and_preserves_schedule) ... ok
+test_preset_gate_keeps_failed_seeds_and_requires_both_tasks (test_minimal_validation.MinimalValidationTests.test_preset_gate_keeps_failed_seeds_and_requires_both_tasks) ... ok
+test_query_ce_control_uses_same_ids_and_exact_joint_gradient (test_minimal_validation.MinimalValidationTests.test_query_ce_control_uses_same_ids_and_exact_joint_gradient) ... ok
+test_temporary_steps_restore_snapshot_and_use_actual_fp32_writeback (test_minimal_validation.MinimalValidationTests.test_temporary_steps_restore_snapshot_and_use_actual_fp32_writeback) ... ok
+test_true_gradients_match_canonical_paths_and_fixed_control_geometry (test_minimal_validation.MinimalValidationTests.test_true_gradients_match_canonical_paths_and_fixed_control_geometry) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 6.696s
+
+OK
