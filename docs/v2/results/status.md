@@ -1,6 +1,10 @@
 # TQG v2实验执行状态
 
-## 当前目标任务（2026-11-04，研究与归档完成）
+## 新SEGA式实现最小验证（2026-11-07，完成）
+
+[结果与完整表格](../../results/tqg_sega_minimal_20261107/README.md)：重新训练三个源模型，在Mutagenicity 0→1/3完成48个版本诊断块。源学习与数值检查通过，但v1/v2均0/2任务通过预登记研究门槛，未触发M2。已保存完整[日志、checkpoint、矩阵与梯度证据](../../../experiments/tqg_sega_minimal_20261107/README.md)，没有final标签读取。该轮使用新骨干，不能直接与下面旧骨干结果配对。
+
+## 历史目标任务（2026-11-04，研究与归档完成）
 
 [冻结协议](../plans/optimization_execution_20261104/README.md)对应用户review后的局部bank/核读取研究目标。
 

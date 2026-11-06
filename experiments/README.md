@@ -2,6 +2,7 @@
 
 | 版本 | 归档入口 | 可读结果 |
 |---|---|---|
+| 新SEGA式 v1/v2共同验证，11-07 | [完整原始归档](tqg_sega_minimal_20261107/README.md) | [M0/M1结果、M2不触发原因](../docs/results/tqg_sega_minimal_20261107/README.md) |
 | v1：有限扰动、odd/even | [v1归档索引](v1/README.md) | [结果与完整表格](../docs/v1/results/README.md) |
 | v2：Jacobian、核查询、梯度反馈 | [v2归档索引](v2/README.md) | [结果及最新状态](../docs/v2/results/README.md) |
 

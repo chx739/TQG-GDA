@@ -1,0 +1,31 @@
+{
+  "scope": "post-run summary of recorded numerical checks; fixed FP32 primary results",
+  "versions": {
+    "v1": {
+      "blocks": 24,
+      "gradient_identity_max_relative_error": 6.707750605093943e-07,
+      "gradient_identity_max_absolute_error": 2.682985210712372e-06,
+      "fallbacks": 0,
+      "unchanged_states": 24,
+      "execution_space_dimensions": [
+        7,
+        8
+      ]
+    },
+    "v2": {
+      "blocks": 24,
+      "gradient_identity_max_relative_error": 0.0,
+      "gradient_identity_max_absolute_error": 0.0,
+      "fallbacks": 0,
+      "unchanged_states": 24,
+      "execution_space_dimensions": [
+        16
+      ],
+      "calibrations_converged": 24
+    }
+  },
+  "logical_nonfrozen_steps": 624,
+  "max_rounded_sgd_parameter_error": 2.9802322387695312e-08,
+  "zero_actual_nonfrozen_steps": 0,
+  "max_FP32_FP64_change_discrepancy": 2.9380757449182227e-07
+}

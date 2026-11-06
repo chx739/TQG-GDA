@@ -1,0 +1,59 @@
+{
+  "query": {
+    "version": "v2",
+    "status": "gradient_feedback",
+    "target_labels_used": false,
+    "rank": 16,
+    "rank_tolerance": 1.3152448155087768,
+    "largest_singular_value": 306.84075927734375,
+    "smallest_retained_singular_value": 16.07608985900879,
+    "rank_policy": "all_numerically_nonzero",
+    "target_jacobian_rows": 16,
+    "parameter_count": 35957,
+    "scale_h_squared": 155.2590252121206,
+    "scale_a_squared": 15427.8520758618,
+    "scale_h_at_floor": false,
+    "scale_a_at_floor": false,
+    "signature": "representation_response",
+    "source_target_kernel_mean": 0.4060148166493081,
+    "source_target_kernel_max": 0.9163981953025969,
+    "calibration": {
+      "mode": "joint",
+      "converged": true,
+      "iterations": 3,
+      "termination": "gap_tolerance",
+      "gap": 3.48413813355819e-07,
+      "primal": 46.409148940121725,
+      "dual": 46.40914859170792,
+      "mean_error": 4.613815263384047,
+      "max_error": 39.949277770996915,
+      "weight_norm": 54.347855975974134,
+      "backtracks": 2
+    },
+    "source_query_graphs": 196,
+    "target_graphs": 16,
+    "residual_norm": 7.90743577699361,
+    "coefficient_norm": 14.574056544447746
+  },
+  "query_and_execution_seconds": 2.2108815498650074,
+  "primary_query_seconds": 2.207206293940544,
+  "calibration_seconds": 0.00925874337553978,
+  "gradient_identity": {
+    "absolute": 0.0,
+    "relative": 0.0
+  },
+  "space_dim": 16,
+  "deterministic_replay": false,
+  "model_hash": "5a66d0c82a0e0cc4469f2efa55d7fd1e9cd097ed1864b763d1b49f59f2bcceb0",
+  "state_unchanged": true,
+  "gradient_hashes": {
+    "TRUE": "a8a77f8c9d04ef0374f1e336fd0c1f8ea00de158bed701b30decd355d890ebeb",
+    "MEAN-Y": "df3642e9cc2cd3cdbc4eee793e404b201c6e93a47d027ed7bca08acfdeed692f",
+    "PERM-1": "07457747e798f86d2c7ac07455c650a0a204c5dc6fbf8450e66058cc23304f6e",
+    "RAND-1": "35aabdbc75deacb574b61c4899e6a2511c1268e0010d76a463adaa333a87d2b4",
+    "PERM-2": "ef51b92ded2b828605ee952cb0f6fce2b65bd2e0497054aee08b934711eba595",
+    "RAND-2": "594444d36341008984207438efd2e409545db0655ad6263b839e587cabb09f59",
+    "PERM-3": "6b6e703e50907729e75316b39eda9036c11c5b7da93fbebde79b9e1eae498c1c",
+    "RAND-3": "aba757bfa7ef1747226869147eeb1053b4736a0933a6a58239cf1e74eaf27cfa"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "query": {
+    "version": "v2",
+    "status": "gradient_feedback",
+    "target_labels_used": false,
+    "rank": 16,
+    "rank_tolerance": 0.5978059627759649,
+    "largest_singular_value": 139.46546936035156,
+    "smallest_retained_singular_value": 13.727714538574219,
+    "rank_policy": "all_numerically_nonzero",
+    "target_jacobian_rows": 16,
+    "parameter_count": 35957,
+    "scale_h_squared": 92.96587637244741,
+    "scale_a_squared": 11679.663825480813,
+    "scale_h_at_floor": false,
+    "scale_a_at_floor": false,
+    "signature": "representation_response",
+    "source_target_kernel_mean": 0.34658125104738885,
+    "source_target_kernel_max": 0.8822559372571542,
+    "calibration": {
+      "mode": "joint",
+      "converged": true,
+      "iterations": 3,
+      "termination": "gap_tolerance",
+      "gap": 2.7793213064342126e-08,
+      "primal": 52.68974005569604,
+      "dual": 52.68974002790283,
+      "mean_error": 5.302390295442297,
+      "max_error": 47.04496778155374,
+      "weight_norm": 23.405366177866362,
+      "backtracks": 1
+    },
+    "source_query_graphs": 196,
+    "target_graphs": 16,
+    "residual_norm": 8.034155605487701,
+    "coefficient_norm": 8.989116931968534
+  },
+  "query_and_execution_seconds": 2.141605895012617,
+  "primary_query_seconds": 2.137942437082529,
+  "calibration_seconds": 0.00793323665857315,
+  "gradient_identity": {
+    "absolute": 0.0,
+    "relative": 0.0
+  },
+  "space_dim": 16,
+  "deterministic_replay": false,
+  "model_hash": "17e5b08e94374c14178221cce149397c96c6367e2aeaee67c0c5c87b1e1cb9bf",
+  "state_unchanged": true,
+  "gradient_hashes": {
+    "TRUE": "e8c0e1c0385bbb401325b81261c5fd68d441d257c604c65c95e162fa76b7bd7b",
+    "MEAN-Y": "f4003a3209d76a50bc7a750a39c38c418a64dacf43a47e7cd90c0b83e2c2cb10",
+    "PERM-1": "71d5047780ac931b81ea89ee1fc378c481538bd95cb445deb15ad222936ffafe",
+    "RAND-1": "7b3bf61ee7150ac8f82a0db0b6931cabd63f2493b62da58144531418d15278c8",
+    "PERM-2": "77f9ab225d510b3be04ce0f796430172e7134c128e776c49356afa4a0e7c68dd",
+    "RAND-2": "e82f77a68a7da4dc4494cbe9f1659d821892c65ea74825b13961c2a617cc0417",
+    "PERM-3": "2f74073311b1467bf663dd4016ff55d40c0b14cdd3b77d181dc89b6b412e1090",
+    "RAND-3": "6278237af6a019f560863a72cfa5b813c1fce3d538475af00f9e573e1285d0b6"
+  }
+}

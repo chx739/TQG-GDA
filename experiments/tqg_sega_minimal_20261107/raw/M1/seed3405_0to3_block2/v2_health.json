@@ -1,0 +1,59 @@
+{
+  "query": {
+    "version": "v2",
+    "status": "gradient_feedback",
+    "target_labels_used": false,
+    "rank": 16,
+    "rank_tolerance": 0.5005419165136118,
+    "largest_singular_value": 116.77420043945312,
+    "smallest_retained_singular_value": 8.07418155670166,
+    "rank_policy": "all_numerically_nonzero",
+    "target_jacobian_rows": 16,
+    "parameter_count": 35957,
+    "scale_h_squared": 155.2590252121206,
+    "scale_a_squared": 8680.497906875935,
+    "scale_h_at_floor": false,
+    "scale_a_at_floor": false,
+    "signature": "representation_response",
+    "source_target_kernel_mean": 0.38065857487024063,
+    "source_target_kernel_max": 0.9026998761126375,
+    "calibration": {
+      "mode": "joint",
+      "converged": true,
+      "iterations": 3,
+      "termination": "gap_tolerance",
+      "gap": 1.144675280784213e-06,
+      "primal": 24.051442394020967,
+      "dual": 24.051441249345686,
+      "mean_error": 2.3342365339881352,
+      "max_error": 21.16471445099841,
+      "weight_norm": 29.73190633738562,
+      "backtracks": 1
+    },
+    "source_query_graphs": 196,
+    "target_graphs": 16,
+    "residual_norm": 7.90743577699361,
+    "coefficient_norm": 19.243726041850472
+  },
+  "query_and_execution_seconds": 2.2889098823070526,
+  "primary_query_seconds": 2.2830086573958397,
+  "calibration_seconds": 0.007610101252794266,
+  "gradient_identity": {
+    "absolute": 0.0,
+    "relative": 0.0
+  },
+  "space_dim": 16,
+  "deterministic_replay": false,
+  "model_hash": "5a66d0c82a0e0cc4469f2efa55d7fd1e9cd097ed1864b763d1b49f59f2bcceb0",
+  "state_unchanged": true,
+  "gradient_hashes": {
+    "TRUE": "ed44a65f089d54eab503e8cf5567f2d6445aa594638cd18e7257b577eab9f8c3",
+    "MEAN-Y": "aeb23f42239bed8fc986acece714e7cadf5891a518ac9b8a1325471fd3cebcf4",
+    "PERM-1": "cd7e92e21cbce19e5dc575a5cd2c710e6bd605b91f6c86d1897f7737370ffe41",
+    "RAND-1": "2ea4dfb8b09fb0815668dec959e0a59a8d154fc453ae36b9240f6abd4ed6b1d3",
+    "PERM-2": "74e52b52ab81dfa04e2983ded9bf37bf7a8f961c150b1b5fdd9587e328344ce2",
+    "RAND-2": "89293827a63e94a29578f2efe854367233f79505a6a56b59809efa1fd754e4c6",
+    "PERM-3": "18383564f77bcd28cf8639cf6aa0ae2d52a26e0a5067ef5df819b8f274bcf875",
+    "RAND-3": "56fcf18dd8b10335e1b8e7d3f2cd5f19cfbe55f0cbe598dfdfe2351fea546d81"
+  }
+}
