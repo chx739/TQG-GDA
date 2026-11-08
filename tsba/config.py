@@ -4,6 +4,8 @@ import math
 
 
 @dataclass(frozen=True)
+# §3.15：运行前固定的工程配置。下列数值是默认选择，不是文档证明的最优值。
+# 公式符号沿用 docs/tsba/TSBA_Graph_Level_GDA_Design.md。
 class Config:
     seed: int = 0
     encoder: str = "gin"
@@ -25,8 +27,11 @@ class Config:
     adapt_rounds: int = 30
     source_adapt_batch: int = 128
     target_batch: int = 128
+    # §3.10：lambda_boundary=λB，控制源 CE 与边界位移拟合的相对权重。
     lambda_boundary: float = 1.0
+    # §3.8：τ 为无量纲移动系数；ν=−clip(τ·sigma²·γ)。
     tau: float = 0.1
+    # §3.7、§3.12：三个不同预算分别限制投影距离、请求位移、执行时的归一化变化。
     radius_multiplier: float = 1.0  # R_proj = multiplier * sigma * sqrt(d)
     request_multiplier: float = 0.1  # Delta_max = multiplier * sigma
     execution_multiplier: float = 0.1  # Delta_exec = multiplier * sigma
@@ -36,11 +41,13 @@ class Config:
     projection_steps: int = 20
     projection_backtracks: int = 10
     movement_zero: float = 1e-12  # zero-request tolerance, in units of sigma
+    # §3.11：damping=μ_t，本版本固定常数；它是数值阻尼，不是目标风险置信度。
     damping: float = 1e-2  # constant mu_t, fixed before adaptation
     solver: str = "auto"
     direct_max_params: int = 2048
     cg_tolerance: float = 1e-7
     cg_steps: int = 200
+    # §3.12：armijo=cA∈(0,1)，backtracks 限制 α=2^(−k) 的尝试次数。
     armijo: float = 1e-4
     backtracks: int = 15
     adaptation_dtype: str = "float64"

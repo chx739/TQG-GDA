@@ -5,6 +5,8 @@ from torch.func import functional_call
 from .utils import finite
 
 
+# §3.2 固定整图坐标：mean=μH∈R^d，scale=sH 是全局标量。
+# 统计量作为 buffer 保存，不作为可训练参数。
 class Coordinates(nn.Module):
     def __init__(self, mean, scale):
         super().__init__()
@@ -14,15 +16,20 @@ class Coordinates(nn.Module):
     @classmethod
     def fit(cls, source_h, eps):
         finite(source_h)
+        # μH=(1/nS)Σ_i h_i；sH=sqrt((1/(nS·d))Σ_i||h_i−μH||²+εH²)。
+        # 下面第二次 mean 同时平均样本与维度，不是逐维标准差。
         mean = source_h.mean(0)
         scale = ((source_h - mean).square().mean() + eps ** 2).sqrt()
         finite(scale)
         return cls(mean, scale)
 
     def forward(self, h):
+        # §3.2：x=(h−μH)/sH；to 同时对齐统计量的设备和精度。
         return (h.to(self.mean) - self.mean) / self.scale
 
 
+# §3.3：f_ψ(x)=P_C[Wx+b+U2·SiLU(U1x+a)]。
+# linear 对应 W,b；first 对应 U1,a；last 对应无偏置的 U2。
 class ResidualClassifier(nn.Module):
     def __init__(self, dim, classes, width, *, device=None, dtype=None):
         super().__init__()
@@ -30,6 +37,7 @@ class ResidualClassifier(nn.Module):
         self.first = nn.Linear(dim, width, device=device, dtype=dtype)
         self.last = nn.Linear(width, classes, bias=False, device=device, dtype=dtype)
         nn.init.zeros_(self.first.bias)
+        # U2=0 使残差初始为零；U1 保留随机初始化，后续属于可训练 ψ。
         nn.init.zeros_(self.last.weight)
 
     @classmethod
@@ -41,15 +49,20 @@ class ResidualClassifier(nn.Module):
         model = model.to(coordinates.mean.device)
         with torch.no_grad():
             w = linear.weight.to(coordinates.mean)
+            # 由 h=sH·x+μH 得 W0h+b0=(sH·W0)x+(W0·μH+b0)。
+            # 因此以下复制在数学上保持源模型的初始概率。
             model.linear.weight.copy_(coordinates.scale * w)
             model.linear.bias.copy_(w @ coordinates.mean + linear.bias.to(w))
         return model
 
     def forward(self, x):
         logits = self.linear(x) + self.last(nn.functional.silu(self.first(x)))
+        # P_C=I−11ᵀ/C：减去类别平均 logit，不改变 softmax 或两类 margin。
         return logits - logits.mean(-1, keepdim=True)
 
 
+# §3.9、§3.12–3.13：将 ψ 展平为 [P]，候选用独立向量求值。
+# 只有 commit 修改真实模型；不反传穿过求解过程做元学习。
 class ParameterMap:
     """Functional candidate evaluation: rejected steps never mutate the live model."""
     def __init__(self, model):
@@ -67,8 +80,10 @@ class ParameterMap:
         return result
 
     def logits(self, vector, x):
+        # 以候选 ψ 临时替换参数进行前向；保留对 vector 的响应，不覆盖当前参数。
         return functional_call(self.model, self.mapping(vector), (x,))
 
+    # §3.12：仅由验收通过的分支调用，提交 ψ_next=ψ_bar+α·δ。
     def commit(self, vector):
         finite(vector)
         with torch.no_grad():

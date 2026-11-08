@@ -8,6 +8,8 @@ from torch import nn
 from torch_geometric.nn import GINConv, GINEConv, global_add_pool
 
 
+# §3.2 的 h_theta0(G)：将不同大小的完整图编码为同维向量。
+# 具体 GIN/GINE、BN、逐层 sum pooling 拼接及投影沿用 SEGA 架构范式。
 class GraphEncoder(nn.Module):
     def __init__(self, in_dim, edge_dim, hidden=64, num_layers=3, out_dim=16,
                  dropout=0.0, conv="gin"):
@@ -28,12 +30,14 @@ class GraphEncoder(nn.Module):
                                      nn.Linear(hidden, out_dim))
         self.frozen = False
 
+    # §3.2、§3.13：requires_grad=False 固定参数；eval 固定 BN 统计并关闭 dropout。
     def freeze(self):
         self.frozen = True
         self.requires_grad_(False)
         self.eval()
         return self
 
+    # 即使外层模块调用 train()，被冻结的编码器仍保持评估模式。
     def train(self, mode=True):
         return super().train(False if self.frozen else mode)
 
@@ -46,5 +50,7 @@ class GraphEncoder(nn.Module):
             x = conv(x, data.edge_index, ea) if self.spec["conv"] == "gine" else conv(x, data.edge_index)
             x = torch.relu(bn(x))
             x = nn.functional.dropout(x, self.spec["dropout"], self.training)
+            # 逐层读出 H_l(G)=Σ_{v∈G}h_v^(l)，拼接后经 readout 得整图向量。
+            # 这是所采用的 SEGA 骨干结构，不是 TSBA 新增的边界适配目标。
             pooled.append(global_add_pool(x, data.batch))
         return self.readout(torch.cat(pooled, dim=-1))

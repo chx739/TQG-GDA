@@ -11,6 +11,7 @@ from .encoder import GraphEncoder
 from .utils import finite
 
 
+# §3.2：z0(G)=W0·h_theta0(G)+b0；encoder 对应 h，head 对应 W0,b0。
 class SourceModel(nn.Module):
     def __init__(self, encoder, classes):
         super().__init__()
@@ -21,6 +22,7 @@ class SourceModel(nn.Module):
         return self.head(self.encoder(graph_batch))
 
 
+# 工程批处理：按既定顺序使用每张图一次；合并不足两个节点的批次以满足 BN。
 def graph_batches(graphs, size, order=None):
     order = list(range(len(graphs))) if order is None else order
     chunks = [list(order[i:i + size]) for i in range(0, len(order), size)]
@@ -56,6 +58,8 @@ def source_metrics(model, pool, batch_size, device):
     return dict(ce=float(torch.cat(losses).mean()), accuracy=correct / len(pool.graphs))
 
 
+# §3.2：只用合法源训练标签，通过普通 CE 建立类别语义和表示。
+# 此阶段更新编码器与线性头；适配阶段才冻结编码器。
 def pretrain_encoder(cfg, data, logger=None):
     dim, edge_dim, classes = data.validate()
     encoder = GraphEncoder(dim, edge_dim, cfg.hidden, cfg.num_layers, cfg.emb_dim, cfg.dropout, cfg.encoder)
@@ -73,6 +77,7 @@ def pretrain_encoder(cfg, data, logger=None):
             if batch.num_nodes < 2:
                 raise ValueError("SEGA BatchNorm architecture requires >=2 source nodes per training batch")
             labels = data.source_train.labels[ids].to(cfg.device)
+            # L_src=−(1/BS)Σ_i log p_theta,W,b(y_i^S|G_i^S)，PyTorch 默认取批次均值。
             loss = F.cross_entropy(model(batch), labels)
             finite(loss)
             opt.zero_grad(set_to_none=True)
@@ -81,6 +86,7 @@ def pretrain_encoder(cfg, data, logger=None):
             opt.step()
             finite(*(p for p in model.parameters()))
             total += float(loss.detach()) * len(ids)
+        # 源验证只用于源初始化选模，不加入梯度训练；无验证池时保留最后预定 epoch。
         validation = source_metrics(model, data.source_validation, cfg.source_batch, cfg.device)
         history.append(dict(epoch=epoch, train_ce=total / len(order), source_validation=validation))
         if validation is None or validation["ce"] < best:
@@ -97,6 +103,7 @@ def pretrain_encoder(cfg, data, logger=None):
 
 
 @torch.no_grad()
+# §3.2：冻结 theta0 并缓存整图 h；no_grad/detach 切断后续适配到 GNN 的梯度。
 def encode(encoder, graphs, batch_size, device):
     encoder.freeze()
     outputs = [encoder(Batch.from_data_list([graphs[i] for i in ids]).to(device))

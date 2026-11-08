@@ -24,12 +24,16 @@ class GraphPool:
 
 
 @dataclass
+# §3.1–3.2：S={(G_i^S,Y_i^S)}、T={G_j^T}；源验证保留独立角色。
+# 每个 graph 是完整图；目标池只有结构和属性，不能携带类别标签。
 class TaskData:
     source_train: GraphPool
     source_validation: GraphPool
     target: GraphPool
     protocol: str
 
+    # 检查协议声明、跨角色 ID 互斥、特征兼容与源类别范围。
+    # 这些是数据契约检查，不替代外部确认源监督预算和 final 数据权限。
     def validate(self):
         if self.protocol not in ("transductive", "inductive"):
             raise ValueError("protocol must explicitly be transductive or inductive")
@@ -83,6 +87,8 @@ class TaskData:
         return {name: getattr(self, name).fingerprint() for name in ("source_train", "source_validation", "target")}
 
 
+# §3.1：读取时白名单校验字段；目标记录不允许 label/y。
+# 源标签单独放入 GraphPool.labels，编码器接收的图对象不带 y。
 def from_payload(payload):
     required = {"schema_version", "protocol", "source_train", "source_validation", "target"}
     if set(payload) != required or payload["schema_version"] != 1:
