@@ -59,7 +59,9 @@ def solve(problem):
     cfg = problem.cfg
     system = GGNSystem(problem)
     rhs = system.rhs
-    rhs_norm = float(rhs.norm())
+    rhs_norm_tensor = rhs.norm()
+    finite(rhs_norm_tensor)
+    rhs_norm = float(rhs_norm_tensor)
     method = cfg.solver
     if method == "auto":
         method = "direct" if rhs.numel() <= cfg.direct_max_params else "cg"
@@ -94,8 +96,11 @@ def solve(problem):
     finite(delta)
     # 数值验收：真实相对残差 ||Aδ−b||/||b||；
     # 因为 ∇J_t=−b，还要求 directional=∇J_tᵀδ<0。这不是目标风险下降证明。
-    relative = float((system.matvec(delta) - rhs).norm()) / rhs_norm
-    directional = float((-rhs) @ delta)
+    relative_tensor = (system.matvec(delta) - rhs).norm() / rhs_norm_tensor
+    directional_tensor = (-rhs) @ delta
+    # §3.14：有限分量的归约也可能溢出，不能将其记作普通候选拒绝。
+    finite(relative_tensor, directional_tensor)
+    relative, directional = float(relative_tensor), float(directional_tensor)
     valid = relative <= cfg.cg_tolerance and directional < 0
     return delta.detach(), dict(valid=valid, reason="solved" if valid else "inaccurate_or_non_descent",
                                solver=method, iterations=iterations, relative_residual=relative,

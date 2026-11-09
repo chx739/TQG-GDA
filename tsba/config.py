@@ -45,7 +45,9 @@ class Config:
     damping: float = 1e-2  # constant mu_t, fixed before adaptation
     solver: str = "auto"
     direct_max_params: int = 2048
-    cg_tolerance: float = 1e-7
+    # §3.11：None 在构造时按精度确定默认值；显式容差不会被静默放宽。
+    # float32 的 Jacobian/矩阵乘法舍入误差高于 float64；两条求解路径共用验收值。
+    cg_tolerance: float | None = None
     cg_steps: int = 200
     # §3.12：armijo=cA∈(0,1)，backtracks 限制 α=2^(−k) 的尝试次数。
     armijo: float = 1e-4
@@ -54,6 +56,10 @@ class Config:
     device: str = "cpu"
 
     def __post_init__(self):
+        if self.adaptation_dtype not in ("float32", "float64"):
+            raise ValueError("adaptation_dtype must be float32 or float64")
+        if self.cg_tolerance is None:
+            object.__setattr__(self, "cg_tolerance", 1e-5 if self.adaptation_dtype == "float32" else 1e-7)
         integers = ("seed", "hidden", "num_layers", "emb_dim", "source_epochs", "source_batch",
                     "adapter_width", "score_hidden", "score_epochs", "score_batch", "adapt_rounds",
                     "source_adapt_batch", "target_batch", "projection_steps", "projection_backtracks",
@@ -76,8 +82,6 @@ class Config:
             raise ValueError("invalid dropout or Armijo coefficient")
         if self.encoder not in ("gin", "gine") or self.solver not in ("auto", "direct", "cg"):
             raise ValueError("unknown encoder or solver")
-        if self.adaptation_dtype not in ("float32", "float64"):
-            raise ValueError("adaptation_dtype must be float32 or float64")
         if type(self.score_validation) is not bool:
             raise ValueError("score_validation must be boolean")
 

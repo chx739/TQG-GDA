@@ -110,6 +110,36 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(source_key, source_identity(cfg, changed))
         self.assertNotEqual(source_key, source_identity(dataclasses.replace(cfg, source_epochs=3), changed))
 
+    def test_trained_score_pipeline_accepts_updates_and_persists_them(self):
+        # 固定的合成 CLI 场景：不能只用 completed 覆盖“每轮无锚点”的空执行。
+        # 使用实际训练的 score，不注入常量 score 或绕过边界投影。
+        for solver in ("direct", "cg"):
+            with self.subTest(solver=solver), tempfile.TemporaryDirectory() as tmp:
+                cfg = Config(hidden=8, num_layers=2, emb_dim=4, source_epochs=3,
+                             source_batch=16, score_hidden=8, score_epochs=5,
+                             adapt_rounds=3, target_batch=10, solver=solver)
+                data = synthetic_task()
+                out = Path(tmp) / "trained-score"
+                model, result = run_task(cfg, data, out)
+                self.assertEqual(result["status"], "completed")
+                self.assertEqual(len(result["score"]["history"]), cfg.score_epochs)
+                accepted = [row for row in result["adaptation"]["history"] if row["accepted"]]
+                self.assertGreater(len(accepted), 0)
+                for row in accepted:
+                    self.assertGreater(row["anchors"], 0)
+                    self.assertGreater(row["max_request"], 0)
+                    trial = row["trials"][-1]
+                    self.assertTrue(trial["armijo"] and trial["bounded"])
+                    self.assertLess(trial["objective"], row["before"]["objective"])
+                    self.assertLessEqual(trial["max_movement"], cfg.execution_multiplier * result["sigma"])
+                predictions = torch.load(out / "predictions.pt", weights_only=True)
+                self.assertFalse(torch.equal(predictions["initial_probabilities"], predictions["probabilities"]))
+                loaded = load_predictor(out / "model.pt")
+                torch.testing.assert_close(loaded.predict(data.target.graphs),
+                                           predictions["probabilities"], atol=0, rtol=0)
+                torch.testing.assert_close(model.predict(data.target.graphs),
+                                           predictions["probabilities"], atol=0, rtol=0)
+
     def test_legacy_first_last_checkpoint_preserves_predictions(self):
         from tsba.predict import save_predictor
         data = synthetic_task()

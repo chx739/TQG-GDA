@@ -51,7 +51,10 @@ def project(model, x, pair, radius, tolerance, cfg):
         if float(residual) <= tolerance:
             break
         # §3.7 投影步：Δξ=−m(ξ)·∇m(ξ)/(||∇m(ξ)||²+ε_proj)。
-        direction = -margin * gradient / (norm.square() + cfg.projection_eps)
+        # 范数有限不代表其平方有限；分母溢出会把方向伪装成零，必须停止。
+        denominator = norm.square() + cfg.projection_eps
+        finite(denominator)
+        direction = -margin * gradient / denominator
         finite(direction)
         accepted = False
         for back in range(cfg.projection_backtracks):

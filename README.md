@@ -13,6 +13,7 @@
 ## 设计与实现
 
 - [用户设计原文](docs/tsba/TSBA_Graph_Level_GDA_Design.md)：原样保存。
+- [人工代码审查导航](docs/tsba/code-review-guide.md)：阅读顺序、公式与测试入口。
 - [实现映射与数值选择](docs/tsba/implementation.md)。
 - [数据角色、运行和推断](docs/tsba/usage.md)。
 - [独立 review 与修复记录](docs/tsba/review.md)。

@@ -11,4 +11,4 @@
 - Prefer GitHub URLs for published code, data and reports; use local paths for unpublished artifacts. Resolve report symlinks before publishing links.
 - Reusable TSBA code belongs in `tsba/`, workflows in `workflows/tsba/`, and tests in `tests/tsba/`. The implementation request authorizes synthetic engineering checks; real-data research runs require a specified data protocol.
 
-- `docs/tsba/review-guide.md` is user-requested local-only material. Keep it untracked and ignored; never publish its contents without explicit subsequent authorization.
+- On 2026-11-09 the user explicitly authorized updating and publishing the review navigation as `docs/tsba/code-review-guide.md`. Keep that published guide aligned with code and tests. The old `docs/tsba/review-guide.md` name remains ignored as a legacy local copy; do not republish under the old name.

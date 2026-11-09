@@ -40,7 +40,7 @@ python -m workflows.tsba.run_task \
   --output /absolute/path/new-tsba-run
 ```
 
-配置是 Config 字段的 JSON 子集，未知字段报错。复用源模型时添加 `--source-checkpoint /absolute/path/previous-run/source.pt`；源数据、角色、架构或预训练配置不匹配会报错，目标池可以改变。
+配置是 Config 字段的 JSON 子集，未知字段报错。默认 adaptation_dtype 为 float64。cg_tolerance 未指定或为 null 时，float64 使用 1e-7、float32 使用 1e-5；显式正容差原样保留。它同时控制直接求解和 CG 的真实相对残差验收，运行记录保存解析后的值。过严容差仍可能导致更新全部被拒绝，应检查 adaptation.history 中的原因与残差。Python 中对已解析配置调用 `dataclasses.replace` 更改精度时，若要重新使用该精度的默认容差，需同时传 `cg_tolerance=None`；否则保留原配置的显式数值。复用源模型时添加 `--source-checkpoint /absolute/path/previous-run/source.pt`；源数据、角色、架构或预训练配置不匹配会报错，目标池可以改变。
 
 纯工程检查无需真实输入：
 

@@ -15,11 +15,17 @@ def bandwidth(x, kappa, chunk=256):
         raise ValueError("bandwidth requires nonempty [samples, dimensions] coordinates")
     if bool((x == x[:1]).all()):
         return None
+    # 按实际坐标判定重复，不能把距离计算下溢得到的零误认为相同表示。
+    # 分组索引只需 [N]；避免在每个距离块展开 [chunk,N,d] 的坐标比较。
+    _, groups = torch.unique(x, dim=0, return_inverse=True)
     nearest = []
-    for block in x.split(chunk):
+    for block, block_groups in zip(x.split(chunk), groups.split(chunk)):
         distance = torch.cdist(block, x, compute_mode="donot_use_mm_for_euclid_dist")
+        duplicates = block_groups[:, None] == groups[None, :]
+        if bool(((distance == 0) & ~duplicates).any()):
+            raise NumericalError("positive-neighbor distance underflow")
         # 自身和完全重复表示不充当正距离邻居；重复样本仍保留在训练池中。
-        distance = distance.masked_fill(distance == 0, float("inf"))
+        distance = distance.masked_fill(duplicates, float("inf"))
         nearest.append(distance.min(dim=1).values)
     distances = torch.cat(nearest)
     # Distinct points were checked above: inf here is a numerical error, not
