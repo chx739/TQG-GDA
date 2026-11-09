@@ -90,3 +90,14 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run \
 输出目录必须不存在。入口不会读取真实图数据；使用解析源分类器、训练的score及两个解析score对照。保存输入生成参数、源坐标/初始头、score、逐轮分类器参数与候选、批次/锚点、独立几何观察、预测封存哈希、评价标签访问、风险结果和全文件清单。score和分类器checkpoint属于研究档案，不是包含GNN的生产predictor。所有40条轨迹完成或记录失败后统一评价，不按合成标签选轮次。
 
 生产 `adapt_classifier(..., observer=callback)` 默认关闭观察器。回调只收到复制后的记录/张量，Torch RNG在回调前后隔离；回调异常向调用者传播，不能伪装成算法拒绝。不要在回调中通过外部闭包修改模型。锚点 `input_indices` 对应本轮目标批次位置，可与 `target_ids` 合成全池索引。
+
+已完成的首轮结果见[E1/E2报告](experiments/e1-e2-20261109/report.md)。复核与汇总使用独立入口，输出路径不能覆盖旧文件：
+
+```bash
+python -m workflows.tsba.validation.verify --run /absolute/path/finished-run --output /absolute/path/checkpoint-audit.json
+python -m workflows.tsba.validation.summarize --run /absolute/path/finished-run --output /absolute/path/new-analysis
+python -m workflows.tsba.validation.report --summary /absolute/path/new-analysis/summary.json --output /absolute/path/new-analysis/report.md
+python -m workflows.tsba.validation.package --source /absolute/path/experiment-bundle --archive /absolute/other/path/bundle.tar.gz
+```
+
+`predictions.pt`在研究入口中保存logits；softmax得到概率。自动报告生成证据表格，正式报告另含人工核对后的解释与限制。归档工具逐项核验压缩内容并输出SHA256，不覆盖既有实验目录或档案。

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "plan_id": "tsba-validation-v1-20261109",
-  "status": "frozen_for_E1_E2_execution",
+  "status": "E0_E1_E2_completed_E3_E4_not_executed",
   "purpose": "Falsifiable TSBA mechanism and development-task validation",
   "date": "2026-11-09",
   "algorithm_commit": "c90c3660248d18cf11fc7dc43861d5cd06e1e8c8",
@@ -11,19 +11,22 @@
     "algorithm_changes": false,
     "synthetic_research_run": true,
     "real_data_run": false,
-    "target_labels_read": false,
+    "target_labels_read": true,
     "final_labels_allowed": false,
-    "target_labels_read_note": "real target labels forbidden; synthetic eval labels only after all predictions sealed"
+    "target_labels_read_note": "synthetic evaluation only after seal; no real target labels read",
+    "real_target_labels_read": false,
+    "synthetic_evaluation_labels_read": true
   },
   "stages": [
     {
       "id": "E0",
-      "status": "existing_engineering_evidence_plus_pending_runner_checks",
-      "existing_unit_tests": 32
+      "status": "38_engineering_tests_passed",
+      "existing_unit_tests": 32,
+      "current_unit_tests": 38
     },
     {
       "id": "E1",
-      "status": "planned",
+      "status": "completed_analytic_and_nonlinear_probes",
       "analytic_cases": [
         "compatible_gaussian_classes",
         "high_density_correct_boundary",
@@ -81,7 +84,7 @@
     },
     {
       "id": "E2",
-      "status": "planned",
+      "status": "completed_40_trajectories_zero_execution_failures",
       "dimensions": [
         2,
         16
@@ -407,14 +410,9 @@
     "run_count_caps_predeclared": true
   },
   "required_implementation": [
-    "synthetic_distribution_driver",
-    "population_and_empirical_score_observers",
-    "local_boundary_relocalization_observer",
-    "score_and_per_round_snapshot_export",
-    "target_label_free_payload_export",
-    "seven_arm_baseline_runner",
-    "sealed_prediction_evaluator",
-    "batch_id_and_label_access_audit"
+    "real_graph_target_label_free_payload_export",
+    "seven_arm_real_graph_baseline_runner_and_long_adam_panel",
+    "real_graph_isolated_diagnostic_and_evaluation_role_audit"
   ],
   "execution_entrypoint": "python -m workflows.tsba.validation.run --output ABSOLUTE_NEW_DIRECTORY",
   "archive": {
@@ -422,5 +420,18 @@
     "git": "code, reports, manifests; no model runs",
     "overwrite": false,
     "seal_before_synthetic_evaluation": true
+  },
+  "execution": {
+    "code_commit": "f10262a5ff90f773cc8c29e754944571593f6a7e",
+    "analysis_code_commit": "7a88522",
+    "report": "e1-e2-20261109/report.md",
+    "local_run": "/home/hxchen/experiments/tsba/20261109-mechanisms/run-001",
+    "trajectories": 40,
+    "rounds_recorded": 1200,
+    "score_checkpoints": 10,
+    "execution_failures": 0,
+    "wall_seconds": 1207.2,
+    "peak_process_rss_bytes": 608448512,
+    "archive_index": "e1-e2-20261109/archive-index.json"
   }
 }

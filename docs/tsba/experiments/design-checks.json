@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "scope": "Static plan checks before E1/E2; historical real-data checks retained, no new raw-label access",
+  "scope": "Static checks of current plan metadata; research results in e1-e2-20261109; historical real-data checks retained, no new raw-label access",
   "plan_id": "tsba-validation-v1-20261109",
   "run_counts": {
     "E2_trajectories": 40,
@@ -16,8 +16,8 @@
   "local_document_links_valid": true,
   "original_design_unchanged": true,
   "design_files_sha256": {
-    "docs/tsba/experiments/validation-plan.md": "321f7ff430986f8bb0786ea2061ad28e690737a444bbe78e346443ad5c34ed55",
-    "docs/tsba/experiments/plan.json": "aa3f5719d9b758d77eab5da31c5b5aa0c2a5a896e5bfb605a5ffb3cc63b1a5d0"
+    "docs/tsba/experiments/validation-plan.md": "ac0145b36623f7b4b51dc7d8f09b040814a30d6c26dbbc1dfca76356db8c4af4",
+    "docs/tsba/experiments/plan.json": "4f3377c3366817c9ca374e933afac06701e56838d1175da6738f2863888cd02a"
   },
   "independent_plan_review": {
     "critical_findings_addressed": [
@@ -27,7 +27,8 @@
       "fixed_four_fold_partition"
     ],
     "remaining_blocking_findings": 0,
-    "experiment_execution": false
+    "experiment_execution": false,
+    "scope_note": "Historical pre-execution plan review; not an independent review of the new research runner."
   },
   "review_optimizations": [
     "matched fixed-reference zero-zeta control",
