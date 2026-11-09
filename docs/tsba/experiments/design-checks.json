@@ -16,8 +16,8 @@
   "local_document_links_valid": true,
   "original_design_unchanged": true,
   "design_files_sha256": {
-    "docs/tsba/experiments/validation-plan.md": "ac0145b36623f7b4b51dc7d8f09b040814a30d6c26dbbc1dfca76356db8c4af4",
-    "docs/tsba/experiments/plan.json": "4f3377c3366817c9ca374e933afac06701e56838d1175da6738f2863888cd02a"
+    "docs/tsba/experiments/validation-plan.md": "2a9fabb4c1c569c4a62a99dd7627ebb544aaac0acf1130aeb2c1c07defa46c4e",
+    "docs/tsba/experiments/plan.json": "34310f69c0fe0d0746b9811d35858612acc219d8b5d6f14c29d8d555c20e4ffe"
   },
   "independent_plan_review": {
     "critical_findings_addressed": [
@@ -37,5 +37,12 @@
     "restricted scalar scale/conflict probe",
     "passive observation with paired batch IDs",
     "local checkpoints plus public hash manifests"
-  ]
+  ],
+  "supplement_checks": {
+    "plan": "controls-plan.json",
+    "new_trajectory_count": 20,
+    "engineering_tests_passed": 42,
+    "production_algorithm_changed": false,
+    "post_hoc_declared": true
+  }
 }

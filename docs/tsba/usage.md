@@ -101,3 +101,15 @@ python -m workflows.tsba.validation.package --source /absolute/path/experiment-b
 ```
 
 `predictions.pt`在研究入口中保存logits；softmax得到概率。自动报告生成证据表格，正式报告另含人工核对后的解释与限制。归档工具逐项核验压缩内容并输出SHA256，不覆盖既有实验目录或档案。
+
+## 补充源监督与零请求几何对照
+
+[补充协议](experiments/controls-plan.json)是查看首轮结果后登记的诊断。直接复用原run的输入、初始头和逐轮ID，运行20条新轨迹，不重训score或覆盖旧档案：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_controls \
+  --parent /absolute/path/original-run-001 \
+  --output /absolute/path/new-control-run
+```
+
+`source_ce_ggn`没有边界约束；`zero_zeta_geometry`在自己的当前边界上保留位移损失、DᵀD和执行预算，强制ζ=0仍求解，空锚点跳过。与原TSBA完全相同的参考和矩阵只在首轮检查，后续各自演化。模型和批次记录保存到新目录，所有预测封存后才评价合成标签。
