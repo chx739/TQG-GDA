@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-09",
+  "scope": "Static design checks only; no experiment execution or raw-label access",
+  "plan_id": "tsba-validation-v1-20261109",
+  "run_counts": {
+    "E2_trajectories": 40,
+    "E3_single_step_candidates": 200,
+    "E4_task_seed_arm_cells": 60,
+    "E4_max_adaptation_executions": 50
+  },
+  "historical_metadata_hash_verified": true,
+  "source_role_disjointness_verified": true,
+  "diagnostic_A_B_disjointness_verified": true,
+  "final_role_validation": "archived metadata counts/hashes only; re-audit full ID mapping before execution",
+  "local_document_links_valid": true,
+  "original_design_unchanged": true,
+  "design_files_sha256": {
+    "docs/tsba/experiments/validation-plan.md": "63c168a90421fc6bb8e075669a9ad6f366fdcd70c7e2d31777ab4b3d78ed4014",
+    "docs/tsba/experiments/plan.json": "1f339c2912b15f19a73cd9b578658943aa4c6056dc523fa9cccc869448e2d97d"
+  },
+  "independent_plan_review": {
+    "critical_findings_addressed": [
+      "one_sided_initial_population_score",
+      "full_trajectory_query_coverage",
+      "per_task_production_batch_rng",
+      "fixed_four_fold_partition"
+    ],
+    "remaining_blocking_findings": 0,
+    "experiment_execution": false
+  }
+}

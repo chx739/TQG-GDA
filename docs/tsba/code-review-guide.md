@@ -120,3 +120,7 @@ tests/tsba/
 每个疑问记四项即可：`文件 / 函数 → 对应文档小节 → 你期望的行为 → 代码中不理解或不一致的地方`。例如：`boundary.build_boundaries → §3.8 → 密度升高时边界应反向移动 → 为什么 zeta 是正号？`
 
 先区分“实现是否符合文档”和“文档假设是否合理”：前者定位代码，后者讨论方法。这样后续可以直接围绕具体函数和公式继续，不必重述整套流程。
+
+## 从代码 review 到实验验证
+
+下一步见 [TSBA 验证实验设计](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/experiments/validation-plan.md)。它区分公式执行、score 的边界可靠性、实际局部位移与真实任务收益，并列出待实现的研究观察器与基线；该设计稿不是已完成实验报告。
