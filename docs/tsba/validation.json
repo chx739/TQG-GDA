@@ -11,7 +11,7 @@
   },
   "unit_tests": {
     "command": "python -m unittest discover -s tests/tsba -v",
-    "passed": 23,
+    "passed": 24,
     "failed": 0
   },
   "independent_review": {
@@ -53,12 +53,12 @@
     "tsba/__init__.py": "f725f5a62538a4cd62b4e74ccef812de617cf561b78ba50d6ecdb8fdd9caabae",
     "tsba/adapt.py": "84be9522b6a751502c326939174b1caab7d2d71bead5d8b5ec8484dc61f67c63",
     "tsba/boundary.py": "8b3ea7ca55761cbfcfbc9a3fbaad2c470c93e238c1e5556f606d9fa6a9fba2fa",
-    "tsba/classifier.py": "e8736174af46f84d888bdfbb2e5aa5fc70e08f3b2634411446d9a905ec2235f2",
+    "tsba/classifier.py": "2b4b00eeebc02e461c8beac4cf9a8fb9be712eb8a71488ff77569ab26c7005c9",
     "tsba/config.py": "e02e7d98eb0f74d59dfac5f3ff2e07b63bba06b05ccc128ec0f63a23d6e11d57",
     "tsba/data.py": "d760c9318faf8defec742526bae0f9675c8d98a648ea06533ffbb33c020d0a37",
     "tsba/encoder.py": "45e25e8da36a8233180e9ddb63ba5a894559495e0241c5e683d3e88a32bb6389",
     "tsba/pipeline.py": "9b06725f6579290b80bae94db2d8b0233369e39a2e0853a66727bf5266a50c48",
-    "tsba/predict.py": "88fe02b417357d8fa447434c4acfa3218036d2cc7f98d07fa45253ca6e62d6db",
+    "tsba/predict.py": "08936ad3a60592934a4d057d160619ddf975599e81a9face666045a106f16b85",
     "tsba/pretrain.py": "5a6313457bdc1ba0d34e6393e5ae5cdf8336d84c83dc9cf1c6082f7e5241b31a",
     "tsba/problem.py": "caac878cd5723a37ab4fe96349413a20c37f075e810a027bc73139abefe36c32",
     "tsba/score.py": "e2630ce1cf6b26899d6f4f659e5e63e379cc4e983f6a100491078fce00946bf1",
@@ -68,8 +68,8 @@
     "workflows/tsba/__init__.py": "70b20dbc0f4dd8dbcf9d16910385e5f30162052883f49f495e21611f1721f6cd",
     "workflows/tsba/run_task.py": "0d0037102e49ad5e420e2f71b4dd1f443f865d3658d8f51f772bd7ee2cd23636",
     "tests/tsba/test_adapt.py": "7e2b01a9ca4894ae651585558a80ac867246dac9f4ad22146171105ee61ad74b",
-    "tests/tsba/test_math.py": "094744dc459def8c176fb58ef5c609ea69ffd0fa9bf213cb7c5181b2e13b30e8",
-    "tests/tsba/test_pipeline.py": "80ad5cca4cb162f216406cfa6e8d0a2fca42b03d87568182dc9a3ef7f82486ee"
+    "tests/tsba/test_math.py": "cff7bcd2e2b3f26ce26d5db9d9667afef12725cb09eff8c82d9e0eb66cc1ac8f",
+    "tests/tsba/test_pipeline.py": "e259028df25ac49433f25048d6a3124fe2e0c1d2665137f090c42f49e5a58952"
   },
   "limitations": [
     "GPU execution not verified",
@@ -105,5 +105,14 @@
     "local_navigation_links_updated": 22,
     "date": "2026-11-08",
     "unit_tests_passed": 23
+  },
+  "classifier_layer_names": {
+    "date": "2026-11-09",
+    "layers": [
+      "U1",
+      "U2"
+    ],
+    "legacy_predictor_loading_verified": true,
+    "nonzero_residual_predictions_identical": true
   }
 }

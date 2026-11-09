@@ -110,6 +110,32 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(source_key, source_identity(cfg, changed))
         self.assertNotEqual(source_key, source_identity(dataclasses.replace(cfg, source_epochs=3), changed))
 
+    def test_legacy_first_last_checkpoint_preserves_predictions(self):
+        from tsba.predict import save_predictor
+        data = synthetic_task()
+        model, _ = run_task(self.small_config(adapt_rounds=0), data)
+        with torch.no_grad():
+            model.classifier.U2.weight.normal_(0, .2)
+            model.classifier.U1.bias.fill_(.15)
+        expected = model.predict(data.target.graphs)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "model.pt"
+            save_predictor(model, path, {})
+            ck = torch.load(path, weights_only=True)
+            state = ck["classifier_state"]
+            self.assertIn("U1.weight", state)
+            self.assertIn("U2.weight", state)
+            for new, old in (("U1.weight", "first.weight"), ("U1.bias", "first.bias"),
+                             ("U2.weight", "last.weight")):
+                state[old] = state.pop(new)
+            torch.save(ck, path)
+            loaded = load_predictor(path)
+            torch.testing.assert_close(expected, loaded.predict(data.target.graphs), atol=0, rtol=0)
+            state["U1.weight"] = state["first.weight"].clone()
+            torch.save(ck, path)
+            with self.assertRaisesRegex(ValueError, "ambiguous classifier state"):
+                load_predictor(path)
+
     def test_missing_source_validation_preserves_label_budget(self):
         data = synthetic_task()
         data.source_validation.graphs, data.source_validation.ids = [], []

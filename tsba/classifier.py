@@ -29,16 +29,16 @@ class Coordinates(nn.Module):
 
 
 # §3.3：f_ψ(x)=P_C[Wx+b+U2·SiLU(U1x+a)]。
-# linear 对应 W,b；first 对应 U1,a；last 对应无偏置的 U2。
+# linear 对应 W,b；U1.weight 对应矩阵 U1，U1.bias 对应 a；U2 无偏置。
 class ResidualClassifier(nn.Module):
     def __init__(self, dim, classes, width, *, device=None, dtype=None):
         super().__init__()
         self.linear = nn.Linear(dim, classes, device=device, dtype=dtype)
-        self.first = nn.Linear(dim, width, device=device, dtype=dtype)
-        self.last = nn.Linear(width, classes, bias=False, device=device, dtype=dtype)
-        nn.init.zeros_(self.first.bias)
+        self.U1 = nn.Linear(dim, width, device=device, dtype=dtype)
+        self.U2 = nn.Linear(width, classes, bias=False, device=device, dtype=dtype)
+        nn.init.zeros_(self.U1.bias)
         # U2=0 使残差初始为零；U1 保留随机初始化，后续属于可训练 ψ。
-        nn.init.zeros_(self.last.weight)
+        nn.init.zeros_(self.U2.weight)
 
     @classmethod
     def from_source(cls, linear, coordinates, width, seed):
@@ -56,7 +56,7 @@ class ResidualClassifier(nn.Module):
         return model
 
     def forward(self, x):
-        logits = self.linear(x) + self.last(nn.functional.silu(self.first(x)))
+        logits = self.linear(x) + self.U2(nn.functional.silu(self.U1(x)))
         # P_C=I−11ᵀ/C：减去类别平均 logit，不改变 softmax 或两类 margin。
         return logits - logits.mean(-1, keepdim=True)
 

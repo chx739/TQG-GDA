@@ -128,7 +128,7 @@ class MathTests(unittest.TestCase):
         with torch.no_grad():
             model.linear.weight.copy_(torch.tensor([[1., 0.], [-1., 0.], [0., 1.]]))
             model.linear.bias.copy_(torch.tensor([0., 0., -1.]))
-            model.last.weight.normal_(0, .1)  # exercise nonzero hidden-layer parameter responses
+            model.U2.weight.normal_(0, .1)  # exercise nonzero hidden-layer parameter responses
         source = torch.tensor([[1., 0.], [-1., 0.], [0., 2.]], dtype=torch.float64)
         labels = torch.tensor([0, 1, 2])
         target = torch.tensor([[.2, .1], [-.2, -.1]], dtype=torch.float64)

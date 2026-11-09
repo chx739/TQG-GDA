@@ -40,7 +40,7 @@ def save_predictor(model, path, metadata):
                     encoder_state={k: v.cpu() for k, v in model.encoder.state_dict().items()},
                     coordinates={k: v.cpu() for k, v in model.coordinates.state_dict().items()},
                     classifier_state={k: v.cpu() for k, v in model.classifier.state_dict().items()},
-                    classes=model.classifier.linear.out_features, width=model.classifier.first.out_features,
+                    classes=model.classifier.linear.out_features, width=model.classifier.U1.out_features,
                     metadata=metadata), path)
 
 
@@ -54,5 +54,13 @@ def load_predictor(path, device="cpu"):
     coordinates = Coordinates(ck["coordinates"]["mean"], ck["coordinates"]["scale"])
     classifier = ResidualClassifier(ck["encoder_spec"]["out_dim"], ck["classes"], ck["width"],
                                     dtype=coordinates.mean.dtype)
-    classifier.load_state_dict(ck["classifier_state"])
+    # 兼容重命名前的 v1 checkpoint：仅转换键名，不改变保存的权重值。
+    state = dict(ck["classifier_state"])
+    for old, new in (("first.weight", "U1.weight"), ("first.bias", "U1.bias"),
+                     ("last.weight", "U2.weight")):
+        if old in state:
+            if new in state:
+                raise ValueError(f"ambiguous classifier state: both {old} and {new}")
+            state[new] = state.pop(old)
+    classifier.load_state_dict(state)
     return Predictor(encoder, coordinates, classifier).to(device).requires_grad_(False)
