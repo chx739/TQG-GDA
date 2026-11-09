@@ -1,0 +1,12 @@
+{
+  "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /home/hxchen/anaconda3/envs/bfn4jet/bin/python -m unittest discover -s tests/tsba -v",
+  "tests": 42,
+  "seconds": 9.99,
+  "status": "passed",
+  "new_checks": [
+    "source GGN equals linear CE Hessian and matrix-free action",
+    "zero request retains geometry curvature and performs source update",
+    "empty geometry skips and source control ignores target",
+    "exhausted zero-request backtracking never commits"
+  ]
+}

@@ -1,15 +1,27 @@
 {
   "plan_id": "tsba-e2-controls-20261109",
-  "status": "frozen_before_supplement_execution",
+  "status": "completed_20_trajectories_zero_execution_failures",
   "post_hoc": true,
   "why_post_hoc": "Requested after inspecting E1/E2 results; diagnostic, not a new blind confirmation.",
   "parent_execution_commit": "f10262a5ff90f773cc8c29e754944571593f6a7e",
   "parent_report_commit": "609e2cb797f381c4bb23ff277b8b8ec4eff470ed",
   "parent_archive_sha256": "a216503eb38ddda5c6477f77df5c441f88a9e0afcee5d4c43df18655a63d90f5",
   "parent_run": "/home/hxchen/experiments/tsba/20261109-mechanisms/run-001",
-  "dimensions": [2, 16],
-  "seeds": [0, 1, 2, 3, 4],
-  "arms": ["source_ce_ggn", "zero_zeta_geometry"],
+  "dimensions": [
+    2,
+    16
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "arms": [
+    "source_ce_ggn",
+    "zero_zeta_geometry"
+  ],
   "trajectories": 20,
   "rounds": 30,
   "source_ce_ggn": {
@@ -37,9 +49,29 @@
     "masks": "audit parent nonempty/nonzero attempt masks; report differences without adding ad-hoc arms"
   },
   "comparisons": {
-    "primary": ["learned minus zero_zeta_geometry", "population minus zero_zeta_geometry", "zero_zeta_geometry minus source_ce_ggn"],
-    "also_report": ["all six arms versus source-initial", "empirical minus zero_zeta_geometry", "learned minus source_ce_ggn"],
-    "metrics": ["balanced accuracy percentage points", "NLL", "accuracy", "class recalls", "confusion matrix", "source CE", "acceptance", "anchors", "backtracking", "solver residual", "runtime"],
+    "primary": [
+      "learned minus zero_zeta_geometry",
+      "population minus zero_zeta_geometry",
+      "zero_zeta_geometry minus source_ce_ggn"
+    ],
+    "also_report": [
+      "all six arms versus source-initial",
+      "empirical minus zero_zeta_geometry",
+      "learned minus source_ce_ggn"
+    ],
+    "metrics": [
+      "balanced accuracy percentage points",
+      "NLL",
+      "accuracy",
+      "class recalls",
+      "confusion matrix",
+      "source CE",
+      "acceptance",
+      "anchors",
+      "backtracking",
+      "solver residual",
+      "runtime"
+    ],
     "aggregation": "paired within dimension and seed; mean, sample SD, win/tie/loss; no seed replacement",
     "endpoint": "last accepted state after 30 attempts; no target label model selection",
     "inference_limit": "within this synthetic setup and fixed update budget; no GDA efficacy claim"
@@ -50,6 +82,29 @@
     "real_target_labels": false,
     "changing_settings_after_new_results": false
   },
-  "resources": {"device": "cpu", "threads": 1, "dtype": "float64", "per_cell_seconds": 1200, "total_seconds": 14400, "peak_rss_bytes": 4294967296},
-  "archive": {"overwrite_parent": false, "local_checkpoints_logs_source_and_hashes": true, "git": "code, report, scalar tables, audit and archive manifests only"}
+  "resources": {
+    "device": "cpu",
+    "threads": 1,
+    "dtype": "float64",
+    "per_cell_seconds": 1200,
+    "total_seconds": 14400,
+    "peak_rss_bytes": 4294967296
+  },
+  "archive": {
+    "overwrite_parent": false,
+    "local_checkpoints_logs_source_and_hashes": true,
+    "git": "code, report, scalar tables, audit and archive manifests only"
+  },
+  "execution": {
+    "code_commit": "44b74988d07cdd291bc7c21a34f252c21e8ebc78",
+    "analysis_code_commit": "4f7a4ed",
+    "report": "e2-controls-20261109/report.md",
+    "run_path": "/home/hxchen/experiments/tsba/20261109-controls/run-001",
+    "wall_seconds": 328.7,
+    "peak_rss_bytes": 517124096,
+    "checkpoints_replayed": 20,
+    "rounds_verified": 600,
+    "files_verified": 235,
+    "archive_index": "e2-controls-20261109/archive-index.json"
+  }
 }

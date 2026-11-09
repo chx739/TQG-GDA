@@ -113,3 +113,11 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_cont
 ```
 
 `source_ce_ggn`没有边界约束；`zero_zeta_geometry`在自己的当前边界上保留位移损失、DᵀD和执行预算，强制ζ=0仍求解，空锚点跳过。与原TSBA完全相同的参考和矩阵只在首轮检查，后续各自演化。模型和批次记录保存到新目录，所有预测封存后才评价合成标签。
+
+补充对照完成后，用下面的只读核验入口重载checkpoint并生成配对表格：
+
+```bash
+python -m workflows.tsba.validation.summarize_controls --run /absolute/path/finished-control-run --output /absolute/path/new-control-analysis
+```
+
+已发布的[补充对照报告](experiments/e2-controls-20261109/report.md)包含20条新轨迹、与原40条轨迹的配对比较、源控制的局限以及对首轮解释的修正。

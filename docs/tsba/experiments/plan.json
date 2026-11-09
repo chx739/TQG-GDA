@@ -20,9 +20,9 @@
   "stages": [
     {
       "id": "E0",
-      "status": "38_engineering_tests_passed",
+      "status": "42_engineering_tests_passed",
       "existing_unit_tests": 32,
-      "current_unit_tests": 38
+      "current_unit_tests": 42
     },
     {
       "id": "E1",
@@ -437,8 +437,10 @@
   "control_supplement": {
     "plan": "controls-plan.json",
     "post_hoc": true,
-    "status": "frozen_before_execution",
+    "status": "completed_20_trajectories",
     "new_trajectories": 20,
-    "original_trajectories_preserved": 40
+    "original_trajectories_preserved": 40,
+    "report": "e2-controls-20261109/report.md",
+    "execution_failures": 0
   }
 }
