@@ -4,7 +4,7 @@
 
 ## 先打开这三份材料
 
-1. [设计原文](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/TSBA_Graph_Level_GDA_Design.md)：以 §3 的数学定义和行为要求为准；§1、§2 用于理解研究动机。
+1. [设计原文](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/TSBA_Graph_Level_GDA_Design.md)（[English translation](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/TSBA_Graph_Level_GDA_Design_EN.md)）：以 §3 的数学定义和行为要求为准；§1、§2 用于理解研究动机。
 2. [实现映射](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/implementation.md)：区分原文规定与原文留给实现的数值选择，例如固定阻尼、带宽倍数、训练预算。
 3. [独立 review 记录](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/review.md)：已有审查发现、修复及证据边界；它不能替代本次人工判断。
 

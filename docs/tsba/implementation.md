@@ -2,6 +2,8 @@
 
 依据同目录 `TSBA_Graph_Level_GDA_Design.md` 用户原文，SHA256 `57ef49dae959d2331a91bdb26f536c54adde07165078df5186e0ea1ce36b8855`。原文“尚未实现或验证”是提供时的状态；本分支实现算法，但没有真实任务有效性结论。
 
+完整英文译文见 [TSBA_Graph_Level_GDA_Design_EN.md](TSBA_Graph_Level_GDA_Design_EN.md)，保留原文历史状态、公式和证据边界。
+
 ## SEGA 范式与 TSBA 定义
 
 沿用 SEGA 的配置、数据、源预训练、固定坐标、目标辅助信息、problem、subproblem、adapt、predict、pipeline 职责拆分。每轮固定参考，求解候选，真实前向重评估，通过验收后才提交。候选使用函数式参数调用，拒绝或异常不会污染正在使用的模型。
