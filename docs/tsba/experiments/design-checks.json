@@ -1,12 +1,13 @@
 {
   "date": "2026-11-09",
-  "scope": "Static design checks only; no experiment execution or raw-label access",
+  "scope": "Static plan checks before E1/E2; historical real-data checks retained, no new raw-label access",
   "plan_id": "tsba-validation-v1-20261109",
   "run_counts": {
     "E2_trajectories": 40,
-    "E3_single_step_candidates": 200,
-    "E4_task_seed_arm_cells": 60,
-    "E4_max_adaptation_executions": 50
+    "E3_single_step_candidates": 240,
+    "E4_task_seed_arm_cells": 70,
+    "E4_max_adaptation_executions": 60,
+    "E4_extra_long_adam_trajectories": 30
   },
   "historical_metadata_hash_verified": true,
   "source_role_disjointness_verified": true,
@@ -15,8 +16,8 @@
   "local_document_links_valid": true,
   "original_design_unchanged": true,
   "design_files_sha256": {
-    "docs/tsba/experiments/validation-plan.md": "63c168a90421fc6bb8e075669a9ad6f366fdcd70c7e2d31777ab4b3d78ed4014",
-    "docs/tsba/experiments/plan.json": "1f339c2912b15f19a73cd9b578658943aa4c6056dc523fa9cccc869448e2d97d"
+    "docs/tsba/experiments/validation-plan.md": "321f7ff430986f8bb0786ea2061ad28e690737a444bbe78e346443ad5c34ed55",
+    "docs/tsba/experiments/plan.json": "aa3f5719d9b758d77eab5da31c5b5aa0c2a5a896e5bfb605a5ffb3cc63b1a5d0"
   },
   "independent_plan_review": {
     "critical_findings_addressed": [
@@ -27,5 +28,13 @@
     ],
     "remaining_blocking_findings": 0,
     "experiment_execution": false
-  }
+  },
+  "review_optimizations": [
+    "matched fixed-reference zero-zeta control",
+    "pre-solve attempt-mask source control",
+    "predeclared 700-step Adam panel",
+    "restricted scalar scale/conflict probe",
+    "passive observation with paired batch IDs",
+    "local checkpoints plus public hash manifests"
+  ]
 }

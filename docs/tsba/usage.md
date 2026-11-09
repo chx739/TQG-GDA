@@ -77,3 +77,16 @@ python -m unittest discover -s tests/tsba -v
 ```
 
 覆盖概率等价初始化、重复点带宽、投影有效性、位移符号、GGN/目标梯度、直接/CG 一致性、空反馈/异常/回溯回滚、BN 冻结、目标标签隔离、checkpoint 身份和合成图端到端独立推断。
+
+## E1/E2 合成机制验证
+
+按[冻结方案](experiments/validation-plan.md)运行40条固定表示轨迹：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run \
+  --output /absolute/path/new-tsba-mechanism-run
+```
+
+输出目录必须不存在。入口不会读取真实图数据；使用解析源分类器、训练的score及两个解析score对照。保存输入生成参数、源坐标/初始头、score、逐轮分类器参数与候选、批次/锚点、独立几何观察、预测封存哈希、评价标签访问、风险结果和全文件清单。score和分类器checkpoint属于研究档案，不是包含GNN的生产predictor。所有40条轨迹完成或记录失败后统一评价，不按合成标签选轮次。
+
+生产 `adapt_classifier(..., observer=callback)` 默认关闭观察器。回调只收到复制后的记录/张量，Torch RNG在回调前后隔离；回调异常向调用者传播，不能伪装成算法拒绝。不要在回调中通过外部闭包修改模型。锚点 `input_indices` 对应本轮目标批次位置，可与 `target_ids` 合成全池索引。

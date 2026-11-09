@@ -1,5 +1,8 @@
 """SEGA-style propose -> nonlinear re-evaluate -> accept/backtrack, with TSBA objectives."""
+import copy
+from dataclasses import asdict
 import torch
+from .classifier import ParameterMap
 from .boundary import build_boundaries
 from .problem import TsbaProblem
 from .subproblem import solve
@@ -29,7 +32,12 @@ def backtrack(problem, delta, directional, sigma):
 
 # §3.6–3.14：每轮抽批次、构造边界、求候选、真实验收、接受才提交。
 # 原位更新 model；返回日志；源坐标、目标坐标和 score 始终固定。
-def adapt_classifier(model, source, labels, target, score, sigma, cfg, logger=None):
+def adapt_classifier(model, source, labels, target, score, sigma, cfg, logger=None, observer=None):
+    """Optional observer receives detached copies after each attempt, never live state.
+
+    Research observers must be passive; CPU/CUDA torch RNG is restored around the
+    callback. Observer failures propagate to the caller, not solver diagnostics.
+    """
     model.eval()
     model.zero_grad(set_to_none=True)
     if sigma is None:
@@ -40,6 +48,8 @@ def adapt_classifier(model, source, labels, target, score, sigma, cfg, logger=No
     accepted, history, stop_reason = 0, [], "round_budget"
     for round_id in range(cfg.adapt_rounds):
         rec = dict(round=round_id, accepted=False)
+        before = ParameterMap(model).vector() if observer is not None else None
+        boundaries, delta = None, None
         try:
             source_ids = torch.randperm(len(source), generator=rng, device=source.device)[:cfg.source_adapt_batch]
             target_ids = torch.randperm(len(target), generator=rng, device=target.device)[:cfg.target_batch]
@@ -76,6 +86,15 @@ def adapt_classifier(model, source, labels, target, score, sigma, cfg, logger=No
             rec.update(reason="numerical_error", error=str(exc))
             stop_reason = "numerical_error"
         history.append(rec)
+        if observer is not None:
+            payload = dict(record=copy.deepcopy(rec), before=before,
+                           after=ParameterMap(model).vector(),
+                           source_ids=source_ids.detach().clone(), target_ids=target_ids.detach().clone(),
+                           boundaries=asdict(boundaries) if boundaries is not None else None,
+                           delta=delta.detach().clone() if delta is not None else None)
+            devices = [source.device] if source.is_cuda else []
+            with torch.random.fork_rng(devices=devices):
+                observer(payload)
         if logger:
             logger(f"round {round_id}: {rec['reason']}; anchors={rec.get('anchors', 0)}")
         if stop_reason == "numerical_error":

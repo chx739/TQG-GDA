@@ -18,6 +18,8 @@ class BoundaryBatch:
     zeta: torch.Tensor
     normals: torch.Tensor
     rejected: dict
+    # 可选审计映射：每个有效锚点来自传入 target 批次的哪个位置。
+    input_indices: torch.Tensor | None = None
 
     def __len__(self):
         return len(self.points)
@@ -105,8 +107,8 @@ def project(model, x, pair, radius, tolerance, cfg):
 def build_boundaries(model, target, score, sigma, cfg):
     radius = cfg.radius_multiplier * sigma * math.sqrt(target.shape[1])
     tolerance = cfg.root_tolerance * sigma
-    rows, rejected = [], Counter()
-    for x in target.detach():
+    rows, indices, rejected = [], [], Counter()
+    for input_index, x in enumerate(target.detach()):
         with torch.no_grad():
             logits = model(x.unsqueeze(0))[0]
             finite(logits)
@@ -132,11 +134,13 @@ def build_boundaries(model, target, score, sigma, cfg):
                                                       cfg.request_multiplier * sigma)
             finite(gamma, zeta)
         rows.append((point, pair, norm, old_margin, zeta, normal))
+        indices.append(input_index)
     if rows:
         # §3.13：所有边界参考停止梯度；参数更新不穿过投影器或 score。
         columns = [torch.stack(column).detach() for column in zip(*rows)]
-        return BoundaryBatch(*columns, dict(rejected))
+        return BoundaryBatch(*columns, dict(rejected), torch.tensor(indices, device=target.device))
     d = target.shape[1]
     return BoundaryBatch(target.new_empty((0, d)), torch.empty((0, 2), device=target.device, dtype=torch.long),
                          target.new_empty(0), target.new_empty(0), target.new_empty(0),
-                         target.new_empty((0, d)), dict(rejected))
+                         target.new_empty((0, d)), dict(rejected),
+                         torch.empty(0, dtype=torch.long, device=target.device))

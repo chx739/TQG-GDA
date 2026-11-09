@@ -1,6 +1,6 @@
 # TSBA Code Review Guide（人工审查导航）
 
-这份导航供逐项阅读代码使用，不是新的审查结论。初始实现来自 `536ba10`；本导航已按 2026-11-09 数值修复更新，残差层使用 `U1/U2` 命名。下面按“文档要求 → 核心入口 → 要核对的问题 → 已有测试”组织。算法代码位于 `tsba/`，不要与历史 TQG 实现或 `references/sega-gda/` 混读。
+这份导航供逐项阅读代码使用，不是新的审查结论。初始实现来自 `536ba10`；本导航已按 2026-11-09 数值修复与研究观察器更新，残差层使用 `U1/U2` 命名。下面按“文档要求 → 核心入口 → 要核对的问题 → 已有测试”组织。算法代码位于 `tsba/`，不要与历史 TQG 实现或 `references/sega-gda/` 混读。
 
 ## 先打开这三份材料
 
@@ -46,10 +46,10 @@ tests/tsba/
 | 3. 编码器与源模型 | §3.2 | [GraphEncoder](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/encoder.py#L13)、[pretrain_encoder](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/pretrain.py#L63)、[encode](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/pretrain.py#L107) | 是否训练普通源 CE 线性头？适配时参数、BN 统计、dropout 是否全部固定？源选模依赖什么？ |
 | 4. 坐标与分类头 | §3.2–3.3 | [Coordinates.fit](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/classifier.py#L17)、[ResidualClassifier.from_source](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/classifier.py#L44) | 是否只用源训练表示计算均值与全局 RMS？初始概率是否等价？究竟更新哪些参数？ |
 | 5. 分布信息 | §3.4–3.5 | [bandwidth](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/score.py#L10)、[denoising_loss](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/score.py#L55)、[train_score](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/score.py#L60) | sigma 如何确定？距离下溢会不会被误判成重复点？DSM 的符号与尺度是否正确？score 选模是否只看去噪损失？分类阶段是否冻结？ |
-| 6. 边界请求 ★ | §3.6–3.9 | [project](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/boundary.py#L40)、[build_boundaries](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/boundary.py#L105) | 固定的是哪两个类别？投影到的根是否有效？score 如何变成有方向、有限幅度的位移？ |
+| 6. 边界请求 ★ | §3.6–3.9 | [project](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/boundary.py#L42)、[build_boundaries](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/boundary.py#L107) | 固定的是哪两个类别？投影到的根是否有效？score 如何变成有方向、有限幅度的位移？ |
 | 7. 本轮目标 ★ | §3.9–3.10 | [TsbaProblem](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/problem.py#L10) | 是否使用新旧 margin 的差？分母和请求是否保持旧快照值？源 CE 与位移损失的系数是否正确？ |
 | 8. 参数候选 ★ | §3.11 | [GGNSystem](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/subproblem.py#L10)、[solve](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/subproblem.py#L58) | 左端矩阵、右端符号、平均系数是否与公式相同？直接解和 CG 是否求同一系统？默认容差是否匹配计算精度，显式容差是否保留？ |
-| 9. 验收与提交 ★ | §3.12–3.14 | [backtrack](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/adapt.py#L11)、[adapt_classifier](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/adapt.py#L32)、[ParameterMap](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/classifier.py#L66) | 是否真实前向复算？限制的是归一化 margin 变化还是精确边界距离？拒绝会不会污染参数？空反馈与数值异常是否区分？接受后是否刷新参考？ |
+| 9. 验收与提交 ★ | §3.12–3.14 | [backtrack](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/adapt.py#L14)、[adapt_classifier](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/adapt.py#L35)、[ParameterMap](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/classifier.py#L66) | 是否真实前向复算？限制的是归一化 margin 变化还是精确边界距离？拒绝会不会污染参数？空反馈与数值异常是否区分？接受后是否刷新参考？ |
 | 10. 推断与复现 | §3.15–3.17 | [Config](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/config.py#L9)、[Predictor](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/predict.py#L12)、[load_predictor](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/predict.py#L48) | 默认值是否事先确定？保存文件能否独立推断？是否意外依赖源库或 score？ |
 
 ## 最值得逐式对照的五处
@@ -124,3 +124,7 @@ tests/tsba/
 ## 从代码 review 到实验验证
 
 下一步见 [TSBA 验证实验设计](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/experiments/validation-plan.md)。它区分公式执行、score 的边界可靠性、实际局部位移与真实任务收益，并列出待实现的研究观察器与基线；该设计稿不是已完成实验报告。
+
+## 合成研究入口
+
+[E1/E2方案](experiments/validation-plan.md)与[运行器](../../workflows/tsba/validation/run.py)单独审查：oracle是否与坐标/带宽一致、目标评价是否发生在封存之后、四臂批次是否配对、失败和零更新是否保留。`test_validation.py`检查解析score、独立几何观察器、零信息符号指标和被动观察器。新增锚点来源索引和回调不改变生产求解、验收或零反馈规则。
