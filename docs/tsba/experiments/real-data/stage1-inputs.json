@@ -1,0 +1,54 @@
+{
+  "historical_commit": "a672fefe10aba413283a6fb184704f6fae75e1fa",
+  "manifest_path": "docs/research_plans/tqg_sega_minimal_20261106/input_manifest.json",
+  "manifest_sha256": "ecb038150f86711af36e76a5df22443b412f5f18dcb3f93465fde4e3ff65291f",
+  "raw_directory": "/home/hxchen/TQG_data/Mutagenicity_official_20261026/Mutagenicity/raw",
+  "files": {
+    "Mutagenicity_A.txt": {
+      "bytes": 3554144,
+      "sha256": "ae85e22b4b898ebd819d2ed3adc8f06a7bf1cda746b333086472d19b36711145"
+    },
+    "Mutagenicity_graph_indicator.txt": {
+      "bytes": 622816,
+      "sha256": "88b2d83ff10fad75b3280654061e965976f74e75620058c371ed23567236b4bc"
+    },
+    "Mutagenicity_node_labels.txt": {
+      "bytes": 263105,
+      "sha256": "b429ec418c831d02dc3088b2fe08d11214627850d2bbdacfa9797c0510e70ae7"
+    },
+    "Mutagenicity_edge_labels.txt": {
+      "bytes": 533788,
+      "sha256": "bf8e783386ac22e6033bbce56d765c0a4336649bd590a6f1e467b27b549f2114"
+    },
+    "Mutagenicity_graph_labels.txt": {
+      "bytes": 8674,
+      "sha256": "b604c7dcbfdf89193901e32abdcbf9b5b92137414ce22231f00ed65d48ec48f9"
+    },
+    "Mutagenicity_label_readme.txt": {
+      "bytes": 387,
+      "sha256": "fdfaff559ff89162d8fe0d958c3fa38b245cbdef61f5efb56b7626274507bcbb"
+    }
+  },
+  "cache": {
+    "path": "/home/hxchen/TQG_data/Mutagenicity_official_20261026/Mutagenicity/processed/data.pt",
+    "bytes": 14977860,
+    "sha256": "c4a03120edd2494ab82bcc9792605ea7e71d52024985624313ae11d9f37b4fab",
+    "usage": "provenance byte hashing only; do not deserialize"
+  },
+  "verification": {
+    "file_hashes_verified": true,
+    "label_values_parsed": false,
+    "raw_graph_structure_parsed": false,
+    "source": "read-only predesign audit"
+  },
+  "graph_id": "TU original graph number minus one",
+  "source_manifest_keys": [
+    "source.fit_ids",
+    "source.validation_ids",
+    "source.query_ids"
+  ],
+  "target_manifest_keys": [
+    "targets.{domain}.diagnostic_A_ids",
+    "targets.{domain}.diagnostic_B_ids"
+  ]
+}

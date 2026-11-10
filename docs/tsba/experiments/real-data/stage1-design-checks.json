@@ -1,0 +1,53 @@
+{
+  "protocol_id": "tsba-mutagenicity-r1-v1-20261110",
+  "status": "design_checks_passed_not_R0_engineering_acceptance",
+  "historical_manifest_sha_verified": true,
+  "raw_file_byte_hashes_verified": 6,
+  "graph_label_values_parsed": false,
+  "raw_graph_structure_parsed": false,
+  "data_roles_and_AB_order_verified": true,
+  "probe_inner_split_counts_verified": true,
+  "source_fits": 160,
+  "target_fits": 320,
+  "probe_updates_max": 384000,
+  "source_fold_mapping_checks": [
+    {
+      "fold": 0,
+      "source_ids_sha256": "ef16311eaa78a9c619727a6390c94f10f1cc8f0eb1d27030e83c66727753660a"
+    },
+    {
+      "fold": 1,
+      "source_ids_sha256": "7f4acbdb6d5df195549aa5fe457ed43dd34a4d50ca16c479937c651114ca564e"
+    },
+    {
+      "fold": 2,
+      "source_ids_sha256": "a10f8118f5b4d40958bc0a90482bb4ca9e26e20d0fbffc301c024f1ab4a60db2"
+    },
+    {
+      "fold": 3,
+      "source_ids_sha256": "9520ad52a411571fcfc3039ea93cd1b548063f52b30691fa1fd3cd27406fbd8e"
+    }
+  ],
+  "experiment_executed": false,
+  "production_code_changed": false,
+  "checks_note": "Hashing graph-label bytes is not parsing class values. No source/target graph labels accessed, no training; no new engineering suite run for this documentation-only change.",
+  "independent_design_review": {
+    "status": "reviewed_and_findings_addressed",
+    "findings": [
+      "fit_count",
+      "adjacent_loss_windows",
+      "rng_serialization_pairing",
+      "denominators_LOO_missing",
+      "three_point_kernel_ESS",
+      "ray_failure_tolerances",
+      "stable_log_bootstrap",
+      "missing_fold_and_fixed8_denominator"
+    ]
+  },
+  "document_hashes": {
+    "mutagenicity-stage1-protocol.md": "1719a14f6f9d9dd8b6f872d8f6aeadc87a0c44b3886981039ee190e6a02772b3",
+    "stage1-plan.json": "6ecba25963be49cc8f104b877f3a8fb4cd570582daa078c1c0a875206ed47532",
+    "stage1-inputs.json": "688622f7140266b2de6f8dea5afe17f6e79c489b3441f6a6941a36d668901188",
+    "stage1-report-template.md": "1784d7127fd0b08db903ce27eafa67ec7918108e845d1ec7902edf5ff002ed4a"
+  }
+}

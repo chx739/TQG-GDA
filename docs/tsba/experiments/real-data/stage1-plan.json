@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "protocol_id": "tsba-mutagenicity-r1-v1-20261110",
+  "status": "designed_not_executed_runner_pending",
+  "base_commit": "897fda6d81fe302ce145b02f6f07b4d5562cda9e",
+  "execution_commit": null,
+  "runner_config": false,
+  "experiment_started": false,
+  "real_graph_labels_read": false,
+  "production_algorithm_changed": false,
+  "learned_score_training": false,
+  "classifier_adaptation": false,
+  "final_label_access": false,
+  "tasks": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      3
+    ]
+  ],
+  "seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "roles": {
+    "source_fit": 779,
+    "source_validation": 109,
+    "source_query": 196,
+    "target": {
+      "1": {
+        "total": 1084,
+        "A": 271,
+        "B": 271,
+        "final": 542
+      },
+      "3": {
+        "total": 1085,
+        "A": 271,
+        "B": 271,
+        "final": 543
+      }
+    }
+  },
+  "transductive_input_pool": "all target including B and final; label broker gates roles separately",
+  "source": {
+    "encoder": "gin",
+    "layers": 3,
+    "hidden": 64,
+    "embedding_dim": 16,
+    "dropout": 0,
+    "epochs": 100,
+    "batch": 128,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 0,
+    "dtype": "float32",
+    "selection": "minimum source-validation CE; earliest tie",
+    "checkpoints": "every epoch with optimizer"
+  },
+  "probes": {
+    "outer_folds": 4,
+    "source_audit_per_fold": 49,
+    "total_labels_per_fold": 147,
+    "optimization_samples": 118,
+    "inner_validation_samples": 29,
+    "features": [
+      "H16",
+      "log1p_nodes_log1p_undirected_edges"
+    ],
+    "heads": [
+      "linear",
+      "hidden32_silu_mlp"
+    ],
+    "conditions": [
+      "true",
+      "fixed_permutation"
+    ],
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 0.001,
+    "updates": 800,
+    "validation_cadence": 20,
+    "selection": "minimum inner-validation CE; earliest tie; no step0",
+    "supplementary_endpoints": [
+      200,
+      800
+    ],
+    "geometry_uses": "selected true target H heads only; all 8, no B selection",
+    "dtype": "float64",
+    "source_fits": 160,
+    "target_fits": 320,
+    "total_fits": 480,
+    "max_probe_updates": 384000,
+    "standardization": "optimization118 only; geometry wraps back to common source Coordinates",
+    "budget_sensitive_relative_ce_drop": 0.01,
+    "budget_sensitive_windows": {
+      "previous_inclusive": [
+        601,
+        700
+      ],
+      "last_inclusive": [
+        701,
+        800
+      ],
+      "relative_drop_denominator": "max(abs(previous_mean_CE),1e-12)"
+    }
+  },
+  "geometry": {
+    "coverage_pool": "all target inputs",
+    "deep_query_pool": "fixed first64 hashed A graph IDs",
+    "queries_per_bank": 64,
+    "banks_per_cell": 9,
+    "class_pair": [
+      0,
+      1
+    ],
+    "radius_sigma": 4,
+    "projection_steps": 20,
+    "projection_backtracks": 10,
+    "root_tolerance_sigma": 1e-05,
+    "min_normal": 1e-08,
+    "cluster_radius_sigma": 0.1,
+    "scan_interval_sigma": [
+      -4,
+      4
+    ],
+    "scan_grid": 257,
+    "bisection_steps": 60,
+    "bisection_width_sigma": 1e-08,
+    "near_coincident_sigma": 0.05,
+    "source_lr_analytic_check": true,
+    "reference_consensus_min_heads": 6,
+    "reference_root_iqr_sigma": 1,
+    "lr_ray_parallel_relative_tolerance": 1e-08,
+    "mlp_ray_tangent_relative_tolerance": 1e-06,
+    "root_merge_distance_sigma": 1e-05,
+    "unique_means": "detected_unique_at_fixed_grid_resolution",
+    "degenerate_bandwidth": "retain baselines/probes; geometry and density missing, no substitute sigma"
+  },
+  "density": {
+    "estimator": "equal-weight Gaussian KDE, empirical not population",
+    "bandwidth": "original full-pool nearest-positive-neighbor median/sqrt16",
+    "panels": [
+      {
+        "bandwidth_multiplier": 1,
+        "shoulder_sigma": 1
+      },
+      {
+        "bandwidth_multiplier": 0.5,
+        "shoulder_sigma": 1
+      },
+      {
+        "bandwidth_multiplier": 2,
+        "shoulder_sigma": 1
+      },
+      {
+        "bandwidth_multiplier": 1,
+        "shoulder_sigma": 0.5
+      },
+      {
+        "bandwidth_multiplier": 1,
+        "shoulder_sigma": 2
+      }
+    ],
+    "tangent_radius_sigma": 4,
+    "shoulder_interval": [
+      0.5,
+      1.5
+    ],
+    "min_unlabeled_per_side": 20,
+    "min_B_per_side": 10,
+    "exclude_origin_from_support": true,
+    "leave_origin_out_sensitivity": true,
+    "min_kernel_ess": 5,
+    "valley_contrast": "min(logp_plus,logp_minus)-logp_center",
+    "valley_supported_lower95_gt": "log(1.1)",
+    "valley_opposed_upper95_lt": 0,
+    "bootstrap_repeats": 200,
+    "bootstrap_unit": "target graph ID; frozen bandwidth/models/queries",
+    "percentile_interval": [
+      0.025,
+      0.975
+    ],
+    "quantile_method": "linear",
+    "label_interval": "Wilson95 z=1.95996398454",
+    "slope_signal_sigma": 0.001,
+    "finite_difference_epsilon_sigma": 0.01,
+    "finite_difference_discrepancy_bound": "0.01*max(abs(g),1/sigma)",
+    "chunk": 32,
+    "valley_ess_points": [
+      "center",
+      "positive_shoulder",
+      "negative_shoulder"
+    ],
+    "bootstrap_numerics": "logsumexp(log_count+log_kernel), no pre-underflowed exp cache"
+  },
+  "screening": {
+    "readability_min_BA": 0.55,
+    "readability_true_minus_permutation": 0.05,
+    "readability_positive_folds": 3,
+    "observed_headroom_pp": 1,
+    "source_min_eligible_queries": 16,
+    "min_distinct_B_covered": 40,
+    "min_anchor_clusters": 8,
+    "direction_support_fraction": 0.75,
+    "direction_opposition_fraction": 0.25,
+    "loo_max_direction_flip_fraction": 0.25,
+    "reference_min_label_supported_queries": 16,
+    "reference_joint_evidence_fraction": 0.5,
+    "task_consistent_seeds": 4,
+    "states": [
+      "support",
+      "oppose_current_local_configuration",
+      "inconclusive"
+    ],
+    "not_statistical_significance": true,
+    "reference_required_folds": 3,
+    "reference_min_B_covered": 40,
+    "reference_min_anchor_clusters": 8,
+    "reference_aggregation": "arithmetic mean of four per-fold metrics, not probability ensemble",
+    "source_support_includes_unlabeled": true,
+    "loo_denominator": "original main identifiable query directions; opposite and unidentifiable separately",
+    "systematic_nll_increase_nats": 0.01,
+    "systematic_nll_positive_seeds": 4
+  },
+  "stages": [
+    "R0_role_and_engineering_checks",
+    "source_training_and_S1_seal",
+    "open_query_and_A_train_probes_observe_geometry_density",
+    "S2_seal_all_predictions_observations",
+    "open_B_evaluate_fixed_outputs",
+    "S3_archive_and_decision"
+  ],
+  "resources": {
+    "device": "cpu",
+    "torch_threads": 1,
+    "omp_threads": 1,
+    "mkl_threads": 1,
+    "deterministic": true,
+    "max_rss_bytes": 8589934592,
+    "max_source_seconds": 3600,
+    "max_probe_seconds": 120,
+    "max_geometry_density_cell_seconds": 3600,
+    "max_total_seconds": 86400,
+    "pilot": {
+      "seed": 3405,
+      "task": [
+        0,
+        1
+      ],
+      "included_in_results": true
+    }
+  },
+  "output_root": "/home/hxchen/experiments/tsba/mutagenicity-r1-v1/attempt-001",
+  "failure_policy": "retain partial archives, no replacement seeds or overwriting; repair in new attempt",
+  "later_stages": "R2/R3 require separate protocols; not automatically executed",
+  "rng": {
+    "serialization": "JSON array [protocol_id,purpose,model_seed,domain,fold,feature,head,rep], ensure_ascii=True,separators=(comma,colon); UTF8",
+    "seed": "first8 SHA256 bytes big-endian mod(2^63-1)",
+    "probe_init_domain": 0,
+    "permutation_shared_across": [
+      "model_seed",
+      "feature",
+      "head"
+    ],
+    "bootstrap_shared_across": [
+      "head",
+      "query",
+      "panel"
+    ],
+    "permutation_api": "torch.randperm(147)",
+    "bootstrap_api": "torch.randint(N,(200,N))"
+  },
+  "missing_policy": "Any missing fold => main four-fold mean NA; report available-fold descriptive mean/count separately. Missing heads remain in denominator8; missing never counts as support."
+}

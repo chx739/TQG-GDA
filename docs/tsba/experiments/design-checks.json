@@ -1,6 +1,6 @@
 {
   "date": "2026-11-10",
-  "scope": "Static plan checks and completed synthetic diagnostic audits through P0; no real-data label access",
+  "scope": "Synthetic audits through P0 and detailed Mutagenicity R1 design checks; real-data training not executed",
   "plan_id": "tsba-validation-v1-20261109",
   "run_counts": {
     "E2_trajectories": 40,
@@ -16,7 +16,7 @@
   "local_document_links_valid": true,
   "original_design_unchanged": true,
   "design_files_sha256": {
-    "docs/tsba/experiments/validation-plan.md": "f9546f61a1233212b7255e5f5314ba8e60787a76717f3935a8823bcd829e2a25",
+    "docs/tsba/experiments/validation-plan.md": "41ad43531b92485be5712cdc0f8b762a6bfd7c203e727e56bb74b9cc4b8c70ea",
     "docs/tsba/experiments/plan.json": "ce9b7b1f5411d9878366aa7f4f7658ce8c2033d28135019b3e43f678307bc8fc",
     "docs/tsba/experiments/full-source-plan.json": "2b2b5a89e57f66ec5a54395a6f3d6c38b3fa078a8650a27620da8768b683244b",
     "docs/tsba/experiments/replay-plan.json": "647b93f2813da00efb38a139b7d9550f7882db57c356e25ad6c9a484676e507e",
@@ -136,5 +136,16 @@
     "closed_loop_adaptation": false,
     "report": "p0-20261110/report.md",
     "archive_files_verified": 121
+  },
+  "mutagenicity_R1_design": {
+    "status": "designed_runner_pending",
+    "report": "real-data/mutagenicity-stage1-protocol.md",
+    "checks": "real-data/stage1-design-checks.json",
+    "real_experiment_started": false,
+    "real_graph_label_values_read": false,
+    "source_model_count": 5,
+    "probe_fits_max": 480,
+    "score_models": 0,
+    "adaptation_updates": 0
   }
 }
