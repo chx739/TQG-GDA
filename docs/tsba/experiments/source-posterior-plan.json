@@ -1,0 +1,61 @@
+{
+  "plan_id": "tsba-source-posterior-20261110",
+  "status": "frozen_before_execution",
+  "post_hoc": true,
+  "intervention": "Replace hard-label source CE with exact conditional source CE in gradient/proposal and nonlinear acceptance; same 512 source inputs",
+  "parent_run": "/home/hxchen/experiments/tsba/20261110-full-source/run-001",
+  "replay_reference": "/home/hxchen/experiments/tsba/20261110-replay/run-001",
+  "parent_archive_sha256": "08466be68558e19991c30f648af83fb524e25d208f8428fe915eb480278b316f",
+  "replay_archive_sha256": "235c6f257979f1c3c7e7eda7705bdb06745a3f6933674b9b29b9728e877306d9",
+  "dimensions": [2, 16],
+  "seeds": [0, 1, 2, 3, 4],
+  "arms": ["source_ce_ggn", "zero_zeta_geometry", "population"],
+  "new_trajectories": 30,
+  "attempts_each": 30,
+  "source_loss": {
+    "formula": "mean_i -sum_c p_S(c|x_i) log q_psi(c|x_i)",
+    "posterior": "known GMM: raw log odds=8*(x1-0.5), computed analytically after inverse fixed coordinate transform",
+    "posterior_from_current_model": false,
+    "source_inputs": "exact original 512 samples, same complete source permutation per attempt",
+    "hard_source_labels_used_for_updates": false,
+    "source_class_ce_logging": "posterior-weighted class-conditional CE",
+    "population_integration": false,
+    "interpretation": "Exact conditional label expectation on a finite source input set; not exact integration over source x or a production-method replacement"
+  },
+  "unchanged": ["all Config fields", "input bytes", "initial head", "source coordinates", "all source/target batch IDs", "population score state", "sigma", "categorical source GGN convention", "lambda_boundary", "tau", "damping", "solver tolerance", "projection", "request/execution bounds", "Armijo and backtracking", "round budget", "float64 CPU single thread"],
+  "branch_rules": {
+    "source_ce_ggn": "source-only GGN and Armijo without boundary objective/budget",
+    "zero_zeta_geometry": "own current boundaries, zero requests still solved, empty anchors skipped",
+    "population": "own current boundaries, unchanged population requests, empty/all-zero requests skipped"
+  },
+  "control_stationarity": {
+    "expected": "source-only and zero-request controls stay at the source Bayes initialization within numerical tolerance",
+    "parameter_atol": 1e-9,
+    "logit_atol": 1e-9,
+    "enforced_as_acceptance_rule": false,
+    "extra_gradient_clamp_or_stationary_skip": false,
+    "reporting": "retain actual accept/reject/skip reasons and tiny numerical moves; assertion is checked after each trajectory"
+  },
+  "audit": {
+    "gradient": "independent VJP of softmax(logits)*sum(posterior)-posterior on all 512 samples",
+    "acceptance_ce": "independent logsumexp minus probability-weighted logits for every backtracking trial",
+    "absolute_tolerance": 1e-11,
+    "one_hot_regression": "all three paths reproduce their existing hard-label counterparts within 1e-11",
+    "configuration": "byte-identical parent config and schedule",
+    "checkpoint_replay": "bitwise equality of saved logits",
+    "parents_immutable": true
+  },
+  "evaluation": {
+    "seal": "seal all new adaptation checkpoints and predictions before any synthetic target-label decoding",
+    "model_selection": false,
+    "diagnostics": "same independent 32768 source samples, 10000 target samples and 256 boundary probes as preceding replay; initial plus every saved round",
+    "metrics": ["target BA/NLL", "error confidence and four-cohort NLL changes", "independent source KL/CE", "training conditional CE and hard CE as separate records", "root mean/SD/RMS", "normal angle and nonplanarity", "acceptance, backtracks, gradient and parameter drift"],
+    "comparisons": ["within-arm posterior CE versus archived hard CE", "posterior population versus posterior zero-request", "posterior population versus initialization"],
+    "aggregation": "paired seed differences, mean and sample SD within dimension; failed cells retained separately"
+  },
+  "resources": {"cell_seconds": 1800, "total_seconds": 14400, "rss_bytes": 4294967296},
+  "engineering_tests_passed": 51,
+  "production_tsba_changed": false,
+  "next_step_2_executed": false,
+  "archive": "independent immutable local bundle with logs, all round states and candidates, posterior targets, final classifiers, diagnostic inputs/logits/geometry, code/environment and SHA256; GitHub publishes scalar records and report"
+}

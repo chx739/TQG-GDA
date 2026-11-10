@@ -138,3 +138,5 @@ tests/tsba/
 checkpoint回放入口：[run_replay.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/run_replay.py)、[replay.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/replay.py)。检查解析后验与初始头是否一致、NLL四组贡献是否加和、边界探针是否固定并保留失败，以及观察前后参数是否逐位相同。对应 `test_replay.py`。
 
 回放入口加入后，完整工程测试为48项通过，见[测试日志](experiments/e2-replay-20261110/engineering-checks.txt)；[回放报告](experiments/e2-replay-20261110/report.md)保存930次状态核验和三类研究诊断，未训练新模型。
+
+解析源后验诊断：[source_posterior.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/source_posterior.py)。检查源期望CE是否同时进入梯度与真实验收、GGN公式是否保留、三个分支的跳过/回溯规则是否与旧入口一致，以及是否没有强制控制组不动。对应 `test_source_posterior.py`；当前51项测试通过。

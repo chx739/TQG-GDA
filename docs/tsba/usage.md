@@ -171,3 +171,17 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summariz
 ```
 
 已发布[checkpoint回放报告](experiments/e2-replay-20261110/report.md)。源条件CE和后验KL的MC标准误、逐轮目标NLL四组贡献、固定探针几何、每个种子的配对差均可从表格与完整档案复核。
+
+
+## 解析源后验对照
+
+[后验CE协议](experiments/source-posterior-plan.json)只替换研究入口的源损失，不改变生产TSBA。候选与验收同时替换，复用完整源批次、原目标ID及总体score：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_source_posterior \
+  --parent /absolute/path/full-source-run \
+  --replay /absolute/path/checkpoint-replay-run \
+  --output /absolute/path/new-source-posterior-run
+```
+
+适配全部结束并封存后，自动按前次回放协议重新评价已保存的参数；独立源样本与边界探针必须逐位匹配。`source_ce`接受日志在本诊断中特指后验期望CE，硬标签CE只在封存后的诊断中单独报告。
