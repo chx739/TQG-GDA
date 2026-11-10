@@ -455,9 +455,11 @@
   },
   "checkpoint_replay": {
     "plan": "replay-plan.json",
-    "status": "frozen_before_execution",
+    "status": "completed_930_state_evaluations",
     "post_hoc": true,
     "retraining": false,
-    "state_evaluations": 930
+    "state_evaluations": 930,
+    "failures": 0,
+    "report": "e2-replay-20261110/report.md"
   }
 }

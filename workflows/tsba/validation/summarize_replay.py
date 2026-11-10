@@ -210,7 +210,7 @@ def report(s):
             lines.append(f"| {d} | {arm} | {delta('target.nll')} | {delta('target.mean_wrong_confidence')} | {delta('target.high_confidence_error_fraction_99')} |")
     lines+=['','![目标轨迹](target-trajectories.png)','',
             '下面四组根据每个样本的初始/当前正确性定义。贡献为该组样本NLL变化之和除以全部样本数；四项精确加和为总ΔNLL。组内样本的身份已固定在存档logits中，可重算。它是描述性分解。','',
-            '| 维度 | 方法 | 始终正确 | 由对变错 | 由错变对 | 始终错误 |',
+            '| 维度 | 方法 | 初末均正确 | 由对变错 | 由错变对 | 初末均错误 |',
             '| --- | --- | ---: | ---: | ---: | ---: |']
     for d in (2,16):
         for arm,g in s['groups'][d].items():lines.append('| '+str(d)+' | '+arm+' | '+' | '.join(fmt(g['cohorts'][k]['mean']) for k in ('correct_correct','correct_wrong','wrong_correct','wrong_wrong'))+' |')

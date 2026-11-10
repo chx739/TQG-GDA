@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-10",
+  "execution_commit": "37f03c94e18a8c222443e9a088673e324a6d09ac",
+  "analysis_code_commit": "d53449b5588d35f3f261097c275c79df44ef9951",
+  "post_hoc": true,
+  "retraining": false,
+  "parameter_selection": false,
+  "initial_source_is_analytic_bayes": true,
+  "source_posterior_identity_max_log_error": 7.105427357601002e-15,
+  "manually_added": [
+    "interpretation of source overfitting",
+    "four-cohort NLL attribution, descriptive not causal",
+    "geometry interpretation",
+    "per-seed onset table",
+    "paired population-versus-zero interpretation"
+  ],
+  "cohort_terminology": "initial/final correctness only; intermediate predictions may flip",
+  "probe_queries": 238080,
+  "valid_root_queries": 238080,
+  "normal_orientation_positive_queries": 238080,
+  "engineering_tests_passed": 48,
+  "next_step_2_executed": false,
+  "presentation_only_code_patch": {
+    "file": "reproducibility/summarize_replay_presentation.py",
+    "sha256": "d3b937eca58de91b804b9eef50390ea196036864211bc061902b8ded0ad92387",
+    "change": "endpoint cohort labels made explicit; metric calculations unchanged"
+  },
+  "public_svg_normalization": {
+    "files": [
+      "boundary-trajectories.svg",
+      "source-generalization.svg",
+      "nll-cohorts.svg",
+      "target-trajectories.svg"
+    ],
+    "change": "line-ending whitespace only; XML content checked and archived originals unchanged"
+  }
+}

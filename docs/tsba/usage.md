@@ -160,3 +160,14 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_repl
 ```
 
 930次状态评价包括三个臂各自的初始化与30个已接受状态，重复的初始化不是独立样本。完整记录与compact checkpoint向量留在新目录，失败原样保留。
+
+
+回放结束后，重算目标logits、指标和边界根残差并汇总：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summarize_replay \
+  --run /absolute/path/completed-checkpoint-replay-run \
+  --output /absolute/path/new-replay-analysis
+```
+
+已发布[checkpoint回放报告](experiments/e2-replay-20261110/report.md)。源条件CE和后验KL的MC标准误、逐轮目标NLL四组贡献、固定探针几何、每个种子的配对差均可从表格与完整档案复核。

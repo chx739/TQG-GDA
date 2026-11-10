@@ -16,10 +16,10 @@
   "local_document_links_valid": true,
   "original_design_unchanged": true,
   "design_files_sha256": {
-    "docs/tsba/experiments/validation-plan.md": "07e7d9bb48dce13f071df2a46731b42af0970028c68cef8f93f29c25cae63490",
-    "docs/tsba/experiments/plan.json": "adaf26438bfb34ad7d49facf44c69ce1c525dffae52d1adb860beead8120c509",
+    "docs/tsba/experiments/validation-plan.md": "5b8448954efb852f544d4cc368d7e929cf1e063a4e49c4f1c6e45d75c5eae2e5",
+    "docs/tsba/experiments/plan.json": "bbbeebd27ffe06c7f43ee31c2d4e964aa79646b0d02bb75d7b34f8d2c3255c9c",
     "docs/tsba/experiments/full-source-plan.json": "2b2b5a89e57f66ec5a54395a6f3d6c38b3fa078a8650a27620da8768b683244b",
-    "docs/tsba/experiments/replay-plan.json": "08de1b27a412dec2669e224a8263853d9b4806e3ee9f4b5417a8a535ffe25cfb"
+    "docs/tsba/experiments/replay-plan.json": "647b93f2813da00efb38a139b7d9550f7882db57c356e25ad6c9a484676e507e"
   },
   "independent_plan_review": {
     "critical_findings_addressed": [
@@ -72,6 +72,14 @@
     "plan": "replay-plan.json",
     "retraining": false,
     "state_evaluations": 930,
-    "tests_passed": 48
+    "tests_passed": 48,
+    "status": "completed",
+    "target_state_predictions_replayed": 930,
+    "source_initial_final_metric_checks": 60,
+    "probe_evaluations": 238080,
+    "execution_failures": 0,
+    "parent_archive_unchanged": true,
+    "report": "e2-replay-20261110/report.md",
+    "archive_files_verified": 264
   }
 }

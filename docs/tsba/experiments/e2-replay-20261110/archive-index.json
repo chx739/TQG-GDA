@@ -1,0 +1,30 @@
+{
+  "archive_path": "/home/hxchen/experiments/tsba/archives/20261110-replay-run-001.tar.gz",
+  "archive_bytes": 155318379,
+  "archive_sha256": "235c6f257979f1c3c7e7eda7705bdb06745a3f6933674b9b29b9728e877306d9",
+  "source_path": "/home/hxchen/experiments/tsba/20261110-replay",
+  "files_verified": 264,
+  "uncompressed_bytes": 235107549,
+  "run_path": "/home/hxchen/experiments/tsba/20261110-replay/run-001",
+  "run_manifest": "run-manifest.json",
+  "run_manifest_sha256": "b1c370a8125e8d230b4c52d639533d22e68132cbe13ce05205c2419e81ca0672",
+  "run_files_verified": 240,
+  "checkpoint_state_evaluations": 930,
+  "distinct_initial_states": 10,
+  "target_logit_states_replayed": 930,
+  "source_metrics_recomputed": 60,
+  "boundary_probe_evaluations": 238080,
+  "retraining": false,
+  "post_hoc": true,
+  "parent_archive_sha256": "08466be68558e19991c30f648af83fb524e25d208f8428fe915eb480278b316f",
+  "parent_unchanged": true,
+  "binary_archive_contents": [
+    "compact checkpoint vectors and final classifier states",
+    "independent source inputs and exact posterior",
+    "fixed probe inputs",
+    "all target logits and labels",
+    "roots, normals, fitted plane coefficients and statuses",
+    "configs, code snapshots, package versions and logs"
+  ],
+  "publication": "Reports, plots, scalar tables and integrity records on GitHub; full replay binary records retained locally."
+}

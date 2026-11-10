@@ -1,13 +1,26 @@
 {
   "plan_id": "tsba-checkpoint-replay-20261110",
-  "status": "frozen_before_execution",
+  "status": "completed_930_state_evaluations",
   "post_hoc": true,
   "scope": "Read-only diagnostics of existing full-source checkpoints; no retraining or model selection",
   "parent_run": "/home/hxchen/experiments/tsba/20261110-full-source/run-001",
   "parent_archive_sha256": "08466be68558e19991c30f648af83fb524e25d208f8428fe915eb480278b316f",
-  "dimensions": [2, 16],
-  "seeds": [0, 1, 2, 3, 4],
-  "arms": ["source_ce_ggn", "zero_zeta_geometry", "population"],
+  "dimensions": [
+    2,
+    16
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "arms": [
+    "source_ce_ggn",
+    "zero_zeta_geometry",
+    "population"
+  ],
   "rounds": "initialization plus every saved state after rounds 1..30",
   "state_evaluations": 930,
   "distinct_initial_states": 10,
@@ -16,14 +29,31 @@
     "seed_offset": 810000,
     "distribution": "same source GMM; means (-0.5,1.5) on raw x1; variance .25 on x1 and 1 elsewhere; equal priors",
     "reuse": "one independent set per dimension/seed shared across every arm and round",
-    "metrics": ["hard-label CE and BA", "conditional CE under exact posterior", "KL(true posterior || model)", "conditional CE excess over initialization", "posterior probability MAE"],
+    "metrics": [
+      "hard-label CE and BA",
+      "conditional CE under exact posterior",
+      "KL(true posterior || model)",
+      "conditional CE excess over initialization",
+      "posterior probability MAE"
+    ],
     "uncertainty": "per-sample Monte Carlo SE reported separately from across-seed sample SD",
     "baseline_identity": "verify initial classifier log probabilities equal analytic source posterior to 1e-11"
   },
   "target_evaluation": {
     "data": "the same archived 10000 synthetic evaluation samples and labels; no fresh target test claim",
-    "metrics": ["BA", "NLL", "wrong-prediction mean confidence", "error fractions at confidence >= .9 and >= .99", "correct/wrong NLL contributions"],
-    "cohorts": ["initial correct -> current correct", "initial correct -> current wrong", "initial wrong -> current correct", "initial wrong -> current wrong"],
+    "metrics": [
+      "BA",
+      "NLL",
+      "wrong-prediction mean confidence",
+      "error fractions at confidence >= .9 and >= .99",
+      "correct/wrong NLL contributions"
+    ],
+    "cohorts": [
+      "initial correct -> current correct",
+      "initial correct -> current wrong",
+      "initial wrong -> current correct",
+      "initial wrong -> current wrong"
+    ],
     "nll_decomposition": "sum within each cohort of current minus initial per-sample NLL, divided by total N; exact additive accounting, not a causal attribution",
     "selection": false
   },
@@ -40,7 +70,16 @@
     "root_policy": "use only unique detected roots; keep missing, multiple and nonfinite counts and records",
     "limitation": "finite grid cannot certify global uniqueness or detect all tangencies/sub-grid crossings",
     "normal": "input gradient of f1-f0 in raw coordinates; ideal orientation +e1; parameter gradients disabled",
-    "metrics": ["root mean and population SD", "RMS/MAE distance to target threshold", "RMS distance to source threshold", "normal angle to +e1", "normal change from prior round", "orientation", "affine fitted intercept/slope", "RMS residual after affine fit as finite-probe nonplanarity"],
+    "metrics": [
+      "root mean and population SD",
+      "RMS/MAE distance to target threshold",
+      "RMS distance to source threshold",
+      "normal angle to +e1",
+      "normal change from prior round",
+      "orientation",
+      "affine fitted intercept/slope",
+      "RMS residual after affine fit as finite-probe nonplanarity"
+    ],
     "coverage": "always report detected-root and normal validity; do not interpret missing roots as zero displacement"
   },
   "safety_of_observation": {
@@ -51,8 +90,35 @@
     "initial_and_final_predictions_match_archives_bitwise": true
   },
   "aggregation": "all seed trajectories; mean and sample SD within dimension; paired population-minus-zero; rounds/probes are not independent seeds",
-  "resources": {"device": "cpu", "threads": 1, "dtype": "float64", "cell_seconds": 1200, "total_seconds": 14400, "rss_bytes": 4294967296},
-  "archive": ["complete compact checkpoint vectors", "source/probe inputs and exact posterior", "all target logits", "per-probe roots/normals/statuses", "per-round metrics", "code snapshot and environment", "hash manifest, logs, failures"],
+  "resources": {
+    "device": "cpu",
+    "threads": 1,
+    "dtype": "float64",
+    "cell_seconds": 1200,
+    "total_seconds": 14400,
+    "rss_bytes": 4294967296
+  },
+  "archive": [
+    "complete compact checkpoint vectors",
+    "source/probe inputs and exact posterior",
+    "all target logits",
+    "per-probe roots/normals/statuses",
+    "per-round metrics",
+    "code snapshot and environment",
+    "hash manifest, logs, failures"
+  ],
   "github": "runner, frozen plan, report, scalar tables, plots, audit and archive index; binary records local only",
-  "next_step_2_execution": false
+  "next_step_2_execution": false,
+  "execution": {
+    "code_commit": "37f03c94e18a8c222443e9a088673e324a6d09ac",
+    "analysis_code_commit": "d53449b",
+    "report": "e2-replay-20261110/report.md",
+    "local_run": "/home/hxchen/experiments/tsba/20261110-replay/run-001",
+    "state_evaluations": 930,
+    "failures": 0,
+    "seconds": 63.555853018013295,
+    "probe_evaluations": 238080,
+    "all_probes_unique_detected": true,
+    "archive_index": "e2-replay-20261110/archive-index.json"
+  }
 }
