@@ -19,5 +19,18 @@
   "engineering_tests_passed": 44,
   "old_archives_unchanged": true,
   "original_design_unchanged": true,
-  "production_algorithm_changed": false
+  "production_algorithm_changed": false,
+  "publication_text_normalization": {
+    "files": [
+      "process.csv",
+      "source_ce_curves.csv",
+      "full-source-risk.svg",
+      "source-ce-curves.svg",
+      "paired.csv",
+      "evaluation.csv"
+    ],
+    "change": "LF endings and trailing whitespace only; archived originals unchanged",
+    "csv_parsed_rows_equal": true,
+    "svg_xml_content_equal_after_whitespace_normalization": true
+  }
 }
