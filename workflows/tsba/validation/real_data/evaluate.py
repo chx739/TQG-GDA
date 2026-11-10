@@ -107,6 +107,26 @@ def wilson(successes, total, z=1.95996398454):
     return [max(0., center - width), min(1., center + width)]
 
 
+def validated_nonnegative_errorbars(value, interval):
+    """Convert an interval for plotting, clipping only roundoff-sized errors.
+
+    Wilson endpoints can differ from an observed proportion of zero or one by
+    a few floating-point ulps. Matplotlib rejects even these tiny negative
+    lengths. Keep the saved statistical interval intact and correct only its
+    display lengths; a materially inconsistent interval still raises.
+    """
+    if len(interval) != 2 or not all(finite(v) for v in (value, *interval)):
+        raise ValueError("Finite value and interval required for error bars")
+    value, lower, upper = map(float, (value, *interval))
+    if lower > upper:
+        raise ValueError("Error-bar interval is reversed")
+    tolerance = 16 * math.ulp(max(1., abs(value), abs(lower), abs(upper)))
+    lengths = (value-lower, upper-value)
+    if any(length < -tolerance for length in lengths):
+        raise ValueError("Value is materially outside its error-bar interval")
+    return [[max(0., length)] for length in lengths]
+
+
 def strict_fold_summary(values, expected=4):
     """The available-fold mean is descriptive and never replaces the endpoint."""
     if len(values) != expected:
@@ -767,7 +787,7 @@ def make_figures(root, plan, predictions, geometry, public):
                     value = row.get(f"{prefix}_class0_fraction")
                     interval = row.get(f"{prefix}_wilson95", [None, None])
                     if finite(value):
-                        axs[2].errorbar([coordinate], [value], yerr=[[value-interval[0]], [interval[1]-value]], fmt="o", color="tab:purple")
+                        axs[2].errorbar([coordinate], [value], yerr=validated_nonnegative_errorbars(value, interval), fmt="o", color="tab:purple")
                         axs[2].annotate(f"n={row.get(prefix+'_B_n')}", (coordinate, value), xytext=(4, 5), textcoords="offset points", fontsize=8)
                 axs[2].set(xlim=(-4, 4), ylim=(-.03, 1.03), ylabel="Real B-neighbor class-0 fraction")
                 axs[2].axhline(.5, color="gray", linestyle=":")

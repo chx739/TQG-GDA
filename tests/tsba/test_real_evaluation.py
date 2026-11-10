@@ -10,6 +10,7 @@ import torch
 from workflows.tsba.validation.real_data.evaluate import (
     classification_metrics, direction_from_ci, evaluate_panel, reference_consensus,
     nll_screen, strict_fold_summary, summarize_bank, summarize_direction, verify_observations_sealed, wilson,
+    validated_nonnegative_errorbars,
 )
 
 
@@ -54,6 +55,33 @@ class RealEvaluationTests(unittest.TestCase):
         self.assertLess(wilson(0, 10)[1], .5)
         self.assertLess(wilson(7, 10)[0], .5)
         self.assertEqual(wilson(0, 0), [None, None])
+
+    def test_wilson_errorbar_endpoints_clip_roundoff_only_without_changing_statistics(self):
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots()
+        try:
+            for n in (1, 10, 31, 271):
+                for successes in (0, n, n//2):
+                    interval = wilson(successes, n)
+                    saved = interval.copy()
+                    value = successes/n
+                    errors = validated_nonnegative_errorbars(value, interval)
+                    self.assertTrue(all(length[0] >= 0 for length in errors))
+                    self.assertEqual(interval, saved)
+                    ax.errorbar([successes], [value], yerr=errors)
+            fig.canvas.draw()
+        finally:
+            plt.close(fig)
+        self.assertEqual(validated_nonnegative_errorbars(0., [1e-17, .5])[0], [0.])
+        self.assertEqual(validated_nonnegative_errorbars(1., [.5, 1.-1e-16])[1], [0.])
+        with self.assertRaises(ValueError):
+            validated_nonnegative_errorbars(0., [.01, .5])
+        with self.assertRaises(ValueError):
+            validated_nonnegative_errorbars(.5, [.7, .3])
+        with self.assertRaises(ValueError):
+            validated_nonnegative_errorbars(.5, [float("nan"), .7])
 
     def panel(self):
         positive, negative = list(range(40)), list(range(40, 80))
