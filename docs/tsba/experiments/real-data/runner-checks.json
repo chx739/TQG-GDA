@@ -1,0 +1,22 @@
+{
+  "status": "synthetic_engineering_passed_real_input_verification_pending",
+  "tests": 86,
+  "seconds": 37.688,
+  "real_graph_labels_read": false,
+  "real_training_started": false,
+  "source_training_matches_production_exactly": true,
+  "production_algorithm_modified": false,
+  "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m unittest discover -s tests/tsba -v",
+  "limitations": "Engineering tests are not research evidence. Actual input hashes and per-seed role counts are checked at execution.",
+  "test_log_sha256": "2594889f3ad8239a2a0a48cbda5519590c4884fb5d6ff933c0bee8c37966d5a9",
+  "independent_clean_context_review": "completed; launch-blocking findings corrected before real execution",
+  "review_fixes": [
+    "protocol float32 equivalence and batch-partition tolerances",
+    "missing NLL blocks R2 screening",
+    "missing pre-S1 coverage cannot be retried post-seal",
+    "probe/cell failures propagated into completion state",
+    "degenerate sigma retains full-pool denominator",
+    "checkpoint probability replay before B access",
+    "code snapshot and bootstrap draw arrays archived"
+  ]
+}
