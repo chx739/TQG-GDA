@@ -1,5 +1,8 @@
 # TSBA Code Review Guide（人工审查导航）
 
+研究进展见[实验总览](experiments/README.md)：[模拟结果](experiments/synthetic/README.md)与[真实图验证计划](experiments/real-data/README.md)分开记录；工程测试不代表真实任务有效。
+
+
 这份导航供逐项阅读代码使用，不是新的审查结论。初始实现来自 `536ba10`；本导航已按 2026-11-09 数值修复与研究观察器更新，残差层使用 `U1/U2` 命名。下面按“文档要求 → 核心入口 → 要核对的问题 → 已有测试”组织。算法代码位于 `tsba/`，不要与历史 TQG 实现或 `references/sega-gda/` 混读。
 
 ## 先打开这三份材料

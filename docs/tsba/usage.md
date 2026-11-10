@@ -1,5 +1,8 @@
 # 数据协议、运行与推断
 
+研究进展见[实验总览](experiments/README.md)：[模拟结果](experiments/synthetic/README.md)与[真实图验证计划](experiments/real-data/README.md)分开记录；工程测试不代表真实任务有效。
+
+
 ## 显式输入
 
 使用 `torch.save` 保存纯字典/张量，读取时 `weights_only=True`。顶层必须恰好包含：
