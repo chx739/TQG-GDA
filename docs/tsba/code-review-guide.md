@@ -134,3 +134,5 @@ tests/tsba/
 全源诊断入口：[run_full_source.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/run_full_source.py)。检查配置是否只改变 `source_adapt_batch`、每轮是否完整覆盖512个源ID、目标ID是否与旧档案一致，以及候选和每次回溯是否都使用全源CE。对应 `test_full_source.py`；不改变生产TSBA目标与接受规则。
 
 全源实验入口加入后，完整工程测试为44项通过，见[测试日志](experiments/e2-full-source-20261110/engineering-checks.txt)。[全源诊断报告](experiments/e2-full-source-20261110/report.md)另列30个checkpoint、900轮状态链和1380次候选CE的重载审计；研究结果与工程通过分开报告。
+
+checkpoint回放入口：[run_replay.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/run_replay.py)、[replay.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/replay.py)。检查解析后验与初始头是否一致、NLL四组贡献是否加和、边界探针是否固定并保留失败，以及观察前后参数是否逐位相同。对应 `test_replay.py`。

@@ -147,3 +147,16 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summariz
 核验要求预测逐位一致、逐轮参数状态连续、源样本全覆盖及目标ID完全匹配。输出逐种子评价、配对差、全源CE曲线、审计清单与报告；原128批次的全源CE曲线从既有参数快照被动复算。
 
 已发布的[全源批次报告](experiments/e2-full-source-20261110/report.md)包含30条新轨迹、与原128批次的配对结果及完整归档索引。
+
+
+## 既有全源checkpoint回放
+
+按[回放协议](experiments/replay-plan.json)评价源泛化、目标置信度及固定探针边界；只加载已保存的参数，参数梯度关闭，既有目录不改写：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_replay \
+  --parent /absolute/path/completed-full-source-run \
+  --output /absolute/path/new-checkpoint-replay-run
+```
+
+930次状态评价包括三个臂各自的初始化与30个已接受状态，重复的初始化不是独立样本。完整记录与compact checkpoint向量留在新目录，失败原样保留。
