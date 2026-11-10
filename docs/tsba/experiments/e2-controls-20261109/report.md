@@ -1,5 +1,7 @@
 # E2 补充对照结果（2026-11-09）
 
+后续已完成[全源512样本诊断](../e2-full-source-20261110/report.md)：消除全源CE上升后，16维目标退化仍存在。以下保留原128批次结果和当时判断。
+
 **这是查看首轮结果后追加的诊断，不是新的盲测。** 原40条轨迹保留，新增Source-CE-GGN与zero_zeta_geometry各10条，共20条；输入、源初始化、坐标、带宽、种子、逐轮ID和30次尝试预算均与原档案匹配。真实图数据和标签没有读取。
 
 执行代码：[`44b7498`](https://github.com/chx739/TQG-GDA/tree/44b74988d07cdd291bc7c21a34f252c21e8ebc78)。冻结协议见[controls-plan.json](../controls-plan.json)；原报告见[首轮结果](../e1-e2-20261109/report.md)。

@@ -1,0 +1,28 @@
+{
+  "archive_path": "/home/hxchen/experiments/tsba/archives/20261110-full-source-run-001.tar.gz",
+  "archive_bytes": 32813645,
+  "archive_sha256": "08466be68558e19991c30f648af83fb524e25d208f8428fe915eb480278b316f",
+  "source_path": "/home/hxchen/experiments/tsba/20261110-full-source",
+  "files_verified": 281,
+  "uncompressed_bytes": 50745439,
+  "run_path": "/home/hxchen/experiments/tsba/20261110-full-source/run-001",
+  "manifest_path": "run-manifest.json",
+  "run_manifest_sha256": "fa36f84054030d50fead4d730e1021144f422d55078da7536232873aaac67f1f",
+  "run_files_verified": 263,
+  "final_classifiers_replayed": 30,
+  "oracle_states_verified": 10,
+  "rounds_verified": 900,
+  "post_hoc": true,
+  "only_config_change": {
+    "source_adapt_batch": [
+      128,
+      512
+    ]
+  },
+  "previous_archives_unchanged": true,
+  "previous_archive_sha256": {
+    "20261109-mechanisms-run-001.tar.gz": "a216503eb38ddda5c6477f77df5c441f88a9e0afcee5d4c43df18655a63d90f5",
+    "20261109-controls-run-001.tar.gz": "0ec167ca58428aa2422a1668791f4015bff4410542894150c7e3d8923ccea235"
+  },
+  "publication": "Code, report, scalar tables, figures, logs and manifests on GitHub; full checkpoints and run snapshots retained locally."
+}

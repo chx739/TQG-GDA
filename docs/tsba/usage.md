@@ -134,3 +134,16 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_full
 ```
 
 仅修改 `source_adapt_batch=512`；仍重放原随机数调用并核对目标ID。原有目标形式和预算不改，逐次回溯的源CE用独立的全源前向复算核验。运行器保留全源CE轨迹、原128批次的封存预测和30个新checkpoint，所有预测封存后再评价。
+
+
+完成后，重载所有新checkpoint、复算每次候选的全源CE，并与旧128批次结果配对：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summarize_full_source \
+  --run /absolute/path/finished-full-source-run \
+  --output /absolute/path/new-full-source-analysis
+```
+
+核验要求预测逐位一致、逐轮参数状态连续、源样本全覆盖及目标ID完全匹配。输出逐种子评价、配对差、全源CE曲线、审计清单与报告；原128批次的全源CE曲线从既有参数快照被动复算。
+
+已发布的[全源批次报告](experiments/e2-full-source-20261110/report.md)包含30条新轨迹、与原128批次的配对结果及完整归档索引。

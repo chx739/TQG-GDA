@@ -1,15 +1,50 @@
 {
   "plan_id": "tsba-full-source-20261110",
-  "status": "frozen_before_execution",
+  "status": "completed_30_trajectories",
   "post_hoc": true,
   "requested_change": "source_adapt_batch 128 -> 512 in proposal gradient/GGN AND the source CE term of acceptance",
-  "dimensions": [2, 16],
-  "seeds": [0, 1, 2, 3, 4],
-  "arms": ["source_ce_ggn", "zero_zeta_geometry", "population"],
+  "dimensions": [
+    2,
+    16
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "arms": [
+    "source_ce_ggn",
+    "zero_zeta_geometry",
+    "population"
+  ],
   "new_trajectories": 30,
   "rounds": 30,
-  "only_config_change": {"source_adapt_batch": [128, 512]},
-  "unchanged": ["archived inputs", "source Bayes initialization", "coordinates", "target batch IDs", "target_batch=128", "sigma", "population score formula", "lambda_boundary", "tau", "damping", "solver and tolerance", "projection", "request and execution bounds", "Armijo and backtracking", "float64", "cpu single thread"],
+  "only_config_change": {
+    "source_adapt_batch": [
+      128,
+      512
+    ]
+  },
+  "unchanged": [
+    "archived inputs",
+    "source Bayes initialization",
+    "coordinates",
+    "target batch IDs",
+    "target_batch=128",
+    "sigma",
+    "population score formula",
+    "lambda_boundary",
+    "tau",
+    "damping",
+    "solver and tolerance",
+    "projection",
+    "request and execution bounds",
+    "Armijo and backtracking",
+    "float64",
+    "cpu single thread"
+  ],
   "source_schedule": "replay original seed+201 source-then-target randperm; use complete source permutation instead of its first 128 IDs; verify old prefix and all target IDs",
   "source_objective": "mean CE on all 512 source training samples; do not rescale lambda or learning budget",
   "acceptance": {
@@ -43,10 +78,41 @@
     "source_batch=512 vs archived source_batch=128 within arm and seed",
     "zero_zeta_geometry vs source_ce_ggn at source_batch=512"
   ],
-  "metrics": ["target BA and NLL", "accuracy and per-class recalls", "full-source CE each round", "accepted attempts and backtracks", "anchor coverage", "solver residual", "runtime and RSS"],
+  "metrics": [
+    "target BA and NLL",
+    "accuracy and per-class recalls",
+    "full-source CE each round",
+    "accepted attempts and backtracks",
+    "anchor coverage",
+    "solver residual",
+    "runtime and RSS"
+  ],
   "evaluation": "last accepted model after 30 attempts; all predictions sealed before synthetic label decoding; no target-label selection",
   "aggregation": "within dimension, paired seed mean and sample SD, wins/ties/losses; failed runs retained and separated",
   "real_data_or_labels": false,
-  "resources": {"per_cell_seconds": 1800, "total_seconds": 14400, "rss_bytes": 4294967296},
-  "archive": {"old_runs_immutable": true, "local_full_checkpoints_logs_and_source": true, "github": "code, report, scalar tables and integrity manifests"}
+  "resources": {
+    "per_cell_seconds": 1800,
+    "total_seconds": 14400,
+    "rss_bytes": 4294967296
+  },
+  "archive": {
+    "old_runs_immutable": true,
+    "local_full_checkpoints_logs_and_source": true,
+    "github": "code, report, scalar tables and integrity manifests"
+  },
+  "execution": {
+    "code_commit": "ee4326afafffe71930b7ee4464144c4f98ce3432",
+    "analysis_code_commit": "c15f911",
+    "report": "e2-full-source-20261110/report.md",
+    "local_run": "/home/hxchen/experiments/tsba/20261110-full-source/run-001",
+    "trajectories": 30,
+    "rounds_recorded": 900,
+    "execution_failures": 0,
+    "wall_seconds": 768.8,
+    "peak_process_rss_bytes": 755044352,
+    "source_ce_trials_recomputed": 1380,
+    "checkpoint_prediction_replay": "bitwise equality",
+    "source_ce_increase_rounds": 0,
+    "archive_index": "e2-full-source-20261110/archive-index.json"
+  }
 }

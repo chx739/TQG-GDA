@@ -113,7 +113,7 @@ tests/tsba/
 | 数据边界、冻结、保存与实际更新 | [test_pipeline.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tests/tsba/test_pipeline.py) | 目标标签拒绝、角色互斥、BN 冻结、单节点批次；真实训练 score 后产生有效请求、接受更新并保存加载，覆盖 direct/CG |
 | 精度与数值异常 | [test_solver_precision.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tests/tsba/test_solver_precision.py)、[test_numerical_edges.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tests/tsba/test_numerical_edges.py) | 默认精度策略、显式容差、投影平方溢出、不同点距离下溢与快照保持 |
 
-最新测试数量、运行环境和审查修复记录见 [验证摘要](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/validation.json)。原持久化测试允许无边界而不更新；新增的完整链路测试必须有真实参数更新，二者职责不同。这些检验实现与数值行为，尚不证明低密度方向改善真实目标分类，也未验证 GPU 路径。
+实现与数值修复阶段的历史测试、运行环境和审查记录见 [验证摘要](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/validation.json)。原持久化测试允许无边界而不更新；新增的完整链路测试必须有真实参数更新，二者职责不同。这些检验实现与数值行为，尚不证明低密度方向改善真实目标分类，也未验证 GPU 路径。
 
 ## 记录疑问的方式
 
@@ -132,3 +132,5 @@ tests/tsba/
 补充控制入口：[controls.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/controls.py)、[run_controls.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/run_controls.py)。核对纯源GGN是否移除DᵀD/位移预算，零请求几何控制是否保留它们，是否确实绕过研究分支的零请求跳过而没有修改生产规则，以及是否复用原始逐轮ID。对应 `test_controls.py`。
 
 全源诊断入口：[run_full_source.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/run_full_source.py)。检查配置是否只改变 `source_adapt_batch`、每轮是否完整覆盖512个源ID、目标ID是否与旧档案一致，以及候选和每次回溯是否都使用全源CE。对应 `test_full_source.py`；不改变生产TSBA目标与接受规则。
+
+全源实验入口加入后，完整工程测试为44项通过，见[测试日志](experiments/e2-full-source-20261110/engineering-checks.txt)。[全源诊断报告](experiments/e2-full-source-20261110/report.md)另列30个checkpoint、900轮状态链和1380次候选CE的重载审计；研究结果与工程通过分开报告。

@@ -445,9 +445,12 @@
   },
   "full_source_diagnostic": {
     "plan": "full-source-plan.json",
-    "status": "frozen_before_execution",
+    "status": "completed_30_trajectories",
     "new_trajectories": 30,
     "only_config_change": "source_adapt_batch: 128 -> 512",
-    "post_hoc": true
+    "post_hoc": true,
+    "report": "e2-full-source-20261110/report.md",
+    "execution_failures": 0,
+    "source_ce_increase_rounds": 0
   }
 }
