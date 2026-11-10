@@ -16,8 +16,8 @@
   "local_document_links_valid": true,
   "original_design_unchanged": true,
   "design_files_sha256": {
-    "docs/tsba/experiments/validation-plan.md": "93d54b78409fb9e14d42c2e438b1b76e77c32b11155f559ccce7cfab03688f68",
-    "docs/tsba/experiments/plan.json": "583a32667da01328b42972c115f6d6e712463c04464474cc50c73c00318142e1"
+    "docs/tsba/experiments/validation-plan.md": "5bac7456a226c8c0ec04c4f547669fac25903db74238a4cb35fb1ab18de25ba3",
+    "docs/tsba/experiments/plan.json": "c38fb2e078c63c541dd5ee287f9919a133da8b339a84c051c5143231873eae1b"
   },
   "independent_plan_review": {
     "critical_findings_addressed": [
@@ -48,5 +48,12 @@
     "checkpoints_replayed": 20,
     "rounds_verified": 600,
     "results": "e2-controls-20261109/report.md"
+  },
+  "full_source_checks": {
+    "new_trajectory_count": 30,
+    "tests_passed": 44,
+    "target_schedule_unchanged": true,
+    "source_ce_trial_audit": true,
+    "production_algorithm_changed": false
   }
 }

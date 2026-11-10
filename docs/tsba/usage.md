@@ -121,3 +121,16 @@ python -m workflows.tsba.validation.summarize_controls --run /absolute/path/fini
 ```
 
 已发布的[补充对照报告](experiments/e2-controls-20261109/report.md)包含20条新轨迹、与原40条轨迹的配对比较、源控制的局限以及对首轮解释的修正。
+
+## 全源512样本候选与验收
+
+按[全源批次协议](experiments/full-source-plan.json)运行三臂共30条轨迹：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_full_source \
+  --original /absolute/path/original-mechanism-run \
+  --controls /absolute/path/completed-control-run \
+  --output /absolute/path/new-full-source-run
+```
+
+仅修改 `source_adapt_batch=512`；仍重放原随机数调用并核对目标ID。原有目标形式和预算不改，逐次回溯的源CE用独立的全源前向复算核验。运行器保留全源CE轨迹、原128批次的封存预测和30个新checkpoint，所有预测封存后再评价。
