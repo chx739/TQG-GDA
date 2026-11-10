@@ -1,18 +1,38 @@
 {
-  "protocol_id": "tsba-mutagenicity-r1-v2-20261111",
-  "status": "v2_SEGA_authority_aligned_source_roles_pending_execution",
+  "protocol_id": "tsba-mutagenicity-r1-v3-20261111",
+  "status": "v3_domain_only_scope_and_restored_independent_roles_verified",
   "historical_manifest_sha_verified": true,
   "raw_file_byte_hashes_verified": 6,
   "graph_label_values_parsed": false,
   "raw_graph_structure_parsed": false,
+  "data_roles_and_AB_order_verified": true,
+  "probe_inner_split_counts_verified": true,
   "source_fits": 160,
   "target_fits": 320,
   "probe_updates_max": 384000,
+  "source_fold_mapping_checks": [
+    {
+      "fold": 0,
+      "source_ids_sha256": "78bb20871362728553252978607a1b2dff2a534efa5c1b3b7bb2ba6a377796a4"
+    },
+    {
+      "fold": 1,
+      "source_ids_sha256": "0674558e15d625d19b598a88e6c3e509c7f8781f465a34d83de00eabd77917ec"
+    },
+    {
+      "fold": 2,
+      "source_ids_sha256": "6d0455947c678d2693497b9dac0829ad3c1f262e833224ac5a1c5a140f0e32ce"
+    },
+    {
+      "fold": 3,
+      "source_ids_sha256": "b2576e9d15202d757bdffb6486262cbf6cc44543688afcc6ba862eb547209e5d"
+    }
+  ],
   "experiment_executed": false,
   "production_code_changed": false,
   "checks_note": "Hashing graph-label bytes is not parsing class values. No source/target graph labels accessed, no training; no new engineering suite run for this documentation-only change.",
   "independent_design_review": {
-    "status": "v1_review_preserved_v2_SEGA_alignment_review_completed",
+    "status": "reviewed_and_findings_addressed",
     "findings": [
       "fit_count",
       "adjacent_loss_windows",
@@ -22,18 +42,23 @@
       "ray_failure_tolerances",
       "stable_log_bootstrap",
       "missing_fold_and_fixed8_denominator"
-    ]
+    ],
+    "scope_correction_review": "v3 independent role/domain audit passed; no label values parsed"
   },
   "document_hashes": {
-    "mutagenicity-stage1-protocol.md": "327ee9fbdd6511f30097f5bc57990e5172142e8cb0303db50a93104b8f121b0a",
-    "stage1-plan.json": "02ad49027a3471d19d46f00cc2ae70040f9f72a657ef9ac0262568a9f1e0c2a4",
-    "stage1-inputs.json": "7649d5fc2eee7af490983191e9e3c6c7b22d271f60de4e433004b1d07e502263",
-    "stage1-report-template.md": "a6734f85b8f2640c8847072c81438c5c5d14c04019b835d651c4e729c4edac58"
+    "mutagenicity-stage1-protocol.md": "ccf1efcf6bb292ad96206cd6c3308cfd3adb091831c8a60a927986b6372bd0f0",
+    "stage1-plan.json": "7e98de5132663016caf189f51e306a96bd852c86aac3157a24816c0e0af58c2a",
+    "stage1-inputs.json": "227d8dfb225b4b8b47b3b667f8ad46a0f15acebc47fcade2cbf644f7a03105c0",
+    "stage1-report-template.md": "0ae3d72e7b42ff1c6a143c88f62633399bfad9fd77d68af09f7e2fcb83b23293"
   },
-  "historical_target_roles_AB_order_verified": true,
-  "sega_domain_files_equal_historical_idx": true,
-  "source_role_rule": "exact SEGA split_source_roles 0.4/0.4 by cfg.seed",
-  "source_role_ids_materialized": false,
-  "source_inner_split_ids_verified": false,
-  "pending_source_role_note": "Requires allowed source-domain labels in R0 allocator; no source labels parsed in this documentation update. Prior TQG source mapping checks are not v2 evidence."
+  "sega_scope": "domain indices only, algorithm role mapping withdrawn",
+  "domain_counts": [
+    1084,
+    1084,
+    1084,
+    1085
+  ],
+  "domain_disjoint_cover_4337": true,
+  "source_roles_partition_sega_domain0": true,
+  "target_roles_partition_sega_domains": true
 }

@@ -42,11 +42,15 @@
     "source": "read-only predesign audit"
   },
   "graph_id": "TU original graph number minus one",
+  "source_manifest_keys": [
+    "source.fit_ids",
+    "source.validation_ids",
+    "source.query_ids"
+  ],
   "target_manifest_keys": [
     "targets.{domain}.diagnostic_A_ids",
     "targets.{domain}.diagnostic_B_ids"
   ],
-  "historical_manifest_usage": "provenance and target diagnostic overlay only; NOT source role authority",
   "sega_domain_files": {
     "0": {
       "path": "references/sega-gda/splits/idx_Mutagenicity_0.npy",
@@ -65,9 +69,5 @@
       "sha256": "dd20a9dbbcd7d083a37cf8ecf25e1313bdca88b5b24e58236841d2ae83809d48"
     }
   },
-  "sega_source_roles": {
-    "references/sega-gda/sega/data.py": "b5e4b3014f684fd4b42810edcfa07e56c07c78425bbd4b88d0f511cda6acc315",
-    "references/sega-gda/sega/config.py": "b2c60cb54d0bd203183f52f42dc61c0c8b0101f794d31c45d40bba835561bcba"
-  },
-  "source_roles_materialized": false
+  "sega_scope": "domain graph IDs only; no algorithm source-role generator"
 }

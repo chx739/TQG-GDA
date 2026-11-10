@@ -16,7 +16,7 @@
   "local_document_links_valid": true,
   "original_design_unchanged": true,
   "design_files_sha256": {
-    "docs/tsba/experiments/validation-plan.md": "c6ae3a86aa5935a71da0f0f46f6f1e68e9faf6445810f36f18517625413ea809",
+    "docs/tsba/experiments/validation-plan.md": "e97ebb6b5f4a4e84c6a78e0b1be14dae0641b2b531636d4ae5ab05bdaeca0b90",
     "docs/tsba/experiments/plan.json": "ce9b7b1f5411d9878366aa7f4f7658ce8c2033d28135019b3e43f678307bc8fc",
     "docs/tsba/experiments/full-source-plan.json": "2b2b5a89e57f66ec5a54395a6f3d6c38b3fa078a8650a27620da8768b683244b",
     "docs/tsba/experiments/replay-plan.json": "647b93f2813da00efb38a139b7d9550f7882db57c356e25ad6c9a484676e507e",
@@ -147,7 +147,8 @@
     "probe_fits_max": 480,
     "score_models": 0,
     "adaptation_updates": 0,
-    "protocol_version": "v2_SEGA_split_authority",
-    "source_role_ids_materialized": false
+    "protocol_version": "v3_SEGA_domain_indices_only",
+    "source_role_rule": "restored independent fit779/validation109/diagnostic196",
+    "sega_algorithm_roles_used": false
   }
 }

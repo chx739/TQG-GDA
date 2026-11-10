@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "protocol_id": "tsba-mutagenicity-r1-v2-20261111",
+  "protocol_id": "tsba-mutagenicity-r1-v3-20261111",
   "status": "designed_not_executed_runner_pending",
-  "base_commit": "4f0f2911912833c981d847f96b33f9503f675f92",
+  "base_commit": "1e18d3c652b8ecef7c8cb7f93543af638e66d420",
   "execution_commit": null,
   "runner_config": false,
   "experiment_started": false,
@@ -29,6 +29,9 @@
     3409
   ],
   "roles": {
+    "source_fit": 779,
+    "source_validation": 109,
+    "source_query": 196,
     "target": {
       "1": {
         "total": 1084,
@@ -42,20 +45,7 @@
         "B": 271,
         "final": 543
       }
-    },
-    "source": {
-      "authority": "references/sega-gda/sega/data.py::split_source_roles",
-      "frac_ref": 0.4,
-      "frac_fit": 0.4,
-      "split_seed": "cfg.seed, one split per source model seed",
-      "counts": "derived from source class counts and original per-class rounding, not hardcoded",
-      "training": "I_fit",
-      "validation": "I_cal",
-      "diagnostic_pool": "first196 hash-sorted I_ref per source seed",
-      "unused": "remaining I_ref",
-      "supervision_note": "SEGA ref participates in its own reference-classifier training; TSBA ref is diagnosis-only. Not equal supervision or a SEGA performance baseline."
-    },
-    "target_diagnostic_authority": "historical A/B/final overlay, not provided by SEGA"
+    }
   },
   "transductive_input_pool": "all target including B and final; label broker gates roles separately",
   "source": {
@@ -267,7 +257,7 @@
       "included_in_results": true
     }
   },
-  "output_root": "/home/hxchen/experiments/tsba/mutagenicity-r1-v2/attempt-001",
+  "output_root": "/home/hxchen/experiments/tsba/mutagenicity-r1-v3/attempt-001",
   "failure_policy": "retain partial archives, no replacement seeds or overwriting; repair in new attempt",
   "later_stages": "R2/R3 require separate protocols; not automatically executed",
   "rng": {
@@ -288,7 +278,8 @@
     "bootstrap_api": "torch.randint(N,(200,N))"
   },
   "missing_policy": "Any missing fold => main four-fold mean NA; report available-fold descriptive mean/count separately. Missing heads remain in denominator8; missing never counts as support.",
-  "supersedes": "v1 protocol at 4f0f291 (never executed)",
-  "domain_authority": "references/sega-gda/splits/idx_Mutagenicity_{domain}.npy",
-  "source_labels_for_role_assignment": "R0 isolated allocator may parse domain0 source labels; trainers only receive permitted roles"
+  "supersedes": "v2 at 1e18d3c (documentation-only, source-role algorithm adoption withdrawn)",
+  "domain_authority": "references/sega-gda/splits/idx_Mutagenicity_{domain}.npy; graph domain membership only",
+  "source_role_authority": "historical manifest source fit779/query196/validation109; independent TSBA experiment roles, NOT SEGA split_source_roles",
+  "sega_algorithm_roles_used": false
 }

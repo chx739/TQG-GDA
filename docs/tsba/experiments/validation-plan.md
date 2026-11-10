@@ -362,6 +362,11 @@ checkpoint回放已完成：[三项诊断结果](e2-replay-20261110/report.md)�
 [详细流程](real-data/mutagenicity-stage1-protocol.md)与[机器清单](real-data/stage1-plan.json)取代旧§5–7的整批执行顺序。首阶段固定0→1/0→3及五种子，训练当前源GNN后冻结，比较匹配源/目标探针、原始源头及规模/置乱对照；新增双侧标签支持的低密度结构与源法向方向相容诊断。147总标签预算分118优化/29内部验证，480个小头拟合；B在全部模型、概率及几何密度记录封存后读取。原raw输入和图类别分离读取，final类别不解析。没有训练score网络、没有分类适配；R2/R3需另行登记。设计核验不代表R0工程验收，当前真实实验结果仍为空。
 
 
-## 18. R1 v2划分来源纠正（2026-11-11，未执行）
+## 18. R1 v2历史修订（2026-11-11，已撤回、从未执行）
 
-用户指定以SEGA为准后，[当前R1 v2](real-data/mutagenicity-stage1-protocol.md)改为直接读取SEGA域索引，并按SEGA原函数、frac_ref=frac_fit=0.4和每个模型seed生成I_ref/I_fit/I_cal。旧§5及R1 v1中的779/109/196属于历史TQG角色，不能用于新执行；历史记录保留。TSBA用I_fit训练/I_cal验证，从I_ref另选196张作诊断，精确数量和ID在R0源角色分配器生成。该映射不等同SEGA参考分类器的标签利用。A/B/final继续作为额外的历史诊断隔离层，SEGA原代码无此分组；A/B固定哈希打散、非类别分层。没有读取真实图类别或运行实验。
+本节仅记载已撤回的误解，不可作为执行协议。此前将“以SEGA为准”误扩展到算法源角色，[当时的修订](https://github.com/chx739/TQG-GDA/blob/1e18d3c/docs/tsba/experiments/real-data/mutagenicity-stage1-protocol.md)改为直接读取SEGA域索引，并按SEGA原函数、frac_ref=frac_fit=0.4和每个模型seed生成I_ref/I_fit/I_cal。旧§5及R1 v1中的779/109/196属于历史TQG角色，不能用于新执行；历史记录保留。TSBA用I_fit训练/I_cal验证，从I_ref另选196张作诊断，精确数量和ID在R0源角色分配器生成。该映射不等同SEGA参考分类器的标签利用。A/B/final继续作为额外的历史诊断隔离层，SEGA原代码无此分组；A/B固定哈希打散、非类别分层。没有读取真实图类别或运行实验。
+
+
+## 19. R1 v3：仅核对SEGA数据域，不引入算法角色（2026-11-11）
+
+用户澄清后，[当前R1 v3](real-data/mutagenicity-stage1-protocol.md)撤回§18的SEGA源角色分配器及提前读取全部源标签权限，恢复独立的TSBA fit779/validation109/diagnostic196；目标A/B/final继续作独立诊断隔离层。四域索引与SEGA逐字节一致、互斥且覆盖4337图；独立源/目标实验角色分别在对应域内互斥且覆盖，核验通过。SEGA只作为域归属权威，不引入I_ref/I_fit/I_cal或参考分类器算法。v2未运行任何真实训练，生产代码始终未变。

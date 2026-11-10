@@ -1,8 +1,10 @@
 # Mutagenicity R1：冻结表示、局部密度与边界方向诊断协议
 
-协议ID：`tsba-mutagenicity-r1-v2-20261111`。v1设计日期：2026-11-10；v2修订日期：2026-11-11。代码基点：`897fda6`（完整提交见机器清单）。**状态：详细设计已制定，运行器待实现/验收，未训练真实模型、未读取真实图类别值、未产生研究结果。** 本协议的阈值是预设研究筛查规则，不是定理或显著性标准。任何执行前修订均保留版本差异；执行时将协议、输入ID和实现commit封存。
+协议ID：`tsba-mutagenicity-r1-v3-20261111`。原设计日期：2026-11-10；v3范围纠正：2026-11-11。代码基点：`897fda6`（完整提交见机器清单）。**状态：详细设计已制定，运行器待实现/验收，未训练真实模型、未读取真实图类别值、未产生研究结果。** 本协议的阈值是预设研究筛查规则，不是定理或显著性标准。任何执行前修订均保留版本差异；执行时将协议、输入ID和实现commit封存。
 
-配套：[机器清单](stage1-plan.json)、[输入来源](stage1-inputs.json)、[报告模板](stage1-report-template.md)。v2修订仅纠正数据权威来源和源角色映射，密度/探针预算不变。本页取代旧E3/E4“一口气执行后才开标签”的顺序；原设计和历史报告不改。R2/R3仅列接口，须看R1结果后另行登记，不在本轮自动启动。
+**范围纠正：SEGA仅用于确认图ID的域归属，不采用其I_ref/I_fit/I_cal算法角色、参考分类器或相应源标签访问权限。v2的40%/40%/20%改动已撤回；恢复独立的TSBA实验角色779训练/109验证/196诊断。此前只有文档变更，没有运行SEGA源角色分配或训练。**
+
+配套：[机器清单](stage1-plan.json)、[输入来源](stage1-inputs.json)、[报告模板](stage1-report-template.md)。本页取代旧E3/E4“一口气执行后才开标签”的顺序；原设计和历史报告不改。R2/R3仅列接口，须看R1结果后另行登记，不在本轮自动启动。
 
 ## 1. 问题、边界与阶段
 
@@ -19,23 +21,19 @@ R1验证的是局部相容性，不能证明“降低密度必然提高分类准
 
 ## 2. 固定数据角色与读取权限
 
-Mutagenicity 4337张图，图ID为原TU图序号减1。**v2按用户要求，以SEGA参考包为域索引和源角色划分的权威来源。** 固定`split_type=idx`，直接读取`references/sega-gda/splits/idx_Mutagenicity_{0,1,3}.npy`，0→1、0→3；模型种子3405–3409。四域索引与旧文件逐字节一致，数量1084/1084/1084/1085。域是SEGA图规模划分，非官方自然域。0→2不作为事后替换任务。
+Mutagenicity 4337张图，图ID为原TU图序号减1。域归属以`references/sega-gda/splits/idx_Mutagenicity_{0..3}.npy`为权威；旧索引与参考包逐字节相同，域计数1084/1084/1084/1085，两两互斥，恰好覆盖0..4336。这里只复用数据索引，不调用SEGA的源角色分配器。域是SEGA图规模划分，非官方自然域。固定0→1、0→3；模型种子3405–3409。域0源fit779、validation109、query196；域1目标1084=A271+B271+final542；域3目标1085=A271+B271+final543。0→2不作为看结果后的替换任务。
 
-源角色直接采用参考包`sega/data.py::split_source_roles`，`frac_ref=0.4, frac_fit=0.4, seed=cfg.seed`。对每类按原图ID排序，再使用同一`np.random.RandomState(seed)`依次打乱，按原函数逐类round及边界规则分成I_ref/I_fit/I_cal；**精确成员随模型seed变化，数量由源类别计数和原函数取整决定，不能预填434/434/216。** 同source/seed跨目标域共享角色。所有实际ID、ref_sub1/ref_sub2与数量保存到新run的`roles/seed{seed}.json`，核验互斥并覆盖域0。
+采用历史提交 `a672fefe10aba413283a6fb184704f6fae75e1fa` 的 `docs/research_plans/tqg_sega_minimal_20261106/input_manifest.json`。从git对象导出并核验SHA，不依赖当前工作目录分支。所有明确ID复制到新run的`roles.json`，执行前核验互斥、覆盖和计数。该清单只提供独立实验角色：fit/query/validation必须合并等于SEGA域0；A/B/final必须合并等于对应SEGA目标域。复用历史角色ID不引入任何历史算法模块。
 
-TSBA映射：`I_fit → source_train`，`I_cal → source_validation`，`I_ref → 诊断候选池`。为保持诊断147/49预算，从每个seed的I_ref按`SHA256("{protocol_id}|diagnostic_subset|{seed}|{id}")`排序取196张作为新的source diagnostic196；不足196则记录协议不适用，不跨角色补图。其余I_ref本轮不用。**原SEGA训练时I_ref图和标签参与参考分类器；当前TSBA仅用I_fit的普通线性CE，不声称与SEGA使用相同训练监督或构成公平的SEGA效果对比。** 这是复用SEGA划分，不是改写TSBA算法为SEGA。
+**不要使用旧source_train_indices975作为源训练集**：它含fit779和query196。必须使用清单`source.fit_ids`、`validation_ids`、`query_ids`。
 
-旧提交`a672fefe10aba413283a6fb184704f6fae75e1fa`的`input_manifest.json`现在只用于历史来源和目标诊断层；不再决定源train/validation/query。旧779/109/196及旧975训练索引均禁用于v2源划分。v1设计仍保存在提交`4f0f291`，从未执行真实训练，因此没有需要迁移的真实checkpoint。
-
-**SEGA没有目标A/B/final分组**，原代码在完整目标域上报告准确率。本协议保留已有目标开发标签隔离层：域1为A271/B271/final542，域3为A271/B271/final543；它是额外诊断安排，不称SEGA原划分，也不因复用SEGA索引而开放final类别。目标完整输入池与SEGA域一致，类别只按下述阶段开放。历史目标角色清单从git对象导出并校验SHA，与SEGA完整域的覆盖关系必须重新核验。
-
-A/B保持旧规则：对该域542个development ID按`SHA256("tqg-v2-diag-20261031|domain={domain}|id={id}")`十六进制字符串排序，前271为A、其余为B；排序和内容都须与清单`diagnostic_A_ids/diagnostic_B_ids`一致。这是确定性的伪随机打散，不按类别分层，也不是每次重新随机；相同ID和前缀永远得到相同A/B。哈希排序若碰撞按整数ID打破平局；UTF-8编码，整数十进制无补零。
+A/B保持旧规则：对该域542个development ID按`SHA256("tqg-v2-diag-20261031|domain={domain}|id={id}")`十六进制字符串排序，前271为A、其余为B；排序和内容都须与清单`diagnostic_A_ids/diagnostic_B_ids`一致。这是额外的固定哈希伪随机诊断划分，不是SEGA原有分组；不按类别分层，也不每次重新随机。哈希排序若碰撞按整数ID打破平局；UTF-8编码，整数十进制无补零。
 
 | 数据 | 训练/选模 | 密度/几何 | 类别评价 |
 |---|---|---|---|
-| 源I_fit（按SEGA生成） | 源GNN训练；固定坐标估计 | 可做源描述统计 | 源训练曲线 |
-| 源I_cal（按SEGA生成） | 只选择源checkpoint | 不估计源坐标 | 源验证曲线 |
-| 源I_ref中固定选出的诊断196 | S1封存后，仅诊断探针 | 冻结表示 | 源独立审计 |
+| 源fit779 | 源GNN训练；固定坐标估计 | 可做源描述统计 | 源训练曲线 |
+| 源validation109 | 只选择源checkpoint | 不估计源坐标 | 源验证曲线 |
+| 源query196 | S1封存后，仅诊断探针 | 冻结表示 | 源独立审计 |
 | 目标A271 | S1后，仅诊断探针，147总标签预算/折 | 输入可用于共同查询和KDE | 只作训练/内部验证，不作为最终性能 |
 | 目标B271 | 不训练、不选模、不选尺度 | 输入可进入KDE；属传导式 | S2封存后评价与局部标签组成 |
 | final542/543 | 禁止图类别访问 | 输入允许进入KDE和覆盖观察；明确传导式 | 禁止 |
@@ -46,13 +44,13 @@ A/B保持旧规则：对该域542个development ID按`SHA256("tqg-v2-diag-202610
 
 输入导出仅读`A.txt`、`graph_indicator.txt`、`node_labels.txt`、`edge_labels.txt`：复刻PyG2.6.1 TU的输入变换，1基转0基，类别输入按列减最小值再one-hot，去自环后coalesce，按图转换局部节点编号。保留边属性，GIN主模型不使用它。不声称raw重建与旧缓存逐位相等；保存转换代码、包版本和每图输入哈希。验证4337图、每图非空、无跨图边、端点范围、节点14维/边3维、双向边和无向边计数。异常不自动“修复”数据。
 
-独立label broker对`graph_labels.txt`建立换行字节偏移索引；验证角色、阶段、封存token和请求ID后，才seek/read并解析获准行。禁止整体loadtxt或全标签列表缓存。fit必须含恰好两类，否则标记输入协议不适用并停止，不扫描其他角色补类别。R0仅受限角色分配器可以读取域0全部源标签，以建立SEGA分层角色和类别映射（原值升序映射0/1）；训练器仍只拿I_fit/I_cal标签，诊断训练器S1后才拿指定196标签。其他获准角色出现未知类别报错。final请求始终拒绝。哈希/换行索引会扫描原始字节，因此准确表述为“final类别值未解析/未提供给训练与评价”，不是“文件从未读取”。每次成功/拒绝均记时间、角色、ID、用途和token。
+独立label broker对`graph_labels.txt`建立换行字节偏移索引；验证角色、阶段、封存token和请求ID后，才seek/read并解析获准行。禁止整体loadtxt或全标签列表缓存。fit必须含恰好两类，否则标记输入协议不适用并停止，不扫描其他角色补类别。类别映射仅由fit标签建立，按原值升序映射0/1；其他获准角色出现未知类别报错。final请求始终拒绝。哈希/换行索引会扫描原始字节，因此准确表述为“final类别值未解析/未提供给训练与评价”，不是“文件从未读取”。每次成功/拒绝均记时间、角色、ID、用途和token。
 
 ## 3. 执行与封存顺序
 
-1. **R0**：核验文件字节、域ID和无标签结构，由受限角色分配器读取域0源标签，生成SEGA分层角色。生成探针切分、query ID、所有随机种子与资源配置。角色分配器只开放域0标签，训练器只开放已生成的I_fit/I_cal；执行独立工程验收。
+1. **R0**：只核验文件字节、角色ID和无标签结构。生成探针切分、query ID、所有随机种子与资源配置。label broker只开放fit/validation；执行独立工程验收。
 2. **S1**：训练全部5个源模型，保存选模历史、冻结表示、Coordinates、源初始头和所有B概率；生成原带宽、初始覆盖及描述统计，封存manifest。若某源种子失败，其两个任务一并保留失败，不补种子。
-3. 开放源诊断196和A标签，训练全部固定诊断头及对照；不开放B标签。完成全部B概率、全部参考头、几何、密度、重采样与支持邻域ID。此时不知道B标签组成。
+3. 开放source-query和A标签，训练全部固定诊断头及对照；不开放B标签。完成全部B概率、全部参考头、几何、密度、重采样与支持邻域ID。此时不知道B标签组成。
 4. **S2**：封存全部probe状态、选择记录、B概率、查询与邻域、原始密度曲线、无标签标志、失败清单。之后才开放B标签。
 5. 独立评价器仅对已有概率和固定邻域计算性能/标签统计；可按预定公式标记参考可靠性，但不得改模型、筛掉原记录、改尺度或重新构造邻域。生成**S3**结果和完整档案。
 6. 报告R1结论，再决定R2。A/B已经在旧TQG研究观察过，属于开发诊断，不称盲测。若修改方法，后续独立确认协议另定，final标签本轮不解锁。
@@ -63,15 +61,15 @@ A/B保持旧规则：对该域542个development ID按`SHA256("tqg-v2-diag-202610
 
 当前TSBA GIN三层、hidden64、out_dim16、dropout0，普通线性分类头；Adam lr0.001，weight_decay0，batch128，100 epochs。仅fit训练，最低validation CE选模；相同最小值取较早epoch。保存每epoch权重和优化器及曲线，主结果固定选中模型，不按目标结果延长训练。
 
-CPU单线程、固定随机种子、确定性算法；源训练float32，冻结表示转float64供诊断。验证encoder参数、BN buffers前后不变；dropout关闭；对同一图不同编码批次划分输出在float32预设容差rtol1e-5/atol1e-6内一致。Coordinates仅由该seed的I_fit表示估计，使用生产的全局标量缩放，禁止逐目标域重新白化。保存source原线性头与ResidualClassifier初始概率等价检查（float32与float64比较rtol1e-5/atol1e-6）。
+CPU单线程、固定随机种子、确定性算法；源训练float32，冻结表示转float64供诊断。验证encoder参数、BN buffers前后不变；dropout关闭；对同一图不同编码批次划分输出在float32预设容差rtol1e-5/atol1e-6内一致。Coordinates仅由779源训练表示估计，使用生产的全局标量缩放，禁止逐目标域重新白化。保存source原线性头与ResidualClassifier初始概率等价检查（float32与float64比较rtol1e-5/atol1e-6）。
 
 ### 4.2 折、内部验证与总标签预算
 
-在每个seed新选的196张上采用四折规则：源诊断ID按`SHA256("tsba-validation-v1|source_partition|0|all|{id}")`排序，rank mod4分折；每折49审计、剩147为诊断标签预算。目标每折从A按`SHA256("tsba-validation-v1|target_probe_train|{domain}|{fold}|{id}")`取前147。
+保持旧E3外折：源query按`SHA256("tsba-validation-v1|source_partition|0|all|{id}")`排序，rank mod4分折；每折49审计、剩147为诊断标签预算。目标每折从A按`SHA256("tsba-validation-v1|target_probe_train|{domain}|{fold}|{id}")`取前147。
 
-新增内部切分：将各147按`SHA256("tsba-mutagenicity-r1-v2-20261111|inner|{role}|{domain}|{fold}|{id}")`排序；前118优化、后29内部验证。source role用domain0，target用实际域。**147是优化+内部验证总标注数，不是147优化再额外拿验证标签。** 源49审计不能选模；目标B不能选模。不用标签重抽样；118或29任一缺类别，记录不可估计，并保留源baseline及其他合法折。
+新增内部切分：将各147按`SHA256("tsba-mutagenicity-r1-v3-20261111|inner|{role}|{domain}|{fold}|{id}")`排序；前118优化、后29内部验证。source role用domain0，target用实际域。**147是优化+内部验证总标注数，不是147优化再额外拿验证标签。** 源49审计不能选模；目标B不能选模。不用标签重抽样；118或29任一缺类别，记录不可估计，并保留源baseline及其他合法折。
 
-源折随SEGA源角色的seed变化，同源seed跨目标域复用；目标A及目标折跨源模型种子保持同样ID。对照使用各自对应的同一份ID。折不是独立重复。原子随机键为JSON数组`[protocol_id,purpose,model_seed,domain,fold,feature,head,rep]`，`json.dumps(...,ensure_ascii=True,separators=(",",":"))`的UTF-8字节取SHA256，前8字节big-endian对2^63−1取模。初始化purpose=`probe_init`、domain=0、rep=−1；feature/head取实际名称，源/目标共享初值。置乱purpose=`label_permutation`、model_seed=0、domain取来源域、fold取实际折、feature=head=`*`、rep=−1，CPU Torch Generator下randperm(147)，因此跨模型种子/特征/头共享同一位置置换；源诊断ID随seed不同，不能称为跨seed同一图ID置换；目标侧因ID一致，也共享图ID置换映射。密度重采样purpose=`density_bootstrap`、model_seed和domain取实际值、fold=rep=−1、feature=head=`*`，一次randint(N,size=(200,N))生成200份有放回图ID清单；同一任务/种子全部头、查询和尺度共用。保存实际整数与抽样数组，其他用途不得复用相同键。源模型本身沿用生产set_seed(seed)及seed+1批次流。
+所有折跨源模型种子保持同样ID；对照也使用同样ID。折不是独立重复。原子随机键为JSON数组`[protocol_id,purpose,model_seed,domain,fold,feature,head,rep]`，`json.dumps(...,ensure_ascii=True,separators=(",",":"))`的UTF-8字节取SHA256，前8字节big-endian对2^63−1取模。初始化purpose=`probe_init`、domain=0、rep=−1；feature/head取实际名称，源/目标共享初值。置乱purpose=`label_permutation`、model_seed=0、domain取来源域、fold取实际折、feature=head=`*`、rep=−1，CPU Torch Generator下randperm(147)，因此跨模型种子/特征/头共享同一标签置换。密度重采样purpose=`density_bootstrap`、model_seed和domain取实际值、fold=rep=−1、feature=head=`*`，一次randint(N,size=(200,N))生成200份有放回图ID清单；同一任务/种子全部头、查询和尺度共用。保存实际整数与抽样数组，其他用途不得复用相同键。源模型本身沿用生产set_seed(seed)及seed+1批次流。
 
 ### 4.3 探针与规模对照
 
@@ -85,7 +83,7 @@ CPU单线程、固定随机种子、确定性算法；源训练float32，冻结�
 
 ### 4.4 比较与训练充分性
 
-在同一B分别报目标true探针对PRIOR、置乱、匹配源探针、原始I_fit源模型的配对BA/NLL；再比较H与SIZE。source探针在其49源审计上评价；原始源模型在完整query196评价。保留按类召回、混淆矩阵、预测比例、逐图概率及损失。源/目标优化样本量相同不意味着全方法标注量相同，编码器已使用该seed的I_fit标签。
+在同一B分别报目标true探针对PRIOR、置乱、匹配源探针、原始779源模型的配对BA/NLL；再比较H与SIZE。source探针在其49源审计上评价；原始源模型在完整query196评价。保留按类召回、混淆矩阵、预测比例、逐图概率及损失。源/目标优化样本量相同不意味着全方法标注量相同，编码器已使用779源标签。
 
 报告第701–800步平均训练CE相对紧邻的601–700步变化、200/800曲线、内部验证曲线与选中步分布。选中早不等于优化充分，800也不保证收敛。令A=mean(CE601:700)、B=mean(CE701:800)，若(A−B)/max(|A|,1e−12)>0.01，标记`budget_sensitive`，不额外加步；若探针表现差且此标志为真，不判定表示无信息。
 
@@ -189,7 +187,7 @@ S2前保存每个邻域的全部图ID及无标签支持，S3再查B标签。两�
 
 运行器还未实现，以下检查完成前不得将状态标为“可执行已验收”：
 
-- SEGA域索引/源角色哈希、A/B顺序、118/29/49互斥；禁止旧779/109/196或975误用，逐seed与SEGA原函数输出一致；label broker阶段与final拒绝用人工哨兵标签验证，不读真实final值。
+- 角色计数/哈希、A/B顺序、118/29/49互斥；禁止975误用；label broker阶段与final拒绝用人工哨兵标签验证，不读真实final值。
 - raw图输入变换在小型合成TU夹具上与PyG2.6.1一致；真实数据仅核验结构不跨图/维度/ID，不能靠加载整个旧y比较。
 - 源模型冻结与等价初始化；参考标准化包回原坐标的梯度链式法则。
 - 线性距离/投影/射线交点解析对照；MLP无根、多根、切触缺测；退化法向与半径边缘。
@@ -202,10 +200,10 @@ KDE chunk32，bootstrap200可用预计算核矩阵分块，禁止一次构造全
 
 ## 10. 产物、复现与实现任务
 
-本地根目录拟定`/home/hxchen/experiments/tsba/mutagenicity-r1-v2/attempt-001/`，执行时必须不存在。输出至少包含：
+本地根目录拟定`/home/hxchen/experiments/tsba/mutagenicity-r1-v3/attempt-001/`，执行时必须不存在。输出至少包含：
 
 ```text
-protocol/       protocol.md, plan.json, inputs.json, roles/seed*.json, rng.json, source.tar, environment.txt
+protocol/       protocol.md, plan.json, inputs.json, roles.json, rng.json, source.tar, environment.txt
 inputs/         label-free graph payloads and hashes; broker offsets/mapping/access.log (restricted labels separate)
 source/seed*/   epoch checkpoints+Adam, selected source.pt, history, frozen embeddings/Coordinates, B probabilities
 probes/         split IDs, true/permuted labels (restricted), every20-step states+Adam, scaler, selection, B probabilities
