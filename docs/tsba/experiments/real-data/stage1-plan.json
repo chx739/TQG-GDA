@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "protocol_id": "tsba-mutagenicity-r1-v4-20261111",
-  "status": "R0_engineering_accepted_ready_for_real_input_verification",
+  "status": "completed_with_plot_only_evaluation_repair",
   "base_commit": "e016cd8478f5cd829dab6f0c87d1c2afaecae120",
-  "execution_commit": null,
+  "execution_commit": "c6f6be73971b6607b3eb638e7ac31f08ef2e526b",
   "runner_config": true,
-  "experiment_started": false,
-  "real_graph_labels_read": false,
+  "experiment_started": true,
+  "real_graph_labels_read": true,
   "production_algorithm_changed": false,
   "learned_score_training": false,
   "classifier_adaptation": false,
@@ -300,10 +300,13 @@
     "same_seed_shared_across_targets": true,
     "changed_seed_changes_members_not_class_counts": true,
     "role_output": "roles/seed{seed}.json",
-    "actual_ids_materialized": false
+    "actual_ids_materialized": true
   },
   "diagnostic_role": "research-only R1 holdout, not required by the TSBA algorithm",
   "source_label_access": "R0 restricted allocator parses source-domain labels for stratification; source trainer only receives its seed fit/validation, diagnostics only after S1; no target labels at R0",
   "target_roles_seed_dependent": false,
-  "statistics_note": "seed variation combines source split and model training randomness; paired comparisons only within same task/seed"
+  "statistics_note": "seed variation combines source split and model training randomness; paired comparisons only within same task/seed",
+  "evaluation_repair_commit": "b8218ed221b0ddd9549bbee3214fccf84baf4781",
+  "report": "r1-20261111/report.md",
+  "completed_attempt": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-002"
 }

@@ -1,0 +1,54 @@
+{
+  "protocol_id": "tsba-mutagenicity-r1-v4-20261111",
+  "source_execution_commit": "c6f6be73971b6607b3eb638e7ac31f08ef2e526b",
+  "evaluation_repair_commit": "b8218ed221b0ddd9549bbee3214fccf84baf4781",
+  "archives": [
+    {
+      "archive_path": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-001.tar.gz",
+      "archive_bytes": 1059127952,
+      "archive_sha256": "6a80ec677301162fc7cea028c79bf458570eb58e8e2533b2ceb549e3cb78f25d",
+      "source_path": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-001",
+      "files_verified": 22340,
+      "uncompressed_bytes": 1735026012,
+      "attempt": "attempt-001",
+      "member_manifest_path": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-001.tar.gz.json",
+      "status": "preserved_plot_interruption"
+    },
+    {
+      "archive_path": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-002.tar.gz",
+      "archive_bytes": 1068585450,
+      "archive_sha256": "6dbc9524cdb626381fe4e93bd1b1c09da9f81e3f9ff6df77cc50547d1eed381e",
+      "source_path": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-002",
+      "files_verified": 22359,
+      "uncompressed_bytes": 1756931278,
+      "attempt": "attempt-002",
+      "member_manifest_path": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-002.tar.gz.json",
+      "status": "completed_evaluation_only_repair"
+    }
+  ],
+  "seals": {
+    "S1": {
+      "digest": "0f06bdcc8b1b394dd4b541892275b1bdb4c1885318e962213694ca5f8309fd3c",
+      "files": 574
+    },
+    "S2": {
+      "digest": "c9672858ccabb62602066955075914010997e8f42f6c2d93e2ced768dfeb67de",
+      "files": 22307
+    },
+    "S3": {
+      "digest": "d698f0bb2fcb0794ad1b09c92f757f6dd216c1c3452761304e34405fad71f124",
+      "files": 50
+    }
+  },
+  "source_epoch_checkpoints": 500,
+  "probe_every20_checkpoints": 19200,
+  "source_models": 5,
+  "probe_fits": 480,
+  "geometry_cells": 10,
+  "score_trained": false,
+  "classifier_adapted": false,
+  "final_values_parsed": false,
+  "public_data_scope": "aggregate metrics/figures only; graph inputs, labels/probabilities, neighbor IDs and model states remain local",
+  "support_summary_code_sha256": "09aa9f68db0d61dcb02328a52c456459efe86ecb066140cbbdcd5850ca2b000e",
+  "support_summary_input": "attempt-002 frozen S2 bank records; no new queries or labels"
+}

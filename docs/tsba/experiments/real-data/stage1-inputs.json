@@ -67,5 +67,12 @@
   "sega_scope": "domain graph IDs only; no algorithm source-role generator",
   "historical_source_role_usage": "provenance and previous class-count/proportion check only, not current role IDs",
   "source_role_generation": "cfg.seed two-stage class-stratified TSBA experiment partition; see stage1-plan.json",
-  "source_role_ids_materialized": false
+  "source_role_ids_materialized": true,
+  "execution_verification": {
+    "raw_graph_structure_parsed": true,
+    "source_role_counts_verified": true,
+    "role_summary": "r1-20261111/source-summary.json",
+    "final_class_values_parsed": false,
+    "completed_attempt": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-002"
+  }
 }
