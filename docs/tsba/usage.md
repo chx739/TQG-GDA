@@ -185,3 +185,14 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_sour
 ```
 
 适配全部结束并封存后，自动按前次回放协议重新评价已保存的参数；独立源样本与边界探针必须逐位匹配。`source_ce`接受日志在本诊断中特指后验期望CE，硬标签CE只在封存后的诊断中单独报告。
+
+
+核验候选方程、每次后验CE验收及checkpoint，并与旧硬标签结果配对：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summarize_source_posterior \
+  --run /absolute/path/completed-source-posterior-run \
+  --output /absolute/path/new-source-posterior-analysis
+```
+
+[已发布报告](experiments/e2-source-posterior-20261110/report.md)包含20条控制轨迹的浮点漂移、总体score净收益及完整档案索引。

@@ -16,11 +16,11 @@
   "local_document_links_valid": true,
   "original_design_unchanged": true,
   "design_files_sha256": {
-    "docs/tsba/experiments/validation-plan.md": "c35b4a3a5320540dad41a7049de6051473e94585d19412c8a473d0dbeed264d9",
-    "docs/tsba/experiments/plan.json": "59dc336b44c37db74e2bd8c1a7e51d133d8632b849cd12ed3980c7e965444ae4",
+    "docs/tsba/experiments/validation-plan.md": "75f53fef5af6ecc2705c33f295a97ee8547aa8c4d80d53eeacf2a4d6c8953d3f",
+    "docs/tsba/experiments/plan.json": "ce9b7b1f5411d9878366aa7f4f7658ce8c2033d28135019b3e43f678307bc8fc",
     "docs/tsba/experiments/full-source-plan.json": "2b2b5a89e57f66ec5a54395a6f3d6c38b3fa078a8650a27620da8768b683244b",
     "docs/tsba/experiments/replay-plan.json": "647b93f2813da00efb38a139b7d9550f7882db57c356e25ad6c9a484676e507e",
-    "docs/tsba/experiments/source-posterior-plan.json": "ac9ba779468a24ea09045337e2bcb99112bdf4d87ce56c36299a0f9ffd728a85"
+    "docs/tsba/experiments/source-posterior-plan.json": "927bbca2f921ebef2bab359618afb9406ae0001f36f652bcfbd459ff6bbc3c70"
   },
   "independent_plan_review": {
     "critical_findings_addressed": [
@@ -87,6 +87,15 @@
     "plan": "source-posterior-plan.json",
     "tests_passed": 51,
     "production_algorithm_changed": false,
-    "source_loss_changed_in_proposal_and_acceptance": true
+    "source_loss_changed_in_proposal_and_acceptance": true,
+    "status": "completed",
+    "attempts": 900,
+    "candidate_ce_audits": 965,
+    "state_prediction_replays": 930,
+    "control_trajectories_stationary_within_tolerance": 20,
+    "failures": 0,
+    "source_gradient_max_audit_error": 1.1443146130792757e-18,
+    "report": "e2-source-posterior-20261110/report.md",
+    "archive_files_verified": 463
   }
 }

@@ -1,15 +1,28 @@
 {
   "plan_id": "tsba-source-posterior-20261110",
-  "status": "frozen_before_execution",
+  "status": "completed_30_trajectories",
   "post_hoc": true,
   "intervention": "Replace hard-label source CE with exact conditional source CE in gradient/proposal and nonlinear acceptance; same 512 source inputs",
   "parent_run": "/home/hxchen/experiments/tsba/20261110-full-source/run-001",
   "replay_reference": "/home/hxchen/experiments/tsba/20261110-replay/run-001",
   "parent_archive_sha256": "08466be68558e19991c30f648af83fb524e25d208f8428fe915eb480278b316f",
   "replay_archive_sha256": "235c6f257979f1c3c7e7eda7705bdb06745a3f6933674b9b29b9728e877306d9",
-  "dimensions": [2, 16],
-  "seeds": [0, 1, 2, 3, 4],
-  "arms": ["source_ce_ggn", "zero_zeta_geometry", "population"],
+  "dimensions": [
+    2,
+    16
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "arms": [
+    "source_ce_ggn",
+    "zero_zeta_geometry",
+    "population"
+  ],
   "new_trajectories": 30,
   "attempts_each": 30,
   "source_loss": {
@@ -22,7 +35,25 @@
     "population_integration": false,
     "interpretation": "Exact conditional label expectation on a finite source input set; not exact integration over source x or a production-method replacement"
   },
-  "unchanged": ["all Config fields", "input bytes", "initial head", "source coordinates", "all source/target batch IDs", "population score state", "sigma", "categorical source GGN convention", "lambda_boundary", "tau", "damping", "solver tolerance", "projection", "request/execution bounds", "Armijo and backtracking", "round budget", "float64 CPU single thread"],
+  "unchanged": [
+    "all Config fields",
+    "input bytes",
+    "initial head",
+    "source coordinates",
+    "all source/target batch IDs",
+    "population score state",
+    "sigma",
+    "categorical source GGN convention",
+    "lambda_boundary",
+    "tau",
+    "damping",
+    "solver tolerance",
+    "projection",
+    "request/execution bounds",
+    "Armijo and backtracking",
+    "round budget",
+    "float64 CPU single thread"
+  ],
   "branch_rules": {
     "source_ce_ggn": "source-only GGN and Armijo without boundary objective/budget",
     "zero_zeta_geometry": "own current boundaries, zero requests still solved, empty anchors skipped",
@@ -30,8 +61,8 @@
   },
   "control_stationarity": {
     "expected": "source-only and zero-request controls stay at the source Bayes initialization within numerical tolerance",
-    "parameter_atol": 1e-9,
-    "logit_atol": 1e-9,
+    "parameter_atol": 1e-09,
+    "logit_atol": 1e-09,
     "enforced_as_acceptance_rule": false,
     "extra_gradient_clamp_or_stationary_skip": false,
     "reporting": "retain actual accept/reject/skip reasons and tiny numerical moves; assertion is checked after each trajectory"
@@ -49,13 +80,44 @@
     "seal": "seal all new adaptation checkpoints and predictions before any synthetic target-label decoding",
     "model_selection": false,
     "diagnostics": "same independent 32768 source samples, 10000 target samples and 256 boundary probes as preceding replay; initial plus every saved round",
-    "metrics": ["target BA/NLL", "error confidence and four-cohort NLL changes", "independent source KL/CE", "training conditional CE and hard CE as separate records", "root mean/SD/RMS", "normal angle and nonplanarity", "acceptance, backtracks, gradient and parameter drift"],
-    "comparisons": ["within-arm posterior CE versus archived hard CE", "posterior population versus posterior zero-request", "posterior population versus initialization"],
+    "metrics": [
+      "target BA/NLL",
+      "error confidence and four-cohort NLL changes",
+      "independent source KL/CE",
+      "training conditional CE and hard CE as separate records",
+      "root mean/SD/RMS",
+      "normal angle and nonplanarity",
+      "acceptance, backtracks, gradient and parameter drift"
+    ],
+    "comparisons": [
+      "within-arm posterior CE versus archived hard CE",
+      "posterior population versus posterior zero-request",
+      "posterior population versus initialization"
+    ],
     "aggregation": "paired seed differences, mean and sample SD within dimension; failed cells retained separately"
   },
-  "resources": {"cell_seconds": 1800, "total_seconds": 14400, "rss_bytes": 4294967296},
+  "resources": {
+    "cell_seconds": 1800,
+    "total_seconds": 14400,
+    "rss_bytes": 4294967296
+  },
   "engineering_tests_passed": 51,
   "production_tsba_changed": false,
   "next_step_2_executed": false,
-  "archive": "independent immutable local bundle with logs, all round states and candidates, posterior targets, final classifiers, diagnostic inputs/logits/geometry, code/environment and SHA256; GitHub publishes scalar records and report"
+  "archive": "independent immutable local bundle with logs, all round states and candidates, posterior targets, final classifiers, diagnostic inputs/logits/geometry, code/environment and SHA256; GitHub publishes scalar records and report",
+  "execution": {
+    "code_commit": "5b5e4bef992fe34934183ba96bf37cade27992c7",
+    "analysis_code_commit": "c7e2d4b",
+    "report": "e2-source-posterior-20261110/report.md",
+    "local_run": "/home/hxchen/experiments/tsba/20261110-source-posterior/run-001",
+    "trajectories": 30,
+    "attempts": 900,
+    "accepted": 896,
+    "failures": 0,
+    "diagnostic_failures": 0,
+    "seconds": 574.0197263770388,
+    "state_replays": 930,
+    "candidate_ce_audits": 965,
+    "archive_index": "e2-source-posterior-20261110/archive-index.json"
+  }
 }

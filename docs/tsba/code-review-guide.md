@@ -140,3 +140,5 @@ checkpoint回放入口：[run_replay.py](https://github.com/chx739/TQG-GDA/blob/
 回放入口加入后，完整工程测试为48项通过，见[测试日志](experiments/e2-replay-20261110/engineering-checks.txt)；[回放报告](experiments/e2-replay-20261110/report.md)保存930次状态核验和三类研究诊断，未训练新模型。
 
 解析源后验诊断：[source_posterior.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/source_posterior.py)。检查源期望CE是否同时进入梯度与真实验收、GGN公式是否保留、三个分支的跳过/回溯规则是否与旧入口一致，以及是否没有强制控制组不动。对应 `test_source_posterior.py`；当前51项测试通过。
+
+[解析源后验对照报告](experiments/e2-source-posterior-20261110/report.md)记录候选和验收的独立复算、20条数值平稳控制轨迹及总体score的实际收益；[51项测试日志](experiments/e2-source-posterior-20261110/engineering-checks.txt)可直接核对。

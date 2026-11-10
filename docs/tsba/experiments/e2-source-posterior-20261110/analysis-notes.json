@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-10",
+  "execution_commit": "5b5e4bef992fe34934183ba96bf37cade27992c7",
+  "analysis_code_commit": "c7e2d4b343527f1241ba746552c6be858652758d",
+  "post_hoc": true,
+  "only_intervention": "source hard CE -> analytic conditional CE in proposal and acceptance",
+  "config_and_schedule_unchanged": true,
+  "production_algorithm_changed": false,
+  "original_design_unchanged": true,
+  "tests_passed": 51,
+  "adaptation_trajectories": 30,
+  "attempts": 900,
+  "accepted": 896,
+  "stationary_control_trajectories": 20,
+  "diagnostic_states": 930,
+  "probe_queries": 238080,
+  "manual_interpretation": [
+    "stationary controls without forced clamping",
+    "source-label fitting as driver of previous degradation",
+    "positive but small oracle request effect",
+    "paired improvement versus old model is not net adaptation gain",
+    "source conditional CE uses finite inputs, not population integration"
+  ],
+  "next_step_2_executed": false,
+  "public_svg_normalization": {
+    "files": [
+      "posterior-geometry.svg",
+      "posterior-risk.svg"
+    ],
+    "change": "trailing whitespace only; XML content verified; archived originals unchanged"
+  }
+}
