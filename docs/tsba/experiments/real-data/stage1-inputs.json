@@ -42,13 +42,32 @@
     "source": "read-only predesign audit"
   },
   "graph_id": "TU original graph number minus one",
-  "source_manifest_keys": [
-    "source.fit_ids",
-    "source.validation_ids",
-    "source.query_ids"
-  ],
   "target_manifest_keys": [
     "targets.{domain}.diagnostic_A_ids",
     "targets.{domain}.diagnostic_B_ids"
-  ]
+  ],
+  "historical_manifest_usage": "provenance and target diagnostic overlay only; NOT source role authority",
+  "sega_domain_files": {
+    "0": {
+      "path": "references/sega-gda/splits/idx_Mutagenicity_0.npy",
+      "sha256": "3851c87429bccf05241cefe1599350f0e39fa9903b35966915f6388a2dc764c9"
+    },
+    "1": {
+      "path": "references/sega-gda/splits/idx_Mutagenicity_1.npy",
+      "sha256": "4539b47175179d94a03ac03b3499e5f259150585cce8715ca690f2f61ae8806b"
+    },
+    "2": {
+      "path": "references/sega-gda/splits/idx_Mutagenicity_2.npy",
+      "sha256": "0cc8c27db27cd8133de90591e37f2b152460182858c65c8f66c3b1e351b3c15b"
+    },
+    "3": {
+      "path": "references/sega-gda/splits/idx_Mutagenicity_3.npy",
+      "sha256": "dd20a9dbbcd7d083a37cf8ecf25e1313bdca88b5b24e58236841d2ae83809d48"
+    }
+  },
+  "sega_source_roles": {
+    "references/sega-gda/sega/data.py": "b5e4b3014f684fd4b42810edcfa07e56c07c78425bbd4b88d0f511cda6acc315",
+    "references/sega-gda/sega/config.py": "b2c60cb54d0bd203183f52f42dc61c0c8b0101f794d31c45d40bba835561bcba"
+  },
+  "source_roles_materialized": false
 }
