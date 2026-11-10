@@ -1,6 +1,6 @@
 {
   "date": "2026-11-10",
-  "scope": "Static plan checks plus completed full-source diagnostic audits; no new real-data label access",
+  "scope": "Static plan checks and completed synthetic diagnostic audits through the static score experiment; no real-data label access",
   "plan_id": "tsba-validation-v1-20261109",
   "run_counts": {
     "E2_trajectories": 40,
@@ -16,11 +16,12 @@
   "local_document_links_valid": true,
   "original_design_unchanged": true,
   "design_files_sha256": {
-    "docs/tsba/experiments/validation-plan.md": "75f53fef5af6ecc2705c33f295a97ee8547aa8c4d80d53eeacf2a4d6c8953d3f",
+    "docs/tsba/experiments/validation-plan.md": "97ac54feb5954bd9a529f92c2e8234e6148d520e87b63de5181003756bb3d7f2",
     "docs/tsba/experiments/plan.json": "ce9b7b1f5411d9878366aa7f4f7658ce8c2033d28135019b3e43f678307bc8fc",
     "docs/tsba/experiments/full-source-plan.json": "2b2b5a89e57f66ec5a54395a6f3d6c38b3fa078a8650a27620da8768b683244b",
     "docs/tsba/experiments/replay-plan.json": "647b93f2813da00efb38a139b7d9550f7882db57c356e25ad6c9a484676e507e",
-    "docs/tsba/experiments/source-posterior-plan.json": "927bbca2f921ebef2bab359618afb9406ae0001f36f652bcfbd459ff6bbc3c70"
+    "docs/tsba/experiments/source-posterior-plan.json": "927bbca2f921ebef2bab359618afb9406ae0001f36f652bcfbd459ff6bbc3c70",
+    "docs/tsba/experiments/static-score-plan.json": "478b7bd5e1a6db1a82705a7b728ff4497216c327624ac309d6eeced8c0afedfc"
   },
   "independent_plan_review": {
     "critical_findings_addressed": [
@@ -97,5 +98,21 @@
     "source_gradient_max_audit_error": 1.1443146130792757e-18,
     "report": "e2-source-posterior-20261110/report.md",
     "archive_files_verified": 463
+  },
+  "static_score_checks": {
+    "plan": "static-score-plan.json",
+    "status": "completed",
+    "score_fits": 50,
+    "updates_per_fit": 400,
+    "tests_passed": 56,
+    "checkpoint_bank_replays": 400,
+    "independent_oracle_gradient_probes": 3100,
+    "historical_baselines_bitwise": 10,
+    "failures": 0,
+    "classifier_updates": 0,
+    "production_algorithm_changed": false,
+    "closed_loop_adaptation": false,
+    "report": "e2-static-score-20261110/report.md",
+    "archive_files_verified": 387
   }
 }

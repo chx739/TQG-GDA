@@ -196,3 +196,19 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summariz
 ```
 
 [已发布报告](experiments/e2-source-posterior-20261110/report.md)包含20条控制轨迹的浮点漂移、总体score净收益及完整档案索引。
+
+
+## 静态score诊断
+
+[五组单因素协议](experiments/static-score-plan.json)固定分类头、查询点和400次Adam更新，只改变目标样本量或带宽，不更新分类器：
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_static_score \
+  --parent /absolute/path/completed-original-e1-e2-run \
+  --output /absolute/path/new-static-score-run
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summarize_static_score \
+  --run /absolute/path/completed-static-score-run \
+  --output /absolute/path/new-static-score-analysis
+```
+
+主结果使用最终400更新状态；补充保存按旧无标签噪声验证规则选中的快照。扩大样本池时σ仍取原512样本的基准；带宽实验的查询点不变。[已发布报告](experiments/e2-static-score-20261110/report.md)分别记录估计误差和总体方向是否仍朝正确边界，避免把过度平滑后的准确估计当成成功适配。完整checkpoint、Adam状态、逐更新日志及查询记录见报告内本地存档索引。

@@ -142,3 +142,6 @@ checkpoint回放入口：[run_replay.py](https://github.com/chx739/TQG-GDA/blob/
 解析源后验诊断：[source_posterior.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/source_posterior.py)。检查源期望CE是否同时进入梯度与真实验收、GGN公式是否保留、三个分支的跳过/回溯规则是否与旧入口一致，以及是否没有强制控制组不动。对应 `test_source_posterior.py`；当前51项测试通过。
 
 [解析源后验对照报告](experiments/e2-source-posterior-20261110/report.md)记录候选和验收的独立复算、20条数值平稳控制轨迹及总体score的实际收益；[51项测试日志](experiments/e2-source-posterior-20261110/engineering-checks.txt)可直接核对。
+
+
+静态score诊断：[static_score.py](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/static_score.py)、[运行器](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/run_static_score.py)、[重载分析](https://github.com/chx739/TQG-GDA/blob/TSBA/workflows/tsba/validation/summarize_static_score.py)。检查嵌套样本池、原512基准带宽、固定查询与400次更新是否保持；主最终状态与辅助选中快照是否分开；是否同时报告法向/请求误差与正确边界方向，避免只看全向量DSM或同带宽oracle符号一致率。对应`test_static_score.py`，当前完整56项工程测试通过。[研究报告](experiments/e2-static-score-20261110/report.md)记录50组拟合、400次checkpoint查询集重载和3100个oracle探针；没有启动闭环适配。
