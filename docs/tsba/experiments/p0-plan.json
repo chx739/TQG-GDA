@@ -1,0 +1,23 @@
+{
+  "name": "P0 fixed static score training budget and restricted scalar oracle",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "dimension": 2,
+  "target_samples": 8192,
+  "updates": [
+    400,
+    1600,
+    6400
+  ],
+  "training": "Resume archived 400-step Adam states; shared prefix stochastic schedule; unchanged architecture, lr, batch and original seed-specific bandwidth. Primary: final budget states. Secondary: minimum same-pool noisy DSM validation every four updates. No oracle selection.",
+  "queries": "All four original banks and common masks reused bitwise. Report seed mean/sample SD and paired changes; retain all failures.",
+  "oracle": "Fixed raw log odds 8*(x1-b), initial b=.5; beta=(b-mean)/source_scale. Original lambda=1,tau=.1,damping=.01 and raw bandwidth. Population source expected CE (1024-point Gauss-Hermite per class, cross-check512), and finite512 analytic posterior CE. Scalar GGN and original Armijo/execution cap; 30 steps and up to10000 at tolerance1e-12. Also density-only displacement trajectory and algebraic lambda required for equilibria b=.4,.25,.1. Diagnostic only: not nonlinear TSBA or an upper bound.",
+  "metrics": "Original score audit: normal error, signed request error, sign recalls and balanced agreement, vector error; final/selected states. Oracle exact mixture BA, source excess CE, residual and convergence.",
+  "limits": "CPU one thread float64; peak RSS4GiB; 6400 fixed maximum training updates, no tuning or learned-score closed loop.",
+  "archives": "Inputs, masks, references, schedules, model/Adam states, all losses, per-query values, oracle curves/trajectories, provenance and sha256 manifests; verified tar.gz. Public code/report/scalar tables/plots/manifests only."
+}
