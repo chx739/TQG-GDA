@@ -1,36 +1,16 @@
 {
-  "protocol_id": "tsba-mutagenicity-r1-v3-20261111",
-  "status": "v3_domain_only_scope_and_restored_independent_roles_verified",
+  "protocol_id": "tsba-mutagenicity-r1-v4-20261111",
+  "status": "v4_seeded_split_design_pending_actual_R0_role_generation",
   "historical_manifest_sha_verified": true,
   "raw_file_byte_hashes_verified": 6,
   "graph_label_values_parsed": false,
   "raw_graph_structure_parsed": false,
-  "data_roles_and_AB_order_verified": true,
-  "probe_inner_split_counts_verified": true,
   "source_fits": 160,
   "target_fits": 320,
   "probe_updates_max": 384000,
-  "source_fold_mapping_checks": [
-    {
-      "fold": 0,
-      "source_ids_sha256": "78bb20871362728553252978607a1b2dff2a534efa5c1b3b7bb2ba6a377796a4"
-    },
-    {
-      "fold": 1,
-      "source_ids_sha256": "0674558e15d625d19b598a88e6c3e509c7f8781f465a34d83de00eabd77917ec"
-    },
-    {
-      "fold": 2,
-      "source_ids_sha256": "6d0455947c678d2693497b9dac0829ad3c1f262e833224ac5a1c5a140f0e32ce"
-    },
-    {
-      "fold": 3,
-      "source_ids_sha256": "b2576e9d15202d757bdffb6486262cbf6cc44543688afcc6ba862eb547209e5d"
-    }
-  ],
   "experiment_executed": false,
   "production_code_changed": false,
-  "checks_note": "Hashing graph-label bytes is not parsing class values. No source/target graph labels accessed, no training; no new engineering suite run for this documentation-only change.",
+  "checks_note": "Historical domain and target role checks retained; fixed-seed source fold checks removed. Actual new per-seed source roles require R0 restricted source-label access and have NOT been generated. No real labels read, no training.",
   "independent_design_review": {
     "status": "reviewed_and_findings_addressed",
     "findings": [
@@ -43,13 +23,14 @@
       "stable_log_bootstrap",
       "missing_fold_and_fixed8_denominator"
     ],
-    "scope_correction_review": "v3 independent role/domain audit passed; no label values parsed"
+    "scope_correction_review": "v3 independent role/domain audit passed; no label values parsed",
+    "v4_review": "passed; no blocking issues; diagnostic is research-only and real per-seed IDs pending R0"
   },
   "document_hashes": {
-    "mutagenicity-stage1-protocol.md": "ccf1efcf6bb292ad96206cd6c3308cfd3adb091831c8a60a927986b6372bd0f0",
-    "stage1-plan.json": "7e98de5132663016caf189f51e306a96bd852c86aac3157a24816c0e0af58c2a",
-    "stage1-inputs.json": "227d8dfb225b4b8b47b3b667f8ad46a0f15acebc47fcade2cbf644f7a03105c0",
-    "stage1-report-template.md": "0ae3d72e7b42ff1c6a143c88f62633399bfad9fd77d68af09f7e2fcb83b23293"
+    "mutagenicity-stage1-protocol.md": "54fc5c5d62e0237a3d919629fb7beef4a95f7de65d890d67e4c5941883401bd8",
+    "stage1-plan.json": "4674d911b7a06de478d5a52ebfe27ebe03f7e868ea15f6b8b8ce979f001b7834",
+    "stage1-inputs.json": "ebb013564d9ff7267fcf8c2ff62f1d9d41dd3f5f1e8ee41c3071bf54e8164fc3",
+    "stage1-report-template.md": "f159d33726c375cbcaa4e36c56e3fcba103203c1d6f84efeec8bb150e2f15eec"
   },
   "sega_scope": "domain indices only, algorithm role mapping withdrawn",
   "domain_counts": [
@@ -59,6 +40,38 @@
     1085
   ],
   "domain_disjoint_cover_4337": true,
-  "source_roles_partition_sega_domain0": true,
-  "target_roles_partition_sega_domains": true
+  "target_roles_partition_sega_domains": true,
+  "historical_source_roles_partition_domain0_verified": true,
+  "new_source_role_ids_generated": false,
+  "new_source_role_ids_verified": false,
+  "new_source_folds_verified": false,
+  "current_source_rule": "cfg.seed stratified:10% validation,80% of remaining fit,rest diagnostic",
+  "synthetic_split_rule_check": {
+    "fixture_class_counts": [
+      [
+        3,
+        3
+      ],
+      [
+        101,
+        983
+      ],
+      [
+        457,
+        627
+      ]
+    ],
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "repeatability_disjoint_cover_count_invariance": true,
+    "large_fixture_members_change_with_seed": true,
+    "real_labels_used": false,
+    "not_actual_R0_acceptance": true
+  },
+  "historical_data_roles_and_AB_order_verified": true
 }

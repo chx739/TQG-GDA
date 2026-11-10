@@ -369,4 +369,9 @@ checkpoint回放已完成：[三项诊断结果](e2-replay-20261110/report.md)�
 
 ## 19. R1 v3：仅核对SEGA数据域，不引入算法角色（2026-11-11）
 
-用户澄清后，[当前R1 v3](real-data/mutagenicity-stage1-protocol.md)撤回§18的SEGA源角色分配器及提前读取全部源标签权限，恢复独立的TSBA fit779/validation109/diagnostic196；目标A/B/final继续作独立诊断隔离层。四域索引与SEGA逐字节一致、互斥且覆盖4337图；独立源/目标实验角色分别在对应域内互斥且覆盖，核验通过。SEGA只作为域归属权威，不引入I_ref/I_fit/I_cal或参考分类器算法。v2未运行任何真实训练，生产代码始终未变。
+用户澄清后，[当时R1 v3](https://github.com/chx739/TQG-GDA/blob/e016cd8/docs/tsba/experiments/real-data/mutagenicity-stage1-protocol.md)撤回§18的SEGA源角色分配器及提前读取全部源标签权限，恢复独立的TSBA fit779/validation109/diagnostic196；目标A/B/final继续作独立诊断隔离层。四域索引与SEGA逐字节一致、互斥且覆盖4337图；独立源/目标实验角色分别在对应域内互斥且覆盖，核验通过。SEGA只作为域归属权威，不引入I_ref/I_fit/I_cal或参考分类器算法。v2未运行任何真实训练，生产代码始终未变。
+
+
+## 20. R1 v4：cfg.seed分层划分，比例保留（2026-11-11）
+
+[当前R1 v4](real-data/mutagenicity-stage1-protocol.md)按用户要求，将源划分由历史固定seed431改为每模型cfg.seed。保留两级规则：逐类约10%验证；剩余逐类80%训练、20%诊断，预期总数仍779/109/196。每seed独立保存角色/折/源模型/坐标，同seed跨目标域和对照共享；目标A/B不变。R0受限分配器需读取源标签做分层，但训练器只获得对应训练/验证标签；诊断标签仅S1后给诊断训练器。统计波动包含划分与训练随机性。诊断196是研究留出、非TSBA必需；不引入SEGA算法角色。本次只更新协议，真实角色ID未生成、训练未启动。

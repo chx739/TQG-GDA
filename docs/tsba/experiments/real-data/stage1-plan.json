@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "protocol_id": "tsba-mutagenicity-r1-v3-20261111",
+  "protocol_id": "tsba-mutagenicity-r1-v4-20261111",
   "status": "designed_not_executed_runner_pending",
-  "base_commit": "1e18d3c652b8ecef7c8cb7f93543af638e66d420",
+  "base_commit": "e016cd8478f5cd829dab6f0c87d1c2afaecae120",
   "execution_commit": null,
   "runner_config": false,
   "experiment_started": false,
@@ -257,7 +257,7 @@
       "included_in_results": true
     }
   },
-  "output_root": "/home/hxchen/experiments/tsba/mutagenicity-r1-v3/attempt-001",
+  "output_root": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-001",
   "failure_policy": "retain partial archives, no replacement seeds or overwriting; repair in new attempt",
   "later_stages": "R2/R3 require separate protocols; not automatically executed",
   "rng": {
@@ -278,8 +278,32 @@
     "bootstrap_api": "torch.randint(N,(200,N))"
   },
   "missing_policy": "Any missing fold => main four-fold mean NA; report available-fold descriptive mean/count separately. Missing heads remain in denominator8; missing never counts as support.",
-  "supersedes": "v2 at 1e18d3c (documentation-only, source-role algorithm adoption withdrawn)",
+  "supersedes": "v3 fixed source IDs; v4 source split uses cfg.seed, proportions unchanged",
   "domain_authority": "references/sega-gda/splits/idx_Mutagenicity_{domain}.npy; graph domain membership only",
-  "source_role_authority": "historical manifest source fit779/query196/validation109; independent TSBA experiment roles, NOT SEGA split_source_roles",
-  "sega_algorithm_roles_used": false
+  "source_role_authority": "independent TSBA two-stage class-stratified source split driven by cfg.seed; historical source IDs are provenance only",
+  "sega_algorithm_roles_used": false,
+  "source_split": {
+    "seed": "cfg.seed (3405..3409)",
+    "validation_fraction": 0.1,
+    "fit_fraction_of_remaining": 0.8,
+    "validation_rng": "single random.Random(cfg.seed), class order sorted, IDs sorted before shuffle",
+    "fit_rng": "single CPU torch.Generator.manual_seed(cfg.seed), class order sorted, remaining IDs sorted before randperm",
+    "validation_count": "max(1,min(n_class-2,round(0.10*n_class))), Python ties-to-even",
+    "fit_count": "max(1,min(n_remaining-1,floor(0.80*n_remaining)))",
+    "diagnostic_count": "remaining after fit",
+    "min_graphs_per_class": 3,
+    "expected_counts": {
+      "fit": 779,
+      "validation": 109,
+      "diagnostic": 196
+    },
+    "same_seed_shared_across_targets": true,
+    "changed_seed_changes_members_not_class_counts": true,
+    "role_output": "roles/seed{seed}.json",
+    "actual_ids_materialized": false
+  },
+  "diagnostic_role": "research-only R1 holdout, not required by the TSBA algorithm",
+  "source_label_access": "R0 restricted allocator parses source-domain labels for stratification; source trainer only receives its seed fit/validation, diagnostics only after S1; no target labels at R0",
+  "target_roles_seed_dependent": false,
+  "statistics_note": "seed variation combines source split and model training randomness; paired comparisons only within same task/seed"
 }
