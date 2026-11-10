@@ -212,3 +212,17 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summariz
 ```
 
 主结果使用最终400更新状态；补充保存按旧无标签噪声验证规则选中的快照。扩大样本池时σ仍取原512样本的基准；带宽实验的查询点不变。[已发布报告](experiments/e2-static-score-20261110/report.md)分别记录估计误差和总体方向是否仍朝正确边界，避免把过度平滑后的准确估计当成成功适配。完整checkpoint、Adam状态、逐更新日志及查询记录见报告内本地存档索引。
+
+### P0：延长固定score训练预算与简化oracle
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_p0 \
+  --parent /absolute/path/completed-static-score-run \
+  --original /absolute/path/completed-original-e1-e2-run \
+  --output /absolute/path/new-p0-run
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summarize_p0 \
+  --run /absolute/path/completed-p0-run \
+  --output /absolute/path/new-p0-analysis
+```
+
+固定2维、8192样本和原带宽/查询；从原400步Adam状态连续训练，固定末尾400/1600/6400步比较。原父档案先后校验且不可覆盖；输出路径必须不存在。[P0报告](experiments/p0-20261110/report.md)包含逐种子结果和完整本地archive索引。6400步静态检查5/5通过，但源约束下标量oracle收益仍小；本入口不运行学习score闭环。`p0_oracle.py`是固定斜率阈值诊断，不是生产分类头实现。

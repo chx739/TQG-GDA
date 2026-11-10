@@ -1,6 +1,6 @@
 {
   "date": "2026-11-10",
-  "scope": "Static plan checks and completed synthetic diagnostic audits through the static score experiment; no real-data label access",
+  "scope": "Static plan checks and completed synthetic diagnostic audits through P0; no real-data label access",
   "plan_id": "tsba-validation-v1-20261109",
   "run_counts": {
     "E2_trajectories": 40,
@@ -16,12 +16,13 @@
   "local_document_links_valid": true,
   "original_design_unchanged": true,
   "design_files_sha256": {
-    "docs/tsba/experiments/validation-plan.md": "97ac54feb5954bd9a529f92c2e8234e6148d520e87b63de5181003756bb3d7f2",
+    "docs/tsba/experiments/validation-plan.md": "2da5034a087141f38caf82f9101e1019738806befd778a143d0dfa5f3fe19312",
     "docs/tsba/experiments/plan.json": "ce9b7b1f5411d9878366aa7f4f7658ce8c2033d28135019b3e43f678307bc8fc",
     "docs/tsba/experiments/full-source-plan.json": "2b2b5a89e57f66ec5a54395a6f3d6c38b3fa078a8650a27620da8768b683244b",
     "docs/tsba/experiments/replay-plan.json": "647b93f2813da00efb38a139b7d9550f7882db57c356e25ad6c9a484676e507e",
     "docs/tsba/experiments/source-posterior-plan.json": "927bbca2f921ebef2bab359618afb9406ae0001f36f652bcfbd459ff6bbc3c70",
-    "docs/tsba/experiments/static-score-plan.json": "478b7bd5e1a6db1a82705a7b728ff4497216c327624ac309d6eeced8c0afedfc"
+    "docs/tsba/experiments/static-score-plan.json": "478b7bd5e1a6db1a82705a7b728ff4497216c327624ac309d6eeced8c0afedfc",
+    "docs/tsba/experiments/p0-plan.json": "601ba9160e0542c1ba92ab6dadd27f13ca3524b1e3b3ab49314f7fc7b31d0add"
   },
   "independent_plan_review": {
     "critical_findings_addressed": [
@@ -114,5 +115,26 @@
     "closed_loop_adaptation": false,
     "report": "e2-static-score-20261110/report.md",
     "archive_files_verified": 387
+  },
+  "p0_checks": {
+    "plan": "p0-plan.json",
+    "status": "completed",
+    "dimension": 2,
+    "samples": 8192,
+    "updates": [
+      400,
+      1600,
+      6400
+    ],
+    "new_training_updates": 30000,
+    "tests_passed": 59,
+    "checkpoint_bank_replays": 120,
+    "oracle_recomputations": 5,
+    "failures": 0,
+    "learned_classifier_updates": 0,
+    "production_algorithm_changed": false,
+    "closed_loop_adaptation": false,
+    "report": "p0-20261110/report.md",
+    "archive_files_verified": 121
   }
 }
