@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "seals": {
+    "FINAL": {
+      "digest": "f4e1b107555ed6cda9e8e3594804413ff8f87dad0e88fea6ad4725f28f968c45",
+      "seal_file_sha256": "5f1734dc962f4fdf2d5e5a2fe5c5687b955e3f892b8e2cc752bca9d6428de074"
+    },
+    "OBS": {
+      "digest": "4814df4b9641f45b010b4d3b397dfd0893ee2eb1b5a3d4c0399ca0835545f2ea",
+      "seal_file_sha256": "475240e6eba14ac8d9d1ebca825ac3c05b2d942eadf5402763854057ae0172aa"
+    }
+  },
+  "aggregate_inputs": {
+    "evaluation/warm_summary.json": {
+      "sha256": "dab57fe0099a0173cba4a12b985151ca0642df39f71dc04a75ae3ee289794cb1",
+      "bytes": 220994
+    },
+    "evaluation/warm_by_seed.json": {
+      "sha256": "5c569aff4ce9673b122bf419fea1a9dfe0c2adad3ed0d46e1c6a4ae4b525ad3f",
+      "bytes": 220881
+    },
+    "evaluation/warm_paired.json": {
+      "sha256": "8921d2ae46ed02d119cb6dc4a348bc8db350142d452c8cb7aa6110a1f61f4c49",
+      "bytes": 28565
+    },
+    "evaluation/steps_summary.json": {
+      "sha256": "542460134f15d62b93df6fd31ebdeb5427bc23d0ac83850bd068ed1f06aa8f67",
+      "bytes": 738852
+    },
+    "evaluation/steps_comparisons.json": {
+      "sha256": "932baa78e9b54311f55d9eafec2aa3c234eb23239fe6fdd7533ed726ba87ddd2",
+      "bytes": 56850
+    },
+    "evaluation/steps_paired.json": {
+      "sha256": "a80a06196d39ca0629a3b386cbb678ac831bff7d71c04ee0c3bd839398423b3d",
+      "bytes": 41906
+    },
+    "evaluation/scales_summary.json": {
+      "sha256": "657f2be7fb2f0a21ed5b41921740589d8ebcdd9af7e9419a002c80d95eef6e5a",
+      "bytes": 387
+    },
+    "evaluation/scales_groups.json": {
+      "sha256": "ecc20326950b0dc3f33824a1c0e91a78ca2e5dc32f213c14e7939c445d28ee33",
+      "bytes": 702071
+    },
+    "evaluation/scales_seed_aggregates.json": {
+      "sha256": "35037995ff8e504c1490f79d9309dcea779735d2266b36a06a56c7964640b928",
+      "bytes": 177427
+    },
+    "evaluation/scales_banks.json": {
+      "sha256": "8bf8105522859702daadda9934fc0888f33c417155f86a01318183a580d60a24",
+      "bytes": 1103307
+    },
+    "scales/index.json": {
+      "sha256": "20d1f93fb93fda273321d6d6f2158de8b7cb7250c0c25f54812ce19b5b36471d",
+      "bytes": 281395
+    },
+    "scores/index.json": {
+      "sha256": "9234f9c154199074af668bbd9d3879019d4284001ced0a54ce6cc1079af56143",
+      "bytes": 98615
+    },
+    "completion.json": {
+      "sha256": "838ce3c172b5ec8e508bf45cf960c5922f1f0c75851b320a3d428177a30f6a15",
+      "bytes": 394
+    },
+    "phase-outcomes.json": {
+      "sha256": "3c4932d767a9e8f52f9fb3ca942710e41e355fcbdfb2a3e898151166803116f9",
+      "bytes": 239
+    },
+    "prediction-replay.json": {
+      "sha256": "9ae5d9ef3951ab7196313fdaabde3f84d808da79154e7a94cd2e6d11cf8381d2",
+      "bytes": 216
+    },
+    "evaluation/audit.json": {
+      "sha256": "1952ed0c019e33afb50a7c7cd220f8e4e1a6a76abebbf12937d99f90cb2e2cf5",
+      "bytes": 244
+    }
+  },
+  "missing_optional_aggregates": [],
+  "labels_parsed": false,
+  "tensors_loaded": false,
+  "per_graph_or_query_records_read": false
+}

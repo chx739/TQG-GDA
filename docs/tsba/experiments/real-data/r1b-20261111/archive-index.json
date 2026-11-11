@@ -1,0 +1,58 @@
+{
+  "protocol_id": "tsba-mutagenicity-r1b-20261111-v1",
+  "source_execution_commit": "64de9a991be7fd5ae46565620f02f8f0f8e5757f",
+  "postprocessing_code_commit": "2c846f03499ed14bd6255611d79540dfe8b2a9c8",
+  "archives": [
+    {
+      "archive_path": "/home/hxchen/experiments/tsba/mutagenicity-r1b/attempt-001.tar.gz",
+      "archive_bytes": 1507265334,
+      "archive_sha256": "e4530be8b06b9d83a5d8aff74dd6d77cb37a11d8a129cf3376ee59dba12f220c",
+      "source_path": "/home/hxchen/experiments/tsba/mutagenicity-r1b/attempt-001",
+      "files_verified": 6960,
+      "uncompressed_bytes": 2103105750,
+      "attempt": "attempt-001",
+      "member_manifest_path": "/home/hxchen/experiments/tsba/mutagenicity-r1b/attempt-001.tar.gz.json",
+      "status": "completed"
+    },
+    {
+      "archive_path": "/home/hxchen/experiments/tsba/mutagenicity-r1b/analysis-001.tar.gz",
+      "archive_bytes": 13340432,
+      "archive_sha256": "97dd9c40badfe0748cdc2d0a5ddbbdb43e37eced026403af3ee61645757c844f",
+      "source_path": "/home/hxchen/experiments/tsba/mutagenicity-r1b/analysis-001",
+      "files_verified": 25,
+      "uncompressed_bytes": 56542955,
+      "attempt": "analysis-001",
+      "member_manifest_path": "/home/hxchen/experiments/tsba/mutagenicity-r1b/analysis-001.tar.gz.json",
+      "status": "completed"
+    }
+  ],
+  "seals": {
+    "INPUT": {
+      "digest": "d633da71a7b62662deec253f813db92e726f41e3d0caef9ce662d002d50a0074",
+      "files": 741
+    },
+    "OBS": {
+      "digest": "4814df4b9641f45b010b4d3b397dfd0893ee2eb1b5a3d4c0399ca0835545f2ea",
+      "files": 6930
+    },
+    "FINAL": {
+      "digest": "f4e1b107555ed6cda9e8e3594804413ff8f87dad0e88fea6ad4725f28f968c45",
+      "files": 30
+    }
+  },
+  "warm_fits": 80,
+  "warm_initial_plus_every20_checkpoints": 3280,
+  "old_random_corrections": 40,
+  "score_fits": 20,
+  "score_epoch_checkpoints": 2000,
+  "single_step_groups": 160,
+  "output_views": 320,
+  "source_GNNs_reused": 5,
+  "source_GNNs_retrained": 0,
+  "pre_run_unittests": 112,
+  "failed_fits_or_views": 0,
+  "final_values_parsed": false,
+  "closed_loop_executed": false,
+  "public_scope": "aggregate metrics, figures and independent review; models, graph/neighbor IDs, labels and per-graph probabilities remain local",
+  "historical_dependency_archive_sha256": "6dbc9524cdb626381fe4e93bd1b1c09da9f81e3f9ff6df77cc50547d1eed381e"
+}

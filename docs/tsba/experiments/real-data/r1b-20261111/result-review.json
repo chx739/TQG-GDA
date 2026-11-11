@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "unresolved_findings": 0,
+  "reviewer": "independent clean-context subagent /root/r1b_result_review",
+  "scope": "sealed run integrity, aggregate results, saved update decomposition and final report",
+  "report_sha256": "87c890cf188ff9913b6e31a91958187f71e6b6ffc6e9d607626b8b9b52398e30",
+  "unique_sealed_files_independently_hashed": 6958,
+  "hash_mismatches": 0,
+  "label_access_events": 24,
+  "final_ID_overlap": 0,
+  "label_values_parsed_by_reviewer": false,
+  "model_training_by_reviewer": false,
+  "new_queries_by_reviewer": false,
+  "observations": [
+    "80 warm fits,20 learned score fits,160 arms and320 views completed",
+    "2200 warm plus1600 step prediction groups replay exactly",
+    "Normal/reverse/matched-source B argmax predictions match in every paired cell/view",
+    "Source and score proposal arithmetic independently verified for80 views and20 static models",
+    "All scale conditional eligibility rates remain NA"
+  ],
+  "report_corrections_resolved": [
+    "Domain3 learned paired NLL rounded values",
+    "Minimum-side B support wording",
+    "NLL-primary and BA-secondary designation",
+    "Epoch index99 is the100th epoch",
+    "Selected-step distributions and saved training/validation curves",
+    "Small-alpha contribution ratio interpretation"
+  ],
+  "review_note": "Read-only independent review; scientific conclusions are bounded to the preregistered developmental experiment"
+}

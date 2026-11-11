@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "input_file": "observation-summary.json",
+  "input_sha256": "47dc5e4808febeefb55be2c773a15737ea42d9cc651702ba6eb7b8d684ad4c4b",
+  "helper_file": "workflows/tsba/validation/real_data/next_round/locality_figures.py",
+  "helper_sha256": "236d572bcb46c9b8c8d4403c5e8646ca424c33ecc4eb3a89125d38e4fd90cb40",
+  "retained_metric_keys": [
+    "min_both_sides_unlabeled_n",
+    "min_both_sides_B_n",
+    "ess_center",
+    "ess_min_three",
+    "max_kernel_weight_center",
+    "origin_kernel_weight_center",
+    "coverage_fraction_target_pool"
+  ],
+  "compact_scope": "All six settings, main and LOO, source/linear/mlp/reference_all; across-seed and pooled scalar summaries only",
+  "raw_queries_read": false,
+  "labels_parsed": false,
+  "experiment_archive_written": false,
+  "fitting_or_setting_selection_performed": false,
+  "figures": [
+    {
+      "file": "neighborhood-locality.png",
+      "settings": [
+        "r1_b1",
+        "r1.5_b1",
+        "r2_b1"
+      ],
+      "pool": "main (support identical in LOO)",
+      "metrics": [
+        "min_both_sides_unlabeled_n",
+        "min_both_sides_B_n",
+        "coverage_fraction_target_pool"
+      ],
+      "statistics": [
+        "median",
+        "p90",
+        "max"
+      ],
+      "coverage_display_multiplier": 100
+    },
+    {
+      "file": "kernel-concentration.png",
+      "settings": [
+        "r1_b1",
+        "r1_b1.5",
+        "r1_b2"
+      ],
+      "pools": [
+        "main",
+        "loo"
+      ],
+      "metrics": [
+        "ess_min_three",
+        "max_kernel_weight_center",
+        "origin_kernel_weight_center"
+      ],
+      "statistics": [
+        "median",
+        "p90"
+      ],
+      "weight_display_multiplier": 100
+    }
+  ],
+  "outputs": {
+    "neighborhood-locality.png": {
+      "bytes": 350544,
+      "sha256": "74126d3d9f9deab9fa048dce6cffe7ea6b4df1e1d91658c85eb60130e9c0352d"
+    },
+    "kernel-concentration.png": {
+      "bytes": 370492,
+      "sha256": "c7fed12f0b85a30ed5713fc199a9edbd5b0610002522ab2f15074b817776f825"
+    },
+    "density-summary.json": {
+      "bytes": 670974,
+      "sha256": "cca78488f4c9245d96e83d6faed5e04157a01af3f23ce3dbd8e10441a294410e"
+    },
+    "density-summary.csv": {
+      "bytes": 247139,
+      "sha256": "da49e2869de899ec9385ec1f4c36168a1bb611422534d37b1f1278d5379073e6"
+    }
+  },
+  "figure_statistics": "Pooled descriptive quantiles of correlated records; no confidence intervals",
+  "compact_JSON_preserves_source_metadata": true
+}

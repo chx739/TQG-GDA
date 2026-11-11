@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "status": "published",
+  "aggregate_files": 16,
+  "missing_optional_aggregates": [],
+  "figures": {
+    "warm": {
+      "status": "created",
+      "file": "warm-reference-heads.png",
+      "plotted_mean_sd_pairs": 20,
+      "uncertainty": "sample SD across five seed means; not confidence intervals"
+    },
+    "paired_steps": {
+      "status": "created",
+      "file": "single-step-paired-nll.png",
+      "seed_ids": [
+        3405,
+        3406,
+        3407,
+        3408,
+        3409
+      ],
+      "plotted_seed_points": 160,
+      "missing_seed_points": 0,
+      "difference": "normal minus paired control; no acceptance-subset filtering"
+    },
+    "static_score": {
+      "status": "created",
+      "file": "static-score-comparison.png",
+      "seed_ids": [
+        3405,
+        3406,
+        3407,
+        3408,
+        3409
+      ],
+      "plotted_seed_points": 100,
+      "normalization": "original frozen sigma0, not fitted bandwidth"
+    },
+    "density_scales": {
+      "status": "created",
+      "file": "density-scale-aggregates.png",
+      "plotted_seed_points": 360,
+      "raw_ess_distribution": "unavailable in public aggregate schemas",
+      "target_neighborhood_coverage_distribution": "unavailable in public aggregate schemas",
+      "coverage_shown": "distinct B graphs covered by eligible anchors / 271, main pool",
+      "aggregation": "reference banks averaged within seed; no setting selected"
+    }
+  },
+  "setting_selection_performed": false,
+  "archive_writes": false,
+  "figure_inputs": "only exported aggregate JSON; all settings retained"
+}
