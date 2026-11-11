@@ -2,7 +2,7 @@
 
 本分支实现用户提供的 TSBA 设计：固定整图编码与坐标，以无标签目标分布的 score 提出边界法向位移，再用源 CE 和阻尼 Gauss–Newton 更新分类模块。代码遵循 SEGA 的模块划分和“候选求解 → 非线性重评估 → 接受／回溯”范式。
 
-这是候选研究方法的工程实现。Mutagenicity R1与R1b已完成：源头微调降低平均NLL但未超过源头BA；扩尺度仍缺少双侧标签支持；经验/学习score单步未显示额外BA收益，更新由源CE主导。真实数据score已训练，完整闭环尚未执行。详见[R1b报告](docs/tsba/experiments/real-data/r1b-20261111/report.md)。
+这是候选研究方法的工程实现。Mutagenicity R2已完成630条完整30轮轨迹：score续训降低了估计误差，增大边界权重也增强了密度分量，但60个正常配置的五种子平均B集NLL全部差于原始源头，BA变化小且方向混合。几何源对照也出现源fit改善、留出NLL恶化。详见[R2报告](docs/tsba/experiments/real-data/r2-20261111/report.md)；R1/R1b作为前期诊断保留。
 
 | 分支 | 用途 |
 | --- | --- |
@@ -15,7 +15,7 @@
 - [用户设计原文](docs/tsba/TSBA_Graph_Level_GDA_Design.md)：原样保存；[English translation](docs/tsba/TSBA_Graph_Level_GDA_Design_EN.md)。
 - [实验总览与当前结论](docs/tsba/experiments/README.md)：区分模拟结果、真实图计划与工程证据。
 - [模拟数据验证](docs/tsba/experiments/synthetic/README.md)：已完成至P0，含训练预算与源约束结论。
-- [真实数据验证](docs/tsba/experiments/real-data/README.md)：Mutagenicity R1/R1b结果、协议、档案与阶段决策。
+- [真实数据验证](docs/tsba/experiments/real-data/README.md)：Mutagenicity R1/R1b/R2结果、协议、档案与阶段决策。
 - [历史完整实验设计](docs/tsba/experiments/validation-plan.md)：E0–E5及各轮执行协议。
 - [人工代码审查导航](docs/tsba/code-review-guide.md)：阅读顺序、公式与测试入口。
 - [实现映射与数值选择](docs/tsba/implementation.md)。
