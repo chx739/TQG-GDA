@@ -173,5 +173,22 @@ class R2Checks(unittest.TestCase):
             write_csv(root/'metrics.csv',[dict(seed=1,nll=.5)])
             self.assertEqual(before,(root/'metrics.csv').read_bytes())
 
+    def test_manifest_recovery_after_publication_before_unlink(self):
+        from workflows.tsba.validation.real_data.r2.evaluate import write_json,evidence_manifest
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);(root/'evidence.txt').write_text('frozen evidence')
+            (root/'other.partial-kept').write_text('other interrupted evidence')
+            expected=evidence_manifest(root);unlink=Path.unlink
+            def interrupted(path,*args,**kwargs):
+                if path.name.startswith('manifest.json.partial-'):raise InterruptedError('after publication')
+                return unlink(path,*args,**kwargs)
+            with patch.object(Path,'unlink',interrupted):
+                with self.assertRaises(InterruptedError):write_json(root/'manifest.json',expected)
+            self.assertTrue((root/'manifest.json').exists())
+            self.assertEqual(len(list(root.glob('manifest.json.partial-*'))),1)
+            self.assertIn('other.partial-kept',evidence_manifest(root))
+            write_json(root/'manifest.json',evidence_manifest(root))
+            self.assertEqual(json.loads((root/'manifest.json').read_text()),expected)
+
 
 if __name__=='__main__':unittest.main()

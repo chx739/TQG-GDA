@@ -31,11 +31,23 @@ def write_csv(path,rows):
     temp.unlink()
 
 
+def evidence_manifest(root):
+    """Exclude this manifest and its own interrupted-publication hardlinks.
+
+    Other partial artifacts remain evidence. A crash after publishing the
+    manifest but before unlinking its temporary name must not make the manifest
+    appear as a newly discovered input on the next recovery attempt.
+    """
+    root=Path(root)
+    excluded=('manifest.json',*[p.name for p in root.glob('manifest.json.partial-*')])
+    return manifest(root,exclude=excluded)
+
+
 def evaluate(root,plan):
     root=Path(root);verify(root,'OBS');out=root/'evaluation'
     if (root/'seals/FINAL.json').exists():
         verify(root,'FINAL')
-        write_json(root/'manifest.json',manifest(root,exclude=('manifest.json',)))
+        write_json(root/'manifest.json',evidence_manifest(root))
         return
     broker=Broker(root);roles=json.loads((root/'deps/roles.json').read_text());labels={}
     for d in plan['domains']:
@@ -120,4 +132,4 @@ def evaluate(root,plan):
         final_labels_parsed=False,new_target_supervised_training=False,primary_attempt=30,primary_metric='B NLL',B_is_development=True)
     write_json(root/'completion.json',completion)
     seal(root,'FINAL',['evaluation','completion.json','logs','seals/INPUT.json','seals/OBS.json'])
-    write_json(root/'manifest.json',manifest(root,exclude=('manifest.json',)));print(json.dumps(completion),flush=True)
+    write_json(root/'manifest.json',evidence_manifest(root));print(json.dumps(completion),flush=True)
