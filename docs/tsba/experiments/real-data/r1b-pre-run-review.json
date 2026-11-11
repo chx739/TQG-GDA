@@ -1,0 +1,41 @@
+{
+  "status": "clear_no_remaining_blocker",
+  "review_date": "2026-11-11",
+  "reviewer": "independent clean-context subagent /root/r1b_design_review",
+  "scope": "R1b execution, labels, frozen dependencies, numerical controls and evaluation; post-run publishing excluded",
+  "independent_tests": {
+    "new_round_tests_passed": 25,
+    "elapsed_seconds": 13.424,
+    "additional_source_GGN_shape": [
+      779,
+      16
+    ],
+    "additional_source_GGN_relative_residual": 3.6e-15
+  },
+  "historical_dependencies_metadata_checked": 731,
+  "resolved_findings": [
+    "Authenticate seal canonical identity on cached reads",
+    "Reject added files in frozen directories",
+    "Rehash raw label bytes on each scoped read",
+    "Bind executing checkout and plan to archived source",
+    "Preserve fixed denominators and NA for failed folds/groups",
+    "Evaluate small-step and production views independently",
+    "Archive explicit source GGN and paired control decomposition",
+    "Count missing observation/dependency failures in completion"
+  ],
+  "limitations": [
+    "B is development data with prior observation",
+    "Empirical KDE is a finite-pool reference",
+    "One-step results are exploratory and do not validate a full adaptation loop"
+  ],
+  "real_labels_read_by_review": false,
+  "historical_artifacts_modified": false,
+  "reviewed_sha256": {
+    "workflows/tsba/validation/real_data/next_round/common.py": "c17b245ac1675b7a9cc27ad619ceaeb5b439fa3fcbac279dc6b9eadda5d10030",
+    "workflows/tsba/validation/real_data/next_round/warm.py": "e8e6cdb71e63a03a94daed4ec028009ca05c223129db4440422bd6b6c834e69f",
+    "workflows/tsba/validation/real_data/next_round/scales.py": "3b4d8bf9d23f1c5885b52e08128fb50903d40411656074d2cedba5d776ef497f",
+    "workflows/tsba/validation/real_data/next_round/steps.py": "8a5a88d019929f987217fa0468400d9bb05b7fa60baac84294fa835f49e67633",
+    "workflows/tsba/validation/real_data/next_round/evaluate.py": "331d581edc2a07ad0f64806c488b77abb304e3a2ed95f5367e08c72365f429d0",
+    "workflows/tsba/validation/real_data/next_round/run.py": "dedfac069b6c5523a983d4ff0d459dda583bfc182314885d34346ace789812a7"
+  }
+}

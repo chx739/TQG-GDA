@@ -1,0 +1,28 @@
+{
+  "protocol_id": "tsba-mutagenicity-r1b-20261111-v1",
+  "output_root": "/home/hxchen/experiments/tsba/mutagenicity-r1b/attempt-001",
+  "seeds": [3405, 3406, 3407, 3408, 3409],
+  "domains": [1, 3],
+  "dependency": {
+    "root": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-002",
+    "s2_digest": "c9672858ccabb62602066955075914010997e8f42f6c2d93e2ced768dfeb67de",
+    "archive": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-002.tar.gz",
+    "archive_sha256": "6dbc9524cdb626381fe4e93bd1b1c09da9f81e3f9ff6df77cc50547d1eed381e"
+  },
+  "warm": {"learning_rates": [0.001, 0.0001], "updates": 800, "validation_cadence": 20, "weight_decay": 0.001, "outer_folds": 4, "supplementary_endpoints": [200, 800]},
+  "scales": {
+    "settings": [
+      {"support_multiplier": 1, "bandwidth_multiplier": 1},
+      {"support_multiplier": 1.5, "bandwidth_multiplier": 1},
+      {"support_multiplier": 2, "bandwidth_multiplier": 1},
+      {"support_multiplier": 1, "bandwidth_multiplier": 1.5},
+      {"support_multiplier": 1, "bandwidth_multiplier": 2},
+      {"support_multiplier": 2, "bandwidth_multiplier": 2}
+    ],
+    "bootstrap_repeats": 200
+  },
+  "scores": {"hidden": 64, "lr": 0.001, "batch": 128, "epochs": 100, "validation": true},
+  "steps": {"bandwidth_multipliers": [1, 2], "small_step_start": 0.0625, "small_step_floor": 0.000030517578125, "lambda_boundary": 1, "damping": 0.01, "tau": 0.1, "request_multiplier": 0.1, "execution_multiplier": 0.1, "source_fit_count": 779, "anchor_count": 64},
+  "resources": {"max_total_seconds": 86400, "max_probe_seconds": 120, "max_score_seconds": 3600, "max_scale_cell_seconds": 3600, "max_rss_bytes": 8589934592},
+  "evaluation": {"primary": "B_nll", "secondary": "B_balanced_accuracy", "folds_averaged_before_seeds": true, "final_labels_allowed": false, "B_selects_settings": false}
+}
