@@ -159,5 +159,19 @@ class R2Checks(unittest.TestCase):
             with patch('workflows.tsba.validation.real_data.r2.run.verify'),patch('workflows.tsba.validation.real_data.r2.run.seal',return_value=dict(digest='test')):
                 replay_and_seal(root,plan)
 
+    def test_evaluation_products_resume_without_overwrite(self):
+        from workflows.tsba.validation.real_data.r2.evaluate import write_json,write_csv
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            write_json(root/'labels.json',{'source':{1:0,2:1}})
+            before=(root/'labels.json').read_bytes()
+            write_json(root/'labels.json',{'source':{1:0,2:1}})
+            self.assertEqual(before,(root/'labels.json').read_bytes())
+            with self.assertRaises(PermissionError):write_json(root/'labels.json',{'source':{1:1,2:1}})
+            write_csv(root/'metrics.csv',[dict(seed=1,nll=.5)])
+            before=(root/'metrics.csv').read_bytes()
+            write_csv(root/'metrics.csv',[dict(seed=1,nll=.5)])
+            self.assertEqual(before,(root/'metrics.csv').read_bytes())
+
 
 if __name__=='__main__':unittest.main()

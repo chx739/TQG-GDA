@@ -66,3 +66,5 @@ float64，确定性算法，OMP/MKL/PyTorch每进程1线程，8个独立 CPU wor
 `OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.real_data.r2.run --stage STAGE`
 
 顺序：`init --test-log PATH` → `pilot` → `scores` → `adapt` → `diagnose` → `seal` → `evaluate`。新 run 不覆盖既有目录；恢复只允许相同代码/输入/计划的未封存执行。完整结果将链接到真实数据实验索引，与模拟结果分开。
+
+执行前审查修复了首轮数值失败的旁路缺失处理、JSON/OBS原子恢复和评价输出恢复。`attempt-001` 只完成输入核验和源 fit 标签登记，未开始小试、score续训或适配、未读任何目标标签；它连同终止原因保留。正式执行使用 `attempt-002`。评价中断后重新计算固定结果，逐项验证既有 JSON/CSV 完全一致再复用，不覆盖已发布记录；FINAL 后只能核验并补齐清单。

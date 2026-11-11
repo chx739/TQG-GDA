@@ -1,20 +1,42 @@
 """Post-seal evaluation of the entire fixed grid; B never selects a model."""
 import json
+import os
 from pathlib import Path
+import uuid
 
 import numpy as np
 import torch
 
 from ...archive import digest, manifest
 from ..data import canonical_sha
-from ..evaluate import classification_metrics, seed_summary, write_csv
-from .common import write_json, seal, load, verify, Broker, jobs, job_key
+from ..evaluate import classification_metrics, seed_summary, write_csv as _write_csv
+from .common import write_json as _write_json, seal, load, verify, Broker, jobs, job_key
+
+
+def write_json(path,value):
+    """Recompute deterministic evaluation products and verify existing records."""
+    path=Path(path);normalized=json.loads(json.dumps(value,allow_nan=False))
+    if path.exists():
+        if json.loads(path.read_text())!=normalized:raise PermissionError('Evaluation record changed: '+str(path))
+    else:_write_json(path,value)
+
+
+def write_csv(path,rows):
+    path=Path(path);temp=path.with_name(path.name+'.partial-'+uuid.uuid4().hex)
+    _write_csv(temp,rows)
+    with temp.open('rb') as f:os.fsync(f.fileno())
+    if path.exists():
+        if path.read_bytes()!=temp.read_bytes():raise PermissionError('Evaluation CSV changed: '+str(path))
+    else:os.link(temp,path)
+    temp.unlink()
 
 
 def evaluate(root,plan):
     root=Path(root);verify(root,'OBS');out=root/'evaluation'
-    if (root/'seals/FINAL.json').exists():raise FileExistsError('Evaluation already sealed')
-    if list(out.iterdir()):raise FileExistsError('Preserve interrupted evaluation; do not overwrite')
+    if (root/'seals/FINAL.json').exists():
+        verify(root,'FINAL')
+        write_json(root/'manifest.json',manifest(root,exclude=('manifest.json',)))
+        return
     broker=Broker(root);roles=json.loads((root/'deps/roles.json').read_text());labels={}
     for d in plan['domains']:
         labels[f'B{d}']=broker.read(roles['targets'][str(d)]['B'],'target_B','Fixed R2 complete-grid evaluation after OBS',domain=d)
@@ -98,4 +120,4 @@ def evaluate(root,plan):
         final_labels_parsed=False,new_target_supervised_training=False,primary_attempt=30,primary_metric='B NLL',B_is_development=True)
     write_json(root/'completion.json',completion)
     seal(root,'FINAL',['evaluation','completion.json','logs','seals/INPUT.json','seals/OBS.json'])
-    write_json(root/'manifest.json',manifest(root));print(json.dumps(completion),flush=True)
+    write_json(root/'manifest.json',manifest(root,exclude=('manifest.json',)));print(json.dumps(completion),flush=True)
