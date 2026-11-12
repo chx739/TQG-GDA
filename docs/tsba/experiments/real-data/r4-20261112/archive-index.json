@@ -1,0 +1,54 @@
+{
+  "archive_path": "/home/hxchen/experiments/tsba/mutagenicity-r4/attempt-001.tar.gz",
+  "archive_bytes": 2311713703,
+  "archive_sha256": "e53a76a778ee951a6969f38a4580fbc85c3b7db8f07a0940d752210711041a49",
+  "source_path": "/home/hxchen/experiments/tsba/mutagenicity-r4/attempt-001",
+  "files_verified": 13025,
+  "uncompressed_bytes": 2780561291,
+  "audit": {
+    "seals": {
+      "INPUT": "6610dbc4ffc23a2a763a0076dbf345700ab065dc9a8a3c877aedf46d7d7407fb",
+      "OBS": "e5da89623032cce95215c64f7281a871a966c5d633f11dca1ffbf769fa153d57",
+      "FINAL": "46f9b16c478095807db52540f5cd56cb237807fd6704450835cd05de45795c93"
+    },
+    "replay": {
+      "sources": 20,
+      "score_endpoints": 240,
+      "scores": 60,
+      "predictions_replayed": 9300,
+      "attempts": 9000,
+      "side_predictions_replayed": 1800,
+      "trajectories": 300,
+      "side_statuses": {
+        "available": 600
+      }
+    },
+    "table_rows": {
+      "endpoints": 4860,
+      "paired": 480,
+      "rounds": 9300,
+      "side": 1800,
+      "score_endpoints": 240,
+      "source_curves": 2000,
+      "diagnostics": 5
+    },
+    "zero_statuses": {
+      "stationary": 60
+    },
+    "source_epoch_checkpoints": 2000,
+    "score_checkpoints": 960,
+    "states_with_predictions": 9300,
+    "statuses": {
+      "accepted": 8998,
+      "backtracking_exhausted": 2
+    },
+    "r3_historical_fresh_fits": {
+      "count": 50,
+      "parameter_exact": 50,
+      "target_log_prediction_exact": 50,
+      "target_argmax_exact": 50
+    },
+    "config_hash": "c4ccd74503331246b6fdec501cc5dbedecb86c4f3c7c860ad60d3e5b5b6847d0"
+  },
+  "execution_commit": "683624fa7332ae1426ff6de3ef6abe945c355fce"
+}
