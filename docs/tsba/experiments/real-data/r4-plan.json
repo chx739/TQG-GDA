@@ -1,0 +1,255 @@
+{
+  "seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "domains": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "domain_counts": [
+    1084,
+    1084,
+    1084,
+    1085
+  ],
+  "sega_ref_fraction": 0.4,
+  "sega_fit_fraction": 0.4,
+  "risk_budget": 0.05,
+  "constraint_tolerance": 1e-09,
+  "solver": {
+    "ftol": 1e-12,
+    "iterations": 150,
+    "constraint_generation_limit": 80,
+    "add_rows": 16
+  },
+  "endpoints": [
+    0,
+    1,
+    3,
+    10,
+    30
+  ],
+  "side_attempts": [
+    1,
+    30
+  ],
+  "side_alpha_start": 0.0625,
+  "relocation_scan_points": 65,
+  "relocation_radius_sigma": 4,
+  "relocation_bisections": 28,
+  "workers": 32,
+  "schema": 1,
+  "dataset": "Mutagenicity",
+  "experiment": "R4 fixed-configuration all directions",
+  "directions": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      3,
+      2
+    ]
+  ],
+  "historical_directions": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      3
+    ]
+  ],
+  "r3_reference_commit": "7a3ac191b46ee6867a7840fc3b9542536d0efc78",
+  "r3_inputs_digest": "5c869819eeb2bb553befbcc90c81cab5a5752278f95e503fe25614e5c75b91f3",
+  "model": {
+    "seed": 0,
+    "encoder": "gin",
+    "hidden": 64,
+    "num_layers": 3,
+    "emb_dim": 16,
+    "dropout": 0.0,
+    "source_epochs": 100,
+    "source_lr": 0.001,
+    "source_batch": 128,
+    "adapter_width": 16,
+    "coordinate_eps": 1e-08,
+    "score_hidden": 64,
+    "score_epochs": 800,
+    "score_batch": 128,
+    "score_lr": 0.001,
+    "score_validation": true,
+    "kappa_sigma": 1.0,
+    "adapt_rounds": 30,
+    "source_adapt_batch": 128,
+    "target_batch": 128,
+    "lambda_boundary": 1.0,
+    "tau": 0.1,
+    "radius_multiplier": 1.0,
+    "request_multiplier": 0.1,
+    "execution_multiplier": 0.1,
+    "root_tolerance": 1e-05,
+    "min_normal": 1e-08,
+    "projection_eps": 1e-12,
+    "projection_steps": 20,
+    "projection_backtracks": 10,
+    "movement_zero": 1e-12,
+    "damping": 0.01,
+    "solver": "auto",
+    "direct_max_params": 2048,
+    "cg_tolerance": 1e-07,
+    "cg_steps": 200,
+    "armijo": 0.0001,
+    "backtracks": 15,
+    "adaptation_dtype": "float64",
+    "device": "cpu"
+  },
+  "score": {
+    "hidden": 64,
+    "lr": 0.001,
+    "batch": 128,
+    "endpoints": [
+      900,
+      1800,
+      3600,
+      7200
+    ],
+    "recovery_epochs": 50,
+    "bandwidths": [
+      1
+    ]
+  },
+  "weight": 1.0,
+  "epsilon": 0.25,
+  "adam": {
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.0,
+    "amsgrad": false,
+    "maximize": false,
+    "foreach": null,
+    "capturable": false,
+    "differentiable": false,
+    "fused": null
+  },
+  "methods": {
+    "B0": {
+      "group": null,
+      "density": null
+    },
+    "B1": {
+      "group": "M00",
+      "density": "zero"
+    },
+    "B2": {
+      "group": "M01",
+      "density": "zero"
+    },
+    "A1": {
+      "group": "M01",
+      "density": "learned"
+    },
+    "A2": {
+      "group": "M11",
+      "density": "learned"
+    },
+    "A3": {
+      "group": "M11",
+      "density": "kde"
+    }
+  },
+  "primary": "A2",
+  "secondary": "A1",
+  "primary_metric": "accuracy",
+  "pairs": [
+    [
+      "A2",
+      "B0"
+    ],
+    [
+      "A2",
+      "B1"
+    ],
+    [
+      "A2",
+      "B2"
+    ],
+    [
+      "A1",
+      "B2"
+    ],
+    [
+      "A3",
+      "B0"
+    ],
+    [
+      "A2",
+      "A3"
+    ],
+    [
+      "B1",
+      "B0"
+    ],
+    [
+      "B2",
+      "B1"
+    ]
+  ],
+  "counts": {
+    "sources": 20,
+    "scores": 60,
+    "trajectories": 300,
+    "attempts": 9000
+  },
+  "reuse": "fresh_training"
+}

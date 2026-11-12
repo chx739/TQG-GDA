@@ -4,6 +4,7 @@
 
 ## 结果与执行入口
 
+- R4 固定同一配置评估全部 12 个方向，以第 30 次尝试的目标 Accuracy 为主指标。[实验协议](r4-protocol.md) · [机器计划](r4-plan.json)
 - R3 使用 868/216 的源训练与验证划分，检验源风险预算、置信度上限和 M11 的九格参数敏感性。结果采用封存后的全目标域开发计分。[实验协议](r3-protocol.md) · [机器配置](r3-plan.json) · [档案索引](r3-20261112/archive-index.json)
 - [R2完整报告](r2-20261111/report.md)：900/1800/3600/7200步 × λ=1/10/100，两个任务、两个带宽，630条完整轨迹；含源侧变化和事后置信度分解。
 - [R2执行前协议](r2-protocol.md)、[原始机器计划](r2-plan.json)、[档案索引](r2-20261111/archive-index.json)：新入口 `workflows.tsba.validation.real_data.r2.run`；小试后调度改为32个独立单线程worker，科学配置不变。
