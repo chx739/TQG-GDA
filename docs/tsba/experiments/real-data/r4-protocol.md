@@ -18,3 +18,17 @@ python -m workflows.tsba.validation.real_data.r4.run \
   --root /home/hxchen/experiments/tsba/mutagenicity-r4/attempt-001 \
   --r3 /home/hxchen/experiments/tsba/mutagenicity-r3/attempt-001
 ```
+
+## 事后补充对照 A0
+
+A0 使用 R3 的 M00 正常请求，保留持续源 CE、学习 score 和原 R4 数值验收。M00 的源每类风险预算和置信度约束均不启用。每个已登记的方向与种子新增一条 30 次尝试的轨迹，共 60 条、1,800 次尝试。原计划保留 A2 为预登记主方案。
+
+适配复用 R4 的源模型、冻结坐标、初始头、7,200 步 score、批次序列和源训练标签。补跑目录的 `protocol/references.json` 记录每个任务引用文件及哈希。统一重载预测并核对两条历史方向对应的 R3 M00 轨迹后，封存 `A0_OBS`，随后读取目标标签。第 30 次尝试为主终点。A0−B0、A0−B1、A1−A0、A2−A0 在同任务同种子内配对，汇总时在每个种子内等权平均方向。
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+python -m workflows.tsba.validation.real_data.r4.supplement \
+  --root /home/hxchen/experiments/tsba/mutagenicity-r4/supplement-m00-001 \
+  --r4 /home/hxchen/experiments/tsba/mutagenicity-r4/attempt-001 \
+  --r3 /home/hxchen/experiments/tsba/mutagenicity-r3/attempt-001
+```

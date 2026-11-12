@@ -55,16 +55,17 @@ def check_zero(root, plan, task):
     return dict(asdict(task), status="stationary", anchors=len(boundaries), attempt=selected["attempt"])
 
 
-def adapt(root, plan, item, stop_after=None):
+def adapt(root, plan, item, stop_after=None, *, reference=None):
     task, method = item
     out = job_dir(root, plan, task, method)
     if (out / "complete.json").exists():
         return
     job = r3_job(plan, task, method)
-    model, pools = inputs(root, plan, task)
-    y = load(labels_path(root, task.source, task.seed, "fit"))
+    input_root, input_plan = reference if reference is not None else (root, plan)
+    model, pools = inputs(input_root, input_plan, task)
+    y = load(labels_path(input_root, task.source, task.seed, "fit"))
     source, target = pools["source_fit"], pools["target"]
-    spec = geometry(root, plan, task)
+    spec = geometry(input_root, input_plan, task)
     sigma = spec["sigma"]
     cfg = config(plan, task.seed)
     budget = Budgets(model, source, y, target, job, plan)
@@ -76,10 +77,10 @@ def adapt(root, plan, item, stop_after=None):
     if job.density == "kde":
         estimator, side_estimator = EmpiricalScore(target, sigma), None
     elif job.density == "learned":
-        estimator, side_estimator = learned_score(root, plan, task), None
+        estimator, side_estimator = learned_score(input_root, input_plan, task), None
     else:
-        estimator, side_estimator = ZeroScore(), learned_score(root, plan, task)
-    schedule = load(batch_path(root, task))
+        estimator, side_estimator = ZeroScore(), learned_score(input_root, input_plan, task)
+    schedule = load(batch_path(input_root, task))
     files = sorted(out.glob("round[0-9][0-9].pt"))
     if files:
         if [p.name for p in files] != [f"round{i:02d}.pt" for i in range(len(files))] or len(files) > len(schedule) + 1:

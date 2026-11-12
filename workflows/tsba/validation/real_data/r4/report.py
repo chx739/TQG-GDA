@@ -14,15 +14,20 @@ def render_heatmap(out, summary, plan):
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    fig, axes = plt.subplots(1, 2, figsize=(9, 4), layout="constrained")
+    contrasts = ("A2−B0", "A1−B2")
+    if "A0" in plan["methods"]:
+        contrasts += ("A0−B0", "A0−B1", "A1−A0", "A2−A0")
+        fig, axes = plt.subplots(2, 3, figsize=(12, 8), layout="constrained")
+    else:
+        fig, axes = plt.subplots(1, 2, figsize=(9, 4), layout="constrained")
     matrices = []
-    for contrast in ("A2−B0", "A1−B2"):
+    for contrast in contrasts:
         values = np.full((4, 4), np.nan)
         for s, t in plan["directions"]:
             values[s, t] = 100 * summary[contrast, f"M{s}→M{t}"]["accuracy"]["mean"]
         matrices.append(values)
     limit = max(*(np.nanmax(abs(matrix)) for matrix in matrices), .01)
-    for ax, matrix, contrast in zip(axes, matrices, ("A2−B0", "A1−B2")):
+    for ax, matrix, contrast in zip(axes.flat, matrices, contrasts):
         image = ax.imshow(matrix, cmap="RdBu", vmin=-limit, vmax=limit)
         for s, t in plan["directions"]:
             value = matrix[s, t]
@@ -66,10 +71,37 @@ def render_curves(out, plan, rounds):
     plt.close(fig)
 
 
-def report(root, plan, out, summaries, rounds):
+def supplement_findings(summary):
+    rows = []
+    labels = (
+        ("A0−B0", "原始 TSBA 相对源模型"),
+        ("A0−B1", "在 M00 中加入学习 score"),
+        ("A1−A0", "在有 score 的 M00 上加入置信度约束"),
+        ("A2−A0", "M11 组合改动相对原始 TSBA"),
+    )
+    for contrast, label in labels:
+        row = summary[contrast, "Avg"]
+        acc = row["accuracy"]
+        rows.append(
+            f"| {label} | {contrast} | {100*acc['mean']:+.4f} | "
+            f"{acc['wins']}/{acc['ties']}/{acc['losses']} | "
+            f"{100*row['balanced_accuracy']['mean']:+.4f} | "
+            f"{100*row['macro_f1']['mean']:+.4f} | {row['nll']['mean']:+.5f} |"
+        )
+    return [
+        "## 事后补充对照结论", "",
+        "Accuracy、BA 和 Macro-F1 差值以百分点计。NLL 差值小于零表示概率预测改善。"
+        "种子胜／平／负按全方向平均 Accuracy 的配对差值计。", "",
+        "| 比较目的 | 配对 | Accuracy | 胜／平／负 | BA | Macro-F1 | NLL |",
+        "|---|---|---:|---:|---:|---:|---:|",
+        *rows, "",
+    ]
+
+
+def report(root, plan, out, summaries, rounds, *, supplement=None):
     summary = {(r["method_or_contrast"], r["scope"]): r for r in summaries}
     scopes = [f"M{s}→M{t}" for s, t in plan["directions"]]
-    methods = plan["methods"]
+    methods = sorted(plan["methods"], key=lambda m: (m[0] != "B", m)) if supplement else plan["methods"]
     overall = summary["A2−B0", "Avg"]["accuracy"]
     replay = read_json(root / "replay.json")
     positive = sum(summary["A2−B0", scope]["accuracy"]["mean"] > 0 for scope in scopes)
@@ -85,6 +117,16 @@ def report(root, plan, out, summaries, rounds):
         "[逐种子端点与辅助指标](endpoints.csv) · [逐种子配对](paired.csv) · "
         "[逐轮预测指标与纠错计数](rounds.csv) · [旁路](side.csv) · "
         "[Score诊断](score_endpoints.csv) · [源训练曲线数据](source_curves.csv) · [完整汇总](summary.csv)", "",
+    ]
+    if supplement:
+        lines += [
+            "[实验协议](../r4-protocol.md) · [原 R4 固定计划](../r4-plan.json)", "",
+            f"**{supplement['date']} 事后补充对照实验。** A0 为原始 TSBA（M00＋学习 score）。"
+            "预登记主方案仍为 A2。A0 复用 R4 的初始分类头、冻结表示、7,200 步 score 和批次序列。",
+            "",
+            *supplement_findings(summary),
+        ]
+    lines += [
         "## Accuracy 主表", "",
         "百分数为五个种子的均值±样本标准差。Avg 先在每个种子内等权平均 12 方向，再计算五个种子的波动。", "",
         "| 方法 | " + " | ".join(scopes + ["Avg"]) + " |",
@@ -93,7 +135,8 @@ def report(root, plan, out, summaries, rounds):
     for method in methods:
         values = [summary[method, scope]["accuracy"] for scope in scopes + ["Avg"]]
         lines.append(f"| {method} | " + " | ".join(f"{100*v['mean']:.3f} ± {100*v['sd']:.3f}" for v in values) + " |")
-    lines += ["", "B0 为原始源头。B1、B2 分别为 M00、M01 零请求。"
+    a0 = "A0 为 M00 学习 score。" if supplement else ""
+    lines += ["", "B0 为原始源头。B1、B2 分别为 M00、M01 零请求。" + a0 +
               "A1 为 M01 学习 score，A2 为预指定主方案 M11 学习 score，A3 为 M11 经验 KDE。", "",
               "### 源域与目标域各三方向平均", "",
               "| 方法 | " + " | ".join(f"{side} M{d}" for side in ("source", "target") for d in plan["domains"]) + " |",
@@ -113,7 +156,8 @@ def report(root, plan, out, summaries, rounds):
         lines.append(f"| {scope} | " + " | ".join(
             f"{100*v['mean']:+.3f} ± {100*v['sd']:.3f} ({v['wins']}/{v['ties']}/{v['losses']})" for v in values
         ) + " |")
-    lines += ["", "![两个登记对比的方向热力图](directions.png)", "",
+    heatmap = "配对 Accuracy 的方向热力图" if supplement else "两个登记对比的方向热力图"
+    lines += ["", f"![{heatmap}](directions.png)", "",
               "## 辅助指标与轮次", "",
               "下表为 12 方向等权均值。每方向和每种子的混淆矩阵、召回及预测类别比例在逐种子端点表。", "",
               "| 方法 | BA (%) | Macro-F1 (%) | NLL | Recall 0 (%) | Recall 1 (%) |",
@@ -164,6 +208,19 @@ def report(root, plan, out, summaries, rounds):
               f"旁路状态为 `{replay['side_statuses']}`。", "",
               "所有模型和轨迹采用新训练产物。R3 仅提供经过哈希认证的数据来源与数值实现。"
               "经验 KDE 是同一有限目标样本池上的参考。"]
+    if supplement:
+        lines[-1] = ("原 R4 的源模型、score 和轨迹均为当时新训练产物。"
+                     "A0 复用源模型和 score，独立执行适配。经验 KDE 使用同一有限目标样本池。")
+        extra = supplement["replay"]
+        lines += [
+            "", f"A0 补跑 {extra['trajectories']} 条轨迹、{extra['attempts']:,} 次尝试，"
+            f"重载核验 {extra['predictions_replayed']:,} 份轨迹状态预测和 "
+            f"{extra.get('side_predictions_replayed', 0):,} 份旁路预测。"
+            f"旁路状态为 `{extra['side_statuses']}`。两轮合计 "
+            f"**{replay['trajectories'] + extra['trajectories']} 条轨迹、"
+            f"{replay['attempts'] + extra['attempts']:,} 次尝试**。"
+            f"历史方向的 {len(supplement['historical'])} 条 A0 轨迹与 R3 的 M00 正常请求逐轮一致。",
+        ]
     render_heatmap(out, summary, plan)
     render_curves(out, plan, rounds)
     path = out / "report.md"

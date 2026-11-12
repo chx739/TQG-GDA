@@ -72,41 +72,45 @@ def replay(root, plan):
             if method == "B0":
                 continue
             path = job_dir(root, plan, task, method)
-            if not (path / "complete.json").is_file():
-                raise ValueError(f"Incomplete trajectory {path}")
-            records = sorted(path.glob("round[0-9][0-9].pt"))
-            if [p.name for p in records] != [f"round{i:02d}.pt" for i in range(cfg.adapt_rounds + 1)]:
-                raise ValueError("Round coverage differs from registration")
-            previous = initial
-            for step, record_path in enumerate(records):
-                r = load(record_path)
-                if step:
-                    if r["attempt"] != step:
-                        raise ValueError("Attempt identity mismatch")
-                    assert_nested_equal(r["batch"], schedule[step - 1])
-                    torch.testing.assert_close(r["before"], previous, rtol=0, atol=0)
-                    if not r["accepted"]:
-                        torch.testing.assert_close(r["after"], previous, rtol=0, atol=0)
-                    summaries["attempts"] += 1
-                else:
-                    torch.testing.assert_close(r["after"], initial, rtol=0, atol=0)
-                assert_nested_equal(predictions(params, r["after"], pools), r["predictions"])
-                previous = r["after"]
-                summaries["predictions_replayed"] += 1
-                if step in plan["side_attempts"]:
-                    side = r["side"]
-                    side_statuses[side["status"]] += 1
-                    if side["status"] == "available":
-                        if set(side["candidates"]) != {-1, 0, 1}:
-                            raise ValueError("Incomplete available side comparison")
-                        for candidate in side["candidates"].values():
-                            assert_nested_equal(predictions(params, candidate["vector"], pools),
-                                                candidate["predictions"])
-                            summaries["side_predictions_replayed"] += 1
-            summaries["trajectories"] += 1
+            replay_trajectory(path, plan, params, pools, initial, schedule, summaries, side_statuses)
     if any(summaries[key] != plan["counts"][key] for key in plan["counts"]):
         raise ValueError(f"R4 count mismatch: {summaries}")
     return dict(summaries, side_statuses=dict(side_statuses))
+
+
+def replay_trajectory(path, plan, params, pools, initial, schedule, summaries, side_statuses):
+    if not (path / "complete.json").is_file():
+        raise ValueError(f"Incomplete trajectory {path}")
+    records = sorted(path.glob("round[0-9][0-9].pt"))
+    if [p.name for p in records] != [f"round{i:02d}.pt" for i in range(plan['model']['adapt_rounds'] + 1)]:
+        raise ValueError("Round coverage differs from registration")
+    previous = initial
+    for step, record_path in enumerate(records):
+        r = load(record_path)
+        if step:
+            if r["attempt"] != step:
+                raise ValueError("Attempt identity mismatch")
+            assert_nested_equal(r["batch"], schedule[step - 1])
+            torch.testing.assert_close(r["before"], previous, rtol=0, atol=0)
+            if not r["accepted"]:
+                torch.testing.assert_close(r["after"], previous, rtol=0, atol=0)
+            summaries["attempts"] += 1
+        else:
+            torch.testing.assert_close(r["after"], initial, rtol=0, atol=0)
+        assert_nested_equal(predictions(params, r["after"], pools), r["predictions"])
+        previous = r["after"]
+        summaries["predictions_replayed"] += 1
+        if step in plan["side_attempts"]:
+            side = r["side"]
+            side_statuses[side["status"]] += 1
+            if side["status"] == "available":
+                if set(side["candidates"]) != {-1, 0, 1}:
+                    raise ValueError("Incomplete available side comparison")
+                for candidate in side["candidates"].values():
+                    assert_nested_equal(predictions(params, candidate["vector"], pools),
+                                        candidate["predictions"])
+                    summaries["side_predictions_replayed"] += 1
+    summaries["trajectories"] += 1
 
 
 def classify(logp, labels):
@@ -193,6 +197,57 @@ def summarize(plan, rows):
     return paired_rows, summary
 
 
+
+def trajectory_rows(path, plan, row, labels, baseline):
+    endpoints, rounds, sides = [], [], []
+    previous = baseline["target"]
+    for step in range(plan["model"]["adapt_rounds"] + 1):
+        record = load(path / f"round{step:02d}.pt")
+        saved = record["predictions"]
+        result = {pool: classify(value, labels[pool]) for pool, value in saved.items()}
+        if step in plan["endpoints"]:
+            endpoints.extend(dict(**row, attempt=step, pool=pool, **value)
+                             for pool, value in result.items())
+        if step:
+            detail = round_summary(record)
+            detail["numerical_error"] = record.get("error")
+            if "bounds" in record:
+                detail["anchors"] = len(record["bounds"]["points"])
+                detail["projection_rejections"] = record["bounds"]["rejected"]
+            if "relocation" in record:
+                displacement = [r["displacement"] for r in record["relocation"]["intersections"]
+                                if r["status"] == "single_root"]
+                detail["single_root_count"] = len(displacement)
+                detail["normal_displacement_rms"] = (
+                    math.sqrt(math.fsum(v*v for v in displacement) / len(displacement))
+                    if displacement else None
+                )
+        else:
+            detail = dict(attempt=0, status="initial", accepted=False)
+        result_row = dict(**row, **detail, **result["target"], **margin_summary(saved["target"]))
+        result_row.update({f"{pool}_{key}": result[pool][key]
+                           for pool in ("source_fit", "source_validation")
+                           for key in ("nll", "accuracy", "class0_ce", "class1_ce")})
+        result_row.update(correction(saved["target"], baseline["target"], labels["target"]))
+        result_row.update({"previous_" + key: value for key, value in
+                           correction(saved["target"], previous, labels["target"]).items()})
+        if result_row["net_correct"] != result["target"]["correct"] - int(
+            (baseline["target"].argmax(1) == labels["target"]).sum()
+        ):
+            raise ValueError("Correction counts do not match the accuracy change")
+        rounds.append(result_row)
+        previous = saved["target"]
+        if step in plan["side_attempts"]:
+            side = record["side"]
+            for direction in (-1, 0, 1):
+                item = dict(**row, attempt=step, side_direction=direction,
+                            status=side["status"], alpha=side.get("alpha"))
+                if side["status"] == "available":
+                    item.update(classify(side["candidates"][direction]["predictions"]["target"],
+                                         labels["target"]))
+                sides.append(item)
+    return endpoints, rounds, sides
+
 def evaluate(root, plan):
     digest, target_labels = evaluation_labels(root)
     out = root / "evaluation"
@@ -223,52 +278,10 @@ def evaluate(root, plan):
                                           **classify(value, labels[pool])))
                 continue
             path = job_dir(root, plan, task, method)
-            previous = baseline["target"]
-            for step in range(plan["model"]["adapt_rounds"] + 1):
-                record = load(path / f"round{step:02d}.pt")
-                saved = record["predictions"]
-                result = {pool: classify(value, labels[pool]) for pool, value in saved.items()}
-                if step in plan["endpoints"]:
-                    endpoints.extend(dict(**row, attempt=step, pool=pool, **value)
-                                     for pool, value in result.items())
-                if step:
-                    detail = round_summary(record)
-                    detail["numerical_error"] = record.get("error")
-                    if "bounds" in record:
-                        detail["anchors"] = len(record["bounds"]["points"])
-                        detail["projection_rejections"] = record["bounds"]["rejected"]
-                    if "relocation" in record:
-                        displacement = [r["displacement"] for r in record["relocation"]["intersections"]
-                                        if r["status"] == "single_root"]
-                        detail["single_root_count"] = len(displacement)
-                        detail["normal_displacement_rms"] = (
-                            math.sqrt(math.fsum(v*v for v in displacement) / len(displacement))
-                            if displacement else None
-                        )
-                else:
-                    detail = dict(attempt=0, status="initial", accepted=False)
-                result_row = dict(**row, **detail, **result["target"], **margin_summary(saved["target"]))
-                result_row.update({f"{pool}_{key}": result[pool][key]
-                                   for pool in ("source_fit", "source_validation")
-                                   for key in ("nll", "accuracy", "class0_ce", "class1_ce")})
-                result_row.update(correction(saved["target"], baseline["target"], labels["target"]))
-                result_row.update({"previous_" + key: value for key, value in
-                                   correction(saved["target"], previous, labels["target"]).items()})
-                if result_row["net_correct"] != result["target"]["correct"] - int(
-                    (baseline["target"].argmax(1) == labels["target"]).sum()
-                ):
-                    raise ValueError("Correction counts do not match the accuracy change")
-                rounds.append(result_row)
-                previous = saved["target"]
-                if step in plan["side_attempts"]:
-                    side = record["side"]
-                    for direction in (-1, 0, 1):
-                        item = dict(**row, attempt=step, side_direction=direction,
-                                    status=side["status"], alpha=side.get("alpha"))
-                        if side["status"] == "available":
-                            item.update(classify(side["candidates"][direction]["predictions"]["target"],
-                                                 labels["target"]))
-                        sides.append(item)
+            e, r, d = trajectory_rows(path, plan, row, labels, baseline)
+            endpoints.extend(e)
+            rounds.extend(r)
+            sides.extend(d)
     pairs, summary = summarize(plan, endpoints)
     for name, data in (("endpoints", endpoints), ("paired", pairs), ("rounds", rounds), ("side", sides),
                        ("score_endpoints", score_rows), ("source_curves", source_rows), ("summary", summary)):
