@@ -50,5 +50,85 @@
     },
     "config_hash": "c4ccd74503331246b6fdec501cc5dbedecb86c4f3c7c860ad60d3e5b5b6847d0"
   },
-  "execution_commit": "683624fa7332ae1426ff6de3ef6abe945c355fce"
+  "execution_commit": "683624fa7332ae1426ff6de3ef6abe945c355fce",
+  "supplement": {
+    "method": "A0",
+    "post_hoc": true,
+    "archive_path": "/home/hxchen/experiments/tsba/mutagenicity-r4/supplement-m00-001.tar.gz",
+    "archive_bytes": 275661319,
+    "archive_sha256": "f3cc2e1b79522f25765a06557479ff2c9845bfed4cc925e865a5c8b9ef656577",
+    "source_path": "/home/hxchen/experiments/tsba/mutagenicity-r4/supplement-m00-001",
+    "files_verified": 1948,
+    "uncompressed_bytes": 401413270,
+    "seals": {
+      "INPUT": "1108ad0166d54ff9c76cca6c1607b458a0a2179fd922a009942337005a7b6028",
+      "OBS": "4997e7f73f5c34d0bc3c116e35eb668bff1156c787548a5a96febba5cf369713",
+      "FINAL": "7a076e83e30e5973742d87aa28a4d14676f5f4de0bf17a8df60c52dd062c2f2d"
+    },
+    "original_seals": {
+      "INPUT": "6610dbc4ffc23a2a763a0076dbf345700ab065dc9a8a3c877aedf46d7d7407fb",
+      "OBS": "e5da89623032cce95215c64f7281a871a966c5d633f11dca1ffbf769fa153d57",
+      "FINAL": "46f9b16c478095807db52540f5cd56cb237807fd6704450835cd05de45795c93"
+    },
+    "replay": {
+      "predictions_replayed": 1860,
+      "attempts": 1800,
+      "side_predictions_replayed": 360,
+      "trajectories": 60,
+      "side_statuses": {
+        "available": 120
+      }
+    },
+    "reference_manifest_sha256": "6bcb9370c2a6882ff5c824110e927384e4eedfc1dcbcffc5ede6e306808ba6da",
+    "execution_commit": "750dcfc8bef8948534c7687de6ea3f8906750be8",
+    "date": "2026-11-12",
+    "table_rows": {
+      "endpoints": {
+        "original": 4860,
+        "added": 900,
+        "total": 5760
+      },
+      "paired": {
+        "original": 480,
+        "added": 240,
+        "total": 720
+      },
+      "rounds": {
+        "original": 9300,
+        "added": 1860,
+        "total": 11160
+      },
+      "side": {
+        "original": 1800,
+        "added": 360,
+        "total": 2160
+      },
+      "summary": {
+        "original": 308,
+        "added": 110,
+        "total": 418
+      },
+      "diagnostics": {
+        "original": 5,
+        "added": 1,
+        "total": 6
+      }
+    },
+    "statuses": {
+      "accepted": 1800
+    },
+    "historical_directions": {
+      "trajectories": 10,
+      "states_exact": 310,
+      "attempts_exact": 300,
+      "saved_predictions_exact": 50
+    },
+    "references": "protocol/references.json",
+    "reused_source_models": 20,
+    "reused_score_models": 60,
+    "original_and_supplement_counts": {
+      "trajectories": 360,
+      "attempts": 10800
+    }
+  }
 }
