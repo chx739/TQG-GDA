@@ -10,7 +10,7 @@
 a8ed02d65efed7b95de9cdd2b712ba37ce53c972f5f7a86f320c56bc93e23028
 ```
 
-本仓库将附件的代码、README、依赖声明、合成测试和域索引保存在 [`references/sega-gda/`](../references/sega-gda/)，不修改文件字节。原始数据仅留在本地原附件；完整来源及省略清单见 [provenance](../references/sega-gda.provenance.json)。附件 README 引用了设计文档 `SEGA_GDA_Revised_Design_CN`，该文档本身不在此次附件内；这里仅依据已提供的代码与 README 描述参考行为。
+本仓库将附件的代码、README、依赖声明、合成测试和域索引保存在 [`references/sega-gda/`](../references/sega-gda)，不修改文件字节。原始数据仅留在本地原附件；完整来源及省略清单见 [provenance](../references/sega-gda.provenance.json)。附件 README 引用了设计文档 `SEGA_GDA_Revised_Design_CN`，该文档本身不在此次附件内；这里仅依据已提供的代码与 README 描述参考行为。
 
 ## 参考包已经实现的范式
 
