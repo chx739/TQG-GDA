@@ -21,7 +21,7 @@ def main():
     p.add_argument('--stage',required=True,choices=['scores','adapt','diagnose'])
     args=p.parse_args();configure()
     repo=Path(__file__).resolve().parents[5]
-    registered=json.loads((repo/'docs/tsba/experiments/real-data/r2-plan.json').read_text())
+    registered=json.loads((repo/'docs/tsba/experiments/mutagenicity/r2-plan.json').read_text())
     root=Path(registered['output_root'])
     assert registered==json.loads((root/'execution-plan.json').read_text())
     for rel,expected in json.loads((root/'provenance.json').read_text())['file_hashes'].items():

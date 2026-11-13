@@ -179,11 +179,11 @@ def main():
     torch.set_num_threads(1);torch.set_num_interop_threads(1);torch.use_deterministic_algorithms(True)
     repo=Path(__file__).resolve().parents[3]
     original=args.original.resolve();controls=args.controls.resolve()
-    integrity=dict(original=verify_archive(original,repo/'docs/tsba/experiments/e1-e2-20261109/run-manifest.json'),
-                   controls=verify_archive(controls,repo/'docs/tsba/experiments/e2-controls-20261109/run-manifest.json'))
+    integrity=dict(original=verify_archive(original,repo/'docs/tsba/experiments/synthetic/e1-e2-20261109/run-manifest.json'),
+                   controls=verify_archive(controls,repo/'docs/tsba/experiments/synthetic/e2-controls-20261109/run-manifest.json'))
     root=args.output.resolve();root.mkdir(parents=True,exist_ok=False)
     write_json(root/'parent-integrity.json',integrity);write_json(root/'provenance.json',provenance(repo))
-    shutil.copy2(repo/'docs/tsba/experiments/full-source-plan.json',root/'full-source-plan.json')
+    shutil.copy2(repo/'docs/tsba/experiments/synthetic/full-source-plan.json',root/'full-source-plan.json')
     failures=[];cells=[];start=time.perf_counter()
     def timeout(signum,frame):raise TimeoutError('predeclared 1800 second cell budget exceeded')
     signal.signal(signal.SIGALRM,timeout)

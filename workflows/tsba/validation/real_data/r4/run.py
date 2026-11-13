@@ -141,7 +141,7 @@ def main():
             raise ValueError(f"Set {var}=1 for deterministic per-process execution")
     configure()
     repo = Path(__file__).resolve().parents[5]
-    plan_path = repo / "docs/tsba/experiments/real-data/r4-plan.json"
+    plan_path = repo / "docs/tsba/experiments/mutagenicity/r4-plan.json"
     root = args.root.resolve()
     root.parent.mkdir(parents=True, exist_ok=True)
     with (root.parent / (root.name + ".lock")).open("a") as lock:

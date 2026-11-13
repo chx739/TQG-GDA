@@ -4,7 +4,7 @@
 
 三组全源512实验的初始化及30轮参数原样回放，没有重新训练、生成参数候选或选择checkpoint。每个维数/种子使用32768个独立源样本和256组固定边界探针；目标评价复用原10000个合成样本。
 
-执行代码：[`37f03c9`](https://github.com/chx739/TQG-GDA/tree/37f03c94e18a8c222443e9a088673e324a6d09ac)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/37f03c94e18a8c222443e9a088673e324a6d09ac/docs/tsba/experiments/replay-plan.json)；[前轮结果](../e2-full-source-20261110/report.md)。
+执行代码：[`37f03c9`](https://github.com/chx739/TQG-GDA/tree/37f03c94e18a8c222443e9a088673e324a6d09ac)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/37f03c94e18a8c222443e9a088673e324a6d09ac/docs/tsba/experiments/synthetic/replay-plan.json)；[前轮结果](../e2-full-source-20261110/report.md)。
 
 ## 诊断结论
 

@@ -107,10 +107,10 @@ def main():
     torch.set_num_threads(1);torch.set_num_interop_threads(1);torch.use_deterministic_algorithms(True)
     root=args.output.resolve();root.mkdir(parents=True,exist_ok=False);repo=Path(__file__).resolve().parents[3]
     write_json(root/'provenance.json',provenance(repo))
-    shutil.copy2(repo/'docs/tsba/experiments/p0-plan.json',root/'plan.json')
+    shutil.copy2(repo/'docs/tsba/experiments/synthetic/p0-plan.json',root/'plan.json')
     parents={}
     for label,path,published in [('static',args.parent,'e2-static-score-20261110'),('original',args.original,'e1-e2-20261109')]:
-        parents[label]=verify_archive(path,repo/f'docs/tsba/experiments/{published}/run-manifest.json')
+        parents[label]=verify_archive(path,repo/f'docs/tsba/experiments/synthetic/{published}/run-manifest.json')
     write_json(root/'parents-before.json',parents)
     start=time.perf_counter();failures=[]
     with (root/'run.log').open('x',buffering=1) as file:
@@ -126,7 +126,7 @@ def main():
                 failures.append(dict(seed=seed,error=repr(exc),traceback=traceback.format_exc()));log(f'FAILED seed={seed} {exc}')
         log(f'COMPLETE failures={len(failures)} seconds={time.perf_counter()-start:.2f}')
     for label,path,published in [('static',args.parent,'e2-static-score-20261110'),('original',args.original,'e1-e2-20261109')]:
-        verify_archive(path,repo/f'docs/tsba/experiments/{published}/run-manifest.json')
+        verify_archive(path,repo/f'docs/tsba/experiments/synthetic/{published}/run-manifest.json')
     write_json(root/'parents-after.json',parents)
     write_json(root/'failures.json',failures)
     write_json(root/'completion.json',dict(seeds=5-len(failures),failures=len(failures),seconds=time.perf_counter()-start,

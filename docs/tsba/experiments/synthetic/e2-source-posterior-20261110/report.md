@@ -2,7 +2,7 @@
 
 唯一干预：同一512个源输入上的硬标签CE，改为解析源后验加权的期望CE；候选梯度和真实验收同时替换。全部Config、初始头、源/目标ID、总体score、带宽及预算沿用全源实验。
 
-执行代码：[`5b5e4be`](https://github.com/chx739/TQG-GDA/tree/5b5e4bef992fe34934183ba96bf37cade27992c7)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/5b5e4bef992fe34934183ba96bf37cade27992c7/docs/tsba/experiments/source-posterior-plan.json)；[前轮回放](../e2-replay-20261110/report.md)。
+执行代码：[`5b5e4be`](https://github.com/chx739/TQG-GDA/tree/5b5e4bef992fe34934183ba96bf37cade27992c7)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/5b5e4bef992fe34934183ba96bf37cade27992c7/docs/tsba/experiments/synthetic/source-posterior-plan.json)；[前轮回放](../e2-replay-20261110/report.md)。
 
 ## 主要结论
 

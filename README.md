@@ -2,11 +2,8 @@
 
 本分支实现用户提供的 TSBA 设计：固定整图编码与坐标，以无标签目标分布的 score 提出边界法向位移，再用源 CE 和阻尼 Gauss–Newton 更新分类模块。代码遵循 SEGA 的模块划分和“候选求解 → 非线性重评估 → 接受／回溯”范式。
 
-这是候选研究方法的工程实现。Mutagenicity R2已完成630条完整30轮轨迹：score续训降低了估计误差，增大边界权重也增强了密度分量，但60个正常配置的五种子平均B集NLL全部差于原始源头，BA变化小且方向混合。几何源对照也出现源fit改善、留出NLL恶化。详见[R2报告](docs/tsba/experiments/real-data/r2-20261111/report.md)；R1/R1b作为前期诊断保留。
+这是候选研究方法的工程实现。最新 Mutagenicity R4 覆盖 12 个迁移方向，并已补齐原始 TSBA（M00＋score）对照：平均 Accuracy 从源模型的 69.658% 提升至 70.001%，但零请求对照为 70.020%，尚未展示 score 的平均额外收益。M11 为 69.701%。详见 [R4 完整报告](docs/tsba/experiments/mutagenicity/r4-20261112/report.md)。
 
-R3 完成了 520 条全目标域开发轨迹。M11 的密度请求在 0→1 的九个参数格中均取得配对 NLL 改善，0→3 的改善限于低权重三格。两个固定输出缩放基线在各自任务上的平均 NLL 都低于所有正常请求配置。[R3 报告](docs/tsba/experiments/real-data/r3-20261112/report.md)
-
-R4 固定配置完成全部 12 个迁移方向。主方案 A2 的平均 Accuracy 较源头提高 0.0431 个百分点，较 B1 和 B2 零请求对照分别低 0.3182 和 0.1983 个百分点。[R4 报告](docs/tsba/experiments/real-data/r4-20261112/report.md)
 
 | 分支 | 用途 |
 | --- | --- |
@@ -19,7 +16,7 @@ R4 固定配置完成全部 12 个迁移方向。主方案 A2 的平均 Accuracy
 - [用户设计原文](docs/tsba/TSBA_Graph_Level_GDA_Design.md)：原样保存；[English translation](docs/tsba/TSBA_Graph_Level_GDA_Design_EN.md)。
 - [实验总览与当前结论](docs/tsba/experiments/README.md)：区分模拟结果、真实图计划与工程证据。
 - [模拟数据验证](docs/tsba/experiments/synthetic/README.md)：已完成至P0，含训练预算与源约束结论。
-- [真实数据验证](docs/tsba/experiments/real-data/README.md)：Mutagenicity R1/R1b/R2结果、协议、档案与阶段决策。
+- [真实数据验证](docs/tsba/experiments/mutagenicity/README.md)：Mutagenicity R1–R4 及补跑结果、协议与档案。
 - [历史完整实验设计](docs/tsba/experiments/validation-plan.md)：E0–E5及各轮执行协议。
 - [人工代码审查导航](docs/tsba/code-review-guide.md)：阅读顺序、公式与测试入口。
 - [实现映射与数值选择](docs/tsba/implementation.md)。

@@ -121,9 +121,9 @@ def main():
     torch.set_num_interop_threads(1)
     torch.use_deterministic_algorithms(True)
     write_json(root/'provenance.json', provenance(repo))
-    protocol = repo/'docs/tsba/experiments/static-score-plan.json'
+    protocol = repo/'docs/tsba/experiments/synthetic/static-score-plan.json'
     (root/'plan.json').write_bytes(protocol.read_bytes())
-    integrity = verify_archive(args.parent, repo/'docs/tsba/experiments/e1-e2-20261109/run-manifest.json')
+    integrity = verify_archive(args.parent, repo/'docs/tsba/experiments/synthetic/e1-e2-20261109/run-manifest.json')
     write_json(root/'parent-integrity-before.json', integrity)
     failures, completed, start = [], [], time.perf_counter()
     def timeout(signum, frame):
@@ -151,7 +151,7 @@ def main():
     write_json(root/'failures.json', failures)
     write_json(root/'completion.json', dict(completed=completed, failures=len(failures), seconds=time.perf_counter()-start,
                peak_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024))
-    write_json(root/'parent-integrity-after.json', verify_archive(args.parent, repo/'docs/tsba/experiments/e1-e2-20261109/run-manifest.json'))
+    write_json(root/'parent-integrity-after.json', verify_archive(args.parent, repo/'docs/tsba/experiments/synthetic/e1-e2-20261109/run-manifest.json'))
     write_json(root/'label-access.json', dict(real_target_labels=False, synthetic_evaluation_labels=False,
                synthetic_component_ids='generated only by input sampler, discarded immediately; never passed to trainer'))
     write_json(root/'manifest.json', manifest(root))

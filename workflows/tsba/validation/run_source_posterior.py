@@ -105,9 +105,9 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--parent',type=Path,required=True);p.add_argument('--replay',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     args=p.parse_args();torch.set_num_threads(1);torch.set_num_interop_threads(1);torch.use_deterministic_algorithms(True)
     repo=Path(__file__).resolve().parents[3];parent=args.parent.resolve();reference=args.replay.resolve();root=args.output.resolve()
-    planpath=repo/'docs/tsba/experiments/source-posterior-plan.json';plan=read(planpath)
-    expected=repo/'docs/tsba/experiments/e2-full-source-20261110/run-manifest.json'
-    expected_replay=repo/'docs/tsba/experiments/e2-replay-20261110/run-manifest.json'
+    planpath=repo/'docs/tsba/experiments/synthetic/source-posterior-plan.json';plan=read(planpath)
+    expected=repo/'docs/tsba/experiments/synthetic/e2-full-source-20261110/run-manifest.json'
+    expected_replay=repo/'docs/tsba/experiments/synthetic/e2-replay-20261110/run-manifest.json'
     integrity=dict(parent=verify_archive(parent,expected),replay=verify_archive(reference,expected_replay))
     root.mkdir(parents=True,exist_ok=False);write_json(root/'parent-integrity.json',integrity)
     write_json(root/'provenance.json',provenance(repo));shutil.copy2(planpath,root/'source-posterior-plan.json')

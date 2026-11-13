@@ -164,7 +164,7 @@ def main():
             raise ValueError(f"Set {variable}=1 for reproducible per-process CPU execution")
     configure()
     repo = Path(__file__).resolve().parents[5]
-    plan_path = repo / "docs/tsba/experiments/real-data/r3-plan.json"
+    plan_path = repo / "docs/tsba/experiments/mutagenicity/r3-plan.json"
     root = args.root.resolve()
     root.parent.mkdir(parents=True, exist_ok=True)
     # A single orchestrator owns a run directory even across terminal sessions.

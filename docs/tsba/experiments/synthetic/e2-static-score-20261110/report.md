@@ -1,6 +1,6 @@
 # 第2步：静态 score 样本量与带宽诊断
 
-日期：2026-11-10。执行协议：[static-score-plan.json](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/experiments/static-score-plan.json)。前序证据：[解析源后验对照](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/experiments/e2-source-posterior-20261110/report.md)。
+日期：2026-11-10。执行协议：[static-score-plan.json](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/experiments/synthetic/static-score-plan.json)。前序证据：[解析源后验对照](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/tsba/experiments/synthetic/e2-source-posterior-20261110/report.md)。
 
 ## 结论
 

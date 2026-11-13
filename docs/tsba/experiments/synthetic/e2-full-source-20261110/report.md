@@ -4,7 +4,7 @@
 
 本轮仅把源适配批次从128改为全部512个既有源样本。候选的源梯度/GGN和验收目标中的源CE都使用全源均值；没有增加硬性源风险约束。三组各自在原目标和预算下运行30轮。
 
-执行代码：[`ee4326a`](https://github.com/chx739/TQG-GDA/tree/ee4326afafffe71930b7ee4464144c4f98ce3432)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/ee4326afafffe71930b7ee4464144c4f98ce3432/docs/tsba/experiments/full-source-plan.json)。复用原输入、初始化、源坐标、带宽、目标批次ID和全部数值配置，新增2维数×5种子×3臂=30条轨迹。原128批次结果由已有封存预测复用。
+执行代码：[`ee4326a`](https://github.com/chx739/TQG-GDA/tree/ee4326afafffe71930b7ee4464144c4f98ce3432)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/ee4326afafffe71930b7ee4464144c4f98ce3432/docs/tsba/experiments/synthetic/full-source-plan.json)。复用原输入、初始化、源坐标、带宽、目标批次ID和全部数值配置，新增2维数×5种子×3臂=30条轨迹。原128批次结果由已有封存预测复用。
 
 ## 主要结论
 

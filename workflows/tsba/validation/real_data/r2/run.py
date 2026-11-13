@@ -46,7 +46,7 @@ def initialize(repo,root,plan,test_log):
     for d in (*FROZEN,'logs','evaluation','failures','pilot'):(root/d).mkdir(exist_ok=True)
     shutil.copyfile(test_log,root/'logs/R0-tests.txt')
     for name in ('r2-plan.json','r2-protocol.md'):
-        shutil.copyfile(repo/'docs/tsba/experiments/real-data'/name,root/'protocol'/name)
+        shutil.copyfile(repo/'docs/tsba/experiments/mutagenicity'/name,root/'protocol'/name)
     shutil.copyfile(request,root/'protocol/user-request.txt')
     write_json(root/'execution-plan.json',plan);write_json(root/'provenance.json',provenance(repo))
     with (root/'protocol/source.tar').open('xb') as f:subprocess.run(['git','archive','--format=tar','HEAD'],cwd=repo,stdout=f,check=True)
@@ -153,7 +153,7 @@ def main():
     parser.add_argument('--root',type=Path);parser.add_argument('--test-log',type=Path)
     args=parser.parse_args();configure()
     repo=Path(__file__).resolve().parents[5]
-    plan=json.loads((repo/'docs/tsba/experiments/real-data/r2-plan.json').read_text())
+    plan=json.loads((repo/'docs/tsba/experiments/mutagenicity/r2-plan.json').read_text())
     root=args.root or Path(plan['output_root'])
     if args.stage=='init':initialize(repo,root,plan,args.test_log)
     else:
