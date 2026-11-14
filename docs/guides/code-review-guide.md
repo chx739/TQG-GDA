@@ -3,7 +3,7 @@
 研究进展见[实验总览](../../experiments/README.md)：[模拟结果](../../experiments/synthetic/README.md)与[真实图验证计划](../../experiments/mutagenicity/README.md)分开记录；工程测试不代表真实任务有效。
 
 
-这份导航供逐项阅读代码使用，不是新的审查结论。初始实现来自 `536ba10`；本导航已按 2026-11-09 数值修复与研究观察器更新，残差层使用 `U1/U2` 命名。下面按“文档要求 → 核心入口 → 要核对的问题 → 已有测试”组织。算法代码位于 `tsba/`，不要与历史 TQG 实现或 `references/sega-gda/` 混读。
+这份导航供逐项阅读代码使用，不是新的审查结论。初始实现来自 `536ba10`；本导航已按 2026-11-09 数值修复与研究观察器更新，残差层使用 `U1/U2` 命名。下面按“文档要求 → 核心入口 → 要核对的问题 → 已有测试”组织。算法代码位于 `tsba/`，不要与历史 TQG 实现或 `SEGA-ref` 上的参考快照 混读。
 
 ## 先打开这两份材料
 
@@ -98,9 +98,9 @@ tests/tsba/
 
 | TSBA | SEGA 参考 | 主要看什么 |
 | --- | --- | --- |
-| [encoder.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/encoder.py) | [encoder.py](https://github.com/chx739/TQG-GDA/blob/TSBA/references/sega-gda/sega/encoder.py) | 消息传递、BN、逐层 sum pooling 拼接和投影结构；TSBA 的 dtype 处理 |
-| [pipeline.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/pipeline.py) | [pipeline.py](https://github.com/chx739/TQG-GDA/blob/TSBA/references/sega-gda/sega/pipeline.py) | 分阶段编排及冻结表示的组织方式 |
-| [problem.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/problem.py)、[subproblem.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/subproblem.py)、[adapt.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/adapt.py) | [problem.py](https://github.com/chx739/TQG-GDA/blob/TSBA/references/sega-gda/sega/problem.py)、[subproblem.py](https://github.com/chx739/TQG-GDA/blob/TSBA/references/sega-gda/sega/subproblem.py)、[adapt.py](https://github.com/chx739/TQG-GDA/blob/TSBA/references/sega-gda/sega/adapt.py) | 目标定义、候选求解、非线性重评估、接受或回溯的职责分工 |
+| [encoder.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/encoder.py) | [encoder.py](https://github.com/chx739/TQG-GDA/blob/SEGA-ref/references/sega-gda/sega/encoder.py) | 消息传递、BN、逐层 sum pooling 拼接和投影结构；TSBA 的 dtype 处理 |
+| [pipeline.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/pipeline.py) | [pipeline.py](https://github.com/chx739/TQG-GDA/blob/SEGA-ref/references/sega-gda/sega/pipeline.py) | 分阶段编排及冻结表示的组织方式 |
+| [problem.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/problem.py)、[subproblem.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/subproblem.py)、[adapt.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tsba/adapt.py) | [problem.py](https://github.com/chx739/TQG-GDA/blob/SEGA-ref/references/sega-gda/sega/problem.py)、[subproblem.py](https://github.com/chx739/TQG-GDA/blob/SEGA-ref/references/sega-gda/sega/subproblem.py)、[adapt.py](https://github.com/chx739/TQG-GDA/blob/SEGA-ref/references/sega-gda/sega/adapt.py) | 目标定义、候选求解、非线性重评估、接受或回溯的职责分工 |
 
 这里继承的是结构与执行范式。TSBA 文档明确改用线性头＋残差分类器、目标 score 与边界位移，因此不能要求它保留 SEGA 的参照库分类、可信目标伪标签或逐类硬风险预算。SEGA 的真实数据入口会读目标标签，本次人工 review 只需阅读它，不必运行。
 

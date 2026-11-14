@@ -1,6 +1,6 @@
 """SEGA's GIN/GINE + per-layer sum pooling + projection architecture.
 
-Adapted from references/sega-gda/sega/encoder.py. Input dtype follows the
+Adapted from the original encoder on SEGA-ref. Input dtype follows the
 parameters, allowing float64 GINE as well as float32 source pretraining.
 """
 import torch

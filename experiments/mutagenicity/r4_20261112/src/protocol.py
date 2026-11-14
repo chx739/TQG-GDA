@@ -9,9 +9,10 @@ import torch
 from tsba.config import Config
 from tsba.utils import identity
 from experiments.common.io import digest
-from experiments.mutagenicity.r1_20261111.src.data import label_offsets, reconstruct_graphs
+from experiments.mutagenicity.r1_20261111.src.data import domain_index_path, label_offsets, reconstruct_graphs
 from experiments.mutagenicity.r2_20261111.src.common import atomic_tensor, batches, verify, write_json
-from experiments.mutagenicity.r3_20261112.src.protocol import Job, read_json, read_values, reference_split
+from experiments.mutagenicity.r3_20261112.src.protocol import Job, read_json, read_values
+from experiments.mutagenicity.r3_20261112.src.source_roles import split_source_roles
 
 
 @dataclass(frozen=True)
@@ -107,7 +108,7 @@ def prepare(root, repo, plan, reference):
             raise ValueError(f"R3 raw file hash mismatch: {filename}")
     domains = {}
     for key, item in inputs["sega_domain_files"].items():
-        path = repo / item["path"]
+        path = domain_index_path(repo, item["path"])
         if digest(path) != item["sha256"]:
             raise ValueError(f"R3 domain index hash mismatch: {key}")
         domains[key] = np.load(path, allow_pickle=False).astype(np.int64).tolist()
@@ -134,13 +135,12 @@ def prepare(root, repo, plan, reference):
     label_sha = inputs["files"][label_path.name]["sha256"]
     write_json(root / "inputs/label_records.json", dict(
         path=str(label_path), offsets=offsets, sha256=label_sha, mapping=mapping))
-    splitter = reference_split(repo)
     for source in plan["domains"]:
         ids = domains[str(source)]
         # Each allocator handles one source role. Workers receive split files only.
         values = read_values(label_path, offsets, ids, label_sha)
         for seed in plan["seeds"]:
-            row, fit_y, val_y = split_domain(ids, values, mapping, splitter, seed, total,
+            row, fit_y, val_y = split_domain(ids, values, mapping, split_source_roles, seed, total,
                                             (plan["sega_ref_fraction"], plan["sega_fit_fraction"]))
             write_json(root / "roles" / f"M{source}" / f"seed{seed}.json", row)
             atomic_tensor(labels_path(root, source, seed, "fit"), fit_y)

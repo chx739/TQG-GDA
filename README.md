@@ -7,7 +7,8 @@
 
 | 分支 | 用途 |
 | --- | --- |
-| `SEGA-ref` | SEGA 参考基线；历史清理后的提交为 `ab08590` |
+| [SEGA-ref](https://github.com/chx739/TQG-GDA/tree/SEGA-ref) | 原始 SEGA 参考基线 |
+| [SEGA-fixed-2](https://github.com/chx739/TQG-GDA/tree/SEGA-fixed-2) | 独立保存解压后的 SEGA GDA fixed-2 项目 |
 | `TSBA` | TSBA 实现、设计映射与合成检查 |
 | `TQG` | 旧 TQG 历史归档，已移除旧实验数组 |
 

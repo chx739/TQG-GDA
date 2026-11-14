@@ -1,37 +1,7 @@
-"""Data: TU Mutagenicity, domain splits from the provided .npy files, source roles (Sec. 3.1.2)."""
-from __future__ import annotations
-
-import os
+"""Source role allocator used by R3/R4, preserved from SEGA-ref (ab08590)."""
 from dataclasses import dataclass
 
 import numpy as np
-import torch
-
-
-def load_tu_dataset(root: str, name: str = "Mutagenicity"):
-    """Load a TU dataset with PyG.
-
-    Node labels become one-hot `x` (14 dims for Mutagenicity); bond types become
-    one-hot `edge_attr` (3 dims). If `root/name/raw/` already holds the raw TU
-    txt files, nothing is downloaded.
-    """
-    from torch_geometric.datasets import TUDataset
-
-    ds = TUDataset(root=root, name=name, use_node_attr=False, use_edge_attr=True)
-    return ds
-
-
-def load_domain(split_dir: str, split_type: str, dom: int, dataset: str = "Mutagenicity") -> np.ndarray:
-    path = os.path.join(split_dir, f"{split_type}_{dataset}_{dom}.npy")
-    idx = np.load(path, allow_pickle=False).astype(np.int64)
-    if len(np.unique(idx)) != len(idx):
-        raise ValueError(f"duplicate graph ids in {path}")
-    return idx
-
-
-def graph_labels(ds) -> np.ndarray:
-    store = ds._data if hasattr(ds, "_data") else ds.data
-    return store.y.view(-1).cpu().numpy().astype(np.int64)
 
 
 @dataclass

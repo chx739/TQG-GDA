@@ -12,7 +12,7 @@ import torch
 from tsba.classifier import ResidualClassifier
 from experiments.mutagenicity.r2_20261111.src.common import atomic_tensor, batches, load, seal, write_json
 from experiments.mutagenicity.r2_20261111.src.score import assert_nested_equal
-from experiments.mutagenicity.r3_20261112.src.protocol import reference_split
+from experiments.mutagenicity.r3_20261112.src.source_roles import split_source_roles
 from experiments.mutagenicity.r4_20261112.src.evaluate import METRICS, correction, summarize
 from experiments.mutagenicity.r4_20261112.src.protocol import (
     Task, batch_path, evaluation_labels, job_dir, labels_path, score_dir, source_dir, split_domain, tasks,
@@ -38,7 +38,7 @@ class R4Test(unittest.TestCase):
         self.assertEqual(len({source_dir(Path("/tmp"), self.plan, task.source, task.seed) for task in cases}), 20)
         ids = np.arange(10, 1095)
         row, fit, val = split_domain(ids, [0]*670+[1]*415, {"0":0,"1":1},
-                                     reference_split(REPO), 3405, 1095, (.4,.4))
+                                     split_source_roles, 3405, 1095, (.4,.4))
         self.assertEqual((len(fit),len(val)), (868,217))
         self.assertEqual(sorted(row["fit"]+row["validation"]), ids.tolist())
 

@@ -254,6 +254,14 @@ class LabelBroker:
                 handle.write(json.dumps(event, separators=(",", ":")) + "\n")
 
 
+def domain_index_path(repo, recorded_path):
+    """Resolve the archived SEGA split location to TSBA's identical data copy."""
+    path = Path(recorded_path)
+    if path.parent == Path("references/sega-gda/splits"):
+        path = Path("data") / path.name
+    return Path(repo) / path
+
+
 def prepare_inputs(root, repo, plan):
     root, repo = Path(root), Path(repo)
     for directory in ("inputs", "roles", "logs"):
@@ -271,7 +279,7 @@ def prepare_inputs(root, repo, plan):
     _verify(spec["cache"]["path"], spec["cache"])  # bytes only, never deserialize y
     domains = {}
     for domain, item in spec["sega_domain_files"].items():
-        path = repo / item["path"]
+        path = domain_index_path(repo, item["path"])
         _verify(path, item)
         ids = np.load(path, allow_pickle=False).astype(np.int64).reshape(-1).tolist()
         if len(set(ids)) != len(ids):

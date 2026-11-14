@@ -1,17 +1,17 @@
 """R3 grid, exact input roles and explicit target label gate."""
 from dataclasses import asdict, dataclass
-import importlib.util
 import json
 from pathlib import Path
-import sys
 
 import numpy as np
 import torch
 
 from tsba.config import Config
 from experiments.common.io import digest
-from experiments.mutagenicity.r1_20261111.src.data import label_offsets, reconstruct_graphs
+from experiments.mutagenicity.r1_20261111.src.data import domain_index_path, label_offsets, reconstruct_graphs
 from experiments.mutagenicity.r2_20261111.src.common import atomic_tensor, batches, seal, verify, write_json
+
+from .source_roles import split_source_roles
 
 
 @dataclass(frozen=True)
@@ -85,15 +85,6 @@ def read_values(path, offsets, ids, sha256):
     return [int(data[start:start + length]) for start, length in (offsets[i] for i in ids)]
 
 
-def reference_split(repo):
-    path = repo / "references/sega-gda/sega/data.py"
-    spec = importlib.util.spec_from_file_location("_r3_sega_roles", path)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    return module.split_source_roles
-
-
 def prepare(root, repo, plan, inputs):
     raw = Path(inputs["raw_directory"])
     for name, spec in inputs["files"].items():
@@ -101,7 +92,7 @@ def prepare(root, repo, plan, inputs):
             raise ValueError(f"Raw input hash mismatch: {name}")
     domains = {}
     for domain, spec in inputs["sega_domain_files"].items():
-        path = repo / spec["path"]
+        path = domain_index_path(repo, spec["path"])
         if digest(path) != spec["sha256"]:
             raise ValueError(f"SEGA index hash mismatch: {domain}")
         domains[domain] = np.load(path, allow_pickle=False).astype(np.int64).tolist()
@@ -125,9 +116,8 @@ def prepare(root, repo, plan, inputs):
     # The reference allocator indexes by graph ID. All other slots are sentinels.
     source_labels = np.full(len(joined), -1, dtype=np.int64)
     source_labels[source_ids] = [mapping[label] for label in source_values]
-    split = reference_split(repo)
     for seed in plan["seeds"]:
-        reference = asdict(split(source_ids, source_labels, plan["sega_ref_fraction"],
+        reference = asdict(split_source_roles(source_ids, source_labels, plan["sega_ref_fraction"],
                                  plan["sega_fit_fraction"], 2, seed))
         fit = sorted(np.concatenate([reference["ref"], reference["fit"]]).tolist())
         validation = sorted(reference["cal"].tolist())
