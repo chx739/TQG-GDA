@@ -1,0 +1,53 @@
+{
+  "experiment_kind": "development_synthetic_ot_relation_only",
+  "dtype": "float64",
+  "num_threads": 1,
+  "fixture_seed": 3,
+  "scale_seed": 1729,
+  "coverage_seed": 211,
+  "source_relation_seed": 101,
+  "target_relation_seed": 102,
+  "reference_seed": 307,
+  "source_references_per_class": 3,
+  "scale_pairs": 3,
+  "coverage_centers": 2,
+  "bandwidth_floor": 0.2,
+  "spectral_bound": 1.0,
+  "solver": {
+    "segments": 4,
+    "quadrature": 3,
+    "path_steps": 8,
+    "path_lr": 0.01,
+    "chunk_size": 8,
+    "checkpoint_chunks": false
+  },
+  "epsilon": 0.3,
+  "rho": 1.0,
+  "ot_tolerances": {
+    "max_iter": 5000,
+    "column_abs": 1e-10,
+    "column_rel": 1e-10,
+    "stationarity_abs": 1e-7,
+    "stationarity_rel": 1e-8,
+    "iterate": 1e-9,
+    "objective": 1e-11,
+    "export_mass": 1e-10,
+    "export_objective_abs": 1e-8,
+    "export_objective_rel": 1e-7
+  },
+  "relation_rules": {
+    "source_positive_neighbors": 2,
+    "target_near_neighbors": 1,
+    "target_far_rank_low": 3,
+    "target_far_rank_high": 1000000,
+    "source_per_anchor": 2,
+    "target_per_anchor": 2,
+    "zeta": 0.2,
+    "epsilon": 0.01
+  },
+  "relation_margin": 0.2,
+  "alignment_weight": 0.7,
+  "relation_weight": 0.2,
+  "formal_paper_result": false,
+  "notes": "Fixed synthetic development choices, no target labels/ACC. Far rank upper bound truncates to available IDs; source negatives use all other classes; uniform valid combination reservoir; full fixed memories per loss. No optimizer steps. Production calibration and real target permission deferred."
+}

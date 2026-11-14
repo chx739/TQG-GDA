@@ -1,0 +1,21 @@
+{
+  "experiment_kind": "development_source_only",
+  "data_cache": "data/PROTEINS/processed/data.pt",
+  "split_manifest": "data/splits/PROTEINS_idx_0_source.json",
+  "use_node_attributes": false,
+  "hidden_dim": 32,
+  "num_layers": 2,
+  "readout": "mean",
+  "dtype": "float64",
+  "epochs": 100,
+  "batch_size": 32,
+  "lr": 0.003,
+  "seed": 3405,
+  "num_threads": 1,
+  "device": "cpu",
+  "selection": "source_validation_ce_min_earliest",
+  "scale_pairs": 128,
+  "scale_seed": 1729,
+  "temperature": 1.0,
+  "identity_regions": 1
+}
