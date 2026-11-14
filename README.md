@@ -24,10 +24,9 @@
 - [模拟数据验证](experiments/synthetic/README.md)：已完成至P0，含训练预算与源约束结论。
 - [真实数据验证](experiments/mutagenicity/README.md)：Mutagenicity R1–R4 及补跑结果、协议与档案。
 - [历史完整实验设计](experiments/validation-plan.md)：E0–E5及各轮执行协议。
-- [人工代码审查导航](docs/review/code-review-guide.md)：阅读顺序、公式与测试入口。
+- [人工代码审查导航](docs/guides/code-review-guide.md)：阅读顺序、公式与测试入口。
 - [实现映射与数值选择](docs/method/implementation.md)。
 - [数据角色、运行和推断](docs/guides/usage.md)。
-- [独立 review 与修复记录](docs/review/initial-review.md)。
 - [SEGA 参考及来源](docs/method/sega-reference.md)：参考快照保持原字节。
 
 ```text

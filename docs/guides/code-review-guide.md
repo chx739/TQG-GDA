@@ -5,11 +5,10 @@
 
 这份导航供逐项阅读代码使用，不是新的审查结论。初始实现来自 `536ba10`；本导航已按 2026-11-09 数值修复与研究观察器更新，残差层使用 `U1/U2` 命名。下面按“文档要求 → 核心入口 → 要核对的问题 → 已有测试”组织。算法代码位于 `tsba/`，不要与历史 TQG 实现或 `references/sega-gda/` 混读。
 
-## 先打开这三份材料
+## 先打开这两份材料
 
 1. [设计原文](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/method/design-zh.md)（[English translation](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/method/design-en.md)）：以 §3 的数学定义和行为要求为准；§1、§2 用于理解研究动机。
 2. [实现映射](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/method/implementation.md)：区分原文规定与原文留给实现的数值选择，例如固定阻尼、带宽倍数、训练预算。
-3. [独立 review 记录](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/review/initial-review.md)：已有审查发现、修复及证据边界；它不能替代本次人工判断。
 
 ## 核心代码目录
 
@@ -116,7 +115,7 @@ tests/tsba/
 | 数据边界、冻结、保存与实际更新 | [test_pipeline.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tests/tsba/test_pipeline.py) | 目标标签拒绝、角色互斥、BN 冻结、单节点批次；真实训练 score 后产生有效请求、接受更新并保存加载，覆盖 direct/CG |
 | 精度与数值异常 | [test_solver_precision.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tests/tsba/test_solver_precision.py)、[test_numerical_edges.py](https://github.com/chx739/TQG-GDA/blob/TSBA/tests/tsba/test_numerical_edges.py) | 默认精度策略、显式容差、投影平方溢出、不同点距离下溢与快照保持 |
 
-实现与数值修复阶段的历史测试、运行环境和审查记录见 [验证摘要](https://github.com/chx739/TQG-GDA/blob/TSBA/docs/review/initial-validation.json)。原持久化测试允许无边界而不更新；新增的完整链路测试必须有真实参数更新，二者职责不同。这些检验实现与数值行为，尚不证明低密度方向改善真实目标分类，也未验证 GPU 路径。
+原持久化测试允许无边界而不更新；新增的完整链路测试必须有真实参数更新，二者职责不同。这些检验实现与数值行为，尚不证明低密度方向改善真实目标分类，也未验证 GPU 路径。
 
 ## 记录疑问的方式
 

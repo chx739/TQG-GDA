@@ -66,4 +66,4 @@ SEGA 距离参照分类器不能直接提供 W0,b0。本实现采用文档允许
 
 ## 代码内的中文阅读说明
 
-核心模块已在计算位置添加中文注释，按设计原文 §3.1–3.17 标明变量、公式与梯度/状态边界。公式旁的符号沿用原文；数值默认值仍以 Config 和本文件为准。2026-11-08 的注释提交仅新增注释，经可执行 token 与 AST 等价检查及当时 23 项测试确认。早期数值修复与当时测试证据见 [review.md](../review/initial-review.md) 和 [validation.json](../review/initial-validation.json)。人工阅读入口见 [code-review-guide.md](../review/code-review-guide.md)。
+核心模块已在计算位置添加中文注释，按设计原文 §3.1–3.17 标明变量、公式与梯度/状态边界。公式旁的符号沿用原文；数值默认值仍以 Config 和本文件为准。2026-11-08 的注释提交仅新增注释，经可执行 token 与 AST 等价检查及当时 23 项测试确认。人工阅读入口见 [code-review-guide.md](../guides/code-review-guide.md)。
