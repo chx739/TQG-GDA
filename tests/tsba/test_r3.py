@@ -14,15 +14,15 @@ from tsba.classifier import ParameterMap, ResidualClassifier
 from tsba.problem import TsbaProblem
 from tsba.subproblem import solve
 from tsba.utils import NumericalError
-from experiments.mutagenicity.r2_20261111.src.common import atomic_tensor, batches, load, seal, write_json
-from experiments.mutagenicity.r3_20261112.src.constraints import (
+from experiments.mutagenicity.score_budget_and_adaptation_20261111.src.common import atomic_tensor, batches, load, seal, write_json
+from experiments.mutagenicity.risk_and_confidence_constraints_20261112.src.constraints import (
     AffineBudgets, Budgets, accept, margin_jacobian, propose,
 )
-from experiments.mutagenicity.r3_20261112.src.diagnostics import relocate
-from experiments.mutagenicity.r3_20261112.src.protocol import Job, grid, read_json, target_values
-from experiments.mutagenicity.r3_20261112.src.trajectory import one_attempt, trajectory
+from experiments.mutagenicity.risk_and_confidence_constraints_20261112.src.diagnostics import relocate
+from experiments.mutagenicity.risk_and_confidence_constraints_20261112.src.protocol import Job, grid, read_json, target_values
+from experiments.mutagenicity.risk_and_confidence_constraints_20261112.src.trajectory import one_attempt, trajectory
 
-PLAN = read_json(Path(__file__).resolve().parents[2] / "experiments/mutagenicity/r3_20261112/configs/r3-plan.json")
+PLAN = read_json(Path(__file__).resolve().parents[2] / "experiments/mutagenicity/risk_and_confidence_constraints_20261112/configs/r3-plan.json")
 
 
 class R3Test(unittest.TestCase):
@@ -185,7 +185,7 @@ class R3Test(unittest.TestCase):
         first = one_attempt(*args, side=True)
         self.assertTrue(first["accepted"])
         p.commit(initial)
-        with patch("experiments.mutagenicity.r3_20261112.src.trajectory.common_side",
+        with patch("experiments.mutagenicity.risk_and_confidence_constraints_20261112.src.trajectory.common_side",
                    side_effect=NumericalError("injected side error")):
             failed = one_attempt(*args, side=True)
         self.assertEqual(failed["side"]["status"], "numerical_failure")

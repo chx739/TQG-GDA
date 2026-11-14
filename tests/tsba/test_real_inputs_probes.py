@@ -9,11 +9,11 @@ import torch
 from torch.nn import functional as F
 
 from experiments.common.io import digest, write_json
-from experiments.mutagenicity.r1_20261111.src.data import (
+from experiments.mutagenicity.representation_boundary_support_20261111.src.data import (
     LabelBroker, canonical_sha, label_offsets, probe_folds, reconstruct_graphs,
     rng_seed, source_split,
 )
-from experiments.mutagenicity.r1_20261111.src.probes import Probe, fit_probe, load_probe
+from experiments.mutagenicity.representation_boundary_support_20261111.src.probes import Probe, fit_probe, load_probe
 
 
 class InputsTests(unittest.TestCase):

@@ -7,7 +7,7 @@ import unittest
 
 import torch
 
-from experiments.common.statistics import classification_metrics, wilson, validated_nonnegative_errorbars; from experiments.mutagenicity.r1_20261111.src.evaluate import direction_from_ci, evaluate_panel, reference_consensus, nll_screen, strict_fold_summary, summarize_bank, summarize_direction, verify_observations_sealed
+from experiments.common.statistics import classification_metrics, wilson, validated_nonnegative_errorbars; from experiments.mutagenicity.representation_boundary_support_20261111.src.evaluate import direction_from_ci, evaluate_panel, reference_consensus, nll_screen, strict_fold_summary, summarize_bank, summarize_direction, verify_observations_sealed
 
 
 class RealEvaluationTests(unittest.TestCase):

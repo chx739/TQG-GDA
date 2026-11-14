@@ -4,7 +4,8 @@
 
 - 当前开发主线是 `TSBA`；`TQG` 保存旧实现，`SEGA-ref` 保存参考基线。历史分支不作为当前实验配置的默认依据。
 - 核心算法放 `tsba/`；通用任务入口放在 `scripts/run_task.py`。纯通用工具放 `experiments/common/`，不含轮次目录或实验流程；各轮实现放对应实验的 `src/`，启动脚本放根目录 `scripts/`，工程测试放 `tests/tsba/`。
-- 方法、实现与使用说明放 `docs/`；各轮实验的方案、配置、报告和结果放 `experiments/<数据集>/<轮次_日期>/`，每轮使用 `README.md`、`src/`、`configs/`、`docs/`、`results/`、`report.md` 结构；合成实验使用 `synthetic/`。入口见 `README.md` 和 `experiments/README.md`。
+- 方法、实现与使用说明放 `docs/`；新实验按 [模板](experiments/templates/README.md) 放在 `experiments/<数据集>/<topic>_<YYYYMMDD>/`，合成实验使用 `synthetic/`。用小写英文和下划线描述研究问题。启动脚本的实验目录与对应实验同名。
+- 实验索引用研究问题作显示名，历史轮次编号在各轮 README 中注明。已有合成实验沿用目录名。
 
 ## 方法与实验
 
@@ -22,6 +23,12 @@
 
 ## 验证与交付
 
-- 更新受影响的文档、运行入口和测试路径；执行与改动相关的检查。纯文档整理检查链接和差异即可，不因此重跑研究实验。算法或流程变更按影响范围运行工程测试，常用命令为 `python -m unittest discover -s tests/tsba -v`。
+- 移动文件时检查导入、启动命令、文档链接和打包入口。更改启动命令后按文档验证调用，更改安装入口后从新构建的安装包验证命令。纯文档整理检查链接和差异即可，不因此重跑研究实验。算法或流程变更按影响范围运行工程测试，常用命令为 `python -m unittest discover -s tests/tsba -v`。
 - 沿用本项目的交付约定：完成已授权改动后提交并正常推送到 GitHub origin，核验远程提交；用户另有要求时按其要求执行。不要覆盖他人的未提交工作，未经新的明确授权不强推或改写历史。
 - 说明实际改动、验证结果及尚未完成的事项；发布后的材料优先给出 GitHub 链接，本地材料给出真实路径。
+
+## 提交信息
+
+- 新提交采用 [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) 的 `<type>(<scope>): <description>` 格式，`scope` 可省略。
+- 按主要改动选择类型，常用 `feat`、`fix`、`refactor`、`docs`、`test`、`chore`。例如 `docs(repo): document experiment naming conventions`。
+- 涉及不兼容的调用方式或入口变更时，用 `!` 或 `BREAKING CHANGE:` 标记，并在正文说明迁移方式。

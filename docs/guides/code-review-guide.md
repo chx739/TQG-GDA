@@ -150,4 +150,4 @@ checkpoint回放入口：[run_replay.py](https://github.com/chx739/TQG-GDA/blob/
 
 P0预算诊断：[run_p0.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/p0_20261110/src/run_p0.py)、[p0_oracle.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/p0_20261110/src/p0_oracle.py)、[summarize_p0.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/p0_20261110/src/summarize_p0.py)。检查400步Adam恢复与随机前缀是否精确，主固定末尾模型是否区别于DSM选中模型；oracle阈值是否采用原坐标缩放，有限/总体源后验是否区分，回溯停止是否如实报告；不要把标量收益当作完整TSBA上界。对应`test_p0.py`，完整59项测试通过。[P0报告](../../experiments/synthetic/p0_20261110/report.md)记录6400步静态检查5/5通过，但源约束下oracle收益仍小，未启动学习score闭环。
 
-真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/r1_20261111/docs/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/r1_20261111/configs/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。
+真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/representation_boundary_support_20261111/docs/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/representation_boundary_support_20261111/configs/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。
