@@ -31,8 +31,8 @@ Mutagenicity 两套索引的同编号域成员重合约 92.3%，只能提供划�
 
 输入路径、文件字节 SHA256、四域索引 SHA256 和图数记录在两份计划配置中：
 
-- [Mutagenicity 计划](mutagenicity/r5_原始方法与请求价值_20261114/configs/plan.json)。
-- [PROTEINS 计划](proteins/r5_原始方法与请求价值_20261114/configs/plan.json)。
+- [Mutagenicity 计划](../configs/mutagenicity-plan.json)。
+- [PROTEINS 计划](../configs/proteins-plan.json)。
 
 登记时只解析索引、图结构输入及节点特征标签；图分类标签文件只计算字节哈希，不解析其值。正式准备阶段须复核全部输入哈希，并核验四域 ID 互斥、穷尽、无重复、无越界。
 
@@ -195,7 +195,7 @@ H=F_S+\lambda_B D^\top D/M+\mu I,\qquad
 
 本次交付只有协议、计划配置和导航；下述模块与命令是**待实现接口**，不是现在已经可运行的入口。
 
-每个数据集 R5 目录未来按模板增加 `src/`、`scripts/`、`results/`；共同实验实现由 Mutagenicity R5 持有，PROTEINS R5 显式调用并记录依赖，不塞入 `experiments/common` 冒充无假设工具。
+本轮统一归档在 `experiments/mutagenicity/r5_原始方法与请求价值_20261114/`，PROTEINS 是同轮的跨数据集验证设置。未来按模板在本目录增加 `src/`、`scripts/`、`results/`；三个设置共用本轮入口和实现，不另建 PROTEINS 轮次目录。
 
 必须实现的内容：
 
@@ -210,9 +210,9 @@ H=F_S+\lambda_B D^\top D/M+\mu I,\qquad
 拟议调用模板如下，实现完成前不要执行：
 
 ```sh
-python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/plan.json --setting mutagenicity_edge --root <新的历史复用分析目录>
-python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/plan.json --setting mutagenicity_node --root <新的节点划分运行目录>
-python -m experiments.proteins.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/proteins/r5_原始方法与请求价值_20261114/configs/plan.json --setting proteins_edge --root <新的蛋白质运行目录>
+python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/mutagenicity-plan.json --setting mutagenicity_edge --root <新的历史复用分析目录>
+python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/mutagenicity-plan.json --setting mutagenicity_node --root <新的节点划分运行目录>
+python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/proteins-plan.json --setting proteins_edge --root <新的蛋白质运行目录>
 ```
 
 入口阶段应显式区分 `prepare/run/replay/evaluate` 或提供等价状态机；仅 `--help` 不得访问真实类别。运行器实现后更新此节为经过核验的真实命令。当前默认 Python 缺少 torch，须先选择/建立兼容运行环境并登记版本，不能把 JSON 可解析当作算法运行已通过。
@@ -237,7 +237,7 @@ python -m experiments.proteins.r5_原始方法与请求价值_20261114.scripts.r
 
 ## 12 相关仓库证据
 
-- [原始方法](../docs/method/design-zh.md)与[实现说明](../docs/method/implementation.md)。
-- [R3 报告](mutagenicity/r3_源风险与置信度约束_20261112/report.md)、[同状态旁路实现](mutagenicity/r3_源风险与置信度约束_20261112/src/trajectory.py)、[密度和重定位诊断](mutagenicity/r3_源风险与置信度约束_20261112/src/diagnostics.py)。
-- [R4 报告](mutagenicity/r4_全方向迁移对照_20261112/report.md)、[实际配置](mutagenicity/r4_全方向迁移对照_20261112/configs/executed-plan.json)、[档案索引](mutagenicity/r4_全方向迁移对照_20261112/results/archive-index.json)。
-- [数据索引说明](../data/README.md)、[记录规范](../docs/guides/experiment-records.md)、[新实验模板](templates/README.md)。
+- [原始方法](../../../../docs/method/design-zh.md)与[实现说明](../../../../docs/method/implementation.md)。
+- [R3 报告](../../r3_源风险与置信度约束_20261112/report.md)、[同状态旁路实现](../../r3_源风险与置信度约束_20261112/src/trajectory.py)、[密度和重定位诊断](../../r3_源风险与置信度约束_20261112/src/diagnostics.py)。
+- [R4 报告](../../r4_全方向迁移对照_20261112/report.md)、[实际配置](../../r4_全方向迁移对照_20261112/configs/executed-plan.json)、[档案索引](../../r4_全方向迁移对照_20261112/results/archive-index.json)。
+- [数据索引说明](../../../../data/README.md)、[记录规范](../../../../docs/guides/experiment-records.md)、[新实验模板](../../../templates/README.md)。

@@ -5,12 +5,11 @@
 | 分类 | 阅读入口 | 内容 |
 |---|---|---|
 | 合成数据 | [合成实验](synthetic_data/README.md) | E1/E2、控制实验、源后验、静态 score 与 P0 训练预算 |
-| Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R4 真实图实验；R4 含原始 TSBA 补充对照 |
-| PROTEINS | [proteins](proteins/README.md) | R5 原始方法与请求价值验证计划 |
+| Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R4 结果与 R5 计划；R5 包含 PROTEINS 验证设置 |
 
 ## 当前计划
 
-[R5｜原始 TSBA 在不同数据设置上是否有整体收益与请求价值？](r5_原始方法与请求价值_20261114.md)：复用 Mutagenicity 边数划分的 R4，新增 Mutagenicity 节点数划分和 PROTEINS 边数划分；各设置 12 方向、5 种子。统一 B0/B1/A0 与 A0 首尾同状态正常/零/反向旁路。状态为计划中，当前仅有协议和计划配置，尚未实现运行器或启动训练。
+[R5｜原始 TSBA 在不同数据设置上是否有整体收益与请求价值？](mutagenicity/r5_原始方法与请求价值_20261114/README.md)：复用 Mutagenicity 边数划分的 R4，新增 Mutagenicity 节点数划分和 PROTEINS 边数划分；各设置 12 方向、5 种子。统一 B0/B1/A0 与 A0 首尾同状态正常/零/反向旁路。状态为计划中，当前仅有协议和计划配置，尚未实现运行器或启动训练。
 
 ## 最新结果
 
