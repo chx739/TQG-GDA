@@ -12,7 +12,7 @@ a8ed02d65efed7b95de9cdd2b712ba37ce53c972f5f7a86f320c56bc93e23028
 
 原始参考快照及[来源清单](https://github.com/chx739/TQG-GDA/blob/SEGA-ref/references/sega-gda.provenance.json)保存在 [SEGA-ref](https://github.com/chx739/TQG-GDA/tree/SEGA-ref/references/sega-gda)。下面的分析对应这个原始版本。
 
-后续附件 `SEGA_GDA_fixed_2.zip` 解压后的 [SEGA_GDA 项目](https://github.com/chx739/TQG-GDA/tree/SEGA-fixed-2/SEGA_GDA) 保存在独立分支 `SEGA-fixed-2`。TSBA 从 [data/](../../data/README.md) 读取域索引；R3/R4 保留原版的源角色划分函数。历史清单中记录的旧索引路径由运行代码指向字节相同的新位置。
+后续附件 `SEGA_GDA_fixed_2.zip` 解压后的 [SEGA_GDA 项目](https://github.com/chx739/TQG-GDA/tree/SEGA-fixed-2) 保存在独立分支 `SEGA-fixed-2`。TSBA 从 [data/](../../data/README.md) 读取域索引；R3/R4 保留原版的源角色划分函数。历史清单中记录的旧索引路径由运行代码指向字节相同的新位置。
 
 ## 参考包已经实现的范式
 
