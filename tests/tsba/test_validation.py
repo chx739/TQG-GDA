@@ -9,11 +9,11 @@ from tsba.adapt import adapt_classifier
 from tsba.boundary import BoundaryBatch, build_boundaries
 from tsba.classifier import ParameterMap, ResidualClassifier
 from tsba.config import Config
-from workflows.tsba.validation.analytic import run_analytic, Threshold
-from workflows.tsba.validation.archive import digest, save_tensor, write_json
-from workflows.tsba.validation.distributions import GaussianMixtureScore, setup_cell, oracles, ZeroScore
-from workflows.tsba.validation.geometry import normal_roots, compare_geometry
-from workflows.tsba.validation.metrics import score_audit
+from experiments.common.synthetic.analytic import run_analytic, Threshold
+from experiments.common.synthetic.archive import digest, save_tensor, write_json
+from experiments.common.synthetic.distributions import GaussianMixtureScore, setup_cell, oracles, ZeroScore
+from experiments.common.synthetic.geometry import normal_roots, compare_geometry
+from experiments.common.synthetic.metrics import score_audit
 
 
 class ValidationTests(unittest.TestCase):

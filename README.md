@@ -2,7 +2,7 @@
 
 本分支实现用户提供的 TSBA 设计：固定整图编码与坐标，以无标签目标分布的 score 提出边界法向位移，再用源 CE 和阻尼 Gauss–Newton 更新分类模块。代码遵循 SEGA 的模块划分和“候选求解 → 非线性重评估 → 接受／回溯”范式。
 
-这是候选研究方法的工程实现。最新 Mutagenicity R4 覆盖 12 个迁移方向，并已补齐原始 TSBA（M00＋score）对照：平均 Accuracy 从源模型的 69.658% 提升至 70.001%，但零请求对照为 70.020%，尚未展示 score 的平均额外收益。M11 为 69.701%。详见 [R4 完整报告](experiments/mutagenicity/r4-20261112/report.md)。
+这是候选研究方法的工程实现。最新 Mutagenicity R4 覆盖 12 个迁移方向，并已补齐原始 TSBA（M00＋score）对照：平均 Accuracy 从源模型的 69.658% 提升至 70.001%，但零请求对照为 70.020%，尚未展示 score 的平均额外收益。M11 为 69.701%。详见 [R4 完整报告](experiments/mutagenicity/r4_20261112/report.md)。
 
 
 | 分支 | 用途 |
@@ -35,7 +35,9 @@ tsba/
   config.py, data.py, encoder.py, pretrain.py
   classifier.py, score.py, boundary.py
   problem.py, subproblem.py, adapt.py, predict.py, pipeline.py
-workflows/tsba/run_task.py
+workflows/tsba/run_task.py   # 通用 TSBA 任务入口
+experiments/common/        # 实验共用工具
+experiments/<数据集>/<轮次_日期>/  # 专用代码、方案与结果
 tests/tsba/
 ```
 

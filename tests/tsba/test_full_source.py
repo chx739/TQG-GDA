@@ -5,9 +5,9 @@ import torch
 from tsba.adapt import adapt_classifier
 from tsba.classifier import ParameterMap
 from tsba.config import Config
-from workflows.tsba.validation.controls import adapt_control
-from workflows.tsba.validation.distributions import setup_cell, oracles
-from workflows.tsba.validation.run_full_source import full_source_config, full_source_schedule, audit_full_source_event
+from experiments.common.synthetic.controls import adapt_control
+from experiments.common.synthetic.distributions import setup_cell, oracles
+from experiments.common.synthetic.run_full_source import full_source_config, full_source_schedule, audit_full_source_event
 
 
 class FullSourceTests(unittest.TestCase):

@@ -11,12 +11,14 @@ dependencies = ["torch>=2.1", "torch-geometric>=2.4", "numpy>=1.24"]
 
 [project.optional-dependencies]
 test = ["pytest>=7"]
+experiments = ["scipy", "matplotlib"]
 
 [project.scripts]
 tsba = "workflows.tsba.run_task:main"
 
 [tool.setuptools.packages.find]
-include = ["tsba*", "workflows*"]
+include = ["tsba*", "workflows*", "experiments*"]
+namespaces = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests/tsba"]

@@ -7,20 +7,20 @@ import unittest
 import torch
 
 from tsba.classifier import ResidualClassifier
-from workflows.tsba.validation.archive import digest, save_tensor, write_json
-from workflows.tsba.validation.real_data.data import hash_order, label_offsets, probe_folds
-from workflows.tsba.validation.real_data.runtime import seal
-from workflows.tsba.validation.real_data.probes import run_probes
-from workflows.tsba.validation.real_data.geometry import run_source_coverage, run_cell
-from workflows.tsba.validation.real_data.evaluate import evaluate_run
-from workflows.tsba.validation.real_data.audit import replay_predictions
+from experiments.common.synthetic.archive import digest, save_tensor, write_json
+from experiments.common.real_data.data import hash_order, label_offsets, probe_folds
+from experiments.common.real_data.runtime import seal
+from experiments.common.real_data.probes import run_probes
+from experiments.mutagenicity.r1_20261111.geometry import run_source_coverage, run_cell
+from experiments.common.real_data.evaluate import evaluate_run
+from experiments.mutagenicity.r1_20261111.audit import replay_predictions
 
 
 class RealIntegrationTests(unittest.TestCase):
     def test_synthetic_staged_probabilities_geometry_and_evaluation(self):
         torch.set_num_threads(1)
         repo = Path(__file__).resolve().parents[2]
-        plan = json.loads((repo / 'experiments/mutagenicity/r1-20261111/stage1-plan.json').read_text())
+        plan = json.loads((repo / 'experiments/mutagenicity/r1_20261111/stage1-plan.json').read_text())
         plan = copy.deepcopy(plan)
         plan.update(seeds=[3405], tasks=[[0, 1]])
         plan['probes'].update(updates=20, supplementary_endpoints=[20])

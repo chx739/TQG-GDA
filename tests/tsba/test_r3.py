@@ -14,15 +14,15 @@ from tsba.classifier import ParameterMap, ResidualClassifier
 from tsba.problem import TsbaProblem
 from tsba.subproblem import solve
 from tsba.utils import NumericalError
-from workflows.tsba.validation.real_data.r2.common import atomic_tensor, batches, load, seal, write_json
-from workflows.tsba.validation.real_data.r3.constraints import (
+from experiments.common.real_data.r2.common import atomic_tensor, batches, load, seal, write_json
+from experiments.common.real_data.r3.constraints import (
     AffineBudgets, Budgets, accept, margin_jacobian, propose,
 )
-from workflows.tsba.validation.real_data.r3.diagnostics import relocate
-from workflows.tsba.validation.real_data.r3.protocol import Job, grid, read_json, target_values
-from workflows.tsba.validation.real_data.r3.trajectory import one_attempt, trajectory
+from experiments.common.real_data.r3.diagnostics import relocate
+from experiments.common.real_data.r3.protocol import Job, grid, read_json, target_values
+from experiments.common.real_data.r3.trajectory import one_attempt, trajectory
 
-PLAN = read_json(Path(__file__).resolve().parents[2] / "experiments/mutagenicity/r3-20261112/r3-plan.json")
+PLAN = read_json(Path(__file__).resolve().parents[2] / "experiments/mutagenicity/r3_20261112/r3-plan.json")
 
 
 class R3Test(unittest.TestCase):
@@ -185,7 +185,7 @@ class R3Test(unittest.TestCase):
         first = one_attempt(*args, side=True)
         self.assertTrue(first["accepted"])
         p.commit(initial)
-        with patch("workflows.tsba.validation.real_data.r3.trajectory.common_side",
+        with patch("experiments.common.real_data.r3.trajectory.common_side",
                    side_effect=NumericalError("injected side error")):
             failed = one_attempt(*args, side=True)
         self.assertEqual(failed["side"]["status"], "numerical_failure")

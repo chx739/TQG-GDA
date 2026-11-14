@@ -86,7 +86,7 @@ python -m unittest discover -s tests/tsba -v
 按[冻结方案](../../experiments/validation-plan.md)运行40条固定表示轨迹：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e1_e2_20261109.run \
   --output /absolute/path/new-tsba-mechanism-run
 ```
 
@@ -94,23 +94,23 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run \
 
 生产 `adapt_classifier(..., observer=callback)` 默认关闭观察器。回调只收到复制后的记录/张量，Torch RNG在回调前后隔离；回调异常向调用者传播，不能伪装成算法拒绝。不要在回调中通过外部闭包修改模型。锚点 `input_indices` 对应本轮目标批次位置，可与 `target_ids` 合成全池索引。
 
-已完成的首轮结果见[E1/E2报告](../../experiments/synthetic/e1-e2-20261109/report.md)。复核与汇总使用独立入口，输出路径不能覆盖旧文件：
+已完成的首轮结果见[E1/E2报告](../../experiments/synthetic/e1_e2_20261109/report.md)。复核与汇总使用独立入口，输出路径不能覆盖旧文件：
 
 ```bash
-python -m workflows.tsba.validation.verify --run /absolute/path/finished-run --output /absolute/path/checkpoint-audit.json
-python -m workflows.tsba.validation.summarize --run /absolute/path/finished-run --output /absolute/path/new-analysis
-python -m workflows.tsba.validation.report --summary /absolute/path/new-analysis/summary.json --output /absolute/path/new-analysis/report.md
-python -m workflows.tsba.validation.package --source /absolute/path/experiment-bundle --archive /absolute/other/path/bundle.tar.gz
+python -m experiments.common.synthetic.verify --run /absolute/path/finished-run --output /absolute/path/checkpoint-audit.json
+python -m experiments.synthetic.e1_e2_20261109.summarize --run /absolute/path/finished-run --output /absolute/path/new-analysis
+python -m experiments.synthetic.e1_e2_20261109.report --summary /absolute/path/new-analysis/summary.json --output /absolute/path/new-analysis/report.md
+python -m experiments.common.synthetic.package --source /absolute/path/experiment-bundle --archive /absolute/other/path/bundle.tar.gz
 ```
 
 `predictions.pt`在研究入口中保存logits；softmax得到概率。自动报告生成证据表格，正式报告另含人工核对后的解释与限制。归档工具逐项核验压缩内容并输出SHA256，不覆盖既有实验目录或档案。
 
 ## 补充源监督与零请求几何对照
 
-[补充协议](../../experiments/synthetic/e2-controls-20261109/controls-plan.json)是查看首轮结果后登记的诊断。直接复用原run的输入、初始头和逐轮ID，运行20条新轨迹，不重训score或覆盖旧档案：
+[补充协议](../../experiments/synthetic/e2_controls_20261109/controls-plan.json)是查看首轮结果后登记的诊断。直接复用原run的输入、初始头和逐轮ID，运行20条新轨迹，不重训score或覆盖旧档案：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_controls \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_controls_20261109.run_controls \
   --parent /absolute/path/original-run-001 \
   --output /absolute/path/new-control-run
 ```
@@ -120,17 +120,17 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_cont
 补充对照完成后，用下面的只读核验入口重载checkpoint并生成配对表格：
 
 ```bash
-python -m workflows.tsba.validation.summarize_controls --run /absolute/path/finished-control-run --output /absolute/path/new-control-analysis
+python -m experiments.synthetic.e2_controls_20261109.summarize_controls --run /absolute/path/finished-control-run --output /absolute/path/new-control-analysis
 ```
 
-已发布的[补充对照报告](../../experiments/synthetic/e2-controls-20261109/report.md)包含20条新轨迹、与原40条轨迹的配对比较、源控制的局限以及对首轮解释的修正。
+已发布的[补充对照报告](../../experiments/synthetic/e2_controls_20261109/report.md)包含20条新轨迹、与原40条轨迹的配对比较、源控制的局限以及对首轮解释的修正。
 
 ## 全源512样本候选与验收
 
-按[全源批次协议](../../experiments/synthetic/e2-full-source-20261110/full-source-plan.json)运行三臂共30条轨迹：
+按[全源批次协议](../../experiments/synthetic/e2_full_source_20261110/full-source-plan.json)运行三臂共30条轨迹：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_full_source \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_full_source_20261110.run_full_source \
   --original /absolute/path/original-mechanism-run \
   --controls /absolute/path/completed-control-run \
   --output /absolute/path/new-full-source-run
@@ -142,22 +142,22 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_full
 完成后，重载所有新checkpoint、复算每次候选的全源CE，并与旧128批次结果配对：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summarize_full_source \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_full_source_20261110.summarize_full_source \
   --run /absolute/path/finished-full-source-run \
   --output /absolute/path/new-full-source-analysis
 ```
 
 核验要求预测逐位一致、逐轮参数状态连续、源样本全覆盖及目标ID完全匹配。输出逐种子评价、配对差、全源CE曲线、审计清单与报告；原128批次的全源CE曲线从既有参数快照被动复算。
 
-已发布的[全源批次报告](../../experiments/synthetic/e2-full-source-20261110/report.md)包含30条新轨迹、与原128批次的配对结果及完整归档索引。
+已发布的[全源批次报告](../../experiments/synthetic/e2_full_source_20261110/report.md)包含30条新轨迹、与原128批次的配对结果及完整归档索引。
 
 
 ## 既有全源checkpoint回放
 
-按[回放协议](../../experiments/synthetic/e2-replay-20261110/replay-plan.json)评价源泛化、目标置信度及固定探针边界；只加载已保存的参数，参数梯度关闭，既有目录不改写：
+按[回放协议](../../experiments/synthetic/e2_replay_20261110/replay-plan.json)评价源泛化、目标置信度及固定探针边界；只加载已保存的参数，参数梯度关闭，既有目录不改写：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_replay \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_replay_20261110.run_replay \
   --parent /absolute/path/completed-full-source-run \
   --output /absolute/path/new-checkpoint-replay-run
 ```
@@ -168,20 +168,20 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_repl
 回放结束后，重算目标logits、指标和边界根残差并汇总：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summarize_replay \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_replay_20261110.summarize_replay \
   --run /absolute/path/completed-checkpoint-replay-run \
   --output /absolute/path/new-replay-analysis
 ```
 
-已发布[checkpoint回放报告](../../experiments/synthetic/e2-replay-20261110/report.md)。源条件CE和后验KL的MC标准误、逐轮目标NLL四组贡献、固定探针几何、每个种子的配对差均可从表格与完整档案复核。
+已发布[checkpoint回放报告](../../experiments/synthetic/e2_replay_20261110/report.md)。源条件CE和后验KL的MC标准误、逐轮目标NLL四组贡献、固定探针几何、每个种子的配对差均可从表格与完整档案复核。
 
 
 ## 解析源后验对照
 
-[后验CE协议](../../experiments/synthetic/e2-source-posterior-20261110/source-posterior-plan.json)只替换研究入口的源损失，不改变生产TSBA。候选与验收同时替换，复用完整源批次、原目标ID及总体score：
+[后验CE协议](../../experiments/synthetic/e2_source_posterior_20261110/source-posterior-plan.json)只替换研究入口的源损失，不改变生产TSBA。候选与验收同时替换，复用完整源批次、原目标ID及总体score：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_source_posterior \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_source_posterior_20261110.run_source_posterior \
   --parent /absolute/path/full-source-run \
   --replay /absolute/path/checkpoint-replay-run \
   --output /absolute/path/new-source-posterior-run
@@ -193,41 +193,41 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_sour
 核验候选方程、每次后验CE验收及checkpoint，并与旧硬标签结果配对：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summarize_source_posterior \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_source_posterior_20261110.summarize_source_posterior \
   --run /absolute/path/completed-source-posterior-run \
   --output /absolute/path/new-source-posterior-analysis
 ```
 
-[已发布报告](../../experiments/synthetic/e2-source-posterior-20261110/report.md)包含20条控制轨迹的浮点漂移、总体score净收益及完整档案索引。
+[已发布报告](../../experiments/synthetic/e2_source_posterior_20261110/report.md)包含20条控制轨迹的浮点漂移、总体score净收益及完整档案索引。
 
 
 ## 静态score诊断
 
-[五组单因素协议](../../experiments/synthetic/e2-static-score-20261110/static-score-plan.json)固定分类头、查询点和400次Adam更新，只改变目标样本量或带宽，不更新分类器：
+[五组单因素协议](../../experiments/synthetic/e2_static_score_20261110/static-score-plan.json)固定分类头、查询点和400次Adam更新，只改变目标样本量或带宽，不更新分类器：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_static_score \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_static_score_20261110.run_static_score \
   --parent /absolute/path/completed-original-e1-e2-run \
   --output /absolute/path/new-static-score-run
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summarize_static_score \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_static_score_20261110.summarize_static_score \
   --run /absolute/path/completed-static-score-run \
   --output /absolute/path/new-static-score-analysis
 ```
 
-主结果使用最终400更新状态；补充保存按旧无标签噪声验证规则选中的快照。扩大样本池时σ仍取原512样本的基准；带宽实验的查询点不变。[已发布报告](../../experiments/synthetic/e2-static-score-20261110/report.md)分别记录估计误差和总体方向是否仍朝正确边界，避免把过度平滑后的准确估计当成成功适配。完整checkpoint、Adam状态、逐更新日志及查询记录见报告内本地存档索引。
+主结果使用最终400更新状态；补充保存按旧无标签噪声验证规则选中的快照。扩大样本池时σ仍取原512样本的基准；带宽实验的查询点不变。[已发布报告](../../experiments/synthetic/e2_static_score_20261110/report.md)分别记录估计误差和总体方向是否仍朝正确边界，避免把过度平滑后的准确估计当成成功适配。完整checkpoint、Adam状态、逐更新日志及查询记录见报告内本地存档索引。
 
 ### P0：延长固定score训练预算与简化oracle
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.run_p0 \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.p0_20261110.run_p0 \
   --parent /absolute/path/completed-static-score-run \
   --original /absolute/path/completed-original-e1-e2-run \
   --output /absolute/path/new-p0-run
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.validation.summarize_p0 \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.p0_20261110.summarize_p0 \
   --run /absolute/path/completed-p0-run \
   --output /absolute/path/new-p0-analysis
 ```
 
-固定2维、8192样本和原带宽/查询；从原400步Adam状态连续训练，固定末尾400/1600/6400步比较。原父档案先后校验且不可覆盖；输出路径必须不存在。[P0报告](../../experiments/synthetic/p0-20261110/report.md)包含逐种子结果和完整本地archive索引。6400步静态检查5/5通过，但源约束下标量oracle收益仍小；本入口不运行学习score闭环。`p0_oracle.py`是固定斜率阈值诊断，不是生产分类头实现。
+固定2维、8192样本和原带宽/查询；从原400步Adam状态连续训练，固定末尾400/1600/6400步比较。原父档案先后校验且不可覆盖；输出路径必须不存在。[P0报告](../../experiments/synthetic/p0_20261110/report.md)包含逐种子结果和完整本地archive索引。6400步静态检查5/5通过，但源约束下标量oracle收益仍小；本入口不运行学习score闭环。`p0_oracle.py`是固定斜率阈值诊断，不是生产分类头实现。
 
-真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/r1-20261111/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/r1-20261111/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。
+真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/r1_20261111/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/r1_20261111/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。

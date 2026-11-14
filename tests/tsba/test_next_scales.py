@@ -8,12 +8,12 @@ from unittest.mock import patch
 
 import torch
 
-from workflows.tsba.validation.archive import manifest, write_json
-from workflows.tsba.validation.real_data.data import canonical_sha
-from workflows.tsba.validation.real_data.density import (
+from experiments.common.synthetic.archive import manifest, write_json
+from experiments.common.real_data.data import canonical_sha
+from experiments.common.real_data.density import (
     GaussianKDE, bootstrap_counts, finite_support, valley_observation,
 )
-from workflows.tsba.validation.real_data.next_round import scales
+import experiments.mutagenicity.r1b_20261111.scales as scales
 
 
 class FrozenScaleTests(unittest.TestCase):

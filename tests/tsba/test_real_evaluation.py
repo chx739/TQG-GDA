@@ -7,7 +7,7 @@ import unittest
 
 import torch
 
-from workflows.tsba.validation.real_data.evaluate import (
+from experiments.common.real_data.evaluate import (
     classification_metrics, direction_from_ci, evaluate_panel, reference_consensus,
     nll_screen, strict_fold_summary, summarize_bank, summarize_direction, verify_observations_sealed, wilson,
     validated_nonnegative_errorbars,

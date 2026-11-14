@@ -15,9 +15,9 @@ from tsba.score import ScoreNetwork
 from tsba.subproblem import GGNSystem
 from tsba.problem import TsbaProblem
 from tsba.boundary import BoundaryBatch
-from workflows.tsba.validation.real_data.r2.adapt import one_attempt, settings, ZeroScore
-from workflows.tsba.validation.real_data.r2.common import batches, jobs, atomic_tensor, load
-from workflows.tsba.validation.real_data.r2.score import restore, epoch_update, assert_nested_equal, comparison
+from experiments.common.real_data.r2.adapt import one_attempt, settings, ZeroScore
+from experiments.common.real_data.r2.common import batches, jobs, atomic_tensor, load
+from experiments.common.real_data.r2.score import restore, epoch_update, assert_nested_equal, comparison
 
 
 class R2Checks(unittest.TestCase):
@@ -96,9 +96,9 @@ class R2Checks(unittest.TestCase):
         self.assertEqual(c['away_zero']['sign_agreement'],0.)
 
     def test_r2_label_gate_and_seal_tampering(self):
-        from workflows.tsba.validation.real_data.r2.common import Broker, FROZEN
-        from workflows.tsba.validation.real_data.runtime import seal
-        from workflows.tsba.validation.archive import digest
+        from experiments.common.real_data.r2.common import Broker, FROZEN
+        from experiments.common.real_data.runtime import seal
+        from experiments.common.synthetic.archive import digest
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)
             for d in (*FROZEN,'logs','deps/inputs','deps/roles'):(root/d).mkdir(parents=True,exist_ok=True)
@@ -122,8 +122,8 @@ class R2Checks(unittest.TestCase):
 
     def test_first_projection_failure_keeps_unavailable_diagnostic(self):
         from tsba.utils import NumericalError
-        from workflows.tsba.validation.real_data.r2.diagnostics import first_round
-        from workflows.tsba.validation.real_data.r2.common import job_key, write_json
+        from experiments.mutagenicity.r2_20261111.diagnostics import first_round
+        from experiments.common.real_data.r2.common import job_key, write_json
         plan=dict(seeds=[1],domains=[1],lambdas=[1],bandwidth_multipliers=[1],score_updates=[900])
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);x=self.source[:6]
@@ -132,7 +132,7 @@ class R2Checks(unittest.TestCase):
             write_json(root/'deps/roles/seed1.json',dict(fit_ids=[0,1],validation_ids=[4],diagnostic_ids=[5]))
             write_json(root/'source-labels/seed1.json',{'0':0,'1':1})
             for spec in jobs(plan):
-                with patch('workflows.tsba.validation.real_data.r2.adapt.build_boundaries',side_effect=NumericalError('injected')):
+                with patch('experiments.common.real_data.r2.adapt.build_boundaries',side_effect=NumericalError('injected')):
                     p=one_attempt(copy.deepcopy(self.model),x[:2],self.y[:2],x[2:4],ZeroScore(),1.,settings(1,1))
                 self.assertEqual(p['record']['status'],'failed')
                 p.update(sigma0=1.,batch=dict(source_ids=[0,1],target_ids=[2,3]))
@@ -144,23 +144,23 @@ class R2Checks(unittest.TestCase):
                 self.assertFalse(load(p)['available'])
 
     def test_atomic_json_and_seal_interruption_resume(self):
-        from workflows.tsba.validation.real_data.r2.common import write_json
-        from workflows.tsba.validation.real_data.r2.run import replay_and_seal
+        from experiments.common.real_data.r2.common import write_json
+        from experiments.mutagenicity.r2_20261111.run import replay_and_seal
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);p=root/'value.json'
-            with patch('workflows.tsba.validation.real_data.r2.common.os.link',side_effect=OSError('interruption')):
+            with patch('experiments.common.real_data.r2.common.os.link',side_effect=OSError('interruption')):
                 with self.assertRaises(OSError):write_json(p,dict(ok=True))
             self.assertFalse(p.exists());write_json(p,dict(ok=True));self.assertTrue(json.loads(p.read_text())['ok'])
             for stage,n in (('scores',20),('adapt',630),('diagnose',30)):write_json(root/f'{stage}-index.json',dict(count=n))
             plan=dict(seeds=[])
-            with patch('workflows.tsba.validation.real_data.r2.run.verify'),patch('workflows.tsba.validation.real_data.r2.run.seal',side_effect=RuntimeError('interrupted before OBS')):
+            with patch('experiments.mutagenicity.r2_20261111.run.verify'),patch('experiments.mutagenicity.r2_20261111.run.seal',side_effect=RuntimeError('interrupted before OBS')):
                 with self.assertRaises(RuntimeError):replay_and_seal(root,plan)
             self.assertTrue((root/'prediction-replay.json').exists())
-            with patch('workflows.tsba.validation.real_data.r2.run.verify'),patch('workflows.tsba.validation.real_data.r2.run.seal',return_value=dict(digest='test')):
+            with patch('experiments.mutagenicity.r2_20261111.run.verify'),patch('experiments.mutagenicity.r2_20261111.run.seal',return_value=dict(digest='test')):
                 replay_and_seal(root,plan)
 
     def test_evaluation_products_resume_without_overwrite(self):
-        from workflows.tsba.validation.real_data.r2.evaluate import write_json,write_csv
+        from experiments.common.real_data.r2.evaluate import write_json,write_csv
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)
             write_json(root/'labels.json',{'source':{1:0,2:1}})
@@ -174,7 +174,7 @@ class R2Checks(unittest.TestCase):
             self.assertEqual(before,(root/'metrics.csv').read_bytes())
 
     def test_manifest_recovery_after_publication_before_unlink(self):
-        from workflows.tsba.validation.real_data.r2.evaluate import write_json,evidence_manifest
+        from experiments.common.real_data.r2.evaluate import write_json,evidence_manifest
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);(root/'evidence.txt').write_text('frozen evidence')
             (root/'other.partial-kept').write_text('other interrupted evidence')

@@ -10,9 +10,9 @@ import torch
 from torch.nn import functional as F
 
 from tsba.classifier import ResidualClassifier
-from workflows.tsba.validation.archive import digest, save_tensor, write_json
-from workflows.tsba.validation.real_data.probes import Probe, model_directory
-from workflows.tsba.validation.real_data.next_round.warm import (
+from experiments.common.synthetic.archive import digest, save_tensor, write_json
+from experiments.common.real_data.probes import Probe, model_directory
+from experiments.mutagenicity.r1b_20261111.warm import (
     fit_warm, rescore_random, run_warm, source_initialized_probe,
 )
 
@@ -130,7 +130,7 @@ class WarmTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             # One preflight, then steps 0..20; fail before optimizer update 21.
-            with patch("workflows.tsba.validation.real_data.next_round.warm._rss",
+            with patch("experiments.mutagenicity.r1b_20261111.warm._rss",
                        side_effect=[1] * 22 + [9 * 1024**3, 9 * 1024**3]):
                 meta = self._fit(root / "limited")
             self.assertEqual(meta["status"], "failed")
