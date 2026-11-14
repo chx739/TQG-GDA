@@ -19,7 +19,6 @@
 - `references/sega-gda/` 是原始参考快照，保持文件字节不变；来源及校验信息见 `references/sega-gda.provenance.json`。需要修改参考行为时，在当前实现或实验流程中实现并说明差异。
 - 整理目录时保留历史 JSON、CSV、图表和日志的原始字节，只修复导航与路径引用；不混入算法改动或重算结果。新运行使用新 attempt，纠错或补充需保留来源，不覆盖旧证据。
 - 文件是否入库按任务需要和现有 `.gitignore` 处理，不额外施加体积门槛或统一的仓库外存储要求。不提交凭据。
-- `docs/v2/results/assumptions_brief_20261105.md` 是用户明确要求不公开的本地草稿，未经明确授权不发布。代码审查导航使用 `docs/tsba/code-review-guide.md`，不恢复已忽略的旧文件名 `review-guide.md`。
 
 ## 验证与交付
 
