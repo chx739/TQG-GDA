@@ -230,4 +230,26 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic_data.p0_分�
 
 固定2维、8192样本和原带宽/查询；从原400步Adam状态连续训练，固定末尾400/1600/6400步比较。原父档案先后校验且不可覆盖；输出路径必须不存在。[P0报告](../../experiments/synthetic_data/p0_分数训练预算_20261110/report.md)包含逐种子结果和完整本地archive索引。6400步静态检查5/5通过，但源约束下标量oracle收益仍小；本入口不运行学习score闭环。`p0_oracle.py`是固定斜率阈值诊断，不是生产分类头实现。
 
-真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/r1_图表示与边界支持_20261111/docs/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/r1_图表示与边界支持_20261111/configs/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。
+### Mutagenicity 复现
+
+R1 已完成 5 个真实源 GNN、480 个监督探针对照和 10 个几何与密度诊断单元。冻结表示包含可读的目标类别信息，现有邻域的样本支持不足以可靠判断低密度分隔或边界移动方向。该轮止于诊断。详见 [R1 报告](../../experiments/mutagenicity/r1_图表示与边界支持_20261111/report.md)和[各轮实验索引](../../experiments/mutagenicity/README.md)。
+
+从仓库根目录启动。数据或档案迁移后，给各轮入口传入实际位置，并用 `--root` 指定新的输出目录。例如，R1 的复现命令如下。
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.mutagenicity.r1_图表示与边界支持_20261111.scripts.run \
+  --root /absolute/path/new-r1-attempt \
+  --r0-log /absolute/path/passing-unittest.log \
+  --raw-directory /absolute/path/Mutagenicity/raw \
+  --cache /absolute/path/Mutagenicity/processed/data.pt
+```
+
+| 入口 | 输入迁移后使用的参数 |
+|---|---|
+| R1 `run` | `--raw-directory` 指向 TU 原始文件目录，`--cache` 指向原始缓存。运行器会识别 Git 历史清理后的已知提交。也可用 `--historical-repo`、`--historical-commit` 指向持有同一清单和划分文件的 Git 检出。 |
+| R1b `run` | `--dependency-root` 指向 R1 的 `attempt-002`，`--dependency-archive` 指向相应的 `attempt-002.tar.gz`，`--raw-directory` 指向原始标签文件所在目录。 |
+| R2 `run --stage init` | 同一组依赖参数指向 R1b 的 `attempt-001` 和 `attempt-001.tar.gz`。用 `--raw-directory` 指向原始标签文件所在目录，`--request` 指向登记请求的原文件或档案内的 `protocol/user-request.txt`。后续阶段和 `run_resources` 使用同一个 `--root`。 |
+| R3、R4 `run` | 初始化时用 `--raw-directory` 指向原始 TU 文件，R4 还用 `--r3` 指向封存的 R3 attempt。 |
+| R1 `repair_evaluation`、R4 `supplement` | 可用 `--raw-directory` 指向原始标签文件所在目录。用 `--source` 或 `--r4`、`--r3` 指向各自要求的封存 attempt。 |
+
+输入仍按登记哈希和封存记录校验。旧 attempt 的续跑须符合其封存的代码身份。

@@ -47,7 +47,7 @@ tests/tsba/
 Python >= 3.10，PyTorch >= 2.1，PyG >= 2.4。TSBA 不需要 SEGA 的 CVXPY 求解器依赖。
 
 ```bash
-python -m pip install -e .
+python -m pip install -e '.[experiments]'
 python -m unittest discover -s tests/tsba -v
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.run_task --synthetic --output /tmp/tsba-smoke
 ```
