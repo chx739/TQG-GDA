@@ -3,7 +3,7 @@
 通用 TSBA 任务用 `python -m scripts.run_task` 启动。安装项目后也可以用 `tsba` 命令。各轮实验从仓库根目录用 `python -m scripts.<数据集>.<experiment_id>.<入口>` 调用，实验实现位于 `experiments/<数据集>/<experiment_id>/src/`。
 
 ```sh
-python -m scripts.mutagenicity.all_direction_transfer_20261112.run --help
+python -m scripts.mutagenicity.r4_all_direction_transfer_20261112.run --help
 python -m scripts.synthetic.p0_20261110.run_p0 --help
 python -m scripts.tools.package --help
 ```

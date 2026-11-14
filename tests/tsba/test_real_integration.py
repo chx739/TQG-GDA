@@ -8,19 +8,19 @@ import torch
 
 from tsba.classifier import ResidualClassifier
 from experiments.common.io import digest, save_tensor, write_json
-from experiments.mutagenicity.representation_boundary_support_20261111.src.data import hash_order, label_offsets, probe_folds
+from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.data import hash_order, label_offsets, probe_folds
 from experiments.common.runtime import seal
-from experiments.mutagenicity.representation_boundary_support_20261111.src.probes import run_probes
-from experiments.mutagenicity.representation_boundary_support_20261111.src.geometry import run_source_coverage, run_cell
-from experiments.mutagenicity.representation_boundary_support_20261111.src.evaluate import evaluate_run
-from experiments.mutagenicity.representation_boundary_support_20261111.src.audit import replay_predictions
+from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.probes import run_probes
+from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.geometry import run_source_coverage, run_cell
+from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.evaluate import evaluate_run
+from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.audit import replay_predictions
 
 
 class RealIntegrationTests(unittest.TestCase):
     def test_synthetic_staged_probabilities_geometry_and_evaluation(self):
         torch.set_num_threads(1)
         repo = Path(__file__).resolve().parents[2]
-        plan = json.loads((repo / 'experiments/mutagenicity/representation_boundary_support_20261111/configs/stage1-plan.json').read_text())
+        plan = json.loads((repo / 'experiments/mutagenicity/r1_representation_boundary_support_20261111/configs/stage1-plan.json').read_text())
         plan = copy.deepcopy(plan)
         plan.update(seeds=[3405], tasks=[[0, 1]])
         plan['probes'].update(updates=20, supplementary_endpoints=[20])

@@ -230,4 +230,4 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.p0_20261110.summ
 
 固定2维、8192样本和原带宽/查询；从原400步Adam状态连续训练，固定末尾400/1600/6400步比较。原父档案先后校验且不可覆盖；输出路径必须不存在。[P0报告](../../experiments/synthetic/p0_20261110/report.md)包含逐种子结果和完整本地archive索引。6400步静态检查5/5通过，但源约束下标量oracle收益仍小；本入口不运行学习score闭环。`p0_oracle.py`是固定斜率阈值诊断，不是生产分类头实现。
 
-真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/representation_boundary_support_20261111/docs/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/representation_boundary_support_20261111/configs/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。
+真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/r1_representation_boundary_support_20261111/docs/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/r1_representation_boundary_support_20261111/configs/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。

@@ -2,7 +2,7 @@
 
 ## 一轮实验的证据包
 
-新实验放在 `experiments/<数据集>/<topic>_<YYYYMMDD>/`，合成数据使用 `synthetic`。用小写英文和下划线描述研究问题，具体命名示例见[模板](../../experiments/templates/README.md)。已有合成实验目录沿用原名。
+新实验放在 `experiments/<数据集>/<round>_<topic>_<YYYYMMDD>/`，合成数据使用 `synthetic`。以小写轮次编号开头，再用小写英文和下划线描述研究问题，具体命名示例见[模板](../../experiments/templates/README.md)。已有合成实验目录沿用原名。
 
 | 文件 | 含义 |
 |---|---|

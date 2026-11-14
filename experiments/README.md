@@ -9,7 +9,7 @@
 
 ## 最新结果
 
-[Mutagenicity R4（含 A0 补跑）](mutagenicity/all_direction_transfer_20261112/report.md)：原始 TSBA 的平均 Accuracy 为 70.001%，源模型为 69.658%；零请求对照为 70.020%，尚未观察到 score 的平均额外收益。M11 为 69.701%。这些是完整目标域上的开发评价，不是独立最终测试。
+[Mutagenicity R4（含 A0 补跑）](mutagenicity/r4_all_direction_transfer_20261112/report.md)：原始 TSBA 的平均 Accuracy 为 70.001%，源模型为 69.658%；零请求对照为 70.020%，尚未观察到 score 的平均额外收益。M11 为 69.701%。这些是完整目标域上的开发评价，不是独立最终测试。
 
 [P0 合成数据报告](synthetic/p0_20261110/report.md)：增加训练预算后，二维固定查询上的方向一致率达到 99.980%；这不是图分类 Accuracy，也不直接证明真实图适配有效。
 
@@ -26,11 +26,11 @@
 | [源标签抽样噪声如何影响结论？](synthetic/e2_source_posterior_20261110/README.md) | 已完成 | 消除噪声后总体 score 收益仍小 |
 | [样本量与带宽如何影响 score？](synthetic/e2_static_score_20261110/README.md) | 已完成；预算解释由 P0 更新 | 400 步结果不能解释为网络不可学 |
 | [训练不足能否解释 score 方向误差？](synthetic/p0_20261110/README.md) | 已完成 | 二维长预算可学到方向；不等于真实图适配有效 |
-| [冻结图表示是否保留类信息和边界支持？](mutagenicity/representation_boundary_support_20261111/README.md) | 已完成 | 局部支持不足；不能据此确认低密度分隔 |
-| [密度尺度与单步适配诊断揭示了什么？](mutagenicity/density_and_single_step_diagnostics_20261111/README.md) | 已完成 | 多项诊断与单步结果见报告，不能当作闭环有效性证明 |
-| [训练预算与多轮适配如何影响 score？](mutagenicity/score_budget_and_adaptation_20261111/README.md) | 已完成；旧数据口径 | 后续由 R3 检查约束与源拟合问题；不可跨数据池直接比分 |
-| [源风险与置信度约束如何影响适配？](mutagenicity/risk_and_confidence_constraints_20261112/README.md) | 已完成 | 固定配置扩展到 R4；开发调参不等于独立测试 |
-| [固定配置在各迁移方向上是否带来收益？](mutagenicity/all_direction_transfer_20261112/README.md) | 已完成 | score 未表现出平均额外收益；全部方法共用一份 R4 报告 |
+| [冻结图表示是否保留类信息和边界支持？](mutagenicity/r1_representation_boundary_support_20261111/README.md) | 已完成 | 局部支持不足；不能据此确认低密度分隔 |
+| [密度尺度与单步适配诊断揭示了什么？](mutagenicity/r1b_density_and_single_step_diagnostics_20261111/README.md) | 已完成 | 多项诊断与单步结果见报告，不能当作闭环有效性证明 |
+| [训练预算与多轮适配如何影响 score？](mutagenicity/r2_score_budget_and_adaptation_20261111/README.md) | 已完成；旧数据口径 | 后续由 R3 检查约束与源拟合问题；不可跨数据池直接比分 |
+| [源风险与置信度约束如何影响适配？](mutagenicity/r3_risk_and_confidence_constraints_20261112/README.md) | 已完成 | 固定配置扩展到 R4；开发调参不等于独立测试 |
+| [固定配置在各迁移方向上是否带来收益？](mutagenicity/r4_all_direction_transfer_20261112/README.md) | 已完成 | score 未表现出平均额外收益；全部方法共用一份 R4 报告 |
 
 ## 实验项目结构
 
@@ -48,7 +48,7 @@ experiments/
 scripts/<数据集>/<experiment_id>/   # 仓库根目录的启动脚本
 ```
 
-新实验以研究问题命名，使用 `<topic>_<YYYYMMDD>`，并在索引中用研究问题作为显示名。方案、报告和目录结构见[新实验模板](templates/README.md)。已有合成实验沿用目录名，编号见各轮 README。
+新实验的目录名包含轮次编号、研究主题和日期，使用 `<round>_<topic>_<YYYYMMDD>`，并在索引中用研究问题作为显示名。方案、报告和目录结构见[新实验模板](templates/README.md)。已有合成实验沿用目录名，编号见各轮 README。
 
 `common` 不按轮次命名，不保存训练或适配流程。R2/R3 等特定协议的代码归本轮 `src/`；后续实验沿用时明确列出依赖。核心算法仍位于 `tsba/`。
 
@@ -58,7 +58,7 @@ scripts/<数据集>/<experiment_id>/   # 仓库根目录的启动脚本
 
 ```sh
 python -m pip install -e '.[experiments]'
-python -m scripts.mutagenicity.all_direction_transfer_20261112.run --help
+python -m scripts.mutagenicity.r4_all_direction_transfer_20261112.run --help
 python -m scripts.synthetic.p0_20261110.run_p0 --help
 ```
 
