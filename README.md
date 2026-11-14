@@ -15,20 +15,20 @@
 
 - [docs：方法与使用文档](docs/README.md)
 - [experiments：方案、实际配置、报告与汇总](experiments/README.md)
-- [仓库维护规范](docs/maintenance.md)
+- [仓库维护规范](docs/guides/repository.md)
 
 ## 设计与实现
 
-- [用户设计原文](docs/tsba/TSBA_Graph_Level_GDA_Design.md)：原样保存；[English translation](docs/tsba/TSBA_Graph_Level_GDA_Design_EN.md)。
+- [用户设计原文](docs/method/design-zh.md)：原样保存；[English translation](docs/method/design-en.md)。
 - [实验总览与当前结论](experiments/README.md)：区分模拟结果、真实图计划与工程证据。
 - [模拟数据验证](experiments/synthetic/README.md)：已完成至P0，含训练预算与源约束结论。
 - [真实数据验证](experiments/mutagenicity/README.md)：Mutagenicity R1–R4 及补跑结果、协议与档案。
 - [历史完整实验设计](experiments/validation-plan.md)：E0–E5及各轮执行协议。
-- [人工代码审查导航](docs/tsba/code-review-guide.md)：阅读顺序、公式与测试入口。
-- [实现映射与数值选择](docs/tsba/implementation.md)。
-- [数据角色、运行和推断](docs/tsba/usage.md)。
-- [独立 review 与修复记录](docs/tsba/review.md)。
-- [SEGA 参考及来源](docs/design-baseline.md)：参考快照保持原字节。
+- [人工代码审查导航](docs/review/code-review-guide.md)：阅读顺序、公式与测试入口。
+- [实现映射与数值选择](docs/method/implementation.md)。
+- [数据角色、运行和推断](docs/guides/usage.md)。
+- [独立 review 与修复记录](docs/review/initial-review.md)。
+- [SEGA 参考及来源](docs/method/sega-reference.md)：参考快照保持原字节。
 
 ```text
 tsba/

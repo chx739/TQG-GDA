@@ -1,6 +1,6 @@
 # 新主线的设计参考与当前边界
 
-记录日期：2026-11-06。原设计准备基线现作为 `SEGA-ref` 保留；当前 `TSBA` 分支根据后续明确授权实现 [TSBA 设计](tsba/TSBA_Graph_Level_GDA_Design.md)。以下参考包分析保留其原始背景。
+记录日期：2026-11-06。原设计准备基线现作为 `SEGA-ref` 保留；当前 `TSBA` 分支根据后续明确授权实现 [TSBA 设计](design-zh.md)。以下参考包分析保留其原始背景。
 
 ## 参考来源
 
@@ -10,7 +10,7 @@
 a8ed02d65efed7b95de9cdd2b712ba37ce53c972f5f7a86f320c56bc93e23028
 ```
 
-本仓库将附件的代码、README、依赖声明、合成测试和域索引保存在 [`references/sega-gda/`](../references/sega-gda)，不修改文件字节。原始数据仅留在本地原附件；完整来源及省略清单见 [provenance](../references/sega-gda.provenance.json)。附件 README 引用了设计文档 `SEGA_GDA_Revised_Design_CN`，该文档本身不在此次附件内；这里仅依据已提供的代码与 README 描述参考行为。
+本仓库将附件的代码、README、依赖声明、合成测试和域索引保存在 [`references/sega-gda/`](../../references/sega-gda)，不修改文件字节。原始数据仅留在本地原附件；完整来源及省略清单见 [provenance](../../references/sega-gda.provenance.json)。附件 README 引用了设计文档 `SEGA_GDA_Revised_Design_CN`，该文档本身不在此次附件内；这里仅依据已提供的代码与 README 描述参考行为。
 
 ## 参考包已经实现的范式
 
@@ -24,7 +24,7 @@ a8ed02d65efed7b95de9cdd2b712ba37ce53c972f5f7a86f320c56bc93e23028
 | 更新验收 | 候选子问题、非线性重评估、接受或回溯、停止 |
 | 预测 | 完整源参照库结合最终共享几何 |
 
-这些是参考实现的现状。TSBA 继承模块组织及候选更新验收流程；分类器、适配变量与目标按 TSBA 文档实现，见 [实现映射](tsba/implementation.md)。
+这些是参考实现的现状。TSBA 继承模块组织及候选更新验收流程；分类器、适配变量与目标按 TSBA 文档实现，见 [实现映射](implementation.md)。
 
 ## 与历史 TQG 的关系
 

@@ -5,7 +5,7 @@ import math
 
 @dataclass(frozen=True)
 # §3.15：运行前固定的工程配置。下列数值是默认选择，不是文档证明的最优值。
-# 公式符号沿用 docs/tsba/TSBA_Graph_Level_GDA_Design.md。
+# 公式符号沿用 docs/method/design-zh.md。
 class Config:
     seed: int = 0
     encoder: str = "gin"

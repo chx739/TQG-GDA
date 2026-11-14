@@ -46,7 +46,7 @@ experiments/
     <轮次-日期>/           # 方案、计划、实际配置、报告、汇总与档案索引
 ```
 
-新增真实数据集使用数据集名称目录。方法与使用说明见 [docs](../docs/README.md)，实验规范见[记录规范](../docs/experiment-records.md)。算法和运行器继续放在 `tsba/` 与 `workflows/tsba/`。
+新增真实数据集使用数据集名称目录。方法与使用说明见 [docs](../docs/README.md)，实验规范见[记录规范](../docs/guides/experiment-records.md)。算法和运行器继续放在 `tsba/` 与 `workflows/tsba/`。
 
 ## 存档与迁移
 

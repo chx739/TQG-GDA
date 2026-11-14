@@ -1,6 +1,6 @@
 # Graph-Level GDA: Target-Distribution-Driven Classification Boundary Adaptation
 
-> Translation note (2026-11-09): This is an English translation of the [original Chinese design](TSBA_Graph_Level_GDA_Design.md). The design status below reflects the original document, not the current repository status. An implementation and synthetic engineering checks are now available; real-task effectiveness remains unverified. For current implementation details and the distinction between normalized margin changes and exact geometric boundary displacement, see the [implementation notes](implementation.md) and [code review guide](code-review-guide.md).
+> Translation note (2026-11-09): This is an English translation of the [original Chinese design](design-zh.md). The design status below reflects the original document, not the current repository status. An implementation and synthetic engineering checks are now available; real-task effectiveness remains unverified. For current implementation details and the distinction between normalized margin changes and exact geometric boundary displacement, see the [implementation notes](implementation.md) and [code review guide](../review/code-review-guide.md).
 
 **Tentative method name: Target-Score Boundary Adaptation (TSBA)**
 

@@ -1,8 +1,8 @@
 # TSBA 实现与设计映射
 
-依据同目录 `TSBA_Graph_Level_GDA_Design.md` 用户原文，SHA256 `57ef49dae959d2331a91bdb26f536c54adde07165078df5186e0ea1ce36b8855`。原文“尚未实现或验证”是提供时的状态；本分支实现算法，但没有真实任务有效性结论。
+依据同目录 `design-zh.md` 用户原文，SHA256 `57ef49dae959d2331a91bdb26f536c54adde07165078df5186e0ea1ce36b8855`。原文“尚未实现或验证”是提供时的状态；本分支实现算法，但没有真实任务有效性结论。
 
-完整英文译文见 [TSBA_Graph_Level_GDA_Design_EN.md](TSBA_Graph_Level_GDA_Design_EN.md)，保留原文历史状态、公式和证据边界。
+完整英文译文见 [英文设计](design-en.md)，保留原文历史状态、公式和证据边界。
 
 ## SEGA 范式与 TSBA 定义
 
@@ -66,4 +66,4 @@ SEGA 距离参照分类器不能直接提供 W0,b0。本实现采用文档允许
 
 ## 代码内的中文阅读说明
 
-核心模块已在计算位置添加中文注释，按设计原文 §3.1–3.17 标明变量、公式与梯度/状态边界。公式旁的符号沿用原文；数值默认值仍以 Config 和本文件为准。2026-11-08 的注释提交仅新增注释，经可执行 token 与 AST 等价检查及当时 23 项测试确认。后续数值修复与最新测试证据见 [review.md](review.md) 和 [validation.json](validation.json)。人工阅读入口见 [code-review-guide.md](code-review-guide.md)。
+核心模块已在计算位置添加中文注释，按设计原文 §3.1–3.17 标明变量、公式与梯度/状态边界。公式旁的符号沿用原文；数值默认值仍以 Config 和本文件为准。2026-11-08 的注释提交仅新增注释，经可执行 token 与 AST 等价检查及当时 23 项测试确认。早期数值修复与当时测试证据见 [review.md](../review/initial-review.md) 和 [validation.json](../review/initial-validation.json)。人工阅读入口见 [code-review-guide.md](../review/code-review-guide.md)。
