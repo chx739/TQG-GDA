@@ -1,16 +1,28 @@
-# Project working agreement
+# 仓库工作约定
 
-- The user explicitly authorized renaming `main` to `SEGA-ref`, creating `TSBA`, implementing the supplied TSBA design, and an independent review by a subagent with no inherited conversation. `SEGA-ref` preserves baseline `ab0859065ebcdd4cfd72dbce13ed2d995d8f4587`; implementation belongs on `TSBA`.
-- Follow `docs/tsba/TSBA_Graph_Level_GDA_Design.md` and the numerical choices in `docs/tsba/implementation.md`. Retain SEGA's modular organization and proposal/nonlinear-check/accept-or-backtrack workflow. Do not silently add objectives, pseudo-label tasks, hard source-risk constraints, or encoder adaptation.
-- Legacy TQG is archived on `TQG`. On 2026-11-14 the user authorized removing historical `experiments/**/*.npz`. Preserve remaining historical evidence; do not rewrite history without new explicit authorization.
-- Keep the files under `references/sega-gda/` byte-for-byte identical to their source entries in `SEGA-GDA(1).zip`. Their provenance and checksums are in `references/sega-gda.provenance.json`. These are reference materials, not a newly implemented TQG method. Record limitations in project documentation rather than modifying this snapshot.
-- Do not add raw datasets, credentials, temporary outputs, model runs or the source ZIP to Git. The attachment's raw dataset files are intentionally omitted from the reference import.
-- Do not run the reference package's real-data pipeline as a routine check: it reads whole-target labels. Preserve the historical development/final boundaries; final target labels must not be used for tuning or routine verification. Engineering checks and research evidence must remain distinct.
-- The meeting draft `docs/v2/results/assumptions_brief_20261105.md` remains local-only, untracked and ignored. Do not publish it without explicit user authorization.
-- After authorized changes, update relevant documentation, run appropriate checks, commit and synchronize to the project's GitHub origin without force. Verify the remote commit and report any local-only work or publication block. Do not bypass approval or access-control rejections.
-- Prefer GitHub URLs for published code, data and reports; use local paths for unpublished artifacts. Resolve report symlinks before publishing links.
-- Reusable TSBA code belongs in `tsba/`, workflows in `workflows/tsba/`, and tests in `tests/tsba/`. The implementation request authorizes synthetic engineering checks; real-data research runs require a specified data protocol.
+## 项目与目录
 
-- On 2026-11-09 the user explicitly authorized updating and publishing the review navigation as `docs/tsba/code-review-guide.md`. Keep that published guide aligned with code and tests. The old `docs/tsba/review-guide.md` name remains ignored as a legacy local copy; do not republish under the old name.
+- 当前开发主线是 `TSBA`；`TQG` 保存旧实现，`SEGA-ref` 保存参考基线。历史分支不作为当前实验配置的默认依据。
+- 可复用算法放 `tsba/`，运行和分析流程放 `workflows/tsba/`，工程测试放 `tests/tsba/`。
+- 方法、实现与使用说明放 `docs/`；各轮实验的方案、配置、报告和结果放 `experiments/<数据集>/<轮次-日期>/`，合成实验使用 `synthetic/`。入口见 `README.md` 和 `experiments/README.md`。
 
-- Keep method/usage documentation in `docs/`, and each TSBA experiment evidence bundle in `experiments/<dataset>/<round-date>/`. Preserve historical JSON/CSV/log bytes when reorganizing; record actual execution separately from planned configuration.
+## 方法与实验
+
+- 原始 TSBA 依据 `docs/tsba/TSBA_Graph_Level_GDA_Design.md` 和 `docs/tsba/implementation.md`。新增目标函数、约束、伪标签任务或编码器适配时，应在对应实验协议中说明，区分原始方法与实验变体，避免静默改变基线。
+- 实际运行遵循该轮协议和当前用户要求，不将历史配置当成全局限制。Mutagenicity R1–R2 的源诊断池与目标 A/B/final 划分仅适用于相应历史实验；R3–R4 使用约 80%/20% 源训练/验证及完整目标域开发评价。
+- 真实数据研究运行需有明确的任务范围和数据协议；已有授权可直接执行，不重复请求确认。按协议区分训练、选模和评价标签，监督诊断不能混入无监督适配训练。工程检查不默认启动真实数据或参考包的研究流程。
+- 工程测试通过、合成机制证据和真实数据效果分别报告；完整目标域上的开发评价不称为独立最终测试。
+- 实验记录遵循 `docs/experiment-records.md`：计划与实际配置分开，保存代码版本、数据划分、种子、执行来源和差异；缺失信息不根据计划推定。补跑整合到对应轮次，注明来源和事后登记情况。
+
+## 历史材料与变更范围
+
+- `references/sega-gda/` 是原始参考快照，保持文件字节不变；来源及校验信息见 `references/sega-gda.provenance.json`。需要修改参考行为时，在当前实现或实验流程中实现并说明差异。
+- 整理目录时保留历史 JSON、CSV、图表和日志的原始字节，只修复导航与路径引用；不混入算法改动或重算结果。新运行使用新 attempt，纠错或补充需保留来源，不覆盖旧证据。
+- 文件是否入库按任务需要和现有 `.gitignore` 处理，不额外施加体积门槛或统一的仓库外存储要求。不提交凭据。
+- `docs/v2/results/assumptions_brief_20261105.md` 是用户明确要求不公开的本地草稿，未经明确授权不发布。代码审查导航使用 `docs/tsba/code-review-guide.md`，不恢复已忽略的旧文件名 `review-guide.md`。
+
+## 验证与交付
+
+- 更新受影响的文档、运行入口和测试路径；执行与改动相关的检查。纯文档整理检查链接和差异即可，不因此重跑研究实验。算法或流程变更按影响范围运行工程测试，常用命令为 `python -m unittest discover -s tests/tsba -v`。
+- 沿用本项目的交付约定：完成已授权改动后提交并正常推送到 GitHub origin，核验远程提交；用户另有要求时按其要求执行。不要覆盖他人的未提交工作，未经新的明确授权不强推或改写历史。
+- 说明实际改动、验证结果及尚未完成的事项；发布后的材料优先给出 GitHub 链接，本地材料给出真实路径。

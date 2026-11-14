@@ -15,7 +15,7 @@
 
 - [docs：方法与使用文档](docs/README.md)
 - [experiments：方案、实际配置、报告与汇总](experiments/README.md)
-- [维护规范与提交检查](docs/maintenance.md)
+- [仓库维护规范](docs/maintenance.md)
 
 ## 设计与实现
 
