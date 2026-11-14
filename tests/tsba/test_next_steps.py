@@ -15,7 +15,7 @@ from tsba.config import Config
 from tsba.problem import TsbaProblem
 from tsba.score import ScoreNetwork, denoising_loss, train_score
 from tsba.subproblem import GGNSystem
-from experiments.common.real_data.next_round.steps import (
+from experiments.mutagenicity.r1b_20261111.src.steps import (
     EmpiricalScore, _candidate_view, displacement_request, fit_score, old_boundaries,
     propose_arms, run_steps, score_comparison, shared_small_alpha,
 )
@@ -265,7 +265,7 @@ class NextStepTests(unittest.TestCase):
             for seed in range(3405, 3410):
                 (root / "deps/roles" / f"seed{seed}.json").write_text(json.dumps({"fit_ids": list(range(779))}))
                 labels[seed] = {i: i % 2 for i in range(779)}
-            prefix = "experiments.common.real_data.next_round.steps."
+            prefix = "experiments.mutagenicity.r1b_20261111.src.steps."
             with patch(prefix + "_cell_inputs", side_effect=inputs), patch(prefix + "fit_score", side_effect=synthetic_fit):
                 result = run_steps(root, {"seeds": list(range(3405, 3410)), "domains": [1, 3],
                                           "resources": {}}, labels)
@@ -291,7 +291,7 @@ class NextStepTests(unittest.TestCase):
             torch.testing.assert_close(system["source_ggn"] + system["d"].T @ system["d"] / len(system["d"])
                                        + .01 * torch.eye(len(system["matrix"]), dtype=torch.float64), system["matrix"])
             # The actual reporting/replay consumers must accept this exact schema.
-            from experiments.mutagenicity.r1b_20261111.evaluate import evaluate_steps, replay
+            from experiments.mutagenicity.r1b_20261111.src.evaluate import evaluate_steps, replay
             plan = dict(seeds=list(range(3405, 3410)), domains=[1, 3])
             replayed = replay(root, plan)
             self.assertEqual(replayed["step_view_pools"], 1600)

@@ -3,8 +3,8 @@
 ## 项目与目录
 
 - 当前开发主线是 `TSBA`；`TQG` 保存旧实现，`SEGA-ref` 保存参考基线。历史分支不作为当前实验配置的默认依据。
-- 核心算法放 `tsba/`；通用任务入口保留在 `workflows/tsba/run_task.py`。实验共用工具放 `experiments/common/`，各轮专用运行与分析代码放对应实验目录，工程测试放 `tests/tsba/`。
-- 方法、实现与使用说明放 `docs/`；各轮实验的方案、配置、报告和结果放 `experiments/<数据集>/<轮次_日期>/`，合成实验使用 `synthetic/`。入口见 `README.md` 和 `experiments/README.md`。
+- 核心算法放 `tsba/`；通用任务入口保留在 `workflows/tsba/run_task.py`。纯通用工具放 `experiments/common/`，不含轮次目录或实验流程；各轮实现放对应实验的 `src/`，启动脚本放根目录 `scripts/`，工程测试放 `tests/tsba/`。
+- 方法、实现与使用说明放 `docs/`；各轮实验的方案、配置、报告和结果放 `experiments/<数据集>/<轮次_日期>/`，每轮使用 `README.md`、`src/`、`configs/`、`docs/`、`results/`、`report.md` 结构；合成实验使用 `synthetic/`。入口见 `README.md` 和 `experiments/README.md`。
 
 ## 方法与实验
 

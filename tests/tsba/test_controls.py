@@ -10,8 +10,8 @@ from tsba.classifier import ParameterMap
 from tsba.config import Config
 from tsba.problem import TsbaProblem
 from tsba.subproblem import GGNSystem
-from experiments.common.synthetic.controls import SourceGGN, SourceProblem, solve_source, adapt_control
-from experiments.common.synthetic.distributions import setup_cell, ZeroScore, generator
+from experiments.synthetic.e2_controls_20261109.src.controls import SourceGGN, SourceProblem, solve_source, adapt_control
+from experiments.synthetic.e1_e2_20261109.src.distributions import setup_cell, ZeroScore, generator
 
 
 def schedule(cfg, n=512):

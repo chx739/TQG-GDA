@@ -129,25 +129,25 @@ tests/tsba/
 
 ## 合成研究入口
 
-[E1/E2方案](../../experiments/validation-plan.md)与[运行器](../../experiments/synthetic/e1_e2_20261109/run.py)单独审查：oracle是否与坐标/带宽一致、目标评价是否发生在封存之后、四臂批次是否配对、失败和零更新是否保留。`test_validation.py`检查解析score、独立几何观察器、零信息符号指标和被动观察器。新增锚点来源索引和回调不改变生产求解、验收或零反馈规则。
+[E1/E2方案](../../experiments/validation-plan.md)与[运行器](../../experiments/synthetic/e1_e2_20261109/src/run.py)单独审查：oracle是否与坐标/带宽一致、目标评价是否发生在封存之后、四臂批次是否配对、失败和零更新是否保留。`test_validation.py`检查解析score、独立几何观察器、零信息符号指标和被动观察器。新增锚点来源索引和回调不改变生产求解、验收或零反馈规则。
 
-补充控制入口：[controls.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/common/synthetic/controls.py)、[run_controls.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_controls_20261109/run_controls.py)。核对纯源GGN是否移除DᵀD/位移预算，零请求几何控制是否保留它们，是否确实绕过研究分支的零请求跳过而没有修改生产规则，以及是否复用原始逐轮ID。对应 `test_controls.py`。
+补充控制入口：[controls.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_controls_20261109/src/controls.py)、[run_controls.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_controls_20261109/src/run_controls.py)。核对纯源GGN是否移除DᵀD/位移预算，零请求几何控制是否保留它们，是否确实绕过研究分支的零请求跳过而没有修改生产规则，以及是否复用原始逐轮ID。对应 `test_controls.py`。
 
-全源诊断入口：[run_full_source.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_full_source_20261110/run_full_source.py)。检查配置是否只改变 `source_adapt_batch`、每轮是否完整覆盖512个源ID、目标ID是否与旧档案一致，以及候选和每次回溯是否都使用全源CE。对应 `test_full_source.py`；不改变生产TSBA目标与接受规则。
+全源诊断入口：[run_full_source.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_full_source_20261110/src/run_full_source.py)。检查配置是否只改变 `source_adapt_batch`、每轮是否完整覆盖512个源ID、目标ID是否与旧档案一致，以及候选和每次回溯是否都使用全源CE。对应 `test_full_source.py`；不改变生产TSBA目标与接受规则。
 
-全源实验入口加入后，完整工程测试为44项通过，见[测试日志](../../experiments/synthetic/e2_full_source_20261110/engineering-checks.txt)。[全源诊断报告](../../experiments/synthetic/e2_full_source_20261110/report.md)另列30个checkpoint、900轮状态链和1380次候选CE的重载审计；研究结果与工程通过分开报告。
+全源实验入口加入后，完整工程测试为44项通过，见[测试日志](../../experiments/synthetic/e2_full_source_20261110/results/engineering-checks.txt)。[全源诊断报告](../../experiments/synthetic/e2_full_source_20261110/report.md)另列30个checkpoint、900轮状态链和1380次候选CE的重载审计；研究结果与工程通过分开报告。
 
-checkpoint回放入口：[run_replay.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_replay_20261110/run_replay.py)、[replay.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/common/synthetic/replay.py)。检查解析后验与初始头是否一致、NLL四组贡献是否加和、边界探针是否固定并保留失败，以及观察前后参数是否逐位相同。对应 `test_replay.py`。
+checkpoint回放入口：[run_replay.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_replay_20261110/src/run_replay.py)、[replay.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_replay_20261110/src/diagnostics.py)。检查解析后验与初始头是否一致、NLL四组贡献是否加和、边界探针是否固定并保留失败，以及观察前后参数是否逐位相同。对应 `test_replay.py`。
 
-回放入口加入后，完整工程测试为48项通过，见[测试日志](../../experiments/synthetic/e2_replay_20261110/engineering-checks.txt)；[回放报告](../../experiments/synthetic/e2_replay_20261110/report.md)保存930次状态核验和三类研究诊断，未训练新模型。
+回放入口加入后，完整工程测试为48项通过，见[测试日志](../../experiments/synthetic/e2_replay_20261110/results/engineering-checks.txt)；[回放报告](../../experiments/synthetic/e2_replay_20261110/report.md)保存930次状态核验和三类研究诊断，未训练新模型。
 
-解析源后验诊断：[source_posterior.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_source_posterior_20261110/source_posterior.py)。检查源期望CE是否同时进入梯度与真实验收、GGN公式是否保留、三个分支的跳过/回溯规则是否与旧入口一致，以及是否没有强制控制组不动。对应 `test_source_posterior.py`；当前51项测试通过。
+解析源后验诊断：[source_posterior.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_source_posterior_20261110/src/source_posterior.py)。检查源期望CE是否同时进入梯度与真实验收、GGN公式是否保留、三个分支的跳过/回溯规则是否与旧入口一致，以及是否没有强制控制组不动。对应 `test_source_posterior.py`；当前51项测试通过。
 
-[解析源后验对照报告](../../experiments/synthetic/e2_source_posterior_20261110/report.md)记录候选和验收的独立复算、20条数值平稳控制轨迹及总体score的实际收益；[51项测试日志](../../experiments/synthetic/e2_source_posterior_20261110/engineering-checks.txt)可直接核对。
+[解析源后验对照报告](../../experiments/synthetic/e2_source_posterior_20261110/report.md)记录候选和验收的独立复算、20条数值平稳控制轨迹及总体score的实际收益；[51项测试日志](../../experiments/synthetic/e2_source_posterior_20261110/results/engineering-checks.txt)可直接核对。
 
 
-静态score诊断：[static_score.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/common/synthetic/static_score.py)、[运行器](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/run_static_score.py)、[重载分析](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/summarize_static_score.py)。检查嵌套样本池、原512基准带宽、固定查询与400次更新是否保持；主最终状态与辅助选中快照是否分开；是否同时报告法向/请求误差与正确边界方向，避免只看全向量DSM或同带宽oracle符号一致率。对应`test_static_score.py`，当前完整56项工程测试通过。[研究报告](../../experiments/synthetic/e2_static_score_20261110/report.md)记录50组拟合、400次checkpoint查询集重载和3100个oracle探针；没有启动闭环适配。
+静态score诊断：[static_score.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/src/estimation.py)、[运行器](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/src/run_static_score.py)、[重载分析](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/src/summarize_static_score.py)。检查嵌套样本池、原512基准带宽、固定查询与400次更新是否保持；主最终状态与辅助选中快照是否分开；是否同时报告法向/请求误差与正确边界方向，避免只看全向量DSM或同带宽oracle符号一致率。对应`test_static_score.py`，当前完整56项工程测试通过。[研究报告](../../experiments/synthetic/e2_static_score_20261110/report.md)记录50组拟合、400次checkpoint查询集重载和3100个oracle探针；没有启动闭环适配。
 
-P0预算诊断：[run_p0.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/p0_20261110/run_p0.py)、[p0_oracle.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/p0_20261110/p0_oracle.py)、[summarize_p0.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/p0_20261110/summarize_p0.py)。检查400步Adam恢复与随机前缀是否精确，主固定末尾模型是否区别于DSM选中模型；oracle阈值是否采用原坐标缩放，有限/总体源后验是否区分，回溯停止是否如实报告；不要把标量收益当作完整TSBA上界。对应`test_p0.py`，完整59项测试通过。[P0报告](../../experiments/synthetic/p0_20261110/report.md)记录6400步静态检查5/5通过，但源约束下oracle收益仍小，未启动学习score闭环。
+P0预算诊断：[run_p0.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/p0_20261110/src/run_p0.py)、[p0_oracle.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/p0_20261110/src/p0_oracle.py)、[summarize_p0.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/p0_20261110/src/summarize_p0.py)。检查400步Adam恢复与随机前缀是否精确，主固定末尾模型是否区别于DSM选中模型；oracle阈值是否采用原坐标缩放，有限/总体源后验是否区分，回溯停止是否如实报告；不要把标量收益当作完整TSBA上界。对应`test_p0.py`，完整59项测试通过。[P0报告](../../experiments/synthetic/p0_20261110/report.md)记录6400步静态检查5/5通过，但源约束下oracle收益仍小，未启动学习score闭环。
 
-真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/r1_20261111/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/r1_20261111/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。
+真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/r1_20261111/docs/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/r1_20261111/configs/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。

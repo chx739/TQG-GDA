@@ -4,7 +4,7 @@
 
 三组全源512实验的初始化及30轮参数原样回放，没有重新训练、生成参数候选或选择checkpoint。每个维数/种子使用32768个独立源样本和256组固定边界探针；目标评价复用原10000个合成样本。
 
-执行代码：[`37f03c9`](https://github.com/chx739/TQG-GDA/tree/37f03c94e18a8c222443e9a088673e324a6d09ac)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/37f03c94e18a8c222443e9a088673e324a6d09ac/experiments/synthetic/e2_replay_20261110/replay-plan.json)；[前轮结果](../e2_full_source_20261110/report.md)。
+执行代码：[`37f03c9`](https://github.com/chx739/TQG-GDA/tree/37f03c94e18a8c222443e9a088673e324a6d09ac)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/37f03c94e18a8c222443e9a088673e324a6d09ac/experiments/synthetic/e2_replay_20261110/configs/replay-plan.json)；[前轮结果](../e2_full_source_20261110/report.md)。
 
 ## 诊断结论
 
@@ -45,7 +45,7 @@
 | 16 | zero_zeta_geometry | 0.063990 → 0.000907 | 0.059575 → 0.171394 | 0.060234 → 0.170128 | 0.109894 ± 0.022320 |
 | 16 | population | 0.063990 → 0.000944 | 0.059575 → 0.162724 | 0.060234 → 0.161724 | 0.101490 ± 0.019070 |
 
-![源泛化](source-generalization.png)
+![源泛化](results/source-generalization.png)
 
 ## 目标分类与置信度
 
@@ -58,7 +58,7 @@
 | 16 | zero_zeta_geometry | 0.215904 → 0.561920 | 0.802835 → 0.909452 | 0.007900 → 0.046000 |
 | 16 | population | 0.215904 → 0.541738 | 0.802835 → 0.908876 | 0.007900 → 0.044400 |
 
-![目标轨迹](target-trajectories.png)
+![目标轨迹](results/target-trajectories.png)
 
 下面四组根据每个样本的初始/当前正确性定义。贡献为该组样本NLL变化之和除以全部样本数；四项精确加和为总ΔNLL。组内样本的身份已固定在存档logits中，可重算。它是描述性分解。“初末均正确/错误”只约束两个端点，期间仍可能发生预测翻转。
 
@@ -71,7 +71,7 @@
 | 16 | zero_zeta_geometry | -0.012086 | 0.098525 | -0.018620 | 0.278196 |
 | 16 | population | -0.013022 | 0.083736 | -0.017594 | 0.272714 |
 
-![NLL分组](nll-cohorts.png)
+![NLL分组](results/nll-cohorts.png)
 
 ## 固定探针上的边界
 
@@ -86,9 +86,9 @@
 | 16 | zero_zeta_geometry | 0.508962 | 0.260396 | 0.573149 | 18.139062 | 0.194963 |
 | 16 | population | 0.502553 | 0.241350 | 0.559036 | 16.976781 | 0.182803 |
 
-![边界轨迹](boundary-trajectories.png)
+![边界轨迹](results/boundary-trajectories.png)
 
-有限区间和网格仅识别“唯一检测根”，不能证明全局唯一，也可能漏掉切触或网格内多次过零。无根、多根、非有限值均保留，不挑最靠近理想位置的根。完整逐轮覆盖在[trajectory.csv](trajectory.csv)。
+有限区间和网格仅识别“唯一检测根”，不能证明全局唯一，也可能漏掉切触或网格内多次过零。无根、多根、非有限值均保留，不挑最靠近理想位置的根。完整逐轮覆盖在[trajectory.csv](results/trajectory.csv)。
 
 ## 记录与核验
 
@@ -98,4 +98,4 @@
 
 研究单位为5个种子，轮次和探针不扩充独立重复。已知源Bayes初始化与先前结果使本诊断具有明确事后性质；不存在按目标评价选轮次。原样本、配置与checkpoint不覆盖，第2步score样本量/带宽实验没有运行。
 
-逐轮指标：[trajectory.csv](trajectory.csv)；population减ζ=0的逐种子终点差：[paired.csv](paired.csv)；首次越过初始指标的轮次：[onsets.csv](onsets.csv)。首次越线不等于稳定变差或显著性结论。完整源输入/后验、checkpoint向量、目标logits、根/法向记录、日志与源代码见[归档索引](archive-index.json)。
+逐轮指标：[trajectory.csv](results/trajectory.csv)；population减ζ=0的逐种子终点差：[paired.csv](results/paired.csv)；首次越过初始指标的轮次：[onsets.csv](results/onsets.csv)。首次越线不等于稳定变差或显著性结论。完整源输入/后验、checkpoint向量、目标logits、根/法向记录、日志与源代码见[归档索引](results/archive-index.json)。

@@ -4,7 +4,7 @@
 
 本轮仅把源适配批次从128改为全部512个既有源样本。候选的源梯度/GGN和验收目标中的源CE都使用全源均值；没有增加硬性源风险约束。三组各自在原目标和预算下运行30轮。
 
-执行代码：[`ee4326a`](https://github.com/chx739/TQG-GDA/tree/ee4326afafffe71930b7ee4464144c4f98ce3432)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/ee4326afafffe71930b7ee4464144c4f98ce3432/experiments/synthetic/e2_full_source_20261110/full-source-plan.json)。复用原输入、初始化、源坐标、带宽、目标批次ID和全部数值配置，新增2维数×5种子×3臂=30条轨迹。原128批次结果由已有封存预测复用。
+执行代码：[`ee4326a`](https://github.com/chx739/TQG-GDA/tree/ee4326afafffe71930b7ee4464144c4f98ce3432)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/ee4326afafffe71930b7ee4464144c4f98ce3432/experiments/synthetic/e2_full_source_20261110/configs/full-source-plan.json)。复用原输入、初始化、源坐标、带宽、目标批次ID和全部数值配置，新增2维数×5种子×3臂=30条轨迹。原128批次结果由已有封存预测复用。
 
 ## 主要结论
 
@@ -44,9 +44,9 @@
 | 16 | 512 | zero_zeta_geometry | -1.8046 ± 0.5204 | 0/0/5 | 0.346015 |
 | 16 | 512 | population | -1.5080 ± 0.8682 | 0/0/5 | 0.325834 |
 
-BA正差较好，NLL负差较好；全部逐种子结果见[evaluation.csv](evaluation.csv)。
+BA正差较好，NLL负差较好；全部逐种子结果见[evaluation.csv](results/evaluation.csv)。
 
-![结果对比](full-source-risk.png)
+![结果对比](results/full-source-risk.png)
 
 ## 配对比较
 
@@ -63,7 +63,7 @@ BA正差较好，NLL负差较好；全部逐种子结果见[evaluation.csv](eval
 | 16 | zero_zeta_geometry_512_minus_128 | -1.2134 ± 0.9444 | 1/0/4 | 0.294807 |
 | 16 | population_512_minus_128 | -1.0030 ± 0.9263 | 0/0/5 | 0.278262 |
 
-population_vs_zero与zero_vs_source均指512批次；其余为同一方法512减128。差值先在同种子内计算，再跨种子汇总。完整配对表见[paired.csv](paired.csv)。
+population_vs_zero与zero_vs_source均指512批次；其余为同一方法512减128。差值先在同种子内计算，再跨种子汇总。完整配对表见[paired.csv](results/paired.csv)。
 
 ## 全源CE与过程记录
 
@@ -78,16 +78,16 @@ population_vs_zero与zero_vs_source均指512批次；其余为同一方法512减
 
 上升轮数以1e−10为数值容差；它是记录指标，没有加入接受条件。曲线每条细线对应一个种子；128批次的全源CE在封存后用旧参数快照重新计算。
 
-![全源CE轨迹](source-ce-curves.png)
+![全源CE轨迹](results/source-ce-curves.png)
 
 文件校验263项；重载30个最终分类器，核对900轮状态链和全部源/目标ID；独立复算1380次回溯候选的全源CE，最大日志差异2.78e-17。预测重载要求逐位一致。
 
 44项工程测试通过；运行耗时768.8秒（约12.8分钟），进程峰值RSS为755,044,352字节（约720 MiB），执行失败为0。全部30个旧128批次端点指标与已发布补充对照逐项相同。10个解析总体score状态也已重载核对。
 
-统计与checkpoint核验代码：[c15f911](https://github.com/chx739/TQG-GDA/tree/c15f911)。[process.csv](process.csv)保存求解残差、回溯、覆盖、CE与耗时；[source_ce_curves.csv](source_ce_curves.csv)保存新旧共1800轮全源CE；[checkpoint-audit.json](checkpoint-audit.json)记录重载审计。逐种子NLL、准确率、每类召回和混淆矩阵均在评价表中。
+统计与checkpoint核验代码：[c15f911](https://github.com/chx739/TQG-GDA/tree/c15f911)。[process.csv](results/process.csv)保存求解残差、回溯、覆盖、CE与耗时；[source_ce_curves.csv](results/source_ce_curves.csv)保存新旧共1800轮全源CE；[checkpoint-audit.json](results/checkpoint-audit.json)记录重载审计。逐种子NLL、准确率、每类召回和混淆矩阵均在评价表中。
 
 ## 范围与档案
 
 这是根据前两轮结果追加的合成机制诊断。固定最终30轮状态，未依据目标指标选轮次或更改配置。失败/异常保留并与正常完成均值分开。源批次增加使每轮源计算量增大，本轮没有等计算量主张。未运行真实图实验。
 
-运行目录：`/home/hxchen/experiments/tsba/20261110-full-source/run-001`。结果、完整逐轮日志、参数/锚点、checkpoint、代码快照和校验信息另存压缩档案，见[归档索引](archive-index.json)。原两轮档案不覆盖。
+运行目录：`/home/hxchen/experiments/tsba/20261110-full-source/run-001`。结果、完整逐轮日志、参数/锚点、checkpoint、代码快照和校验信息另存压缩档案，见[归档索引](results/archive-index.json)。原两轮档案不覆盖。

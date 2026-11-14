@@ -10,18 +10,18 @@ import numpy as np
 import torch
 
 from tsba.classifier import ResidualClassifier
-from experiments.common.real_data.r2.common import atomic_tensor, batches, load, seal, write_json
-from experiments.common.real_data.r2.score import assert_nested_equal
-from experiments.common.real_data.r3.protocol import reference_split
-from experiments.mutagenicity.r4_20261112.evaluate import METRICS, correction, summarize
-from experiments.mutagenicity.r4_20261112.protocol import (
+from experiments.mutagenicity.r2_20261111.src.common import atomic_tensor, batches, load, seal, write_json
+from experiments.mutagenicity.r2_20261111.src.score import assert_nested_equal
+from experiments.mutagenicity.r3_20261112.src.protocol import reference_split
+from experiments.mutagenicity.r4_20261112.src.evaluate import METRICS, correction, summarize
+from experiments.mutagenicity.r4_20261112.src.protocol import (
     Task, batch_path, evaluation_labels, job_dir, labels_path, score_dir, source_dir, split_domain, tasks,
 )
-from experiments.mutagenicity.r4_20261112.training import train_score, train_source
-from experiments.mutagenicity.r4_20261112.trajectory import adapt
+from experiments.mutagenicity.r4_20261112.src.training import train_score, train_source
+from experiments.mutagenicity.r4_20261112.src.trajectory import adapt
 
 REPO = Path(__file__).resolve().parents[2]
-PLAN = json.loads((REPO / "experiments/mutagenicity/r4_20261112/r4-plan.json").read_text())
+PLAN = json.loads((REPO / "experiments/mutagenicity/r4_20261112/configs/r4-plan.json").read_text())
 
 
 class R4Test(unittest.TestCase):
@@ -94,8 +94,8 @@ class R4Test(unittest.TestCase):
         atomic_tensor(labels_path(root,2,3405,"fit"), torch.arange(12)%2)
         atomic_tensor(batch_path(root,task),batches(fit,target,3405,rounds=2,size=8))
         from tsba.boundary import build_boundaries
-        from experiments.common.real_data.r2.adapt import ZeroScore
-        from experiments.mutagenicity.r4_20261112.protocol import config
+        from experiments.mutagenicity.r2_20261111.src.adapt import ZeroScore
+        from experiments.mutagenicity.r4_20261112.src.protocol import config
         from dataclasses import asdict
         b = build_boundaries(model,x[target[:8]],ZeroScore(),1.,config(self.plan,3405))
         atomic_tensor(out/"geometry_M3.pt",dict(sigma=1.,boundaries=asdict(b)))
@@ -115,7 +115,7 @@ class R4Test(unittest.TestCase):
                 atomic_tensor(path,payload)
                 if path.name=="epoch0001.pt":
                     raise InterruptedError("after publication")
-            with patch("experiments.mutagenicity.r4_20261112.training.atomic_tensor",side_effect=interrupted):
+            with patch("experiments.mutagenicity.r4_20261112.src.training.atomic_tensor",side_effect=interrupted):
                 with self.assertRaises(InterruptedError):
                     train_score(two,self.plan,task)
             train_score(two,self.plan,task)
@@ -134,7 +134,7 @@ class R4Test(unittest.TestCase):
             self.prepare_adapt(one,task)
             torch.manual_seed(82)
             self.prepare_adapt(two,task)
-            with patch("experiments.mutagenicity.r4_20261112.trajectory.load", wraps=load) as reader:
+            with patch("experiments.mutagenicity.r4_20261112.src.trajectory.load", wraps=load) as reader:
                 adapt(one,self.plan,(task,"A3"))
                 paths=[p.args[0] for p in reader.call_args_list if "source_labels" in p.args[0].parts]
                 self.assertEqual(paths,[labels_path(one,2,3405,"fit")])
@@ -171,7 +171,7 @@ class R4Test(unittest.TestCase):
                 atomic_tensor(path,payload)
                 if path.name=="epoch000.pt":
                     raise InterruptedError("after source epoch")
-            with patch("experiments.mutagenicity.r4_20261112.training.atomic_tensor",side_effect=interrupted):
+            with patch("experiments.mutagenicity.r4_20261112.src.training.atomic_tensor",side_effect=interrupted):
                 with self.assertRaises(InterruptedError):
                     train_source(two,self.plan,(s,seed))
             train_source(two,self.plan,(s,seed))

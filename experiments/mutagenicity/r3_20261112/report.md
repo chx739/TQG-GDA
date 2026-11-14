@@ -2,7 +2,7 @@
 
 R3 共完成 520 条轨迹、15,600 次尝试。以下为第 30 次尝试的全目标域开发评价。两项迁移分别使用 1,084 和 1,085 张目标图。五个种子分别计分再汇总，目标标签在预测封存后读取。
 
-[逐种子端点](endpoints.csv) · [正常请求配对](paired.csv) · [干预配对](interventions.csv) · [固定缩放基线](baselines.csv) · [逐轮诊断](rounds.csv) · [同状态旁路](side.csv) · [Score端点](score_endpoints.csv)
+[逐种子端点](results/endpoints.csv) · [正常请求配对](results/paired.csv) · [干预配对](results/interventions.csv) · [固定缩放基线](results/baselines.csv) · [逐轮诊断](results/rounds.csv) · [同状态旁路](results/side.csv) · [Score端点](results/score_endpoints.csv)
 
 M00 的零请求对照重现了 R2 观察到的源监督退化。该对照在两个任务上都降低了源训练 NLL，却把源验证 NLL 分别推高约 0.01336 和 0.00780，把目标 NLL 推高约 0.01431 和 0.02307。M10 和 M01 各自在两项任务的四种正常请求配置上，均比对应 M00 降低了源验证和目标 NLL。M11 对 M10 的目标 NLL 改善覆盖 0→1 的 3/4 格和 0→3 的 4/4 格，对 M01 的改善分别为 0/4 和 2/4 格。
 
@@ -90,7 +90,7 @@ M00 的零请求对照重现了 R2 观察到的源监督退化。该对照在两
 | 0→3 | M11 | 1 | 0/4 | 0/4 | 0/4 |
 | 0→3 | M11 | 30 | 4/4 | 2/4 | 2/4 |
 
-逐个状态的主轨迹配置、共同步长和三组候选指标见 [同状态旁路表](side.csv)。
+逐个状态的主轨迹配置、共同步长和三组候选指标见 [同状态旁路表](results/side.csv)。
 
 
 ## 边界与密度诊断
@@ -107,7 +107,7 @@ M00 的零请求对照重现了 R2 观察到的源监督退化。该对照在两
 ## 存档与版本
 
 - 执行代码 `ff0f6e539a294c5380efa149574910b5130023bd`。
-- 输入、观察和最终封存见 [archive-index.json](archive-index.json)。
+- 输入、观察和最终封存见 [archive-index.json](results/archive-index.json)。
 - 主档案含 17,608 个逐文件读回验证的成员，包括角色与批次、源模型、score及优化器状态、每次尝试的模型向量和诊断、日志及评价结果。
 
 ## 原始源头与输出缩放
@@ -195,6 +195,6 @@ M00 的零请求对照重现了 R2 观察到的源监督退化。该对照在两
 | 0→3 | 2 | 3600 | 0.424337 | 0.289609 | 0.851890 |
 | 0→3 | 2 | 7200 | 0.398937 | 0.271833 | 0.858357 |
 
-![0→1九格NLL](sensitivity_d1.png)
+![0→1九格NLL](results/sensitivity_d1.png)
 
-![0→3九格NLL](sensitivity_d3.png)
+![0→3九格NLL](results/sensitivity_d3.png)

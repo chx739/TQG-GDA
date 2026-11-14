@@ -6,10 +6,10 @@ import unittest
 
 import torch
 
-from experiments.common.synthetic.archive import digest, save_tensor, write_json
-from experiments.common.real_data.runtime import seal
-from experiments.common.real_data.next_round.common import NextLabelBroker, verify_seal
-from experiments.mutagenicity.r1b_20261111.evaluate import evaluate_steps, evaluate_warm
+from experiments.common.io import digest, save_tensor, write_json
+from experiments.common.runtime import seal
+from experiments.mutagenicity.r1b_20261111.src.common import NextLabelBroker, verify_seal
+from experiments.mutagenicity.r1b_20261111.src.evaluate import evaluate_steps, evaluate_warm
 
 
 class NextCommonEvaluationTests(unittest.TestCase):

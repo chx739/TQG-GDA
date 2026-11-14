@@ -32,22 +32,23 @@
 | [R3](mutagenicity/r3_20261112/README.md) | 已完成 | 约束与参数敏感性 | 固定配置扩展到 R4；开发调参不等于独立测试 |
 | [R4（含 A0）](mutagenicity/r4_20261112/README.md) | 已完成 | 固定配置全方向比较 | score 未表现出平均额外收益；全部方法共用一份 R4 报告 |
 
-## 目录约定
+## 每轮实验都是一个小项目
 
 ```text
 experiments/
-  README.md
-  validation-plan.md        # 跨轮历史总设计
-  templates/                # 新实验方案与报告模板
-  common/                   # 跨轮共用的实验实现
-  synthetic/<轮次_日期>/   # 每轮证据包
-  mutagenicity/
-    README.md
-    stage1-inputs.json       # 共享输入来源
-    <轮次_日期>/           # 方案、计划、实际配置、报告、汇总与档案索引
+  common/                  # 纯通用工具
+  synthetic/<轮次>/
+  mutagenicity/<轮次>/
+    README.md              # 问题、结论、运行方式、依赖
+    src/                   # 该轮实现
+    configs/               # 计划与实际配置
+    docs/                  # 方案及补充说明
+    results/               # 汇总、图表、日志、核验
+    report.md              # 完整结论
+scripts/<数据集>/<轮次>/   # 仓库根目录的启动脚本
 ```
 
-新增真实数据集使用数据集名称目录。方法与使用说明见 [docs](../docs/README.md)，实验规范见[记录规范](../docs/guides/experiment-records.md)。核心算法保留在 `tsba/`，通用任务入口为 `workflows/tsba/run_task.py`。各轮运行与分析代码随该轮保存，共用工具见 [common](common/README.md)。
+`common` 不按轮次命名，不保存训练或适配流程。R2/R3 等特定协议的代码归本轮 `src/`；后续实验沿用时明确列出依赖。核心算法仍位于 `tsba/`。
 
 ## 存档与迁移
 
@@ -61,8 +62,8 @@ experiments/
 
 ```sh
 python -m pip install -e '.[experiments]'
-python -m experiments.mutagenicity.r4_20261112.run --help
-python -m experiments.synthetic.p0_20261110.run_p0 --help
+python -m scripts.mutagenicity.r4_20261112.run --help
+python -m scripts.synthetic.p0_20261110.run_p0 --help
 ```
 
 各轮 README 列出具体入口。命令参数与标签使用规则仍以该轮协议为准；目录整理不授权重跑真实实验。研究入口面向仓库 checkout，使用 editable 安装；历史数据、封存配置和外部档案不会随 Python 包安装自动提供。

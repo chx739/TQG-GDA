@@ -4,7 +4,7 @@
 
 **这是查看首轮结果后追加的诊断，不是新的盲测。** 原40条轨迹保留，新增Source-CE-GGN与zero_zeta_geometry各10条，共20条；输入、源初始化、坐标、带宽、种子、逐轮ID和30次尝试预算均与原档案匹配。真实图数据和标签没有读取。
 
-执行代码：[`44b7498`](https://github.com/chx739/TQG-GDA/tree/44b74988d07cdd291bc7c21a34f252c21e8ebc78)。冻结协议见[controls-plan.json](controls-plan.json)；原报告见[首轮结果](../e1_e2_20261109/report.md)。
+执行代码：[`44b7498`](https://github.com/chx739/TQG-GDA/tree/44b74988d07cdd291bc7c21a34f252c21e8ebc78)。冻结协议见[controls-plan.json](configs/controls-plan.json)；原报告见[首轮结果](../e1_e2_20261109/report.md)。
 
 ## 主要判断与对首轮解释的修正
 
@@ -45,9 +45,9 @@
 | 16 | population | -0.5050 ± 0.9599 | 2/0/3 | 0.047572 |
 | 16 | zero | 0.0000 ± 0.0000 | 0/5/0 | 0.000000 |
 
-BA正差较好，NLL负差较好。原四臂由封存logits重新计算，未重训或重跑适配。完整逐种子结果见[evaluation.csv](evaluation.csv)。
+BA正差较好，NLL负差较好。原四臂由封存logits重新计算，未重训或重跑适配。完整逐种子结果见[evaluation.csv](results/evaluation.csv)。
 
-![六臂结果](controls-risk.png)
+![六臂结果](results/controls-risk.png)
 
 ## 关键配对差
 
@@ -64,9 +64,9 @@ BA正差较好，NLL负差较好。原四臂由封存logits重新计算，未重
 | 16 | zero_zeta_geometry minus source_ce_ggn | 2.4947 ± 2.6687 | 5/0/0 | -0.114357 |
 | 16 | learned minus source_ce_ggn | 1.8753 ± 2.6274 | 4/0/1 | -0.091919 |
 
-![配对差](paired-differences.png)
+![配对差](results/paired-differences.png)
 
-差值先在同一种子内计算，再跨5个种子汇总；没有把轮次或锚点当作独立重复。完整配对数值见[paired.csv](paired.csv)。
+差值先在同一种子内计算，再跨5个种子汇总；没有把轮次或锚点当作独立重复。完整配对数值见[paired.csv](results/paired.csv)。
 
 ## 过程与归档
 
@@ -79,8 +79,8 @@ BA正差较好，NLL负差较好。原四臂由封存logits重新计算，未重
 
 42项工程测试通过。补充运行耗时328.7秒（约5.5分钟），进程峰值RSS约493 MiB。原三种非零score臂的10个单元全部具有30个活动轮，新对照也全部完成30次更新，因此本轮的差异不来自尝试次数不匹配。
 
-执行失败记录：0。已复核235个文件、20个最终头、600轮状态链及批次，重载预测逐位相同。首轮矩阵/参考检查见[checkpoint-audit.json](checkpoint-audit.json)。
+执行失败记录：0。已复核235个文件、20个最终头、600轮状态链及批次，重载预测逐位相同。首轮矩阵/参考检查见[checkpoint-audit.json](results/checkpoint-audit.json)。
 
 源GGN没有边界执行预算，不能称与TSBA等计算量或只差一个score。固定30轮也不代表各方法均已收敛。当前合成设置的结果不能推广为真实图GDA结论，也不用于挑选或改写首轮checkpoint。
 
-本地run目录：`/home/hxchen/experiments/tsba/20261109-controls/run-001`。完整日志、逐轮参数/锚点和checkpoint保存在本地目录及独立压缩档案；GitHub发布报告、表格与[归档索引](archive-index.json)，不提交模型运行二进制。
+本地run目录：`/home/hxchen/experiments/tsba/20261109-controls/run-001`。完整日志、逐轮参数/锚点和checkpoint保存在本地目录及独立压缩档案；GitHub发布报告、表格与[归档索引](results/archive-index.json)，不提交模型运行二进制。

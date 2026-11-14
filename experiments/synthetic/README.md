@@ -29,6 +29,6 @@
 
 ## 执行计划
 
-[首轮](e1_e2_20261109/plan.json) · [控制实验](e2_controls_20261109/controls-plan.json) · [全源 CE](e2_full_source_20261110/full-source-plan.json) · [回放](e2_replay_20261110/replay-plan.json) · [源后验](e2_source_posterior_20261110/source-posterior-plan.json) · [静态 score](e2_static_score_20261110/static-score-plan.json) · [P0](p0_20261110/p0-plan.json)
+[首轮](e1_e2_20261109/configs/plan.json) · [控制实验](e2_controls_20261109/configs/controls-plan.json) · [全源 CE](e2_full_source_20261110/configs/full-source-plan.json) · [回放](e2_replay_20261110/configs/replay-plan.json) · [源后验](e2_source_posterior_20261110/configs/source-posterior-plan.json) · [静态 score](e2_static_score_20261110/configs/static-score-plan.json) · [P0](p0_20261110/configs/p0-plan.json)
 
 [跨数据类型的历史总设计](../validation-plan.md)。日期目录包含报告、图表和原始证据；JSON、日志及存档来源保持执行时原貌。

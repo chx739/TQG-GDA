@@ -2,7 +2,7 @@
 
 唯一干预：同一512个源输入上的硬标签CE，改为解析源后验加权的期望CE；候选梯度和真实验收同时替换。全部Config、初始头、源/目标ID、总体score、带宽及预算沿用全源实验。
 
-执行代码：[`5b5e4be`](https://github.com/chx739/TQG-GDA/tree/5b5e4bef992fe34934183ba96bf37cade27992c7)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/5b5e4bef992fe34934183ba96bf37cade27992c7/experiments/synthetic/e2_source_posterior_20261110/source-posterior-plan.json)；[前轮回放](../e2_replay_20261110/report.md)。
+执行代码：[`5b5e4be`](https://github.com/chx739/TQG-GDA/tree/5b5e4bef992fe34934183ba96bf37cade27992c7)；[执行前冻结协议](https://github.com/chx739/TQG-GDA/blob/5b5e4bef992fe34934183ba96bf37cade27992c7/experiments/synthetic/e2_source_posterior_20261110/configs/source-posterior-plan.json)；[前轮回放](../e2_replay_20261110/report.md)。
 
 ## 主要结论
 
@@ -37,9 +37,9 @@
 | 16 | posterior | zero_zeta_geometry | 0.000000 ± 0.000000 | 0/5/0 | 0.000000 | -0.000000 |
 | 16 | posterior | population | 0.081946 ± 0.021177 | 5/0/0 | -0.001901 | 0.000006 |
 
-表格中hard为原硬标签CE，posterior为本轮解析源后验CE；BA正差较好，NLL负差较好。旧硬标签结果重用已封存轨迹，不重复训练。所有种子见[endpoints.csv](endpoints.csv)。
+表格中hard为原硬标签CE，posterior为本轮解析源后验CE；BA正差较好，NLL负差较好。旧硬标签结果重用已封存轨迹，不重复训练。所有种子见[endpoints.csv](results/endpoints.csv)。
 
-![风险配对](posterior-risk.png)
+![风险配对](results/posterior-risk.png)
 
 ## 配对差
 
@@ -54,7 +54,7 @@
 | 16 | population_posterior_minus_hard | 1.589984 ± 0.859838 | 5/0/0 | -0.327735 |
 | 16 | posterior_population_minus_zero | 0.081946 ± 0.021177 | 5/0/0 | -0.001901 |
 
-差值先按同一种子计算，再跨种子汇总；[paired.csv](paired.csv)包含全部逐种子差值。
+差值先按同一种子计算，再跨种子汇总；[paired.csv](results/paired.csv)包含全部逐种子差值。
 
 ## 边界与错误置信度
 
@@ -73,9 +73,9 @@
 | 16 | posterior | zero_zeta_geometry | 0.500000 | 0.000000 | 0.000000 | 0.000000 | 0.007900 |
 | 16 | posterior | population | 0.497256 | 0.001693 | 0.103312 | 0.000608 | 0.007820 |
 
-![边界配对](posterior-geometry.png)
+![边界配对](results/posterior-geometry.png)
 
-原始坐标中的源/初始阈值是0.5，目标阈值是0。非平面RMS为固定探针上扣除最佳平面后的残差。有限网格仅报告唯一检测根，并保留缺根、多根及无效法向；逐轮覆盖见[trajectory.csv](trajectory.csv)。
+原始坐标中的源/初始阈值是0.5，目标阈值是0。非平面RMS为固定探针上扣除最佳平面后的残差。有限网格仅报告唯一检测根，并保留缺根、多根及无效法向；逐轮覆盖见[trajectory.csv](results/trajectory.csv)。
 
 ## 控制组、验收与档案
 
@@ -90,10 +90,10 @@
 
 30条轨迹、900次尝试全部正常结束，896次接受、4次跳过。跳过均为2维seed1没有有效边界：ζ=0与总体score各2次；没有数值异常或执行失败。独立诊断完成930个状态、238080次探针查询，全部有唯一检测根和有效法向。运行与诊断合计574.0秒，适配进程峰值RSS约729 MiB。
 
-没有新增梯度归零或stationary跳过阈值。近零梯度可能产生被原Armijo接受的浮点级更新；“接受次数”与“实际参数移动”分别报告。全部原因见[process.csv](process.csv)。
+没有新增梯度归零或stationary跳过阈值。近零梯度可能产生被原Armijo接受的浮点级更新；“接受次数”与“实际参数移动”分别报告。全部原因见[process.csv](results/process.csv)。
 
 51项工程测试通过。逐轮核验900次参数状态与候选方程；独立复算965次回溯的后验CE，最大误差1.6e-16；源梯度最大复算差1.14e-18。930组诊断logits重载逐位一致，60组独立源初始化/终点指标复算一致。图中虚线为旧硬标签组均值，实线为新后验组均值，浅细线为新组逐种子轨迹。
 
 后验期望在原512个源输入上计算，消除了给定输入的标签抽样噪声，但仍非源输入分布的精确积分。独立源评价样本及固定探针与上轮逐位相同。表内−0.000000是控制组KL的浮点舍入，不代表负的理论KL。全部适配预测封存后才评价目标标签，未改选checkpoint。正式TSBA未修改，第2步score样本量/带宽实验未运行。
 
-完整日志、逐轮候选/梯度/参数、后验权重、最终checkpoint、诊断logits与几何、代码和环境保存在[独立档案](archive-index.json)。GitHub只含报告、代码、图、标量表和核验清单。
+完整日志、逐轮候选/梯度/参数、后验权重、最终checkpoint、诊断logits与几何、代码和环境保存在[独立档案](results/archive-index.json)。GitHub只含报告、代码、图、标量表和核验清单。

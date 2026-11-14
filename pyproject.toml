@@ -17,7 +17,7 @@ experiments = ["scipy", "matplotlib"]
 tsba = "workflows.tsba.run_task:main"
 
 [tool.setuptools.packages.find]
-include = ["tsba*", "workflows*", "experiments*"]
+include = ["tsba*", "workflows*", "experiments*", "scripts*"]
 namespaces = false
 
 [tool.pytest.ini_options]

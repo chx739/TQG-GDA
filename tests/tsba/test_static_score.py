@@ -5,8 +5,8 @@ import torch
 from tsba.config import Config
 from tsba.classifier import Coordinates
 from tsba.score import train_score
-from experiments.common.synthetic.distributions import GaussianMixtureScore, sample_gmm
-from experiments.common.synthetic.static_score import enlarged_pool, schedules, fit, evaluate, audit_scores, sign_metrics
+from experiments.synthetic.e1_e2_20261109.src.distributions import GaussianMixtureScore, sample_gmm
+from experiments.synthetic.e2_static_score_20261110.src.estimation import enlarged_pool, schedules, fit, evaluate, audit_scores, sign_metrics
 
 
 class StaticScoreTests(unittest.TestCase):

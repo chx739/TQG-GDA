@@ -36,8 +36,9 @@ tsba/
   classifier.py, score.py, boundary.py
   problem.py, subproblem.py, adapt.py, predict.py, pipeline.py
 workflows/tsba/run_task.py   # 通用 TSBA 任务入口
-experiments/common/        # 实验共用工具
-experiments/<数据集>/<轮次_日期>/  # 专用代码、方案与结果
+experiments/common/        # 与轮次无关的通用工具
+experiments/<数据集>/<轮次_日期>/  # src、configs、docs、results、报告
+scripts/<数据集>/<轮次_日期>/      # 启动脚本
 tests/tsba/
 ```
 

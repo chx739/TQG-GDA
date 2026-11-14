@@ -3,8 +3,8 @@ import numpy as np
 import torch
 from scipy.integrate import quad
 from scipy.special import expit
-from experiments.synthetic.p0_20261110.p0_oracle import source_terms,source_quadrature,analyze
-from experiments.common.synthetic.static_score import schedules,new_model
+from experiments.synthetic.p0_20261110.src.p0_oracle import source_terms,source_quadrature,analyze
+from experiments.synthetic.e2_static_score_20261110.src.estimation import schedules,new_model
 from tsba.config import Config
 from tsba.score import denoising_loss
 import copy

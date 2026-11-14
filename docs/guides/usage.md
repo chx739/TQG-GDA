@@ -86,7 +86,7 @@ python -m unittest discover -s tests/tsba -v
 按[冻结方案](../../experiments/validation-plan.md)运行40条固定表示轨迹：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e1_e2_20261109.run \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e1_e2_20261109.run \
   --output /absolute/path/new-tsba-mechanism-run
 ```
 
@@ -97,20 +97,20 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e1_e2_202611
 已完成的首轮结果见[E1/E2报告](../../experiments/synthetic/e1_e2_20261109/report.md)。复核与汇总使用独立入口，输出路径不能覆盖旧文件：
 
 ```bash
-python -m experiments.common.synthetic.verify --run /absolute/path/finished-run --output /absolute/path/checkpoint-audit.json
-python -m experiments.synthetic.e1_e2_20261109.summarize --run /absolute/path/finished-run --output /absolute/path/new-analysis
-python -m experiments.synthetic.e1_e2_20261109.report --summary /absolute/path/new-analysis/summary.json --output /absolute/path/new-analysis/report.md
-python -m experiments.common.synthetic.package --source /absolute/path/experiment-bundle --archive /absolute/other/path/bundle.tar.gz
+python -m scripts.synthetic.e1_e2_20261109.verify --run /absolute/path/finished-run --output /absolute/path/checkpoint-audit.json
+python -m scripts.synthetic.e1_e2_20261109.summarize --run /absolute/path/finished-run --output /absolute/path/new-analysis
+python -m scripts.synthetic.e1_e2_20261109.report --summary /absolute/path/new-analysis/summary.json --output /absolute/path/new-analysis/report.md
+python -m scripts.tools.package --source /absolute/path/experiment-bundle --archive /absolute/other/path/bundle.tar.gz
 ```
 
 `predictions.pt`在研究入口中保存logits；softmax得到概率。自动报告生成证据表格，正式报告另含人工核对后的解释与限制。归档工具逐项核验压缩内容并输出SHA256，不覆盖既有实验目录或档案。
 
 ## 补充源监督与零请求几何对照
 
-[补充协议](../../experiments/synthetic/e2_controls_20261109/controls-plan.json)是查看首轮结果后登记的诊断。直接复用原run的输入、初始头和逐轮ID，运行20条新轨迹，不重训score或覆盖旧档案：
+[补充协议](../../experiments/synthetic/e2_controls_20261109/configs/controls-plan.json)是查看首轮结果后登记的诊断。直接复用原run的输入、初始头和逐轮ID，运行20条新轨迹，不重训score或覆盖旧档案：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_controls_20261109.run_controls \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_controls_20261109.run_controls \
   --parent /absolute/path/original-run-001 \
   --output /absolute/path/new-control-run
 ```
@@ -120,17 +120,17 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_controls_
 补充对照完成后，用下面的只读核验入口重载checkpoint并生成配对表格：
 
 ```bash
-python -m experiments.synthetic.e2_controls_20261109.summarize_controls --run /absolute/path/finished-control-run --output /absolute/path/new-control-analysis
+python -m scripts.synthetic.e2_controls_20261109.summarize_controls --run /absolute/path/finished-control-run --output /absolute/path/new-control-analysis
 ```
 
 已发布的[补充对照报告](../../experiments/synthetic/e2_controls_20261109/report.md)包含20条新轨迹、与原40条轨迹的配对比较、源控制的局限以及对首轮解释的修正。
 
 ## 全源512样本候选与验收
 
-按[全源批次协议](../../experiments/synthetic/e2_full_source_20261110/full-source-plan.json)运行三臂共30条轨迹：
+按[全源批次协议](../../experiments/synthetic/e2_full_source_20261110/configs/full-source-plan.json)运行三臂共30条轨迹：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_full_source_20261110.run_full_source \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_full_source_20261110.run_full_source \
   --original /absolute/path/original-mechanism-run \
   --controls /absolute/path/completed-control-run \
   --output /absolute/path/new-full-source-run
@@ -142,7 +142,7 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_full_sour
 完成后，重载所有新checkpoint、复算每次候选的全源CE，并与旧128批次结果配对：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_full_source_20261110.summarize_full_source \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_full_source_20261110.summarize_full_source \
   --run /absolute/path/finished-full-source-run \
   --output /absolute/path/new-full-source-analysis
 ```
@@ -154,10 +154,10 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_full_sour
 
 ## 既有全源checkpoint回放
 
-按[回放协议](../../experiments/synthetic/e2_replay_20261110/replay-plan.json)评价源泛化、目标置信度及固定探针边界；只加载已保存的参数，参数梯度关闭，既有目录不改写：
+按[回放协议](../../experiments/synthetic/e2_replay_20261110/configs/replay-plan.json)评价源泛化、目标置信度及固定探针边界；只加载已保存的参数，参数梯度关闭，既有目录不改写：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_replay_20261110.run_replay \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_replay_20261110.run_replay \
   --parent /absolute/path/completed-full-source-run \
   --output /absolute/path/new-checkpoint-replay-run
 ```
@@ -168,7 +168,7 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_replay_20
 回放结束后，重算目标logits、指标和边界根残差并汇总：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_replay_20261110.summarize_replay \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_replay_20261110.summarize_replay \
   --run /absolute/path/completed-checkpoint-replay-run \
   --output /absolute/path/new-replay-analysis
 ```
@@ -178,10 +178,10 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_replay_20
 
 ## 解析源后验对照
 
-[后验CE协议](../../experiments/synthetic/e2_source_posterior_20261110/source-posterior-plan.json)只替换研究入口的源损失，不改变生产TSBA。候选与验收同时替换，复用完整源批次、原目标ID及总体score：
+[后验CE协议](../../experiments/synthetic/e2_source_posterior_20261110/configs/source-posterior-plan.json)只替换研究入口的源损失，不改变生产TSBA。候选与验收同时替换，复用完整源批次、原目标ID及总体score：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_source_posterior_20261110.run_source_posterior \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_source_posterior_20261110.run_source_posterior \
   --parent /absolute/path/full-source-run \
   --replay /absolute/path/checkpoint-replay-run \
   --output /absolute/path/new-source-posterior-run
@@ -193,7 +193,7 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_source_po
 核验候选方程、每次后验CE验收及checkpoint，并与旧硬标签结果配对：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_source_posterior_20261110.summarize_source_posterior \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_source_posterior_20261110.summarize_source_posterior \
   --run /absolute/path/completed-source-posterior-run \
   --output /absolute/path/new-source-posterior-analysis
 ```
@@ -203,13 +203,13 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_source_po
 
 ## 静态score诊断
 
-[五组单因素协议](../../experiments/synthetic/e2_static_score_20261110/static-score-plan.json)固定分类头、查询点和400次Adam更新，只改变目标样本量或带宽，不更新分类器：
+[五组单因素协议](../../experiments/synthetic/e2_static_score_20261110/configs/static-score-plan.json)固定分类头、查询点和400次Adam更新，只改变目标样本量或带宽，不更新分类器：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_static_score_20261110.run_static_score \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_static_score_20261110.run_static_score \
   --parent /absolute/path/completed-original-e1-e2-run \
   --output /absolute/path/new-static-score-run
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_static_score_20261110.summarize_static_score \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_static_score_20261110.summarize_static_score \
   --run /absolute/path/completed-static-score-run \
   --output /absolute/path/new-static-score-analysis
 ```
@@ -219,15 +219,15 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_static_sc
 ### P0：延长固定score训练预算与简化oracle
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.p0_20261110.run_p0 \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.p0_20261110.run_p0 \
   --parent /absolute/path/completed-static-score-run \
   --original /absolute/path/completed-original-e1-e2-run \
   --output /absolute/path/new-p0-run
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.p0_20261110.summarize_p0 \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.p0_20261110.summarize_p0 \
   --run /absolute/path/completed-p0-run \
   --output /absolute/path/new-p0-analysis
 ```
 
 固定2维、8192样本和原带宽/查询；从原400步Adam状态连续训练，固定末尾400/1600/6400步比较。原父档案先后校验且不可覆盖；输出路径必须不存在。[P0报告](../../experiments/synthetic/p0_20261110/report.md)包含逐种子结果和完整本地archive索引。6400步静态检查5/5通过，但源约束下标量oracle收益仍小；本入口不运行学习score闭环。`p0_oracle.py`是固定斜率阈值诊断，不是生产分类头实现。
 
-真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/r1_20261111/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/r1_20261111/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。
+真实图R1详细设计：[Mutagenicity流程](../../experiments/mutagenicity/r1_20261111/docs/mutagenicity-stage1-protocol.md)、[机器清单](../../experiments/mutagenicity/r1_20261111/configs/stage1-plan.json)。诊断包含类别相关密度结构与源边界方向；480个小头拟合的执行驱动仍待实现/验收，当前未运行真实图训练。

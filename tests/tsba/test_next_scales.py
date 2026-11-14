@@ -8,12 +8,12 @@ from unittest.mock import patch
 
 import torch
 
-from experiments.common.synthetic.archive import manifest, write_json
-from experiments.common.real_data.data import canonical_sha
-from experiments.common.real_data.density import (
+from experiments.common.io import manifest, write_json
+from experiments.mutagenicity.r1_20261111.src.data import canonical_sha
+from experiments.mutagenicity.r1_20261111.src.density import (
     GaussianKDE, bootstrap_counts, finite_support, valley_observation,
 )
-import experiments.mutagenicity.r1b_20261111.scales as scales
+import experiments.mutagenicity.r1b_20261111.src.scales as scales
 
 
 class FrozenScaleTests(unittest.TestCase):

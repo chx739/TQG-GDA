@@ -18,7 +18,7 @@ BA有升有降：学习score 21/48格、KDE 6/12格的平均BA高于原始源头
 
 ## 1. score 是否学得更好
 
-经验 KDE 是相同有限目标池、相同带宽的精确平滑密度参考，不是总体真实 score。两个独立固定噪声上的DSM只用于诊断，分类适配使用精确端点。完整逐种子值见 [score-endpoints.csv](score-endpoints.csv)。 该表同时保留全点、近零、非近零分层与相邻端点请求变化。旧64次查询每个任务—种子的有效锚点为15–34个；本轮所有组合在预定 `abs(σ0*n·sKDE)≤1e-6` 阈值下的近零点数均为0，因此近零层指标为NA，非近零符号率与全点一致。
+经验 KDE 是相同有限目标池、相同带宽的精确平滑密度参考，不是总体真实 score。两个独立固定噪声上的DSM只用于诊断，分类适配使用精确端点。完整逐种子值见 [score-endpoints.csv](results/score-endpoints.csv)。 该表同时保留全点、近零、非近零分层与相邻端点请求变化。旧64次查询每个任务—种子的有效锚点为15–34个；本轮所有组合在预定 `abs(σ0*n·sKDE)≤1e-6` 阈值下的近零点数均为0，因此近零层指标为NA，非近零符号率与全点一致。
 
 | 任务 | h/σ0 | 更新 | 主噪声DSM | 第二噪声DSM | 法向RMSE·σ0 | 请求RMSE/σ0 | 非近零符号一致率 |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -39,11 +39,11 @@ BA有升有降：学习score 21/48格、KDE 6/12格的平均BA高于原始源头
 | 0→3 | 2 | 3600 | 0.4234 ± 0.0193 | 0.4236 ± 0.0235 | 0.3431 ± 0.0196 | 0.0343 ± 0.0020 | 0.8290 ± 0.0363 |
 | 0→3 | 2 | 7200 | 0.3956 ± 0.0187 | 0.3957 ± 0.0235 | 0.3210 ± 0.0146 | 0.0321 ± 0.0015 | 0.8686 ± 0.0559 |
 
-![完整DSM曲线](figures/score-curves.png)
+![完整DSM曲线](results/figures/score-curves.png)
 
 ## 2. 完整30次尝试的目标分类结果
 
-先列出[逐种子完整网格](per-seed-grid.md)：300个正常配置×种子单元，含原始源/几何源/反向三个配对比较；下面再汇总五种子的均值与样本SD。全部六类组及0/1/10/30终点的绝对指标在[metrics.csv](metrics.csv)。
+先列出[逐种子完整网格](docs/per-seed-grid.md)：300个正常配置×种子单元，含原始源/几何源/反向三个配对比较；下面再汇总五种子的均值与样本SD。全部六类组及0/1/10/30终点的绝对指标在[metrics.csv](results/metrics.csv)。
 
 Δ均为正常组减对应对照。NLL差值<0表示改善；BA差值>0表示改善。优于几何源对照但仍差于原始源头，只表示增量，不能称整体改善。
 
@@ -58,9 +58,9 @@ BA有升有降：学习score 21/48格、KDE 6/12格的平均BA高于原始源头
 | 0→3 | 几何源 λ=10 | 0.79564 ± 0.24194 | 66.08 ± 3.11 |
 | 0→3 | 几何源 λ=100 | 0.86854 ± 0.31566 | 65.83 ± 3.93 |
 
-![正常减几何源对照NLL](figures/delta_nll_vs_geometry.png)
+![正常减几何源对照NLL](results/figures/delta_nll_vs_geometry.png)
 
-![正常减原始源头NLL](figures/delta_nll_vs_original.png)
+![正常减原始源头NLL](results/figures/delta_nll_vs_original.png)
 
 ### 0→1，h=1σ0
 
@@ -148,13 +148,13 @@ BA有升有降：学习score 21/48格、KDE 6/12格的平均BA高于原始源头
 
 下图第一项为已接受步长下的密度分量 `αDδT/σ0` 的一阶RMS；第二项为真实前向计算的总归一化margin变化RMS。后者同时含源项、密度项和非线性效应，二者均不是重新定位后的精确边界距离。
 
-![已接受密度分量的一阶RMS](figures/executed_target_margin_rms_sigma.png)
+![已接受密度分量的一阶RMS](results/figures/executed_target_margin_rms_sigma.png)
 
-![真实总margin变化RMS](figures/actual_margin_rms_sigma.png)
+![真实总margin变化RMS](results/figures/actual_margin_rms_sigma.png)
 
-完整逐轨迹统计见 [trajectory-mechanisms.csv](trajectory-mechanisms.csv)，逐轮值见 [mechanisms.csv](mechanisms.csv)。每个种子的尝试均值先单独计算，不能把18,900轮当作独立重复。源fit/validation/diagnostic的全部NLL、BA及差值见 [summary.csv](summary.csv) 和 [paired-comparisons.csv](paired-comparisons.csv)。
+完整逐轨迹统计见 [trajectory-mechanisms.csv](results/trajectory-mechanisms.csv)，逐轮值见 [mechanisms.csv](results/mechanisms.csv)。每个种子的尝试均值先单独计算，不能把18,900轮当作独立重复。源fit/validation/diagnostic的全部NLL、BA及差值见 [summary.csv](results/summary.csv) 和 [paired-comparisons.csv](results/paired-comparisons.csv)。
 
-首轮共同小步是旁路，未接入任何主轨迹；共同α按同种子/任务/λ下所有估计器/带宽/预算和方向确定。对应全部评价见 [first-round.csv](first-round.csv)。
+首轮共同小步是旁路，未接入任何主轨迹；共同α按同种子/任务/λ下所有估计器/带宽/预算和方向确定。对应全部评价见 [first-round.csv](results/first-round.csv)。
 
 ## 4. 源对照暴露的具体问题
 
@@ -186,7 +186,7 @@ BA有升有降：学习score 21/48格、KDE 6/12格的平均BA高于原始源头
 
 这说明当前问题不只在“边界是否移动”：源CE继续拟合时，错误预测也可能变得更自信。边界移动惩罚和执行上限约束的是旧边界上的归一化margin变化，并不直接限制远离边界样本的置信度；同时放大输出logits可以保持零边界的位置。这是优先检查置信度自由度的依据，不把这份事后观察当作已完成的独立干预实验。
 
-完整逐种子分解：[posthoc-source-control-confidence.csv](posthoc-source-control-confidence.csv)。
+完整逐种子分解：[posthoc-source-control-confidence.csv](results/posthoc-source-control-confidence.csv)。
 
 ### λ如何改变执行：固定展示7200步端点
 
@@ -232,7 +232,7 @@ BA有升有降：学习score 21/48格、KDE 6/12格的平均BA高于原始源头
 
 - B是已有开发集；本轮没有用B挑选score端点、中间轮、种子或新增配置。final标签关闭。
 - 本轮源/目标batch均为128，边界逐轮刷新；R1b为全源779、固定旧64查询单步，两轮差异不能归因于训练步数一个因素。
-- 原始源头是共同起点。旧目标监督参考仅用于报告对照，见 [prior-target-reference.json](prior-target-reference.json)；没有新增目标监督训练。
+- 原始源头是共同起点。旧目标监督参考仅用于报告对照，见 [prior-target-reference.json](results/prior-target-reference.json)；没有新增目标监督训练。
 - 所有模型、预测、无标签诊断先封OBS，再读取B。拒绝/跳过计入30次尝试；失败不替换种子。
 
 执行代码：`71bb1a5607422714b498bdf6dcd7aa2143650608`。
@@ -241,7 +241,7 @@ BA有升有降：学习score 21/48格、KDE 6/12格的平均BA高于原始源头
 
 OBS：`645b4229f7d5e9ef9245cd98940fee9209a0d8d4d5ce9583651d5ac4684433b2`。
 
-执行前协议：[r2-protocol.md](r2-protocol.md)。原始结果：[metrics.csv](metrics.csv)；完整配对网格：[paired-comparisons.csv](paired-comparisons.csv)。
+执行前协议：[r2-protocol.md](docs/r2-protocol.md)。原始结果：[metrics.csv](results/metrics.csv)；完整配对网格：[paired-comparisons.csv](results/paired-comparisons.csv)。
 
 
 执行核验：全部18,900次尝试均被各自生产回溯接受；30组首轮共同状态/矩阵核验通过；3,150份checkpoint预测精确重载；真实小试中断恢复的31个状态逐位一致。目标A未新读，B只在OBS后读取，final访问为0。
@@ -250,4 +250,4 @@ OBS：`645b4229f7d5e9ef9245cd98940fee9209a0d8d4d5ce9583651d5ac4684433b2`。
 
 独立代码审查及修复：首轮数值失败按缺失结果保留；JSON/封存/评价恢复修复后执行。FINAL完成后又修复一个manifest自身临时硬链接的极窄中断恢复窗口，没有重训或重算评价。最终122项工程测试通过；这些工程检查不充当方法有效性证据。
 
-`attempt-001` 仅做输入登记，未训练、未读取目标标签；因补齐评价恢复而在正式小试前登记为被替代，已另存完整压缩档。完整主实验是 `attempt-002`。见 [archive-index.json](archive-index.json)。
+`attempt-001` 仅做输入登记，未训练、未读取目标标签；因补齐评价恢复而在正式小试前登记为被替代，已另存完整压缩档。完整主实验是 `attempt-002`。见 [archive-index.json](results/archive-index.json)。

@@ -3,8 +3,8 @@ import unittest
 import torch
 from torch import nn
 from tsba.classifier import Coordinates
-from experiments.common.synthetic.distributions import sample_gmm
-from experiments.common.synthetic.replay import posterior_log_prob,source_metrics,target_metrics,boundary_probe
+from experiments.synthetic.e1_e2_20261109.src.distributions import sample_gmm
+from experiments.synthetic.e2_replay_20261110.src.diagnostics import posterior_log_prob,source_metrics,target_metrics,boundary_probe
 
 
 class RawMargin(nn.Module):

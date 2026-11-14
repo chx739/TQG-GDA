@@ -7,14 +7,14 @@
 | 文件 | 含义 |
 |---|---|
 | `README.md` | 状态、研究问题、各证据入口 |
-| `*-protocol.md`、`*-plan.json` | 运行前的方案与计划配置 |
-| `executed-plan.json` | 从真实运行目录复制的执行计划，不手工用计划补填 |
-| `executed-configs.json` | 实际配置快照及来源 SHA256；注明覆盖范围 |
-| `evidence.json` | 执行代码提交、来源、计划与实际差异、验证方式 |
-| `report.md`、汇总表、必要图表 | 结果、失败项、限制和研究结论 |
-| `archive-index.json` 或原有存档索引 | 仓库外原始产物位置、大小、哈希 |
+| `docs/*-protocol.md`、`configs/*-plan.json` | 运行前的方案与计划配置 |
+| `configs/executed-plan.json` | 从真实运行目录复制的执行计划，不手工用计划补填 |
+| `configs/executed-configs.json` | 实际配置快照及来源 SHA256；注明覆盖范围 |
+| `results/evidence.json` | 执行代码提交、来源、计划与实际差异、验证方式 |
+| `report.md`、`results/` 下的汇总表和图表 | 结果、失败项、限制和研究结论 |
+| `results/archive-index.json` 或原有存档索引 | 仓库外原始产物位置、大小、哈希 |
 
-数据集共享的输入来源可留在数据集目录。跨轮历史总设计保留在实验根目录。各轮专用代码与报告放在同一目录；跨轮复用的实现集中到 `experiments/common/`，核心算法仍在 `tsba/`。轮次目录使用下划线，以便作为 Python 模块导入。
+数据集共享的输入来源可留在数据集目录。跨轮历史总设计保留在实验根目录。各轮专用代码与报告放在同一轮目录的 `src/`；纯通用工具集中到 `experiments/common/`，带实验假设的跨轮依赖保留在所属实验中并记录依赖，核心算法仍在 `tsba/`。轮次目录使用下划线，以便作为 Python 模块导入。
 
 ## 计划与执行分开
 
@@ -33,3 +33,5 @@
 已有实验的完整产物仍位于原档案位置，例如 `/home/hxchen/experiments/tsba/`。报告索引记录位置和 SHA256；本地路径不代表其他人有下载权限。本次不再新增产物必须放仓库外或文件体积限制。
 
 部分历史计划在完成后追加过状态、审计和后续实验字段；`plan_bytes_match` 区分字节一致，`plan_values_match` 区分 JSON 值一致，具体差异保存在 `plan_value_differences`。R4 的一致性比较指主运行，A0 来源在同一记录内注明。
+
+启动脚本在仓库根目录 `scripts/`，各轮 README 列出调用方式和跨轮依赖。每轮按小项目组织，不在目录内另建 Git 仓库。

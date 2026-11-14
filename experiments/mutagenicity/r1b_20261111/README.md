@@ -1,30 +1,54 @@
-# r1b_20261111 证据入口
+# r1b_20261111
 
-状态：已完成。具体结论与适用范围以[报告](report.md)为准。
+状态：已完成。
 
-- 计划配置：[next-round-plan.json](next-round-plan.json)；[实验方案](r1b-protocol.md)。
-- 实际执行计划：[executed-plan.json](executed-plan.json)。
-- 实际配置快照及各文件 SHA256：[executed-configs.json](executed-configs.json)。
-- 来源、计划差异与代码提交：[evidence.json](evidence.json)。
+## 问题与结论
 
-这些执行记录从既有档案逐字节提取并核对成员哈希，并非根据当前计划重新填写。配置快照不包含所有选中 checkpoint 和逐任务动态状态；这些仍由报告和原始档案提供。历史路径和旧提交号保留原貌；清理后执行提交号见本轮 `evidence.json`。
+**研究问题：** 参考头、密度尺度、静态 score 和单步更新反映哪些问题？
 
-后续重跑必须创建新 attempt，不覆盖这些文件。命令、数据角色及评价权限见方案与报告；目录整理不授权重跑或使用目标标签。
+**结论摘要：** 这些诊断不能单独证明闭环适配有效，具体结论见完整报告。 数值、失败项与适用范围见[完整报告](report.md)。
 
-计划与实际配置字段一致。
+## 目录
 
-## 本轮代码
+```text
+README.md     阅读与运行入口
+src/          本轮实验实现
+configs/      计划配置与实际配置
+docs/         实验方案及补充说明（如有）
+results/      汇总表、图表、日志和核验材料
+report.md     结论与分析
+```
 
-| 文件 | 用途 |
-|---|---|
-| [evaluate.py](evaluate.py) | 本轮专用实现，由运行或分析入口调用 |
-| [locality_figures.py](locality_figures.py) | 命令行入口：`python -m experiments.mutagenicity.r1b_20261111.locality_figures --help` |
-| [mechanism_summary.py](mechanism_summary.py) | 命令行入口：`python -m experiments.mutagenicity.r1b_20261111.mechanism_summary --help` |
-| [observation_summary.py](observation_summary.py) | 命令行入口：`python -m experiments.mutagenicity.r1b_20261111.observation_summary --help` |
-| [publish.py](publish.py) | 命令行入口：`python -m experiments.mutagenicity.r1b_20261111.publish --help` |
-| [run.py](run.py) | 命令行入口：`python -m experiments.mutagenicity.r1b_20261111.run --help` |
-| [scales.py](scales.py) | 本轮专用实现，由运行或分析入口调用 |
-| [training_curves.py](training_curves.py) | 命令行入口：`python -m experiments.mutagenicity.r1b_20261111.training_curves --help` |
-| [warm.py](warm.py) | 本轮专用实现，由运行或分析入口调用 |
+## 配置与证据
 
-共用实现见 [experiments/common](../../common/README.md)。在仓库根目录运行；实际训练与评价需遵循本轮协议。
+- [next-round-plan.json](configs/next-round-plan.json)
+- [r1b-protocol.md](docs/r1b-protocol.md)
+- [实际执行配置](configs/executed-plan.json)
+- [配置快照](configs/executed-configs.json)
+- [执行来源与计划差异](results/evidence.json)
+- [原始产物位置与校验](results/archive-index.json)
+
+## 如何运行
+
+从仓库根目录安装 `python -m pip install -e '.[experiments]'`。启动脚本放在仓库根目录的 `scripts/`，本轮实现放在 `src/`。先查看参数，再按方案提供输入和新输出目录：
+
+- [locality_figures.py](../../../scripts/mutagenicity/r1b_20261111/locality_figures.py)：`python -m scripts.mutagenicity.r1b_20261111.locality_figures --help`
+- [mechanism_summary.py](../../../scripts/mutagenicity/r1b_20261111/mechanism_summary.py)：`python -m scripts.mutagenicity.r1b_20261111.mechanism_summary --help`
+- [observation_summary.py](../../../scripts/mutagenicity/r1b_20261111/observation_summary.py)：`python -m scripts.mutagenicity.r1b_20261111.observation_summary --help`
+- [publish.py](../../../scripts/mutagenicity/r1b_20261111/publish.py)：`python -m scripts.mutagenicity.r1b_20261111.publish --help`
+- [run.py](../../../scripts/mutagenicity/r1b_20261111/run.py)：`python -m scripts.mutagenicity.r1b_20261111.run --help`
+- [training_curves.py](../../../scripts/mutagenicity/r1b_20261111/training_curves.py)：`python -m scripts.mutagenicity.r1b_20261111.training_curves --help`
+
+历史计划中的机器路径与已封存运行身份保留原貌；重现原记录需使用对应的代码快照与档案，当前入口用于按照协议开展新的执行。不会仅因查看帮助而访问真实目标标签。
+
+## 代码依赖
+
+核心算法来自 `tsba/`；通用工具来自 [experiments/common](../../common/README.md)。
+
+本轮显式沿用以下历史实验的实现，不将其伪装成通用工具，也不复制多份：
+
+- [r1_20261111](../r1_20261111/README.md)
+
+## 验证
+
+在仓库根目录运行 `python -m unittest discover -s tests/tsba -v`。工程检查与研究效果分开报告；原始结果不因目录整理重新生成。

@@ -1,6 +1,6 @@
 # Mutagenicity R1b：参考头、密度尺度与单步验证
 
-日期：2026-11-11。执行代码：`64de9a991be7fd5ae46565620f02f8f0f8e5757f`。预先登记的[实验协议](r1b-protocol.md)、[机器计划](next-round-plan.json)和[独立运行前 review](r1b-pre-run-review.json)。本报告接续[R1](../r1_20261111/report.md)，原始方法设计正文与生产默认值未修改。
+日期：2026-11-11。执行代码：`64de9a991be7fd5ae46565620f02f8f0f8e5757f`。预先登记的[实验协议](docs/r1b-protocol.md)、[机器计划](configs/next-round-plan.json)和[独立运行前 review](results/r1b-pre-run-review.json)。本报告接续[R1](../r1_20261111/report.md)，原始方法设计正文与生产默认值未修改。
 
 ## 结论
 
@@ -46,7 +46,7 @@ NLL越低越好，BA越高越好。所有selected均按A29验证CE选择，不�
 | 源头初始化，lr=1e-4 | 75.337 ± 4.628 | 0.47072 ± 0.04329 | 65.972 ± 2.498 | 0.63907 ± 0.04088 |
 | 旧随机MLP参考 | 72.265 ± 2.447 | 0.55616 ± 0.13543 | 65.451 ± 1.312 | 0.62951 ± 0.01694 |
 
-![参考分类头](warm-reference-heads.png)
+![参考分类头](results/warm-reference-heads.png)
 
 共同lr=1e-3的初始化比较：0→1相对随机头，BA增加0.885个百分点、NLL下降0.01585，两个指标均有4/5种子改善。0→3的BA增加1.742个百分点，但平均NLL**增加**0.00227，不能说两个任务的NLL都优于随机初始化。lr=1e-4只作敏感性设置，不把它与旧lr=1e-3的差异全部归因于初始化。
 
@@ -56,11 +56,11 @@ NLL越低越好，BA越高越好。所有selected均按A29验证CE选择，不�
 
 step0被选中的次数：0→1两个学习率分别4/20、5/20；0→3均6/20，共21/80。所有拟合仍执行800步并存档。选中步数的均值/中位数：0→1的lr=1e-3为260/170，lr=1e-4为486/800；0→3分别为193/70、439/520。固定200/800端点也完整报告；例如共同lr=1e-3的800步BA为71.423%/64.167%，低于selected。继续训练不自动改善BA；本轮也不能把这些小预算、CE选模的头当成BA的理论上限。
 
-![A训练与内部验证曲线](warm-training-curves.png)
+![A训练与内部验证曲线](results/warm-training-curves.png)
 
-[曲线与选中步数统计](warm-training-curves.json)来自封存的A118/A29历史；每20更新展示一点，先平均四折、再汇总五种子。完整逐步训练记录和每20步验证记录保存在`warm/seed{seed}/domain{domain}/fold{fold}/lr{lr}/history.json`。
+[曲线与选中步数统计](results/warm-training-curves.json)来自封存的A118/A29历史；每20更新展示一点，先平均四折、再汇总五种子。完整逐步训练记录和每20步验证记录保存在`warm/seed{seed}/domain{domain}/fold{fold}/lr{lr}/history.json`。
 
-数据：[完整均值与端点](evaluation/warm_summary.json)、[逐种子结果](evaluation/warm_by_seed.csv)、[配对差异](evaluation/warm_paired.json)。
+数据：[完整均值与端点](results/evaluation/warm_summary.json)、[逐种子结果](results/evaluation/warm_by_seed.csv)、[配对差异](results/evaluation/warm_paired.json)。
 
 ## E2：尺度扩大是否解决局部观测不足？
 
@@ -79,15 +79,15 @@ step0被选中的次数：0→1两个学习率分别4/20、5/20；0→3均6/20�
 
 22条双侧独立图达标记录全部来自0→3的参考边界，源边界没有达标位置。所有面板的双侧B支持均未达标；**“既有类别分隔又有密度谷”的条件比例为NA，不能写成0%。**
 
-![双侧支持与局部覆盖](neighborhood-locality.png)
+![双侧支持与局部覆盖](results/neighborhood-locality.png)
 
 半径2时，双侧邻域并集占完整目标池的最大比例：目标1源/参考边界分别1.66%/2.31%，目标3分别3.41%/6.91%。没有扩大到覆盖整个目标池，但这也不证明已找到足够局部支持。具体每侧图数、B数及覆盖分布全部保留，不只展示合格点。
 
-![核权重与ESS](kernel-concentration.png)
+![核权重与ESS](results/kernel-concentration.png)
 
 加倍带宽后，去掉生成图的LOO明显提高有效支持；例如目标3源边界的三点最小ESS中位数由main的2.149变为LOO的3.808。但门槛所需的双侧类别信息仍不足。结论是**观察尺度确实构成瓶颈，扩大尺度只解决了一部分**，没有得到类别相关低密度谷的证据，也没有得到否定它的证据。
 
-数据：[全部紧凑密度统计](density-summary.json)、[CSV](density-summary.csv)、[所有面板的评价汇总](evaluation/scales_groups.json)。完整逐bank/逐种子/查询记录和距离分布在本地档案；紧凑公开统计明确区分五种子分层均值与相关查询的描述性分位数。
+数据：[全部紧凑密度统计](results/density-summary.json)、[CSV](results/density-summary.csv)、[所有面板的评价汇总](results/evaluation/scales_groups.json)。完整逐bank/逐种子/查询记录和距离分布在本地档案；紧凑公开统计明确区分五种子分层均值与相关查询的描述性分位数。
 
 ## E3：密度请求是否提供增量效果？
 
@@ -104,9 +104,9 @@ step0被选中的次数：0→1两个学习率分别4/20、5/20；0→3均6/20�
 
 均为五种子均值；相对误差分母是同一查询处的**经验法向score范数**。带宽增加时经验score本身也变小，绝对RMSE下降不能单独解释为学习充分。学习score的幅值仍明显低于经验score；末epoch被选中说明当前选模落在预算末端，不证明增加步数就会改善分类。
 
-![学习score静态比较](static-score-comparison.png)
+![学习score静态比较](results/static-score-comparison.png)
 
-数据：[训练与静态指标](scores/index.json)、[相对误差和机制审计](mechanism-summary.json)。
+数据：[训练与静态指标](results/scores/index.json)、[相对误差和机制审计](results/mechanism-summary.json)。
 
 ### 相同步长的机制对照
 
@@ -146,11 +146,11 @@ step0被选中的次数：0→1两个学习率分别4/20、5/20；0→3均6/20�
 
 120个非零候选全部通过生产回溯，40个zero输出源头；最大实际margin移动为0.09930σ0，共同小步最大为0.08617σ0。**接受率高没有转化成score增量分类收益。**
 
-![全部单步配对结果](single-step-paired-nll.png)
+![全部单步配对结果](results/single-step-paired-nll.png)
 
 目标3的经验normal−reverse生产NLL差值约+0.000663/+0.000639，比共同小步下大得多。原因包括seed3405的反向组使用1/32，而normal/matched使用1/16；因此这两个生产差值不能单独解释为密度方向优劣。正常与`matched_source`在本次运行中步长相同，其比较没有该步长差异。
 
-全部设置和逐种子差异：[指标汇总](evaluation/steps_summary.json)、[配对CSV](evaluation/steps_comparisons.csv)、[配对汇总](evaluation/steps_paired.json)。没有只报告接受子集或有利设置。
+全部设置和逐种子差异：[指标汇总](results/evaluation/steps_summary.json)、[配对CSV](results/evaluation/steps_comparisons.csv)、[配对汇总](results/evaluation/steps_paired.json)。没有只报告接受子集或有利设置。
 
 ## 当前方法前提与下一步
 
@@ -179,4 +179,4 @@ SHA256：`e4530be8b06b9d83a5d8aff74dd6d77cb37a11d8a129cf3376ee59dba12f220c`。
 
 其中保存3,280个微调step0/每20步checkpoint、40组旧随机对照的初始/选中状态、2,000个score每epoch checkpoint及初始/选中模型、源GNN依赖、候选矩阵/分解、320个输出视图、预测、邻域、bootstrap抽样、日志、代码快照、环境和标签访问审计。源GNN的完整历史训练仍在R1档案，R1b按SHA引用并复制必要状态。
 
-后处理只对已封存记录做统计和绘图，没有新训练、查询或密度估计。完整后处理记录另存`analysis-001`及压缩档。公开报告只含汇总与图表；详细路径、SHA、封存标识和后处理代码见[档案索引](archive-index.json)、[独立结果核验](result-review.json)、[输入哈希](input-hash-manifest.json)。
+后处理只对已封存记录做统计和绘图，没有新训练、查询或密度估计。完整后处理记录另存`analysis-001`及压缩档。公开报告只含汇总与图表；详细路径、SHA、封存标识和后处理代码见[档案索引](results/archive-index.json)、[独立结果核验](results/result-review.json)、[输入哈希](results/input-hash-manifest.json)。

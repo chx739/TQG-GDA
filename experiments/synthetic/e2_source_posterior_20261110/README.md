@@ -1,24 +1,53 @@
-# e2_source_posterior_20261110 证据入口
+# e2_source_posterior_20261110
 
-状态：已完成。具体结论与适用范围以[报告](report.md)为准。
+状态：已完成。
 
-- 计划配置：[source-posterior-plan.json](source-posterior-plan.json)。
-- 实际执行计划：[executed-plan.json](executed-plan.json)。
-- 实际配置快照及各文件 SHA256：[executed-configs.json](executed-configs.json)。
-- 来源、计划差异与代码提交：[evidence.json](evidence.json)。
+## 问题与结论
 
-这些执行记录从既有档案逐字节提取并核对成员哈希，并非根据当前计划重新填写。配置快照不包含所有选中 checkpoint 和逐任务动态状态；这些仍由报告和原始档案提供。历史路径和旧提交号保留原貌；清理后执行提交号见本轮 `evidence.json`。
+**研究问题：** 消除源标签抽样噪声后，目标密度请求是否更有效？
 
-后续重跑必须创建新 attempt，不覆盖这些文件。命令、数据角色及评价权限见方案与报告；目录整理不授权重跑或使用目标标签。
+**结论摘要：** 总体 score 在该设置下带来小幅收益，仍受目标权衡影响。 数值、失败项与适用范围见[完整报告](report.md)。
 
-已记录计划与执行副本的字段差异，见 `evidence.json` 的 `plan_value_differences`；包含事后补充的状态或审计字段，不应直接解释为训练参数改动。
+## 目录
 
-## 本轮代码
+```text
+README.md     阅读与运行入口
+src/          本轮实验实现
+configs/      计划配置与实际配置
+docs/         实验方案及补充说明（如有）
+results/      汇总表、图表、日志和核验材料
+report.md     结论与分析
+```
 
-| 文件 | 用途 |
-|---|---|
-| [run_source_posterior.py](run_source_posterior.py) | 命令行入口：`python -m experiments.synthetic.e2_source_posterior_20261110.run_source_posterior --help` |
-| [source_posterior.py](source_posterior.py) | 本轮专用实现，由运行或分析入口调用 |
-| [summarize_source_posterior.py](summarize_source_posterior.py) | 命令行入口：`python -m experiments.synthetic.e2_source_posterior_20261110.summarize_source_posterior --help` |
+## 配置与证据
 
-共用实现见 [experiments/common](../../common/README.md)。在仓库根目录运行；实际训练与评价需遵循本轮协议。
+- [source-posterior-plan.json](configs/source-posterior-plan.json)
+- [实际执行配置](configs/executed-plan.json)
+- [配置快照](configs/executed-configs.json)
+- [执行来源与计划差异](results/evidence.json)
+- [原始产物位置与校验](results/archive-index.json)
+- [结果汇总：summary.json](results/summary.json)
+
+## 如何运行
+
+从仓库根目录安装 `python -m pip install -e '.[experiments]'`。启动脚本放在仓库根目录的 `scripts/`，本轮实现放在 `src/`。先查看参数，再按方案提供输入和新输出目录：
+
+- [run_source_posterior.py](../../../scripts/synthetic/e2_source_posterior_20261110/run_source_posterior.py)：`python -m scripts.synthetic.e2_source_posterior_20261110.run_source_posterior --help`
+- [summarize_source_posterior.py](../../../scripts/synthetic/e2_source_posterior_20261110/summarize_source_posterior.py)：`python -m scripts.synthetic.e2_source_posterior_20261110.summarize_source_posterior --help`
+
+历史计划中的机器路径与已封存运行身份保留原貌；重现原记录需使用对应的代码快照与档案，当前入口用于按照协议开展新的执行。不会仅因查看帮助而访问真实目标标签。
+
+## 代码依赖
+
+核心算法来自 `tsba/`；通用工具来自 [experiments/common](../../common/README.md)。
+
+本轮显式沿用以下历史实验的实现，不将其伪装成通用工具，也不复制多份：
+
+- [e1_e2_20261109](../e1_e2_20261109/README.md)
+- [e2_controls_20261109](../e2_controls_20261109/README.md)
+- [e2_full_source_20261110](../e2_full_source_20261110/README.md)
+- [e2_replay_20261110](../e2_replay_20261110/README.md)
+
+## 验证
+
+在仓库根目录运行 `python -m unittest discover -s tests/tsba -v`。工程检查与研究效果分开报告；原始结果不因目录整理重新生成。

@@ -1,30 +1,56 @@
-# r4_20261112 证据入口
+# r4_20261112
 
-状态：已完成。具体结论与适用范围以[报告](report.md)为准。
+状态：已完成。
 
-- 计划配置：[r4-plan.json](r4-plan.json)；[实验方案](r4-protocol.md)。
-- 实际执行计划：[executed-plan.json](executed-plan.json)。
-- 实际配置快照及各文件 SHA256：[executed-configs.json](executed-configs.json)。
-- 来源、计划差异与代码提交：[evidence.json](evidence.json)。
+## 问题与结论
 
-配置来源文件从既有档案提取并核对成员哈希，R4 的展示记录合并了主运行与 A0，并非根据当前计划重新填写。配置快照不包含所有选中 checkpoint 和逐任务动态状态；这些仍由报告和原始档案提供。历史路径和旧提交号保留原貌；清理后执行提交号见本轮 `evidence.json`。
+**研究问题：** 固定配置在所有迁移方向上是否有稳定收益？
 
-后续重跑必须创建新 attempt，不覆盖这些文件。命令、数据角色及评价权限见方案与报告；目录整理不授权重跑或使用目标标签。
+**结论摘要：** 包含 A0 的完整比较中，score 尚未表现出平均额外收益。 数值、失败项与适用范围见[完整报告](report.md)。
 
-R4 主运行和 A0 补跑统一记录在本目录、同一份报告及执行配置中。`executed-plan.json` 的 `main` 和 `A0_extension` 保留两个实际运行配置；它是整合记录，不是可直接传给运行器的单一计划。补跑登记、原始配置哈希见 `executed-configs.json`，来源见 `evidence.json` 和原存档索引。
+## 目录
 
-计划与实际配置字段一致。
+```text
+README.md     阅读与运行入口
+src/          本轮实验实现
+configs/      计划配置与实际配置
+docs/         实验方案及补充说明（如有）
+results/      汇总表、图表、日志和核验材料
+report.md     结论与分析
+```
 
-## 本轮代码
+## 配置与证据
 
-| 文件 | 用途 |
-|---|---|
-| [evaluate.py](evaluate.py) | 本轮专用实现，由运行或分析入口调用 |
-| [protocol.py](protocol.py) | 本轮专用实现，由运行或分析入口调用 |
-| [report.py](report.py) | 本轮专用实现，由运行或分析入口调用 |
-| [run.py](run.py) | 命令行入口：`python -m experiments.mutagenicity.r4_20261112.run --help` |
-| [supplement.py](supplement.py) | 命令行入口：`python -m experiments.mutagenicity.r4_20261112.supplement --help` |
-| [training.py](training.py) | 本轮专用实现，由运行或分析入口调用 |
-| [trajectory.py](trajectory.py) | 本轮专用实现，由运行或分析入口调用 |
+- [r4-plan.json](configs/r4-plan.json)
+- [r4-protocol.md](docs/r4-protocol.md)
+- [实际执行配置](configs/executed-plan.json)
+- [配置快照](configs/executed-configs.json)
+- [执行来源与计划差异](results/evidence.json)
+- [原始产物位置与校验](results/archive-index.json)
+- [结果汇总：summary.csv](results/summary.csv)
 
-共用实现见 [experiments/common](../../common/README.md)。在仓库根目录运行；实际训练与评价需遵循本轮协议。
+R4 主运行和 A0 补跑统一记录在这里；实际配置中的 `main` 与 `A0_extension` 保留执行来源，整合记录不是单一运行器配置。
+
+## 如何运行
+
+从仓库根目录安装 `python -m pip install -e '.[experiments]'`。启动脚本放在仓库根目录的 `scripts/`，本轮实现放在 `src/`。先查看参数，再按方案提供输入和新输出目录：
+
+- [run.py](../../../scripts/mutagenicity/r4_20261112/run.py)：`python -m scripts.mutagenicity.r4_20261112.run --help`
+- [supplement.py](../../../scripts/mutagenicity/r4_20261112/supplement.py)：`python -m scripts.mutagenicity.r4_20261112.supplement --help`
+
+历史计划中的机器路径与已封存运行身份保留原貌；重现原记录需使用对应的代码快照与档案，当前入口用于按照协议开展新的执行。不会仅因查看帮助而访问真实目标标签。
+
+## 代码依赖
+
+核心算法来自 `tsba/`；通用工具来自 [experiments/common](../../common/README.md)。
+
+本轮显式沿用以下历史实验的实现，不将其伪装成通用工具，也不复制多份：
+
+- [r1_20261111](../r1_20261111/README.md)
+- [r1b_20261111](../r1b_20261111/README.md)
+- [r2_20261111](../r2_20261111/README.md)
+- [r3_20261112](../r3_20261112/README.md)
+
+## 验证
+
+在仓库根目录运行 `python -m unittest discover -s tests/tsba -v`。工程检查与研究效果分开报告；原始结果不因目录整理重新生成。

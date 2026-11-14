@@ -1,6 +1,6 @@
 # 第2步：静态 score 样本量与带宽诊断
 
-日期：2026-11-10。执行协议：[static-score-plan.json](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/static-score-plan.json)。前序证据：[解析源后验对照](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_source_posterior_20261110/report.md)。
+日期：2026-11-10。执行协议：[static-score-plan.json](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/configs/static-score-plan.json)。前序证据：[解析源后验对照](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_source_posterior_20261110/report.md)。
 
 ## 结论
 
@@ -71,7 +71,7 @@
 
 2维原始σ₀平均约0.055149，三个带宽均保留有用双峰方向。其带宽变化与16维不是相同的物理平滑尺度。
 
-![方向估计与正确移动方向](direction.png)
+![方向估计与正确移动方向](results/direction.png)
 
 ## 2维复核：经验方向改善，学习模型没有跟上
 
@@ -106,9 +106,9 @@
 
 补充选模结果没有扭转判断。十个基线的原规则选中状态均与历史checkpoint逐位一致；16维基线都选第400次更新，和本轮主结果相同。2维历史基线选中更新分别为400/384/192/220/216，所以其历史双侧准确率9.90%与本轮固定400更新的5.37%不同；本轮不把这个差别归因于样本量或带宽。2维8192样本选模后准确率也仅1.70%，16维2σ₀选模后仍是99.96%的错误密度方向匹配。全部补充值列在`selected_vs_population`记录中。
 
-![初始边界法向与请求误差](initial-normal.png)
+![初始边界法向与请求误差](results/initial-normal.png)
 
-![辅助平面法向与请求误差](auxiliary-normal.png)
+![辅助平面法向与请求误差](results/auxiliary-normal.png)
 
 ## 对工作条件的含义与下一步
 
@@ -116,29 +116,29 @@
 - **边界—分布条件**：在这个已知合成分布及固定查询上，σ₀和0.5σ₀的总体方向满足局部朝向；16维2σ₀明确破坏它。该结果说明平滑尺度也会决定此条件是否成立。
 - **整图表示与类别语义条件**：本轮使用人为构造的固定表示与已知类别对应，没有训练或检验真实GNN表示；本轮也没有更新分类头，不能新增参数局部性、源约束或执行阶段结论。
 
-预先冻结的进入闭环检查要求：学习法向/带符号请求误差优于零score、双侧两类召回均高于50%、总体方向仍正确，并在至少4/5种子保持。**两维数×五设置中，每组通过完整检查的种子都是0/5。** 分项检查见[gates.csv](gates.csv)。这是一项明确的实验筛查，不是定理。
+预先冻结的进入闭环检查要求：学习法向/带符号请求误差优于零score、双侧两类召回均高于50%、总体方向仍正确，并在至少4/5种子保持。**两维数×五设置中，每组通过完整检查的种子都是0/5。** 分项检查见[gates.csv](results/gates.csv)。这是一项明确的实验筛查，不是定理。
 
 下一步应继续静态定位训练问题，暂不做闭环：可优先固定2维、8192样本、σ₀及当前查询，仅增加训练更新预算，检查网络是否能学到经验score中已经改善的双侧结构，并继续同时看总体法向幅值误差。16维还需保留精确经验对照，因为其有限池密度误差尚未解决。不能把更多训练、更多数据、改架构和改带宽一起改变后再作单因素归因。本报告不启动这些后续实验。
 
 ## 核验、复现与存档
 
 - 50次训练、20000次Adam更新、0失败；CPU单线程float64。运行约117.6秒，峰值RSS610775040字节。
-- [56项工程测试日志](engineering-checks.txt)通过。新增检查覆盖原训练逐位复现、嵌套池/更新预算、KDE查询分块等价、方向与幅值区分、宽带平滑方向反转。
-- [checkpoint审计](checkpoint-audit.json)：400次“最终/选中checkpoint × 查询集”输出重载逐位一致，200个查询集指标重新计算，3100个oracle探针通过独立对数混合密度的自动微分校验；10个历史基线checkpoint逐位一致。
+- [56项工程测试日志](results/engineering-checks.txt)通过。新增检查覆盖原训练逐位复现、嵌套池/更新预算、KDE查询分块等价、方向与幅值区分、宽带平滑方向反转。
+- [checkpoint审计](results/checkpoint-audit.json)：400次“最终/选中checkpoint × 查询集”输出重载逐位一致，200个查询集指标重新计算，3100个oracle探针通过独立对数混合密度的自动微分校验；10个历史基线checkpoint逐位一致。
 - 运行清单358个文件通过哈希检查，旧实验476个文件复核未改动。固定头、查询点、嵌套池、初始化、噪声与训练步数均核验。没有读取目标评价标签；采样器内部生成的合成分量ID立即丢弃，不进入训练或选模。
 - 执行代码提交`87fe50f`；分析代码提交`484cbac`。生产`tsba/`、SEGA参考快照、原始中文设计文档未修改。
 
-可审查入口：[实验工具](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/common/synthetic/static_score.py)、[运行器](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/run_static_score.py)、[回放分析](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/summarize_static_score.py)。
+可审查入口：[实验工具](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/src/estimation.py)、[运行器](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/src/run_static_score.py)、[回放分析](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic/e2_static_score_20261110/src/summarize_static_score.py)。
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_static_score_20261110.run_static_score \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_static_score_20261110.run_static_score \
   --parent /absolute/path/completed-original-e1-e2-run \
   --output /absolute/path/new-static-score-run
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic.e2_static_score_20261110.summarize_static_score \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.synthetic.e2_static_score_20261110.summarize_static_score \
   --run /absolute/path/completed-static-score-run \
   --output /absolute/path/new-static-score-analysis
 ```
 
-本地完整目录：`/home/hxchen/experiments/tsba/20261110-static-score/`。完整压缩档案：`/home/hxchen/experiments/tsba/archives/20261110-static-score-run-001.tar.gz`；SHA256与成员校验信息见[存档索引](archive-index.json)及同名`.sha256`/`.json`旁文件。档案保留50份checkpoint文件中的初始/最终/选中权重与Adam状态、逐更新日志、全部批次ID/训练噪声、固定数据/查询、每查询score/γ/ζ、代码快照、环境、分析结果和失败清单；不覆写旧档案。GitHub只公开代码、报告、标量表、图、日志和清单，模型与逐查询张量留在完整本地档案。
+本地完整目录：`/home/hxchen/experiments/tsba/20261110-static-score/`。完整压缩档案：`/home/hxchen/experiments/tsba/archives/20261110-static-score-run-001.tar.gz`；SHA256与成员校验信息见[存档索引](results/archive-index.json)及同名`.sha256`/`.json`旁文件。档案保留50份checkpoint文件中的初始/最终/选中权重与Adam状态、逐更新日志、全部批次ID/训练噪声、固定数据/查询、每查询score/γ/ζ、代码快照、环境、分析结果和失败清单；不覆写旧档案。GitHub只公开代码、报告、标量表、图、日志和清单，模型与逐查询张量留在完整本地档案。
 
-公开表：[逐种子指标](metrics.csv)、[方向与信号](signals.csv)、[训练设置及选中更新](fits.csv)、[配对差](paired.csv)、[均值/标准差汇总](summary.json)、[运行日志](run.log)、[运行文件哈希](run-manifest.json)。`learned_vs_empirical`与`empirical_vs_population`分别反映拟合差异和有限池差异，两个RMSE不能直接相加当作总误差的因果分解。
+公开表：[逐种子指标](results/metrics.csv)、[方向与信号](results/signals.csv)、[训练设置及选中更新](results/fits.csv)、[配对差](results/paired.csv)、[均值/标准差汇总](results/summary.json)、[运行日志](results/run.log)、[运行文件哈希](results/run-manifest.json)。`learned_vs_empirical`与`empirical_vs_population`分别反映拟合差异和有限池差异，两个RMSE不能直接相加当作总误差的因果分解。
