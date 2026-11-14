@@ -1,0 +1,410 @@
+{
+  "schema_version": 1,
+  "artifact_type": "planned_protocol_not_execution_record",
+  "protocol": "R5 original TSBA and learned-request value",
+  "status": "planned",
+  "registered_date": "2026-11-14",
+  "implementation_status": "not_implemented",
+  "training_started": false,
+  "shared_protocol": "experiments/r5_原始方法与请求价值_20261114.md",
+  "dataset": "PROTEINS",
+  "seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "domains": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "directions": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      3,
+      2
+    ]
+  ],
+  "settings": [
+    {
+      "id": "proteins_edge",
+      "split_basis": "edge_count",
+      "action": "fresh",
+      "domain_indices": [
+        {
+          "domain": 0,
+          "path": "data/idx_PROTEINS_0.npy",
+          "sha256": "15efc5669142619fcde99efadd676c39a64230fa527920ebad6b295b9eae0363",
+          "count": 278,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 1,
+          "path": "data/idx_PROTEINS_1.npy",
+          "sha256": "f56835ca9f8705f1c57eae8907146b94bfdb0358732eac081cc00b44a31771a0",
+          "count": 278,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 2,
+          "path": "data/idx_PROTEINS_2.npy",
+          "sha256": "96885b7aea84d74a9cd7dd996c444dd23dc6e985d481cbe9bd852ae317e7eb0d",
+          "count": 278,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 3,
+          "path": "data/idx_PROTEINS_3.npy",
+          "sha256": "1e403ed63dd28ddf9658bb8452ce11a38f98ff8290e5c004c165859ef1a4b643",
+          "count": 279,
+          "order": "preserve_file_order"
+        }
+      ],
+      "total_graphs": 1113,
+      "source_roles": "R3_R4_class_stratified_ref_0.4_fit_0.4_cal_remainder_merge_ref_fit",
+      "source_role_counts": "materialize_from_per_source_labels_at_prepare",
+      "score_updates_per_epoch": 3,
+      "score_epochs": 2400,
+      "task_seed_units": 60,
+      "source_models": 20,
+      "score_models": 60,
+      "trajectories": 120,
+      "adaptation_attempts": 3600,
+      "trajectory_states_including_initial": 3720,
+      "side_blocks": 120,
+      "side_candidates_if_all_available": 360,
+      "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r5/proteins_edge/attempt-001"
+    }
+  ],
+  "input": {
+    "raw_directory": "/home/hxchen/research/GDA/TQG/data/PROTEINS_official_20261023/PROTEINS/raw",
+    "files": {
+      "PROTEINS_A.txt": {
+        "sha256": "4c4b33e272fc95cac6d27ed6d5d12b9a852c8610e91fff59f8f0dbdd5a20df67",
+        "bytes": 2022990,
+        "role": "input"
+      },
+      "PROTEINS_graph_indicator.txt": {
+        "sha256": "8d4ff1e852a5c28561e9bffb44cf9490bc552b13a3b6156dd12dc7f44e9afc4a",
+        "bytes": 169673,
+        "role": "input"
+      },
+      "PROTEINS_node_labels.txt": {
+        "sha256": "f758e8ad3d6e3c026b50833d75f6f90735b94eb3345e4243707f495ca8afea8d",
+        "bytes": 86942,
+        "role": "input"
+      },
+      "PROTEINS_graph_labels.txt": {
+        "sha256": "c0ef9810c440775252872318d0c8adc385588e14bc4c47a2c34aa96ee3c7cdcd",
+        "bytes": 2226,
+        "role": "evaluation_label_and_task_scoped_source_label"
+      },
+      "PROTEINS_node_attributes.txt": {
+        "sha256": "54eef829abb37e458a5fbf3a3c581e48e5810e220463c2cd951856b9ceb08f07",
+        "bytes": 478190,
+        "role": "unused_feature_provenance"
+      }
+    },
+    "graph_id": "TU graph number minus one",
+    "class_labels_parsed_at_registration": false,
+    "node_features": "one_hot_node_labels_only",
+    "node_label_values": [
+      0,
+      1,
+      2
+    ],
+    "node_feature_dim": 3,
+    "edge_features": null,
+    "edge_feature_dim": 0,
+    "continuous_node_attributes_used": false,
+    "remove_self_loops": true,
+    "coalesce_duplicate_directed_edges": true,
+    "require_bidirectional_edges": true,
+    "graph_objects_have_y": false
+  },
+  "source": {
+    "epochs": 100,
+    "selection": "minimum_source_validation_ce_earliest_tie",
+    "ref_fraction": 0.4,
+    "fit_fraction": 0.4,
+    "train_roles": [
+      "ref",
+      "fit"
+    ],
+    "validation_role": "cal",
+    "class_balancing": false,
+    "per_setting_source_models": 20,
+    "dtype": "float32",
+    "require_both_classes_in_train_and_validation": true
+  },
+  "model": {
+    "seed": 0,
+    "encoder": "gin",
+    "hidden": 64,
+    "num_layers": 3,
+    "emb_dim": 16,
+    "dropout": 0.0,
+    "source_epochs": 100,
+    "source_lr": 0.001,
+    "source_batch": 128,
+    "adapter_width": 16,
+    "coordinate_eps": 1e-08,
+    "score_hidden": 64,
+    "score_epochs": 2400,
+    "score_batch": 128,
+    "score_lr": 0.001,
+    "score_validation": true,
+    "kappa_sigma": 1.0,
+    "adapt_rounds": 30,
+    "source_adapt_batch": 128,
+    "target_batch": 128,
+    "lambda_boundary": 1.0,
+    "tau": 0.1,
+    "radius_multiplier": 1.0,
+    "request_multiplier": 0.1,
+    "execution_multiplier": 0.1,
+    "root_tolerance": 1e-05,
+    "min_normal": 1e-08,
+    "projection_eps": 1e-12,
+    "projection_steps": 20,
+    "projection_backtracks": 10,
+    "movement_zero": 1e-12,
+    "damping": 0.01,
+    "solver": "auto",
+    "direct_max_params": 2048,
+    "cg_tolerance": 1e-07,
+    "cg_steps": 200,
+    "armijo": 0.0001,
+    "backtracks": 15,
+    "adaptation_dtype": "float64",
+    "device": "cpu"
+  },
+  "adam": {
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.0,
+    "amsgrad": false,
+    "maximize": false,
+    "foreach": null,
+    "capturable": false,
+    "differentiable": false,
+    "fused": null
+  },
+  "score": {
+    "optimizer_updates": 7200,
+    "endpoints": [
+      900,
+      1800,
+      3600,
+      7200
+    ],
+    "checkpoint_selection": "exact_final_update_7200",
+    "use_validation_for_selection": false,
+    "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+    "recovery_epochs": 50,
+    "shuffle_each_epoch": true,
+    "drop_last": false,
+    "bandwidths": [
+      1
+    ],
+    "kde_role": "diagnostic_only_not_population_oracle",
+    "loo_update_arms": false
+  },
+  "methods": {
+    "B0": {
+      "group": null,
+      "density": null,
+      "adapt": false
+    },
+    "B1": {
+      "group": "M00",
+      "density": "zero",
+      "adapt": true
+    },
+    "A0": {
+      "group": "M00",
+      "density": "learned",
+      "adapt": true
+    }
+  },
+  "adaptation": {
+    "rounds": 30,
+    "weight": 1.0,
+    "protect_source_class_risk": false,
+    "confidence_constraint": null,
+    "final_model": "last_accepted_state_within_30_attempts",
+    "target_label_selection": false,
+    "source_validation_selection": false,
+    "source_batch": 128,
+    "target_batch": 128,
+    "rng_offset": 201,
+    "schedule": "R2_common.batches_shared_between_A0_B1",
+    "attempt_statuses_preserved": true
+  },
+  "side": {
+    "method": "A0",
+    "attempts": [
+      1,
+      30
+    ],
+    "when": "before_main_attempt",
+    "directions": [
+      1,
+      0,
+      -1
+    ],
+    "alpha_start": 0.0625,
+    "max_trials": 15,
+    "alpha_multiplier": 0.5,
+    "common_alpha": true,
+    "require_each_arm_armijo_and_motion_bounds": true,
+    "no_parameter_or_rng_commit": true,
+    "record_request_increment": true,
+    "full_reverse_trajectory": false
+  },
+  "relocation": {
+    "radius_sigma": 4,
+    "scan_points": 65,
+    "bisections": 28,
+    "keep_all_root_statuses": true
+  },
+  "rng": {
+    "source_model_offset": 0,
+    "source_shuffle_offset": 1,
+    "score_init_offset": 101,
+    "score_training_offset": 102,
+    "score_validation_offset": 103,
+    "batch_schedule_offset": 201
+  },
+  "evaluation": {
+    "protocol": "transductive_development_full_target",
+    "requires_setting_R5_OBS": true,
+    "primary_endpoint": 30,
+    "reported_endpoints": [
+      0,
+      1,
+      3,
+      10,
+      30
+    ],
+    "primary_contrast": [
+      "A0",
+      "B1"
+    ],
+    "primary_metric": "accuracy",
+    "secondary_contrasts": [
+      [
+        "A0",
+        "B0"
+      ],
+      [
+        "B1",
+        "B0"
+      ]
+    ],
+    "side_metric": "nll",
+    "side_contrasts": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        -1
+      ]
+    ],
+    "auxiliary_metrics": [
+      "balanced_accuracy",
+      "macro_f1",
+      "nll",
+      "per_class_recall",
+      "predicted_class_proportions",
+      "confusion_matrix",
+      "wrong_to_right",
+      "right_to_wrong",
+      "net_correct"
+    ],
+    "fixed_B0_logit_scales": [
+      0.5,
+      0.75
+    ],
+    "target_gradient_diagnostic": false,
+    "aggregation": "within_seed_equal_weight_12_directions_then_5_seed_summary_each_setting_separately",
+    "t_interval": {
+      "level": 0.95,
+      "df": 4,
+      "critical_value": 2.776445,
+      "scope": "descriptive_training_randomness_only"
+    },
+    "missing_pairs": "report_coverage_no_silent_12_direction_mean"
+  },
+  "execution": {
+    "device": "cpu",
+    "adaptation_dtype": "float64",
+    "threads_per_worker": 1,
+    "max_workers": 4,
+    "resume": "restore_model_optimizer_and_rng",
+    "new_attempt_required": true,
+    "allow_target_driven_budget_change": false,
+    "seals": [
+      "R5_INPUT",
+      "R5_OBS",
+      "R5_FINAL"
+    ]
+  },
+  "provenance": {
+    "basis_commit": "b50b32c942862e2ca618e5b62cb080ba59453939",
+    "R4_plan_path": "experiments/mutagenicity/r4_全方向迁移对照_20261112/configs/executed-plan.json",
+    "R4_plan_sha256": "0b7678b898adc41a8350af84600c2266ea99d22b3c149be62a4b8b0ac1833f43",
+    "actual_code_commit_and_environment": "record_at_execution_not_inferred_from_plan"
+  }
+}
