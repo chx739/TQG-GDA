@@ -15,6 +15,7 @@
 
 - [docs：方法与使用文档](docs/README.md)
 - [experiments：方案、实际配置、报告与汇总](experiments/README.md)
+- [数据域索引](idx/README.md)：附件索引副本与 Mutagenicity 一致性核验。
 - [仓库维护规范](docs/guides/repository.md)
 
 ## 设计与实现
