@@ -9,18 +9,8 @@
 
 移动目录的提交只改变组织和引用，不混入算法调整。已完成实验结果不重算；修改结论另给依据。
 
-## 文档链接检查
-
-```sh
-python3 tools/check_doc_links.py
-```
-
-GitHub Actions 对推送和 PR 执行本地 Markdown 文件链接检查。
-
-2026-11-14 按用户要求撤回本次整理新增的大文件防线：不再设置 5 MiB 阈值、提交钩子、例外清单或体积 CI 检查；本次新增的产物忽略规则也已撤回。整理前已有的 `.gitignore` 规则保持原样。
-
 ## 可追溯性
 
-已完成实验以 `executed-plan.json`、`executed-configs.json`、`evidence.json` 和原档案为执行依据。历史路径保持原样，提交号按[映射](archive/history-commit-map.txt)查询。Markdown 检查只核验本地文件目标，不检查外网可访问性或标题锚点。
+已完成实验以 `executed-plan.json`、`executed-configs.json`、`evidence.json` 和原档案为执行依据。历史路径保持原样；各轮 `evidence.json` 记录原始执行提交号及历史清理后的对应提交号。
 
 重新运行工程测试可以验证路径和实现；不据此授权真实数据训练、访问目标标签或重新生成研究结果。
