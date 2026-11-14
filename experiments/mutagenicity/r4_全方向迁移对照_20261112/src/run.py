@@ -52,7 +52,7 @@ def run_stage(root, plan, stage, operation, items):
     write_json(marker, dict(count=len(items), workers=workers, elapsed_seconds=time.monotonic()-start))
 
 
-def initialize(root, repo, plan_path, reference, request, verification_log):
+def initialize(root, repo, plan_path, reference, request, verification_log, *, raw_directory=None):
     staging = root.parent / f".{root.name}.input-{uuid4().hex}"
     p = staging / "protocol"
     p.mkdir(parents=True)
@@ -72,7 +72,7 @@ def initialize(root, repo, plan_path, reference, request, verification_log):
     with (p / "source.tar").open("xb") as stream:
         subprocess.run(["git", "archive", "HEAD"], cwd=repo, stdout=stream, check=True)
     plan = read_json(plan_path)
-    prepare(staging, repo, plan, reference)
+    prepare(staging, repo, plan, reference, raw_directory=raw_directory)
     write_json(p / "config-identity.json", dict(config_hash=config_hash(plan)))
     seal(staging, "R4_INPUT", ["protocol", "inputs", "roles", "source_labels", "batches"])
     staging.rename(root)
@@ -82,7 +82,8 @@ def execute(root, repo, plan_path, args):
     if not root.exists():
         if subprocess.check_output(["git", "status", "--porcelain"], cwd=repo, text=True).strip():
             raise ValueError("Commit the reviewed registration before starting R4")
-        initialize(root, repo, plan_path, args.r3, args.request, args.verification_log)
+        initialize(root, repo, plan_path, args.r3, args.request, args.verification_log,
+                   raw_directory=args.raw_directory)
     verify(root, "R4_INPUT")
     registered = root / "protocol/r4-plan.json"
     if digest(plan_path) != digest(registered):
@@ -134,6 +135,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--r3", type=Path, required=True, help="Archived R3 input reference")
+    parser.add_argument("--raw-directory", type=Path, help="Original TU raw files at their current location")
     parser.add_argument("--request", type=Path)
     parser.add_argument("--verification-log", type=Path)
     args = parser.parse_args()

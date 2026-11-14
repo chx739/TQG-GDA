@@ -19,7 +19,7 @@ from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.evaluate 
 from experiments.common.runtime import RunLog, seal
 
 
-def resume(source, root, repo, tests):
+def resume(source, root, repo, tests, *, raw_directory=None):
     source, root, repo = Path(source), Path(root), Path(repo)
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=repo, text=True).strip():
         raise RuntimeError('Commit the evaluation repair before execution')
@@ -65,7 +65,7 @@ def resume(source, root, repo, tests):
     started = time.monotonic()
     try:
         log('Verified and copied immutable S1/S2 dependencies; evaluation-only repair begins')
-        result = evaluate_run(root, plan)
+        result = evaluate_run(root, plan, raw_directory=raw_directory)
         comparisons = []
         for path in sorted((source / 'evaluation/public').glob('*.json')):
             relative = path.relative_to(source)
@@ -102,5 +102,6 @@ def main():
     parser.add_argument('--root', type=Path, required=True)
     parser.add_argument('--repo', type=Path, default=repository_root())
     parser.add_argument('--tests', type=Path, required=True)
+    parser.add_argument('--raw-directory', type=Path, help='Location of the original TU label file')
     args = parser.parse_args()
-    resume(args.source, args.root, args.repo, args.tests)
+    resume(args.source, args.root, args.repo, args.tests, raw_directory=args.raw_directory)

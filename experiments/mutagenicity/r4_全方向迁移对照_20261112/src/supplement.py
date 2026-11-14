@@ -201,7 +201,7 @@ def numeric_rounds(rows):
              "accepted": row["accepted"] == "True"} for row in rows]
 
 
-def evaluate(root, base, plan, base_plan, historical):
+def evaluate(root, base, plan, base_plan, historical, *, raw_directory=None):
     obs = verify(root, "A0_OBS")
     replay_info = read_json(root / "replay.json")
     required = {"protocol/registration.json", "replay.json", "historical-parity.json"}
@@ -212,7 +212,7 @@ def evaluate(root, base, plan, base_plan, historical):
     if not required <= obs["files"].keys() or any(replay_info[k] != v for k, v in COUNTS.items()):
         raise PermissionError("A0 evaluation requires complete sealed predictions")
     # Label access starts after both observation seals have been verified.
-    base_obs, labels_by_domain = evaluation_labels(base)
+    base_obs, labels_by_domain = evaluation_labels(base, raw_directory=raw_directory)
     out = root / "evaluation"
     out.mkdir(exist_ok=True)
     verified_json(out / "label_access.json", dict(a0_observation=obs["digest"], r4_observation=base_obs,
@@ -250,7 +250,7 @@ def evaluate(root, base, plan, base_plan, historical):
     seal(root, "A0_FINAL", ["seals/A0_OBS.json", "evaluation"])
 
 
-def execute(root, base, r3, repo):
+def execute(root, base, r3, repo, *, raw_directory=None):
     docs = repo / "experiments/mutagenicity"
     index = read_json(docs / "r4_全方向迁移对照_20261112/results/archive-index.json")
     r3_digest = read_json(docs / "r3_源风险与置信度约束_20261112/results/archive-index.json")["observation_digest"]
@@ -296,7 +296,8 @@ def execute(root, base, r3, repo):
         base_final = verify(base, "R4_FINAL")
         if base_final["digest"] != index["audit"]["seals"]["FINAL"]:
             raise ValueError("Historical R4 evaluation differs from the published seal")
-        evaluate(root, base, plan, base_plan, read_json(root / "historical-parity.json"))
+        evaluate(root, base, plan, base_plan, read_json(root / "historical-parity.json"),
+                 raw_directory=raw_directory)
     verify(root, "A0_FINAL")
     print(f"{stamp()} A0 supplement complete at {root}", flush=True)
 
@@ -306,6 +307,7 @@ def main():
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--r4", type=Path, required=True)
     parser.add_argument("--r3", type=Path, required=True)
+    parser.add_argument("--raw-directory", type=Path, help="Location of the original TU label file")
     args = parser.parse_args()
     for var in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS"):
         if os.environ.get(var) != "1":
@@ -318,4 +320,4 @@ def main():
     repo = repository_root()
     with (root.parent / (root.name + ".lock")).open("a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        execute(root, base, r3, repo)
+        execute(root, base, r3, repo, raw_directory=args.raw_directory)

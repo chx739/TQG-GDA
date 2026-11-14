@@ -97,12 +97,12 @@ def split_domain(ids, values, mapping, splitter, seed, total, fractions):
     return metadata, torch.tensor(scoped[fit]), torch.tensor(scoped[validation])
 
 
-def prepare(root, repo, plan, reference):
+def prepare(root, repo, plan, reference, *, raw_directory=None):
     inputs_seal = verify(reference, "R3_INPUT")
     if inputs_seal["digest"] != plan["r3_inputs_digest"]:
         raise ValueError("Unexpected historical R3 input identity")
     inputs = read_json(reference / "protocol/stage1-inputs.json")
-    raw = Path(inputs["raw_directory"])
+    raw = Path(raw_directory or inputs["raw_directory"]).resolve()
     for filename, expected in inputs["files"].items():
         if digest(raw / filename) != expected["sha256"]:
             raise ValueError(f"R3 raw file hash mismatch: {filename}")
@@ -181,7 +181,7 @@ def expected_predictions(root, plan):
                 yield path / f"round{step:02d}.pt"
 
 
-def evaluation_labels(root):
+def evaluation_labels(root, *, raw_directory=None):
     obs = verify(root, "R4_OBS")
     required = {"protocol/r4-plan.json", "seals/R4_INPUT.json", "replay.json",
                 "inputs/label_records.json", "inputs/domains.json", "inputs/registry.json"}
@@ -211,8 +211,11 @@ def evaluation_labels(root):
     if not required <= obs["files"].keys():
         raise PermissionError("R4 observations omit registered models or prediction records")
     meta = read_json(root / "inputs/label_records.json")
+    path = Path(meta["path"])
+    if raw_directory is not None:
+        path = Path(raw_directory) / path.name
     values = {}
     for number in plan["domains"]:
-        raw = read_values(meta["path"], meta["offsets"], domain(root, number), meta["sha256"])
+        raw = read_values(path, meta["offsets"], domain(root, number), meta["sha256"])
         values[number] = torch.tensor([meta["mapping"][str(y)] for y in raw], dtype=torch.long)
     return obs["digest"], values

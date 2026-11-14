@@ -85,8 +85,8 @@ def read_values(path, offsets, ids, sha256):
     return [int(data[start:start + length]) for start, length in (offsets[i] for i in ids)]
 
 
-def prepare(root, repo, plan, inputs):
-    raw = Path(inputs["raw_directory"])
+def prepare(root, repo, plan, inputs, *, raw_directory=None):
+    raw = Path(raw_directory or inputs["raw_directory"]).resolve()
     for name, spec in inputs["files"].items():
         if digest(raw / name) != spec["sha256"]:
             raise ValueError(f"Raw input hash mismatch: {name}")

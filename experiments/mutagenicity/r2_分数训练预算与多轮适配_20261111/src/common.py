@@ -11,7 +11,7 @@ import torch
 
 from experiments.common.io import digest
 from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.data import canonical_sha
-from experiments.mutagenicity.r1b_密度与单步适配诊断_20261111.src.common import NextLabelBroker
+from experiments.mutagenicity.r1b_密度与单步适配诊断_20261111.src.common import NextLabelBroker, verified_label_path
 from tsba.classifier import ResidualClassifier
 
 
@@ -131,12 +131,14 @@ def validate_roles(root,plan):
     return roles
 
 
-def prepare(root,plan):
-    root=Path(root);old=Path(plan['dependency']['root'])
+def prepare(root, plan, *, dependency_root=None, dependency_archive=None, raw_directory=None):
+    root = Path(root)
+    old = Path(dependency_root or plan['dependency']['root']).resolve()
+    archive = Path(dependency_archive or plan['dependency']['archive']).resolve()
     seal=json.loads((old/'seals/OBS.json').read_text())
     if seal['digest']!=plan['dependency']['OBS_digest'] or canonical_sha({k:seal[k] for k in ('stage','files')})!=seal['digest']:
         raise ValueError('R1b observation identity mismatch')
-    if digest(plan['dependency']['archive'])!=plan['dependency']['archive_sha256']:
+    if digest(archive)!=plan['dependency']['archive_sha256']:
         raise ValueError('R1b complete archive SHA mismatch')
     selected={'deps/roles.json','deps/inputs/broker.json','deps/inputs/class_mapping.json'}
     for seed in plan['seeds']:
@@ -157,6 +159,7 @@ def prepare(root,plan):
         shutil.copyfile(old/rel,dst)
         if digest(dst)!=seal['files'][rel]:raise ValueError('Dependency copy mismatch')
         records[destrel]=dict(original=rel,sha256=seal['files'][rel],bytes=dst.stat().st_size)
+    label_path = verified_label_path(root, raw_directory)
     roles=validate_roles(root,plan)
     checks=[]
     with torch.no_grad():
@@ -170,7 +173,9 @@ def prepare(root,plan):
                 schedule=batches(s['fit_ids'],roles['targets'][str(d)]['ids'],seed)
                 atomic_tensor(root/f'batches/seed{seed}_domain{d}.pt',schedule)
             checks.append(dict(seed=seed,source_probability_exact=True,coordinates_exact=True,dimension=f['x'].shape[1]))
-    write_json(root/'dependency-manifest.json',dict(original_root=str(old),OBS_digest=seal['digest'],files=records))
+    write_json(root/'dependency-manifest.json',dict(original_root=str(old),OBS_digest=seal['digest'],
+        original_archive=str(archive),original_archive_sha256=plan['dependency']['archive_sha256'],
+        label_path=str(label_path),files=records))
     write_json(root/'input-checks.json',dict(source_models=checks,source_role_counts=[779,109,196],target_A=271,target_B=271,role_partitions_verified=True,final_values_parsed=False))
     return roles
 

@@ -121,7 +121,9 @@ def evaluate(root,plan):
     write_csv(out/'summary.csv',flat)
     # Prior target-supervised references are report-only aggregates, authenticated
     # only after R2 predictions were sealed. No old labels enter R2 workers.
-    old=Path(plan['dependency']['root']);final=json.loads((old/'seals/FINAL.json').read_text())
+    dependency = json.loads((root/'dependency-manifest.json').read_text())
+    old = Path(dependency['original_root'])
+    final = json.loads((old/'seals/FINAL.json').read_text())
     assert canonical_sha({k:final[k] for k in ('stage','files')})==final['digest']
     rel='evaluation/warm_summary.json'
     assert digest(old/rel)==final['files'][rel]

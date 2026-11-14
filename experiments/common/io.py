@@ -33,7 +33,8 @@ def manifest(root, exclude=()):
 
 def provenance(repo):
     def git(*args):return subprocess.check_output(['git',*args],cwd=repo,text=True).strip()
-    paths=git('ls-files').splitlines()
+    tracked=subprocess.check_output(['git','ls-files','-z'],cwd=repo)
+    paths=os.fsdecode(tracked).split('\0')
     # Untracked new runner files included explicitly before the pre-run commit.
     paths=sorted(set(paths)|{str(p.relative_to(repo)) for folder in ('experiments', 'scripts') for p in (repo/folder).rglob('*.py')})
     hashes={p:digest(repo/p) for p in paths if p.endswith(('.py','.json','.md')) and (repo/p).is_file()}

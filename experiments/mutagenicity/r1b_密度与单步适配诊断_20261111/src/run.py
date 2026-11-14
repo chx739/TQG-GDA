@@ -21,7 +21,7 @@ from experiments.mutagenicity.r1b_密度与单步适配诊断_20261111.src.steps
 from experiments.mutagenicity.r1b_密度与单步适配诊断_20261111.src.warm import run_warm
 
 
-def execute(repo, root, plan, r0_log):
+def execute(repo, root, plan, r0_log, *, dependency_root=None, dependency_archive=None, raw_directory=None):
     repo, root = Path(repo), Path(root)
     if repo.resolve() != repository_root():
         raise RuntimeError('Executing checkout must match the archived repository')
@@ -55,7 +55,8 @@ def execute(repo, root, plan, r0_log):
     started = time.monotonic()
     try:
         log('Verify original archive and copy immutable R1 dependencies; no label parsing')
-        roles = prepare_dependencies(root,plan)
+        roles = prepare_dependencies(root, plan, dependency_root=dependency_root,
+                                     dependency_archive=dependency_archive, raw_directory=raw_directory)
         inputs = seal(root,'INPUT',['deps','dependency-manifest.json','role-verification.json','execution-plan.json',
             'protocol','provenance.json','logs/R0-tests.txt'])
         log(f"INPUT sealed {inputs['digest']}")
@@ -108,6 +109,11 @@ def main():
     parser.add_argument('--repo',type=Path,default=repository_root())
     parser.add_argument('--root',type=Path)
     parser.add_argument('--r0-log',type=Path,required=True)
+    parser.add_argument('--dependency-root', type=Path, help='Directory of the sealed R1 attempt')
+    parser.add_argument('--dependency-archive', type=Path, help='Original R1 archive at its current location')
+    parser.add_argument('--raw-directory', type=Path, help='Location of the original TU label file')
     args = parser.parse_args()
     plan = json.loads((args.repo / 'experiments/mutagenicity/r1b_密度与单步适配诊断_20261111/configs/next-round-plan.json').read_text())
-    execute(args.repo,args.root or plan['output_root'],plan,args.r0_log)
+    execute(args.repo, args.root or plan['output_root'], plan, args.r0_log,
+            dependency_root=args.dependency_root, dependency_archive=args.dependency_archive,
+            raw_directory=args.raw_directory)

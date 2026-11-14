@@ -71,7 +71,7 @@ def parallel(stage, root, items, plan, workers):
                             workers=workers, completed_utc=stamp()))
 
 
-def initialize(root, repo, plan_path, request):
+def initialize(root, repo, plan_path, request, *, raw_directory=None):
     root.mkdir(parents=True, exist_ok=False)
     p = root / "protocol"
     p.mkdir()
@@ -91,7 +91,8 @@ def initialize(root, repo, plan_path, request):
         deterministic_algorithms=True))
     with (p / "source.tar").open("xb") as stream:
         subprocess.run(["git", "archive", "HEAD"], cwd=repo, stdout=stream, check=True)
-    prepare(root, repo, read_json(plan_path), read_json(p / "stage1-inputs.json"))
+    prepare(root, repo, read_json(plan_path), read_json(p / "stage1-inputs.json"),
+            raw_directory=raw_directory)
     seal(root, "R3_INPUT", ["inputs", "roles", "source_labels", "batches", "protocol"])
 
 
@@ -100,7 +101,7 @@ def execution(root, repo, plan_path, args):
         if subprocess.check_output(["git", "status", "--porcelain"], cwd=repo, text=True).strip():
             raise ValueError("Commit the reviewed implementation and plan before initializing the run")
         staging = root.parent / f".{root.name}.input-{uuid4().hex}"
-        initialize(staging, repo, plan_path, args.request)
+        initialize(staging, repo, plan_path, args.request, raw_directory=args.raw_directory)
         staging.rename(root)
     verify(root, "R3_INPUT")
     registered = root / "protocol/r3-plan.json"

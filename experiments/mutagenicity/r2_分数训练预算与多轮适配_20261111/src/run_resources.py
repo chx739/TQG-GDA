@@ -20,10 +20,11 @@ from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--stage',required=True,choices=['scores','adapt','diagnose'])
+    p.add_argument('--root', type=Path)
     args=p.parse_args();configure()
     repo=repository_root()
     registered=json.loads((repo/'experiments/mutagenicity/r2_分数训练预算与多轮适配_20261111/configs/r2-plan.json').read_text())
-    root=Path(registered['output_root'])
+    root=args.root or Path(registered['output_root'])
     assert registered==json.loads((root/'execution-plan.json').read_text())
     for rel,expected in json.loads((root/'provenance.json').read_text())['file_hashes'].items():
         if rel.endswith('.py') and digest(repo/rel)!=expected:raise RuntimeError('Archived implementation changed: '+rel)

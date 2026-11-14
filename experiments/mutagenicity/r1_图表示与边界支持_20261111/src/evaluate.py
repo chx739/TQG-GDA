@@ -722,7 +722,7 @@ def make_figures(root, plan, predictions, geometry, public):
     return figures
 
 
-def evaluate_run(root, plan):
+def evaluate_run(root, plan, *, raw_directory=None):
     """Open B only after complete S2 verification; write immutable S3 inputs."""
     from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.data import LabelBroker
     root = Path(root)
@@ -732,7 +732,7 @@ def evaluate_run(root, plan):
     public.mkdir(exist_ok=False)
     seal = json.loads((root / "seals/S2.json").read_text())
     verify_observations_sealed(root, plan, seal)
-    broker = LabelBroker(root, plan)
+    broker = LabelBroker(root, plan, raw_directory=raw_directory)
     # Explicitly verify every sealed byte before opening the first evaluation
     # label; the broker repeats/caches integrity verification on each read.
     broker._seal("S2", seal["digest"])

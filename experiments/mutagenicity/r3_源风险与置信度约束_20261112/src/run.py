@@ -10,6 +10,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--request", type=Path)
+    parser.add_argument("--raw-directory", type=Path, help="Original TU raw files at their current location")
     parser.add_argument("--workers", type=int, help="CPU scheduling only")
     args = parser.parse_args()
     for variable in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS"):

@@ -8,7 +8,7 @@ import torch
 
 from experiments.common.io import digest, save_tensor, write_json
 from experiments.common.runtime import seal
-from experiments.mutagenicity.r1b_密度与单步适配诊断_20261111.src.common import NextLabelBroker, verify_seal
+from experiments.mutagenicity.r1b_密度与单步适配诊断_20261111.src.common import NextLabelBroker, verified_label_path, verify_seal
 from experiments.mutagenicity.r1b_密度与单步适配诊断_20261111.src.evaluate import evaluate_steps, evaluate_warm
 
 
@@ -23,7 +23,13 @@ class NextCommonEvaluationTests(unittest.TestCase):
             write_json(root/'deps/roles.json',dict(targets={'1':dict(A=[0],B=[1],final=[2])}))
             write_json(root/'deps/inputs/broker.json',dict(path=str(raw),sha256=digest(raw),offsets=[[0,2],[2,2],[4,12]]))
             write_json(root/'deps/inputs/class_mapping.json',dict(raw_to_class={'0':0,'1':1}))
-            seal(root,'INPUT',['deps'])
+            moved_dir = root/'relocated'
+            moved_dir.mkdir()
+            raw = raw.rename(moved_dir/raw.name)
+            label_path = verified_label_path(root, moved_dir)
+            self.assertEqual(label_path, raw)
+            write_json(root/'dependency-manifest.json',dict(label_path=str(label_path)))
+            seal(root,'INPUT',['deps','dependency-manifest.json'])
             broker = NextLabelBroker(root)
             self.assertEqual(broker.read([0],'target_A','fit',domain=1),{0:0})
             raw.write_bytes(b'1\n1\nNOT-A-LABEL\n')
@@ -34,7 +40,7 @@ class NextCommonEvaluationTests(unittest.TestCase):
                 broker.read([1],'target_B','premature',domain=1)
             with self.assertRaises(PermissionError):
                 broker.read([2],'target_A','disguised final',domain=1)
-            seal(root,'OBS',['deps','seals/INPUT.json'])
+            seal(root,'OBS',['deps','dependency-manifest.json','seals/INPUT.json'])
             self.assertEqual(broker.read([1],'target_B','frozen evaluation',domain=1),{1:1})
             (root/'deps/unsealed-added-file.txt').write_text('cannot be consumed after OBS')
             with self.assertRaises(PermissionError):

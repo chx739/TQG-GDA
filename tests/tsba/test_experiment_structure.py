@@ -1,12 +1,32 @@
 """Keep the experiment layout's architectural boundaries explicit."""
 import ast
 from pathlib import Path
+import subprocess
+import tempfile
 import unittest
+
+from experiments.common.io import digest, provenance
 
 REPO = Path(__file__).resolve().parents[2]
 
 
 class ExperimentStructureTests(unittest.TestCase):
+    def test_provenance_hashes_tracked_paths_with_chinese_and_whitespace(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            subprocess.run(['git', 'init', '--quiet', str(repo)], check=True)
+            paths = ('实验/配置.json', '实验/报告\n续篇.md')
+            for name in paths:
+                path = repo / name
+                path.parent.mkdir(exist_ok=True)
+                path.write_text(name, encoding='utf-8')
+            subprocess.run(['git', 'add', '--', *paths], cwd=repo, check=True)
+            subprocess.run(['git', '-c', 'user.name=Test', '-c', 'user.email=test@example.com',
+                            '-c', 'core.hooksPath=/dev/null', '-c', 'commit.gpgsign=false',
+                            'commit', '--quiet', '-m', 'Fixture'], cwd=repo, check=True)
+            self.assertEqual(provenance(repo)['file_hashes'],
+                             {name: digest(repo / name) for name in paths})
+
     def test_common_is_round_independent_and_has_no_cli(self):
         common = REPO / 'experiments/common'
         for path in common.rglob('*.py'):

@@ -44,6 +44,23 @@ def _export(repo, revision, name):
     return subprocess.check_output(["git", "show", f"{revision}:{name}"], cwd=repo)
 
 
+def historical_inputs(repo, spec, historical_commit=None):
+    revision = spec["historical_commit"] if historical_commit is None else historical_commit
+    # The large-file history cleanup changed this commit ID. The manifest and
+    # every role file are still authenticated against the original hashes.
+    if historical_commit is None and revision == "a672fefe10aba413283a6fb184704f6fae75e1fa":
+        if subprocess.run(["git", "cat-file", "-e", f"{revision}^{{commit}}"], cwd=repo,
+                          stderr=subprocess.DEVNULL).returncode:
+            revision = "822b0926515489491516d21035aa1c40d0bb1bc4"
+    revision = subprocess.check_output(
+        ["git", "rev-parse", "--verify", "--end-of-options", f"{revision}^{{commit}}"],
+        cwd=repo, text=True).strip()
+    content = _export(repo, revision, spec["manifest_path"])
+    if hashlib.sha256(content).hexdigest() != spec["manifest_sha256"]:
+        raise ValueError("Historical manifest SHA mismatch")
+    return revision, content
+
+
 def source_split(ids, raw_labels, seed):
     """Independent TSBA two-stage split; no SEGA algorithm roles."""
     if len(ids) != len(raw_labels) or len(set(ids)) != len(ids):
@@ -164,11 +181,13 @@ def label_offsets(path):
 
 
 class LabelBroker:
-    def __init__(self, root, plan=None):
+    def __init__(self, root, plan=None, *, raw_directory=None):
         self.root = Path(root)
         self.plan = plan
         self.roles = json.loads((self.root / "roles.json").read_text())
         self.info = json.loads((self.root / "inputs/broker.json").read_text())
+        if raw_directory is not None:
+            self.info["path"] = str(Path(raw_directory) / Path(self.info["path"]).name)
         if digest(self.info["path"]) != self.info["sha256"]:
             raise ValueError("Raw label bytes changed since offset indexing")
         self._verified = {}
@@ -262,21 +281,22 @@ def domain_index_path(repo, recorded_path):
     return Path(repo) / path
 
 
-def prepare_inputs(root, repo, plan):
+def prepare_inputs(root, repo, plan, *, raw_directory=None, cache=None,
+                   historical_repo=None, historical_commit=None):
     root, repo = Path(root), Path(repo)
     for directory in ("inputs", "roles", "logs"):
         (root / directory).mkdir(parents=True, exist_ok=True)
     spec = json.loads((repo / "experiments/mutagenicity/stage1-inputs.json").read_text())
-    manifest_bytes = _export(repo, spec["historical_commit"], spec["manifest_path"])
-    if hashlib.sha256(manifest_bytes).hexdigest() != spec["manifest_sha256"]:
-        raise ValueError("Historical manifest SHA mismatch")
+    history = Path(historical_repo or repo).resolve()
+    revision, manifest_bytes = historical_inputs(history, spec, historical_commit)
     with (root / "inputs/historical-manifest.json").open("xb") as handle:
         handle.write(manifest_bytes)
     old = json.loads(manifest_bytes)
-    raw = Path(spec["raw_directory"])
+    raw = Path(raw_directory or spec["raw_directory"]).resolve()
     for name, expected in spec["files"].items():
         _verify(raw / name, expected)
-    _verify(spec["cache"]["path"], spec["cache"])  # bytes only, never deserialize y
+    cache_path = Path(cache or spec["cache"]["path"]).resolve()
+    _verify(cache_path, spec["cache"])  # bytes only, never deserialize y
     domains = {}
     for domain, item in spec["sega_domain_files"].items():
         path = domain_index_path(repo, item["path"])
@@ -294,7 +314,7 @@ def prepare_inputs(root, repo, plan):
         exported = {}
         for role in ("target", "development", "final"):
             item = prior[role]
-            content = _export(repo, spec["historical_commit"], item["path"])
+            content = _export(history, revision, item["path"])
             if hashlib.sha256(content).hexdigest() != item["sha256"]:
                 raise ValueError(f"Historical {domain}/{role} SHA mismatch")
             exported[role] = np.load(io.BytesIO(content), allow_pickle=False).astype(np.int64).reshape(-1).tolist()
@@ -340,5 +360,7 @@ def prepare_inputs(root, repo, plan):
     write_json(root / "inputs/graphs.json", records)
     write_json(root / "inputs/verification.json", dict(source_role_counts=plan["source_split"]["expected_counts"],
                graph_count=len(graphs), raw_hashes_verified=True, cache_deserialized=False,
-               final_class_values_parsed=False, torch_version=torch.__version__))
+               final_class_values_parsed=False, torch_version=torch.__version__,
+               raw_directory=str(raw), cache_path=str(cache_path),
+               historical_repo=str(history), historical_commit=revision))
     return roles

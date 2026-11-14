@@ -26,7 +26,8 @@ def assert_phase(root, expected):
         raise PermissionError(f'Expected phase {expected}; actual {actual}. No training/geometry after S2.')
 
 
-def execute(repo, root, plan, r0_log):
+def execute(repo, root, plan, r0_log, *, raw_directory=None, cache=None,
+            historical_repo=None, historical_commit=None):
     from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.data import prepare_inputs
     from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.source import run_source
     from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.geometry import run_source_coverage, run_cell
@@ -69,7 +70,8 @@ def execute(repo, root, plan, r0_log):
         log(f'FAILURE {stage} {record["error"]}')
     try:
         log('R0 prepare raw inputs, historical target roles and cfg.seed source roles')
-        prepare_inputs(root, repo, plan)
+        prepare_inputs(root, repo, plan, raw_directory=raw_directory, cache=cache,
+                       historical_repo=historical_repo, historical_commit=historical_commit)
         write_json(root / 'R0.json', dict(status='passed', tests_sha256=digest(root / 'logs/R0-tests.txt'),
             input_verification_sha256=digest(root / 'inputs/verification.json'), final_values_parsed=False))
         for seed in plan['seeds']:
@@ -141,6 +143,12 @@ def main():
     parser.add_argument('--repo', type=Path, default=repository_root())
     parser.add_argument('--root', type=Path)
     parser.add_argument('--r0-log', type=Path, required=True)
+    parser.add_argument('--raw-directory', type=Path, help='Original TU raw files at their current location')
+    parser.add_argument('--cache', type=Path, help='Original processed/data.pt, verified by hash only')
+    parser.add_argument('--historical-repo', type=Path, help='Checkout containing the registered split files')
+    parser.add_argument('--historical-commit', help='Commit containing hash-identical split files')
     args = parser.parse_args()
     plan = json.loads((args.repo / 'experiments/mutagenicity/r1_图表示与边界支持_20261111/configs/stage1-plan.json').read_text())
-    execute(args.repo, args.root or plan['output_root'], plan, args.r0_log)
+    execute(args.repo, args.root or plan['output_root'], plan, args.r0_log,
+            raw_directory=args.raw_directory, cache=args.cache,
+            historical_repo=args.historical_repo, historical_commit=args.historical_commit)

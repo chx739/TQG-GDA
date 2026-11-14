@@ -72,14 +72,14 @@ def validate_roles(root, plan):
     return roles
 
 
-def prepare_dependencies(root, plan):
+def prepare_dependencies(root, plan, *, dependency_root=None, dependency_archive=None, raw_directory=None):
     """Copy selected sealed evidence, never old evaluation labels or full y."""
     root = Path(root)
-    old = Path(plan['dependency']['root'])
+    old = Path(dependency_root or plan['dependency']['root']).resolve()
     old_seal = json.loads((old / 'seals/S2.json').read_text())
     if old_seal['digest'] != plan['dependency']['s2_digest'] or canonical_sha({k: old_seal[k] for k in ('stage', 'files')}) != old_seal['digest']:
         raise ValueError('Historical S2 identity mismatch')
-    archive = Path(plan['dependency']['archive'])
+    archive = Path(dependency_archive or plan['dependency']['archive']).resolve()
     if digest(archive) != plan['dependency']['archive_sha256']:
         raise ValueError('Historical full archive SHA256 mismatch')
     selected = {'roles.json', 'inputs/broker.json', 'inputs/class_mapping.json', 'inputs/size.pt', 'inputs/graphs.json'}
@@ -107,13 +107,24 @@ def prepare_dependencies(root, plan):
         if digest(dst) != old_seal['files'][rel]:
             raise ValueError('Dependency copy mismatch')
         copies[rel] = dict(bytes=dst.stat().st_size, sha256=old_seal['files'][rel])
+    label_path = verified_label_path(root, raw_directory)
     write_json(root / 'dependency-manifest.json', dict(original_root=str(old), original_s2=old_seal['digest'],
-        original_archive=str(archive), original_archive_sha256=plan['dependency']['archive_sha256'], files=copies))
+        original_archive=str(archive), original_archive_sha256=plan['dependency']['archive_sha256'],
+        label_path=str(label_path), files=copies))
     roles = validate_roles(root, plan)
     write_json(root / 'role-verification.json', dict(source_counts=[779,109,196], target_A=271, target_B=271,
         target_final=[542,543], frozen_queries=64, partition_disjoint_exhaustive=True,
         roles_sha256=digest(root / 'deps/roles.json'), final_values_parsed=False))
     return roles
+
+
+def verified_label_path(root, raw_directory=None):
+    info = json.loads((root / 'deps/inputs/broker.json').read_text())
+    registered = Path(info['path'])
+    label_path = registered if raw_directory is None else Path(raw_directory) / registered.name
+    if digest(label_path) != info['sha256']:
+        raise ValueError('Raw label bytes changed')
+    return label_path.resolve()
 
 
 class NextLabelBroker:
@@ -123,7 +134,10 @@ class NextLabelBroker:
         self.roles = json.loads((self.root / 'deps/roles.json').read_text())
         self.info = json.loads((self.root / 'deps/inputs/broker.json').read_text())
         self.mapping = json.loads((self.root / 'deps/inputs/class_mapping.json').read_text())['raw_to_class']
-        if digest(self.info['path']) != self.info['sha256']:
+        manifest = self.root / 'dependency-manifest.json'
+        locations = json.loads(manifest.read_text()) if manifest.exists() else {}
+        self.label_path = Path(locations.get('label_path', self.info['path']))
+        if digest(self.label_path) != self.info['sha256']:
             raise ValueError('Raw label bytes changed')
         self._verified = {}
 
@@ -163,7 +177,7 @@ class NextLabelBroker:
                 raise PermissionError('IDs outside declared role')
             event['token'] = self._check(stage)
             values = []
-            with open(self.info['path'], 'rb', buffering=0) as stream:
+            with self.label_path.open('rb', buffering=0) as stream:
                 # Authenticate the same opened bytes on every access, including
                 # after lengthy training. Hashing bytes does not parse classes.
                 if hashlib.sha256(stream.read()).hexdigest() != self.info['sha256']:

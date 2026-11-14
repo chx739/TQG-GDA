@@ -38,10 +38,11 @@ def worker(stage,root,spec,plan):
     raise ValueError(stage)
 
 
-def initialize(repo,root,plan,test_log):
+def initialize(repo, root, plan, test_log, *, request=None, dependency_root=None,
+               dependency_archive=None, raw_directory=None):
     if subprocess.check_output(['git','status','--porcelain'],cwd=repo,text=True).strip():raise RuntimeError('Commit protocol and code before real-data execution')
     if '\nOK\n' not in Path(test_log).read_text():raise ValueError('Passing unittest log required')
-    request=Path(plan['request_path'])
+    request = Path(request or plan['request_path'])
     if digest(request)!=plan['request_sha256']:raise ValueError('Request changed')
     root.mkdir(parents=True,exist_ok=False)
     for d in (*FROZEN,'logs','evaluation','failures','pilot'):(root/d).mkdir(exist_ok=True)
@@ -53,7 +54,8 @@ def initialize(repo,root,plan,test_log):
     with (root/'protocol/source.tar').open('xb') as f:subprocess.run(['git','archive','--format=tar','HEAD'],cwd=repo,stdout=f,check=True)
     packages=sorted({(d.metadata['Name'],d.version) for d in importlib.metadata.distributions() if d.metadata['Name']})
     (root/'protocol/environment.txt').write_text('OMP_NUM_THREADS=1\nMKL_NUM_THREADS=1\ntorch deterministic=True\n'+'\n'.join(f'{a}=={b}' for a,b in packages)+'\n')
-    prepare(root,plan)
+    prepare(root, plan, dependency_root=dependency_root, dependency_archive=dependency_archive,
+            raw_directory=raw_directory)
     sealed=seal(root,'INPUT',['deps','batches','protocol','execution-plan.json','dependency-manifest.json','input-checks.json','provenance.json','logs/R0-tests.txt'])
     print('INPUT '+sealed['digest'],flush=True)
     broker=Broker(root)
@@ -152,12 +154,23 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--stage',required=True,choices=['init','pilot','scores','adapt','diagnose','seal','evaluate'])
     parser.add_argument('--root',type=Path);parser.add_argument('--test-log',type=Path)
+    parser.add_argument('--request', type=Path, help='Original registered request at its current location (init only)')
+    parser.add_argument('--dependency-root', type=Path, help='Directory of the sealed R1b attempt (init only)')
+    parser.add_argument('--dependency-archive', type=Path, help='Original R1b archive (init only)')
+    parser.add_argument('--raw-directory', type=Path, help='Location of the original TU label file (init only)')
     args=parser.parse_args();configure()
     repo=repository_root()
     plan=json.loads((repo/'experiments/mutagenicity/r2_分数训练预算与多轮适配_20261111/configs/r2-plan.json').read_text())
     root=args.root or Path(plan['output_root'])
-    if args.stage=='init':initialize(repo,root,plan,args.test_log)
+    if args.stage=='init':
+        if args.test_log is None:
+            parser.error('--stage init requires --test-log')
+        initialize(repo, root, plan, args.test_log, request=args.request,
+                   dependency_root=args.dependency_root, dependency_archive=args.dependency_archive,
+                   raw_directory=args.raw_directory)
     else:
+        if any((args.request, args.dependency_root, args.dependency_archive, args.raw_directory)):
+            parser.error('Input path overrides must be supplied during --stage init')
         assert json.loads((root/'execution-plan.json').read_text())==plan
         # Resume/evaluation uses the same implementation as INPUT. Reporting
         # changes can be committed separately, but training code cannot drift.
