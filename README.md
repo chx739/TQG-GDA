@@ -80,3 +80,9 @@ PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 python -m unittest discover -s tests
 真实图缓存需自行准备；数据哈希和角色应匹配具体实验协议。PROTEINS／Mutagenicity的0→1/2/3沿用SEGA提供的图规模域索引，不是数据集官方自然域。目标final标签不用于日常诊断、调参或选模。
 
 完成修改或实验后，更新对应版本文档、核验产物并同步GitHub，约定见[AGENTS.md](AGENTS.md)。
+
+## 2026-11-14 实验数组清理与 TSBA 拆分
+
+按用户要求，旧实验目录中的 `.npz` 数组已从当前 TQG 文件树移除；模型、报告及其他证据保留。完整数组仍可从删除前提交恢复，旧存档清单中的数组路径属于历史记录，当前 checkout 不再是完整逐步回放档案。[清理统计](docs/maintenance/npz-removal-20261114.json)。
+
+TSBA 的独立仓库为 [chx739/TSBA](https://github.com/chx739/TSBA)，从 TSBA 当前快照建立新历史，不继承旧 TQG 的大型 Git 对象。
