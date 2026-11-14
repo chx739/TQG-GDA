@@ -1,0 +1,3532 @@
+{
+  "mutagenicity_edge": {
+    "schema_version": 1,
+    "artifact_type": "planned_protocol_not_execution_record",
+    "status": "planned",
+    "registered_date": "2026-11-14",
+    "implementation_status": "not_implemented",
+    "execution_started": false,
+    "protocol": "experiments/mutagenicity/r6_源梯度与密度请求分解_20261114/docs/r6-protocol.md",
+    "analysis_type": "post_R5_observation_fixed_state_supervised_mechanism_diagnostic",
+    "repository_basis_commit": "d29773d9ac50dda6f189cd14d2e72a32a08b033b",
+    "reference_artifacts": [
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/report.md",
+        "sha256": "304098a46928b20213292b2191646afa153833ede66de76315bffbfaa29f371e"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/executed-configs.json",
+        "sha256": "5246044971c9f82a5094313b71e5d47135c4d54280debea784f93242a1922bb6"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/results/archive-index.json",
+        "sha256": "2936fffe95e3767daea8373d24875c22c3830951a9bad956c5bb94467ef5dcf5"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/results/evidence.json",
+        "sha256": "49725c0de3b34d40afdf6c6c27c41500d1cba4281362df1568492274bcad79c5"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/src/diagnostics.py",
+        "sha256": "35c3453ee6e03cbb47f2e4c1ca065fe58a14e881b24b4813f9a0f0203dd0a123"
+      }
+    ],
+    "settings": [
+      {
+        "id": "mutagenicity_edge",
+        "dataset": "Mutagenicity",
+        "split_basis": "edge_count",
+        "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_edge/attempt-001",
+        "r5_origin": "reuse",
+        "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+        "r5_execution_plan_sha256": "58bb05f8c486112a35206f8f1622fff4d39886a4b319f875768d280c746319f3",
+        "r5_seal_digests": {
+          "INPUT": "5ba5e365d86685e367176fe05f90465a836c20cad0463b467cbec1405f7a6a99",
+          "OBS": "adcd93a683374ee8007ef5f74374be029485b63c015c626a7d7404a6edf137a7",
+          "FINAL": "183453c688b5c9873b8d55df4e9fbf8dd3adf56e45ccfb774662b592a3cf7143"
+        },
+        "r5_seal_file_sha256": {
+          "INPUT": "d3673fa771b38c1259f1360a819880514bc121e6dcd5c4f5f6fe8d443b679c13",
+          "OBS": "141c2ba67b8b7faa018e6f7c1f53b930dcf045c5f92427ef1c47acd73f90e392",
+          "FINAL": "2fd00f20aaf23080a351892de7b8c82bd0d60e69756124af589dfcfa6100d856"
+        },
+        "domain_indices": [
+          {
+            "domain": 0,
+            "path": "data/idx_Mutagenicity_0.npy",
+            "sha256": "3851c87429bccf05241cefe1599350f0e39fa9903b35966915f6388a2dc764c9",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 1,
+            "path": "data/idx_Mutagenicity_1.npy",
+            "sha256": "4539b47175179d94a03ac03b3499e5f259150585cce8715ca690f2f61ae8806b",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 2,
+            "path": "data/idx_Mutagenicity_2.npy",
+            "sha256": "0cc8c27db27cd8133de90591e37f2b152460182858c65c8f66c3b1e351b3c15b",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 3,
+            "path": "data/idx_Mutagenicity_3.npy",
+            "sha256": "dd20a9dbbcd7d083a37cf8ecf25e1313bdca88b5b24e58236841d2ae83809d48",
+            "count": 1085,
+            "order": "preserve_file_order"
+          }
+        ],
+        "input": {
+          "raw_directory": "/home/hxchen/research/GDA/TQG/data/Mutagenicity_official_20261026/Mutagenicity/raw",
+          "files": {
+            "Mutagenicity_A.txt": {
+              "sha256": "ae85e22b4b898ebd819d2ed3adc8f06a7bf1cda746b333086472d19b36711145",
+              "bytes": 3554144,
+              "role": "input"
+            },
+            "Mutagenicity_graph_indicator.txt": {
+              "sha256": "88b2d83ff10fad75b3280654061e965976f74e75620058c371ed23567236b4bc",
+              "bytes": 622816,
+              "role": "input"
+            },
+            "Mutagenicity_node_labels.txt": {
+              "sha256": "b429ec418c831d02dc3088b2fe08d11214627850d2bbdacfa9797c0510e70ae7",
+              "bytes": 263105,
+              "role": "input"
+            },
+            "Mutagenicity_graph_labels.txt": {
+              "sha256": "b604c7dcbfdf89193901e32abdcbf9b5b92137414ce22231f00ed65d48ec48f9",
+              "bytes": 8674,
+              "role": "evaluation_label_and_task_scoped_source_label"
+            },
+            "Mutagenicity_edge_labels.txt": {
+              "sha256": "bf8e783386ac22e6033bbce56d765c0a4336649bd590a6f1e467b27b549f2114",
+              "bytes": 533788,
+              "role": "input"
+            }
+          },
+          "graph_id": "TU graph number minus one",
+          "class_labels_parsed_at_registration": false,
+          "node_features": "one_hot_node_labels_only",
+          "node_label_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "node_feature_dim": 14,
+          "edge_features": "one_hot_edge_labels",
+          "edge_feature_dim": 3,
+          "continuous_node_attributes_used": false,
+          "remove_self_loops": true,
+          "coalesce_duplicate_directed_edges": true,
+          "require_bidirectional_edges": true,
+          "graph_objects_have_y": false
+        },
+        "inherited_model_config": {
+          "seed": 0,
+          "encoder": "gin",
+          "hidden": 64,
+          "num_layers": 3,
+          "emb_dim": 16,
+          "dropout": 0.0,
+          "source_epochs": 100,
+          "source_lr": 0.001,
+          "source_batch": 128,
+          "adapter_width": 16,
+          "coordinate_eps": 1e-08,
+          "score_hidden": 64,
+          "score_epochs": 800,
+          "score_batch": 128,
+          "score_lr": 0.001,
+          "score_validation": true,
+          "kappa_sigma": 1.0,
+          "adapt_rounds": 30,
+          "source_adapt_batch": 128,
+          "target_batch": 128,
+          "lambda_boundary": 1.0,
+          "tau": 0.1,
+          "radius_multiplier": 1.0,
+          "request_multiplier": 0.1,
+          "execution_multiplier": 0.1,
+          "root_tolerance": 1e-05,
+          "min_normal": 1e-08,
+          "projection_eps": 1e-12,
+          "projection_steps": 20,
+          "projection_backtracks": 10,
+          "movement_zero": 1e-12,
+          "damping": 0.01,
+          "solver": "auto",
+          "direct_max_params": 2048,
+          "cg_tolerance": 1e-07,
+          "cg_steps": 200,
+          "armijo": 0.0001,
+          "backtracks": 15,
+          "adaptation_dtype": "float64",
+          "device": "cpu"
+        },
+        "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+        "inherited_score_config": {
+          "optimizer_updates": 7200,
+          "endpoints": [
+            900,
+            1800,
+            3600,
+            7200
+          ],
+          "checkpoint_selection": "exact_final_update_7200",
+          "use_validation_for_selection": false,
+          "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+          "recovery_epochs": 50,
+          "shuffle_each_epoch": true,
+          "drop_last": false,
+          "bandwidths": [
+            1
+          ],
+          "kde_role": "diagnostic_only_not_population_oracle",
+          "loo_update_arms": false
+        },
+        "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+        "planned_state_blocks": 120,
+        "expected_available_blocks_from_r5": 120,
+        "r5_missing_blocks": [],
+        "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/mutagenicity_edge/attempt-001"
+      },
+      {
+        "id": "mutagenicity_node",
+        "dataset": "Mutagenicity",
+        "split_basis": "node_count",
+        "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_node/attempt-001",
+        "r5_origin": "fresh",
+        "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+        "r5_execution_plan_sha256": "6182e158c7e465d73f1ff18d1b051c594a7fcb5e3c6b5d336528dd5c52924954",
+        "r5_seal_digests": {
+          "INPUT": "cb6b7b1bfb01a0b39f9ffb1b69eecac94f16b6595cf0aa892051e13ed778352a",
+          "OBS": "4e1d5f13b0914dd24009cc42230820eaaeb43267065e56c739132a0ac1469f88",
+          "FINAL": "9d1e3edb2524ca23e1e9825190f4603104cf6b5509667f1d2b62d2c730d2667e"
+        },
+        "r5_seal_file_sha256": {
+          "INPUT": "767fa7f6a7e8d269a2c76162663a1bf36590ef07fd08fb69b3ec0c40dfef7a2c",
+          "OBS": "57ded4fab9a62fa35a46d6b56a91d0046a3911ae89f7cf6191648b23e8d46912",
+          "FINAL": "d6ad4baae5a9e10cc44912f1a029e7061225810d02790e7067b55ec4aae09a6c"
+        },
+        "domain_indices": [
+          {
+            "domain": 0,
+            "path": "data/node_Mutagenicity_0.npy",
+            "sha256": "b6804472907b37e130d0cbedc77de605318c33eee5db5195bb57c7133c75d3f1",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 1,
+            "path": "data/node_Mutagenicity_1.npy",
+            "sha256": "3a5569c89e03b9ecb6f4be3bd1bc3b3f1750b40c8c09a4140adb5f10580e3733",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 2,
+            "path": "data/node_Mutagenicity_2.npy",
+            "sha256": "b156a351074c0abd60dd4b7783ecc078ff6f243a61c5c64f63c481d718b2ddf9",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 3,
+            "path": "data/node_Mutagenicity_3.npy",
+            "sha256": "6b2eded025bbc59a8f34943778266a7e023cc5d5257dfae74e2efa881e681af8",
+            "count": 1085,
+            "order": "preserve_file_order"
+          }
+        ],
+        "input": {
+          "raw_directory": "/home/hxchen/research/GDA/TQG/data/Mutagenicity_official_20261026/Mutagenicity/raw",
+          "files": {
+            "Mutagenicity_A.txt": {
+              "sha256": "ae85e22b4b898ebd819d2ed3adc8f06a7bf1cda746b333086472d19b36711145",
+              "bytes": 3554144,
+              "role": "input"
+            },
+            "Mutagenicity_graph_indicator.txt": {
+              "sha256": "88b2d83ff10fad75b3280654061e965976f74e75620058c371ed23567236b4bc",
+              "bytes": 622816,
+              "role": "input"
+            },
+            "Mutagenicity_node_labels.txt": {
+              "sha256": "b429ec418c831d02dc3088b2fe08d11214627850d2bbdacfa9797c0510e70ae7",
+              "bytes": 263105,
+              "role": "input"
+            },
+            "Mutagenicity_graph_labels.txt": {
+              "sha256": "b604c7dcbfdf89193901e32abdcbf9b5b92137414ce22231f00ed65d48ec48f9",
+              "bytes": 8674,
+              "role": "evaluation_label_and_task_scoped_source_label"
+            },
+            "Mutagenicity_edge_labels.txt": {
+              "sha256": "bf8e783386ac22e6033bbce56d765c0a4336649bd590a6f1e467b27b549f2114",
+              "bytes": 533788,
+              "role": "input"
+            }
+          },
+          "graph_id": "TU graph number minus one",
+          "class_labels_parsed_at_registration": false,
+          "node_features": "one_hot_node_labels_only",
+          "node_label_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "node_feature_dim": 14,
+          "edge_features": "one_hot_edge_labels",
+          "edge_feature_dim": 3,
+          "continuous_node_attributes_used": false,
+          "remove_self_loops": true,
+          "coalesce_duplicate_directed_edges": true,
+          "require_bidirectional_edges": true,
+          "graph_objects_have_y": false
+        },
+        "inherited_model_config": {
+          "seed": 0,
+          "encoder": "gin",
+          "hidden": 64,
+          "num_layers": 3,
+          "emb_dim": 16,
+          "dropout": 0.0,
+          "source_epochs": 100,
+          "source_lr": 0.001,
+          "source_batch": 128,
+          "adapter_width": 16,
+          "coordinate_eps": 1e-08,
+          "score_hidden": 64,
+          "score_epochs": 800,
+          "score_batch": 128,
+          "score_lr": 0.001,
+          "score_validation": true,
+          "kappa_sigma": 1.0,
+          "adapt_rounds": 30,
+          "source_adapt_batch": 128,
+          "target_batch": 128,
+          "lambda_boundary": 1.0,
+          "tau": 0.1,
+          "radius_multiplier": 1.0,
+          "request_multiplier": 0.1,
+          "execution_multiplier": 0.1,
+          "root_tolerance": 1e-05,
+          "min_normal": 1e-08,
+          "projection_eps": 1e-12,
+          "projection_steps": 20,
+          "projection_backtracks": 10,
+          "movement_zero": 1e-12,
+          "damping": 0.01,
+          "solver": "auto",
+          "direct_max_params": 2048,
+          "cg_tolerance": 1e-07,
+          "cg_steps": 200,
+          "armijo": 0.0001,
+          "backtracks": 15,
+          "adaptation_dtype": "float64",
+          "device": "cpu"
+        },
+        "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+        "inherited_score_config": {
+          "optimizer_updates": 7200,
+          "endpoints": [
+            900,
+            1800,
+            3600,
+            7200
+          ],
+          "checkpoint_selection": "exact_final_update_7200",
+          "use_validation_for_selection": false,
+          "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+          "recovery_epochs": 50,
+          "shuffle_each_epoch": true,
+          "drop_last": false,
+          "bandwidths": [
+            1
+          ],
+          "kde_role": "diagnostic_only_not_population_oracle",
+          "loo_update_arms": false
+        },
+        "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+        "planned_state_blocks": 120,
+        "expected_available_blocks_from_r5": 120,
+        "r5_missing_blocks": [],
+        "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/mutagenicity_node/attempt-001"
+      },
+      {
+        "id": "proteins_edge",
+        "dataset": "PROTEINS",
+        "split_basis": "edge_count",
+        "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/proteins_edge/attempt-001",
+        "r5_origin": "fresh",
+        "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+        "r5_execution_plan_sha256": "1f5ee6b38cb3acd41824930ea1b1fef26ceb6f5130b755d9d5fe8385841363b0",
+        "r5_seal_digests": {
+          "INPUT": "91247688ee617048c7fc36acc8147d356d826c3a293b327d4d27e287f0e9f3b7",
+          "OBS": "5a5e28b7cd47d1597c9b68b399acfb33e4c89dd8d5e83e264b1630bb9c219e4d",
+          "FINAL": "1bfedf37cb8104de34f8619494a8a5cfeb720f304bb35ea3586b8a46c931fa4b"
+        },
+        "r5_seal_file_sha256": {
+          "INPUT": "e520310bdc55b15010deb45be4f3f8b65ccd83207dbfd6b1068aa3daf8b2211e",
+          "OBS": "168c85032883ff4983e0e766f753e581c86f2a1ac8ed4a1c126752b9e8e8e87b",
+          "FINAL": "c825fba49501898a495009bfa9387f8273237dafa3bbd7cb9f1db8783d7f38ce"
+        },
+        "domain_indices": [
+          {
+            "domain": 0,
+            "path": "data/idx_PROTEINS_0.npy",
+            "sha256": "15efc5669142619fcde99efadd676c39a64230fa527920ebad6b295b9eae0363",
+            "count": 278,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 1,
+            "path": "data/idx_PROTEINS_1.npy",
+            "sha256": "f56835ca9f8705f1c57eae8907146b94bfdb0358732eac081cc00b44a31771a0",
+            "count": 278,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 2,
+            "path": "data/idx_PROTEINS_2.npy",
+            "sha256": "96885b7aea84d74a9cd7dd996c444dd23dc6e985d481cbe9bd852ae317e7eb0d",
+            "count": 278,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 3,
+            "path": "data/idx_PROTEINS_3.npy",
+            "sha256": "1e403ed63dd28ddf9658bb8452ce11a38f98ff8290e5c004c165859ef1a4b643",
+            "count": 279,
+            "order": "preserve_file_order"
+          }
+        ],
+        "input": {
+          "raw_directory": "/home/hxchen/research/GDA/TQG/data/PROTEINS_official_20261023/PROTEINS/raw",
+          "files": {
+            "PROTEINS_A.txt": {
+              "sha256": "4c4b33e272fc95cac6d27ed6d5d12b9a852c8610e91fff59f8f0dbdd5a20df67",
+              "bytes": 2022990,
+              "role": "input"
+            },
+            "PROTEINS_graph_indicator.txt": {
+              "sha256": "8d4ff1e852a5c28561e9bffb44cf9490bc552b13a3b6156dd12dc7f44e9afc4a",
+              "bytes": 169673,
+              "role": "input"
+            },
+            "PROTEINS_node_labels.txt": {
+              "sha256": "f758e8ad3d6e3c026b50833d75f6f90735b94eb3345e4243707f495ca8afea8d",
+              "bytes": 86942,
+              "role": "input"
+            },
+            "PROTEINS_graph_labels.txt": {
+              "sha256": "c0ef9810c440775252872318d0c8adc385588e14bc4c47a2c34aa96ee3c7cdcd",
+              "bytes": 2226,
+              "role": "evaluation_label_and_task_scoped_source_label"
+            },
+            "PROTEINS_node_attributes.txt": {
+              "sha256": "54eef829abb37e458a5fbf3a3c581e48e5810e220463c2cd951856b9ceb08f07",
+              "bytes": 478190,
+              "role": "unused_feature_provenance"
+            }
+          },
+          "graph_id": "TU graph number minus one",
+          "class_labels_parsed_at_registration": false,
+          "node_features": "one_hot_node_labels_only",
+          "node_label_values": [
+            0,
+            1,
+            2
+          ],
+          "node_feature_dim": 3,
+          "edge_features": null,
+          "edge_feature_dim": 0,
+          "continuous_node_attributes_used": false,
+          "remove_self_loops": true,
+          "coalesce_duplicate_directed_edges": true,
+          "require_bidirectional_edges": true,
+          "graph_objects_have_y": false
+        },
+        "inherited_model_config": {
+          "seed": 0,
+          "encoder": "gin",
+          "hidden": 64,
+          "num_layers": 3,
+          "emb_dim": 16,
+          "dropout": 0.0,
+          "source_epochs": 100,
+          "source_lr": 0.001,
+          "source_batch": 128,
+          "adapter_width": 16,
+          "coordinate_eps": 1e-08,
+          "score_hidden": 64,
+          "score_epochs": 2400,
+          "score_batch": 128,
+          "score_lr": 0.001,
+          "score_validation": true,
+          "kappa_sigma": 1.0,
+          "adapt_rounds": 30,
+          "source_adapt_batch": 128,
+          "target_batch": 128,
+          "lambda_boundary": 1.0,
+          "tau": 0.1,
+          "radius_multiplier": 1.0,
+          "request_multiplier": 0.1,
+          "execution_multiplier": 0.1,
+          "root_tolerance": 1e-05,
+          "min_normal": 1e-08,
+          "projection_eps": 1e-12,
+          "projection_steps": 20,
+          "projection_backtracks": 10,
+          "movement_zero": 1e-12,
+          "damping": 0.01,
+          "solver": "auto",
+          "direct_max_params": 2048,
+          "cg_tolerance": 1e-07,
+          "cg_steps": 200,
+          "armijo": 0.0001,
+          "backtracks": 15,
+          "adaptation_dtype": "float64",
+          "device": "cpu"
+        },
+        "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+        "inherited_score_config": {
+          "optimizer_updates": 7200,
+          "endpoints": [
+            900,
+            1800,
+            3600,
+            7200
+          ],
+          "checkpoint_selection": "exact_final_update_7200",
+          "use_validation_for_selection": false,
+          "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+          "recovery_epochs": 50,
+          "shuffle_each_epoch": true,
+          "drop_last": false,
+          "bandwidths": [
+            1
+          ],
+          "kde_role": "diagnostic_only_not_population_oracle",
+          "loo_update_arms": false
+        },
+        "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+        "planned_state_blocks": 120,
+        "expected_available_blocks_from_r5": 108,
+        "r5_missing_blocks": [
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3406,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3406,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3409,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3409,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3406,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3406,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3409,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3409,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3406,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3406,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3409,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3409,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          }
+        ],
+        "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/proteins_edge/attempt-001"
+      }
+    ],
+    "domains": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "directions": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ]
+    ],
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "states": {
+      "trajectory": "A0",
+      "attempts_before": [
+        1,
+        30
+      ],
+      "primary_attempt_before": 1,
+      "secondary_attempt_before": 30,
+      "parameter_field": "before",
+      "boundary_and_batch": "same record as before; no regeneration",
+      "alpha_source": "sealed R5 record.side.alpha",
+      "require_r5_side_status": "available"
+    },
+    "factorial": {
+      "source_gradient_coefficients": [
+        0,
+        1
+      ],
+      "request_signs": [
+        -1,
+        0,
+        1
+      ],
+      "arms": [
+        {
+          "id": "N",
+          "source_gradient_coefficient": 0,
+          "request_sign": 0
+        },
+        {
+          "id": "S",
+          "source_gradient_coefficient": 1,
+          "request_sign": 0
+        },
+        {
+          "id": "SU+",
+          "source_gradient_coefficient": 1,
+          "request_sign": 1
+        },
+        {
+          "id": "SU-",
+          "source_gradient_coefficient": 1,
+          "request_sign": -1
+        },
+        {
+          "id": "U+",
+          "source_gradient_coefficient": 0,
+          "request_sign": 1
+        },
+        {
+          "id": "U-",
+          "source_gradient_coefficient": 0,
+          "request_sign": -1
+        }
+      ],
+      "fixed_H": "F_S + lambda_B D^T D / M + damping I",
+      "source_direction": "s = delta_zero = -H^-1 g_source_batch",
+      "request_direction": "u = delta_normal - delta_zero = H^-1 lambda_B D^T zeta / M",
+      "retain_source_curvature": true,
+      "direction_normalization": false,
+      "recompute_boundaries_per_arm": false
+    },
+    "steps": {
+      "multipliers": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "primary_multiplier": 1.0,
+      "beta": "historical_alpha * multiplier",
+      "search_new_alpha": false,
+      "choose_best_step_by_labels": false,
+      "armijo_filter": false,
+      "commit_candidates": false,
+      "motion_feasibility": "max(abs(true_forward_movement_on_old_boundaries)) <= inherited execution_multiplier * sigma",
+      "finite_over_budget_policy": "retain marked in primary diagnostic; secondary six-arm common-motion-feasible subset per beta",
+      "nonfinite_policy": "record numerical_failure; never treat as finite budget rejection"
+    },
+    "numerics": {
+      "device": "cpu",
+      "dtype": "float64",
+      "linear_residual_tolerance": "10 * inherited cg_tolerance * max(norm(original_rhs), norm(rhs_checked), 1e-12)",
+      "replay_logprob_atol": 1e-09,
+      "replay_logprob_rtol": 1e-07,
+      "replay_predictions_must_match_exactly": true,
+      "derivative_sign_atol": 1e-10,
+      "derivative_sign_rtol": 1e-08,
+      "derivative_sign_threshold": "atol + rtol * norm(pool_gradient) * norm(direction)",
+      "relocation_radius_sigma": 4,
+      "relocation_scan_points": 65,
+      "relocation_bisections": 28
+    },
+    "labels": {
+      "candidate_phase": "task-scoped source-fit labels only; no source-validation or target labels or metric tables",
+      "evaluation_phase": "after R6_OBS verify: full source-fit, source-validation and target labels",
+      "target_gradients": "evaluation diagnostic only; never update candidates, steps, selection or model",
+      "claim_unseen_target_labels": false,
+      "claim_independent_final_test": false
+    },
+    "evaluation": {
+      "pools": [
+        "source_batch",
+        "source_fit",
+        "source_validation",
+        "target"
+      ],
+      "primary_comparisons": [
+        {
+          "left": "U+",
+          "right": "N",
+          "pools": [
+            "target"
+          ],
+          "metric": "nll"
+        },
+        {
+          "left": "U+",
+          "right": "U-",
+          "pools": [
+            "target"
+          ],
+          "metric": "nll"
+        },
+        {
+          "left": "S",
+          "right": "N",
+          "pools": [
+            "source_fit",
+            "source_validation",
+            "target"
+          ],
+          "metric": "nll"
+        }
+      ],
+      "key_secondary_comparisons": [
+        [
+          "SU+",
+          "S"
+        ],
+        [
+          "SU+",
+          "SU-"
+        ],
+        [
+          "SU+",
+          "U+"
+        ],
+        [
+          "SU-",
+          "U-"
+        ]
+      ],
+      "interaction": "L(SU+) - L(S) - L(U+) + L(N)",
+      "metrics": [
+        "nll",
+        "accuracy",
+        "balanced_accuracy",
+        "macro_f1",
+        "class_ce",
+        "class_recall",
+        "predicted_class_proportions",
+        "wrong_to_right",
+        "right_to_wrong",
+        "net_correct"
+      ],
+      "fixed_target_subgroups": [
+        "initially_correct",
+        "initially_wrong",
+        "generators",
+        "complement"
+      ],
+      "subgroup_origin": "old theta predictions and old generator graph IDs; evaluation only",
+      "derivatives_at_theta": [
+        "gradient(pool_nll) dot s",
+        "gradient(pool_nll) dot u"
+      ],
+      "derivative_after_source": "gradient(pool_nll at theta + beta*s) dot u for every fixed beta",
+      "stop_gradient_through": [
+        "encoder",
+        "score",
+        "boundaries",
+        "H",
+        "s",
+        "u"
+      ],
+      "finite_difference_diagnostics": "Delta L(beta*v), beta*d, nonlinear residual; no adaptive target-driven step search",
+      "aggregation": "each setting/time/step/contrast: equal 12 directions within each seed, then five seeds",
+      "incomplete_seed": "NA for full-direction seed; NA for complete-five-seed mean if any incomplete; optionally separately labeled conditional available-block statistics",
+      "secondary_feasible_mask": "same six-arm jointly feasible block set; no per-arm filtering",
+      "uncertainty": {
+        "report": [
+          "raw_seed_values",
+          "mean",
+          "sample_sd",
+          "win_tie_loss"
+        ],
+        "optional_t95_critical_df4": 2.776445,
+        "scope": "fixed-data training randomness only"
+      },
+      "posthoc_focus": {
+        "setting": "proteins_edge",
+        "directions": [
+          [
+            3,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "reason": "R5 high NLL degradation; illustrative only, all directions remain in registered scope"
+      }
+    },
+    "budget": {
+      "new_source_models": 0,
+      "new_score_models": 0,
+      "new_training_updates": 0,
+      "new_closed_loop_trajectories": 0,
+      "new_committed_adaptation_attempts": 0,
+      "planned_blocks": 360,
+      "expected_available_blocks_from_r5": 348,
+      "arms": 6,
+      "step_multipliers": 3,
+      "expected_candidate_cells": 6264,
+      "max_distinct_parameter_states_per_available_block": 16,
+      "expected_max_distinct_parameter_states": 5568,
+      "counts_are": "expected diagnostic counts, not completed execution"
+    },
+    "execution": {
+      "stages": [
+        "prepare",
+        "candidates",
+        "replay",
+        "evaluate",
+        "report"
+      ],
+      "seals": [
+        "R6_INPUT",
+        "R6_OBS",
+        "R6_FINAL"
+      ],
+      "threads_per_worker": 1,
+      "max_workers": 4,
+      "environment": "record compatible torch/python versions and actual commands at execution",
+      "new_attempt_required": true,
+      "write_to_r5_archive": false
+    },
+    "outputs": {
+      "tables": [
+        "candidates.csv",
+        "paired.csv",
+        "derivatives.csv",
+        "interactions.csv",
+        "coverage.csv",
+        "seed_summary.csv",
+        "summary.csv"
+      ],
+      "state_artifacts": [
+        "theta",
+        "s",
+        "u",
+        "historical_alpha",
+        "old_record_reference_and_hash",
+        "candidate_vectors",
+        "pool_log_probabilities",
+        "motion_status",
+        "replay_checks"
+      ],
+      "execution_records": [
+        "actual_config",
+        "execution_commit",
+        "input_manifest",
+        "environment",
+        "commands",
+        "all_planned_block_statuses",
+        "seal_summaries"
+      ]
+    },
+    "setting": {
+      "id": "mutagenicity_edge",
+      "dataset": "Mutagenicity",
+      "split_basis": "edge_count",
+      "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_edge/attempt-001",
+      "r5_origin": "reuse",
+      "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+      "r5_execution_plan_sha256": "58bb05f8c486112a35206f8f1622fff4d39886a4b319f875768d280c746319f3",
+      "r5_seal_digests": {
+        "INPUT": "5ba5e365d86685e367176fe05f90465a836c20cad0463b467cbec1405f7a6a99",
+        "OBS": "adcd93a683374ee8007ef5f74374be029485b63c015c626a7d7404a6edf137a7",
+        "FINAL": "183453c688b5c9873b8d55df4e9fbf8dd3adf56e45ccfb774662b592a3cf7143"
+      },
+      "r5_seal_file_sha256": {
+        "INPUT": "d3673fa771b38c1259f1360a819880514bc121e6dcd5c4f5f6fe8d443b679c13",
+        "OBS": "141c2ba67b8b7faa018e6f7c1f53b930dcf045c5f92427ef1c47acd73f90e392",
+        "FINAL": "2fd00f20aaf23080a351892de7b8c82bd0d60e69756124af589dfcfa6100d856"
+      },
+      "domain_indices": [
+        {
+          "domain": 0,
+          "path": "data/idx_Mutagenicity_0.npy",
+          "sha256": "3851c87429bccf05241cefe1599350f0e39fa9903b35966915f6388a2dc764c9",
+          "count": 1084,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 1,
+          "path": "data/idx_Mutagenicity_1.npy",
+          "sha256": "4539b47175179d94a03ac03b3499e5f259150585cce8715ca690f2f61ae8806b",
+          "count": 1084,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 2,
+          "path": "data/idx_Mutagenicity_2.npy",
+          "sha256": "0cc8c27db27cd8133de90591e37f2b152460182858c65c8f66c3b1e351b3c15b",
+          "count": 1084,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 3,
+          "path": "data/idx_Mutagenicity_3.npy",
+          "sha256": "dd20a9dbbcd7d083a37cf8ecf25e1313bdca88b5b24e58236841d2ae83809d48",
+          "count": 1085,
+          "order": "preserve_file_order"
+        }
+      ],
+      "input": {
+        "raw_directory": "/home/hxchen/research/GDA/TQG/data/Mutagenicity_official_20261026/Mutagenicity/raw",
+        "files": {
+          "Mutagenicity_A.txt": {
+            "sha256": "ae85e22b4b898ebd819d2ed3adc8f06a7bf1cda746b333086472d19b36711145",
+            "bytes": 3554144,
+            "role": "input"
+          },
+          "Mutagenicity_graph_indicator.txt": {
+            "sha256": "88b2d83ff10fad75b3280654061e965976f74e75620058c371ed23567236b4bc",
+            "bytes": 622816,
+            "role": "input"
+          },
+          "Mutagenicity_node_labels.txt": {
+            "sha256": "b429ec418c831d02dc3088b2fe08d11214627850d2bbdacfa9797c0510e70ae7",
+            "bytes": 263105,
+            "role": "input"
+          },
+          "Mutagenicity_graph_labels.txt": {
+            "sha256": "b604c7dcbfdf89193901e32abdcbf9b5b92137414ce22231f00ed65d48ec48f9",
+            "bytes": 8674,
+            "role": "evaluation_label_and_task_scoped_source_label"
+          },
+          "Mutagenicity_edge_labels.txt": {
+            "sha256": "bf8e783386ac22e6033bbce56d765c0a4336649bd590a6f1e467b27b549f2114",
+            "bytes": 533788,
+            "role": "input"
+          }
+        },
+        "graph_id": "TU graph number minus one",
+        "class_labels_parsed_at_registration": false,
+        "node_features": "one_hot_node_labels_only",
+        "node_label_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "node_feature_dim": 14,
+        "edge_features": "one_hot_edge_labels",
+        "edge_feature_dim": 3,
+        "continuous_node_attributes_used": false,
+        "remove_self_loops": true,
+        "coalesce_duplicate_directed_edges": true,
+        "require_bidirectional_edges": true,
+        "graph_objects_have_y": false
+      },
+      "inherited_model_config": {
+        "seed": 0,
+        "encoder": "gin",
+        "hidden": 64,
+        "num_layers": 3,
+        "emb_dim": 16,
+        "dropout": 0.0,
+        "source_epochs": 100,
+        "source_lr": 0.001,
+        "source_batch": 128,
+        "adapter_width": 16,
+        "coordinate_eps": 1e-08,
+        "score_hidden": 64,
+        "score_epochs": 800,
+        "score_batch": 128,
+        "score_lr": 0.001,
+        "score_validation": true,
+        "kappa_sigma": 1.0,
+        "adapt_rounds": 30,
+        "source_adapt_batch": 128,
+        "target_batch": 128,
+        "lambda_boundary": 1.0,
+        "tau": 0.1,
+        "radius_multiplier": 1.0,
+        "request_multiplier": 0.1,
+        "execution_multiplier": 0.1,
+        "root_tolerance": 1e-05,
+        "min_normal": 1e-08,
+        "projection_eps": 1e-12,
+        "projection_steps": 20,
+        "projection_backtracks": 10,
+        "movement_zero": 1e-12,
+        "damping": 0.01,
+        "solver": "auto",
+        "direct_max_params": 2048,
+        "cg_tolerance": 1e-07,
+        "cg_steps": 200,
+        "armijo": 0.0001,
+        "backtracks": 15,
+        "adaptation_dtype": "float64",
+        "device": "cpu"
+      },
+      "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+      "inherited_score_config": {
+        "optimizer_updates": 7200,
+        "endpoints": [
+          900,
+          1800,
+          3600,
+          7200
+        ],
+        "checkpoint_selection": "exact_final_update_7200",
+        "use_validation_for_selection": false,
+        "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+        "recovery_epochs": 50,
+        "shuffle_each_epoch": true,
+        "drop_last": false,
+        "bandwidths": [
+          1
+        ],
+        "kde_role": "diagnostic_only_not_population_oracle",
+        "loo_update_arms": false
+      },
+      "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+      "planned_state_blocks": 120,
+      "expected_available_blocks_from_r5": 120,
+      "r5_missing_blocks": [],
+      "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/mutagenicity_edge/attempt-001"
+    },
+    "workers": 4
+  },
+  "mutagenicity_node": {
+    "schema_version": 1,
+    "artifact_type": "planned_protocol_not_execution_record",
+    "status": "planned",
+    "registered_date": "2026-11-14",
+    "implementation_status": "not_implemented",
+    "execution_started": false,
+    "protocol": "experiments/mutagenicity/r6_源梯度与密度请求分解_20261114/docs/r6-protocol.md",
+    "analysis_type": "post_R5_observation_fixed_state_supervised_mechanism_diagnostic",
+    "repository_basis_commit": "d29773d9ac50dda6f189cd14d2e72a32a08b033b",
+    "reference_artifacts": [
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/report.md",
+        "sha256": "304098a46928b20213292b2191646afa153833ede66de76315bffbfaa29f371e"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/executed-configs.json",
+        "sha256": "5246044971c9f82a5094313b71e5d47135c4d54280debea784f93242a1922bb6"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/results/archive-index.json",
+        "sha256": "2936fffe95e3767daea8373d24875c22c3830951a9bad956c5bb94467ef5dcf5"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/results/evidence.json",
+        "sha256": "49725c0de3b34d40afdf6c6c27c41500d1cba4281362df1568492274bcad79c5"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/src/diagnostics.py",
+        "sha256": "35c3453ee6e03cbb47f2e4c1ca065fe58a14e881b24b4813f9a0f0203dd0a123"
+      }
+    ],
+    "settings": [
+      {
+        "id": "mutagenicity_edge",
+        "dataset": "Mutagenicity",
+        "split_basis": "edge_count",
+        "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_edge/attempt-001",
+        "r5_origin": "reuse",
+        "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+        "r5_execution_plan_sha256": "58bb05f8c486112a35206f8f1622fff4d39886a4b319f875768d280c746319f3",
+        "r5_seal_digests": {
+          "INPUT": "5ba5e365d86685e367176fe05f90465a836c20cad0463b467cbec1405f7a6a99",
+          "OBS": "adcd93a683374ee8007ef5f74374be029485b63c015c626a7d7404a6edf137a7",
+          "FINAL": "183453c688b5c9873b8d55df4e9fbf8dd3adf56e45ccfb774662b592a3cf7143"
+        },
+        "r5_seal_file_sha256": {
+          "INPUT": "d3673fa771b38c1259f1360a819880514bc121e6dcd5c4f5f6fe8d443b679c13",
+          "OBS": "141c2ba67b8b7faa018e6f7c1f53b930dcf045c5f92427ef1c47acd73f90e392",
+          "FINAL": "2fd00f20aaf23080a351892de7b8c82bd0d60e69756124af589dfcfa6100d856"
+        },
+        "domain_indices": [
+          {
+            "domain": 0,
+            "path": "data/idx_Mutagenicity_0.npy",
+            "sha256": "3851c87429bccf05241cefe1599350f0e39fa9903b35966915f6388a2dc764c9",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 1,
+            "path": "data/idx_Mutagenicity_1.npy",
+            "sha256": "4539b47175179d94a03ac03b3499e5f259150585cce8715ca690f2f61ae8806b",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 2,
+            "path": "data/idx_Mutagenicity_2.npy",
+            "sha256": "0cc8c27db27cd8133de90591e37f2b152460182858c65c8f66c3b1e351b3c15b",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 3,
+            "path": "data/idx_Mutagenicity_3.npy",
+            "sha256": "dd20a9dbbcd7d083a37cf8ecf25e1313bdca88b5b24e58236841d2ae83809d48",
+            "count": 1085,
+            "order": "preserve_file_order"
+          }
+        ],
+        "input": {
+          "raw_directory": "/home/hxchen/research/GDA/TQG/data/Mutagenicity_official_20261026/Mutagenicity/raw",
+          "files": {
+            "Mutagenicity_A.txt": {
+              "sha256": "ae85e22b4b898ebd819d2ed3adc8f06a7bf1cda746b333086472d19b36711145",
+              "bytes": 3554144,
+              "role": "input"
+            },
+            "Mutagenicity_graph_indicator.txt": {
+              "sha256": "88b2d83ff10fad75b3280654061e965976f74e75620058c371ed23567236b4bc",
+              "bytes": 622816,
+              "role": "input"
+            },
+            "Mutagenicity_node_labels.txt": {
+              "sha256": "b429ec418c831d02dc3088b2fe08d11214627850d2bbdacfa9797c0510e70ae7",
+              "bytes": 263105,
+              "role": "input"
+            },
+            "Mutagenicity_graph_labels.txt": {
+              "sha256": "b604c7dcbfdf89193901e32abdcbf9b5b92137414ce22231f00ed65d48ec48f9",
+              "bytes": 8674,
+              "role": "evaluation_label_and_task_scoped_source_label"
+            },
+            "Mutagenicity_edge_labels.txt": {
+              "sha256": "bf8e783386ac22e6033bbce56d765c0a4336649bd590a6f1e467b27b549f2114",
+              "bytes": 533788,
+              "role": "input"
+            }
+          },
+          "graph_id": "TU graph number minus one",
+          "class_labels_parsed_at_registration": false,
+          "node_features": "one_hot_node_labels_only",
+          "node_label_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "node_feature_dim": 14,
+          "edge_features": "one_hot_edge_labels",
+          "edge_feature_dim": 3,
+          "continuous_node_attributes_used": false,
+          "remove_self_loops": true,
+          "coalesce_duplicate_directed_edges": true,
+          "require_bidirectional_edges": true,
+          "graph_objects_have_y": false
+        },
+        "inherited_model_config": {
+          "seed": 0,
+          "encoder": "gin",
+          "hidden": 64,
+          "num_layers": 3,
+          "emb_dim": 16,
+          "dropout": 0.0,
+          "source_epochs": 100,
+          "source_lr": 0.001,
+          "source_batch": 128,
+          "adapter_width": 16,
+          "coordinate_eps": 1e-08,
+          "score_hidden": 64,
+          "score_epochs": 800,
+          "score_batch": 128,
+          "score_lr": 0.001,
+          "score_validation": true,
+          "kappa_sigma": 1.0,
+          "adapt_rounds": 30,
+          "source_adapt_batch": 128,
+          "target_batch": 128,
+          "lambda_boundary": 1.0,
+          "tau": 0.1,
+          "radius_multiplier": 1.0,
+          "request_multiplier": 0.1,
+          "execution_multiplier": 0.1,
+          "root_tolerance": 1e-05,
+          "min_normal": 1e-08,
+          "projection_eps": 1e-12,
+          "projection_steps": 20,
+          "projection_backtracks": 10,
+          "movement_zero": 1e-12,
+          "damping": 0.01,
+          "solver": "auto",
+          "direct_max_params": 2048,
+          "cg_tolerance": 1e-07,
+          "cg_steps": 200,
+          "armijo": 0.0001,
+          "backtracks": 15,
+          "adaptation_dtype": "float64",
+          "device": "cpu"
+        },
+        "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+        "inherited_score_config": {
+          "optimizer_updates": 7200,
+          "endpoints": [
+            900,
+            1800,
+            3600,
+            7200
+          ],
+          "checkpoint_selection": "exact_final_update_7200",
+          "use_validation_for_selection": false,
+          "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+          "recovery_epochs": 50,
+          "shuffle_each_epoch": true,
+          "drop_last": false,
+          "bandwidths": [
+            1
+          ],
+          "kde_role": "diagnostic_only_not_population_oracle",
+          "loo_update_arms": false
+        },
+        "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+        "planned_state_blocks": 120,
+        "expected_available_blocks_from_r5": 120,
+        "r5_missing_blocks": [],
+        "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/mutagenicity_edge/attempt-001"
+      },
+      {
+        "id": "mutagenicity_node",
+        "dataset": "Mutagenicity",
+        "split_basis": "node_count",
+        "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_node/attempt-001",
+        "r5_origin": "fresh",
+        "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+        "r5_execution_plan_sha256": "6182e158c7e465d73f1ff18d1b051c594a7fcb5e3c6b5d336528dd5c52924954",
+        "r5_seal_digests": {
+          "INPUT": "cb6b7b1bfb01a0b39f9ffb1b69eecac94f16b6595cf0aa892051e13ed778352a",
+          "OBS": "4e1d5f13b0914dd24009cc42230820eaaeb43267065e56c739132a0ac1469f88",
+          "FINAL": "9d1e3edb2524ca23e1e9825190f4603104cf6b5509667f1d2b62d2c730d2667e"
+        },
+        "r5_seal_file_sha256": {
+          "INPUT": "767fa7f6a7e8d269a2c76162663a1bf36590ef07fd08fb69b3ec0c40dfef7a2c",
+          "OBS": "57ded4fab9a62fa35a46d6b56a91d0046a3911ae89f7cf6191648b23e8d46912",
+          "FINAL": "d6ad4baae5a9e10cc44912f1a029e7061225810d02790e7067b55ec4aae09a6c"
+        },
+        "domain_indices": [
+          {
+            "domain": 0,
+            "path": "data/node_Mutagenicity_0.npy",
+            "sha256": "b6804472907b37e130d0cbedc77de605318c33eee5db5195bb57c7133c75d3f1",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 1,
+            "path": "data/node_Mutagenicity_1.npy",
+            "sha256": "3a5569c89e03b9ecb6f4be3bd1bc3b3f1750b40c8c09a4140adb5f10580e3733",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 2,
+            "path": "data/node_Mutagenicity_2.npy",
+            "sha256": "b156a351074c0abd60dd4b7783ecc078ff6f243a61c5c64f63c481d718b2ddf9",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 3,
+            "path": "data/node_Mutagenicity_3.npy",
+            "sha256": "6b2eded025bbc59a8f34943778266a7e023cc5d5257dfae74e2efa881e681af8",
+            "count": 1085,
+            "order": "preserve_file_order"
+          }
+        ],
+        "input": {
+          "raw_directory": "/home/hxchen/research/GDA/TQG/data/Mutagenicity_official_20261026/Mutagenicity/raw",
+          "files": {
+            "Mutagenicity_A.txt": {
+              "sha256": "ae85e22b4b898ebd819d2ed3adc8f06a7bf1cda746b333086472d19b36711145",
+              "bytes": 3554144,
+              "role": "input"
+            },
+            "Mutagenicity_graph_indicator.txt": {
+              "sha256": "88b2d83ff10fad75b3280654061e965976f74e75620058c371ed23567236b4bc",
+              "bytes": 622816,
+              "role": "input"
+            },
+            "Mutagenicity_node_labels.txt": {
+              "sha256": "b429ec418c831d02dc3088b2fe08d11214627850d2bbdacfa9797c0510e70ae7",
+              "bytes": 263105,
+              "role": "input"
+            },
+            "Mutagenicity_graph_labels.txt": {
+              "sha256": "b604c7dcbfdf89193901e32abdcbf9b5b92137414ce22231f00ed65d48ec48f9",
+              "bytes": 8674,
+              "role": "evaluation_label_and_task_scoped_source_label"
+            },
+            "Mutagenicity_edge_labels.txt": {
+              "sha256": "bf8e783386ac22e6033bbce56d765c0a4336649bd590a6f1e467b27b549f2114",
+              "bytes": 533788,
+              "role": "input"
+            }
+          },
+          "graph_id": "TU graph number minus one",
+          "class_labels_parsed_at_registration": false,
+          "node_features": "one_hot_node_labels_only",
+          "node_label_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "node_feature_dim": 14,
+          "edge_features": "one_hot_edge_labels",
+          "edge_feature_dim": 3,
+          "continuous_node_attributes_used": false,
+          "remove_self_loops": true,
+          "coalesce_duplicate_directed_edges": true,
+          "require_bidirectional_edges": true,
+          "graph_objects_have_y": false
+        },
+        "inherited_model_config": {
+          "seed": 0,
+          "encoder": "gin",
+          "hidden": 64,
+          "num_layers": 3,
+          "emb_dim": 16,
+          "dropout": 0.0,
+          "source_epochs": 100,
+          "source_lr": 0.001,
+          "source_batch": 128,
+          "adapter_width": 16,
+          "coordinate_eps": 1e-08,
+          "score_hidden": 64,
+          "score_epochs": 800,
+          "score_batch": 128,
+          "score_lr": 0.001,
+          "score_validation": true,
+          "kappa_sigma": 1.0,
+          "adapt_rounds": 30,
+          "source_adapt_batch": 128,
+          "target_batch": 128,
+          "lambda_boundary": 1.0,
+          "tau": 0.1,
+          "radius_multiplier": 1.0,
+          "request_multiplier": 0.1,
+          "execution_multiplier": 0.1,
+          "root_tolerance": 1e-05,
+          "min_normal": 1e-08,
+          "projection_eps": 1e-12,
+          "projection_steps": 20,
+          "projection_backtracks": 10,
+          "movement_zero": 1e-12,
+          "damping": 0.01,
+          "solver": "auto",
+          "direct_max_params": 2048,
+          "cg_tolerance": 1e-07,
+          "cg_steps": 200,
+          "armijo": 0.0001,
+          "backtracks": 15,
+          "adaptation_dtype": "float64",
+          "device": "cpu"
+        },
+        "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+        "inherited_score_config": {
+          "optimizer_updates": 7200,
+          "endpoints": [
+            900,
+            1800,
+            3600,
+            7200
+          ],
+          "checkpoint_selection": "exact_final_update_7200",
+          "use_validation_for_selection": false,
+          "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+          "recovery_epochs": 50,
+          "shuffle_each_epoch": true,
+          "drop_last": false,
+          "bandwidths": [
+            1
+          ],
+          "kde_role": "diagnostic_only_not_population_oracle",
+          "loo_update_arms": false
+        },
+        "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+        "planned_state_blocks": 120,
+        "expected_available_blocks_from_r5": 120,
+        "r5_missing_blocks": [],
+        "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/mutagenicity_node/attempt-001"
+      },
+      {
+        "id": "proteins_edge",
+        "dataset": "PROTEINS",
+        "split_basis": "edge_count",
+        "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/proteins_edge/attempt-001",
+        "r5_origin": "fresh",
+        "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+        "r5_execution_plan_sha256": "1f5ee6b38cb3acd41824930ea1b1fef26ceb6f5130b755d9d5fe8385841363b0",
+        "r5_seal_digests": {
+          "INPUT": "91247688ee617048c7fc36acc8147d356d826c3a293b327d4d27e287f0e9f3b7",
+          "OBS": "5a5e28b7cd47d1597c9b68b399acfb33e4c89dd8d5e83e264b1630bb9c219e4d",
+          "FINAL": "1bfedf37cb8104de34f8619494a8a5cfeb720f304bb35ea3586b8a46c931fa4b"
+        },
+        "r5_seal_file_sha256": {
+          "INPUT": "e520310bdc55b15010deb45be4f3f8b65ccd83207dbfd6b1068aa3daf8b2211e",
+          "OBS": "168c85032883ff4983e0e766f753e581c86f2a1ac8ed4a1c126752b9e8e8e87b",
+          "FINAL": "c825fba49501898a495009bfa9387f8273237dafa3bbd7cb9f1db8783d7f38ce"
+        },
+        "domain_indices": [
+          {
+            "domain": 0,
+            "path": "data/idx_PROTEINS_0.npy",
+            "sha256": "15efc5669142619fcde99efadd676c39a64230fa527920ebad6b295b9eae0363",
+            "count": 278,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 1,
+            "path": "data/idx_PROTEINS_1.npy",
+            "sha256": "f56835ca9f8705f1c57eae8907146b94bfdb0358732eac081cc00b44a31771a0",
+            "count": 278,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 2,
+            "path": "data/idx_PROTEINS_2.npy",
+            "sha256": "96885b7aea84d74a9cd7dd996c444dd23dc6e985d481cbe9bd852ae317e7eb0d",
+            "count": 278,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 3,
+            "path": "data/idx_PROTEINS_3.npy",
+            "sha256": "1e403ed63dd28ddf9658bb8452ce11a38f98ff8290e5c004c165859ef1a4b643",
+            "count": 279,
+            "order": "preserve_file_order"
+          }
+        ],
+        "input": {
+          "raw_directory": "/home/hxchen/research/GDA/TQG/data/PROTEINS_official_20261023/PROTEINS/raw",
+          "files": {
+            "PROTEINS_A.txt": {
+              "sha256": "4c4b33e272fc95cac6d27ed6d5d12b9a852c8610e91fff59f8f0dbdd5a20df67",
+              "bytes": 2022990,
+              "role": "input"
+            },
+            "PROTEINS_graph_indicator.txt": {
+              "sha256": "8d4ff1e852a5c28561e9bffb44cf9490bc552b13a3b6156dd12dc7f44e9afc4a",
+              "bytes": 169673,
+              "role": "input"
+            },
+            "PROTEINS_node_labels.txt": {
+              "sha256": "f758e8ad3d6e3c026b50833d75f6f90735b94eb3345e4243707f495ca8afea8d",
+              "bytes": 86942,
+              "role": "input"
+            },
+            "PROTEINS_graph_labels.txt": {
+              "sha256": "c0ef9810c440775252872318d0c8adc385588e14bc4c47a2c34aa96ee3c7cdcd",
+              "bytes": 2226,
+              "role": "evaluation_label_and_task_scoped_source_label"
+            },
+            "PROTEINS_node_attributes.txt": {
+              "sha256": "54eef829abb37e458a5fbf3a3c581e48e5810e220463c2cd951856b9ceb08f07",
+              "bytes": 478190,
+              "role": "unused_feature_provenance"
+            }
+          },
+          "graph_id": "TU graph number minus one",
+          "class_labels_parsed_at_registration": false,
+          "node_features": "one_hot_node_labels_only",
+          "node_label_values": [
+            0,
+            1,
+            2
+          ],
+          "node_feature_dim": 3,
+          "edge_features": null,
+          "edge_feature_dim": 0,
+          "continuous_node_attributes_used": false,
+          "remove_self_loops": true,
+          "coalesce_duplicate_directed_edges": true,
+          "require_bidirectional_edges": true,
+          "graph_objects_have_y": false
+        },
+        "inherited_model_config": {
+          "seed": 0,
+          "encoder": "gin",
+          "hidden": 64,
+          "num_layers": 3,
+          "emb_dim": 16,
+          "dropout": 0.0,
+          "source_epochs": 100,
+          "source_lr": 0.001,
+          "source_batch": 128,
+          "adapter_width": 16,
+          "coordinate_eps": 1e-08,
+          "score_hidden": 64,
+          "score_epochs": 2400,
+          "score_batch": 128,
+          "score_lr": 0.001,
+          "score_validation": true,
+          "kappa_sigma": 1.0,
+          "adapt_rounds": 30,
+          "source_adapt_batch": 128,
+          "target_batch": 128,
+          "lambda_boundary": 1.0,
+          "tau": 0.1,
+          "radius_multiplier": 1.0,
+          "request_multiplier": 0.1,
+          "execution_multiplier": 0.1,
+          "root_tolerance": 1e-05,
+          "min_normal": 1e-08,
+          "projection_eps": 1e-12,
+          "projection_steps": 20,
+          "projection_backtracks": 10,
+          "movement_zero": 1e-12,
+          "damping": 0.01,
+          "solver": "auto",
+          "direct_max_params": 2048,
+          "cg_tolerance": 1e-07,
+          "cg_steps": 200,
+          "armijo": 0.0001,
+          "backtracks": 15,
+          "adaptation_dtype": "float64",
+          "device": "cpu"
+        },
+        "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+        "inherited_score_config": {
+          "optimizer_updates": 7200,
+          "endpoints": [
+            900,
+            1800,
+            3600,
+            7200
+          ],
+          "checkpoint_selection": "exact_final_update_7200",
+          "use_validation_for_selection": false,
+          "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+          "recovery_epochs": 50,
+          "shuffle_each_epoch": true,
+          "drop_last": false,
+          "bandwidths": [
+            1
+          ],
+          "kde_role": "diagnostic_only_not_population_oracle",
+          "loo_update_arms": false
+        },
+        "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+        "planned_state_blocks": 120,
+        "expected_available_blocks_from_r5": 108,
+        "r5_missing_blocks": [
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3406,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3406,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3409,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3409,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3406,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3406,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3409,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3409,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3406,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3406,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3409,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3409,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          }
+        ],
+        "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/proteins_edge/attempt-001"
+      }
+    ],
+    "domains": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "directions": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ]
+    ],
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "states": {
+      "trajectory": "A0",
+      "attempts_before": [
+        1,
+        30
+      ],
+      "primary_attempt_before": 1,
+      "secondary_attempt_before": 30,
+      "parameter_field": "before",
+      "boundary_and_batch": "same record as before; no regeneration",
+      "alpha_source": "sealed R5 record.side.alpha",
+      "require_r5_side_status": "available"
+    },
+    "factorial": {
+      "source_gradient_coefficients": [
+        0,
+        1
+      ],
+      "request_signs": [
+        -1,
+        0,
+        1
+      ],
+      "arms": [
+        {
+          "id": "N",
+          "source_gradient_coefficient": 0,
+          "request_sign": 0
+        },
+        {
+          "id": "S",
+          "source_gradient_coefficient": 1,
+          "request_sign": 0
+        },
+        {
+          "id": "SU+",
+          "source_gradient_coefficient": 1,
+          "request_sign": 1
+        },
+        {
+          "id": "SU-",
+          "source_gradient_coefficient": 1,
+          "request_sign": -1
+        },
+        {
+          "id": "U+",
+          "source_gradient_coefficient": 0,
+          "request_sign": 1
+        },
+        {
+          "id": "U-",
+          "source_gradient_coefficient": 0,
+          "request_sign": -1
+        }
+      ],
+      "fixed_H": "F_S + lambda_B D^T D / M + damping I",
+      "source_direction": "s = delta_zero = -H^-1 g_source_batch",
+      "request_direction": "u = delta_normal - delta_zero = H^-1 lambda_B D^T zeta / M",
+      "retain_source_curvature": true,
+      "direction_normalization": false,
+      "recompute_boundaries_per_arm": false
+    },
+    "steps": {
+      "multipliers": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "primary_multiplier": 1.0,
+      "beta": "historical_alpha * multiplier",
+      "search_new_alpha": false,
+      "choose_best_step_by_labels": false,
+      "armijo_filter": false,
+      "commit_candidates": false,
+      "motion_feasibility": "max(abs(true_forward_movement_on_old_boundaries)) <= inherited execution_multiplier * sigma",
+      "finite_over_budget_policy": "retain marked in primary diagnostic; secondary six-arm common-motion-feasible subset per beta",
+      "nonfinite_policy": "record numerical_failure; never treat as finite budget rejection"
+    },
+    "numerics": {
+      "device": "cpu",
+      "dtype": "float64",
+      "linear_residual_tolerance": "10 * inherited cg_tolerance * max(norm(original_rhs), norm(rhs_checked), 1e-12)",
+      "replay_logprob_atol": 1e-09,
+      "replay_logprob_rtol": 1e-07,
+      "replay_predictions_must_match_exactly": true,
+      "derivative_sign_atol": 1e-10,
+      "derivative_sign_rtol": 1e-08,
+      "derivative_sign_threshold": "atol + rtol * norm(pool_gradient) * norm(direction)",
+      "relocation_radius_sigma": 4,
+      "relocation_scan_points": 65,
+      "relocation_bisections": 28
+    },
+    "labels": {
+      "candidate_phase": "task-scoped source-fit labels only; no source-validation or target labels or metric tables",
+      "evaluation_phase": "after R6_OBS verify: full source-fit, source-validation and target labels",
+      "target_gradients": "evaluation diagnostic only; never update candidates, steps, selection or model",
+      "claim_unseen_target_labels": false,
+      "claim_independent_final_test": false
+    },
+    "evaluation": {
+      "pools": [
+        "source_batch",
+        "source_fit",
+        "source_validation",
+        "target"
+      ],
+      "primary_comparisons": [
+        {
+          "left": "U+",
+          "right": "N",
+          "pools": [
+            "target"
+          ],
+          "metric": "nll"
+        },
+        {
+          "left": "U+",
+          "right": "U-",
+          "pools": [
+            "target"
+          ],
+          "metric": "nll"
+        },
+        {
+          "left": "S",
+          "right": "N",
+          "pools": [
+            "source_fit",
+            "source_validation",
+            "target"
+          ],
+          "metric": "nll"
+        }
+      ],
+      "key_secondary_comparisons": [
+        [
+          "SU+",
+          "S"
+        ],
+        [
+          "SU+",
+          "SU-"
+        ],
+        [
+          "SU+",
+          "U+"
+        ],
+        [
+          "SU-",
+          "U-"
+        ]
+      ],
+      "interaction": "L(SU+) - L(S) - L(U+) + L(N)",
+      "metrics": [
+        "nll",
+        "accuracy",
+        "balanced_accuracy",
+        "macro_f1",
+        "class_ce",
+        "class_recall",
+        "predicted_class_proportions",
+        "wrong_to_right",
+        "right_to_wrong",
+        "net_correct"
+      ],
+      "fixed_target_subgroups": [
+        "initially_correct",
+        "initially_wrong",
+        "generators",
+        "complement"
+      ],
+      "subgroup_origin": "old theta predictions and old generator graph IDs; evaluation only",
+      "derivatives_at_theta": [
+        "gradient(pool_nll) dot s",
+        "gradient(pool_nll) dot u"
+      ],
+      "derivative_after_source": "gradient(pool_nll at theta + beta*s) dot u for every fixed beta",
+      "stop_gradient_through": [
+        "encoder",
+        "score",
+        "boundaries",
+        "H",
+        "s",
+        "u"
+      ],
+      "finite_difference_diagnostics": "Delta L(beta*v), beta*d, nonlinear residual; no adaptive target-driven step search",
+      "aggregation": "each setting/time/step/contrast: equal 12 directions within each seed, then five seeds",
+      "incomplete_seed": "NA for full-direction seed; NA for complete-five-seed mean if any incomplete; optionally separately labeled conditional available-block statistics",
+      "secondary_feasible_mask": "same six-arm jointly feasible block set; no per-arm filtering",
+      "uncertainty": {
+        "report": [
+          "raw_seed_values",
+          "mean",
+          "sample_sd",
+          "win_tie_loss"
+        ],
+        "optional_t95_critical_df4": 2.776445,
+        "scope": "fixed-data training randomness only"
+      },
+      "posthoc_focus": {
+        "setting": "proteins_edge",
+        "directions": [
+          [
+            3,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "reason": "R5 high NLL degradation; illustrative only, all directions remain in registered scope"
+      }
+    },
+    "budget": {
+      "new_source_models": 0,
+      "new_score_models": 0,
+      "new_training_updates": 0,
+      "new_closed_loop_trajectories": 0,
+      "new_committed_adaptation_attempts": 0,
+      "planned_blocks": 360,
+      "expected_available_blocks_from_r5": 348,
+      "arms": 6,
+      "step_multipliers": 3,
+      "expected_candidate_cells": 6264,
+      "max_distinct_parameter_states_per_available_block": 16,
+      "expected_max_distinct_parameter_states": 5568,
+      "counts_are": "expected diagnostic counts, not completed execution"
+    },
+    "execution": {
+      "stages": [
+        "prepare",
+        "candidates",
+        "replay",
+        "evaluate",
+        "report"
+      ],
+      "seals": [
+        "R6_INPUT",
+        "R6_OBS",
+        "R6_FINAL"
+      ],
+      "threads_per_worker": 1,
+      "max_workers": 4,
+      "environment": "record compatible torch/python versions and actual commands at execution",
+      "new_attempt_required": true,
+      "write_to_r5_archive": false
+    },
+    "outputs": {
+      "tables": [
+        "candidates.csv",
+        "paired.csv",
+        "derivatives.csv",
+        "interactions.csv",
+        "coverage.csv",
+        "seed_summary.csv",
+        "summary.csv"
+      ],
+      "state_artifacts": [
+        "theta",
+        "s",
+        "u",
+        "historical_alpha",
+        "old_record_reference_and_hash",
+        "candidate_vectors",
+        "pool_log_probabilities",
+        "motion_status",
+        "replay_checks"
+      ],
+      "execution_records": [
+        "actual_config",
+        "execution_commit",
+        "input_manifest",
+        "environment",
+        "commands",
+        "all_planned_block_statuses",
+        "seal_summaries"
+      ]
+    },
+    "setting": {
+      "id": "mutagenicity_node",
+      "dataset": "Mutagenicity",
+      "split_basis": "node_count",
+      "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_node/attempt-001",
+      "r5_origin": "fresh",
+      "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+      "r5_execution_plan_sha256": "6182e158c7e465d73f1ff18d1b051c594a7fcb5e3c6b5d336528dd5c52924954",
+      "r5_seal_digests": {
+        "INPUT": "cb6b7b1bfb01a0b39f9ffb1b69eecac94f16b6595cf0aa892051e13ed778352a",
+        "OBS": "4e1d5f13b0914dd24009cc42230820eaaeb43267065e56c739132a0ac1469f88",
+        "FINAL": "9d1e3edb2524ca23e1e9825190f4603104cf6b5509667f1d2b62d2c730d2667e"
+      },
+      "r5_seal_file_sha256": {
+        "INPUT": "767fa7f6a7e8d269a2c76162663a1bf36590ef07fd08fb69b3ec0c40dfef7a2c",
+        "OBS": "57ded4fab9a62fa35a46d6b56a91d0046a3911ae89f7cf6191648b23e8d46912",
+        "FINAL": "d6ad4baae5a9e10cc44912f1a029e7061225810d02790e7067b55ec4aae09a6c"
+      },
+      "domain_indices": [
+        {
+          "domain": 0,
+          "path": "data/node_Mutagenicity_0.npy",
+          "sha256": "b6804472907b37e130d0cbedc77de605318c33eee5db5195bb57c7133c75d3f1",
+          "count": 1084,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 1,
+          "path": "data/node_Mutagenicity_1.npy",
+          "sha256": "3a5569c89e03b9ecb6f4be3bd1bc3b3f1750b40c8c09a4140adb5f10580e3733",
+          "count": 1084,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 2,
+          "path": "data/node_Mutagenicity_2.npy",
+          "sha256": "b156a351074c0abd60dd4b7783ecc078ff6f243a61c5c64f63c481d718b2ddf9",
+          "count": 1084,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 3,
+          "path": "data/node_Mutagenicity_3.npy",
+          "sha256": "6b2eded025bbc59a8f34943778266a7e023cc5d5257dfae74e2efa881e681af8",
+          "count": 1085,
+          "order": "preserve_file_order"
+        }
+      ],
+      "input": {
+        "raw_directory": "/home/hxchen/research/GDA/TQG/data/Mutagenicity_official_20261026/Mutagenicity/raw",
+        "files": {
+          "Mutagenicity_A.txt": {
+            "sha256": "ae85e22b4b898ebd819d2ed3adc8f06a7bf1cda746b333086472d19b36711145",
+            "bytes": 3554144,
+            "role": "input"
+          },
+          "Mutagenicity_graph_indicator.txt": {
+            "sha256": "88b2d83ff10fad75b3280654061e965976f74e75620058c371ed23567236b4bc",
+            "bytes": 622816,
+            "role": "input"
+          },
+          "Mutagenicity_node_labels.txt": {
+            "sha256": "b429ec418c831d02dc3088b2fe08d11214627850d2bbdacfa9797c0510e70ae7",
+            "bytes": 263105,
+            "role": "input"
+          },
+          "Mutagenicity_graph_labels.txt": {
+            "sha256": "b604c7dcbfdf89193901e32abdcbf9b5b92137414ce22231f00ed65d48ec48f9",
+            "bytes": 8674,
+            "role": "evaluation_label_and_task_scoped_source_label"
+          },
+          "Mutagenicity_edge_labels.txt": {
+            "sha256": "bf8e783386ac22e6033bbce56d765c0a4336649bd590a6f1e467b27b549f2114",
+            "bytes": 533788,
+            "role": "input"
+          }
+        },
+        "graph_id": "TU graph number minus one",
+        "class_labels_parsed_at_registration": false,
+        "node_features": "one_hot_node_labels_only",
+        "node_label_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "node_feature_dim": 14,
+        "edge_features": "one_hot_edge_labels",
+        "edge_feature_dim": 3,
+        "continuous_node_attributes_used": false,
+        "remove_self_loops": true,
+        "coalesce_duplicate_directed_edges": true,
+        "require_bidirectional_edges": true,
+        "graph_objects_have_y": false
+      },
+      "inherited_model_config": {
+        "seed": 0,
+        "encoder": "gin",
+        "hidden": 64,
+        "num_layers": 3,
+        "emb_dim": 16,
+        "dropout": 0.0,
+        "source_epochs": 100,
+        "source_lr": 0.001,
+        "source_batch": 128,
+        "adapter_width": 16,
+        "coordinate_eps": 1e-08,
+        "score_hidden": 64,
+        "score_epochs": 800,
+        "score_batch": 128,
+        "score_lr": 0.001,
+        "score_validation": true,
+        "kappa_sigma": 1.0,
+        "adapt_rounds": 30,
+        "source_adapt_batch": 128,
+        "target_batch": 128,
+        "lambda_boundary": 1.0,
+        "tau": 0.1,
+        "radius_multiplier": 1.0,
+        "request_multiplier": 0.1,
+        "execution_multiplier": 0.1,
+        "root_tolerance": 1e-05,
+        "min_normal": 1e-08,
+        "projection_eps": 1e-12,
+        "projection_steps": 20,
+        "projection_backtracks": 10,
+        "movement_zero": 1e-12,
+        "damping": 0.01,
+        "solver": "auto",
+        "direct_max_params": 2048,
+        "cg_tolerance": 1e-07,
+        "cg_steps": 200,
+        "armijo": 0.0001,
+        "backtracks": 15,
+        "adaptation_dtype": "float64",
+        "device": "cpu"
+      },
+      "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+      "inherited_score_config": {
+        "optimizer_updates": 7200,
+        "endpoints": [
+          900,
+          1800,
+          3600,
+          7200
+        ],
+        "checkpoint_selection": "exact_final_update_7200",
+        "use_validation_for_selection": false,
+        "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+        "recovery_epochs": 50,
+        "shuffle_each_epoch": true,
+        "drop_last": false,
+        "bandwidths": [
+          1
+        ],
+        "kde_role": "diagnostic_only_not_population_oracle",
+        "loo_update_arms": false
+      },
+      "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+      "planned_state_blocks": 120,
+      "expected_available_blocks_from_r5": 120,
+      "r5_missing_blocks": [],
+      "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/mutagenicity_node/attempt-001"
+    },
+    "workers": 4
+  },
+  "proteins_edge": {
+    "schema_version": 1,
+    "artifact_type": "planned_protocol_not_execution_record",
+    "status": "planned",
+    "registered_date": "2026-11-14",
+    "implementation_status": "not_implemented",
+    "execution_started": false,
+    "protocol": "experiments/mutagenicity/r6_源梯度与密度请求分解_20261114/docs/r6-protocol.md",
+    "analysis_type": "post_R5_observation_fixed_state_supervised_mechanism_diagnostic",
+    "repository_basis_commit": "d29773d9ac50dda6f189cd14d2e72a32a08b033b",
+    "reference_artifacts": [
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/report.md",
+        "sha256": "304098a46928b20213292b2191646afa153833ede66de76315bffbfaa29f371e"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/executed-configs.json",
+        "sha256": "5246044971c9f82a5094313b71e5d47135c4d54280debea784f93242a1922bb6"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/results/archive-index.json",
+        "sha256": "2936fffe95e3767daea8373d24875c22c3830951a9bad956c5bb94467ef5dcf5"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/results/evidence.json",
+        "sha256": "49725c0de3b34d40afdf6c6c27c41500d1cba4281362df1568492274bcad79c5"
+      },
+      {
+        "path": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/src/diagnostics.py",
+        "sha256": "35c3453ee6e03cbb47f2e4c1ca065fe58a14e881b24b4813f9a0f0203dd0a123"
+      }
+    ],
+    "settings": [
+      {
+        "id": "mutagenicity_edge",
+        "dataset": "Mutagenicity",
+        "split_basis": "edge_count",
+        "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_edge/attempt-001",
+        "r5_origin": "reuse",
+        "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+        "r5_execution_plan_sha256": "58bb05f8c486112a35206f8f1622fff4d39886a4b319f875768d280c746319f3",
+        "r5_seal_digests": {
+          "INPUT": "5ba5e365d86685e367176fe05f90465a836c20cad0463b467cbec1405f7a6a99",
+          "OBS": "adcd93a683374ee8007ef5f74374be029485b63c015c626a7d7404a6edf137a7",
+          "FINAL": "183453c688b5c9873b8d55df4e9fbf8dd3adf56e45ccfb774662b592a3cf7143"
+        },
+        "r5_seal_file_sha256": {
+          "INPUT": "d3673fa771b38c1259f1360a819880514bc121e6dcd5c4f5f6fe8d443b679c13",
+          "OBS": "141c2ba67b8b7faa018e6f7c1f53b930dcf045c5f92427ef1c47acd73f90e392",
+          "FINAL": "2fd00f20aaf23080a351892de7b8c82bd0d60e69756124af589dfcfa6100d856"
+        },
+        "domain_indices": [
+          {
+            "domain": 0,
+            "path": "data/idx_Mutagenicity_0.npy",
+            "sha256": "3851c87429bccf05241cefe1599350f0e39fa9903b35966915f6388a2dc764c9",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 1,
+            "path": "data/idx_Mutagenicity_1.npy",
+            "sha256": "4539b47175179d94a03ac03b3499e5f259150585cce8715ca690f2f61ae8806b",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 2,
+            "path": "data/idx_Mutagenicity_2.npy",
+            "sha256": "0cc8c27db27cd8133de90591e37f2b152460182858c65c8f66c3b1e351b3c15b",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 3,
+            "path": "data/idx_Mutagenicity_3.npy",
+            "sha256": "dd20a9dbbcd7d083a37cf8ecf25e1313bdca88b5b24e58236841d2ae83809d48",
+            "count": 1085,
+            "order": "preserve_file_order"
+          }
+        ],
+        "input": {
+          "raw_directory": "/home/hxchen/research/GDA/TQG/data/Mutagenicity_official_20261026/Mutagenicity/raw",
+          "files": {
+            "Mutagenicity_A.txt": {
+              "sha256": "ae85e22b4b898ebd819d2ed3adc8f06a7bf1cda746b333086472d19b36711145",
+              "bytes": 3554144,
+              "role": "input"
+            },
+            "Mutagenicity_graph_indicator.txt": {
+              "sha256": "88b2d83ff10fad75b3280654061e965976f74e75620058c371ed23567236b4bc",
+              "bytes": 622816,
+              "role": "input"
+            },
+            "Mutagenicity_node_labels.txt": {
+              "sha256": "b429ec418c831d02dc3088b2fe08d11214627850d2bbdacfa9797c0510e70ae7",
+              "bytes": 263105,
+              "role": "input"
+            },
+            "Mutagenicity_graph_labels.txt": {
+              "sha256": "b604c7dcbfdf89193901e32abdcbf9b5b92137414ce22231f00ed65d48ec48f9",
+              "bytes": 8674,
+              "role": "evaluation_label_and_task_scoped_source_label"
+            },
+            "Mutagenicity_edge_labels.txt": {
+              "sha256": "bf8e783386ac22e6033bbce56d765c0a4336649bd590a6f1e467b27b549f2114",
+              "bytes": 533788,
+              "role": "input"
+            }
+          },
+          "graph_id": "TU graph number minus one",
+          "class_labels_parsed_at_registration": false,
+          "node_features": "one_hot_node_labels_only",
+          "node_label_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "node_feature_dim": 14,
+          "edge_features": "one_hot_edge_labels",
+          "edge_feature_dim": 3,
+          "continuous_node_attributes_used": false,
+          "remove_self_loops": true,
+          "coalesce_duplicate_directed_edges": true,
+          "require_bidirectional_edges": true,
+          "graph_objects_have_y": false
+        },
+        "inherited_model_config": {
+          "seed": 0,
+          "encoder": "gin",
+          "hidden": 64,
+          "num_layers": 3,
+          "emb_dim": 16,
+          "dropout": 0.0,
+          "source_epochs": 100,
+          "source_lr": 0.001,
+          "source_batch": 128,
+          "adapter_width": 16,
+          "coordinate_eps": 1e-08,
+          "score_hidden": 64,
+          "score_epochs": 800,
+          "score_batch": 128,
+          "score_lr": 0.001,
+          "score_validation": true,
+          "kappa_sigma": 1.0,
+          "adapt_rounds": 30,
+          "source_adapt_batch": 128,
+          "target_batch": 128,
+          "lambda_boundary": 1.0,
+          "tau": 0.1,
+          "radius_multiplier": 1.0,
+          "request_multiplier": 0.1,
+          "execution_multiplier": 0.1,
+          "root_tolerance": 1e-05,
+          "min_normal": 1e-08,
+          "projection_eps": 1e-12,
+          "projection_steps": 20,
+          "projection_backtracks": 10,
+          "movement_zero": 1e-12,
+          "damping": 0.01,
+          "solver": "auto",
+          "direct_max_params": 2048,
+          "cg_tolerance": 1e-07,
+          "cg_steps": 200,
+          "armijo": 0.0001,
+          "backtracks": 15,
+          "adaptation_dtype": "float64",
+          "device": "cpu"
+        },
+        "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+        "inherited_score_config": {
+          "optimizer_updates": 7200,
+          "endpoints": [
+            900,
+            1800,
+            3600,
+            7200
+          ],
+          "checkpoint_selection": "exact_final_update_7200",
+          "use_validation_for_selection": false,
+          "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+          "recovery_epochs": 50,
+          "shuffle_each_epoch": true,
+          "drop_last": false,
+          "bandwidths": [
+            1
+          ],
+          "kde_role": "diagnostic_only_not_population_oracle",
+          "loo_update_arms": false
+        },
+        "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+        "planned_state_blocks": 120,
+        "expected_available_blocks_from_r5": 120,
+        "r5_missing_blocks": [],
+        "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/mutagenicity_edge/attempt-001"
+      },
+      {
+        "id": "mutagenicity_node",
+        "dataset": "Mutagenicity",
+        "split_basis": "node_count",
+        "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_node/attempt-001",
+        "r5_origin": "fresh",
+        "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+        "r5_execution_plan_sha256": "6182e158c7e465d73f1ff18d1b051c594a7fcb5e3c6b5d336528dd5c52924954",
+        "r5_seal_digests": {
+          "INPUT": "cb6b7b1bfb01a0b39f9ffb1b69eecac94f16b6595cf0aa892051e13ed778352a",
+          "OBS": "4e1d5f13b0914dd24009cc42230820eaaeb43267065e56c739132a0ac1469f88",
+          "FINAL": "9d1e3edb2524ca23e1e9825190f4603104cf6b5509667f1d2b62d2c730d2667e"
+        },
+        "r5_seal_file_sha256": {
+          "INPUT": "767fa7f6a7e8d269a2c76162663a1bf36590ef07fd08fb69b3ec0c40dfef7a2c",
+          "OBS": "57ded4fab9a62fa35a46d6b56a91d0046a3911ae89f7cf6191648b23e8d46912",
+          "FINAL": "d6ad4baae5a9e10cc44912f1a029e7061225810d02790e7067b55ec4aae09a6c"
+        },
+        "domain_indices": [
+          {
+            "domain": 0,
+            "path": "data/node_Mutagenicity_0.npy",
+            "sha256": "b6804472907b37e130d0cbedc77de605318c33eee5db5195bb57c7133c75d3f1",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 1,
+            "path": "data/node_Mutagenicity_1.npy",
+            "sha256": "3a5569c89e03b9ecb6f4be3bd1bc3b3f1750b40c8c09a4140adb5f10580e3733",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 2,
+            "path": "data/node_Mutagenicity_2.npy",
+            "sha256": "b156a351074c0abd60dd4b7783ecc078ff6f243a61c5c64f63c481d718b2ddf9",
+            "count": 1084,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 3,
+            "path": "data/node_Mutagenicity_3.npy",
+            "sha256": "6b2eded025bbc59a8f34943778266a7e023cc5d5257dfae74e2efa881e681af8",
+            "count": 1085,
+            "order": "preserve_file_order"
+          }
+        ],
+        "input": {
+          "raw_directory": "/home/hxchen/research/GDA/TQG/data/Mutagenicity_official_20261026/Mutagenicity/raw",
+          "files": {
+            "Mutagenicity_A.txt": {
+              "sha256": "ae85e22b4b898ebd819d2ed3adc8f06a7bf1cda746b333086472d19b36711145",
+              "bytes": 3554144,
+              "role": "input"
+            },
+            "Mutagenicity_graph_indicator.txt": {
+              "sha256": "88b2d83ff10fad75b3280654061e965976f74e75620058c371ed23567236b4bc",
+              "bytes": 622816,
+              "role": "input"
+            },
+            "Mutagenicity_node_labels.txt": {
+              "sha256": "b429ec418c831d02dc3088b2fe08d11214627850d2bbdacfa9797c0510e70ae7",
+              "bytes": 263105,
+              "role": "input"
+            },
+            "Mutagenicity_graph_labels.txt": {
+              "sha256": "b604c7dcbfdf89193901e32abdcbf9b5b92137414ce22231f00ed65d48ec48f9",
+              "bytes": 8674,
+              "role": "evaluation_label_and_task_scoped_source_label"
+            },
+            "Mutagenicity_edge_labels.txt": {
+              "sha256": "bf8e783386ac22e6033bbce56d765c0a4336649bd590a6f1e467b27b549f2114",
+              "bytes": 533788,
+              "role": "input"
+            }
+          },
+          "graph_id": "TU graph number minus one",
+          "class_labels_parsed_at_registration": false,
+          "node_features": "one_hot_node_labels_only",
+          "node_label_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "node_feature_dim": 14,
+          "edge_features": "one_hot_edge_labels",
+          "edge_feature_dim": 3,
+          "continuous_node_attributes_used": false,
+          "remove_self_loops": true,
+          "coalesce_duplicate_directed_edges": true,
+          "require_bidirectional_edges": true,
+          "graph_objects_have_y": false
+        },
+        "inherited_model_config": {
+          "seed": 0,
+          "encoder": "gin",
+          "hidden": 64,
+          "num_layers": 3,
+          "emb_dim": 16,
+          "dropout": 0.0,
+          "source_epochs": 100,
+          "source_lr": 0.001,
+          "source_batch": 128,
+          "adapter_width": 16,
+          "coordinate_eps": 1e-08,
+          "score_hidden": 64,
+          "score_epochs": 800,
+          "score_batch": 128,
+          "score_lr": 0.001,
+          "score_validation": true,
+          "kappa_sigma": 1.0,
+          "adapt_rounds": 30,
+          "source_adapt_batch": 128,
+          "target_batch": 128,
+          "lambda_boundary": 1.0,
+          "tau": 0.1,
+          "radius_multiplier": 1.0,
+          "request_multiplier": 0.1,
+          "execution_multiplier": 0.1,
+          "root_tolerance": 1e-05,
+          "min_normal": 1e-08,
+          "projection_eps": 1e-12,
+          "projection_steps": 20,
+          "projection_backtracks": 10,
+          "movement_zero": 1e-12,
+          "damping": 0.01,
+          "solver": "auto",
+          "direct_max_params": 2048,
+          "cg_tolerance": 1e-07,
+          "cg_steps": 200,
+          "armijo": 0.0001,
+          "backtracks": 15,
+          "adaptation_dtype": "float64",
+          "device": "cpu"
+        },
+        "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+        "inherited_score_config": {
+          "optimizer_updates": 7200,
+          "endpoints": [
+            900,
+            1800,
+            3600,
+            7200
+          ],
+          "checkpoint_selection": "exact_final_update_7200",
+          "use_validation_for_selection": false,
+          "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+          "recovery_epochs": 50,
+          "shuffle_each_epoch": true,
+          "drop_last": false,
+          "bandwidths": [
+            1
+          ],
+          "kde_role": "diagnostic_only_not_population_oracle",
+          "loo_update_arms": false
+        },
+        "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+        "planned_state_blocks": 120,
+        "expected_available_blocks_from_r5": 120,
+        "r5_missing_blocks": [],
+        "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/mutagenicity_node/attempt-001"
+      },
+      {
+        "id": "proteins_edge",
+        "dataset": "PROTEINS",
+        "split_basis": "edge_count",
+        "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/proteins_edge/attempt-001",
+        "r5_origin": "fresh",
+        "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+        "r5_execution_plan_sha256": "1f5ee6b38cb3acd41824930ea1b1fef26ceb6f5130b755d9d5fe8385841363b0",
+        "r5_seal_digests": {
+          "INPUT": "91247688ee617048c7fc36acc8147d356d826c3a293b327d4d27e287f0e9f3b7",
+          "OBS": "5a5e28b7cd47d1597c9b68b399acfb33e4c89dd8d5e83e264b1630bb9c219e4d",
+          "FINAL": "1bfedf37cb8104de34f8619494a8a5cfeb720f304bb35ea3586b8a46c931fa4b"
+        },
+        "r5_seal_file_sha256": {
+          "INPUT": "e520310bdc55b15010deb45be4f3f8b65ccd83207dbfd6b1068aa3daf8b2211e",
+          "OBS": "168c85032883ff4983e0e766f753e581c86f2a1ac8ed4a1c126752b9e8e8e87b",
+          "FINAL": "c825fba49501898a495009bfa9387f8273237dafa3bbd7cb9f1db8783d7f38ce"
+        },
+        "domain_indices": [
+          {
+            "domain": 0,
+            "path": "data/idx_PROTEINS_0.npy",
+            "sha256": "15efc5669142619fcde99efadd676c39a64230fa527920ebad6b295b9eae0363",
+            "count": 278,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 1,
+            "path": "data/idx_PROTEINS_1.npy",
+            "sha256": "f56835ca9f8705f1c57eae8907146b94bfdb0358732eac081cc00b44a31771a0",
+            "count": 278,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 2,
+            "path": "data/idx_PROTEINS_2.npy",
+            "sha256": "96885b7aea84d74a9cd7dd996c444dd23dc6e985d481cbe9bd852ae317e7eb0d",
+            "count": 278,
+            "order": "preserve_file_order"
+          },
+          {
+            "domain": 3,
+            "path": "data/idx_PROTEINS_3.npy",
+            "sha256": "1e403ed63dd28ddf9658bb8452ce11a38f98ff8290e5c004c165859ef1a4b643",
+            "count": 279,
+            "order": "preserve_file_order"
+          }
+        ],
+        "input": {
+          "raw_directory": "/home/hxchen/research/GDA/TQG/data/PROTEINS_official_20261023/PROTEINS/raw",
+          "files": {
+            "PROTEINS_A.txt": {
+              "sha256": "4c4b33e272fc95cac6d27ed6d5d12b9a852c8610e91fff59f8f0dbdd5a20df67",
+              "bytes": 2022990,
+              "role": "input"
+            },
+            "PROTEINS_graph_indicator.txt": {
+              "sha256": "8d4ff1e852a5c28561e9bffb44cf9490bc552b13a3b6156dd12dc7f44e9afc4a",
+              "bytes": 169673,
+              "role": "input"
+            },
+            "PROTEINS_node_labels.txt": {
+              "sha256": "f758e8ad3d6e3c026b50833d75f6f90735b94eb3345e4243707f495ca8afea8d",
+              "bytes": 86942,
+              "role": "input"
+            },
+            "PROTEINS_graph_labels.txt": {
+              "sha256": "c0ef9810c440775252872318d0c8adc385588e14bc4c47a2c34aa96ee3c7cdcd",
+              "bytes": 2226,
+              "role": "evaluation_label_and_task_scoped_source_label"
+            },
+            "PROTEINS_node_attributes.txt": {
+              "sha256": "54eef829abb37e458a5fbf3a3c581e48e5810e220463c2cd951856b9ceb08f07",
+              "bytes": 478190,
+              "role": "unused_feature_provenance"
+            }
+          },
+          "graph_id": "TU graph number minus one",
+          "class_labels_parsed_at_registration": false,
+          "node_features": "one_hot_node_labels_only",
+          "node_label_values": [
+            0,
+            1,
+            2
+          ],
+          "node_feature_dim": 3,
+          "edge_features": null,
+          "edge_feature_dim": 0,
+          "continuous_node_attributes_used": false,
+          "remove_self_loops": true,
+          "coalesce_duplicate_directed_edges": true,
+          "require_bidirectional_edges": true,
+          "graph_objects_have_y": false
+        },
+        "inherited_model_config": {
+          "seed": 0,
+          "encoder": "gin",
+          "hidden": 64,
+          "num_layers": 3,
+          "emb_dim": 16,
+          "dropout": 0.0,
+          "source_epochs": 100,
+          "source_lr": 0.001,
+          "source_batch": 128,
+          "adapter_width": 16,
+          "coordinate_eps": 1e-08,
+          "score_hidden": 64,
+          "score_epochs": 2400,
+          "score_batch": 128,
+          "score_lr": 0.001,
+          "score_validation": true,
+          "kappa_sigma": 1.0,
+          "adapt_rounds": 30,
+          "source_adapt_batch": 128,
+          "target_batch": 128,
+          "lambda_boundary": 1.0,
+          "tau": 0.1,
+          "radius_multiplier": 1.0,
+          "request_multiplier": 0.1,
+          "execution_multiplier": 0.1,
+          "root_tolerance": 1e-05,
+          "min_normal": 1e-08,
+          "projection_eps": 1e-12,
+          "projection_steps": 20,
+          "projection_backtracks": 10,
+          "movement_zero": 1e-12,
+          "damping": 0.01,
+          "solver": "auto",
+          "direct_max_params": 2048,
+          "cg_tolerance": 1e-07,
+          "cg_steps": 200,
+          "armijo": 0.0001,
+          "backtracks": 15,
+          "adaptation_dtype": "float64",
+          "device": "cpu"
+        },
+        "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+        "inherited_score_config": {
+          "optimizer_updates": 7200,
+          "endpoints": [
+            900,
+            1800,
+            3600,
+            7200
+          ],
+          "checkpoint_selection": "exact_final_update_7200",
+          "use_validation_for_selection": false,
+          "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+          "recovery_epochs": 50,
+          "shuffle_each_epoch": true,
+          "drop_last": false,
+          "bandwidths": [
+            1
+          ],
+          "kde_role": "diagnostic_only_not_population_oracle",
+          "loo_update_arms": false
+        },
+        "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+        "planned_state_blocks": 120,
+        "expected_available_blocks_from_r5": 108,
+        "r5_missing_blocks": [
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3406,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3406,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3409,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 0,
+            "seed": 3409,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3406,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3406,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3409,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 1,
+            "seed": 3409,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3406,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3406,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3409,
+            "attempt_before": 1,
+            "reason": "no_valid_boundary"
+          },
+          {
+            "source": 3,
+            "target": 2,
+            "seed": 3409,
+            "attempt_before": 30,
+            "reason": "no_valid_boundary"
+          }
+        ],
+        "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/proteins_edge/attempt-001"
+      }
+    ],
+    "domains": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "directions": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ]
+    ],
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "states": {
+      "trajectory": "A0",
+      "attempts_before": [
+        1,
+        30
+      ],
+      "primary_attempt_before": 1,
+      "secondary_attempt_before": 30,
+      "parameter_field": "before",
+      "boundary_and_batch": "same record as before; no regeneration",
+      "alpha_source": "sealed R5 record.side.alpha",
+      "require_r5_side_status": "available"
+    },
+    "factorial": {
+      "source_gradient_coefficients": [
+        0,
+        1
+      ],
+      "request_signs": [
+        -1,
+        0,
+        1
+      ],
+      "arms": [
+        {
+          "id": "N",
+          "source_gradient_coefficient": 0,
+          "request_sign": 0
+        },
+        {
+          "id": "S",
+          "source_gradient_coefficient": 1,
+          "request_sign": 0
+        },
+        {
+          "id": "SU+",
+          "source_gradient_coefficient": 1,
+          "request_sign": 1
+        },
+        {
+          "id": "SU-",
+          "source_gradient_coefficient": 1,
+          "request_sign": -1
+        },
+        {
+          "id": "U+",
+          "source_gradient_coefficient": 0,
+          "request_sign": 1
+        },
+        {
+          "id": "U-",
+          "source_gradient_coefficient": 0,
+          "request_sign": -1
+        }
+      ],
+      "fixed_H": "F_S + lambda_B D^T D / M + damping I",
+      "source_direction": "s = delta_zero = -H^-1 g_source_batch",
+      "request_direction": "u = delta_normal - delta_zero = H^-1 lambda_B D^T zeta / M",
+      "retain_source_curvature": true,
+      "direction_normalization": false,
+      "recompute_boundaries_per_arm": false
+    },
+    "steps": {
+      "multipliers": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "primary_multiplier": 1.0,
+      "beta": "historical_alpha * multiplier",
+      "search_new_alpha": false,
+      "choose_best_step_by_labels": false,
+      "armijo_filter": false,
+      "commit_candidates": false,
+      "motion_feasibility": "max(abs(true_forward_movement_on_old_boundaries)) <= inherited execution_multiplier * sigma",
+      "finite_over_budget_policy": "retain marked in primary diagnostic; secondary six-arm common-motion-feasible subset per beta",
+      "nonfinite_policy": "record numerical_failure; never treat as finite budget rejection"
+    },
+    "numerics": {
+      "device": "cpu",
+      "dtype": "float64",
+      "linear_residual_tolerance": "10 * inherited cg_tolerance * max(norm(original_rhs), norm(rhs_checked), 1e-12)",
+      "replay_logprob_atol": 1e-09,
+      "replay_logprob_rtol": 1e-07,
+      "replay_predictions_must_match_exactly": true,
+      "derivative_sign_atol": 1e-10,
+      "derivative_sign_rtol": 1e-08,
+      "derivative_sign_threshold": "atol + rtol * norm(pool_gradient) * norm(direction)",
+      "relocation_radius_sigma": 4,
+      "relocation_scan_points": 65,
+      "relocation_bisections": 28
+    },
+    "labels": {
+      "candidate_phase": "task-scoped source-fit labels only; no source-validation or target labels or metric tables",
+      "evaluation_phase": "after R6_OBS verify: full source-fit, source-validation and target labels",
+      "target_gradients": "evaluation diagnostic only; never update candidates, steps, selection or model",
+      "claim_unseen_target_labels": false,
+      "claim_independent_final_test": false
+    },
+    "evaluation": {
+      "pools": [
+        "source_batch",
+        "source_fit",
+        "source_validation",
+        "target"
+      ],
+      "primary_comparisons": [
+        {
+          "left": "U+",
+          "right": "N",
+          "pools": [
+            "target"
+          ],
+          "metric": "nll"
+        },
+        {
+          "left": "U+",
+          "right": "U-",
+          "pools": [
+            "target"
+          ],
+          "metric": "nll"
+        },
+        {
+          "left": "S",
+          "right": "N",
+          "pools": [
+            "source_fit",
+            "source_validation",
+            "target"
+          ],
+          "metric": "nll"
+        }
+      ],
+      "key_secondary_comparisons": [
+        [
+          "SU+",
+          "S"
+        ],
+        [
+          "SU+",
+          "SU-"
+        ],
+        [
+          "SU+",
+          "U+"
+        ],
+        [
+          "SU-",
+          "U-"
+        ]
+      ],
+      "interaction": "L(SU+) - L(S) - L(U+) + L(N)",
+      "metrics": [
+        "nll",
+        "accuracy",
+        "balanced_accuracy",
+        "macro_f1",
+        "class_ce",
+        "class_recall",
+        "predicted_class_proportions",
+        "wrong_to_right",
+        "right_to_wrong",
+        "net_correct"
+      ],
+      "fixed_target_subgroups": [
+        "initially_correct",
+        "initially_wrong",
+        "generators",
+        "complement"
+      ],
+      "subgroup_origin": "old theta predictions and old generator graph IDs; evaluation only",
+      "derivatives_at_theta": [
+        "gradient(pool_nll) dot s",
+        "gradient(pool_nll) dot u"
+      ],
+      "derivative_after_source": "gradient(pool_nll at theta + beta*s) dot u for every fixed beta",
+      "stop_gradient_through": [
+        "encoder",
+        "score",
+        "boundaries",
+        "H",
+        "s",
+        "u"
+      ],
+      "finite_difference_diagnostics": "Delta L(beta*v), beta*d, nonlinear residual; no adaptive target-driven step search",
+      "aggregation": "each setting/time/step/contrast: equal 12 directions within each seed, then five seeds",
+      "incomplete_seed": "NA for full-direction seed; NA for complete-five-seed mean if any incomplete; optionally separately labeled conditional available-block statistics",
+      "secondary_feasible_mask": "same six-arm jointly feasible block set; no per-arm filtering",
+      "uncertainty": {
+        "report": [
+          "raw_seed_values",
+          "mean",
+          "sample_sd",
+          "win_tie_loss"
+        ],
+        "optional_t95_critical_df4": 2.776445,
+        "scope": "fixed-data training randomness only"
+      },
+      "posthoc_focus": {
+        "setting": "proteins_edge",
+        "directions": [
+          [
+            3,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "reason": "R5 high NLL degradation; illustrative only, all directions remain in registered scope"
+      }
+    },
+    "budget": {
+      "new_source_models": 0,
+      "new_score_models": 0,
+      "new_training_updates": 0,
+      "new_closed_loop_trajectories": 0,
+      "new_committed_adaptation_attempts": 0,
+      "planned_blocks": 360,
+      "expected_available_blocks_from_r5": 348,
+      "arms": 6,
+      "step_multipliers": 3,
+      "expected_candidate_cells": 6264,
+      "max_distinct_parameter_states_per_available_block": 16,
+      "expected_max_distinct_parameter_states": 5568,
+      "counts_are": "expected diagnostic counts, not completed execution"
+    },
+    "execution": {
+      "stages": [
+        "prepare",
+        "candidates",
+        "replay",
+        "evaluate",
+        "report"
+      ],
+      "seals": [
+        "R6_INPUT",
+        "R6_OBS",
+        "R6_FINAL"
+      ],
+      "threads_per_worker": 1,
+      "max_workers": 4,
+      "environment": "record compatible torch/python versions and actual commands at execution",
+      "new_attempt_required": true,
+      "write_to_r5_archive": false
+    },
+    "outputs": {
+      "tables": [
+        "candidates.csv",
+        "paired.csv",
+        "derivatives.csv",
+        "interactions.csv",
+        "coverage.csv",
+        "seed_summary.csv",
+        "summary.csv"
+      ],
+      "state_artifacts": [
+        "theta",
+        "s",
+        "u",
+        "historical_alpha",
+        "old_record_reference_and_hash",
+        "candidate_vectors",
+        "pool_log_probabilities",
+        "motion_status",
+        "replay_checks"
+      ],
+      "execution_records": [
+        "actual_config",
+        "execution_commit",
+        "input_manifest",
+        "environment",
+        "commands",
+        "all_planned_block_statuses",
+        "seal_summaries"
+      ]
+    },
+    "setting": {
+      "id": "proteins_edge",
+      "dataset": "PROTEINS",
+      "split_basis": "edge_count",
+      "r5_archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/proteins_edge/attempt-001",
+      "r5_origin": "fresh",
+      "r5_execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+      "r5_execution_plan_sha256": "1f5ee6b38cb3acd41824930ea1b1fef26ceb6f5130b755d9d5fe8385841363b0",
+      "r5_seal_digests": {
+        "INPUT": "91247688ee617048c7fc36acc8147d356d826c3a293b327d4d27e287f0e9f3b7",
+        "OBS": "5a5e28b7cd47d1597c9b68b399acfb33e4c89dd8d5e83e264b1630bb9c219e4d",
+        "FINAL": "1bfedf37cb8104de34f8619494a8a5cfeb720f304bb35ea3586b8a46c931fa4b"
+      },
+      "r5_seal_file_sha256": {
+        "INPUT": "e520310bdc55b15010deb45be4f3f8b65ccd83207dbfd6b1068aa3daf8b2211e",
+        "OBS": "168c85032883ff4983e0e766f753e581c86f2a1ac8ed4a1c126752b9e8e8e87b",
+        "FINAL": "c825fba49501898a495009bfa9387f8273237dafa3bbd7cb9f1db8783d7f38ce"
+      },
+      "domain_indices": [
+        {
+          "domain": 0,
+          "path": "data/idx_PROTEINS_0.npy",
+          "sha256": "15efc5669142619fcde99efadd676c39a64230fa527920ebad6b295b9eae0363",
+          "count": 278,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 1,
+          "path": "data/idx_PROTEINS_1.npy",
+          "sha256": "f56835ca9f8705f1c57eae8907146b94bfdb0358732eac081cc00b44a31771a0",
+          "count": 278,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 2,
+          "path": "data/idx_PROTEINS_2.npy",
+          "sha256": "96885b7aea84d74a9cd7dd996c444dd23dc6e985d481cbe9bd852ae317e7eb0d",
+          "count": 278,
+          "order": "preserve_file_order"
+        },
+        {
+          "domain": 3,
+          "path": "data/idx_PROTEINS_3.npy",
+          "sha256": "1e403ed63dd28ddf9658bb8452ce11a38f98ff8290e5c004c165859ef1a4b643",
+          "count": 279,
+          "order": "preserve_file_order"
+        }
+      ],
+      "input": {
+        "raw_directory": "/home/hxchen/research/GDA/TQG/data/PROTEINS_official_20261023/PROTEINS/raw",
+        "files": {
+          "PROTEINS_A.txt": {
+            "sha256": "4c4b33e272fc95cac6d27ed6d5d12b9a852c8610e91fff59f8f0dbdd5a20df67",
+            "bytes": 2022990,
+            "role": "input"
+          },
+          "PROTEINS_graph_indicator.txt": {
+            "sha256": "8d4ff1e852a5c28561e9bffb44cf9490bc552b13a3b6156dd12dc7f44e9afc4a",
+            "bytes": 169673,
+            "role": "input"
+          },
+          "PROTEINS_node_labels.txt": {
+            "sha256": "f758e8ad3d6e3c026b50833d75f6f90735b94eb3345e4243707f495ca8afea8d",
+            "bytes": 86942,
+            "role": "input"
+          },
+          "PROTEINS_graph_labels.txt": {
+            "sha256": "c0ef9810c440775252872318d0c8adc385588e14bc4c47a2c34aa96ee3c7cdcd",
+            "bytes": 2226,
+            "role": "evaluation_label_and_task_scoped_source_label"
+          },
+          "PROTEINS_node_attributes.txt": {
+            "sha256": "54eef829abb37e458a5fbf3a3c581e48e5810e220463c2cd951856b9ceb08f07",
+            "bytes": 478190,
+            "role": "unused_feature_provenance"
+          }
+        },
+        "graph_id": "TU graph number minus one",
+        "class_labels_parsed_at_registration": false,
+        "node_features": "one_hot_node_labels_only",
+        "node_label_values": [
+          0,
+          1,
+          2
+        ],
+        "node_feature_dim": 3,
+        "edge_features": null,
+        "edge_feature_dim": 0,
+        "continuous_node_attributes_used": false,
+        "remove_self_loops": true,
+        "coalesce_duplicate_directed_edges": true,
+        "require_bidirectional_edges": true,
+        "graph_objects_have_y": false
+      },
+      "inherited_model_config": {
+        "seed": 0,
+        "encoder": "gin",
+        "hidden": 64,
+        "num_layers": 3,
+        "emb_dim": 16,
+        "dropout": 0.0,
+        "source_epochs": 100,
+        "source_lr": 0.001,
+        "source_batch": 128,
+        "adapter_width": 16,
+        "coordinate_eps": 1e-08,
+        "score_hidden": 64,
+        "score_epochs": 2400,
+        "score_batch": 128,
+        "score_lr": 0.001,
+        "score_validation": true,
+        "kappa_sigma": 1.0,
+        "adapt_rounds": 30,
+        "source_adapt_batch": 128,
+        "target_batch": 128,
+        "lambda_boundary": 1.0,
+        "tau": 0.1,
+        "radius_multiplier": 1.0,
+        "request_multiplier": 0.1,
+        "execution_multiplier": 0.1,
+        "root_tolerance": 1e-05,
+        "min_normal": 1e-08,
+        "projection_eps": 1e-12,
+        "projection_steps": 20,
+        "projection_backtracks": 10,
+        "movement_zero": 1e-12,
+        "damping": 0.01,
+        "solver": "auto",
+        "direct_max_params": 2048,
+        "cg_tolerance": 1e-07,
+        "cg_steps": 200,
+        "armijo": 0.0001,
+        "backtracks": 15,
+        "adaptation_dtype": "float64",
+        "device": "cpu"
+      },
+      "effective_model_seed": "task.seed; inherited model.seed=0 is not an override",
+      "inherited_score_config": {
+        "optimizer_updates": 7200,
+        "endpoints": [
+          900,
+          1800,
+          3600,
+          7200
+        ],
+        "checkpoint_selection": "exact_final_update_7200",
+        "use_validation_for_selection": false,
+        "validation": "fixed_independent_noise_on_same_target_pool_diagnostic_only",
+        "recovery_epochs": 50,
+        "shuffle_each_epoch": true,
+        "drop_last": false,
+        "bandwidths": [
+          1
+        ],
+        "kde_role": "diagnostic_only_not_population_oracle",
+        "loo_update_arms": false
+      },
+      "source_roles": "reuse exact R5 per-source, per-seed fit/validation IDs; do not resplit",
+      "planned_state_blocks": 120,
+      "expected_available_blocks_from_r5": 108,
+      "r5_missing_blocks": [
+        {
+          "source": 3,
+          "target": 0,
+          "seed": 3406,
+          "attempt_before": 1,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 0,
+          "seed": 3406,
+          "attempt_before": 30,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 0,
+          "seed": 3409,
+          "attempt_before": 1,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 0,
+          "seed": 3409,
+          "attempt_before": 30,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 1,
+          "seed": 3406,
+          "attempt_before": 1,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 1,
+          "seed": 3406,
+          "attempt_before": 30,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 1,
+          "seed": 3409,
+          "attempt_before": 1,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 1,
+          "seed": 3409,
+          "attempt_before": 30,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 2,
+          "seed": 3406,
+          "attempt_before": 1,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 2,
+          "seed": 3406,
+          "attempt_before": 30,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 2,
+          "seed": 3409,
+          "attempt_before": 1,
+          "reason": "no_valid_boundary"
+        },
+        {
+          "source": 3,
+          "target": 2,
+          "seed": 3409,
+          "attempt_before": 30,
+          "reason": "no_valid_boundary"
+        }
+      ],
+      "output_root_suggestion": "/home/hxchen/research/GDA/TSBA/experiments/r6/proteins_edge/attempt-001"
+    },
+    "workers": 4
+  }
+}

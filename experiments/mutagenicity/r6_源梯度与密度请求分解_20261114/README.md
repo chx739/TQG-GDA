@@ -1,6 +1,6 @@
 # R6 源梯度与密度请求分解
 
-状态：实现与独立代码审查已完成，等待执行启动记录。研究问题：R5 的泛化代价来自源梯度推动、密度请求推动，还是两者在有限步长下的交互？
+状态：已实现、通过独立代码审查，三个设置已启动（2026-11-14）。研究问题：R5 的泛化代价来自源梯度推动、密度请求推动，还是两者在有限步长下的交互？
 
 [实验协议](docs/r6-protocol.md) · [计划配置](configs/r6-plan.json) · [R5 结果](../r5_原始方法与请求价值_20261114/report.md) · [返回 Mutagenicity](../README.md)
 
@@ -23,3 +23,9 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 核心核验：旧预测和线性系统分解、六组固定候选、功能调用不改变状态、有限越界保留、候选封存门控、方向导数与有限差分、分组贡献守恒，以及固定方向/种子分母。合成工程测试位于 `tests/tsba/test_r6.py`，不能替代真实数据结果。
 
 [独立审查与工程检查记录](results/engineering/review.md)。原协议中的“计划中”描述保留为登记历史；运行状态以本页及实际执行记录为准。
+
+## 实际执行
+
+执行代码：`9956ad34c1c41048af46c83f538bb6e0a62f2585`。三个设置的历史输入均已完成哈希核验和 R6_INPUT 封存，首先执行 Mutagenicity 边数设置，随后按登记顺序执行另外两个设置。
+
+[实际配置](configs/executed-configs.json) · [启动时状态快照](results/startup/status.json) · [启动日志快照](results/startup/run.log)。快照不是最终完成证明；完整实时日志位于 `/home/hxchen/research/GDA/TSBA/experiments/r6/run-001.log`，全部 checkpoints 和后续封存在相应 `<setting>/attempt-001/`。最终完成以各设置的 R6_FINAL 和评价表为准。

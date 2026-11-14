@@ -1,0 +1,49 @@
+{
+  "snapshot_utc": "2026-11-14T15:33:51.788975+00:00",
+  "status": "running",
+  "launch": {
+    "pid": 1801085,
+    "command": [
+      "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+      "-u",
+      "-m",
+      "experiments.mutagenicity.r6_源梯度与密度请求分解_20261114.scripts.run",
+      "--plan",
+      "experiments/mutagenicity/r6_源梯度与密度请求分解_20261114/configs/r6-plan.json",
+      "--stage",
+      "all"
+    ],
+    "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+    "started_utc": "2026-11-14T15:32:27.515433+00:00",
+    "commit": "9956ad34c1c41048af46c83f538bb6e0a62f2585",
+    "log": "/home/hxchen/research/GDA/TSBA/experiments/r6/run-001.log"
+  },
+  "settings": {
+    "mutagenicity_edge": {
+      "archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r6/mutagenicity_edge/attempt-001",
+      "input_seal": "f13d816a20579b3cad4e7fe7786e70014f40f942682b93efebcf25828050718f",
+      "block_statuses": {
+        "available": 120
+      },
+      "candidate_cells": 2160,
+      "observation_sealed": false,
+      "final_sealed": false
+    },
+    "mutagenicity_node": {
+      "archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r6/mutagenicity_node/attempt-001",
+      "input_seal": "8c1a1c84cbc591eacd6b328b4616fdf667757bdf1f36200429fb5aada774cb23",
+      "block_statuses": {},
+      "candidate_cells": 0,
+      "observation_sealed": false,
+      "final_sealed": false
+    },
+    "proteins_edge": {
+      "archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r6/proteins_edge/attempt-001",
+      "input_seal": "38903534d2569293183b38d6ec70d9e74e0c9a916e13c7dad599547a9d7323b4",
+      "block_statuses": {},
+      "candidate_cells": 0,
+      "observation_sealed": false,
+      "final_sealed": false
+    }
+  }
+}
