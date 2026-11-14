@@ -13,4 +13,4 @@
 
 - On 2026-11-09 the user explicitly authorized updating and publishing the review navigation as `docs/tsba/code-review-guide.md`. Keep that published guide aligned with code and tests. The old `docs/tsba/review-guide.md` name remains ignored as a legacy local copy; do not republish under the old name.
 
-- Keep method/usage documentation in `docs/`, and each TSBA experiment evidence bundle in `experiments/<dataset>/<round-date>/`. Preserve historical JSON/CSV/log bytes when reorganizing; record actual execution separately from planned configuration. Keep large runtime artifacts outside Git. Run `python3 tools/check_large_files.py --staged` before committing; existing large evidence exceptions are pinned by path and blob hash.
+- Keep method/usage documentation in `docs/`, and each TSBA experiment evidence bundle in `experiments/<dataset>/<round-date>/`. Preserve historical JSON/CSV/log bytes when reorganizing; record actual execution separately from planned configuration.

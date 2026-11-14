@@ -15,9 +15,7 @@
 
 ```sh
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m unittest discover -s tests/tsba -v
-python3 -m unittest discover -s tests/maintenance -v
 python3 tools/check_doc_links.py
-python3 tools/check_large_files.py --all
 ```
 
-大文件检查已在本次工作目录启用提交钩子，并加入 GitHub Actions；新克隆的本地钩子须按[维护说明](../maintenance.md)启用。
+后续变更：2026-11-14 按用户要求撤回大文件防线。上面的体积检查和 2 项维护测试仅记录整理时的验证结果；相关脚本、测试、提交钩子、例外清单和 CI 步骤已删除，本地 hooksPath 设置及此次新增忽略规则已撤回。链接检查继续保留，见[维护说明](../maintenance.md)。

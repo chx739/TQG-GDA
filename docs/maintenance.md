@@ -9,29 +9,15 @@
 
 移动目录的提交只改变组织和引用，不混入算法调整。已完成实验结果不重算；修改结论另给依据。
 
-## 大文件防线
-
-单个 Git 文件上限为 **5 MiB**。这是仓库维护阈值，不是实验超参数。`.gitignore` 排除常见训练产物，但不全局禁止小型 `.npz` 测试数据。
-
-新克隆启用提交钩子（先检查是否已有自定义 hooksPath；已有时整合检查命令，不覆盖）：
+## 文档链接检查
 
 ```sh
-git config --get core.hooksPath
-git config core.hooksPath .githooks
-```
-
-检查读取暂存区的实际 Git 对象，避免工作区与暂存区不一致漏检：
-
-```sh
-python3 tools/check_large_files.py --staged
-python3 tools/check_large_files.py --all
 python3 tools/check_doc_links.py
-python3 -m unittest discover -s tests/maintenance -v
 ```
 
-GitHub Actions 对推送和 PR 执行同样检查。要在合并时强制要求通过，还需仓库管理员配置分支保护；本次不修改分支保护。
+GitHub Actions 对推送和 PR 执行本地 Markdown 文件链接检查。
 
-三份既有历史 CSV 超过阈值，在 `.github/large-file-exceptions.json` 按路径与 blob 哈希固定例外。内容变大或发生任何变化，例外不再匹配。新增例外须说明保留价值；通常应将大文件移至外部档案，只提交摘要与哈希。
+2026-11-14 按用户要求撤回本次整理新增的大文件防线：不再设置 5 MiB 阈值、提交钩子、例外清单或体积 CI 检查；本次新增的产物忽略规则也已撤回。整理前已有的 `.gitignore` 规则保持原样。
 
 ## 可追溯性
 

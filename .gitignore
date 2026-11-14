@@ -26,15 +26,3 @@ data/**/processed/
 
 # Legacy local navigation filename; published guide is code-review-guide.md.
 /docs/tsba/review-guide.md
-
-# Large runtime artifacts belong outside the evidence repository.
-/artifacts/
-/cache/
-**/checkpoints/
-**/tensorboard/
-*.tar
-*.tar.gz
-*.tgz
-*.npy
-# Small fixtures elsewhere may use .npz; experiment arrays stay external.
-/experiments/**/*.npz
