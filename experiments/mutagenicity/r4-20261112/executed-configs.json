@@ -1,0 +1,626 @@
+{
+  "protocol/r4-plan.json": {
+    "sha256": "f3dedd8b42cd6ac27d8d3037147da1b4f6d5b72a1fd0d06debf0ff354e5878a3",
+    "content": {
+      "seeds": [
+        3405,
+        3406,
+        3407,
+        3408,
+        3409
+      ],
+      "domains": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "domain_counts": [
+        1084,
+        1084,
+        1084,
+        1085
+      ],
+      "sega_ref_fraction": 0.4,
+      "sega_fit_fraction": 0.4,
+      "risk_budget": 0.05,
+      "constraint_tolerance": 1e-09,
+      "solver": {
+        "ftol": 1e-12,
+        "iterations": 150,
+        "constraint_generation_limit": 80,
+        "add_rows": 16
+      },
+      "endpoints": [
+        0,
+        1,
+        3,
+        10,
+        30
+      ],
+      "side_attempts": [
+        1,
+        30
+      ],
+      "side_alpha_start": 0.0625,
+      "relocation_scan_points": 65,
+      "relocation_radius_sigma": 4,
+      "relocation_bisections": 28,
+      "workers": 32,
+      "schema": 1,
+      "dataset": "Mutagenicity",
+      "experiment": "R4 fixed-configuration all directions",
+      "directions": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "historical_directions": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "r3_reference_commit": "7a3ac191b46ee6867a7840fc3b9542536d0efc78",
+      "r3_inputs_digest": "5c869819eeb2bb553befbcc90c81cab5a5752278f95e503fe25614e5c75b91f3",
+      "model": {
+        "seed": 0,
+        "encoder": "gin",
+        "hidden": 64,
+        "num_layers": 3,
+        "emb_dim": 16,
+        "dropout": 0.0,
+        "source_epochs": 100,
+        "source_lr": 0.001,
+        "source_batch": 128,
+        "adapter_width": 16,
+        "coordinate_eps": 1e-08,
+        "score_hidden": 64,
+        "score_epochs": 800,
+        "score_batch": 128,
+        "score_lr": 0.001,
+        "score_validation": true,
+        "kappa_sigma": 1.0,
+        "adapt_rounds": 30,
+        "source_adapt_batch": 128,
+        "target_batch": 128,
+        "lambda_boundary": 1.0,
+        "tau": 0.1,
+        "radius_multiplier": 1.0,
+        "request_multiplier": 0.1,
+        "execution_multiplier": 0.1,
+        "root_tolerance": 1e-05,
+        "min_normal": 1e-08,
+        "projection_eps": 1e-12,
+        "projection_steps": 20,
+        "projection_backtracks": 10,
+        "movement_zero": 1e-12,
+        "damping": 0.01,
+        "solver": "auto",
+        "direct_max_params": 2048,
+        "cg_tolerance": 1e-07,
+        "cg_steps": 200,
+        "armijo": 0.0001,
+        "backtracks": 15,
+        "adaptation_dtype": "float64",
+        "device": "cpu"
+      },
+      "score": {
+        "hidden": 64,
+        "lr": 0.001,
+        "batch": 128,
+        "endpoints": [
+          900,
+          1800,
+          3600,
+          7200
+        ],
+        "recovery_epochs": 50,
+        "bandwidths": [
+          1
+        ]
+      },
+      "weight": 1.0,
+      "epsilon": 0.25,
+      "adam": {
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.0,
+        "amsgrad": false,
+        "maximize": false,
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null
+      },
+      "methods": {
+        "B0": {
+          "group": null,
+          "density": null
+        },
+        "B1": {
+          "group": "M00",
+          "density": "zero"
+        },
+        "B2": {
+          "group": "M01",
+          "density": "zero"
+        },
+        "A1": {
+          "group": "M01",
+          "density": "learned"
+        },
+        "A2": {
+          "group": "M11",
+          "density": "learned"
+        },
+        "A3": {
+          "group": "M11",
+          "density": "kde"
+        }
+      },
+      "primary": "A2",
+      "secondary": "A1",
+      "primary_metric": "accuracy",
+      "pairs": [
+        [
+          "A2",
+          "B0"
+        ],
+        [
+          "A2",
+          "B1"
+        ],
+        [
+          "A2",
+          "B2"
+        ],
+        [
+          "A1",
+          "B2"
+        ],
+        [
+          "A3",
+          "B0"
+        ],
+        [
+          "A2",
+          "A3"
+        ],
+        [
+          "B1",
+          "B0"
+        ],
+        [
+          "B2",
+          "B1"
+        ]
+      ],
+      "counts": {
+        "sources": 20,
+        "scores": 60,
+        "trajectories": 300,
+        "attempts": 9000
+      },
+      "reuse": "fresh_training"
+    }
+  },
+  "protocol/config-identity.json": {
+    "sha256": "c5857efa98b514c3c9243062a1483c0667ed45329bd6d2a7dc3fa6ab1d5a682c",
+    "content": {
+      "config_hash": "c4ccd74503331246b6fdec501cc5dbedecb86c4f3c7c860ad60d3e5b5b6847d0"
+    }
+  },
+  "supplement-m00-001/protocol/plan.json": {
+    "sha256": "d04a4bfc935c901d1f522a8d5540f30454eef9974238756a927a6d067e74d359",
+    "content": {
+      "seeds": [
+        3405,
+        3406,
+        3407,
+        3408,
+        3409
+      ],
+      "domains": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "domain_counts": [
+        1084,
+        1084,
+        1084,
+        1085
+      ],
+      "sega_ref_fraction": 0.4,
+      "sega_fit_fraction": 0.4,
+      "risk_budget": 0.05,
+      "constraint_tolerance": 1e-09,
+      "solver": {
+        "ftol": 1e-12,
+        "iterations": 150,
+        "constraint_generation_limit": 80,
+        "add_rows": 16
+      },
+      "endpoints": [
+        0,
+        1,
+        3,
+        10,
+        30
+      ],
+      "side_attempts": [
+        1,
+        30
+      ],
+      "side_alpha_start": 0.0625,
+      "relocation_scan_points": 65,
+      "relocation_radius_sigma": 4,
+      "relocation_bisections": 28,
+      "workers": 32,
+      "schema": 1,
+      "dataset": "Mutagenicity",
+      "experiment": "R4 fixed-configuration all directions",
+      "directions": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "historical_directions": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "r3_reference_commit": "7a3ac191b46ee6867a7840fc3b9542536d0efc78",
+      "r3_inputs_digest": "5c869819eeb2bb553befbcc90c81cab5a5752278f95e503fe25614e5c75b91f3",
+      "model": {
+        "seed": 0,
+        "encoder": "gin",
+        "hidden": 64,
+        "num_layers": 3,
+        "emb_dim": 16,
+        "dropout": 0.0,
+        "source_epochs": 100,
+        "source_lr": 0.001,
+        "source_batch": 128,
+        "adapter_width": 16,
+        "coordinate_eps": 1e-08,
+        "score_hidden": 64,
+        "score_epochs": 800,
+        "score_batch": 128,
+        "score_lr": 0.001,
+        "score_validation": true,
+        "kappa_sigma": 1.0,
+        "adapt_rounds": 30,
+        "source_adapt_batch": 128,
+        "target_batch": 128,
+        "lambda_boundary": 1.0,
+        "tau": 0.1,
+        "radius_multiplier": 1.0,
+        "request_multiplier": 0.1,
+        "execution_multiplier": 0.1,
+        "root_tolerance": 1e-05,
+        "min_normal": 1e-08,
+        "projection_eps": 1e-12,
+        "projection_steps": 20,
+        "projection_backtracks": 10,
+        "movement_zero": 1e-12,
+        "damping": 0.01,
+        "solver": "auto",
+        "direct_max_params": 2048,
+        "cg_tolerance": 1e-07,
+        "cg_steps": 200,
+        "armijo": 0.0001,
+        "backtracks": 15,
+        "adaptation_dtype": "float64",
+        "device": "cpu"
+      },
+      "score": {
+        "hidden": 64,
+        "lr": 0.001,
+        "batch": 128,
+        "endpoints": [
+          900,
+          1800,
+          3600,
+          7200
+        ],
+        "recovery_epochs": 50,
+        "bandwidths": [
+          1
+        ]
+      },
+      "weight": 1.0,
+      "epsilon": 0.25,
+      "adam": {
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.0,
+        "amsgrad": false,
+        "maximize": false,
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null
+      },
+      "methods": {
+        "B0": {
+          "group": null,
+          "density": null
+        },
+        "B1": {
+          "group": "M00",
+          "density": "zero"
+        },
+        "B2": {
+          "group": "M01",
+          "density": "zero"
+        },
+        "A1": {
+          "group": "M01",
+          "density": "learned"
+        },
+        "A2": {
+          "group": "M11",
+          "density": "learned"
+        },
+        "A3": {
+          "group": "M11",
+          "density": "kde"
+        },
+        "A0": {
+          "group": "M00",
+          "density": "learned"
+        }
+      },
+      "primary": "A2",
+      "secondary": "A1",
+      "primary_metric": "accuracy",
+      "pairs": [
+        [
+          "A2",
+          "B0"
+        ],
+        [
+          "A2",
+          "B1"
+        ],
+        [
+          "A2",
+          "B2"
+        ],
+        [
+          "A1",
+          "B2"
+        ],
+        [
+          "A3",
+          "B0"
+        ],
+        [
+          "A2",
+          "A3"
+        ],
+        [
+          "B1",
+          "B0"
+        ],
+        [
+          "B2",
+          "B1"
+        ],
+        [
+          "A0",
+          "B0"
+        ],
+        [
+          "A0",
+          "B1"
+        ],
+        [
+          "A1",
+          "A0"
+        ],
+        [
+          "A2",
+          "A0"
+        ]
+      ],
+      "counts": {
+        "sources": 20,
+        "scores": 60,
+        "trajectories": 360,
+        "attempts": 10800
+      },
+      "reuse": "sealed_r4_inputs_for_a0_only"
+    }
+  },
+  "supplement-m00-001/protocol/registration.json": {
+    "sha256": "3acc0d3b3d9d13df0a9063372703baa632e66bab75f56b3eea01fa703489c508",
+    "content": {
+      "post_hoc": true,
+      "method": "A0",
+      "counts": {
+        "trajectories": 60,
+        "attempts": 1800,
+        "predictions_replayed": 1860
+      },
+      "r3_root": "/home/hxchen/experiments/tsba/mutagenicity-r3/attempt-001",
+      "r3_observation": "5bda17e12d1d933623b71dad6c10fc475dbd663fc913d561d82ec06b23bbf1c5",
+      "date": "2026-11-12",
+      "config_hash": "963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+      "side_attempts": [
+        1,
+        30
+      ],
+      "jobs": [
+        "trajectories/Mutagenicity/M0_to_M1/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M1/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M1/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M1/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M1/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M2/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M2/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M2/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M2/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M2/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M3/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M3/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M3/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M3/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M0_to_M3/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M0/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M0/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M0/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M0/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M0/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M2/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M2/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M2/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M2/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M2/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M3/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M3/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M3/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M3/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M1_to_M3/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M0/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M0/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M0/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M0/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M0/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M1/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M1/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M1/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M1/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M1/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M3/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M3/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M3/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M3/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M2_to_M3/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M0/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M0/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M0/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M0/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M0/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M1/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M1/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M1/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M1/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M1/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M2/seed3405/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M2/seed3406/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M2/seed3407/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M2/seed3408/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9",
+        "trajectories/Mutagenicity/M3_to_M2/seed3409/A0/963aa77c0c17802c76697c6732ed5759e4e07223e0f663339e2a3fff5d4562e9"
+      ]
+    }
+  }
+}

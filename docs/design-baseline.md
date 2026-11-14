@@ -28,7 +28,7 @@ a8ed02d65efed7b95de9cdd2b712ba37ce53c972f5f7a86f320c56bc93e23028
 
 ## 与历史 TQG 的关系
 
-历史 TQG 保存在 `history/tqg-v2-20261106`，固定提交为 [`eb39fd7c5433420bd51f14e6330ba5067d164456`](https://github.com/chx739/TQG-GDA/tree/eb39fd7c5433420bd51f14e6330ba5067d164456)。其算法、冻结协议、日志、模型及评价记录保持原样。
+历史 TQG 现保存在 [TQG 分支](https://github.com/chx739/TQG-GDA/tree/TQG)。2026-11-14 清理了历史实验 `.npz`，旧分支名和提交号不再作为当前入口；可用材料与提交映射见[归档说明](archive/README.md)。
 
 历史版本引用的 SEGA 骨干配置与本次附件不同。历史 TQG 的独立 `query` 角色不能直接等同于附件参与预训练的 `ref`；两者的初始化、分类器及适配变量也不同。历史实验分数不能直接转作本参考范式的结果。
 

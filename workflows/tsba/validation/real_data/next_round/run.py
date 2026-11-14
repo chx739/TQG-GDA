@@ -24,7 +24,7 @@ def execute(repo, root, plan, r0_log):
     repo, root = Path(repo), Path(root)
     if repo.resolve() != Path(__file__).resolve().parents[5]:
         raise RuntimeError('Executing checkout must match the archived repository')
-    registered = json.loads((repo / 'docs/tsba/experiments/mutagenicity/next-round-plan.json').read_text())
+    registered = json.loads((repo / 'experiments/mutagenicity/r1b-20261111/next-round-plan.json').read_text())
     if plan != registered:
         raise RuntimeError('Execution settings must match the committed registered plan')
     if subprocess.check_output(['git','status','--porcelain'],cwd=repo,text=True).strip():
@@ -41,7 +41,7 @@ def execute(repo, root, plan, r0_log):
         (root / name).mkdir()
     shutil.copyfile(r0_log,root / 'logs/R0-tests.txt')
     for name in ('r1b-protocol.md','next-round-plan.json','r1b-pre-run-review.json'):
-        shutil.copyfile(repo / 'docs/tsba/experiments/mutagenicity' / name,root / 'protocol' / name)
+        shutil.copyfile(repo / 'experiments/mutagenicity/r1b-20261111' / name,root / 'protocol' / name)
     write_json(root / 'execution-plan.json',plan)
     write_json(root / 'provenance.json',provenance(repo))
     with (root / 'protocol/source.tar').open('xb') as stream:
@@ -108,7 +108,7 @@ def main():
     parser.add_argument('--root',type=Path)
     parser.add_argument('--r0-log',type=Path,required=True)
     args = parser.parse_args()
-    plan = json.loads((args.repo / 'docs/tsba/experiments/mutagenicity/next-round-plan.json').read_text())
+    plan = json.loads((args.repo / 'experiments/mutagenicity/r1b-20261111/next-round-plan.json').read_text())
     execute(args.repo,args.root or plan['output_root'],plan,args.r0_log)
 
 

@@ -21,7 +21,7 @@ from workflows.tsba.validation.real_data.geometry import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-with open(ROOT / "docs/tsba/experiments/mutagenicity/stage1-plan.json") as handle:
+with open(ROOT / "experiments/mutagenicity/r1-20261111/stage1-plan.json") as handle:
     PLAN = json.load(handle)
 
 

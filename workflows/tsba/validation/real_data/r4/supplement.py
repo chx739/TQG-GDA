@@ -253,7 +253,7 @@ def evaluate(root, base, plan, base_plan, historical):
 
 
 def execute(root, base, r3, repo):
-    docs = repo / "docs/tsba/experiments/mutagenicity"
+    docs = repo / "experiments/mutagenicity"
     index = read_json(docs / "r4-20261112/archive-index.json")
     r3_digest = read_json(docs / "r3-20261112/archive-index.json")["observation_digest"]
     obs = verify(base, "R4_OBS")

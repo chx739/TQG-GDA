@@ -20,7 +20,7 @@ class RealIntegrationTests(unittest.TestCase):
     def test_synthetic_staged_probabilities_geometry_and_evaluation(self):
         torch.set_num_threads(1)
         repo = Path(__file__).resolve().parents[2]
-        plan = json.loads((repo / 'docs/tsba/experiments/mutagenicity/stage1-plan.json').read_text())
+        plan = json.loads((repo / 'experiments/mutagenicity/r1-20261111/stage1-plan.json').read_text())
         plan = copy.deepcopy(plan)
         plan.update(seeds=[3405], tasks=[[0, 1]])
         plan['probes'].update(updates=20, supplementary_endpoints=[20])

@@ -76,7 +76,7 @@ def initialize(root, repo, plan_path, request):
     p = root / "protocol"
     p.mkdir()
     for file in (plan_path, plan_path.with_name("r3-protocol.md"),
-                 plan_path.with_name("stage1-inputs.json")):
+                 plan_path.parent.parent / "stage1-inputs.json"):
         shutil.copyfile(file, p / file.name)
     if request is not None:
         shutil.copyfile(request, p / "requested-design.txt")
@@ -164,7 +164,7 @@ def main():
             raise ValueError(f"Set {variable}=1 for reproducible per-process CPU execution")
     configure()
     repo = Path(__file__).resolve().parents[5]
-    plan_path = repo / "docs/tsba/experiments/mutagenicity/r3-plan.json"
+    plan_path = repo / "experiments/mutagenicity/r3-20261112/r3-plan.json"
     root = args.root.resolve()
     root.parent.mkdir(parents=True, exist_ok=True)
     # A single orchestrator owns a run directory even across terminal sessions.

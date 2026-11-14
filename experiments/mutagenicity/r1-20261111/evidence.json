@@ -1,0 +1,59 @@
+{
+  "status": "completed",
+  "source_path": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-002",
+  "actual_plan_source": "execution-plan.json",
+  "registered_plan": "stage1-plan.json",
+  "registered_plan_sha256": "560e1c3a034107968f53f53f35c79ec4ad58bb6a1f32f45753875a404ab7155e",
+  "executed_plan_sha256": "d5b26abb0bee5dc66ed3854e07472c58ed757aa7adc95efcf0295910e1b1f564",
+  "plan_bytes_match": false,
+  "execution_commit_original": "c6f6be73971b6607b3eb638e7ac31f08ef2e526b",
+  "execution_commit_after_history_cleanup": "44210bea97b65e5c3e1d5439a8f185e858282054",
+  "verification": "SHA256 matched archived member manifest; no training or evaluation rerun",
+  "configuration_scope": "Archived execution plan plus available per-seed config.json; per-task overrides and chosen checkpoints remain in the archive and report.",
+  "manifest_source": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-002.tar.gz.json",
+  "manifest_sha256": "d00758fe3101fd63571b6d29ae7551d3d402a48b4f3a0187f15751099cef1863",
+  "report": "report.md",
+  "plan_values_match": false,
+  "plan_value_differences": [
+    {
+      "field": "/completed_attempt",
+      "planned": "/home/hxchen/experiments/tsba/mutagenicity-r1-v4/attempt-002",
+      "executed": null
+    },
+    {
+      "field": "/evaluation_repair_commit",
+      "planned": "b8218ed221b0ddd9549bbee3214fccf84baf4781",
+      "executed": null
+    },
+    {
+      "field": "/execution_commit",
+      "planned": "c6f6be73971b6607b3eb638e7ac31f08ef2e526b",
+      "executed": null
+    },
+    {
+      "field": "/experiment_started",
+      "planned": true,
+      "executed": false
+    },
+    {
+      "field": "/real_graph_labels_read",
+      "planned": true,
+      "executed": false
+    },
+    {
+      "field": "/report",
+      "planned": "r1-20261111/report.md",
+      "executed": null
+    },
+    {
+      "field": "/source_split/actual_ids_materialized",
+      "planned": true,
+      "executed": false
+    },
+    {
+      "field": "/status",
+      "planned": "completed_with_plot_only_evaluation_repair",
+      "executed": "R0_engineering_accepted_ready_for_real_input_verification"
+    }
+  ]
+}

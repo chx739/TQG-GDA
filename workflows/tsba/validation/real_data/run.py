@@ -46,9 +46,9 @@ def execute(repo, root, plan, r0_log):
     for directory in ('logs', 'protocol', 'failures', 'source', 'geometry', 'probes', 'evaluation'):
         (root / directory).mkdir()
     shutil.copyfile(r0_log, root / 'logs/R0-tests.txt')
-    for path in sorted((repo / 'docs/tsba/experiments/mutagenicity').glob('stage1*')):
+    for path in sorted((repo / 'experiments/mutagenicity/r1-20261111').glob('stage1*')) + [repo / 'experiments/mutagenicity/stage1-inputs.json']:
         shutil.copyfile(path, root / 'protocol' / path.name)
-    shutil.copyfile(repo / 'docs/tsba/experiments/mutagenicity/mutagenicity-stage1-protocol.md', root / 'protocol/protocol.md')
+    shutil.copyfile(repo / 'experiments/mutagenicity/r1-20261111/mutagenicity-stage1-protocol.md', root / 'protocol/protocol.md')
     write_json(root / 'execution-plan.json', plan)
     write_json(root / 'provenance.json', provenance(repo))
     with (root / 'protocol/source.tar').open('xb') as stream:
@@ -141,7 +141,7 @@ def main():
     parser.add_argument('--root', type=Path)
     parser.add_argument('--r0-log', type=Path, required=True)
     args = parser.parse_args()
-    plan = json.loads((args.repo / 'docs/tsba/experiments/mutagenicity/stage1-plan.json').read_text())
+    plan = json.loads((args.repo / 'experiments/mutagenicity/r1-20261111/stage1-plan.json').read_text())
     execute(args.repo, args.root or plan['output_root'], plan, args.r0_log)
 
 

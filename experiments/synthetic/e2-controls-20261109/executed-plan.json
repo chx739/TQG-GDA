@@ -1,0 +1,55 @@
+{
+  "plan_id": "tsba-e2-controls-20261109",
+  "status": "frozen_before_supplement_execution",
+  "post_hoc": true,
+  "why_post_hoc": "Requested after inspecting E1/E2 results; diagnostic, not a new blind confirmation.",
+  "parent_execution_commit": "f10262a5ff90f773cc8c29e754944571593f6a7e",
+  "parent_report_commit": "609e2cb797f381c4bb23ff277b8b8ec4eff470ed",
+  "parent_archive_sha256": "a216503eb38ddda5c6477f77df5c441f88a9e0afcee5d4c43df18655a63d90f5",
+  "parent_run": "/home/hxchen/experiments/tsba/20261109-mechanisms/run-001",
+  "dimensions": [2, 16],
+  "seeds": [0, 1, 2, 3, 4],
+  "arms": ["source_ce_ggn", "zero_zeta_geometry"],
+  "trajectories": 20,
+  "rounds": 30,
+  "source_ce_ggn": {
+    "objective": "source CE",
+    "matrix": "F_S + mu I",
+    "rhs": "-g_S",
+    "acceptance": "source CE Armijo; no boundary loss or execution bound",
+    "target_inputs_used": false
+  },
+  "zero_zeta_geometry": {
+    "objective": "source CE + lambda_B/(2M) sum v_j^2",
+    "matrix": "F_S + lambda_B/M D^T D + mu I",
+    "rhs": "-g_S",
+    "anchors": "rebuild from this control's own current head and archived target batch IDs each round",
+    "acceptance": "production true-forward Armijo and movement execution bound",
+    "empty_anchors": "skip, no source-only fallback",
+    "zero_request": "diagnostic solves despite zeta=0; production behavior unchanged",
+    "cross_arm_identical_matrices": "first round only; subsequent states and anchors can diverge"
+  },
+  "reuse": {
+    "data_coordinates_initial_head_bandwidth_config": "parent archive exact bytes",
+    "batch_ids": "parent learned arm exact archived source and target IDs for all 30 rounds",
+    "source_and_score_retraining": false,
+    "original_four_arms_rerun": false,
+    "masks": "audit parent nonempty/nonzero attempt masks; report differences without adding ad-hoc arms"
+  },
+  "comparisons": {
+    "primary": ["learned minus zero_zeta_geometry", "population minus zero_zeta_geometry", "zero_zeta_geometry minus source_ce_ggn"],
+    "also_report": ["all six arms versus source-initial", "empirical minus zero_zeta_geometry", "learned minus source_ce_ggn"],
+    "metrics": ["balanced accuracy percentage points", "NLL", "accuracy", "class recalls", "confusion matrix", "source CE", "acceptance", "anchors", "backtracking", "solver residual", "runtime"],
+    "aggregation": "paired within dimension and seed; mean, sample SD, win/tie/loss; no seed replacement",
+    "endpoint": "last accepted state after 30 attempts; no target label model selection",
+    "inference_limit": "within this synthetic setup and fixed update budget; no GDA efficacy claim"
+  },
+  "label_protocol": {
+    "synthetic_labels_previously_observed": true,
+    "new_label_read": "only after sealing every supplemental trajectory and prediction",
+    "real_target_labels": false,
+    "changing_settings_after_new_results": false
+  },
+  "resources": {"device": "cpu", "threads": 1, "dtype": "float64", "per_cell_seconds": 1200, "total_seconds": 14400, "peak_rss_bytes": 4294967296},
+  "archive": {"overwrite_parent": false, "local_checkpoints_logs_source_and_hashes": true, "git": "code, report, scalar tables, audit and archive manifests only"}
+}

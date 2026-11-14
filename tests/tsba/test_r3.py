@@ -22,7 +22,7 @@ from workflows.tsba.validation.real_data.r3.diagnostics import relocate
 from workflows.tsba.validation.real_data.r3.protocol import Job, grid, read_json, target_values
 from workflows.tsba.validation.real_data.r3.trajectory import one_attempt, trajectory
 
-PLAN = read_json(Path(__file__).resolve().parents[2] / "docs/tsba/experiments/mutagenicity/r3-plan.json")
+PLAN = read_json(Path(__file__).resolve().parents[2] / "experiments/mutagenicity/r3-20261112/r3-plan.json")
 
 
 class R3Test(unittest.TestCase):

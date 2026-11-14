@@ -233,7 +233,7 @@ def main():
     repo=Path(__file__).resolve().parents[3]
     write_json(root/'provenance.json',provenance(repo))
     for name in ['plan.json','validation-plan.md']:
-        (root/name).write_bytes((repo/'docs/tsba/experiments'/('synthetic' if name == 'plan.json' else '')/name).read_bytes())
+        (root/name).write_bytes((repo/'experiments'/('synthetic/e1-e2-20261109' if name == 'plan.json' else '')/name).read_bytes())
     write_json(root/'E1_analytic.json',run_analytic())
     failures=[];completed=[];start=time.perf_counter()
     def timeout(signum,frame):raise TimeoutError('predeclared 1200 second cell budget exceeded')

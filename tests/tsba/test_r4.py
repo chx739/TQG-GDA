@@ -21,7 +21,7 @@ from workflows.tsba.validation.real_data.r4.training import train_score, train_s
 from workflows.tsba.validation.real_data.r4.trajectory import adapt
 
 REPO = Path(__file__).resolve().parents[2]
-PLAN = json.loads((REPO / "docs/tsba/experiments/mutagenicity/r4-plan.json").read_text())
+PLAN = json.loads((REPO / "experiments/mutagenicity/r4-20261112/r4-plan.json").read_text())
 
 
 class R4Test(unittest.TestCase):

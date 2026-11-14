@@ -258,7 +258,7 @@ def prepare_inputs(root, repo, plan):
     root, repo = Path(root), Path(repo)
     for directory in ("inputs", "roles", "logs"):
         (root / directory).mkdir(parents=True, exist_ok=True)
-    spec = json.loads((repo / "docs/tsba/experiments/mutagenicity/stage1-inputs.json").read_text())
+    spec = json.loads((repo / "experiments/mutagenicity/stage1-inputs.json").read_text())
     manifest_bytes = _export(repo, spec["historical_commit"], spec["manifest_path"])
     if hashlib.sha256(manifest_bytes).hexdigest() != spec["manifest_sha256"]:
         raise ValueError("Historical manifest SHA mismatch")

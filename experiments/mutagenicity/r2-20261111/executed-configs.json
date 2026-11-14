@@ -1,0 +1,77 @@
+{
+  "execution-plan.json": {
+    "sha256": "bd0923bbe323b0299c7bace2d6e3544b86778b73315a95911be5c248fe934ad8",
+    "content": {
+      "schema_version": 1,
+      "experiment": "Mutagenicity R2 complete 30-attempt trajectories",
+      "output_root": "/home/hxchen/experiments/tsba/mutagenicity-r2/attempt-002",
+      "request_path": "/home/hxchen/.codex/attachments/04030794-6ec2-4698-a7a1-a47728a69e99/Pasted text.txt",
+      "request_sha256": "0b3bb4316a8b1e4baba04d4e56c20d4f5edd64650b83738952b420cb3af263fb",
+      "seeds": [
+        3405,
+        3406,
+        3407,
+        3408,
+        3409
+      ],
+      "domains": [
+        1,
+        3
+      ],
+      "score_updates": [
+        900,
+        1800,
+        3600,
+        7200
+      ],
+      "lambdas": [
+        1,
+        10,
+        100
+      ],
+      "bandwidth_multipliers": [
+        1,
+        2
+      ],
+      "prediction_attempts": [
+        0,
+        1,
+        10,
+        30
+      ],
+      "attempts": 30,
+      "source_batch": 128,
+      "target_batch": 128,
+      "score_recovery_epochs": 50,
+      "score_hidden": 64,
+      "score_batch": 128,
+      "score_lr": 0.001,
+      "score_epochs": 800,
+      "dependency": {
+        "root": "/home/hxchen/experiments/tsba/mutagenicity-r1b/attempt-001",
+        "OBS_digest": "4814df4b9641f45b010b4d3b397dfd0893ee2eb1b5a3d4c0399ca0835545f2ea",
+        "archive": "/home/hxchen/experiments/tsba/mutagenicity-r1b/attempt-001.tar.gz",
+        "archive_sha256": "e4530be8b06b9d83a5d8aff74dd6d77cb37a11d8a129cf3376ee59dba12f220c"
+      },
+      "resources": {
+        "workers": 8,
+        "threads_per_worker": 1,
+        "max_worker_rss_bytes": 8589934592
+      },
+      "primary_endpoint": {
+        "attempt": 30,
+        "pool": "target B271",
+        "metric": "NLL"
+      },
+      "grid": {
+        "score_trajectories": 20,
+        "score_endpoints": 80,
+        "learned": 480,
+        "kde": 120,
+        "geometry": 30,
+        "total": 630,
+        "max_attempts": 18900
+      }
+    }
+  }
+}

@@ -1,0 +1,672 @@
+{
+  "status": "completed",
+  "source_path": "/home/hxchen/experiments/tsba/20261109-mechanisms/run-001",
+  "actual_plan_source": "plan.json",
+  "registered_plan": "plan.json",
+  "registered_plan_sha256": "ce9b7b1f5411d9878366aa7f4f7658ce8c2033d28135019b3e43f678307bc8fc",
+  "executed_plan_sha256": "aa3f5719d9b758d77eab5da31c5b5aa0c2a5a896e5bfb605a5ffb3cc63b1a5d0",
+  "plan_bytes_match": false,
+  "execution_commit_original": "f10262a5ff90f773cc8c29e754944571593f6a7e",
+  "execution_commit_after_history_cleanup": "230610260890818efa3a8416d48d1d040d1af113",
+  "verification": "SHA256 matched archived member manifest; no training or evaluation rerun",
+  "configuration_scope": "Archived execution plan plus available per-seed config.json; per-task overrides and chosen checkpoints remain in the archive and report.",
+  "manifest_source": "/home/hxchen/TQG-GDA-clean/experiments/synthetic/e1-e2-20261109/run-manifest.json",
+  "manifest_sha256": "89756c944ed77481667a9f76213701078e1d7ba93a7c1630dd38d116ee8a4bfe",
+  "report": "report.md",
+  "plan_values_match": false,
+  "plan_value_differences": [
+    {
+      "field": "/checkpoint_replay",
+      "planned": {
+        "plan": "replay-plan.json",
+        "status": "completed_930_state_evaluations",
+        "post_hoc": true,
+        "retraining": false,
+        "state_evaluations": 930,
+        "failures": 0,
+        "report": "e2-replay-20261110/report.md"
+      },
+      "executed": null
+    },
+    {
+      "field": "/control_supplement",
+      "planned": {
+        "plan": "controls-plan.json",
+        "post_hoc": true,
+        "status": "completed_20_trajectories",
+        "new_trajectories": 20,
+        "original_trajectories_preserved": 40,
+        "report": "e2-controls-20261109/report.md",
+        "execution_failures": 0
+      },
+      "executed": null
+    },
+    {
+      "field": "/execution",
+      "planned": {
+        "code_commit": "f10262a5ff90f773cc8c29e754944571593f6a7e",
+        "analysis_code_commit": "7a88522",
+        "report": "e1-e2-20261109/report.md",
+        "local_run": "/home/hxchen/experiments/tsba/20261109-mechanisms/run-001",
+        "trajectories": 40,
+        "rounds_recorded": 1200,
+        "score_checkpoints": 10,
+        "execution_failures": 0,
+        "wall_seconds": 1207.2,
+        "peak_process_rss_bytes": 608448512,
+        "archive_index": "e1-e2-20261109/archive-index.json"
+      },
+      "executed": null
+    },
+    {
+      "field": "/full_source_diagnostic",
+      "planned": {
+        "plan": "full-source-plan.json",
+        "status": "completed_30_trajectories",
+        "new_trajectories": 30,
+        "only_config_change": "source_adapt_batch: 128 -> 512",
+        "post_hoc": true,
+        "report": "e2-full-source-20261110/report.md",
+        "execution_failures": 0,
+        "source_ce_increase_rounds": 0
+      },
+      "executed": null
+    },
+    {
+      "field": "/required_implementation",
+      "planned": [
+        "real_graph_target_label_free_payload_export",
+        "seven_arm_real_graph_baseline_runner_and_long_adam_panel",
+        "real_graph_isolated_diagnostic_and_evaluation_role_audit"
+      ],
+      "executed": [
+        "synthetic_distribution_driver",
+        "population_and_empirical_score_observers",
+        "local_boundary_relocalization_observer",
+        "score_and_per_round_snapshot_export",
+        "target_label_free_payload_export",
+        "seven_arm_baseline_runner",
+        "sealed_prediction_evaluator",
+        "batch_id_and_label_access_audit"
+      ]
+    },
+    {
+      "field": "/scope/real_target_labels_read",
+      "planned": false,
+      "executed": null
+    },
+    {
+      "field": "/scope/synthetic_evaluation_labels_read",
+      "planned": true,
+      "executed": null
+    },
+    {
+      "field": "/scope/target_labels_read",
+      "planned": true,
+      "executed": false
+    },
+    {
+      "field": "/scope/target_labels_read_note",
+      "planned": "synthetic evaluation only after seal; no real target labels read",
+      "executed": "real target labels forbidden; synthetic eval labels only after all predictions sealed"
+    },
+    {
+      "field": "/source_posterior_diagnostic",
+      "planned": {
+        "plan": "source-posterior-plan.json",
+        "status": "completed_30_trajectories",
+        "post_hoc": true,
+        "new_trajectories": 30,
+        "production_algorithm_changed": false,
+        "failures": 0,
+        "report": "e2-source-posterior-20261110/report.md"
+      },
+      "executed": null
+    },
+    {
+      "field": "/stages",
+      "planned": [
+        {
+          "id": "E0",
+          "status": "42_engineering_tests_passed",
+          "existing_unit_tests": 32,
+          "current_unit_tests": 42
+        },
+        {
+          "id": "E1",
+          "status": "completed_analytic_and_nonlinear_probes",
+          "analytic_cases": [
+            "compatible_gaussian_classes",
+            "high_density_correct_boundary",
+            "target_semantics_permutation"
+          ],
+          "sigma": 0.25,
+          "tau": 0.1,
+          "request_multiplier": 0.1,
+          "step_fractions": [
+            1,
+            0.5,
+            0.25,
+            0.125,
+            0.0625
+          ],
+          "linear_geometry_atol": 1e-08,
+          "observer": {
+            "normal_interval_sigma": [
+              -0.5,
+              0.5
+            ],
+            "grid_points": 257,
+            "bisection_max_iterations": 60,
+            "root_width_tolerance_sigma": 1e-08,
+            "feeds_back_into_training": false,
+            "ambiguous_roots": "record_missing_not_favorable_selection"
+          },
+          "nonlinear_probe": {
+            "dimensions": [
+              2,
+              16
+            ],
+            "seeds": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "U2_normal_std": 0.1,
+            "candidate_score": "population",
+            "separate_from_main_initialization": true
+          },
+          "scalar_conflict_probe": {
+            "source_shift": 0.5,
+            "log_odds_slope": 8,
+            "sigma": 0.25,
+            "gauss_hermite_nodes": 128,
+            "scan_interval": [
+              0,
+              0.5
+            ],
+            "general_geometry_bound": false
+          }
+        },
+        {
+          "id": "E2",
+          "status": "completed_40_trajectories_zero_execution_failures",
+          "dimensions": [
+            2,
+            16
+          ],
+          "seeds": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "source_samples": 512,
+          "target_samples": 512,
+          "evaluation_samples": 10000,
+          "source_shift_first_axis": 0.5,
+          "target_class_means_first_axis": [
+            -1,
+            1
+          ],
+          "class_priors": [
+            0.5,
+            0.5
+          ],
+          "first_axis_variance": 0.25,
+          "other_axes_variance": 1,
+          "initialization": "analytic_source_Bayes_log_odds_then_source_coordinate_transform_and_zero_U2",
+          "arms": [
+            "learned_score",
+            "empirical_smoothed_score",
+            "population_smoothed_score",
+            "zero_score"
+          ],
+          "adaptation_runs": 40,
+          "rounds": 30,
+          "normal_sign_reference_min_abs_sigma_gamma": 0.001,
+          "bandwidth": "production_positive_neighbor_rule",
+          "evaluation_labels_used_for_selection": false,
+          "independent_noise_queries_per_bank": 1024,
+          "noise_query_banks": [
+            "target_pool_resample_plus_fresh_noise",
+            "independent_population_sample_plus_fresh_noise"
+          ],
+          "score_reference": {
+            "primary": "population",
+            "fit_error": "empirical",
+            "initial_plane_balanced_sign_agreement": "NA_single_reference_sign",
+            "auxiliary_sign_planes_original_coordinate": [
+              -0.5,
+              0.5
+            ],
+            "auxiliary_planes_drive_adaptation": false,
+            "trajectory_query_union_replay": true,
+            "stratify_replay_by": [
+              "origin_arm",
+              "round"
+            ]
+          },
+          "geometry_observer": "first 8 valid anchors each round; all anchors score replay",
+          "frozen_reference_decomposition": "first active round per trajectory; zero-zeta diagnostic, not production update"
+        },
+        {
+          "id": "E3",
+          "status": "planned_requires_observers_and_isolated_evaluator",
+          "representation_probes": {
+            "source_query_folds": 4,
+            "source_train_per_fold": 147,
+            "source_audit_per_fold": 49,
+            "target_A_train_per_fold": 147,
+            "target_B_evaluation": 271,
+            "heads": [
+              "linear",
+              "hidden32_silu_mlp"
+            ],
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "weight_decay": 0.001,
+            "full_batch_steps": 200,
+            "label_conditions": [
+              "true",
+              "one_fixed_permutation"
+            ],
+            "prior_baseline": true,
+            "can_modify_main_adaptation": false
+          },
+          "single_step": {
+            "blocks_per_task_seed": 4,
+            "source_batch": 128,
+            "target_batch": 128,
+            "arms": [
+              "learned_requests",
+              "empirical_requests",
+              "reversed_requests",
+              "within_pair_permuted_requests",
+              "same_geometry_zero_zeta",
+              "source_ce_ggn"
+            ],
+            "candidate_units": 240,
+            "chain_candidates": false,
+            "rejections_evaluate_old_snapshot": true
+          }
+        },
+        {
+          "id": "E4",
+          "status": "planned_requires_data_export_baselines_and_evaluator",
+          "tasks": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "seeds": [
+            3405,
+            3406,
+            3407,
+            3408,
+            3409
+          ],
+          "arms": [
+            "source_initial",
+            "source_ce_ggn",
+            "source_ce_ggn_attempt_mask",
+            "source_ce_adam",
+            "pseudo_label_adam",
+            "entropy_adam",
+            "tsba"
+          ],
+          "task_seed_arm_cells": 70,
+          "max_adaptation_executions": 60,
+          "source_checkpoints": 5,
+          "tsba_score_checkpoints": 10,
+          "rounds": 30,
+          "checkpoint_rounds": [
+            0,
+            1,
+            10,
+            30
+          ],
+          "primary_endpoint": "last_accepted_model_after_30_attempted_rounds",
+          "matched_compute_claim": false,
+          "source_ce_ggn": {
+            "damping": 0.01,
+            "armijo": 0.0001,
+            "backtracks": 15,
+            "boundary_loss": false,
+            "boundary_execution_budget": false
+          },
+          "adam": {
+            "learning_rate": 0.001,
+            "weight_decay": 0,
+            "steps": 30
+          },
+          "pseudo_label": {
+            "weight": 1,
+            "confidence_threshold": 0.9,
+            "refresh": "each_round_current_model_stop_gradient",
+            "empty_selection": "source_ce_only"
+          },
+          "entropy": {
+            "weight": 0.1,
+            "class_uniformity_loss": false
+          },
+          "attempt_mask": "TSBA pre-solve nonempty anchors and nonzero request; own source acceptance",
+          "long_adam_panel": {
+            "arms": [
+              "source_ce_adam",
+              "pseudo_label_adam",
+              "entropy_adam"
+            ],
+            "source_epochs": 100,
+            "steps_per_epoch": 7,
+            "steps": 700,
+            "extra_executions": 30,
+            "target_label_selection": false
+          }
+        },
+        {
+          "id": "E5",
+          "status": "out_of_first_batch_new_version_required",
+          "candidate_axes": {
+            "kappa_sigma": [
+              0.5,
+              1,
+              2
+            ],
+            "additional_directions": [
+              [
+                0,
+                2
+              ]
+            ],
+            "additional_datasets": [
+              "PROTEINS"
+            ]
+          },
+          "automatic_expansion": false
+        }
+      ],
+      "executed": [
+        {
+          "id": "E0",
+          "status": "existing_engineering_evidence_plus_pending_runner_checks",
+          "existing_unit_tests": 32
+        },
+        {
+          "id": "E1",
+          "status": "planned",
+          "analytic_cases": [
+            "compatible_gaussian_classes",
+            "high_density_correct_boundary",
+            "target_semantics_permutation"
+          ],
+          "sigma": 0.25,
+          "tau": 0.1,
+          "request_multiplier": 0.1,
+          "step_fractions": [
+            1,
+            0.5,
+            0.25,
+            0.125,
+            0.0625
+          ],
+          "linear_geometry_atol": 1e-08,
+          "observer": {
+            "normal_interval_sigma": [
+              -0.5,
+              0.5
+            ],
+            "grid_points": 257,
+            "bisection_max_iterations": 60,
+            "root_width_tolerance_sigma": 1e-08,
+            "feeds_back_into_training": false,
+            "ambiguous_roots": "record_missing_not_favorable_selection"
+          },
+          "nonlinear_probe": {
+            "dimensions": [
+              2,
+              16
+            ],
+            "seeds": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "U2_normal_std": 0.1,
+            "candidate_score": "population",
+            "separate_from_main_initialization": true
+          },
+          "scalar_conflict_probe": {
+            "source_shift": 0.5,
+            "log_odds_slope": 8,
+            "sigma": 0.25,
+            "gauss_hermite_nodes": 128,
+            "scan_interval": [
+              0,
+              0.5
+            ],
+            "general_geometry_bound": false
+          }
+        },
+        {
+          "id": "E2",
+          "status": "planned",
+          "dimensions": [
+            2,
+            16
+          ],
+          "seeds": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "source_samples": 512,
+          "target_samples": 512,
+          "evaluation_samples": 10000,
+          "source_shift_first_axis": 0.5,
+          "target_class_means_first_axis": [
+            -1,
+            1
+          ],
+          "class_priors": [
+            0.5,
+            0.5
+          ],
+          "first_axis_variance": 0.25,
+          "other_axes_variance": 1,
+          "initialization": "analytic_source_Bayes_log_odds_then_source_coordinate_transform_and_zero_U2",
+          "arms": [
+            "learned_score",
+            "empirical_smoothed_score",
+            "population_smoothed_score",
+            "zero_score"
+          ],
+          "adaptation_runs": 40,
+          "rounds": 30,
+          "normal_sign_reference_min_abs_sigma_gamma": 0.001,
+          "bandwidth": "production_positive_neighbor_rule",
+          "evaluation_labels_used_for_selection": false,
+          "independent_noise_queries_per_bank": 1024,
+          "noise_query_banks": [
+            "target_pool_resample_plus_fresh_noise",
+            "independent_population_sample_plus_fresh_noise"
+          ],
+          "score_reference": {
+            "primary": "population",
+            "fit_error": "empirical",
+            "initial_plane_balanced_sign_agreement": "NA_single_reference_sign",
+            "auxiliary_sign_planes_original_coordinate": [
+              -0.5,
+              0.5
+            ],
+            "auxiliary_planes_drive_adaptation": false,
+            "trajectory_query_union_replay": true,
+            "stratify_replay_by": [
+              "origin_arm",
+              "round"
+            ]
+          },
+          "geometry_observer": "first 8 valid anchors each round; all anchors score replay",
+          "frozen_reference_decomposition": "first active round per trajectory; zero-zeta diagnostic, not production update"
+        },
+        {
+          "id": "E3",
+          "status": "planned_requires_observers_and_isolated_evaluator",
+          "representation_probes": {
+            "source_query_folds": 4,
+            "source_train_per_fold": 147,
+            "source_audit_per_fold": 49,
+            "target_A_train_per_fold": 147,
+            "target_B_evaluation": 271,
+            "heads": [
+              "linear",
+              "hidden32_silu_mlp"
+            ],
+            "optimizer": "adam",
+            "learning_rate": 0.001,
+            "weight_decay": 0.001,
+            "full_batch_steps": 200,
+            "label_conditions": [
+              "true",
+              "one_fixed_permutation"
+            ],
+            "prior_baseline": true,
+            "can_modify_main_adaptation": false
+          },
+          "single_step": {
+            "blocks_per_task_seed": 4,
+            "source_batch": 128,
+            "target_batch": 128,
+            "arms": [
+              "learned_requests",
+              "empirical_requests",
+              "reversed_requests",
+              "within_pair_permuted_requests",
+              "same_geometry_zero_zeta",
+              "source_ce_ggn"
+            ],
+            "candidate_units": 240,
+            "chain_candidates": false,
+            "rejections_evaluate_old_snapshot": true
+          }
+        },
+        {
+          "id": "E4",
+          "status": "planned_requires_data_export_baselines_and_evaluator",
+          "tasks": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "seeds": [
+            3405,
+            3406,
+            3407,
+            3408,
+            3409
+          ],
+          "arms": [
+            "source_initial",
+            "source_ce_ggn",
+            "source_ce_ggn_attempt_mask",
+            "source_ce_adam",
+            "pseudo_label_adam",
+            "entropy_adam",
+            "tsba"
+          ],
+          "task_seed_arm_cells": 70,
+          "max_adaptation_executions": 60,
+          "source_checkpoints": 5,
+          "tsba_score_checkpoints": 10,
+          "rounds": 30,
+          "checkpoint_rounds": [
+            0,
+            1,
+            10,
+            30
+          ],
+          "primary_endpoint": "last_accepted_model_after_30_attempted_rounds",
+          "matched_compute_claim": false,
+          "source_ce_ggn": {
+            "damping": 0.01,
+            "armijo": 0.0001,
+            "backtracks": 15,
+            "boundary_loss": false,
+            "boundary_execution_budget": false
+          },
+          "adam": {
+            "learning_rate": 0.001,
+            "weight_decay": 0,
+            "steps": 30
+          },
+          "pseudo_label": {
+            "weight": 1,
+            "confidence_threshold": 0.9,
+            "refresh": "each_round_current_model_stop_gradient",
+            "empty_selection": "source_ce_only"
+          },
+          "entropy": {
+            "weight": 0.1,
+            "class_uniformity_loss": false
+          },
+          "attempt_mask": "TSBA pre-solve nonempty anchors and nonzero request; own source acceptance",
+          "long_adam_panel": {
+            "arms": [
+              "source_ce_adam",
+              "pseudo_label_adam",
+              "entropy_adam"
+            ],
+            "source_epochs": 100,
+            "steps_per_epoch": 7,
+            "steps": 700,
+            "extra_executions": 30,
+            "target_label_selection": false
+          }
+        },
+        {
+          "id": "E5",
+          "status": "out_of_first_batch_new_version_required",
+          "candidate_axes": {
+            "kappa_sigma": [
+              0.5,
+              1,
+              2
+            ],
+            "additional_directions": [
+              [
+                0,
+                2
+              ]
+            ],
+            "additional_datasets": [
+              "PROTEINS"
+            ]
+          },
+          "automatic_expansion": false
+        }
+      ]
+    },
+    {
+      "field": "/status",
+      "planned": "E0_E1_E2_completed_E3_E4_not_executed",
+      "executed": "frozen_for_E1_E2_execution"
+    }
+  ]
+}

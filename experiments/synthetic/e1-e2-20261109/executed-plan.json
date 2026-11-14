@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "plan_id": "tsba-validation-v1-20261109",
+  "status": "frozen_for_E1_E2_execution",
+  "purpose": "Falsifiable TSBA mechanism and development-task validation",
+  "date": "2026-11-09",
+  "algorithm_commit": "c90c3660248d18cf11fc7dc43861d5cd06e1e8c8",
+  "design_sha256": "57ef49dae959d2331a91bdb26f536c54adde07165078df5186e0ea1ce36b8855",
+  "runner_config": false,
+  "scope": {
+    "algorithm_changes": false,
+    "synthetic_research_run": true,
+    "real_data_run": false,
+    "target_labels_read": false,
+    "final_labels_allowed": false,
+    "target_labels_read_note": "real target labels forbidden; synthetic eval labels only after all predictions sealed"
+  },
+  "stages": [
+    {
+      "id": "E0",
+      "status": "existing_engineering_evidence_plus_pending_runner_checks",
+      "existing_unit_tests": 32
+    },
+    {
+      "id": "E1",
+      "status": "planned",
+      "analytic_cases": [
+        "compatible_gaussian_classes",
+        "high_density_correct_boundary",
+        "target_semantics_permutation"
+      ],
+      "sigma": 0.25,
+      "tau": 0.1,
+      "request_multiplier": 0.1,
+      "step_fractions": [
+        1,
+        0.5,
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "linear_geometry_atol": 1e-08,
+      "observer": {
+        "normal_interval_sigma": [
+          -0.5,
+          0.5
+        ],
+        "grid_points": 257,
+        "bisection_max_iterations": 60,
+        "root_width_tolerance_sigma": 1e-08,
+        "feeds_back_into_training": false,
+        "ambiguous_roots": "record_missing_not_favorable_selection"
+      },
+      "nonlinear_probe": {
+        "dimensions": [
+          2,
+          16
+        ],
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "U2_normal_std": 0.1,
+        "candidate_score": "population",
+        "separate_from_main_initialization": true
+      },
+      "scalar_conflict_probe": {
+        "source_shift": 0.5,
+        "log_odds_slope": 8,
+        "sigma": 0.25,
+        "gauss_hermite_nodes": 128,
+        "scan_interval": [
+          0,
+          0.5
+        ],
+        "general_geometry_bound": false
+      }
+    },
+    {
+      "id": "E2",
+      "status": "planned",
+      "dimensions": [
+        2,
+        16
+      ],
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "source_samples": 512,
+      "target_samples": 512,
+      "evaluation_samples": 10000,
+      "source_shift_first_axis": 0.5,
+      "target_class_means_first_axis": [
+        -1,
+        1
+      ],
+      "class_priors": [
+        0.5,
+        0.5
+      ],
+      "first_axis_variance": 0.25,
+      "other_axes_variance": 1,
+      "initialization": "analytic_source_Bayes_log_odds_then_source_coordinate_transform_and_zero_U2",
+      "arms": [
+        "learned_score",
+        "empirical_smoothed_score",
+        "population_smoothed_score",
+        "zero_score"
+      ],
+      "adaptation_runs": 40,
+      "rounds": 30,
+      "normal_sign_reference_min_abs_sigma_gamma": 0.001,
+      "bandwidth": "production_positive_neighbor_rule",
+      "evaluation_labels_used_for_selection": false,
+      "independent_noise_queries_per_bank": 1024,
+      "noise_query_banks": [
+        "target_pool_resample_plus_fresh_noise",
+        "independent_population_sample_plus_fresh_noise"
+      ],
+      "score_reference": {
+        "primary": "population",
+        "fit_error": "empirical",
+        "initial_plane_balanced_sign_agreement": "NA_single_reference_sign",
+        "auxiliary_sign_planes_original_coordinate": [
+          -0.5,
+          0.5
+        ],
+        "auxiliary_planes_drive_adaptation": false,
+        "trajectory_query_union_replay": true,
+        "stratify_replay_by": [
+          "origin_arm",
+          "round"
+        ]
+      },
+      "geometry_observer": "first 8 valid anchors each round; all anchors score replay",
+      "frozen_reference_decomposition": "first active round per trajectory; zero-zeta diagnostic, not production update"
+    },
+    {
+      "id": "E3",
+      "status": "planned_requires_observers_and_isolated_evaluator",
+      "representation_probes": {
+        "source_query_folds": 4,
+        "source_train_per_fold": 147,
+        "source_audit_per_fold": 49,
+        "target_A_train_per_fold": 147,
+        "target_B_evaluation": 271,
+        "heads": [
+          "linear",
+          "hidden32_silu_mlp"
+        ],
+        "optimizer": "adam",
+        "learning_rate": 0.001,
+        "weight_decay": 0.001,
+        "full_batch_steps": 200,
+        "label_conditions": [
+          "true",
+          "one_fixed_permutation"
+        ],
+        "prior_baseline": true,
+        "can_modify_main_adaptation": false
+      },
+      "single_step": {
+        "blocks_per_task_seed": 4,
+        "source_batch": 128,
+        "target_batch": 128,
+        "arms": [
+          "learned_requests",
+          "empirical_requests",
+          "reversed_requests",
+          "within_pair_permuted_requests",
+          "same_geometry_zero_zeta",
+          "source_ce_ggn"
+        ],
+        "candidate_units": 240,
+        "chain_candidates": false,
+        "rejections_evaluate_old_snapshot": true
+      }
+    },
+    {
+      "id": "E4",
+      "status": "planned_requires_data_export_baselines_and_evaluator",
+      "tasks": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "seeds": [
+        3405,
+        3406,
+        3407,
+        3408,
+        3409
+      ],
+      "arms": [
+        "source_initial",
+        "source_ce_ggn",
+        "source_ce_ggn_attempt_mask",
+        "source_ce_adam",
+        "pseudo_label_adam",
+        "entropy_adam",
+        "tsba"
+      ],
+      "task_seed_arm_cells": 70,
+      "max_adaptation_executions": 60,
+      "source_checkpoints": 5,
+      "tsba_score_checkpoints": 10,
+      "rounds": 30,
+      "checkpoint_rounds": [
+        0,
+        1,
+        10,
+        30
+      ],
+      "primary_endpoint": "last_accepted_model_after_30_attempted_rounds",
+      "matched_compute_claim": false,
+      "source_ce_ggn": {
+        "damping": 0.01,
+        "armijo": 0.0001,
+        "backtracks": 15,
+        "boundary_loss": false,
+        "boundary_execution_budget": false
+      },
+      "adam": {
+        "learning_rate": 0.001,
+        "weight_decay": 0,
+        "steps": 30
+      },
+      "pseudo_label": {
+        "weight": 1,
+        "confidence_threshold": 0.9,
+        "refresh": "each_round_current_model_stop_gradient",
+        "empty_selection": "source_ce_only"
+      },
+      "entropy": {
+        "weight": 0.1,
+        "class_uniformity_loss": false
+      },
+      "attempt_mask": "TSBA pre-solve nonempty anchors and nonzero request; own source acceptance",
+      "long_adam_panel": {
+        "arms": [
+          "source_ce_adam",
+          "pseudo_label_adam",
+          "entropy_adam"
+        ],
+        "source_epochs": 100,
+        "steps_per_epoch": 7,
+        "steps": 700,
+        "extra_executions": 30,
+        "target_label_selection": false
+      }
+    },
+    {
+      "id": "E5",
+      "status": "out_of_first_batch_new_version_required",
+      "candidate_axes": {
+        "kappa_sigma": [
+          0.5,
+          1,
+          2
+        ],
+        "additional_directions": [
+          [
+            0,
+            2
+          ]
+        ],
+        "additional_datasets": [
+          "PROTEINS"
+        ]
+      },
+      "automatic_expansion": false
+    }
+  ],
+  "real_data_protocol": {
+    "dataset": "Mutagenicity",
+    "domain_definition": "SEGA graph-size index; not official natural domains",
+    "mode": "transductive",
+    "historical_metadata_commit": "a672fefe10aba413283a6fb184704f6fae75e1fa",
+    "historical_manifest_path": "docs/research_plans/tqg_sega_minimal_20261106/input_manifest.json",
+    "historical_manifest_sha256": "ecb038150f86711af36e76a5df22443b412f5f18dcb3f93465fde4e3ff65291f",
+    "expected_cache_sha256": "c4a03120edd2494ab82bcc9792605ea7e71d52024985624313ae11d9f37b4fab",
+    "raw_cache_verified_this_turn": false,
+    "source_train": {
+      "count": 779,
+      "manifest_pointer": "/source/fit_ids"
+    },
+    "source_validation": {
+      "count": 109,
+      "manifest_pointer": "/source/validation_ids"
+    },
+    "source_query": {
+      "count": 196,
+      "manifest_pointer": "/source/query_ids",
+      "main_training": false,
+      "diagnostic_only": true
+    },
+    "targets": {
+      "1": {
+        "inputs": 1084,
+        "diagnostic_A": 271,
+        "evaluation_B": 271,
+        "final": 542
+      },
+      "3": {
+        "inputs": 1085,
+        "diagnostic_A": 271,
+        "evaluation_B": 271,
+        "final": 543
+      }
+    },
+    "development_previously_observed": true,
+    "final_label_access": false,
+    "all_predictions_sealed_before_target_evaluation": true,
+    "selection": {
+      "source_checkpoint": "lowest_source_validation_ce",
+      "score_checkpoint": "lowest_independent_noise_validation_loss_same_unlabeled_pool",
+      "adaptation_checkpoint": "last_accepted_at_fixed_round_budget",
+      "target_label_selection": false
+    },
+    "execution_order": [
+      "lock_protocol_code_roles",
+      "train_shared_source_and_score",
+      "E3_unlabeled_candidates_and_predictions",
+      "E4_all_trajectories_and_predictions",
+      "seal_main_and_unlabeled_observations",
+      "read_diagnostic_source_query_and_target_A_train_probes_seal_B_predictions",
+      "read_B_evaluate_all"
+    ]
+  },
+  "randomness": {
+    "stable_hash": "SHA256",
+    "prefix": "tsba-validation-v1",
+    "save_actual_batch_ids": true,
+    "paired_initialization_and_batches": true,
+    "synthetic_train_eval_noise_streams_separate": true,
+    "batch_schedules": "per_task_seed_replay_of_production_seed_plus_201_source_then_target_randperm",
+    "reuse_source_continued_across_tasks": false,
+    "source_probe_partition": "SHA256(tsba-validation-v1|source_partition|0|all|graph_id); sort_once; rank_mod_4",
+    "target_probe_sampling": "SHA256(tsba-validation-v1|target_probe_train|domain|fold|graph_id); first_147"
+  },
+  "metrics": {
+    "primary": "paired_target_B_balanced_accuracy_difference_percentage_points",
+    "critical_control": "source_ce_ggn",
+    "secondary": [
+      "target_nll",
+      "target_accuracy",
+      "per_class_recall",
+      "confusion_matrix",
+      "predicted_class_proportions",
+      "source_validation_ce",
+      "source_validation_ba"
+    ],
+    "mechanism": [
+      "boundary_coverage",
+      "projection_rejection_reasons",
+      "normal_score_errors",
+      "request_clipping_fraction",
+      "acceptance_rate",
+      "linearization_error",
+      "local_geometric_displacement_error",
+      "request_realization_error",
+      "solver_residual",
+      "source_ce",
+      "movement_loss",
+      "runtime",
+      "peak_memory"
+    ],
+    "aggregation": "paired_seed_within_task; task_macro_average_within_seed_then_across_seeds",
+    "independent_unit": "model_seed; shared-source tasks correlated",
+    "failed_runs": "report_failure_rates_and_fallback_models_separately; never_replace_seeds",
+    "statistical_significance_claim": false
+  },
+  "extension_screen": {
+    "not_theoretical_guarantee": true,
+    "per_task_mean_ba_gain_pp_at_least": 1,
+    "per_task_positive_seeds_at_least": 4,
+    "seed_count": 5,
+    "source_continued_control_must_also_be_exceeded": true,
+    "nll_and_class_recalls_must_be_disclosed": true,
+    "all_five_runs_completed_required": true,
+    "critical_control_mean_gain_pp_greater_than": 0,
+    "critical_control_positive_seeds_at_least": 4
+  },
+  "resources": {
+    "proposed_device": "cpu",
+    "threads_per_run": 1,
+    "wall_time_budget": {
+      "per_cell_seconds": 1200,
+      "total_seconds": 14400
+    },
+    "memory_budget": {
+      "rss_bytes": 4294967296
+    },
+    "budget_status": "fixed_before_pilot; pilot d2 seed0 retained in official matrix",
+    "run_count_caps_predeclared": true
+  },
+  "required_implementation": [
+    "synthetic_distribution_driver",
+    "population_and_empirical_score_observers",
+    "local_boundary_relocalization_observer",
+    "score_and_per_round_snapshot_export",
+    "target_label_free_payload_export",
+    "seven_arm_baseline_runner",
+    "sealed_prediction_evaluator",
+    "batch_id_and_label_access_audit"
+  ],
+  "execution_entrypoint": "python -m workflows.tsba.validation.run --output ABSOLUTE_NEW_DIRECTORY",
+  "archive": {
+    "checkpoints": "local persistent run directory plus tar.gz and SHA256",
+    "git": "code, reports, manifests; no model runs",
+    "overwrite": false,
+    "seal_before_synthetic_evaluation": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "status": "completed",
+  "source_path": "/home/hxchen/experiments/tsba/20261110-full-source/run-001",
+  "actual_plan_source": "full-source-plan.json",
+  "registered_plan": "full-source-plan.json",
+  "registered_plan_sha256": "2b2b5a89e57f66ec5a54395a6f3d6c38b3fa078a8650a27620da8768b683244b",
+  "executed_plan_sha256": "da3debcc5da78caf85d6ef803378abd69259f06748967a3f0e4dfb98e69dde1f",
+  "plan_bytes_match": false,
+  "execution_commit_original": "ee4326afafffe71930b7ee4464144c4f98ce3432",
+  "execution_commit_after_history_cleanup": "2ba6d6cc32d664c2d1c6c05d63211387f5274f1f",
+  "verification": "SHA256 matched archived member manifest; no training or evaluation rerun",
+  "configuration_scope": "Archived execution plan plus available per-seed config.json; per-task overrides and chosen checkpoints remain in the archive and report.",
+  "manifest_source": "/home/hxchen/TQG-GDA-clean/experiments/synthetic/e2-full-source-20261110/run-manifest.json",
+  "manifest_sha256": "fa36f84054030d50fead4d730e1021144f422d55078da7536232873aaac67f1f",
+  "report": "report.md",
+  "plan_values_match": false,
+  "plan_value_differences": [
+    {
+      "field": "/execution",
+      "planned": {
+        "code_commit": "ee4326afafffe71930b7ee4464144c4f98ce3432",
+        "analysis_code_commit": "c15f911",
+        "report": "e2-full-source-20261110/report.md",
+        "local_run": "/home/hxchen/experiments/tsba/20261110-full-source/run-001",
+        "trajectories": 30,
+        "rounds_recorded": 900,
+        "execution_failures": 0,
+        "wall_seconds": 768.8,
+        "peak_process_rss_bytes": 755044352,
+        "source_ce_trials_recomputed": 1380,
+        "checkpoint_prediction_replay": "bitwise equality",
+        "source_ce_increase_rounds": 0,
+        "archive_index": "e2-full-source-20261110/archive-index.json"
+      },
+      "executed": null
+    },
+    {
+      "field": "/status",
+      "planned": "completed_30_trajectories",
+      "executed": "frozen_before_execution"
+    }
+  ]
+}

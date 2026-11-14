@@ -2,22 +2,29 @@
 
 本分支实现用户提供的 TSBA 设计：固定整图编码与坐标，以无标签目标分布的 score 提出边界法向位移，再用源 CE 和阻尼 Gauss–Newton 更新分类模块。代码遵循 SEGA 的模块划分和“候选求解 → 非线性重评估 → 接受／回溯”范式。
 
-这是候选研究方法的工程实现。最新 Mutagenicity R4 覆盖 12 个迁移方向，并已补齐原始 TSBA（M00＋score）对照：平均 Accuracy 从源模型的 69.658% 提升至 70.001%，但零请求对照为 70.020%，尚未展示 score 的平均额外收益。M11 为 69.701%。详见 [R4 完整报告](docs/tsba/experiments/mutagenicity/r4-20261112/report.md)。
+这是候选研究方法的工程实现。最新 Mutagenicity R4 覆盖 12 个迁移方向，并已补齐原始 TSBA（M00＋score）对照：平均 Accuracy 从源模型的 69.658% 提升至 70.001%，但零请求对照为 70.020%，尚未展示 score 的平均额外收益。M11 为 69.701%。详见 [R4 完整报告](experiments/mutagenicity/r4-20261112/report.md)。
 
 
 | 分支 | 用途 |
 | --- | --- |
-| `SEGA-ref` | 原 `main`，保留参考基线 `aff6582` |
+| `SEGA-ref` | SEGA 参考基线；历史清理后的提交为 `ab08590` |
 | `TSBA` | TSBA 实现、设计映射与合成检查 |
-| `history/tqg-v2-20261106` | 旧 TQG 实现和实验历史，固定 `eb39fd7` |
+| `TQG` | 旧 TQG 历史归档，已移除旧实验数组 |
+
+## 仓库导航
+
+- [docs：方法与使用文档](docs/README.md)
+- [experiments：方案、实际配置、报告与汇总](experiments/README.md)
+- [旧 TQG 归档与提交映射](docs/archive/README.md)
+- [维护规范与提交检查](docs/maintenance.md)
 
 ## 设计与实现
 
 - [用户设计原文](docs/tsba/TSBA_Graph_Level_GDA_Design.md)：原样保存；[English translation](docs/tsba/TSBA_Graph_Level_GDA_Design_EN.md)。
-- [实验总览与当前结论](docs/tsba/experiments/README.md)：区分模拟结果、真实图计划与工程证据。
-- [模拟数据验证](docs/tsba/experiments/synthetic/README.md)：已完成至P0，含训练预算与源约束结论。
-- [真实数据验证](docs/tsba/experiments/mutagenicity/README.md)：Mutagenicity R1–R4 及补跑结果、协议与档案。
-- [历史完整实验设计](docs/tsba/experiments/validation-plan.md)：E0–E5及各轮执行协议。
+- [实验总览与当前结论](experiments/README.md)：区分模拟结果、真实图计划与工程证据。
+- [模拟数据验证](experiments/synthetic/README.md)：已完成至P0，含训练预算与源约束结论。
+- [真实数据验证](experiments/mutagenicity/README.md)：Mutagenicity R1–R4 及补跑结果、协议与档案。
+- [历史完整实验设计](experiments/validation-plan.md)：E0–E5及各轮执行协议。
 - [人工代码审查导航](docs/tsba/code-review-guide.md)：阅读顺序、公式与测试入口。
 - [实现映射与数值选择](docs/tsba/implementation.md)。
 - [数据角色、运行和推断](docs/tsba/usage.md)。

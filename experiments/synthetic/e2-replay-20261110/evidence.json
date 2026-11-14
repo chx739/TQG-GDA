@@ -1,0 +1,40 @@
+{
+  "status": "completed",
+  "source_path": "/home/hxchen/experiments/tsba/20261110-replay/run-001",
+  "actual_plan_source": "replay-plan.json",
+  "registered_plan": "replay-plan.json",
+  "registered_plan_sha256": "647b93f2813da00efb38a139b7d9550f7882db57c356e25ad6c9a484676e507e",
+  "executed_plan_sha256": "08de1b27a412dec2669e224a8263853d9b4806e3ee9f4b5417a8a535ffe25cfb",
+  "plan_bytes_match": false,
+  "execution_commit_original": "37f03c94e18a8c222443e9a088673e324a6d09ac",
+  "execution_commit_after_history_cleanup": "4d5e88e37c4ec90ec619870d1692a8fc069b952c",
+  "verification": "SHA256 matched archived member manifest; no training or evaluation rerun",
+  "configuration_scope": "Archived execution plan plus available per-seed config.json; per-task overrides and chosen checkpoints remain in the archive and report.",
+  "manifest_source": "/home/hxchen/TQG-GDA-clean/experiments/synthetic/e2-replay-20261110/run-manifest.json",
+  "manifest_sha256": "b1c370a8125e8d230b4c52d639533d22e68132cbe13ce05205c2419e81ca0672",
+  "report": "report.md",
+  "plan_values_match": false,
+  "plan_value_differences": [
+    {
+      "field": "/execution",
+      "planned": {
+        "code_commit": "37f03c94e18a8c222443e9a088673e324a6d09ac",
+        "analysis_code_commit": "d53449b",
+        "report": "e2-replay-20261110/report.md",
+        "local_run": "/home/hxchen/experiments/tsba/20261110-replay/run-001",
+        "state_evaluations": 930,
+        "failures": 0,
+        "seconds": 63.555853018013295,
+        "probe_evaluations": 238080,
+        "all_probes_unique_detected": true,
+        "archive_index": "e2-replay-20261110/archive-index.json"
+      },
+      "executed": null
+    },
+    {
+      "field": "/status",
+      "planned": "completed_930_state_evaluations",
+      "executed": "frozen_before_execution"
+    }
+  ]
+}

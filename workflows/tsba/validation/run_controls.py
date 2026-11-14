@@ -28,7 +28,7 @@ def load_json(path):
 
 
 def verify_parent(parent, repo):
-    expected = repo/'docs/tsba/experiments/synthetic/e1-e2-20261109/run-manifest.json'
+    expected = repo/'experiments/synthetic/e1-e2-20261109/run-manifest.json'
     if digest(parent/'manifest.json') != digest(expected):
         raise ValueError('parent manifest differs from the published archive')
     items = load_json(expected)
@@ -178,8 +178,8 @@ def main():
     root=args.output.resolve();root.mkdir(parents=True,exist_ok=False)
     write_json(root/'parent-integrity.json',audit)
     write_json(root/'provenance.json',provenance(repo))
-    shutil.copy2(repo/'docs/tsba/experiments/synthetic/controls-plan.json',root/'controls-plan.json')
-    shutil.copy2(repo/'docs/tsba/experiments/validation-plan.md',root/'validation-plan.md')
+    shutil.copy2(repo/'experiments/synthetic/e2-controls-20261109/controls-plan.json',root/'controls-plan.json')
+    shutil.copy2(repo/'experiments/validation-plan.md',root/'validation-plan.md')
     failures=[];completed=[];started=time.perf_counter()
     def timeout(signum,frame):raise TimeoutError('predeclared 1200 second cell budget exceeded')
     signal.signal(signal.SIGALRM,timeout)

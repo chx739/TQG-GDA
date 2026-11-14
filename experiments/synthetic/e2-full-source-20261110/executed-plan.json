@@ -1,0 +1,52 @@
+{
+  "plan_id": "tsba-full-source-20261110",
+  "status": "frozen_before_execution",
+  "post_hoc": true,
+  "requested_change": "source_adapt_batch 128 -> 512 in proposal gradient/GGN AND the source CE term of acceptance",
+  "dimensions": [2, 16],
+  "seeds": [0, 1, 2, 3, 4],
+  "arms": ["source_ce_ggn", "zero_zeta_geometry", "population"],
+  "new_trajectories": 30,
+  "rounds": 30,
+  "only_config_change": {"source_adapt_batch": [128, 512]},
+  "unchanged": ["archived inputs", "source Bayes initialization", "coordinates", "target batch IDs", "target_batch=128", "sigma", "population score formula", "lambda_boundary", "tau", "damping", "solver and tolerance", "projection", "request and execution bounds", "Armijo and backtracking", "float64", "cpu single thread"],
+  "source_schedule": "replay original seed+201 source-then-target randperm; use complete source permutation instead of its first 128 IDs; verify old prefix and all target IDs",
+  "source_objective": "mean CE on all 512 source training samples; do not rescale lambda or learning budget",
+  "acceptance": {
+    "source_ce_ggn": "full-source CE Armijo, no boundary loss or execution bound",
+    "zero_zeta_geometry": "original source CE plus zero-request movement loss and execution bound; own current references; empty anchors skip",
+    "population": "production TSBA combined objective and execution bound with true population score; only its source CE input expands to 512",
+    "new_hard_source_ce_constraint": false
+  },
+  "data_reuse": {
+    "original_run": "/home/hxchen/experiments/tsba/20261109-mechanisms/run-001",
+    "controls_run": "/home/hxchen/experiments/tsba/20261109-controls/run-001",
+    "original_archive_sha256": "a216503eb38ddda5c6477f77df5c441f88a9e0afcee5d4c43df18655a63d90f5",
+    "controls_archive_sha256": "0ec167ca58428aa2422a1668791f4015bff4410542894150c7e3d8923ccea235",
+    "source_or_score_retraining": false,
+    "old_trajectories_rerun": false,
+    "evaluation_samples_per_cell": 10000
+  },
+  "audit": {
+    "configuration_diff_exactly_one_key": true,
+    "all_512_unique_source_ids_each_round": true,
+    "all_targets_identical_to_parent": true,
+    "every_trial_source_ce_recomputed_on_all_512": true,
+    "logged_ce_tolerance": 1e-11,
+    "source_ce_monotonicity_report_tolerance": 1e-10,
+    "monotonicity_is_diagnostic_not_new_acceptance_rule": true,
+    "checkpoint_prediction_replay": "bitwise equality"
+  },
+  "comparisons": [
+    "population vs zero_zeta_geometry at source_batch=512",
+    "all full-source arms vs initialization",
+    "source_batch=512 vs archived source_batch=128 within arm and seed",
+    "zero_zeta_geometry vs source_ce_ggn at source_batch=512"
+  ],
+  "metrics": ["target BA and NLL", "accuracy and per-class recalls", "full-source CE each round", "accepted attempts and backtracks", "anchor coverage", "solver residual", "runtime and RSS"],
+  "evaluation": "last accepted model after 30 attempts; all predictions sealed before synthetic label decoding; no target-label selection",
+  "aggregation": "within dimension, paired seed mean and sample SD, wins/ties/losses; failed runs retained and separated",
+  "real_data_or_labels": false,
+  "resources": {"per_cell_seconds": 1800, "total_seconds": 14400, "rss_bytes": 4294967296},
+  "archive": {"old_runs_immutable": true, "local_full_checkpoints_logs_and_source": true, "github": "code, report, scalar tables and integrity manifests"}
+}
