@@ -28,7 +28,7 @@ tsba/
 ├── config.py         所有预先固定的预算与数值参数
 └── utils.py          有限值检查、随机种子、内容身份
 
-workflows/tsba/run_task.py   命令行入口、合成小图输入
+scripts/run_task.py   命令行入口、合成小图输入
 tests/tsba/
 ├── test_math.py            公式、几何与求解一致性
 ├── test_adapt.py           接受、拒绝、零反馈、异常回滚

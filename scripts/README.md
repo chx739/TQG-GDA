@@ -1,6 +1,6 @@
 # 启动脚本
 
-从仓库根目录用 `python -m scripts.<数据集>.<轮次>.<入口>` 调用。这里负责启动与参数转交，实验实现位于 `experiments/<数据集>/<轮次>/src/`。
+通用 TSBA 任务用 `python -m scripts.run_task` 启动。安装项目后也可以用 `tsba` 命令。各轮实验从仓库根目录用 `python -m scripts.<数据集>.<轮次>.<入口>` 调用，实验实现位于 `experiments/<数据集>/<轮次>/src/`。
 
 ```sh
 python -m scripts.mutagenicity.r4_20261112.run --help

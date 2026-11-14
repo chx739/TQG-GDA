@@ -36,7 +36,7 @@ tsba/
   config.py, data.py, encoder.py, pretrain.py
   classifier.py, score.py, boundary.py
   problem.py, subproblem.py, adapt.py, predict.py, pipeline.py
-workflows/tsba/run_task.py   # 通用 TSBA 任务入口
+scripts/run_task.py   # 通用 TSBA 任务入口
 experiments/common/        # 与轮次无关的通用工具
 experiments/<数据集>/<轮次_日期>/  # src、configs、docs、results、报告
 scripts/<数据集>/<轮次_日期>/      # 启动脚本
@@ -50,7 +50,7 @@ Python >= 3.10，PyTorch >= 2.1，PyG >= 2.4。TSBA 不需要 SEGA 的 CVXPY 求
 ```bash
 python -m pip install -e .
 python -m unittest discover -s tests/tsba -v
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.run_task --synthetic --output /tmp/tsba-smoke
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.run_task --synthetic --output /tmp/tsba-smoke
 ```
 
 输出目录必须不存在。`--synthetic` 仅生成小图检查工程链路，不读取真实数据或目标标签。`model.pt` 可独立推断；`result.json` 记录源风险、投影拒绝、求解残差和回溯接受结果。训练入口不计算目标准确率。

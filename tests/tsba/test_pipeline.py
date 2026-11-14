@@ -11,7 +11,7 @@ from tsba.pipeline import run_task, source_identity
 from tsba.predict import load_predictor
 from tsba.pretrain import graph_batches, pretrain_encoder
 from tsba.score import train_score
-from workflows.tsba.run_task import synthetic_task
+from scripts.run_task import synthetic_task
 
 torch.set_num_threads(1)
 

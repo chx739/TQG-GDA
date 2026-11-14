@@ -37,7 +37,7 @@ target_record = {
 ## 运行
 
 ```bash
-python -m workflows.tsba.run_task \
+python -m scripts.run_task \
   --input /absolute/path/task.pt \
   --config /absolute/path/config.json \
   --output /absolute/path/new-tsba-run
@@ -48,7 +48,7 @@ python -m workflows.tsba.run_task \
 纯工程检查无需真实输入：
 
 ```bash
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m workflows.tsba.run_task \
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m scripts.run_task \
   --synthetic --output /tmp/tsba-generated-graph-check
 ```
 

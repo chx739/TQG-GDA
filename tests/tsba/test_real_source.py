@@ -5,7 +5,7 @@ import torch
 from tsba.config import Config
 from tsba.pretrain import pretrain_encoder
 from tsba.utils import set_seed
-from workflows.tsba.run_task import synthetic_task
+from scripts.run_task import synthetic_task
 from experiments.mutagenicity.r1_20261111.src.source import train_source
 from experiments.common.runtime import seal
 

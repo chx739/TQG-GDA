@@ -14,10 +14,10 @@ test = ["pytest>=7"]
 experiments = ["scipy", "matplotlib"]
 
 [project.scripts]
-tsba = "workflows.tsba.run_task:main"
+tsba = "scripts.run_task:main"
 
 [tool.setuptools.packages.find]
-include = ["tsba*", "workflows*", "experiments*", "scripts*"]
+include = ["tsba*", "experiments*", "scripts*"]
 namespaces = false
 
 [tool.pytest.ini_options]
