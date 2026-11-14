@@ -1,0 +1,114 @@
+[
+  {
+    "setting": "mutagenicity_edge",
+    "archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_edge/attempt-001",
+    "execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+    "origin": "reuse",
+    "replay": {
+      "sources": 20,
+      "score_endpoints": 240,
+      "scores": 60,
+      "predictions_replayed": 3720,
+      "attempts": 3600,
+      "trajectories": 120,
+      "side_predictions_replayed": 360,
+      "side_statuses": {
+        "available": 120
+      }
+    },
+    "audit": {
+      "final_endpoints": 180,
+      "side_paired_blocks": 240,
+      "summary_recomputed_from_endpoint_counts": true,
+      "exact_accuracy_ties": true,
+      "side_correction_and_nll_partition_checks": true
+    },
+    "seal_digests": {
+      "INPUT": "5ba5e365d86685e367176fe05f90465a836c20cad0463b467cbec1405f7a6a99",
+      "OBS": "adcd93a683374ee8007ef5f74374be029485b63c015c626a7d7404a6edf137a7",
+      "FINAL": "183453c688b5c9873b8d55df4e9fbf8dd3adf56e45ccfb774662b592a3cf7143"
+    },
+    "seal_file_sha256": {
+      "INPUT": "d3673fa771b38c1259f1360a819880514bc121e6dcd5c4f5f6fe8d443b679c13",
+      "OBS": "141c2ba67b8b7faa018e6f7c1f53b930dcf045c5f92427ef1c47acd73f90e392",
+      "FINAL": "2fd00f20aaf23080a351892de7b8c82bd0d60e69756124af589dfcfa6100d856"
+    },
+    "sealed_files": 7371,
+    "sealed_bytes": 2063149019
+  },
+  {
+    "setting": "mutagenicity_node",
+    "archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_node/attempt-001",
+    "execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+    "origin": "fresh",
+    "replay": {
+      "sources": 20,
+      "score_endpoints": 240,
+      "scores": 60,
+      "predictions_replayed": 3720,
+      "attempts": 3600,
+      "trajectories": 120,
+      "side_predictions_replayed": 360,
+      "side_statuses": {
+        "available": 120
+      }
+    },
+    "audit": {
+      "final_endpoints": 180,
+      "side_paired_blocks": 240,
+      "summary_recomputed_from_endpoint_counts": true,
+      "exact_accuracy_ties": true,
+      "side_correction_and_nll_partition_checks": true
+    },
+    "seal_digests": {
+      "INPUT": "cb6b7b1bfb01a0b39f9ffb1b69eecac94f16b6595cf0aa892051e13ed778352a",
+      "OBS": "4e1d5f13b0914dd24009cc42230820eaaeb43267065e56c739132a0ac1469f88",
+      "FINAL": "9d1e3edb2524ca23e1e9825190f4603104cf6b5509667f1d2b62d2c730d2667e"
+    },
+    "seal_file_sha256": {
+      "INPUT": "767fa7f6a7e8d269a2c76162663a1bf36590ef07fd08fb69b3ec0c40dfef7a2c",
+      "OBS": "57ded4fab9a62fa35a46d6b56a91d0046a3911ae89f7cf6191648b23e8d46912",
+      "FINAL": "d6ad4baae5a9e10cc44912f1a029e7061225810d02790e7067b55ec4aae09a6c"
+    },
+    "sealed_files": 7370,
+    "sealed_bytes": 2083209683
+  },
+  {
+    "setting": "proteins_edge",
+    "archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5/proteins_edge/attempt-001",
+    "execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+    "origin": "fresh",
+    "replay": {
+      "sources": 20,
+      "score_endpoints": 240,
+      "scores": 60,
+      "predictions_replayed": 3720,
+      "attempts": 3600,
+      "trajectories": 120,
+      "side_predictions_replayed": 324,
+      "side_statuses": {
+        "available": 108,
+        "no_valid_boundary": 12
+      }
+    },
+    "audit": {
+      "final_endpoints": 180,
+      "side_paired_blocks": 216,
+      "summary_recomputed_from_endpoint_counts": true,
+      "exact_accuracy_ties": true,
+      "side_correction_and_nll_partition_checks": true
+    },
+    "seal_digests": {
+      "INPUT": "91247688ee617048c7fc36acc8147d356d826c3a293b327d4d27e287f0e9f3b7",
+      "OBS": "5a5e28b7cd47d1597c9b68b399acfb33e4c89dd8d5e83e264b1630bb9c219e4d",
+      "FINAL": "1bfedf37cb8104de34f8619494a8a5cfeb720f304bb35ea3586b8a46c931fa4b"
+    },
+    "seal_file_sha256": {
+      "INPUT": "e520310bdc55b15010deb45be4f3f8b65ccd83207dbfd6b1068aa3daf8b2211e",
+      "OBS": "168c85032883ff4983e0e766f753e581c86f2a1ac8ed4a1c126752b9e8e8e87b",
+      "FINAL": "c825fba49501898a495009bfa9387f8273237dafa3bbd7cb9f1db8783d7f38ce"
+    },
+    "sealed_files": 9290,
+    "sealed_bytes": 2392839224
+  }
+]

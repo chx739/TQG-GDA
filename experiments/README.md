@@ -5,11 +5,11 @@
 | 分类 | 阅读入口 | 内容 |
 |---|---|---|
 | 合成数据 | [合成实验](synthetic_data/README.md) | E1/E2、控制实验、源后验、静态 score 与 P0 训练预算 |
-| Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R4 结果与 R5 实施；R5 包含 PROTEINS 验证设置 |
+| Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R5 结果；R5 包含 PROTEINS 验证设置 |
 
-## 当前计划
+## 最新完成：R5
 
-[R5｜原始 TSBA 在不同数据设置上是否有整体收益与请求价值？](mutagenicity/r5_原始方法与请求价值_20261114/README.md)：复用 Mutagenicity 边数划分的 R4，新增 Mutagenicity 节点数划分和 PROTEINS 边数划分；各设置 12 方向、5 种子。统一 B0/B1/A0 与 A0 首尾同状态正常/零/反向旁路。运行器已实现，实际启动与完成情况见本轮记录。
+[R5｜原始 TSBA 在不同数据设置上是否有整体收益与请求价值？](mutagenicity/r5_原始方法与请求价值_20261114/README.md)：复用 Mutagenicity 边数划分的 R4，新增 Mutagenicity 节点数划分和 PROTEINS 边数划分；各设置 12 方向、5 种子。统一 B0/B1/A0 与 A0 首尾同状态正常/零/反向旁路。已完成 360 条轨迹、10,800 次尝试。没有建立 score 的跨设置稳定额外收益，详见[总报告](mutagenicity/r5_原始方法与请求价值_20261114/report.md)。
 
 ## 最新结果
 
@@ -19,10 +19,11 @@
 
 ## 实验状态索引
 
-下列历史研究轮次均已完成；R5 实施见上节。历史入口包含计划、实际配置、来源和报告，计划中实验不生成虚构的执行记录。
+下列研究轮次均已完成。历史入口包含计划、实际配置、来源和报告，计划中实验不生成虚构的执行记录。
 
 | 编号与研究问题 | 状态 | 结论与后续关系 |
 |---|---|---|
+| [R5｜原始 TSBA 在不同数据设置上是否有整体收益与请求价值？](mutagenicity/r5_原始方法与请求价值_20261114/README.md) | 已完成 | Mutagenicity 小幅 Accuracy 收益无需 score；PROTEINS 总体退化，score 未显示稳定额外收益 |
 | [E1/E2｜符号、几何与适配能否按设计运行？](synthetic_data/e1_e2_符号几何与适配_20261109/README.md) | 已完成 | 存在高维反例；后续控制拆解原因 |
 | [E2｜目标请求能否带来额外收益？](synthetic_data/e2_目标请求对照_20261109/README.md) | 已完成 | 正确请求的小增量不等于整体优于初始化 |
 | [E2｜小批次噪声是否解释适配失败？](synthetic_data/e2_全源批次对照_20261110/README.md) | 已完成 | 全源更新仍可出现目标下降 |

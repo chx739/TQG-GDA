@@ -1,8 +1,20 @@
 # R5 原始方法与请求价值
 
-状态：已实现、独立审查通过并启动。历史边数分析完成，节点数设置训练中，PROTEINS 已登记排队。研究问题：原始 TSBA 在 Mutagenicity 两种划分及 PROTEINS 上，是否具有整体分类收益及定向 score 的额外价值？
+状态：已完成。三设置均通过 R5_INPUT / R5_OBS / R5_FINAL 封存及独立统计复核。研究问题：原始 TSBA 在 Mutagenicity 两种划分及 PROTEINS 上，是否具有整体分类收益及定向 score 的额外价值？
 
-[启动记录](results/startup.md) · [完整协议](docs/r5-protocol.md) · [Mutagenicity 计划](configs/mutagenicity-plan.json) · [PROTEINS 计划](configs/proteins-plan.json) · [返回 Mutagenicity](../README.md)
+[完整报告](report.md) · [档案索引](results/archive-index.json) · [启动记录](results/startup.md) · [完整协议](docs/r5-protocol.md) · [Mutagenicity 计划](configs/mutagenicity-plan.json) · [PROTEINS 计划](configs/proteins-plan.json) · [返回 Mutagenicity](../README.md)
+
+## 结果摘要
+
+| 设置 | A0−B0 Accuracy（百分点） | A0−B1 Accuracy（百分点） |
+|---|---:|---:|
+| Mutagenicity 边数（历史复用） | +0.34283 | −0.01844 |
+| Mutagenicity 节点数（新增） | +0.22594 | −0.00154 |
+| PROTEINS 边数（新增） | −0.16739 | +0.01199 |
+
+原始 TSBA 未建立跨设置稳定收益；学习 score 没有稳定超越零请求。三设置 A0 的目标 NLL 均比 B0/B1 更差。详见[完整报告](report.md)中的配对 SD、五种子结果与旁路证据。
+
+360 条轨迹、10,800 次尝试、11,160 个状态预测全部完成并核验；其中 240 条轨迹为新增，120 条为历史复用。旁路共 348/360 块可用，PROTEINS 的 12 块无有效边界保留缺失和分母，没有删除任务或补延长预算。
 
 ## 范围
 
@@ -42,3 +54,13 @@ python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scrip
 ## 实现依赖
 
 复用核心 `tsba/`，以及 [R3](../r3_源风险与置信度约束_20261112/README.md) 的源角色、同状态旁路与数值诊断、[R4](../r4_全方向迁移对照_20261112/README.md) 的训练与证据组织。本轮实现负责三个设置的输入适配与运行，不改写旧 R3/R4 证据。
+
+## 完成后的核验与发布
+
+所有设置最终封存后可独立复核并复制原字节结果：
+
+```sh
+python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.archive --archive-root /home/hxchen/research/GDA/TSBA/experiments/r5
+```
+
+该入口只读取封存结果，复核哈希、方向等权配对、精确平局、纠错计数和 NLL 分组守恒，不训练或调整模型。结论正文保存在 `results/interpretation.md`，生成总报告时一并引用。实际配置见 [executed-configs.json](configs/executed-configs.json)，最终日志与封存清单见 `results/final-logs/`、`results/final-seals/`。启动记录是保留的历史快照，不代表当前仍在运行。
