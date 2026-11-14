@@ -9,11 +9,11 @@ from unittest.mock import patch
 import torch
 
 from experiments.common.io import manifest, write_json
-from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.data import canonical_sha
-from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.density import (
+from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.data import canonical_sha
+from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.density import (
     GaussianKDE, bootstrap_counts, finite_support, valley_observation,
 )
-import experiments.mutagenicity.r1b_density_and_single_step_diagnostics_20261111.src.scales as scales
+import experiments.mutagenicity.r1b_密度与单步适配诊断_20261111.src.scales as scales
 
 
 class FrozenScaleTests(unittest.TestCase):

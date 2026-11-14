@@ -16,7 +16,7 @@
 
 首次了解方法：中文设计 → 实现映射 → 使用说明。检查代码：实现映射 → 代码审查导航 → 相关测试。
 
-查看研究进展直接进入[实验总览](../experiments/README.md)：[合成实验](../experiments/synthetic/README.md)从几何与控制实验读到 P0；[Mutagenicity](../experiments/mutagenicity/README.md)从表示诊断读到 R4 全方向比较。每轮先看证据入口，再看报告。
+查看研究进展直接进入[实验总览](../experiments/README.md)：[合成实验](../experiments/synthetic_data/README.md)从几何与控制实验读到 P0；[Mutagenicity](../experiments/mutagenicity/README.md)从表示诊断读到 R4 全方向比较。每轮先看证据入口，再看报告。
 
 ## 历史状态说明
 

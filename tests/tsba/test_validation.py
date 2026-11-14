@@ -9,9 +9,9 @@ from tsba.adapt import adapt_classifier
 from tsba.boundary import BoundaryBatch, build_boundaries
 from tsba.classifier import ParameterMap, ResidualClassifier
 from tsba.config import Config
-from experiments.synthetic.e1_e2_20261109.src.analytic import run_analytic, Threshold
+from experiments.synthetic_data.e1_e2_符号几何与适配_20261109.src.analytic import run_analytic, Threshold
 from experiments.common.io import digest, save_tensor, write_json
-from experiments.synthetic.e1_e2_20261109.src.distributions import GaussianMixtureScore, setup_cell, oracles, ZeroScore
+from experiments.synthetic_data.e1_e2_符号几何与适配_20261109.src.distributions import GaussianMixtureScore, setup_cell, oracles, ZeroScore
 from experiments.common.geometry import normal_roots, compare_geometry
 from experiments.common.metrics import score_audit
 

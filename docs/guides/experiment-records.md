@@ -2,7 +2,7 @@
 
 ## 一轮实验的证据包
 
-新实验放在 `experiments/<数据集>/<round>_<topic>_<YYYYMMDD>/`，合成数据使用 `synthetic`。以小写轮次编号开头，再用小写英文和下划线描述研究问题，具体命名示例见[模板](../../experiments/templates/README.md)。已有合成实验目录沿用原名。
+新实验放在 `experiments/<数据集>/<编号>_<中文主题>_<YYYYMMDD>/`，合成数据使用 `synthetic_data`。索引显示「编号｜研究问题」，具体命名示例见[模板](../../experiments/templates/README.md)。
 
 | 文件 | 含义 |
 |---|---|
@@ -34,4 +34,4 @@
 
 部分历史计划在完成后追加过状态、审计和后续实验字段；`plan_bytes_match` 区分字节一致，`plan_values_match` 区分 JSON 值一致，具体差异保存在 `plan_value_differences`。R4 的一致性比较指主运行，A0 来源在同一记录内注明。
 
-启动脚本在仓库根目录 `scripts/`，各轮 README 列出调用方式和跨轮依赖。每轮按小项目组织，不在目录内另建 Git 仓库。
+启动脚本放在各轮实验的 `scripts/`，各轮 README 列出调用方式和跨轮依赖。每轮按小项目组织，不在目录内另建 Git 仓库。

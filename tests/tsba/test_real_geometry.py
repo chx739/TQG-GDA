@@ -10,10 +10,10 @@ from torch import nn
 from tsba.boundary import project
 from tsba.config import Config
 from tsba.classifier import ResidualClassifier
-from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.density import (
+from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.density import (
     GaussianKDE, bootstrap_counts, derived_seed, finite_support, valley_observation,
 )
-from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.geometry import (
+from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.geometry import (
     analytic_projection, cluster_anchors, coverage, fixed_query_ids, observed_project,
     reference_consensus, scan_reference,
     run_cell, run_source_coverage,
@@ -21,7 +21,7 @@ from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.ge
 
 
 ROOT = Path(__file__).resolve().parents[2]
-with open(ROOT / "experiments/mutagenicity/r1_representation_boundary_support_20261111/configs/stage1-plan.json") as handle:
+with open(ROOT / "experiments/mutagenicity/r1_图表示与边界支持_20261111/configs/stage1-plan.json") as handle:
     PLAN = json.load(handle)
 
 

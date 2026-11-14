@@ -15,9 +15,9 @@ from tsba.score import ScoreNetwork
 from tsba.subproblem import GGNSystem
 from tsba.problem import TsbaProblem
 from tsba.boundary import BoundaryBatch
-from experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.adapt import one_attempt, settings, ZeroScore
-from experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.common import batches, jobs, atomic_tensor, load
-from experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.score import restore, epoch_update, assert_nested_equal, comparison
+from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.adapt import one_attempt, settings, ZeroScore
+from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.common import batches, jobs, atomic_tensor, load
+from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.score import restore, epoch_update, assert_nested_equal, comparison
 
 
 class R2Checks(unittest.TestCase):
@@ -96,7 +96,7 @@ class R2Checks(unittest.TestCase):
         self.assertEqual(c['away_zero']['sign_agreement'],0.)
 
     def test_r2_label_gate_and_seal_tampering(self):
-        from experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.common import Broker, FROZEN
+        from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.common import Broker, FROZEN
         from experiments.common.runtime import seal
         from experiments.common.io import digest
         with tempfile.TemporaryDirectory() as directory:
@@ -122,8 +122,8 @@ class R2Checks(unittest.TestCase):
 
     def test_first_projection_failure_keeps_unavailable_diagnostic(self):
         from tsba.utils import NumericalError
-        from experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.diagnostics import first_round
-        from experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.common import job_key, write_json
+        from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.diagnostics import first_round
+        from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.common import job_key, write_json
         plan=dict(seeds=[1],domains=[1],lambdas=[1],bandwidth_multipliers=[1],score_updates=[900])
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);x=self.source[:6]
@@ -132,7 +132,7 @@ class R2Checks(unittest.TestCase):
             write_json(root/'deps/roles/seed1.json',dict(fit_ids=[0,1],validation_ids=[4],diagnostic_ids=[5]))
             write_json(root/'source-labels/seed1.json',{'0':0,'1':1})
             for spec in jobs(plan):
-                with patch('experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.adapt.build_boundaries',side_effect=NumericalError('injected')):
+                with patch('experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.adapt.build_boundaries',side_effect=NumericalError('injected')):
                     p=one_attempt(copy.deepcopy(self.model),x[:2],self.y[:2],x[2:4],ZeroScore(),1.,settings(1,1))
                 self.assertEqual(p['record']['status'],'failed')
                 p.update(sigma0=1.,batch=dict(source_ids=[0,1],target_ids=[2,3]))
@@ -144,23 +144,23 @@ class R2Checks(unittest.TestCase):
                 self.assertFalse(load(p)['available'])
 
     def test_atomic_json_and_seal_interruption_resume(self):
-        from experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.common import write_json
-        from experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.run import replay_and_seal
+        from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.common import write_json
+        from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.run import replay_and_seal
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);p=root/'value.json'
-            with patch('experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.common.os.link',side_effect=OSError('interruption')):
+            with patch('experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.common.os.link',side_effect=OSError('interruption')):
                 with self.assertRaises(OSError):write_json(p,dict(ok=True))
             self.assertFalse(p.exists());write_json(p,dict(ok=True));self.assertTrue(json.loads(p.read_text())['ok'])
             for stage,n in (('scores',20),('adapt',630),('diagnose',30)):write_json(root/f'{stage}-index.json',dict(count=n))
             plan=dict(seeds=[])
-            with patch('experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.run.verify'),patch('experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.run.seal',side_effect=RuntimeError('interrupted before OBS')):
+            with patch('experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.run.verify'),patch('experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.run.seal',side_effect=RuntimeError('interrupted before OBS')):
                 with self.assertRaises(RuntimeError):replay_and_seal(root,plan)
             self.assertTrue((root/'prediction-replay.json').exists())
-            with patch('experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.run.verify'),patch('experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.run.seal',return_value=dict(digest='test')):
+            with patch('experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.run.verify'),patch('experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.run.seal',return_value=dict(digest='test')):
                 replay_and_seal(root,plan)
 
     def test_evaluation_products_resume_without_overwrite(self):
-        from experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.evaluate import write_json,write_csv
+        from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.evaluate import write_json,write_csv
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)
             write_json(root/'labels.json',{'source':{1:0,2:1}})
@@ -174,7 +174,7 @@ class R2Checks(unittest.TestCase):
             self.assertEqual(before,(root/'metrics.csv').read_bytes())
 
     def test_manifest_recovery_after_publication_before_unlink(self):
-        from experiments.mutagenicity.r2_score_budget_and_adaptation_20261111.src.evaluate import write_json,evidence_manifest
+        from experiments.mutagenicity.r2_分数训练预算与多轮适配_20261111.src.evaluate import write_json,evidence_manifest
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);(root/'evidence.txt').write_text('frozen evidence')
             (root/'other.partial-kept').write_text('other interrupted evidence')

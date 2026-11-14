@@ -6,7 +6,7 @@ from tsba.config import Config
 from tsba.pretrain import pretrain_encoder
 from tsba.utils import set_seed
 from scripts.run_task import synthetic_task
-from experiments.mutagenicity.r1_representation_boundary_support_20261111.src.source import train_source
+from experiments.mutagenicity.r1_图表示与边界支持_20261111.src.source import train_source
 from experiments.common.runtime import seal
 
 

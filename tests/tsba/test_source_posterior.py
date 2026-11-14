@@ -8,9 +8,9 @@ from tsba.boundary import build_boundaries
 from tsba.classifier import ParameterMap
 from tsba.config import Config
 from tsba.subproblem import GGNSystem
-from experiments.synthetic.e2_controls_20261109.src.controls import SourceProblem,SourceGGN,adapt_control
-from experiments.synthetic.e1_e2_20261109.src.distributions import setup_cell,oracles
-from experiments.synthetic.e2_source_posterior_20261110.src.source_posterior import (
+from experiments.synthetic_data.e2_目标请求对照_20261109.src.controls import SourceProblem,SourceGGN,adapt_control
+from experiments.synthetic_data.e1_e2_符号几何与适配_20261109.src.distributions import setup_cell,oracles
+from experiments.synthetic_data.e2_解析源后验对照_20261110.src.source_posterior import (
     analytic_source_posterior,expected_ce,PosteriorSourceProblem,PosteriorTsbaProblem,
     adapt_posterior,audit_posterior_event,ARMS)
 

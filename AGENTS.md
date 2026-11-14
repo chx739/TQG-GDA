@@ -3,9 +3,9 @@
 ## 项目与目录
 
 - 当前开发主线是 `TSBA`；`TQG` 保存旧实现，`SEGA-ref` 保存参考基线。历史分支不作为当前实验配置的默认依据。
-- 核心算法放 `tsba/`；通用任务入口放在 `scripts/run_task.py`。纯通用工具放 `experiments/common/`，不含轮次目录或实验流程；各轮实现放对应实验的 `src/`，启动脚本放根目录 `scripts/`，工程测试放 `tests/tsba/`。
-- 方法、实现与使用说明放 `docs/`；新实验按 [模板](experiments/templates/README.md) 放在 `experiments/<数据集>/<round>_<topic>_<YYYYMMDD>/`，合成实验使用 `synthetic/`。目录先写轮次编号（如 `r1`、`r1b`），再用小写英文和下划线描述研究问题。启动脚本的实验目录与对应实验同名。
-- 实验索引用研究问题作显示名，历史轮次编号在各轮 README 中注明。已有合成实验沿用目录名。
+- 核心算法放 `tsba/`；通用任务入口放在 `scripts/run_task.py`。纯通用工具放 `experiments/common/`，不含轮次目录或实验流程；各轮实现放对应实验的 `src/`，启动脚本放同一实验的 `scripts/`，工程测试放 `tests/tsba/`。
+- 方法、实现与使用说明放 `docs/`；新实验按 [模板](experiments/templates/README.md) 放在 `experiments/<数据集>/<编号>_<中文主题>_<YYYYMMDD>/`，合成实验使用 `synthetic_data/`。目录编号用小写字母和数字，例如 `r1b`、`e1_e2`、`p0`。中文主题使用汉字和下划线，目录名须能作为 Python 模块名。
+- 实验索引显示「编号｜研究问题」，例如「R4｜固定配置在各迁移方向上是否带来收益？」。各轮 README 提供 `python -m experiments.<数据集>.<实验目录>.scripts.<入口>` 命令。
 
 ## 方法与实验
 

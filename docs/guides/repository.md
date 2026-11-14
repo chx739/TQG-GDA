@@ -5,7 +5,7 @@
 - `docs/`：方法、实现、使用、维护与历史说明。
 - `experiments/`：TSBA 的实验方案、计划、实际执行记录、报告与必要汇总。
 - `tsba/`：核心算法；`scripts/run_task.py`：通用任务入口；`tests/tsba/`：工程测试。
-- `experiments/common/`：纯通用工具；各轮 `src/` 保存实验实现，根目录 `scripts/` 保存启动脚本。
+- `experiments/common/`：纯通用工具；各轮 `src/` 保存实验实现，各轮 `scripts/` 保存启动脚本。
 - 旧 TQG 保留在 `TQG` 分支；原始 SEGA 快照见 `SEGA-ref`，fixed-2 附件见 `SEGA-fixed-2`。
 
 移动目录的提交只改变组织和引用，不混入算法调整。已完成实验结果不重算；修改结论另给依据。

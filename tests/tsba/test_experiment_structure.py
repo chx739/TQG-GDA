@@ -16,10 +16,10 @@ class ExperimentStructureTests(unittest.TestCase):
                 for node in ast.walk(tree):
                     if isinstance(node, ast.ImportFrom):
                         module = node.module or ''
-                        self.assertFalse(module.startswith(('experiments.synthetic.', 'experiments.mutagenicity.', 'scripts.')))
+                        self.assertFalse(module.startswith(('experiments.synthetic_data.', 'experiments.mutagenicity.', 'scripts.')))
                     elif isinstance(node, ast.Import):
                         for alias in node.names:
-                            self.assertFalse(alias.name.startswith(('experiments.synthetic.', 'experiments.mutagenicity.', 'scripts.')))
+                            self.assertFalse(alias.name.startswith(('experiments.synthetic_data.', 'experiments.mutagenicity.', 'scripts.')))
                 self.assertFalse(any(isinstance(n, ast.FunctionDef) and n.name == 'main' for n in tree.body))
 
     def test_rounds_have_code_config_results_and_reading_entry(self):
@@ -31,7 +31,8 @@ class ExperimentStructureTests(unittest.TestCase):
                 for name in ('README.md', 'src/__init__.py', 'configs/executed-plan.json', 'docs/README.md', 'results/evidence.json'):
                     self.assertTrue((root / name).is_file(), name)
                 self.assertFalse(any(p.name != '__init__.py' for p in root.glob('*.py')))
-                scripts = REPO / 'scripts' / root.relative_to(REPO / 'experiments')
+                scripts = root / 'scripts'
+                self.assertTrue((scripts / '__init__.py').is_file())
                 self.assertTrue(any(p.name != '__init__.py' for p in scripts.glob('*.py')))
 
     def test_literal_repository_input_paths_exist(self):

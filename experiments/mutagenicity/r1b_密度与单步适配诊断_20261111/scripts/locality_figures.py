@@ -1,0 +1,5 @@
+"""Launch the corresponding experiment command from the repository root."""
+from experiments.mutagenicity.r1b_密度与单步适配诊断_20261111.src.locality_figures import main
+
+if __name__ == "__main__":
+    main()
