@@ -1,0 +1,123 @@
+{
+  "time_utc": "2026-11-14T11:09:52.200961+00:00",
+  "execution_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+  "archive_root": "/home/hxchen/research/GDA/TSBA/experiments/r5",
+  "launcher": {
+    "pid": 1790718,
+    "launcher": "/home/hxchen/research/GDA/TSBA/experiments/r5/launch-001.py",
+    "log": "/home/hxchen/research/GDA/TSBA/experiments/r5/launch-001.log",
+    "origin": "host detached process",
+    "previous_launch": "sandbox child exited before execution; no events or research outputs",
+    "git_commit": "5d46c9637729d4aac1114632528811abbc4644a5",
+    "workers": 4
+  },
+  "settings": [
+    {
+      "setting": "mutagenicity_edge",
+      "root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_edge/attempt-001",
+      "input_seal": "5ba5e365d86685e367176fe05f90465a836c20cad0463b467cbec1405f7a6a99",
+      "training_started": false,
+      "historical_reuse": true,
+      "source_models_complete": 20,
+      "source_epoch_files": 2000,
+      "score_models_complete": 60,
+      "trajectories_complete": 120,
+      "log": "/home/hxchen/research/GDA/TSBA/experiments/r5/logs/mutagenicity_edge.log",
+      "source_roles": {
+        "0": {
+          "fit": 868,
+          "validation": 216
+        },
+        "1": {
+          "fit": 866,
+          "validation": 218
+        },
+        "2": {
+          "fit": 866,
+          "validation": 218
+        },
+        "3": {
+          "fit": 868,
+          "validation": 217
+        }
+      },
+      "status": "completed historical replay and new analysis",
+      "observation_seal": "adcd93a683374ee8007ef5f74374be029485b63c015c626a7d7404a6edf137a7",
+      "final_seal": "183453c688b5c9873b8d55df4e9fbf8dd3adf56e45ccfb774662b592a3cf7143",
+      "replay": {
+        "sources": 20,
+        "score_endpoints": 240,
+        "scores": 60,
+        "predictions_replayed": 3720,
+        "attempts": 3600,
+        "trajectories": 120,
+        "side_predictions_replayed": 360,
+        "side_statuses": {
+          "available": 120
+        }
+      }
+    },
+    {
+      "setting": "mutagenicity_node",
+      "root": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_node/attempt-001",
+      "input_seal": "cb6b7b1bfb01a0b39f9ffb1b69eecac94f16b6595cf0aa892051e13ed778352a",
+      "training_started": true,
+      "historical_reuse": false,
+      "source_models_complete": 12,
+      "source_epoch_files": 1544,
+      "score_models_complete": 0,
+      "trajectories_complete": 0,
+      "log": "/home/hxchen/research/GDA/TSBA/experiments/r5/logs/mutagenicity_node.log",
+      "source_roles": {
+        "0": {
+          "fit": 868,
+          "validation": 216
+        },
+        "1": {
+          "fit": 868,
+          "validation": 216
+        },
+        "2": {
+          "fit": 868,
+          "validation": 216
+        },
+        "3": {
+          "fit": 868,
+          "validation": 217
+        }
+      },
+      "status": "source training"
+    },
+    {
+      "setting": "proteins_edge",
+      "root": "/home/hxchen/research/GDA/TSBA/experiments/r5/proteins_edge/attempt-001",
+      "input_seal": "91247688ee617048c7fc36acc8147d356d826c3a293b327d4d27e287f0e9f3b7",
+      "training_started": false,
+      "historical_reuse": false,
+      "source_models_complete": 0,
+      "source_epoch_files": 0,
+      "score_models_complete": 0,
+      "trajectories_complete": 0,
+      "log": "/home/hxchen/research/GDA/TSBA/experiments/r5/logs/proteins_edge.log",
+      "source_roles": {
+        "0": {
+          "fit": 222,
+          "validation": 56
+        },
+        "1": {
+          "fit": 224,
+          "validation": 54
+        },
+        "2": {
+          "fit": 222,
+          "validation": 56
+        },
+        "3": {
+          "fit": 224,
+          "validation": 55
+        }
+      },
+      "status": "inputs sealed; queued after mutagenicity_node"
+    }
+  ]
+}

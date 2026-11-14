@@ -1,8 +1,8 @@
 # R5 原始方法与请求价值
 
-状态：运行器已实现，正在完成独立审查与启动检查。研究问题：原始 TSBA 在 Mutagenicity 两种划分及 PROTEINS 上，是否具有整体分类收益及定向 score 的额外价值？
+状态：已实现、独立审查通过并启动。历史边数分析完成，节点数设置训练中，PROTEINS 已登记排队。研究问题：原始 TSBA 在 Mutagenicity 两种划分及 PROTEINS 上，是否具有整体分类收益及定向 score 的额外价值？
 
-[完整协议](docs/r5-protocol.md) · [Mutagenicity 计划](configs/mutagenicity-plan.json) · [PROTEINS 计划](configs/proteins-plan.json) · [返回 Mutagenicity](../README.md)
+[启动记录](results/startup.md) · [完整协议](docs/r5-protocol.md) · [Mutagenicity 计划](configs/mutagenicity-plan.json) · [PROTEINS 计划](configs/proteins-plan.json) · [返回 Mutagenicity](../README.md)
 
 ## 范围
 

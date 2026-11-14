@@ -1,0 +1,30 @@
+import datetime, json, os, subprocess, sys
+from pathlib import Path
+repo = Path("/home/hxchen/research/GDA/TSBA/repository")
+archive = Path(__file__).parent
+prefix = "experiments/mutagenicity/r5_原始方法与请求价值_20261114"
+module = "experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run"
+settings = [("mutagenicity_edge", "mutagenicity"), ("mutagenicity_node", "mutagenicity"), ("proteins_edge", "proteins")]
+(archive / "logs").mkdir(exist_ok=True)
+def event(**values):
+    values["time_utc"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    with (archive / "launch-001-events.jsonl").open("a") as stream:
+        stream.write(json.dumps(values)+"\n")
+    print(json.dumps(values), flush=True)
+ready=[]
+failed=False
+for stage in ("prepare", "run"):
+    for setting, dataset in (settings if stage == "prepare" else ready):
+        command=[sys.executable,"-u","-m",module,"--plan",str(repo/prefix/"configs"/(dataset+"-plan.json")),
+                 "--setting",setting,"--root",str(archive/setting/"attempt-001"),"--stage",stage]
+        with (archive/"logs"/(setting+".log")).open("a") as log:
+            process=subprocess.Popen(command,cwd=repo,stdout=log,stderr=subprocess.STDOUT)
+            event(setting=setting,stage=stage,event="started",pid=process.pid,command=command)
+            status=process.wait()
+        event(setting=setting,stage=stage,event="finished",exit_code=status)
+        if status:
+            failed=True
+        elif stage=="prepare":
+            ready.append((setting,dataset))
+event(event="queue_finished",failed=failed)
+sys.exit(1 if failed else 0)
