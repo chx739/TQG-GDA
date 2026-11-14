@@ -1,6 +1,6 @@
 # R5 原始 TSBA 跨数据设置效果与密度请求价值
 
-状态：计划中。登记日期：2026-11-14。范围：完整实验协议与计划配置；运行器尚待实现，没有新增研究运行或结果。
+登记日期：2026-11-14。运行器现已实现；研究配置保持原登记值，独立审查、检查和实际启动状态见本轮 README 与 results/。计划配置不充当执行记录。
 
 本轮统一回答两个问题：原始 TSBA 是否在不同数据设置中稳定改善目标分类；学习 score 给出的请求是否比零请求和反向请求更有任务价值。整体效果沿用 R4 的匹配轨迹对照，局部方向检验沿用 R3 的同状态旁路，一次训练和适配产生两层证据。
 
@@ -193,11 +193,11 @@ H=F_S+\lambda_B D^\top D/M+\mu I,\qquad
 
 ## 10 代码实现范围和运行入口
 
-本次交付只有协议、计划配置和导航；下述模块与命令是**待实现接口**，不是现在已经可运行的入口。
+以下运行接口已实现，并通过 `--help` 与合成工程测试。完整实际运行状态由独立 attempt 的封存和日志记录。
 
-本轮统一归档在 `experiments/mutagenicity/r5_原始方法与请求价值_20261114/`，PROTEINS 是同轮的跨数据集验证设置。未来按模板在本目录增加 `src/`、`scripts/`、`results/`；三个设置共用本轮入口和实现，不另建 PROTEINS 轮次目录。
+本轮统一归档在 `experiments/mutagenicity/r5_原始方法与请求价值_20261114/`，PROTEINS 是同轮的跨数据集验证设置。已按模板在本目录增加 `src/`、`scripts/`、`results/`；三个设置共用本轮入口和实现，不另建 PROTEINS 轮次目录。
 
-必须实现的内容：
+实现范围：
 
 - 输入适配：支持 dataset/split 身份与 PROTEINS 无边标签、固定节点特征协议；保持 Mutagenicity R4 图输入的重构一致。
 - 计划适配：保留精确 7200 updates，按域大小解析为 800/2400 epochs；score 加载按登记更新端点定位，避免硬编码 `epoch0800.pt`。
@@ -207,7 +207,7 @@ H=F_S+\lambda_B D^\top D/M+\mu I,\qquad
 
 复用核心 `tsba/`、R3 的源角色和数值内核、R4 的源训练/score/轨迹逻辑及纯 IO 工具。原算法和原 R3/R4 结果不修改；若复用函数存在数据集硬编码，在 R5 局部适配并做回归检查。
 
-拟议调用模板如下，实现完成前不要执行：
+调用模板如下（先设置 OMP_NUM_THREADS、MKL_NUM_THREADS、OPENBLAS_NUM_THREADS 均为 1）：
 
 ```sh
 python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/mutagenicity-plan.json --setting mutagenicity_edge --root <新的历史复用分析目录>
@@ -215,7 +215,7 @@ python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scrip
 python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/proteins-plan.json --setting proteins_edge --root <新的蛋白质运行目录>
 ```
 
-入口阶段应显式区分 `prepare/run/replay/evaluate` 或提供等价状态机；仅 `--help` 不得访问真实类别。运行器实现后更新此节为经过核验的真实命令。当前默认 Python 缺少 torch，须先选择/建立兼容运行环境并登记版本，不能把 JSON 可解析当作算法运行已通过。
+入口通过 `--stage prepare/run/replay/evaluate` 显式区分阶段；`--help` 不访问真实类别。已验证环境为 `/home/hxchen/anaconda3/envs/bfn4jet/bin/python`，执行时记录实际包版本、代码提交和命令。源/score/适配中的数值异常统一写 terminal failure，禁止同 attempt 重入；工程中断允许从 checkpoint 恢复。
 
 ## 11 工程验收和研究判读
 

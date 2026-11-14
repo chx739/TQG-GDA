@@ -1,6 +1,6 @@
 # R5 原始方法与请求价值
 
-状态：计划中。研究问题：原始 TSBA 在 Mutagenicity 两种划分及 PROTEINS 上，是否具有整体分类收益及定向 score 的额外价值？
+状态：运行器已实现，正在完成独立审查与启动检查。研究问题：原始 TSBA 在 Mutagenicity 两种划分及 PROTEINS 上，是否具有整体分类收益及定向 score 的额外价值？
 
 [完整协议](docs/r5-protocol.md) · [Mutagenicity 计划](configs/mutagenicity-plan.json) · [PROTEINS 计划](configs/proteins-plan.json) · [返回 Mutagenicity](../README.md)
 
@@ -20,9 +20,24 @@ PROTEINS 四域为 278/278/278/279 张图，使用 3 维节点类别 one-hot，�
 
 ## 状态与运行接口
 
-当前只有协议和计划配置，未实现运行器，未开始训练。实际配置、执行来源、结果和报告仅在真实运行后生成。
+运行器已实现。两份计划 JSON 保留原登记信息；它们的 `planned/not_implemented/training_started=false` 是计划登记时的状态，不作为实际执行记录。运行时生成 `protocol/requested-plan.json`、解析配置 `protocol/plan.json`、Git/环境/命令来源、输入封存、checkpoint 与最终评价；实际进度另记在 `results/`。
 
-统一入口拟为 `python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run`，通过 `--plan` 和 `--setting` 选择设置。参数与调用模板见协议第 10 节；该命令目前不可执行。实现时在本目录增加 `src/`、`scripts/` 和 `results/`。
+已验证的 Python 环境为 `/home/hxchen/anaconda3/envs/bfn4jet/bin/python`。从仓库根目录执行：
+
+```sh
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/mutagenicity-plan.json --setting mutagenicity_edge --root /home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_edge/attempt-001
+python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/mutagenicity-plan.json --setting mutagenicity_node --root /home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_node/attempt-001
+python -m experiments.mutagenicity.r5_原始方法与请求价值_20261114.scripts.run --plan experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/proteins-plan.json --setting proteins_edge --root /home/hxchen/research/GDA/TSBA/experiments/r5/proteins_edge/attempt-001
+```
+
+将 `python` 指向上述环境。`--stage prepare` 只登记输入，`run` 运行到评价，`replay` 只重载核验并封存，`evaluate` 必须已有本设置的 `R5_OBS`。`--help` 不读真实类别。正式运行要求已提交的干净工作区；每个设置最多 4 个 worker、每 worker 1 线程。工程中断可原目录续跑，数值异常留下 terminal failure 并阻止重入，修复后必须另开 attempt。
+
+## 结果字段
+
+每设置 `evaluation/` 输出主轨迹、旁路、源/score 曲线、图表与 `report.md`。`paired_seeds.csv` 是五个 seed 的原始等权均值；`side_seeds.csv` / `side_summary.csv` 同时列覆盖与缺失。缺失方向不冒充完整 12 方向均值，`available_mean` 仅为注明分母的可用子集描述。Accuracy/BA/F1 原始列为 0–1，`*_pp` 为百分点。旁路 `nll_contribution` 是该固定子集对全目标 ΔNLL 的加权贡献，正确/错误两组可加和。
+
+历史 edge 的原文件保持不变，新目录保存独立字节副本、来源与 SHA256；补算的请求分解/几何字段注明历史状态新增分析。
 
 ## 实现依赖
 
