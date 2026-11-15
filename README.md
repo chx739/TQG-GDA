@@ -25,7 +25,6 @@
 - [实验总览与当前结论](experiments/README.md)：区分模拟结果、真实图计划与工程证据。
 - [模拟数据验证](experiments/synthetic_data/README.md)：已完成至P0，含训练预算与源约束结论。
 - [真实数据验证](experiments/mutagenicity/README.md)：Mutagenicity R1–R4 及补跑结果、协议与档案。
-- [历史完整实验设计](experiments/validation-plan.md)：E0–E5及各轮执行协议。
 - [人工代码审查导航](docs/guides/code-review-guide.md)：阅读顺序、公式与测试入口。
 - [实现映射与数值选择](docs/method/implementation.md)。
 - [数据角色、运行和推断](docs/guides/usage.md)。

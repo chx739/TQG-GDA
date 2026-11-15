@@ -31,4 +31,4 @@
 
 [符号、几何与适配](e1_e2_符号几何与适配_20261109/configs/plan.json) · [目标请求的增量](e2_目标请求对照_20261109/configs/controls-plan.json) · [源小批次噪声](e2_全源批次对照_20261110/configs/full-source-plan.json) · [源泛化、置信度与边界](e2_适配轨迹回放_20261110/configs/replay-plan.json) · [源标签抽样噪声](e2_解析源后验对照_20261110/configs/source-posterior-plan.json) · [样本量与带宽](e2_静态分数估计_20261110/configs/static-score-plan.json) · [Score 训练预算](p0_分数训练预算_20261110/configs/p0-plan.json)
 
-[跨数据类型的历史总设计](../validation-plan.md)。日期目录包含报告、图表和原始证据；JSON、日志及存档来源保持执行时原貌。
+各轮目录包含报告、图表和原始证据，JSON、日志及存档来源保持执行时原貌。

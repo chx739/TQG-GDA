@@ -233,8 +233,8 @@ def main():
     torch.use_deterministic_algorithms(True)
     repo=repository_root()
     write_json(root/'provenance.json',provenance(repo))
-    for name in ['plan.json','validation-plan.md']:
-        (root/name).write_bytes((repo/'experiments'/('synthetic_data/e1_e2_符号几何与适配_20261109/configs' if name == 'plan.json' else '')/name).read_bytes())
+    plan = repo / 'experiments/synthetic_data/e1_e2_符号几何与适配_20261109/configs/plan.json'
+    (root / 'plan.json').write_bytes(plan.read_bytes())
     write_json(root/'E1_analytic.json',run_analytic())
     failures=[];completed=[];start=time.perf_counter()
     def timeout(signum,frame):raise TimeoutError('predeclared 1200 second cell budget exceeded')

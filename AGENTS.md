@@ -7,7 +7,7 @@
 - 方法、实现与使用说明放 `docs/`；新实验按 [模板](experiments/templates/README.md) 放在 `experiments/<数据集>/<编号>_<中文主题>_<YYYYMMDD>/`，合成实验使用 `synthetic_data/`。目录编号用小写字母和数字，例如 `r1b`、`e1_e2`、`p0`。中文主题使用汉字和下划线，目录名须能作为 Python 模块名。
 - 新建实验文件前先读 `experiments/README.md`、所属数据集 README 和模板，确定所属轮次。方案与补充说明必须放在该轮 `docs/`，配置放 `configs/`；计划阶段也遵循此结构，不把协议单独放在 `experiments/` 或数据集根目录。
 - 同一轮包含多个数据集时，沿用已确定的主数据集目录，统一保存协议、各数据集配置和结果，并在轮次 README 中列明范围；不能仅因跨数据集就另建并列轮次或根目录协议。R5 的 Mutagenicity 与 PROTEINS 设置统一归档于 `experiments/mutagenicity/r5_原始方法与请求价值_20261114/`。
-- `experiments/` 根目录保留的跨轮历史总设计是既有材料的保留规则，不是新实验或跨数据集协议的放置例外。先按目录规则落位，再更新索引；不得修改 README 的规则来迁就错误位置。
+- 先按目录规则落位，再更新索引；不得修改 README 的规则来迁就错误位置。
 - 实验索引显示「编号｜研究问题」，例如「R4｜固定配置在各迁移方向上是否带来收益？」。各轮 README 提供 `python -m experiments.<数据集>.<实验目录>.scripts.<入口>` 命令。
 
 ## 方法与实验

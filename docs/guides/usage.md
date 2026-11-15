@@ -83,7 +83,7 @@ python -m unittest discover -s tests/tsba -v
 
 ## E1/E2 合成机制验证
 
-按[冻结方案](../../experiments/validation-plan.md)运行40条固定表示轨迹：
+按[冻结配置](../../experiments/synthetic_data/e1_e2_符号几何与适配_20261109/configs/plan.json)运行40条固定表示轨迹：
 
 ```bash
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.synthetic_data.e1_e2_符号几何与适配_20261109.scripts.run \

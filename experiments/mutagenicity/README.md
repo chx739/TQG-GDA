@@ -48,6 +48,6 @@
 
 实验实现位于各轮 `src/`，纯工具集中到 `experiments/common/`。从仓库根目录使用 `python -m experiments.mutagenicity.<experiment_id>.scripts.<入口>` 运行，各轮 README 列出入口。各轮精确命令、代码提交及模型来源见协议和报告。重新执行使用新目录，数据迁移后的参数见[复现指南](../../docs/guides/usage.md#mutagenicity-复现)。
 
-[输入来源与哈希](stage1-inputs.json) · [R1 报告模板](r1_图表示与边界支持_20261111/docs/stage1-report-template.md) · [历史总设计](../validation-plan.md)
+[输入来源与哈希](stage1-inputs.json) · [R1 报告模板](r1_图表示与边界支持_20261111/docs/stage1-report-template.md)
 
 旧的源诊断角色及 A/B/final 划分只适用于相应历史实验，不是当前 TSBA 的固定算法要求。历史 JSON、日志和存档索引中的路径保留执行时原貌。

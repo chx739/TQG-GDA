@@ -23,7 +23,6 @@ def main():
     write_json(root/'parent-integrity.json',audit)
     write_json(root/'provenance.json',provenance(repo))
     shutil.copy2(repo/'experiments/synthetic_data/e2_目标请求对照_20261109/configs/controls-plan.json',root/'controls-plan.json')
-    shutil.copy2(repo/'experiments/validation-plan.md',root/'validation-plan.md')
     failures=[];completed=[];started=time.perf_counter()
     def timeout(signum,frame):raise TimeoutError('predeclared 1200 second cell budget exceeded')
     signal.signal(signal.SIGALRM,timeout)

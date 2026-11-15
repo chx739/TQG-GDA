@@ -125,11 +125,11 @@ tests/tsba/
 
 ## 从代码 review 到实验验证
 
-下一步见 [TSBA 验证实验设计](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/validation-plan.md)。它区分公式执行、score 的边界可靠性、实际局部位移与真实任务收益，并列出待实现的研究观察器与基线；该设计稿不是已完成实验报告。
+验证覆盖公式执行、score 的边界可靠性、实际局部位移与真实任务收益。各轮问题、配置和结果见[实验索引](../../experiments/README.md)。
 
 ## 合成研究入口
 
-[E1/E2方案](../../experiments/validation-plan.md)与[运行器](../../experiments/synthetic_data/e1_e2_符号几何与适配_20261109/src/run.py)单独审查：oracle是否与坐标/带宽一致、目标评价是否发生在封存之后、四臂批次是否配对、失败和零更新是否保留。`test_validation.py`检查解析score、独立几何观察器、零信息符号指标和被动观察器。新增锚点来源索引和回调不改变生产求解、验收或零反馈规则。
+[E1/E2配置](../../experiments/synthetic_data/e1_e2_符号几何与适配_20261109/configs/plan.json)与[运行器](../../experiments/synthetic_data/e1_e2_符号几何与适配_20261109/src/run.py)单独审查：oracle是否与坐标/带宽一致、目标评价是否发生在封存之后、四臂批次是否配对、失败和零更新是否保留。`test_validation.py`检查解析score、独立几何观察器、零信息符号指标和被动观察器。新增锚点来源索引和回调不改变生产求解、验收或零反馈规则。
 
 补充控制入口：[controls.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic_data/e2_目标请求对照_20261109/src/controls.py)、[run_controls.py](https://github.com/chx739/TQG-GDA/blob/TSBA/experiments/synthetic_data/e2_目标请求对照_20261109/src/run_controls.py)。核对纯源GGN是否移除DᵀD/位移预算，零请求几何控制是否保留它们，是否确实绕过研究分支的零请求跳过而没有修改生产规则，以及是否复用原始逐轮ID。对应 `test_controls.py`。
 
