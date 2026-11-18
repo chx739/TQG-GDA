@@ -33,12 +33,21 @@ def _lse(values):
 
 
 def _partition(z, u, correction):
-    shifted = z - z.max(axis=1, keepdims=True)
-    logp0 = shifted - _lse(shifted)[:, None]
-    updated = logp0 + u @ correction.T
-    log_norm = _lse(updated)
-    change = float(np.mean(log_norm - _lse(logp0)))
-    probabilities = np.exp(updated - log_norm[:, None])
+    source_offset = z.max(axis=1, keepdims=True)
+    delta = u @ correction.T
+    # TwoSum keeps the rounding residual until the common row offset is removed.
+    total = z + delta
+    rounded_delta = total - z
+    residual = (z - (total - rounded_delta)) + (delta - rounded_delta)
+    total_offset = total.max(axis=1, keepdims=True)
+    updated = (total - total_offset) + residual
+    offset = updated.max(axis=1, keepdims=True)
+    centered = updated - offset
+    log_norm = _lse(centered)
+    baseline_norm = _lse(z - source_offset)
+    change = float(np.mean((total_offset[:, 0] - source_offset[:, 0])
+                           + (offset[:, 0] + (log_norm - baseline_norm))))
+    probabilities = np.exp(centered - log_norm[:, None])
     gradient = probabilities.T @ u / len(u)
     if not math.isfinite(change) or not np.isfinite(gradient).all():
         raise FloatingPointError("Non-finite log-partition change or gradient")
@@ -54,6 +63,19 @@ def log_partition_change(source_logits, features, correction):
     return _partition(z, u, w)[0]
 
 
+def _center_correction(w):
+    # Relative cross-entropy is unchanged by adding the same feature
+    # weights to every class. Remove the shared same-sign component before
+    # matrix multiplication so it cannot mask smaller class differences.
+    return w - np.clip(0., w.min(axis=0), w.max(axis=0))
+
+
+def _risk_terms(z, u, w, statistics):
+    centered = _center_correction(w)
+    partition, gradient = _partition(z, u, centered)
+    return partition - np.einsum("kcd,cd->k", statistics, centered), gradient
+
+
 def relative_risks(source_logits, features, correction, statistics):
     """Return A(W)-<W,S_k> for all retained conditional-label statistics."""
     z, u = _inputs(source_logits, features)
@@ -61,7 +83,7 @@ def relative_risks(source_logits, features, correction, statistics):
     stats = _array(statistics, "statistics", 3)
     if w.shape != (z.shape[1], u.shape[1]) or stats.shape[1:] != w.shape or not len(stats):
         raise ValueError("Correction/statistics have incompatible dimensions or no candidates")
-    return _partition(z, u, w)[0] - np.einsum("kcd,cd->k", stats, w)
+    return _risk_terms(z, u, w, stats)[0]
 
 
 def _kkt(gradient, stats, risks, epigraph, regularization, w,
@@ -133,11 +155,10 @@ def solve_master(source_logits, features, statistics, *, regularization,
         return float(vector[-1] + regularization * (w @ w) / 2), np.r_[regularization * w, 1.]
 
     def constraints(vector):
-        value, _ = _partition(z, u, vector[:-1].reshape(shape))
-        return vector[-1] - value + flattened @ vector[:-1]
+        return vector[-1] - _risk_terms(z, u, vector[:-1].reshape(shape), stats)[0]
 
     def constraint_jacobian(vector):
-        _, gradient = _partition(z, u, vector[:-1].reshape(shape))
+        _, gradient = _risk_terms(z, u, vector[:-1].reshape(shape), stats)
         return np.column_stack((flattened - gradient.ravel(), np.ones(len(stats))))
 
     result = minimize(objective, x0, jac=True, method="SLSQP",
@@ -149,8 +170,7 @@ def solve_master(source_logits, features, statistics, *, regularization,
                                      solver_success=bool(result.success), solver_status=int(result.status),
                                      solver_message=str(result.message))
     w = result.x[:-1].reshape(shape).copy()
-    value, gradient = _partition(z, u, w)
-    risks = value - np.einsum("kcd,cd->k", stats, w)
+    risks, gradient = _risk_terms(z, u, w, stats)
     epigraph = float(result.x[-1])
     worst = float(risks.max())
     penalty = regularization * float(np.sum(w * w)) / 2
@@ -275,7 +295,7 @@ def solve_shared_update(source_logits, features, explanations, config):
         if iteration == rounds:
             break
         try:
-            found = explanations.search(u @ w.T, deepcopy(candidates))
+            found = explanations.search(u @ _center_correction(w).T, deepcopy(candidates))
             entry["search_diagnostics"] = _json(getattr(explanations, "last_search", None))
             if (float(explanations.reference_loss) != reference_loss
                     or float(explanations.threshold) != threshold):
@@ -289,7 +309,7 @@ def solve_shared_update(source_logits, features, explanations, config):
             entry["error"] = str(error)
             return finish(zero, "invalid_search_result", True)
         risk = float(relative_risks(z, u, w, np.asarray([found.statistic]))[0])
-        violation = risk - master["found_worst_risk"]
+        violation = risk - master["epigraph"]
         entry.update(search_observation_loss=float(found.observation_loss),
                      search_risk=risk, separation_violation=violation,
                      searched_statistic=_json(found.statistic))

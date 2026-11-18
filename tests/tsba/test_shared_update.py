@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from scipy.special import logsumexp
+from scipy.special import logit, logsumexp, softmax
 from scipy.stats import norm
 
 from scripts.run_task import synthetic_task
@@ -14,8 +14,8 @@ from tsba.pipeline import run_task
 from tsba.shared_update import SharedUpdateConfig
 from tsba.shared_update.explanations import Explanation, ExplanationSet
 from tsba.shared_update.pipeline import run_shared_task
-from tsba.shared_update.predict import SharedUpdatePredictor, load_shared_predictor
-from tsba.shared_update.solver import relative_risks, solve_shared_update
+from tsba.shared_update.predict import SharedUpdatePredictor, corrected_logits, load_shared_predictor
+from tsba.shared_update.solver import _partition, _risk_terms, relative_risks, solve_master, solve_shared_update
 
 
 class SharedUpdateTests(unittest.TestCase):
@@ -57,6 +57,21 @@ class SharedUpdateTests(unittest.TestCase):
         self.assertAlmostEqual(adverse.observation_loss, expected_loss, places=12)
         np.testing.assert_allclose(adverse.statistic, expected_q.T @ family.features / len(target))
 
+    def test_four_graph_example_from_design(self):
+        # Design §3.15 uses zero regularization solely for this example. A
+        # small positive value keeps the implemented master strictly convex.
+        z0 = np.column_stack((logit([.42, .53, .47, .48]), np.zeros(4)))
+        u = np.array([[-1.], [-1.], [1.], [1.]])
+        q_class_1 = np.array([[.10, .60, .35, .85], [.50, .30, .75, .35]])
+        q = np.stack((q_class_1, 1 - q_class_1), axis=-1)
+        statistics = np.einsum("knc,nd->kcd", q, u) / len(u)
+        w, master = solve_master(z0, u, statistics, regularization=1e-9)
+        self.assertTrue(master["valid"], master)
+        np.testing.assert_allclose(softmax(z0 + u @ w.T, axis=1)[:, 0],
+                                   [.34805146, .45395642, .54604358, .55596431], atol=1e-6, rtol=0.)
+        np.testing.assert_allclose(relative_risks(z0, u, w, statistics),
+                                   [-.02663122, -.01138913], atol=1e-6, rtol=0.)
+
     def test_last_search_candidate_constrains_final_update(self):
         reference = Explanation(np.array([0.]), 0., np.array([[.9], [.1]]))
         adverse = Explanation(np.array([1.]), .01, np.array([[.1], [.9]]))
@@ -78,9 +93,55 @@ class SharedUpdateTests(unittest.TestCase):
         self.assertEqual(result["status"], "completed")
         self.assertEqual(result["stop_reason"], "search_budget_exhausted")
         self.assertEqual(result["candidate_count"], 2)
-        self.assertGreater(result["iterations"][0]["separation_violation"], .1)
+        first = result["iterations"][0]
+        self.assertGreater(first["separation_violation"], .1)
+        self.assertEqual(first["separation_violation"], first["search_risk"] - first["master"]["epigraph"])
         self.assertFalse(result["full_set_certified"])
         np.testing.assert_allclose(w, 0., atol=1e-7)
+
+    def test_distant_class_independent_coordinate_preserves_posterior(self):
+        source = np.array([[-1.5, 0.], [-.5, 0.], [.5, 0.], [1.5, 0.]])
+        target = np.array([[.99, 0.], [.99, 1e6]])
+        family = ExplanationSet(source, np.array([0, 0, 1, 1]), target, SharedUpdateConfig())
+        posterior = family._target_terms(family._initial)[-1]
+        self.assertTrue(np.isfinite(family._observation(family._initial)[0]))
+        np.testing.assert_allclose(posterior.sum(axis=1), 1., atol=1e-15, rtol=0.)
+        np.testing.assert_allclose(posterior[0], posterior[1], atol=1e-15, rtol=0.)
+        self.assertLess(posterior[1, 0], 1e-3)
+
+    def test_master_gradient_and_prediction_preserve_logit_differences_at_large_scale(self):
+        cases = [([1., 0., 0.], [1e18, 1e18, -2e18], [1., 0., -np.inf]),
+                 ([1e18, 0., 1.], [-1e18, 0., 0.], [0., 0., 1.])]
+        for source, delta, shifted in cases:
+            with self.subTest(source=source, delta=delta):
+                source_logits = np.array([source])
+                correction = np.array(delta)[:, None]
+                _, gradient = _partition(source_logits, np.ones((1, 1)), correction)
+                expected = softmax(shifted)
+                np.testing.assert_allclose(gradient[:, 0], expected, atol=1e-15, rtol=0.)
+                logits = corrected_logits(torch.from_numpy(source_logits), torch.ones((1, 1), dtype=torch.float64),
+                                          torch.from_numpy(correction))
+                np.testing.assert_allclose(logits.softmax(-1).numpy()[0], expected, atol=1e-15, rtol=0.)
+
+    def test_relative_risk_preserves_small_change_with_large_common_correction(self):
+        z0 = np.array([[1., 0., 0.]])
+        correction = np.array([[1e18], [1e18], [1e18 - 128]])
+        statistic = np.array([[[1.], [0.], [0.]]])
+        expected = logsumexp([1., 0., -128.]) - logsumexp([1., 0., 0.])
+        actual = relative_risks(z0, np.ones((1, 1)), correction, statistic)
+        np.testing.assert_allclose(actual, [expected], atol=1e-12, rtol=0.)
+
+    def test_master_and_prediction_remove_common_feature_weights_before_matmul(self):
+        z0, u = np.zeros((1, 3)), np.ones((1, 2))
+        w = np.array([[2., 1e18], [0., 1e18], [1., 1e18]])
+        statistic = np.array([[[1., 1.], [0., 0.], [0., 0.]]])
+        _, gradient = _risk_terms(z0, u, w, statistic)
+        perturbation = np.array([[1e-5, 0.], [0., 0.], [0., 0.]])
+        numerical = (relative_risks(z0, u, w + perturbation, statistic)
+                     - relative_risks(z0, u, w - perturbation, statistic)) / 2e-5
+        np.testing.assert_allclose(numerical, gradient[0, 0] - 1., atol=1e-9, rtol=0.)
+        logits = corrected_logits(*(torch.from_numpy(value) for value in (z0, u, w)))
+        np.testing.assert_allclose(logits.softmax(-1)[0].numpy(), softmax([2., 0., 1.]), atol=1e-15, rtol=0.)
 
     def test_reuses_tsba_source_and_loads_standalone_predictor(self):
         cfg = Config(hidden=8, num_layers=2, emb_dim=4, source_epochs=3, source_batch=16,

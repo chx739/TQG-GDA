@@ -14,6 +14,17 @@ def update_features(embeddings, mean, scale):
     return torch.cat((x, torch.ones_like(x[..., :1])), dim=-1)
 
 
+def corrected_logits(source_logits, features, correction):
+    """Return probability-equivalent logits using compensated addition."""
+    lower, upper = correction.amin(dim=0), correction.amax(dim=0)
+    shared = lower.clamp_min(0) + upper.clamp_max(0)
+    correction_logits = features @ (correction - shared).T
+    total = source_logits + correction_logits
+    rounded_correction = total - source_logits
+    residual = (source_logits - (total - rounded_correction)) + (correction_logits - rounded_correction)
+    return (total - total.amax(dim=-1, keepdim=True)) + residual
+
+
 class SharedUpdatePredictor(nn.Module):
     def __init__(self, source, mean, scale, correction):
         super().__init__()
@@ -33,7 +44,7 @@ class SharedUpdatePredictor(nn.Module):
     def logits_from_embeddings(self, h):
         z0 = self.source.head(h).to(self.correction)
         u = update_features(h, self.mean, self.scale)
-        return z0 + u @ self.correction.T
+        return corrected_logits(z0, u, self.correction)
 
     def forward(self, batch):
         return self.logits_from_embeddings(self.source.encoder(batch))

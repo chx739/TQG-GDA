@@ -8,7 +8,7 @@ import torch
 from ..pretrain import SOURCE_KEYS, encode, prepare_source, source_identity
 from ..utils import file_hash, finite, identity, set_seed
 from .explanations import ExplanationSet
-from .predict import SharedUpdatePredictor, save_shared_predictor, update_features
+from .predict import SharedUpdatePredictor, corrected_logits, save_shared_predictor, update_features
 from .solver import solve_shared_update
 
 
@@ -52,7 +52,7 @@ def run_shared_task(source_cfg, update_cfg, data, output_dir=None, source_checkp
         correction, adaptation = solve_shared_update(z0.cpu().numpy(), u_target.cpu().numpy(), explanations, update_cfg)
         model = SharedUpdatePredictor(source, mean, scale, torch.as_tensor(correction))
         initial = z0.softmax(-1)
-        probabilities = (z0 + u_target @ model.correction.T).softmax(-1)
+        probabilities = corrected_logits(z0, u_target, model.correction).softmax(-1)
         finite(initial, probabilities)
         result = dict(**metadata, status="completed", source_pretraining=source_info, adaptation=adaptation,
                       target_labels_used=False, target_accuracy=None,

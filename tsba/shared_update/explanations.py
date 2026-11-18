@@ -133,11 +133,17 @@ class ExplanationSet:
         scale_x = self.target * np.exp(log_scale)
         difference = scale_x[:, None, :] + shift - mean
         inverse_variance = np.exp(-log_variance)
-        energy = -0.5 * (np.log(2 * np.pi) + log_variance
-                         + difference ** 2 * inverse_variance).sum(2)
-        log_joint = energy + np.log(prior)
-        normalizer = logsumexp(log_joint, axis=1)
-        posterior = np.exp(log_joint - normalizer[:, None])
+        # Shift out the common energy per coordinate before summing so that
+        # a distant uninformative coordinate cannot erase class differences.
+        coordinate_energy = -0.5 * (log_variance + difference ** 2 * inverse_variance)
+        coordinate_offset = coordinate_energy.max(axis=1, keepdims=True)
+        relative_energy = (coordinate_energy - coordinate_offset).sum(axis=2)
+        class_offset = relative_energy.max(axis=1, keepdims=True)
+        log_joint = relative_energy - class_offset + np.log(prior)
+        log_norm = logsumexp(log_joint, axis=1)
+        posterior = np.exp(log_joint - log_norm[:, None])
+        normalizer = (coordinate_offset[:, 0, :].sum(axis=1) - 0.5 * self.dimension * np.log(2 * np.pi)
+                      + class_offset[:, 0] + log_norm)
         return (mean, log_variance, log_scale, latent_prior, prior, scale_x,
                 difference, inverse_variance, normalizer, posterior)
 
