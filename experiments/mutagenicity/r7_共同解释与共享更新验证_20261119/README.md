@@ -15,7 +15,7 @@
 
 [初次 S 实测报告](report.md) · [门槛输出](results/gate.json) · [S 阶段补充计划](docs/s-separation-followup.md)
 
-[独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮方案](docs/iteration-02.md)
+[独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮实测](docs/iteration-02.md) · [第三轮投影方案](docs/iteration-03.md)
 
 ## 合成阶段执行
 
@@ -30,3 +30,5 @@ python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119
 S 使用固定生成参数的解析源 logits。真实目标条件概率与抽样标签只在对应封存后进入 oracle 或评价。主宽度的门槛决定是否继续 P，`gate.json` 保存逐世界、逐条件的决策。工程回归固定到本方法及本轮入口的相关测试。
 
 `S-audit` 使用初次 S 的封存档案，做固定 W 独立分离诊断。`--plan` 可用于登记后的迭代版本。P 入口需要优化版本通过的同配置 S 封存目录，入口会校验合成阶段的拟合实现哈希。
+
+`C` 入口需要同配置通过的 `--p-output`。它沿用 R5 M00 源模型缓存和 R3 的候选更新验收，按登记的实际迭代数重训 A 上的 score，并和 J 共用 A/H 折。已完成小规模工程联调。

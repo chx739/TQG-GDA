@@ -104,13 +104,20 @@ def width_key(tau):
     return f'tau-{tau:.3f}'
 
 
-def explanation_family(plan, source_x, source_y, target_x, cfg):
+def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None):
     variant = plan.get('separation_variant', 'stock')
     if variant == 'stock':
         return ExplanationSet(source_x, source_y, target_x, cfg)
     if variant == 'restore_trust_v1':
         from .restored_separation import RestoredExplanationSet
         return RestoredExplanationSet(source_x, source_y, target_x, cfg)
+    if variant == 'projected_restore_v1':
+        from .projected_explanations import ProjectedExplanationSet
+
+        if v0 is None or v0.shape != (2, source_x.shape[1] + 1):
+            raise ValueError('Projected estimation requires the frozen binary source head in fit coordinates')
+        return ProjectedExplanationSet(source_x, source_y, target_x, cfg,
+                                       source_head_normal=v0[1, :-1] - v0[0, :-1])
     raise ValueError(f'Unregistered separation algorithm: {variant}')
 
 
@@ -132,8 +139,10 @@ def fit_block(plan, seed, block, *, phase='S'):
     z = data['adapt_z0']
     if not np.allclose(u @ v0.T, z - z.mean(axis=1, keepdims=True), rtol=1e-10, atol=1e-12):
         raise ValueError('Source head does not reconstruct adaptation logits')
-    base = explanation_family(plan, source_u[:, :-1], data['source_y'], u[:, :-1], primary)
+    base = explanation_family(plan, source_u[:, :-1], data['source_y'], u[:, :-1], primary, v0)
     base.fit()
+    if hasattr(base, 'projection_report'):
+        base.fit_report['projection'] = base.projection_report
     write_npz(block / 'standardization.npz', mean=mean, scale=scale, source_u=source_u, adapt_u=u, adapt_z0=z, v0=v0)
     for tau in requested:
         cfg = config(plan, seed, tau)

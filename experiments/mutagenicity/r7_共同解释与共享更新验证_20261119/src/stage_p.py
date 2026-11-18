@@ -7,12 +7,11 @@ from scipy.special import softmax
 import torch
 
 from experiments.common.io import digest, provenance, write_json
-from tsba.shared_update.explanations import ExplanationSet
 from tsba.shared_update.solver import relative_risks
 
 from .coverage import _cdf_diagnostic, hull_distance
 from .evaluate import classification, exact_methods, methods, predict, replay_predictions
-from .fit import config, features, master, moment, read_npz, width_key, write_npz
+from .fit import config, explanation_family, features, master, moment, read_npz, width_key, write_npz
 from .r5_inputs import load_inputs, load_labels
 from .seals import seal, verify_seal
 from .stage_s import _assert_pinned_method, _fit, _leaf_paths, csv_write, json_read
@@ -55,10 +54,10 @@ def _oracles(plan, root, block, seed, repo):
         write_json(block / f'{key}-oracle.json', record)
 
 
-def _bank_diagnostics(cfg, fit, std, held, arrays, adapt_y, holdout_y):
+def _bank_diagnostics(plan, cfg, fit, std, held, arrays, adapt_y, holdout_y):
     src = std['source_u'][:, :-1]
-    adapt = ExplanationSet(src, fit['source_y'], std['adapt_u'][:, :-1], cfg)
-    holdout = ExplanationSet(src, fit['source_y'], held['holdout_u'][:, :-1], cfg)
+    adapt = explanation_family(plan, src, fit['source_y'], std['adapt_u'][:, :-1], cfg, std['v0'])
+    holdout = explanation_family(plan, src, fit['source_y'], held['holdout_u'][:, :-1], cfg, std['v0'])
     h_posterior = np.stack([holdout._target_terms(theta)[-1] for theta in arrays['theta']])
     h_stats = np.stack([moment(q, held['holdout_u']) for q in h_posterior])
     pool_moments = []
@@ -76,7 +75,9 @@ def _bank_diagnostics(cfg, fit, std, held, arrays, adapt_y, holdout_y):
                                  observed_moment=hull_distance(sy, bank, **tolerance),
                                  source_prediction_moment=hull_distance(ss, bank, **tolerance),
                                  empirical_risk_change=risk, retained_worst_change=worst, gap=risk - worst))
-    fit_quality = _cdf_diagnostic(adapt, arrays['ref_theta'], held['holdout_u'][:, :-1])
+    fit_quality = _cdf_diagnostic(adapt, arrays['ref_theta'], holdout.target)
+    fit_quality['density_dimension'] = adapt.dimension
+    fit_quality['correction_dimension'] = std['adapt_u'].shape[1] - 1
     expanded = None
     if 'audit_theta' in arrays:
         expanded = np.stack([holdout._target_terms(theta)[-1] for theta in arrays['audit_theta']])
@@ -146,7 +147,7 @@ def _evaluate(plan, root, repo, tasks):
                                        exact_separation_violation=record.get('exact_separation_violation'),
                                        independent_audit=record.get('independent_audit')))
             cfg = config(plan, seed, tau)
-            pool_moments, fit_quality, h_q, expanded_q = _bank_diagnostics(cfg, fit, std, held, arrays, labels['adapt'], h_y)
+            pool_moments, fit_quality, h_q, expanded_q = _bank_diagnostics(plan, cfg, fit, std, held, arrays, labels['adapt'], h_y)
             moments.extend(metadata | item for item in pool_moments)
             coverage.append(metadata | fit_quality)
             if tau == primary:
@@ -215,8 +216,11 @@ def run(plan_path, root, s_output, workers, repo):
     if plan.get('development_iteration') and plan.get('separation_variant') == 'stock':
         raise ValueError('This stock plan is a synthetic comparator only')
     fit_sources = ['fit.py', 'controls.py']
-    if plan.get('separation_variant') == 'restore_trust_v1':
+    variant = plan.get('separation_variant')
+    if variant in ('restore_trust_v1', 'projected_restore_v1'):
         fit_sources.append('restored_separation.py')
+    if variant == 'projected_restore_v1':
+        fit_sources.append('projected_explanations.py')
     frozen = json_read(s_output / 'provenance.json')['file_hashes']
     for name in fit_sources:
         path = Path(__file__).parent / name

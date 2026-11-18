@@ -7,3 +7,5 @@
 [第一轮独立分离审计与求解器迭代](iteration-01.md)
 
 [第二轮相容范围验证](iteration-02.md)
+
+[第三轮源任务投影验证](iteration-03.md)
