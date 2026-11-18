@@ -17,3 +17,5 @@
 [第六轮冻结源后验](iteration-06.md)
 
 [第七轮目标类别质量约束](iteration-07.md)
+
+[第八轮混合模板与类别质量](iteration-08.md)

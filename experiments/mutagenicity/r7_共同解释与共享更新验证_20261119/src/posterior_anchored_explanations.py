@@ -258,7 +258,7 @@ class PosteriorAnchoredExplanationSet(MixtureExplanationSet):
         report = dict(coordinate=int(coordinate), methods=kinds, approximation="deterministic numerical integration; no interpolation",
                       tolerance=self.cdf_tolerance, order=order, refinements=history,
                       converged=converged and bounds_error <= self.cdf_tolerance and monotonic_error <= self.cdf_tolerance,
-                      boundary_values_validated=True, preclip_bounds_error=bounds_error,
+                      analytic_boundary_limits_enforced=True, preclip_bounds_error=bounds_error,
                       monotonicity_error=monotonic_error, samples=len(cutoffs),
                       error_scope="successive-order differences, not rigorous bounds")
         self.cdf_reports[str(coordinate)] = report
@@ -357,6 +357,11 @@ def check_posterior_anchored_explanations():
         candidate = family.search(correction, [reference])
         assert candidate is not None and candidate.observation_loss <= family.threshold+cfg.feasibility_tol
         assert candidate.statistic.shape == (2, dimension+1)
+        replay = PosteriorAnchoredExplanationSet(source, labels, rng.normal(size=(7, dimension)), cfg,
+            source_head_normal=normal, source_head_bias=.17, component_counts=(1,), mixture_n_init=1)
+        np.testing.assert_array_equal(replay.source_prior_normalizer, family.source_prior_normalizer)
+        np.testing.assert_array_equal(replay.pooled_component_weights, family.pooled_component_weights)
+        assert replay._target_terms(reference.parameters)[-1].shape == (7, 2)
         json.dumps(family.fit_report, allow_nan=False)
         json.dumps(family.cdf_reports, allow_nan=False)
         cases.append(dict(full_dimension=dimension, normalization_order=family.normalization_report["order"],
@@ -364,4 +369,5 @@ def check_posterior_anchored_explanations():
                           search_status=family.last_search["status"]))
     return dict(passed=True, identity_B0_invariant=True, maximum_gradient_error=max_error,
                 normalizer_independent_quad_verified=True, conditional_CDF_independent_quad_verified=True,
-                full_moments=True, no_second_axis_ranking_when_zero=True, cases=cases)
+                full_moments=True, source_only_query_replay=True,
+                no_second_axis_ranking_when_zero=True, cases=cases)

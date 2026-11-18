@@ -288,7 +288,7 @@ def diagnostics(cfg, fit, standard, held, truth, observed, detail_j, *, plan=Non
     holdout_true_risk = float(relative_risks(holdout_z0, holdout_u, correction, moments["holdout_true"][None])[0])
     holdout_worst = float(relative_risks(holdout_z0, holdout_u, correction, holdout_bank).max())
     cdf = _cdf_diagnostic(family, reference_parameters, holdout_u[:, :-1])
-    augmented = (plan or {}).get('separation_variant') == 'posterior_mass_v1'
+    augmented = (plan or {}).get('separation_variant') in ('posterior_mass_v1', 'mixture_mass_v1')
     fits_raw_threshold = true_loss <= threshold + cfg.feasibility_tol
     return dict(
         observation_threshold_scope='posterior_mass_penalized_fit' if augmented else 'raw_observation_nll',

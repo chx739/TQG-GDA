@@ -1,0 +1,104 @@
+{
+  "passed": true,
+  "valid": true,
+  "primary_tau": 0.005,
+  "checks": {
+    "complete_primary_rows": true,
+    "well_specified:joint_signal": true,
+    "well_specified:analytic_oracle": true,
+    "no_shift:mean_harm_cap": true,
+    "no_shift:each_seed_harm_cap": true,
+    "angle_shift:joint_signal": true,
+    "angle_shift:analytic_oracle": true
+  },
+  "failed_checks": [],
+  "expected_primary_rows": 40,
+  "found_primary_rows": 40,
+  "missing": [],
+  "duplicates": [],
+  "unexpected": [],
+  "malformed": [],
+  "invalid_rows": [],
+  "worlds": {
+    "well_specified": {
+      "joint_passing_seeds": [
+        35,
+        36,
+        38,
+        39
+      ],
+      "analytic_oracle_improving_seeds": [
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "joint_mean_expected_nll_delta": -0.004125219795883919,
+      "joint_max_expected_nll_delta": 0.00037464242736825657,
+      "analytic_oracle_mean_expected_nll_delta": -0.10288032307366471,
+      "registered_seeds": 5,
+      "valid_joint_rows": 5,
+      "valid_analytic_oracle_rows": 5
+    },
+    "no_shift": {
+      "joint_passing_seeds": [],
+      "analytic_oracle_improving_seeds": [],
+      "joint_mean_expected_nll_delta": 4.4422873288396107e-10,
+      "joint_max_expected_nll_delta": 2.2211436677159794e-09,
+      "analytic_oracle_mean_expected_nll_delta": 0.0,
+      "registered_seeds": 5,
+      "valid_joint_rows": 5,
+      "valid_analytic_oracle_rows": 5
+    },
+    "semantic_reflection": {
+      "joint_passing_seeds": [],
+      "analytic_oracle_improving_seeds": [
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "joint_mean_expected_nll_delta": 1.4814821587669138e-07,
+      "joint_max_expected_nll_delta": 7.407413363110741e-07,
+      "analytic_oracle_mean_expected_nll_delta": -2.875884502046336,
+      "registered_seeds": 5,
+      "valid_joint_rows": 5,
+      "valid_analytic_oracle_rows": 5
+    },
+    "angle_shift": {
+      "joint_passing_seeds": [
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "analytic_oracle_improving_seeds": [
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "joint_mean_expected_nll_delta": -0.012179456851049129,
+      "joint_max_expected_nll_delta": -0.01003267442646169,
+      "analytic_oracle_mean_expected_nll_delta": -0.0139953322132633,
+      "registered_seeds": 5,
+      "valid_joint_rows": 5,
+      "valid_analytic_oracle_rows": 5
+    }
+  },
+  "scope": "statistical_stage_S_gate_only; runner_must_also_verify_engineering_and_seals",
+  "expected_observation_blocks": 20,
+  "widths": [
+    0.005,
+    0.01,
+    0.02
+  ],
+  "next_phase": "P",
+  "engineering_regression_passed": true,
+  "known_moment_passed": true,
+  "input_and_frozen_replay_passed": true
+}
