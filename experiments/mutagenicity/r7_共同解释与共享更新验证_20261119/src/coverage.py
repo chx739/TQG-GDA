@@ -167,8 +167,11 @@ def _cdf_diagnostic(family, reference_parameters, holdout):
         right = np.arange(1, count + 1) / count
         left = np.arange(count) / count
         distances.append(float(max(np.max(right - model_cdf), np.max(model_cdf - left))))
-    return dict(coordinate_sup=distances, maximum=max(distances), median=float(np.median(distances)),
-                samples=count, scope="fixed_reference_marginal_fit_only_not_model_selection")
+    report = dict(coordinate_sup=distances, maximum=max(distances), median=float(np.median(distances)),
+                  samples=count, scope="fixed_reference_marginal_fit_only_not_model_selection")
+    if hasattr(family, 'cdf_reports'):
+        report['numerical_integration'] = family.cdf_reports
+    return report
 
 
 def boundary_angle(v0, w, truth, standard):

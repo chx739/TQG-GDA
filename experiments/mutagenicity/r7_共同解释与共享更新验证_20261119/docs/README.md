@@ -13,3 +13,5 @@
 [第四轮源类条件锚定](iteration-04.md)
 
 [第五轮源混合模板](iteration-05.md)
+
+[第六轮冻结源后验](iteration-06.md)

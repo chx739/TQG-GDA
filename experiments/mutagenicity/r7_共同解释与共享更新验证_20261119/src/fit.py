@@ -111,8 +111,10 @@ def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None):
     if variant == 'restore_trust_v1':
         from .restored_separation import RestoredExplanationSet
         return RestoredExplanationSet(source_x, source_y, target_x, cfg)
-    if variant in ('projected_restore_v1', 'anchored_projected_v1', 'source_mixture_v1'):
-        if variant == 'source_mixture_v1':
+    if variant in ('projected_restore_v1', 'anchored_projected_v1', 'source_mixture_v1', 'posterior_anchored_v1'):
+        if variant == 'posterior_anchored_v1':
+            from .posterior_anchored_explanations import PosteriorAnchoredExplanationSet as family_class
+        elif variant == 'source_mixture_v1':
             from .mixture_explanations import MixtureExplanationSet as family_class
         elif variant == 'anchored_projected_v1':
             from .anchored_explanations import AnchoredExplanationSet as family_class
@@ -120,7 +122,9 @@ def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None):
             from .projected_explanations import ProjectedExplanationSet as family_class
         if v0 is None or v0.shape != (2, source_x.shape[1] + 1):
             raise ValueError('Projected estimation requires the frozen binary source head in fit coordinates')
-        options = plan.get('source_mixture_options', {}) if variant == 'source_mixture_v1' else {}
+        options = dict(plan.get('source_mixture_options', {})) if variant in ('source_mixture_v1', 'posterior_anchored_v1') else {}
+        if variant == 'posterior_anchored_v1':
+            options['source_head_bias'] = float(v0[1, -1] - v0[0, -1])
         return family_class(source_x, source_y, target_x, cfg,
                             source_head_normal=v0[1, :-1] - v0[0, :-1], **options)
     raise ValueError(f'Unregistered separation algorithm: {variant}')
@@ -132,12 +136,14 @@ def fitter_source_files(plan):
     files = ['fit.py', 'controls.py']
     if variant != 'stock':
         files.append('restored_separation.py')
-    if variant in ('projected_restore_v1', 'anchored_projected_v1', 'source_mixture_v1'):
+    if variant in ('projected_restore_v1', 'anchored_projected_v1', 'source_mixture_v1', 'posterior_anchored_v1'):
         files.append('projected_explanations.py')
-    if variant in ('anchored_projected_v1', 'source_mixture_v1'):
+    if variant == 'anchored_projected_v1':
         files.append('anchored_explanations.py')
-    if variant == 'source_mixture_v1':
+    if variant in ('source_mixture_v1', 'posterior_anchored_v1'):
         files.append('mixture_explanations.py')
+    if variant == 'posterior_anchored_v1':
+        files.append('posterior_anchored_explanations.py')
     return files
 
 

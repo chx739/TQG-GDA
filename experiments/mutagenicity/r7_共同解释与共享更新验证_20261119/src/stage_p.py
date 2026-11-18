@@ -88,7 +88,9 @@ def _source_template_diagnostics(plan, cfg, fit, std, validation, labels, theta)
     source_x = std['source_u'][:, :-1]
     val_x = features(validation['validation_h'], std['mean'], std['scale'])[:, :-1]
     family = explanation_family(plan, source_x, fit['source_y'], val_x, cfg, std['v0'])
-    prior = np.bincount(fit['source_y'], minlength=family.classes) / len(source_x)
+    empirical = np.bincount(fit['source_y'], minlength=family.classes) / len(source_x)
+    normalizer = getattr(family, 'source_prior_normalizer', None)
+    prior = empirical if normalizer is None else np.asarray(normalizer, dtype=np.float64)
     if np.any(prior <= cfg.prior_floor):
         return {'status': 'empirical_source_prior_below_floor'}
     parameters = theta.copy()
@@ -107,7 +109,8 @@ def _source_template_diagnostics(plan, cfg, fit, std, validation, labels, theta)
                 if base['balanced_accuracy'] is not None else None,
                 component_counts=list(getattr(family, 'source_component_counts', ())),
                 posterior_probability_floor=float(np.finfo(np.float64).tiny),
-                scope='reference templates with identity map and source-fit prior')
+                scope='reference templates with identity map and ' +
+                ('source posterior normalizer' if normalizer is not None else 'source-fit prior'))
 
 
 def _endpoints(name, record, key, std, arrays, labels, source_pairs, reference):

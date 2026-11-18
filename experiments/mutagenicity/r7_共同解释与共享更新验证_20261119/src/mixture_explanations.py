@@ -344,9 +344,9 @@ def check_mixture_explanations():
     source2[:, 0] += 1.8*components+.8*labels2
     source2[:, 1] += 1.5*(2*labels2-1)
     target2 = rng.normal(size=(19, 2))
-    family = MixtureExplanationSet(source2, labels2, target2, cfg, source_head_normal=np.array([1., 0.]),
-                                  mixture_n_init=2)
+    family = MixtureExplanationSet(source2, labels2, target2, cfg, source_head_normal=np.array([1., 0.]))
     assert family.source_component_counts == (2, 2)
+    assert all(len(trial["runs"]) == 5 for report in family.source_template_report for trial in report["trials"])
     theta2 = family._initial+np.array([.04, -.03, .02, .01, -.08])
     correction2 = rng.normal(size=(19, 2))
     for name, extra in [("_observation", ()), ("_separation", (correction2,))]:
@@ -369,7 +369,7 @@ def check_mixture_explanations():
                         /np.exp(.5*logvar[:, coordinate]))@weights
         np.testing.assert_allclose(cdf, expected, atol=1e-14, rtol=0)
     replay = MixtureExplanationSet(source2, labels2, rng.normal(size=(7, 2)), cfg,
-                                  source_head_normal=np.array([1., 0.]), mixture_n_init=2)
+                                  source_head_normal=np.array([1., 0.]))
     assert replay.source_component_counts == family.source_component_counts
     for template, other in zip(family.source_templates, replay.source_templates):
         for key in template:
