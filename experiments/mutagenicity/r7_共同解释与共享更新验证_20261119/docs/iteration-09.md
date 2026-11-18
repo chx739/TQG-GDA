@@ -19,3 +19,7 @@ python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119
   --reference /path/to/attempt-010/P --angular /path/to/attempt-011/P \
   --output /path/to/attempt-011/diagnostics/angular-update.json
 ```
+
+## 封存结果
+
+S 已通过。正确设定和角度偏移各有 5/5 种子满足主门槛，平均期望 NLL 差为 −0.01229 和 −0.00990，无偏移为 +0.00016。18 项相关工程回归通过，其中 16 维夹具检查角向实现。二维 S 的结果用于确认已有机制可复现。真实 P 按原门槛继续。[S 门槛](../results/iteration-09/S/gate.json) · [工程回归](../results/iteration-09/S/engineering-regression.txt)
