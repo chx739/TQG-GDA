@@ -11,7 +11,6 @@ import numpy as np
 from scipy.optimize import minimize
 from scipy.special import logsumexp, ndtr, softmax
 
-from tsba.shared_update.explanations import ExplanationSet
 from tsba.shared_update.solver import relative_risks
 
 
@@ -135,10 +134,15 @@ def _true_parameters(model, family):
         return None, "generating_map_is_not_positive_diagonal"
     if np.any(latent <= 0):
         return None, "generating_prior_is_not_representable_with_configured_floor"
-    parameters = np.concatenate((model["means"].ravel(), np.log(model["variances"]).ravel(),
-                                 np.log(model["diagonal"]), model["shift"],
-                                 np.log(latent[:-1]) - np.log(latent[-1])))
-    return parameters, None
+    class_parameters = np.concatenate((model['means'].ravel(), np.log(model['variances']).ravel()))
+    affine_and_prior = np.concatenate((np.log(model['diagonal']), model['shift'],
+                                       np.log(latent[:-1]) - np.log(latent[-1])))
+    anchored = getattr(family, 'fixed_class_parameters', None)
+    if anchored is not None:
+        if not np.allclose(class_parameters, anchored, rtol=0., atol=1e-12):
+            return None, 'specified_generating_parameters_differ_from_fixed_source_template'
+        return affine_and_prior, None
+    return np.concatenate((class_parameters, affine_and_prior)), None
 
 
 def _cdf_diagnostic(family, reference_parameters, holdout):
@@ -183,7 +187,7 @@ def boundary_angle(v0, w, truth, standard):
     return float(np.degrees(np.arccos(np.clip(cosine, -1., 1.))))
 
 
-def diagnostics(cfg, fit, standard, held, truth, observed, detail_j):
+def diagnostics(cfg, fit, standard, held, truth, observed, detail_j, *, plan=None):
     """Evaluate frozen S explanations without using labels to change them.
 
     Unsuffixed moment distances and risk gap refer to A. ``holdout_*`` values
@@ -207,8 +211,13 @@ def diagnostics(cfg, fit, standard, held, truth, observed, detail_j):
             or not all(np.all(u[:, -1] == 1.) for u in (source_u, adapt_u, holdout_u))):
         raise ValueError("Inconsistent standardized features or fixed logits")
     labels = np.asarray(fit["source_y"])
-    family = ExplanationSet(source_u[:, :-1], labels, adapt_u[:, :-1], cfg)
-    holdout_family = ExplanationSet(source_u[:, :-1], labels, holdout_u[:, :-1], cfg)
+    from .fit import explanation_family
+
+    v0 = standard.get('v0')
+    family = explanation_family(plan or {}, source_u[:, :-1], labels, adapt_u[:, :-1], cfg, v0)
+    holdout_family = explanation_family(plan or {}, source_u[:, :-1], labels, holdout_u[:, :-1], cfg, v0)
+    if family.dimension != dimension:
+        raise ValueError('Analytic S coverage requires the full generating coordinate space')
     threshold, reference_loss = float(detail_j["threshold"]), float(detail_j["reference_loss"])
     if not math.isfinite(threshold) or not math.isfinite(reference_loss) or threshold < reference_loss:
         raise ValueError("Invalid frozen reference loss or likelihood threshold")

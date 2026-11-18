@@ -111,14 +111,29 @@ def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None):
     if variant == 'restore_trust_v1':
         from .restored_separation import RestoredExplanationSet
         return RestoredExplanationSet(source_x, source_y, target_x, cfg)
-    if variant == 'projected_restore_v1':
-        from .projected_explanations import ProjectedExplanationSet
-
+    if variant in ('projected_restore_v1', 'anchored_projected_v1'):
+        if variant == 'anchored_projected_v1':
+            from .anchored_explanations import AnchoredExplanationSet as family_class
+        else:
+            from .projected_explanations import ProjectedExplanationSet as family_class
         if v0 is None or v0.shape != (2, source_x.shape[1] + 1):
             raise ValueError('Projected estimation requires the frozen binary source head in fit coordinates')
-        return ProjectedExplanationSet(source_x, source_y, target_x, cfg,
-                                       source_head_normal=v0[1, :-1] - v0[0, :-1])
+        return family_class(source_x, source_y, target_x, cfg,
+                            source_head_normal=v0[1, :-1] - v0[0, :-1])
     raise ValueError(f'Unregistered separation algorithm: {variant}')
+
+
+def fitter_source_files(plan):
+    """Modules that must remain identical across gated adaptation phases."""
+    variant = plan.get('separation_variant', 'stock')
+    files = ['fit.py', 'controls.py']
+    if variant != 'stock':
+        files.append('restored_separation.py')
+    if variant in ('projected_restore_v1', 'anchored_projected_v1'):
+        files.append('projected_explanations.py')
+    if variant == 'anchored_projected_v1':
+        files.append('anchored_explanations.py')
+    return files
 
 
 def fit_block(plan, seed, block, *, phase='S'):

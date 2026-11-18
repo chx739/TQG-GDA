@@ -14,7 +14,7 @@ import torch
 from experiments.common.io import digest, provenance, save_tensor, write_json
 
 from .evaluate import classification, exact_methods, methods, replay_heldout, replay_predictions
-from .fit import config, fit_block, read_npz, width_key, write_npz
+from .fit import config, fit_block, fitter_source_files, read_npz, width_key, write_npz
 from .matched_tsba import blind_inputs, fit_matched_tsba, predict_matched
 from .paired import paired_bootstrap
 from .r5_inputs import load_inputs, load_labels
@@ -111,12 +111,7 @@ def _verify_pilot(plan_path, plan, p_output, repo, tau, pilot_keys):
             or any(config(plan, seed, tau).to_dict() not in execution['common']
                    for seed in plan['real_model_seeds'])):
         raise ValueError('The sealed pilot used different primary fitting or audit parameters')
-    sources = ['fit.py', 'controls.py', 'evaluate.py', 'real_audit.py', 'separation_audit.py', 'r5_inputs.py']
-    variant = plan.get('separation_variant')
-    if variant in ('restore_trust_v1', 'projected_restore_v1'):
-        sources.append('restored_separation.py')
-    if variant == 'projected_restore_v1':
-        sources.append('projected_explanations.py')
+    sources = fitter_source_files(plan) + ['evaluate.py', 'real_audit.py', 'separation_audit.py', 'r5_inputs.py']
     frozen = _sealed_json(p_output, 'provenance.json', records['INPUT']['files'])['file_hashes']
     for name in sources:
         path = Path(__file__).with_name(name).resolve()

@@ -11,7 +11,7 @@ from tsba.shared_update.solver import relative_risks
 
 from .coverage import _cdf_diagnostic, hull_distance
 from .evaluate import classification, exact_methods, methods, predict, replay_predictions
-from .fit import config, explanation_family, features, master, moment, read_npz, width_key, write_npz
+from .fit import config, explanation_family, features, fitter_source_files, master, moment, read_npz, width_key, write_npz
 from .r5_inputs import load_inputs, load_labels
 from .seals import seal, verify_seal
 from .stage_s import _assert_pinned_method, _fit, _leaf_paths, csv_write, json_read
@@ -215,14 +215,8 @@ def run(plan_path, root, s_output, workers, repo):
     plan = json_read(plan_path)
     if plan.get('development_iteration') and plan.get('separation_variant') == 'stock':
         raise ValueError('This stock plan is a synthetic comparator only')
-    fit_sources = ['fit.py', 'controls.py']
-    variant = plan.get('separation_variant')
-    if variant in ('restore_trust_v1', 'projected_restore_v1'):
-        fit_sources.append('restored_separation.py')
-    if variant == 'projected_restore_v1':
-        fit_sources.append('projected_explanations.py')
     frozen = json_read(s_output / 'provenance.json')['file_hashes']
-    for name in fit_sources:
+    for name in fitter_source_files(plan):
         path = Path(__file__).parent / name
         if frozen.get(str(path.relative_to(repo))) != digest(path):
             raise ValueError(f'The pilot fitter differs from the passed synthetic implementation: {name}')

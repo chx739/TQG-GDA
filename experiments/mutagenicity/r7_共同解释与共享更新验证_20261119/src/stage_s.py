@@ -109,7 +109,7 @@ def _evaluate(plan, root, specs):
                 for name, value in replay_predictions(standard, held, arrays).items():
                     if not np.array_equal(value, saved[name]):
                         raise ValueError(f'{block.name}/{key}/{name}: holdout replay mismatch')
-            cov = coverage.diagnostics(config(plan, seed, tau), fit, standard, held, truth, observed, records['J'])
+            cov = coverage.diagnostics(config(plan, seed, tau), fit, standard, held, truth, observed, records['J'], plan=plan)
             cov_rows.append(width | cov)
             moments.append(width | {k: v for k, v in cov.items() if 'moment' in k or 'simplex' in k})
             arrays = observed | oracle | heldout
