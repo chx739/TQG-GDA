@@ -1,0 +1,40 @@
+{
+  "original": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-001/S",
+  "original_final_digest": "5b3f53bc2274a34ca3d9ce2e15a00a1e78b08b765041fbb4729541e949ffc928",
+  "method_commit": "fea693841b6da36af7d77f92d564f5410ade1808",
+  "config": {
+    "coordinate_floor": 1e-06,
+    "variance_floor": 0.001,
+    "mean_radius": 2,
+    "scale_min": 0.25,
+    "scale_max": 4,
+    "shift_bound": 4,
+    "prior_floor": 0.0001,
+    "tau": 0.01,
+    "regularization": 0.1,
+    "inner_starts": 10,
+    "inner_maxiter": 300,
+    "master_maxiter": 200,
+    "search_rounds": 10,
+    "feasibility_tol": 1e-08,
+    "optimality_tol": 1e-06,
+    "separation_tol": 1e-06
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "seed_offset": 7001,
+  "stock_arm": "unchanged stock search with archived reference/retained candidates; 10 launches maximum",
+  "independent_arm": "all 10 launches are new seed+7001 feasible perturbations; known candidates retained",
+  "reference_refitted": false,
+  "target_truth_access": "after AUDIT_OBS for all five seeds",
+  "original_data_previously_evaluated": true,
+  "confirmation": false,
+  "source_sha256": "c944a9b0f4ffe91737f350fd316bd42e44f7e635c898183185e95102fae92424",
+  "python": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 13:27:36) [GCC 11.2.0]",
+  "numpy": "1.26.4"
+}

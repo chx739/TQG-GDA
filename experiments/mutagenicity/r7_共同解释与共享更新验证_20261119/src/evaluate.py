@@ -22,7 +22,7 @@ def exact_methods(plan, tau, *, oracle=False):
     return {'O', 'O_analytic'}
 
 
-def replay_heldout(plan, block):
+def replay_heldout(plan, block, *, phase='S'):
     data = read_npz(block / 'holdout_input.npz')
     standard = read_npz(block / 'standardization.npz')
     u = features(data['holdout_h'], standard['mean'], standard['scale'])
@@ -31,10 +31,13 @@ def replay_heldout(plan, block):
     if not np.allclose(u @ standard['v0'].T, expected_z, rtol=1e-10, atol=1e-12):
         raise ValueError('Source head does not reconstruct holdout logits')
     write_npz(block / 'holdout_standardization.npz', holdout_u=u, holdout_z0=z, holdout_ids=data['holdout_ids'])
-    for tau in plan['phases']['S']['width_grid']:
+    for tau in plan['phases'][phase]['width_grid']:
         key = width_key(tau)
         observed = read_npz(block / f'{key}-observed.npz')
-        if set(methods(observed)) != exact_methods(plan, tau):
+        expected = exact_methods(plan, tau)
+        if phase == 'P' and tau == plan['phases']['P']['independent_audit']['tau']:
+            expected |= {'J_plus', 'P_plus', 'P_mass_plus'}
+        if set(methods(observed)) != expected:
             raise ValueError(f'{block.name}/{key}: incomplete unsupervised arms')
         if methods(observed) == []:
             raise ValueError('No frozen methods')

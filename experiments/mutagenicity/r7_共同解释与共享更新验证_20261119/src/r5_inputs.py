@@ -282,21 +282,22 @@ def load_inputs(plan, setting, source, target, seed, *, repository=None):
     return result
 
 
-def load_labels(root, manifest_relative_path, pool, *, repository=None):
+def load_labels(root, manifest_relative_path, pool, *, repository=None, authenticated_snapshot=False):
     """Read only the sealed task's A or H labels after the required R7 gates.
 
     No arbitrary IDs or raw path are accepted.  The independent R7 verifier
-    validates stage completeness and chaining; this function additionally binds
-    the manifest, archive metadata, graph IDs and actual raw bytes together.
+    validates stage completeness and chaining. Before R7_ORACLE, reads seek
+    only to the authenticated adaptation offsets. After R7_ORACLE, whole-file
+    authentication is available to verify the previously observed A values.
     """
     from .seals import verify_seal
 
-    if pool not in ("adapt", "holdout"):
+    if pool not in ("adapt", "holdout", "validation"):
         raise ValueError("Target label pool must be 'adapt' or 'holdout'")
     root = Path(root).resolve()
     input_seal = verify_seal(root, "R7_INPUT")
     verify_seal(root, "R7_OBS")
-    if pool == "holdout":
+    if pool in ("holdout", "validation") or authenticated_snapshot:
         verify_seal(root, "R7_ORACLE")
     path = _inside(root, manifest_relative_path)
     relative = str(path.relative_to(root))
@@ -318,16 +319,32 @@ def load_labels(root, manifest_relative_path, pool, *, repository=None):
                     sha256=context["provenance"]["r5_files"][context["label_relative"]])
     if manifest["label_records"] != expected:
         raise PermissionError("Label metadata path or identity differs from sealed R7 inputs")
+    if pool == "validation":
+        ids = context["ids"][pool]
+        arch = f"source_labels/M{manifest['source']}/seed{manifest['seed']}_validation.pt"
+        data = torch.load(io.BytesIO(context['read'](arch, 'INPUT')), map_location='cpu', weights_only=True)
+        labels = _tensor(data, (len(ids),), "source validation labels", integer=True)
+        if torch.bincount(labels, minlength=2).tolist() != context["roles"]["class_counts"][pool]:
+            raise ValueError("Source validation labels disagree with sealed role counts")
+        return _numpy(labels)
     metadata = context["label_meta"]
-    raw = Path(metadata["path"]).read_bytes()
-    if _sha(raw) != metadata["sha256"]:
-        raise PermissionError("Raw label bytes differ from the authenticated R5 snapshot")
+    records = [metadata["offsets"][graph_id] for graph_id in context["ids"][pool]]
+    with Path(metadata["path"]).open("rb", buffering=0) as stream:
+        if pool == "holdout" or authenticated_snapshot:
+            raw = stream.read()
+            if _sha(raw) != metadata["sha256"]:
+                raise PermissionError("Raw label bytes differ from the authenticated R5 snapshot")
+            selected = [raw[start:start + length] for start, length in records]
+        else:
+            selected = []
+            for start, length in records:
+                stream.seek(start)
+                selected.append(stream.read(length))
     result = []
-    for graph_id in context["ids"][pool]:
-        start, length = metadata["offsets"][graph_id]
-        if start + length > len(raw):
+    for payload, (_, expected_length) in zip(selected, records):
+        if len(payload) != expected_length:
             raise ValueError("Raw label record is truncated")
-        value = str(int(raw[start:start + length]))
+        value = str(int(payload))
         if value not in metadata["mapping"]:
             raise ValueError("Raw target label is outside the fixed source class mapping")
         result.append(metadata["mapping"][value])

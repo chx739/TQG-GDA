@@ -104,12 +104,22 @@ def width_key(tau):
     return f'tau-{tau:.3f}'
 
 
-def fit_block(plan, seed, block):
+def explanation_family(plan, source_x, source_y, target_x, cfg):
+    variant = plan.get('separation_variant', 'stock')
+    if variant == 'stock':
+        return ExplanationSet(source_x, source_y, target_x, cfg)
+    if variant == 'restore_trust_v1':
+        from .restored_separation import RestoredExplanationSet
+        return RestoredExplanationSet(source_x, source_y, target_x, cfg)
+    raise ValueError(f'Unregistered separation algorithm: {variant}')
+
+
+def fit_block(plan, seed, block, *, phase='S'):
     """This worker receives only its own A features and source-fit rows."""
     torch.set_num_threads(1)
     block = Path(block)
     data = read_npz(block / 'fit_input.npz')
-    requested = plan['phases']['S']['width_grid']
+    requested = plan['phases'][phase]['width_grid']
     primary = config(plan, seed, plan['shared_update']['primary_tau'])
     train = data['source_h']
     mean = train.mean(axis=0)
@@ -122,12 +132,18 @@ def fit_block(plan, seed, block):
     z = data['adapt_z0']
     if not np.allclose(u @ v0.T, z - z.mean(axis=1, keepdims=True), rtol=1e-10, atol=1e-12):
         raise ValueError('Source head does not reconstruct adaptation logits')
-    base = ExplanationSet(source_u[:, :-1], data['source_y'], u[:, :-1], primary)
+    base = explanation_family(plan, source_u[:, :-1], data['source_y'], u[:, :-1], primary)
     base.fit()
     write_npz(block / 'standardization.npz', mean=mean, scale=scale, source_u=source_u, adapt_u=u, adapt_z0=z, v0=v0)
     for tau in requested:
         cfg = config(plan, seed, tau)
         arrays, records = run_width(plan, cfg, base, z, u, v0, data['adapt_ids'])
+        if phase == 'P' and tau == plan['phases']['P']['independent_audit']['tau']:
+            from .real_audit import audit
+
+            supplemental, audit_records = audit(plan, cfg, base, z, u, data['adapt_ids'], arrays, records)
+            arrays.update(supplemental)
+            records.update(audit_records)
         key = width_key(tau)
         write_npz(block / f'{key}-observed.npz', **arrays)
         write_json(block / f'{key}-observed.json', records)
