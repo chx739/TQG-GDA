@@ -173,6 +173,9 @@
       "E",
       "J",
       "P",
+      "P_mass",
+      "J_bias",
+      "J_cal",
       "O",
       "C05",
       "C075"
@@ -191,7 +194,28 @@
     "fixed_source_logit_multipliers": [
       0.5,
       0.75
-    ]
+    ],
+    "pointwise_mass": {
+      "bank": "same_retained_explanations_as_joint",
+      "additional_constraint": "same_bank_target_mean_class_probability_interval",
+      "binary_separation": "exact_sort_and_fill",
+      "exact_separation_limit": 100,
+      "require_exact_final_separation_check": true,
+      "ties": "ascending_graph_id"
+    },
+    "restricted_joint": {
+      "J_bias": {
+        "bank": "same_retained_explanations_as_joint",
+        "restriction": "intercept_only"
+      },
+      "J_cal": {
+        "bank": "same_retained_explanations_as_joint",
+        "restriction": "nonnegative_shared_source_logit_scaling_plus_class_bias",
+        "use_class_centered_source_weights_and_bias": true
+      },
+      "regularization_on_original_W": true,
+      "widths": "primary_tau_only"
+    }
   },
   "phases": {
     "S": {
@@ -274,6 +298,35 @@
             0.5,
             0.5
           ]
+        },
+        {
+          "id": "angle_shift",
+          "source_class_means_override": [
+            [
+              -1,
+              -1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "L_diagonal": [
+            1.4,
+            0.7
+          ],
+          "b": [
+            0,
+            0
+          ],
+          "target_prior": [
+            0.5,
+            0.5
+          ],
+          "extra_diagnostics": [
+            "J_vs_J_cal_true_risk",
+            "decision_boundary_direction"
+          ]
         }
       ],
       "width_grid": [
@@ -288,7 +341,13 @@
       "gate": {
         "minimum_seed_count": 4,
         "true_directional_risk_slack_nats": 0.005,
-        "centered_logit_rms_nonzero": 1e-06
+        "centered_logit_rms_nonzero": 1e-06,
+        "required_positive_worlds": [
+          "well_specified",
+          "angle_shift"
+        ],
+        "no_shift_mean_nll_increase_cap": 0.005,
+        "no_shift_each_seed_nll_increase_cap": 0.02
       },
       "rng_streams": "SeedSequence([seed, world_index]).spawn(3) in source, adaptation, holdout order"
     },
@@ -331,22 +390,39 @@
         "augmented_pair": [
           "J_plus",
           "P_plus"
+        ],
+        "augmented_mass_pair": [
+          "J_plus",
+          "P_mass_plus"
         ]
       },
       "gate": {
         "complete_blocks": 10,
         "minimum_seed_improvement_count_per_direction": 4,
-        "mean_nll_decrease_vs_B0_for_J_and_O": 0.005,
-        "minimum_J_fraction_of_oracle_nll_gain": 0.1,
         "minimum_nonzero_J_seeds_per_direction": 4,
         "centered_logit_rms_nonzero": 1e-06,
-        "J_vs_P_minimum_mean_nll_decrease_at_least_one_direction": 0.002,
-        "J_vs_P_maximum_mean_nll_increase_other_direction": 0.002,
-        "require_augmented_pair_gate": true,
         "minimum_mean_ba_gain_either_direction_pp": 0.5,
         "minimum_mean_ba_gain_each_direction_pp": 0,
         "minimum_positive_net_corrections_seeds_in_BA_gain_direction": 4,
-        "allow_observed_harmful_explanation_witness": false
+        "allow_observed_harmful_explanation_witness": false,
+        "mean_nll_decrease_vs_B0_for_J": 0.005,
+        "oracle_is_diagnostic": true
+      },
+      "mechanism_criteria": {
+        "contrasts": [
+          [
+            "J",
+            "P"
+          ],
+          [
+            "J",
+            "P_mass"
+          ]
+        ],
+        "minimum_mean_nll_decrease_at_least_one_direction": 0.002,
+        "maximum_mean_nll_increase_other_direction": 0.002,
+        "require_augmented_pair_for_mechanism_claim": true,
+        "required_for_P_to_C": false
       }
     },
     "C": {
@@ -371,7 +447,6 @@
       "classification_criteria": {
         "average_nll_improves_each_setting": true,
         "minimum_mean_ba_gain_each_setting_pp": 0,
-        "minimum_mean_ba_gain_in_at_least_two_settings_pp": 0.5,
         "comparisons_evaluated_separately": [
           [
             "J",
@@ -381,7 +456,9 @@
             "J",
             "A0"
           ]
-        ]
+        ],
+        "minimum_mean_ba_gain_for_PROTEINS_and_one_Mutagenicity_split_pp": 0.5,
+        "require_complete_favorable_intervals_for_clear_cross_dataset_development_claim": true
       },
       "matched_tsba": {
         "compared_groups": [
@@ -407,6 +484,70 @@
           "score_diagnostic": 103,
           "adaptation_batches": 201
         }
+      },
+      "independent_audit_repeat": {
+        "setting": "proteins_edge",
+        "directions": [
+          [
+            0,
+            3
+          ]
+        ],
+        "seeds": [
+          3405,
+          3406,
+          3407,
+          3408,
+          3409
+        ],
+        "inherits": "P.independent_audit"
+      }
+    },
+    "D": {
+      "setting": "nci1_edge",
+      "enable_only_if_C_point_estimate_gate_and_complete_primary_pairs": true,
+      "freeze_before_target_access": true,
+      "primary_tau": 0.01,
+      "source_domain": 0,
+      "directions": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "source_checkpoints_new": 5,
+      "expected_blocks": 15,
+      "source_model": {
+        "encoder": "gin",
+        "num_layers": 3,
+        "hidden": 64,
+        "emb_dim": 16,
+        "dropout": 0,
+        "source_epochs": 100,
+        "source_lr": 0.001,
+        "source_batch": 128,
+        "optimizer": "Adam",
+        "role_split": "R5_class_stratified_source_roles",
+        "selection": "minimum_source_validation_CE",
+        "features": "source_fit_sorted_node_label_onehot_plus_unknown",
+        "edge_attr": null
+      },
+      "confirmation": {
+        "complete_blocks": 15,
+        "minimum_mean_nll_decrease_vs_B0": 0.005,
+        "minimum_mean_ba_gain_vs_B0_pp": 0.5,
+        "require_favorable_paired_intervals_for_both": true,
+        "minimum_directions_with_positive_mean_ba": 2,
+        "maximum_nll_increase_any_direction": 0.005,
+        "maximum_ba_decrease_any_direction_pp": 1
       }
     }
   },
@@ -435,7 +576,51 @@
     "cohort_bootstrap_replicates": 2000,
     "cohort_bootstrap_seed": 20261119,
     "nll_tie_tolerance": 1e-08,
-    "multi_setting_aggregation": "per_setting_equal_directions_within_seed"
+    "multi_setting_aggregation": "per_setting_equal_directions_within_seed",
+    "classification_endpoint": [
+      "J",
+      "B0",
+      "BA"
+    ],
+    "additional_mechanism_contrasts": [
+      [
+        "J",
+        "E"
+      ],
+      [
+        "J",
+        "P_mass"
+      ],
+      [
+        "J",
+        "J_bias"
+      ],
+      [
+        "J",
+        "J_cal"
+      ]
+    ],
+    "paired_interval": {
+      "level": 0.95,
+      "percentiles": [
+        2.5,
+        97.5
+      ],
+      "metrics": [
+        "NLL",
+        "BA",
+        "Accuracy",
+        "directional_risk_gap"
+      ],
+      "strata": [
+        "target_domain",
+        "class"
+      ],
+      "reuse_draws_across_methods_seeds_and_source_directions": true,
+      "minimum_graphs_per_class_for_interval": 10,
+      "conditional_on_fitted_models": true
+    },
+    "marginal_fit_diagnostic": "holdout_coordinate_CDF_sup_distance_against_fixed_reference"
   },
   "execution": {
     "mode": "planned_only",
@@ -449,5 +634,53 @@
       "R7_ORACLE",
       "R7_FINAL"
     ]
+  },
+  "protocol_revision": 2,
+  "previous_plan_commit": "cd1ee882a0354b5cf39789fb04d920c944dee3b0",
+  "external_input": {
+    "id": "nci1_edge",
+    "tu_dataset": "NCI1",
+    "origin": "TUDataset",
+    "source_url": "https://www.chrsmrrs.com/graphkerneldatasets/NCI1.zip",
+    "source_documentation": "https://chrsmrrs.github.io/datasets/docs/datasets/",
+    "archive_status": "raw_archive_and_source_checkpoints_pending",
+    "expected_raw_files": [
+      "NCI1_A.txt",
+      "NCI1_graph_indicator.txt",
+      "NCI1_node_labels.txt",
+      "NCI1_graph_labels.txt"
+    ],
+    "domain_index_pattern": "data/idx_NCI1_{domain}.npy",
+    "domain_counts": [
+      1027,
+      1027,
+      1027,
+      1029
+    ],
+    "planned_adaptation_holdout_counts": [
+      [
+        718,
+        309
+      ],
+      [
+        715,
+        312
+      ],
+      [
+        704,
+        323
+      ],
+      [
+        739,
+        290
+      ]
+    ],
+    "index_sha256": [
+      "b4213925bcbdbc8ff8d97e73491361cea837892385a01b4eb55ad3d446eed2b8",
+      "6f78c32b047d77340659c9d0a1cd960c4f9eac6555383d368d8d412c46f0271f",
+      "4a154448c13d839cab7a4c628fc04b912ae51adc307d75d65b3b0eb1405370fa",
+      "adc00d80aceefe02334ccf635fbc553ff973d47d43527767a18555618fdcd5da"
+    ],
+    "raw_directory": "data/NCI1/raw"
   }
 }
