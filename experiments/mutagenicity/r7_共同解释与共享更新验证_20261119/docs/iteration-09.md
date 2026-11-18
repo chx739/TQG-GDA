@@ -9,3 +9,13 @@
 在主门槛外，用两轮均完成封存的 P 做配对诊断。对照包括同一 B0、原第八轮 J、固定温度 C05/C075，以及以无标签 A 上二分类 margin 更新的 RMS 为标准缩放的第八轮 J。用 A 拟合截距和 B0 margin 对更新量的线性投影，再把冻结的残差方向应用到 H，观察其单独对 BA、净纠错和 NLL 的贡献。用源验证图检查角向化是否损害源模板的类信息。
 
 如果角向版本保留 M1 分类收益，同时使 M3 优于第八轮和 RMS 匹配对照，支持幅度变化干扰解释拟合的假设。如果仅 NLL 降低且排序与分类基本相同，收益主要来自校准。如果源模板劣化或 M3 在更新强度匹配后仍退化，当前角向方案缺少进一步扫描归一化强度的证据。这是相同开发图上的新方法比较，跨划分和跨数据集证据以原 C/D 协议为准。
+
+已有图规模泛化研究发现，局部结构分布也会随图规模改变，并使训练良好的 GNN 在不同规模上迁移失败。这里检验的是现有冻结表示中径向幅度的作用。即使归一化有效，本实验也无法排除局部结构差异。[Yehudai 等，ICML 2021](https://proceedings.mlr.press/v139/yehudai21a.html)
+
+两轮 P 均封存后，在仓库根目录运行配对诊断。输出保存到封存目录之外的新路径。[诊断脚本](../scripts/audit_angular_update.py)
+
+```bash
+python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.audit_angular_update \
+  --reference /path/to/attempt-010/P --angular /path/to/attempt-011/P \
+  --output /path/to/attempt-011/diagnostics/angular-update.json
+```
