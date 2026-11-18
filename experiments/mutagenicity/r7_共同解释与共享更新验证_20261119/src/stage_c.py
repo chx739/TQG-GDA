@@ -175,6 +175,7 @@ def _fit_view(plan, tau):
                 separation_variant=plan.get('separation_variant', 'stock'),
                 source_mixture_options=plan.get('source_mixture_options', {}),
                 density_coordinates=plan.get('density_coordinates', 'source_standardized_v1'),
+                target_posterior_power=plan.get('target_posterior_power', 1.),
                 posterior_mass_options=plan.get('posterior_mass_options', {}), phases={
                     'S': {'width_grid': [tau]},
                     'P': {'width_grid': [tau], 'independent_audit': plan['phases']['P']['independent_audit']},
@@ -441,6 +442,7 @@ def run(plan_path, root, p_output, workers, repo):
                                                    p_output=str(p_output), workers=workers, threads_per_worker=1,
                                                    separation_variant=view['separation_variant'],
                                                    density_coordinates=view['density_coordinates'],
+                                                   target_posterior_power=view['target_posterior_power'],
                                                    source_refit=plan.get('source_refit'),
                                                    source_refit_applied=bool(source_roots),
                                                    common=[config(plan, seed, tau).to_dict()

@@ -98,6 +98,8 @@ class MixtureExplanationSet(ProjectedExplanationSet):
     masses, NOT class priors. Use ``class_prior(theta)`` for class priors.
     """
 
+    target_posterior_power = 1.
+
     def __init__(self, source_x, source_y, target_x, config, *, source_head_normal,
                  fisher_regularization=.1, rank_tolerance=1e-10,
                  component_counts=(1, 2, 4), mixture_n_init=5,
@@ -220,8 +222,8 @@ class MixtureExplanationSet(ProjectedExplanationSet):
                 scores.append(score)
         return np.column_stack(log_density), np.stack(scores, axis=1)
 
-    def _target_terms(self, parameters):
-        """Internal mixture terms; the final entry is the [n_target,C] posterior."""
+    def _raw_target_terms(self, parameters):
+        """Unmodified mixture terms for the marginal likelihood and its gradient."""
         log_scale, shift, latent, prior = self._reduced_parameters(parameters)
         scaled_x = self.target*np.exp(log_scale)
         transformed = scaled_x+shift
@@ -231,9 +233,24 @@ class MixtureExplanationSet(ProjectedExplanationSet):
         posterior = np.exp(joint_log-normalizer[:, None])
         return log_scale, shift, latent, prior, scaled_x, class_log, class_score, normalizer, posterior
 
+    def _target_terms(self, parameters):
+        """Candidate posterior; its raw marginal remains the original mixture.
+
+        The optional angular ablation defines a joint p_theta(x)*q_beta(y|x).
+        Its mixing weights parameterize p_theta, not the integrated class
+        masses of q_beta. The beta=1 branch retains the original arithmetic.
+        """
+        terms = self._raw_target_terms(parameters)
+        if self.target_posterior_power == 1.:
+            return terms
+        joint_log = terms[5]+np.log(terms[3])
+        centered = joint_log-joint_log.max(axis=1, keepdims=True)
+        posterior = softmax(self.target_posterior_power*centered, axis=1)
+        return (*terms[:-1], posterior)
+
     def _observation(self, parameters):
         with np.errstate(over="raise", invalid="raise", divide="raise"):
-            log_scale, _, latent, prior, scaled_x, _, score, normalizer, posterior = self._target_terms(parameters)
+            log_scale, _, latent, prior, scaled_x, _, score, normalizer, posterior = self._raw_target_terms(parameters)
             total = len(self.source)+len(self.target)
             loss = (self._source_conditional_nll-normalizer.sum()-len(self.target)*log_scale.sum())/total
             marginal_score = (posterior[:, :, None]*score).sum(axis=1)
@@ -250,6 +267,8 @@ class MixtureExplanationSet(ProjectedExplanationSet):
             _, _, latent, prior, scaled_x, _, score, _, posterior = self._target_terms(parameters)
             expectation = (posterior*correction).sum(axis=1)
             weights = posterior*(correction-expectation[:, None])/len(self.target)
+            if self.target_posterior_power != 1.:
+                weights *= self.target_posterior_power
             weighted_score = (weights[:, :, None]*score).sum(axis=1)
             gscale = (weighted_score*scaled_x).sum(axis=0)
             gshift = weighted_score.sum(axis=0)

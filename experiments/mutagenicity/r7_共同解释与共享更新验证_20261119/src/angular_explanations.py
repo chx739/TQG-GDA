@@ -51,7 +51,7 @@ class AngularMixtureMassExplanationSet(MixtureMassExplanationSet):
     """
 
     def __init__(self, source_x, source_y, target_x, config, *, source_mean,
-                 source_scale, **mixture_mass_options):
+                 source_scale, target_posterior_power=1., **mixture_mass_options):
         source = np.asarray(source_x, dtype=np.float64)
         mean, scale = np.asarray(source_mean, dtype=np.float64), np.asarray(source_scale, dtype=np.float64)
         if (source.ndim != 2 or not source.shape[1] or mean.shape != (source.shape[1],)
@@ -63,6 +63,11 @@ class AngularMixtureMassExplanationSet(MixtureMassExplanationSet):
         if not np.isfinite(self.angular_floor) or self.angular_floor <= 0:
             raise ValueError("Angular coordinate floor must be finite and positive")
         self.angular_active = source.shape[1] > 2
+        if (isinstance(target_posterior_power, (bool, np.bool_)) or not np.isscalar(target_posterior_power)
+                or not np.isfinite(target_posterior_power) or not 0 < target_posterior_power <= 1):
+            raise ValueError("target_posterior_power must be finite and in (0, 1]")
+        self.requested_target_posterior_power = float(target_posterior_power)
+        self.target_posterior_power = self.requested_target_posterior_power if self.angular_active else 1.
         with np.errstate(over="raise", invalid="raise", divide="raise"):
             self.density_origin_offset = _readonly(mean/scale if self.angular_active else np.zeros_like(mean))
         super().__init__(source_x, source_y, target_x, config, **mixture_mass_options)
@@ -112,6 +117,19 @@ class AngularMixtureMassExplanationSet(MixtureMassExplanationSet):
         self.fit_report["unpenalized_likelihood_measure"] = (
             "projected angular density; not a likelihood on original raw embeddings"
             if self.angular_active else "original <=2D synthetic density")
+        self.fit_report["target_posterior_power"] = dict(
+            requested=self.requested_target_posterior_power, effective=self.target_posterior_power,
+            active=self.target_posterior_power != 1.,
+            formula="q_beta=softmax(beta*(source_class_log_density+log_mixture_weight))",
+            joint="original target marginal p_theta(x) times q_beta(y|x)",
+            raw_marginal_and_CDF_unchanged=True, raw_marginal_gradient_uses_unpowered_posterior=True,
+            separation_and_mass_gradient_include_power=True,
+            mixing_prior_scope="raw marginal mixture weights; need not equal integrated q_beta class masses",
+            low_dimension_rule="full dimension <=2: effective beta=1, exact previous S behavior",
+            classifier_logits_unchanged=True, update_features_unchanged=True,
+            mass_anchor="unchanged original full-coordinate B0 probabilities on A")
+        self.fit_report["mass_penalty"]["posterior_model"] = (
+            "source class GMM target posterior with effective power " + str(self.target_posterior_power))
         return reference
 
 

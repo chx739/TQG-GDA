@@ -111,6 +111,12 @@ def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None, *, sour
         raise ValueError(f'Unregistered density coordinates: {coordinates}')
     if coordinates == 'angular_raw_origin_v1' and variant != 'mixture_mass_v1':
         raise ValueError('Angular density coordinates are registered only for mixture_mass_v1')
+    power = plan.get('target_posterior_power', 1.)
+    if (isinstance(power, (bool, np.bool_)) or not np.isscalar(power)
+            or not np.isfinite(power) or not 0 < power <= 1):
+        raise ValueError('target_posterior_power must be finite and in (0, 1]')
+    if power != 1. and (variant != 'mixture_mass_v1' or coordinates != 'angular_raw_origin_v1'):
+        raise ValueError('Target posterior power is registered only for angular mixture_mass_v1')
     if variant == 'stock':
         return ExplanationSet(source_x, source_y, target_x, cfg)
     if variant == 'restore_trust_v1':
@@ -140,7 +146,7 @@ def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None, *, sour
         if variant in ('posterior_mass_v1', 'mixture_mass_v1'):
             options.update(plan['posterior_mass_options'])
         if coordinates == 'angular_raw_origin_v1':
-            options.update(source_mean=source_mean, source_scale=source_scale)
+            options.update(source_mean=source_mean, source_scale=source_scale, target_posterior_power=power)
         return family_class(source_x, source_y, target_x, cfg,
                             source_head_normal=v0[1, :-1] - v0[0, :-1], **options)
     raise ValueError(f'Unregistered separation algorithm: {variant}')
@@ -163,7 +169,7 @@ def fitter_source_files(plan):
     if variant in ('posterior_mass_v1', 'mixture_mass_v1'):
         files.append('posterior_mass_explanations.py')
     if plan.get('density_coordinates') == 'angular_raw_origin_v1':
-        files.extend(['angular_explanations.py', 'coverage.py', 'stage_s.py', 'stage_p.py', 'stage_c.py'])
+        files.extend(['angular_explanations.py', 'coverage.py', 'stage_s.py', 'stage_p.py', 'stage_c.py', 'stage_d.py'])
     if 'source_refit' in plan:
         files.extend(['source_refit_inputs.py', 'source_refit_stage.py', 'r5_inputs.py',
                       'stage_s.py', 'stage_p.py', 'stage_c.py'])
@@ -191,6 +197,8 @@ def assert_density_execution(plan, executed):
         raise ValueError('Passed phase executed different density coordinates')
     if executed.get('source_refit') != plan.get('source_refit'):
         raise ValueError('Passed phase recorded a different source-refit branch')
+    if executed.get('target_posterior_power', 1.) != plan.get('target_posterior_power', 1.):
+        raise ValueError('Passed phase executed a different target posterior power')
 
 
 def fit_block(plan, seed, block, *, phase='S'):

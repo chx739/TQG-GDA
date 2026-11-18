@@ -287,6 +287,7 @@ def run(plan_path, root, s_output, workers, repo):
                                                    independent_audit=p['independent_audit'],
                                                    separation_variant=plan.get('separation_variant', 'stock'),
                                                    density_coordinates=plan.get('density_coordinates', 'source_standardized_v1'),
+                                                   target_posterior_power=plan.get('target_posterior_power', 1.),
                                                    source_refit=plan.get('source_refit'),
                                                    source_refit_applied=bool(source_roots),
                                                    common=[config(plan, seed, tau).to_dict()

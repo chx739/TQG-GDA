@@ -22,6 +22,108 @@ from tsba.shared_update.solver import _partition, _risk_terms, relative_risks, s
 
 
 class SharedUpdateTests(unittest.TestCase):
+    def test_round_local_powered_posterior_full_dimension_gradients_and_replay(self):
+        prefix = 'experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src.'
+        fit = importlib.import_module(prefix+'fit')
+        mixture = importlib.import_module(prefix+'mixture_explanations')
+        independent_search = importlib.import_module(prefix+'separation_audit').independent_search
+        rng = np.random.default_rng(1119)
+        labels = np.repeat([0, 1], 32)
+        raw = rng.normal(size=(64, 16))
+        raw[:, 0] += .8*(2*labels-1)
+        mean, scale = raw.mean(0), raw.std(0)
+        source, target = (raw-mean)/scale, rng.normal(size=(19, 16))
+        normal, bias = rng.normal(size=16)*.25, -.1
+        v0 = np.stack((-np.r_[normal, bias]/2, np.r_[normal, bias]/2))
+        cfg = SharedUpdateConfig(seed=57, inner_starts=2, inner_maxiter=100, search_rounds=2, tau=.015)
+        plan = dict(separation_variant='mixture_mass_v1', density_coordinates='angular_raw_origin_v1',
+                    source_mixture_options=dict(component_counts=[1], mixture_n_init=1),
+                    posterior_mass_options=dict(mass_weight=1., mass_floor=1e-8))
+        def family(power=None, query=target, dimension=16):
+            options = plan if power is None else plan | dict(target_posterior_power=power)
+            head = np.column_stack((v0[:, :dimension], v0[:, -1]))
+            return fit.explanation_family(options, source[:, :dimension], labels, query[:, :dimension], cfg,
+                                          head, source_mean=mean[:dimension], source_scale=scale[:dimension])
+        old, one, powered = family(), family(1.), family(.5)
+        theta = old._initial+np.array([.06, -.04, .03, -.02, .17])
+        correction = rng.normal(size=(len(target), 2))
+        for parameters in (old._initial, theta):
+            for name, args in (('_observation', ()), ('_separation', (correction,))):
+                a, b = getattr(old, name)(parameters, *args), getattr(one, name)(parameters, *args)
+                np.testing.assert_array_equal(a[0], b[0])
+                np.testing.assert_array_equal(a[1], b[1])
+            raw_terms = old._target_terms(parameters)
+            q = powered._target_terms(parameters)[-1]
+            np.testing.assert_allclose(q, softmax(.5*(raw_terms[5]+np.log(raw_terms[3])), axis=1), atol=1e-15, rtol=0)
+            self.assertGreater(np.max(np.abs(q-raw_terms[-1])), 1e-3)
+            np.testing.assert_array_equal(mixture.MixtureExplanationSet._observation(powered, parameters)[0],
+                                          mixture.MixtureExplanationSet._observation(old, parameters)[0])
+            np.testing.assert_array_equal(mixture.MixtureExplanationSet._observation(powered, parameters)[1],
+                                          mixture.MixtureExplanationSet._observation(old, parameters)[1])
+            np.testing.assert_array_equal(powered.marginal_cdf(parameters, powered.target),
+                                          old.marginal_cdf(parameters, old.target))
+            np.testing.assert_allclose(powered._candidate(parameters).statistic,
+                                       q.T@powered.features/len(target), atol=1e-15, rtol=0)
+            functions = [powered._observation, lambda p: powered._mass_penalty(p)[:2],
+                         lambda p: powered._separation(p, correction),
+                         lambda p: mixture.MixtureExplanationSet._observation(powered, p)]
+            for function in functions:
+                _, gradient = function(parameters)
+                numerical = [(function(parameters+1e-6*axis)[0]-function(parameters-1e-6*axis)[0])/2e-6
+                             for axis in np.eye(len(parameters))]
+                np.testing.assert_allclose(gradient, numerical, atol=5e-7, rtol=2e-5)
+        np.testing.assert_array_equal(powered.features, old.features)
+        np.testing.assert_array_equal(powered.mass_reference_probabilities, old.mass_reference_probabilities)
+        np.testing.assert_array_equal(powered.mass_reference_probabilities[1], expit(target@normal+bias).mean())
+        # Entire fitting/separation/master path, without changing the raw head.
+        z = powered.features@v0.T
+        frozen_z = z.copy()
+        w, result = solve_shared_update(z, powered.features, powered, cfg)
+        self.assertEqual(result['status'], 'completed', result)
+        np.testing.assert_array_equal(z, frozen_z)
+        self.assertEqual(powered.threshold, powered.reference_loss+cfg.tau)
+        for candidate in result['candidates']:
+            q = powered._target_terms(candidate['parameters'])[-1]
+            direct_risk = np.mean(np.sum(q*(logsumexp(z+powered.features@w.T, axis=1)[:, None]
+                                      -logsumexp(z, axis=1)[:, None]-powered.features@w.T), axis=1))
+            np.testing.assert_allclose(relative_risks(z, powered.features, w, [candidate['statistic']])[0],
+                                       direct_risk, atol=2e-14, rtol=0)
+        candidates, audit = independent_search(powered, correction, seed=7058, starts=1, maxiter=80,
+                                               known=[powered.fit()])
+        self.assertEqual(audit['fresh_optimizer_launches'], 1)
+        self.assertTrue(candidates)
+        for candidate in candidates:
+            self.assertLessEqual(candidate.observation_loss, powered.threshold+cfg.feasibility_tol)
+            np.testing.assert_allclose(candidate.statistic,
+                powered._target_terms(candidate.parameters)[-1].T@powered.features/len(target), atol=1e-15, rtol=0)
+        held = rng.normal(size=(11, 16))
+        replay = family(.5, held)
+        together = family(.5, np.vstack((target, held)))
+        np.testing.assert_array_equal(replay.projection_basis, powered.projection_basis)
+        np.testing.assert_allclose(replay._target_terms(theta)[-1], together._target_terms(theta)[-1][len(target):],
+                                   atol=1e-15, rtol=0)
+        for a, b in zip(replay.source_templates, powered.source_templates):
+            for key in a:
+                np.testing.assert_array_equal(a[key], b[key])
+        report = powered.fit_report['target_posterior_power']
+        self.assertEqual(report['effective'], .5)
+        self.assertTrue(report['raw_marginal_gradient_uses_unpowered_posterior'])
+        json.dumps(powered.fit_report, allow_nan=False)
+        # The analytical S gate keeps precisely the old 2D numerical branch.
+        small_old, small = family(dimension=2), family(.5, dimension=2)
+        self.assertEqual(small.target_posterior_power, 1.)
+        a, b = small_old.fit(), small.fit()
+        np.testing.assert_array_equal(a.parameters, b.parameters)
+        np.testing.assert_array_equal(a.statistic, b.statistic)
+        self.assertEqual(a.observation_loss, b.observation_loss)
+        np.testing.assert_array_equal(small._separation(theta, correction)[1], small_old._separation(theta, correction)[1])
+        for invalid in (0., -1., 1.01, True, float('nan')):
+            with self.assertRaises(ValueError):
+                family(invalid)
+        with self.assertRaisesRegex(ValueError, 'only for angular'):
+            fit.explanation_family(plan | dict(density_coordinates='source_standardized_v1', target_posterior_power=.5),
+                                   source, labels, target, cfg, v0)
+
     def test_round_local_source_refit_schedules_once_and_reuses_pilot_checkpoints(self):
         module = importlib.import_module(
             'experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src.source_refit_stage')
@@ -55,23 +157,29 @@ class SharedUpdateTests(unittest.TestCase):
         stage_s = importlib.import_module(prefix+'stage_s')
         stage_p = importlib.import_module(prefix+'stage_p')
         stage_c = importlib.import_module(prefix+'stage_c')
+        nci1_inputs = importlib.import_module(prefix+'nci1_inputs')
         from experiments.common.io import digest
 
-        plan = dict(separation_variant='mixture_mass_v1', density_coordinates='angular_raw_origin_v1',
+        plan = dict(separation_variant='mixture_mass_v1', density_coordinates='angular_raw_origin_v1', target_posterior_power=.5,
                     shared_update={}, controls={}, source_mixture_options={}, posterior_mass_options={},
                     real_model_seeds=[0], phases=dict(S=dict(width_grid=[.005]),
-                    P=dict(width_grid=[.005], independent_audit={}), C={}))
-        for phase in ('S', 'P'):
+                    P=dict(width_grid=[.005], independent_audit={}), C={}, D=dict(width_grid=[.005])))
+        for phase in ('S', 'P', 'D'):
             view = stage_s._worker_plan(plan, phase)
             self.assertEqual(view['density_coordinates'], plan['density_coordinates'])
             self.assertEqual(view['separation_variant'], plan['separation_variant'])
+            self.assertEqual(view['target_posterior_power'], .5)
         view = stage_c._fit_view(plan, .005)
         self.assertEqual(view['density_coordinates'], plan['density_coordinates'])
         self.assertEqual(stage_s._worker_plan(view, 'P')['density_coordinates'], plan['density_coordinates'])
-        for stage in (stage_p, stage_c):
+        self.assertEqual(view['target_posterior_power'], .5)
+        self.assertEqual(stage_s._worker_plan(view, 'P')['target_posterior_power'], .5)
+        for stage in (stage_p, stage_c, nci1_inputs):
             self.assertIs(stage.assert_fitter_sources, fit.assert_fitter_sources)
             self.assertIs(stage.assert_density_execution, fit.assert_density_execution)
-            stage.assert_density_execution(plan, dict(density_coordinates=plan['density_coordinates']))
+            stage.assert_density_execution(plan, dict(density_coordinates=plan['density_coordinates'], target_posterior_power=.5))
+            with self.assertRaisesRegex(ValueError, 'posterior power'):
+                stage.assert_density_execution(plan, dict(density_coordinates=plan['density_coordinates']))
             with self.assertRaisesRegex(ValueError, 'density coordinates'):
                 stage.assert_density_execution(plan, {})
             with self.assertRaisesRegex(ValueError, 'density coordinates'):

@@ -68,7 +68,7 @@ def _leaf_paths(root, specs, filenames):
 def _worker_plan(plan, phase):
     worker_plan = {key: plan[key] for key in ('shared_update', 'controls')}
     worker_plan['separation_variant'] = plan.get('separation_variant', 'stock')
-    for key in ('source_mixture_options', 'posterior_mass_options', 'density_coordinates'):
+    for key in ('source_mixture_options', 'posterior_mass_options', 'density_coordinates', 'target_posterior_power'):
         if key in plan:
             worker_plan[key] = plan[key]
     worker_plan['phases'] = {phase: {key: plan['phases'][phase][key]
@@ -208,6 +208,7 @@ def run(plan_path, root, workers, repo):
                                                    threads_per_worker=torch.get_num_threads(), dtype='float64',
                                                    separation_variant=plan.get('separation_variant', 'stock'),
                                                    density_coordinates=plan.get('density_coordinates', 'source_standardized_v1'),
+                                                   target_posterior_power=plan.get('target_posterior_power', 1.),
                                                    source_refit=plan.get('source_refit'), source_refit_applied=False,
                                                    world_ids=[world['id'] for world in stage_config['worlds']],
                                                    common=common, numpy=np.__version__, scipy=scipy.__version__,
