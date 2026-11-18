@@ -122,6 +122,18 @@ class SharedUpdateTests(unittest.TestCase):
         expected = expit((target[:, 1] - target[:, 0]) / cfg.variance_floor)
         np.testing.assert_allclose(q, expected, atol=3e-7, rtol=0.)
 
+    def test_posterior_with_unequal_variances_near_a_narrow_class_mean(self):
+        source = np.array([[0.], [0.], [.6], [1.4]])
+        for floor in (1e-12, 1e-20):
+            with self.subTest(variance_floor=floor):
+                point = np.sqrt(floor * (np.log(.16 / floor) + 6.25 + 3))
+                family = ExplanationSet(source, np.array([0, 0, 1, 1]), [[point]],
+                                        SharedUpdateConfig(variance_floor=floor))
+                *_, normalizer, posterior = family._target_terms(family._initial)
+                log_components = norm.logpdf(point, loc=[0., 1.], scale=[np.sqrt(floor), .4]) - np.log(2.)
+                np.testing.assert_allclose(posterior[0], softmax(log_components), atol=1e-13, rtol=0.)
+                self.assertAlmostEqual(normalizer[0], logsumexp(log_components), places=12)
+
     def test_master_gradient_and_prediction_preserve_logit_differences_at_large_scale(self):
         cases = [([1., 0., 0.], [1e18, 1e18, -2e18], [1., 0., -np.inf]),
                  ([1e18, 0., 1.], [-1e18, 0., 0.], [0., 0., 1.]),

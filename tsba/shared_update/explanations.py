@@ -133,21 +133,32 @@ class ExplanationSet:
         scale_x = self.target * np.exp(log_scale)
         difference = scale_x[:, None, :] + shift - mean
         inverse_variance = np.exp(-log_variance)
-        # Factor differences to a reference class in each coordinate before
-        # summing. Subtracting two large squared distances can lose a class
-        # gap even when the softmax itself is stable.
-        coordinate_energy = -0.5 * (log_variance + difference ** 2 * inverse_variance)
+        squared = difference ** 2 * inverse_variance
+        coordinate_energy = -0.5 * (log_variance + squared)
         reference = coordinate_energy.argmax(axis=1, keepdims=True)
         coordinate_offset = np.take_along_axis(coordinate_energy, reference, axis=1)
+        direct = coordinate_energy - coordinate_offset
+
+        # Subtraction can lose a small gap between distant class densities.
+        # Factoring that subtraction helps only when its terms are smaller:
+        # near a narrow class mean, factoring can create a worse cancellation.
         reference_diff = np.take_along_axis(difference, reference, axis=1)
-        reference_mean = np.take_along_axis(mean[None, :, :], reference, axis=1)
-        reference_log_var = np.take_along_axis(log_variance[None, :, :], reference, axis=1)
-        log_var_gap = log_variance - reference_log_var
-        inverse_var_gap = (np.sign(log_var_gap) * np.maximum(inverse_variance, np.exp(-reference_log_var))
-                           * np.expm1(-np.abs(log_var_gap)))
-        squared_gap = ((reference_mean - mean) * (difference + reference_diff) * inverse_variance
-                       + reference_diff ** 2 * inverse_var_gap)
-        relative_energy = -0.5 * (log_var_gap + squared_gap).sum(axis=2)
+        reference_mean = np.take_along_axis(mean[None], reference, axis=1)
+        reference_log_var = np.take_along_axis(log_variance[None], reference, axis=1)
+        reference_squared = np.take_along_axis(squared, reference, axis=1)
+        direct_scale = np.maximum(np.maximum(squared, reference_squared),
+                                  np.maximum(np.abs(log_variance), np.abs(reference_log_var)))
+        # A non-finite factored alternative does not invalidate the direct result.
+        with np.errstate(over="ignore", invalid="ignore"):
+            log_var_gap = log_variance - reference_log_var
+            inverse_var_gap = (np.sign(log_var_gap) * np.maximum(inverse_variance, np.exp(-reference_log_var))
+                               * np.expm1(-np.abs(log_var_gap)))
+            mean_term = (reference_mean - mean) * (difference + reference_diff) * inverse_variance
+            variance_term = reference_diff ** 2 * inverse_var_gap
+            factored = -0.5 * (log_var_gap + (mean_term + variance_term))
+            factored_scale = np.maximum(np.abs(log_var_gap), np.maximum(np.abs(mean_term), np.abs(variance_term)))
+        use_factored = np.isfinite(factored) & (factored_scale < direct_scale)
+        relative_energy = np.where(use_factored, factored, direct).sum(axis=2)
         class_offset = relative_energy.max(axis=1, keepdims=True)
         log_joint = relative_energy - class_offset + np.log(prior)
         log_norm = logsumexp(log_joint, axis=1)
