@@ -15,3 +15,5 @@
 [第五轮源混合模板](iteration-05.md)
 
 [第六轮冻结源后验](iteration-06.md)
+
+[第七轮目标类别质量约束](iteration-07.md)

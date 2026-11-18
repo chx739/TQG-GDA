@@ -30,7 +30,7 @@ def main():
     round_dir = Path(__file__).resolve().parents[1]
     plan = args.plan or round_dir / 'configs' / 'r7-plan.json'
     if args.command == 'check':
-        from ..src import anchored_explanations, matched_tsba, mixture_explanations, paired, posterior_anchored_explanations, projected_explanations, stage_p
+        from ..src import anchored_explanations, matched_tsba, mixture_explanations, paired, posterior_anchored_explanations, posterior_mass_explanations, projected_explanations, stage_p
 
         stage_s.controls.check_controls()
         paired.check_paired()
@@ -39,6 +39,7 @@ def main():
         anchored_explanations.check_anchored_explanations()
         mixture_explanations.check_mixture_explanations()
         posterior_anchored_explanations.check_posterior_anchored_explanations()
+        posterior_mass_explanations.check_posterior_mass_explanations()
         stage_p.check_gate(stage_s.json_read(plan))
         with TemporaryDirectory() as folder:
             stage_s.check_seals(Path(folder) / 'seals')

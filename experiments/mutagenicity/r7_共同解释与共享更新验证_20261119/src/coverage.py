@@ -288,12 +288,15 @@ def diagnostics(cfg, fit, standard, held, truth, observed, detail_j, *, plan=Non
     holdout_true_risk = float(relative_risks(holdout_z0, holdout_u, correction, moments["holdout_true"][None])[0])
     holdout_worst = float(relative_risks(holdout_z0, holdout_u, correction, holdout_bank).max())
     cdf = _cdf_diagnostic(family, reference_parameters, holdout_u[:, :-1])
+    augmented = (plan or {}).get('separation_variant') == 'posterior_mass_v1'
+    fits_raw_threshold = true_loss <= threshold + cfg.feasibility_tol
     return dict(
+        observation_threshold_scope='posterior_mass_penalized_fit' if augmented else 'raw_observation_nll',
         true_in_model_bounds=bool(in_box), true_parameter_box_violation=box_violation,
         true_parameter_exclusion_reason=exclusion_reason,
         true_observation_loss=true_loss, true_observation_threshold=threshold,
-        true_likelihood_within_threshold=bool(true_loss <= threshold + cfg.feasibility_tol),
-        true_in_observation_set=bool(in_box and true_loss <= threshold + cfg.feasibility_tol),
+        true_likelihood_within_threshold=None if augmented else bool(fits_raw_threshold),
+        true_in_observation_set=(None if in_box else False) if augmented else bool(in_box and fits_raw_threshold),
         true_moment_distance=hulls["true"]["distance"], source_moment_distance=hulls["source"]["distance"],
         holdout_true_moment_distance=hulls["holdout_true"]["distance"],
         holdout_source_moment_distance=hulls["holdout_source"]["distance"],

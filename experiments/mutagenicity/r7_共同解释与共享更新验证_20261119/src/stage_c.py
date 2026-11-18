@@ -170,7 +170,8 @@ def _prepare_block(plan, repo, root, block, task, reused_input=None):
 def _fit_view(plan, tau):
     return dict(shared_update=plan['shared_update'], controls=plan['controls'],
                 separation_variant=plan.get('separation_variant', 'stock'),
-                source_mixture_options=plan.get('source_mixture_options', {}), phases={
+                source_mixture_options=plan.get('source_mixture_options', {}),
+                posterior_mass_options=plan.get('posterior_mass_options', {}), phases={
                     'S': {'width_grid': [tau]},
                     'P': {'width_grid': [tau], 'independent_audit': plan['phases']['P']['independent_audit']},
                     'C': plan['phases']['C'],

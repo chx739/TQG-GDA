@@ -71,8 +71,9 @@ def _fit(plan, root, specs, workers, *, phase='S'):
     with ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context('spawn')) as pool:
         worker_plan = {key: plan[key] for key in ('shared_update', 'controls')}
         worker_plan['separation_variant'] = plan.get('separation_variant', 'stock')
-        if 'source_mixture_options' in plan:
-            worker_plan['source_mixture_options'] = plan['source_mixture_options']
+        for key in ('source_mixture_options', 'posterior_mass_options'):
+            if key in plan:
+                worker_plan[key] = plan[key]
         worker_plan['phases'] = {phase: {key: plan['phases'][phase][key]
                                        for key in ('width_grid', 'independent_audit')
                                        if key in plan['phases'][phase]}}
