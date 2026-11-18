@@ -31,3 +31,14 @@ python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119
 两分支的 S 均通过，评分表逐字节一致。正确设定和角度偏移分别有 5/5 和 4/5 个种子满足门槛，期望 NLL 平均差分别为 −0.00392 和 −0.01114。无偏移均值差为 +0.00004。这里两分支共用同一解析源模型，sum/mean 的效果以真实 P 的独立源模型结果为准。[sum S 门槛](../results/iteration-10/sum/S/gate.json) · [mean S 门槛](../results/iteration-10/mean/S/gate.json)
 
 两个 P 的输入已封存。五对真实源模型的初始权重哈希完全相同。fresh sum 的源 fit 与目标 A 表示和 B0 logits 分别在 10/10 块与第八轮缓存逐值一致，说明 fresh sum 在这批图上复现了原源模型输入。
+
+两个真实 P 均未通过。两分支的十组主比较和独立局部分离审计均完成，搜索未发现有害可行解释。下表使用留出 H 和主宽度 τ=0.005，BA 差用百分点表示。
+
+| 方向 | `B0_mean−B0_sum` ΔNLL / ΔBA | `J_sum−B0_sum` ΔNLL / ΔBA | `J_mean−B0_mean` ΔNLL / ΔBA |
+| --- | ---: | ---: | ---: |
+| M0→M1 | −0.01974 / +0.535 | +0.02296 / +0.493 | −0.00600 / −0.178 |
+| M0→M3 | +0.27789 / +1.038 | +0.05002 / −1.072 | −0.19376 / −1.693 |
+
+mean 分支在 M3 的 B0 NLL 明显更高。J 改善了这一分支的 NLL，五个种子均下降，但其 BA 降幅的配对区间为 [−3.09, −0.31]，五个种子均无正净纠错。仅将同一分支 B0 logits 乘 0.5 就可降低 0.26285 NLL，分类结果与其 B0 相同。M1 的 mean J 仅有 2/5 个种子降低 NLL。
+
+在 M3，readout 对适配增益的差中之差为 −0.24378 NLL 和 −0.621 个百分点 BA。mean 读出改变了源模型以及后续更新的置信度表现，尚未获得额外的分类纠错证据。共同解释的下一项验证干预候选标签条件分布的置信度。后验强度变化会进入候选风险和重新优化，真实评价仍按原门槛执行。[sum P 门槛](../results/iteration-10/sum/P/gate.json) · [mean P 门槛](../results/iteration-10/mean/P/gate.json) · [完整配对](../results/iteration-10/diagnostics/pooling-pair.json)

@@ -1,0 +1,3034 @@
+{
+  "root": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-013/P",
+  "execution_commit": "fa8c76eac177c868888d599c13bf74bbae9b6587",
+  "provenance_sha256": "59303bf8a002c0f6a5a59947b1de17721fa425ae4a771ea24582b6488c9771dc",
+  "files": {
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/fit_input.npz": {
+      "bytes": 145668,
+      "sha256": "6b2448b0f2ab8019af33209a6c3a9bf1299b92729f68c94908764c13bbf9d67e"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/holdout_input.npz": {
+      "bytes": 28081,
+      "sha256": "b5646b641c2a4073956403954cad2254fee1f0941dc2c03432e8aa79292c9d5a"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/holdout_standardization.npz": {
+      "bytes": 44403,
+      "sha256": "c79622197a9083b821f93088741077ff52c3944ba6b6891703a45e8b426d6a5f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/manifest.json": {
+      "bytes": 105137,
+      "sha256": "1915559fb703c0768ec5ac85840b396166e1a2ccc3636a303a44a16da7b4eb47"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/standardization.npz": {
+      "bytes": 217775,
+      "sha256": "74397177f214df5f5b8750086eb0527cc25250929586efcddf1e8c8f1a16df8f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.005-heldout.npz": {
+      "bytes": 95209,
+      "sha256": "881df8c607cdcd27569a1c6be93f1adff6336026992e1a362de1ddd59689ba7b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.005-observed.json": {
+      "bytes": 183335,
+      "sha256": "c9069cfc772d6b03e36aa565102c06d3832e6db481f0754d161d82d19eb801f6"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.005-observed.npz": {
+      "bytes": 244562,
+      "sha256": "037bb438cbc9ac7e33d5211c10a88fe0eaf46ac8fe2277e7a616c6c4e20b4295"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.005-oracle.json": {
+      "bytes": 1305,
+      "sha256": "afafc8b8b4724980a91ca69115c2e2f0ed8a7bcb3ddb2736039f271881aa0acd"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.005-oracle.npz": {
+      "bytes": 28241,
+      "sha256": "e376ba2c985e2b66f39b5c9a37338692f789a64e41f08694f655ddf54d75c448"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.010-heldout.npz": {
+      "bytes": 47220,
+      "sha256": "dcc7ec22d81ada963eec20cee87853575b8bc321f03e56d6ff50907da208999a"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.010-observed.json": {
+      "bytes": 71865,
+      "sha256": "a51c1807d04f6d28e20ae98992edb2ffa73c8198c30967918a268c1ac6a942fb"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.010-observed.npz": {
+      "bytes": 117541,
+      "sha256": "c31d0518c348e989ee3547175549b30613edd32b55193a5fbabca726be1e9afa"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.010-oracle.json": {
+      "bytes": 1305,
+      "sha256": "afafc8b8b4724980a91ca69115c2e2f0ed8a7bcb3ddb2736039f271881aa0acd"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.010-oracle.npz": {
+      "bytes": 28241,
+      "sha256": "e376ba2c985e2b66f39b5c9a37338692f789a64e41f08694f655ddf54d75c448"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.020-heldout.npz": {
+      "bytes": 47338,
+      "sha256": "cbb17f0e488c6f2e66b4baf9df9ac1dd75e143137dbeb60a0e71f86356e89205"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.020-observed.json": {
+      "bytes": 85081,
+      "sha256": "e74b1768e96776e89839a29ef7811191ab6401a4934392be68b3c0ccd9d19dcd"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.020-observed.npz": {
+      "bytes": 118332,
+      "sha256": "9cf56afb90450d2c21cc2fbf6e633d77bc4f6a7f8314ea5a838ee1eedc0c9daf"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.020-oracle.json": {
+      "bytes": 1305,
+      "sha256": "afafc8b8b4724980a91ca69115c2e2f0ed8a7bcb3ddb2736039f271881aa0acd"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/tau-0.020-oracle.npz": {
+      "bytes": 28241,
+      "sha256": "e376ba2c985e2b66f39b5c9a37338692f789a64e41f08694f655ddf54d75c448"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3405/validation_input.npz": {
+      "bytes": 19913,
+      "sha256": "da14763fd308b9a08b321245f5e831598af8c1e7139853d523c6abddf9004589"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/fit_input.npz": {
+      "bytes": 144448,
+      "sha256": "0be6945d9780c5248e052f684b1f8b2611fd16e3dd236bfdb2e468cbb12c249a"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/holdout_input.npz": {
+      "bytes": 27758,
+      "sha256": "68919dadf52fbbf1f7065206800ec3baffe51790f243df1f32be02dcbb203e8c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/holdout_standardization.npz": {
+      "bytes": 44312,
+      "sha256": "ba7355e40480fffc65f07a8b47da7c7e6d562385b9f12fdb958dbdb6efa42bd8"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/manifest.json": {
+      "bytes": 105123,
+      "sha256": "8aea42f3a2c1ffacde12dcfd1f4d0f0bfbdfa44619ba29f65622a5ac5cc6f3a9"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/standardization.npz": {
+      "bytes": 217387,
+      "sha256": "74e36a25a711601d23948824d6706a3e363b1591a823aac500dfbc2e541caf0e"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.005-heldout.npz": {
+      "bytes": 96262,
+      "sha256": "6857b0df7a1e38484bf95ef00696a0da7ff6cc8f18780c16c70eff467c6322d9"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.005-observed.json": {
+      "bytes": 216183,
+      "sha256": "2ffc5ad64362dd666987d7720f805828649c83871fca96b184a7f19f84281f91"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.005-observed.npz": {
+      "bytes": 245111,
+      "sha256": "ba4d5876ce19171208ac6f659936f28e1c4d631aff41a87dab92af9199b668fd"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.005-oracle.json": {
+      "bytes": 1302,
+      "sha256": "664c3eb2cbbd908ae752b4410a9e08b91cd42ffc86ff18eeb8c555bdc990a39f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.005-oracle.npz": {
+      "bytes": 28091,
+      "sha256": "077bcab501936557dba19c99fcceeb947fae9a1373cd23441ca0d03ddfa8aae8"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.010-heldout.npz": {
+      "bytes": 47967,
+      "sha256": "661f62b6564252994ff7ebb7b931789438bc8385b51c19568b8f54c6566a31df"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.010-observed.json": {
+      "bytes": 192122,
+      "sha256": "a65eb06b5f504f3318c2dd5275ee9ecdc5b1d4b75c50ff460c2b71ac89c97874"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.010-observed.npz": {
+      "bytes": 121219,
+      "sha256": "5f60bf687cf0e0af42d556906fa5f39d32b1ed975f2ec482c34449e6f59b12f9"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.010-oracle.json": {
+      "bytes": 1302,
+      "sha256": "664c3eb2cbbd908ae752b4410a9e08b91cd42ffc86ff18eeb8c555bdc990a39f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.010-oracle.npz": {
+      "bytes": 28091,
+      "sha256": "077bcab501936557dba19c99fcceeb947fae9a1373cd23441ca0d03ddfa8aae8"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.020-heldout.npz": {
+      "bytes": 47985,
+      "sha256": "9d54c1f693885ea3051e06ca62af47667b863c9026d53b39a1eea638674529e3"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.020-observed.json": {
+      "bytes": 205198,
+      "sha256": "dabede915da531edb2a5e82d60345f6b2d4c5f6cec1807aa832d82c40a9adf4a"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.020-observed.npz": {
+      "bytes": 121621,
+      "sha256": "a6e350b5fdea75ba5dfdd912f734e22f8ea5ba91f4c55463f24d5b24d0e1b2dc"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.020-oracle.json": {
+      "bytes": 1302,
+      "sha256": "664c3eb2cbbd908ae752b4410a9e08b91cd42ffc86ff18eeb8c555bdc990a39f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/tau-0.020-oracle.npz": {
+      "bytes": 28091,
+      "sha256": "077bcab501936557dba19c99fcceeb947fae9a1373cd23441ca0d03ddfa8aae8"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3406/validation_input.npz": {
+      "bytes": 19743,
+      "sha256": "a526cb1a5e301e6e5e491e89de1b7e0069b8ca0f59120494cbefb47add20ebf3"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/fit_input.npz": {
+      "bytes": 145548,
+      "sha256": "b04db6aa2efa411c0795992e24a8627b33e189b1dd7c00daae8d4bb5342b1a5d"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/holdout_input.npz": {
+      "bytes": 28142,
+      "sha256": "ca1fb4c898d27b3eb9786bfbe6162df5bc8f1d9dc0390a949dab402e2d230929"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/holdout_standardization.npz": {
+      "bytes": 44434,
+      "sha256": "2775c5fdc11c49e8ae521fcd4f76710898e507df76742bc3bbbf7760b20a6e30"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/manifest.json": {
+      "bytes": 105111,
+      "sha256": "f992de5286f11af031e611a3ccbf9232c7d48b7f457e74241ca923989cc48af2"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/standardization.npz": {
+      "bytes": 217983,
+      "sha256": "78a373963440edce29cf38c197306c15f8355f94dfc2c6d2b11637c315ebd058"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.005-heldout.npz": {
+      "bytes": 98270,
+      "sha256": "219204eeb474f14034c0f586c06123c18e22c56e1ae03d42d0eef558845e4782"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.005-observed.json": {
+      "bytes": 334465,
+      "sha256": "295c67cfb513e2de58f85e34600fd5a4585447235d06287d968b8683e66abeb2"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.005-observed.npz": {
+      "bytes": 254868,
+      "sha256": "6b416bf1794aad69f14c484afa4f485e18e0252ef405c23fb1b7c9a3a080f17c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.005-oracle.json": {
+      "bytes": 1328,
+      "sha256": "418abd72ab633a2f0a9dcc4dbbc2ec86fbf74a4a353b3d9713359ab23df3ae61"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.005-oracle.npz": {
+      "bytes": 28271,
+      "sha256": "6f897358ed63f547a11154a8ccace41cafe9dc8bb43774cd993488b754ffb993"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.010-heldout.npz": {
+      "bytes": 48604,
+      "sha256": "8b4f3d6b6ec4411a7e124bbe98d787db97e46fca0d1d90028afc4b57212bee11"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.010-observed.json": {
+      "bytes": 305077,
+      "sha256": "bb155154310e00af52c700f0226e0cac96e7a530f12af6b6ecd0204cc40d9af7"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.010-observed.npz": {
+      "bytes": 122683,
+      "sha256": "3135df15802ccba10e0aa557f8f5b7df466f1d3a5533f058e1e889e697ca9dd5"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.010-oracle.json": {
+      "bytes": 1328,
+      "sha256": "418abd72ab633a2f0a9dcc4dbbc2ec86fbf74a4a353b3d9713359ab23df3ae61"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.010-oracle.npz": {
+      "bytes": 28271,
+      "sha256": "6f897358ed63f547a11154a8ccace41cafe9dc8bb43774cd993488b754ffb993"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.020-heldout.npz": {
+      "bytes": 49611,
+      "sha256": "d3118b8baed5d86845e98a2e908f85c1ba4c74e11a8df640e25a30ef6bb50ceb"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.020-observed.json": {
+      "bytes": 179806,
+      "sha256": "41b4f6fbd6cab1b52974be71f47c6f33745bed9dc957a511e160f29a1cf36f12"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.020-observed.npz": {
+      "bytes": 125569,
+      "sha256": "71743b695c87064eb8c833b6fa3f3f50f9af290e3bfd02d7db149736b4ff15c9"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.020-oracle.json": {
+      "bytes": 1328,
+      "sha256": "418abd72ab633a2f0a9dcc4dbbc2ec86fbf74a4a353b3d9713359ab23df3ae61"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/tau-0.020-oracle.npz": {
+      "bytes": 28271,
+      "sha256": "6f897358ed63f547a11154a8ccace41cafe9dc8bb43774cd993488b754ffb993"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3407/validation_input.npz": {
+      "bytes": 19785,
+      "sha256": "fe82b414d26e7bb5e93d04b6755990cc73aaf9d3de6b7e8c3f294a1db6db1001"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/fit_input.npz": {
+      "bytes": 145189,
+      "sha256": "bcbd8486c308988ae991b82a457d5b5d0651a7a779315c61362b9c4a92c5491c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/holdout_input.npz": {
+      "bytes": 27937,
+      "sha256": "8d004ebf960a78a423d455ea743e4067be21f6a5ac17ea12d9de40a9a0260a74"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/holdout_standardization.npz": {
+      "bytes": 44342,
+      "sha256": "591324fdb9274198c097447be3cac18fca25c125bdccf84e716752eb36ea708c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/manifest.json": {
+      "bytes": 105116,
+      "sha256": "0eed9f3baf2a7575750aabb1872536dbe73ee48b848cf3b526185b77b14a730c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/standardization.npz": {
+      "bytes": 217512,
+      "sha256": "82733c5f5287f686a020f1d6f12226028b28193bf7ca6129430d8d679f7564c4"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.005-heldout.npz": {
+      "bytes": 95795,
+      "sha256": "69bc0d1b45b3743daffc28f613246baedfc3c601773cb95ac1be0ec582e6464b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.005-observed.json": {
+      "bytes": 222137,
+      "sha256": "72fe5e1e835791026716c750b6d0689cf918cec8ccbc2e51f4a7248e4b7c3d7b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.005-observed.npz": {
+      "bytes": 251964,
+      "sha256": "5d0a842ab025a93ddb0c1331b936f3c646df25dddfcecbeac249dc2bbc1aae72"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.005-oracle.json": {
+      "bytes": 1332,
+      "sha256": "a27ee54bf332d9d99e19c4242a6e33395232861139b1e5304a6972e6bc30925f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.005-oracle.npz": {
+      "bytes": 28535,
+      "sha256": "2c4eebe63ed74a51d77c13f5ed61c05029f99ea707e40aae431d293ae5e5195b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.010-heldout.npz": {
+      "bytes": 47571,
+      "sha256": "fdb9d8548d134d7178797ea7e0107fed5ae733e84655003d947c696f682f7c0d"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.010-observed.json": {
+      "bytes": 142330,
+      "sha256": "f83f2d301e1fe0b5ab8652293acd2d5037d231c4d5788867a3f3097ef00d9dcb"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.010-observed.npz": {
+      "bytes": 119885,
+      "sha256": "6180a429fa0f7f6ee2ad900f37a7f709a68eb73618bc57e20c6316c0e85f4273"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.010-oracle.json": {
+      "bytes": 1332,
+      "sha256": "a27ee54bf332d9d99e19c4242a6e33395232861139b1e5304a6972e6bc30925f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.010-oracle.npz": {
+      "bytes": 28535,
+      "sha256": "2c4eebe63ed74a51d77c13f5ed61c05029f99ea707e40aae431d293ae5e5195b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.020-heldout.npz": {
+      "bytes": 48192,
+      "sha256": "e4e7e50a59f12a5ef7ed02071738a1197c5ec067f3c3b733c84a693fac60f51c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.020-observed.json": {
+      "bytes": 331484,
+      "sha256": "1050caf7f56b252604b0eef326a0fb8484fdfb625beadef55c70de1576ecc14a"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.020-observed.npz": {
+      "bytes": 122104,
+      "sha256": "fc757c9a4d6752a0518b6fb4400aa226c0fb767d69774399943517ed331fcf5d"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.020-oracle.json": {
+      "bytes": 1332,
+      "sha256": "a27ee54bf332d9d99e19c4242a6e33395232861139b1e5304a6972e6bc30925f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/tau-0.020-oracle.npz": {
+      "bytes": 28535,
+      "sha256": "2c4eebe63ed74a51d77c13f5ed61c05029f99ea707e40aae431d293ae5e5195b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3408/validation_input.npz": {
+      "bytes": 19791,
+      "sha256": "c73acd64e52fb5cf4e15e23ccad7276c090c75baf82e22aa67bbea070091aa86"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/fit_input.npz": {
+      "bytes": 144842,
+      "sha256": "52273e30f5f9b340f8cf600bf1d3602629565ed5164d1407fb2156ddfa7b70aa"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/holdout_input.npz": {
+      "bytes": 27856,
+      "sha256": "ad31b9f76bcde7276238860c0f13ba87be87823fa38f4a5f08376d1961732da3"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/holdout_standardization.npz": {
+      "bytes": 44345,
+      "sha256": "42383d19a3ccc65c754b5ab4a65def46cb9c0c234a9292be2af6006d5ebf1f10"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/manifest.json": {
+      "bytes": 105128,
+      "sha256": "a000a8a6009bed4a78a47cde1244fcc0441eda2933d73d65fbb724d530cc49f3"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/standardization.npz": {
+      "bytes": 217270,
+      "sha256": "6a38db451e32bdf73b581a2f9fc2de6f40b526fac9f88ba4e54d7c3a9436e143"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.005-heldout.npz": {
+      "bytes": 96794,
+      "sha256": "84592ffe49e589f9d41cc43b340b03cd4c6c57745fd20b59f0f7a982c2d295d5"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.005-observed.json": {
+      "bytes": 370018,
+      "sha256": "cd2e98581b5595f8193f9cfd0febacf064b2a66c86e0cfb11a9e0dcffeca5a37"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.005-observed.npz": {
+      "bytes": 252786,
+      "sha256": "1139d5dca7089b907f43dbe6138a1971412f50659c82672f2b35bd2e36e376cb"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.005-oracle.json": {
+      "bytes": 1334,
+      "sha256": "1b2b93b5c4ab9c3fe0ce32f7bf5ff38ff7564d2a544626e24a076baec036ad6d"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.005-oracle.npz": {
+      "bytes": 28306,
+      "sha256": "593bca02425d23bf9da5dc0ee9491d9b45b423dd68a04f114033bd563205c650"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.010-heldout.npz": {
+      "bytes": 48061,
+      "sha256": "5109ff3087d79b5185c0fb1234c005df4f46fc202e7e62d593ba47c1631c271b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.010-observed.json": {
+      "bytes": 159860,
+      "sha256": "0885b666dd2d4da5ac8d11cb8bcdc691796a725c38f062fe892a5b5965cc7ddf"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.010-observed.npz": {
+      "bytes": 121166,
+      "sha256": "d03dc8ab1836128277ce319eda40641eeaac06c21db5930a375e13da30d85b0c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.010-oracle.json": {
+      "bytes": 1334,
+      "sha256": "1b2b93b5c4ab9c3fe0ce32f7bf5ff38ff7564d2a544626e24a076baec036ad6d"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.010-oracle.npz": {
+      "bytes": 28306,
+      "sha256": "593bca02425d23bf9da5dc0ee9491d9b45b423dd68a04f114033bd563205c650"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.020-heldout.npz": {
+      "bytes": 49412,
+      "sha256": "220e6c33ec34c686a5a26ed57f46492da3d0f4855aaab1837eb6ae4bb8dc540e"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.020-observed.json": {
+      "bytes": 170488,
+      "sha256": "2603f3fea5a54ea2cfcd75e299a09c2f5690c986d4a5ed9f6cc61411486044ca"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.020-observed.npz": {
+      "bytes": 125003,
+      "sha256": "dbbfda89edbbe982de82e813fe40c14db2620acefd70439dc1bb15337083f576"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.020-oracle.json": {
+      "bytes": 1334,
+      "sha256": "1b2b93b5c4ab9c3fe0ce32f7bf5ff38ff7564d2a544626e24a076baec036ad6d"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/tau-0.020-oracle.npz": {
+      "bytes": 28306,
+      "sha256": "593bca02425d23bf9da5dc0ee9491d9b45b423dd68a04f114033bd563205c650"
+    },
+    "blocks/mutagenicity_edge-M0_to_M1-seed-3409/validation_input.npz": {
+      "bytes": 19870,
+      "sha256": "d93ec6020da16961b3261721a04645b2cd83d29c0f0da361d8df15d918f8cd09"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/fit_input.npz": {
+      "bytes": 143474,
+      "sha256": "c8a04b414aeb0adc64873b9dc837555b85d59726718dd1b26cb72b9eadde6846"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/holdout_input.npz": {
+      "bytes": 30966,
+      "sha256": "6cb826cb92d82dd19055da18a7f3bcd4dcc85f1e8ec040a61d5115937a1f2f7a"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/holdout_standardization.npz": {
+      "bytes": 49101,
+      "sha256": "fc8a444a872467e0c11911065de3d58cdd5383ebd7ce538a6eecd409faa6c5b1"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/manifest.json": {
+      "bytes": 105170,
+      "sha256": "4240d301072e61bc84966ecfd53ec6291f448fd72f115ffb3a3d6c49f0d302dd"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/standardization.npz": {
+      "bytes": 214429,
+      "sha256": "928835e0dad4c62de844e93851b0995736b830543fa73c79ef9e0bf61963b1d3"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.005-heldout.npz": {
+      "bytes": 103225,
+      "sha256": "533ef58dec40abe298dca32469275607741f0e8d37e14dcb7301b61684ef8865"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.005-observed.json": {
+      "bytes": 161901,
+      "sha256": "e4cc670c41b4f3f1d4db7ab00370be50e3b9a2d1b5802a27429ddbc5cbdd71cf"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.005-observed.npz": {
+      "bytes": 235002,
+      "sha256": "c268de050813f8c7f5462db28860b78397bf20f8af297a4769fc7002018667b7"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.005-oracle.json": {
+      "bytes": 1326,
+      "sha256": "3e2e319b42dcaa8f84ffefc0c27b49a267820327684cb0b8c1ecef84678b9ea7"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.005-oracle.npz": {
+      "bytes": 27873,
+      "sha256": "dea6c9d9185f851b303955bfceddad9503dfd645c6813f2b6ddc3429cf363c3c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.010-heldout.npz": {
+      "bytes": 51339,
+      "sha256": "5e62b33fcf794843214036107a2179ae91ad1719662a548783bf6adde9f86fef"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.010-observed.json": {
+      "bytes": 71793,
+      "sha256": "cfd6885ecf7d23558247a12c09828d38edb3244ce98b03f0922f6ad6a77e20a8"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.010-observed.npz": {
+      "bytes": 112945,
+      "sha256": "65157dbd4fe92ea7141f29ee0f6fbfedc545531aec7d195b6cdba4fa19e8e97e"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.010-oracle.json": {
+      "bytes": 1326,
+      "sha256": "3e2e319b42dcaa8f84ffefc0c27b49a267820327684cb0b8c1ecef84678b9ea7"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.010-oracle.npz": {
+      "bytes": 27873,
+      "sha256": "dea6c9d9185f851b303955bfceddad9503dfd645c6813f2b6ddc3429cf363c3c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.020-heldout.npz": {
+      "bytes": 51363,
+      "sha256": "623f98e07b4845cf38203bdd7b8d25fb6d465319a720efb69e7a7081f91d6764"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.020-observed.json": {
+      "bytes": 81972,
+      "sha256": "10ca6d527bc396ad7138979d0bb6b97a84be683924fad8219db67b0ffa0384a5"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.020-observed.npz": {
+      "bytes": 113287,
+      "sha256": "bd74b3c26793febf8bb19957857cefbe97abf0f4a004981789f7581a67415284"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.020-oracle.json": {
+      "bytes": 1326,
+      "sha256": "3e2e319b42dcaa8f84ffefc0c27b49a267820327684cb0b8c1ecef84678b9ea7"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/tau-0.020-oracle.npz": {
+      "bytes": 27873,
+      "sha256": "dea6c9d9185f851b303955bfceddad9503dfd645c6813f2b6ddc3429cf363c3c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3405/validation_input.npz": {
+      "bytes": 19913,
+      "sha256": "da14763fd308b9a08b321245f5e831598af8c1e7139853d523c6abddf9004589"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/fit_input.npz": {
+      "bytes": 142738,
+      "sha256": "4f6cac36f93fff47ce374ba40d16f821d2dd0cf963b2110200bcab401cecf4dc"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/holdout_input.npz": {
+      "bytes": 30821,
+      "sha256": "6e439ac3f5fd15cec79e39f9573f527c9dec89a0d842cc75e415f65b1e1e1cef"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/holdout_standardization.npz": {
+      "bytes": 49050,
+      "sha256": "cf86b347a8ad9e496d7542f4594f0c5098e975eca70c7a577eee8831b8ddd647"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/manifest.json": {
+      "bytes": 105156,
+      "sha256": "94e4e56451bac035d4eef7154dec1ee394c4d143ec7ace1a60404c2067e9fd07"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/standardization.npz": {
+      "bytes": 214252,
+      "sha256": "6ecc4d12365a6719cd704bd7affd3ad0976f7a4630928af41d3ade78a10b3f75"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.005-heldout.npz": {
+      "bytes": 103010,
+      "sha256": "3a47a40281a62cf027f9193404280229742f0d333ca8864cc8a1166b2b3c44d2"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.005-observed.json": {
+      "bytes": 149918,
+      "sha256": "8b8065c853e0f0c80a9b5c67896e1a711a7258457a42c521694f48de971a28db"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.005-observed.npz": {
+      "bytes": 233606,
+      "sha256": "213892c83aa112e937d6df7208944956b4af6013722c1c443194a9e5e7e2594a"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.005-oracle.json": {
+      "bytes": 1317,
+      "sha256": "7a103a7326098833c5260d8d80d156f61a76a1d8e5283dd86175f4a584bb700b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.005-oracle.npz": {
+      "bytes": 27754,
+      "sha256": "b640dfbafff5a3b805a9e725a3bca0f0a76d101b0f0d8fbe30647f06560f6699"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.010-heldout.npz": {
+      "bytes": 51311,
+      "sha256": "ea5640db6a791b9501399af01ff6185db937c1b38a757a6fca8f3375820eab7e"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.010-observed.json": {
+      "bytes": 71583,
+      "sha256": "8d54ae0929015add6863278c4795e8350c84416212137b3fb13c436f9a4be3b2"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.010-observed.npz": {
+      "bytes": 112635,
+      "sha256": "b2f9443abbc82a0fa2b122ad282c1f47e227f061136035dfc89a9c92b87aba29"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.010-oracle.json": {
+      "bytes": 1317,
+      "sha256": "7a103a7326098833c5260d8d80d156f61a76a1d8e5283dd86175f4a584bb700b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.010-oracle.npz": {
+      "bytes": 27754,
+      "sha256": "b640dfbafff5a3b805a9e725a3bca0f0a76d101b0f0d8fbe30647f06560f6699"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.020-heldout.npz": {
+      "bytes": 51309,
+      "sha256": "8739d65493ff58b9857aedd6b0b493d344fb188adb20f0e4b1399194b3d73bce"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.020-observed.json": {
+      "bytes": 71698,
+      "sha256": "6d6ec82f3906d4b513f4f90c14763cf0a42e6449b5a3d83f159e10fc47286a2a"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.020-observed.npz": {
+      "bytes": 112724,
+      "sha256": "981f3549da495c96614a48a516e3b052f835c6ec13c19fc146c829f29b066fc5"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.020-oracle.json": {
+      "bytes": 1317,
+      "sha256": "7a103a7326098833c5260d8d80d156f61a76a1d8e5283dd86175f4a584bb700b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/tau-0.020-oracle.npz": {
+      "bytes": 27754,
+      "sha256": "b640dfbafff5a3b805a9e725a3bca0f0a76d101b0f0d8fbe30647f06560f6699"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3406/validation_input.npz": {
+      "bytes": 19743,
+      "sha256": "a526cb1a5e301e6e5e491e89de1b7e0069b8ca0f59120494cbefb47add20ebf3"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/fit_input.npz": {
+      "bytes": 143454,
+      "sha256": "75a72ee81c4f8e433c676feef257c4c68736054eefbb212215ce23c48e2d0bbf"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/holdout_input.npz": {
+      "bytes": 30919,
+      "sha256": "6a4102dcbba5cceff505d6c3c78f355e33f5faa3ecc26f08c53096e4f5236d0d"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/holdout_standardization.npz": {
+      "bytes": 49092,
+      "sha256": "df3ae9a47cac776afa0a949ae1f2dfb1cffd02da2b65625de0ebcc7d4a1557ca"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/manifest.json": {
+      "bytes": 105144,
+      "sha256": "00d96ad1d73cbf77f5d8b1d920d8b57caa8d7964ac84f1ce1a7108fd3cee2712"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/standardization.npz": {
+      "bytes": 214742,
+      "sha256": "2c1cc88f0ead2a33176426493ef1f1c46b721a2e15dfce69e2303596b7c33be6"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.005-heldout.npz": {
+      "bytes": 102762,
+      "sha256": "d70d2ce40b44442b10726bdf3632583455f1983abcb7541c00cf37698dbe3fd4"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.005-observed.json": {
+      "bytes": 147200,
+      "sha256": "c74b81198f452348f5bbcb029695332ca4425a204ad9599d0d0e20fc73bc48a1"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.005-observed.npz": {
+      "bytes": 233600,
+      "sha256": "df51ba13f6af4649d8e9d06815584e9bec73e0c448e990ac8605a4717c27531d"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.005-oracle.json": {
+      "bytes": 1325,
+      "sha256": "e629eed798318b69f370bc7891f86a10e4ed5319a1f9c963d64b180c439929c2"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.005-oracle.npz": {
+      "bytes": 27753,
+      "sha256": "d604c42b64f4557f5698083fd7a406968dd40d32556b89e9e2a536e53238dc0f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.010-heldout.npz": {
+      "bytes": 51171,
+      "sha256": "d92e93789bf8e71f361a78ae615d1f2204508913c7af9f01a1bf34baaea70ccc"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.010-observed.json": {
+      "bytes": 65446,
+      "sha256": "1f90b89c5d525eeefaa50ce1f24cf72c00927d4fe7131e2268fd0e0f66c59bbb"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.010-observed.npz": {
+      "bytes": 112444,
+      "sha256": "f5190fbef2676b9a65f9e10d7c01cc1d4076a2792640747f416732039ba1ac1a"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.010-oracle.json": {
+      "bytes": 1325,
+      "sha256": "e629eed798318b69f370bc7891f86a10e4ed5319a1f9c963d64b180c439929c2"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.010-oracle.npz": {
+      "bytes": 27753,
+      "sha256": "d604c42b64f4557f5698083fd7a406968dd40d32556b89e9e2a536e53238dc0f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.020-heldout.npz": {
+      "bytes": 51249,
+      "sha256": "c0b5652e014a0510276e5febf9b89a7d446ecca845a5ac026795df2d2b19c651"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.020-observed.json": {
+      "bytes": 79692,
+      "sha256": "f2d04ffd8d5ea4665ab46b9095236dbd5d89e7923bc109c924a555a61a77fa8f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.020-observed.npz": {
+      "bytes": 112878,
+      "sha256": "e08fb0a7b5cf46462355e6b5d50b07e5d79e8b85aa83d89a7b1298fc38e3b811"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.020-oracle.json": {
+      "bytes": 1325,
+      "sha256": "e629eed798318b69f370bc7891f86a10e4ed5319a1f9c963d64b180c439929c2"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/tau-0.020-oracle.npz": {
+      "bytes": 27753,
+      "sha256": "d604c42b64f4557f5698083fd7a406968dd40d32556b89e9e2a536e53238dc0f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3407/validation_input.npz": {
+      "bytes": 19785,
+      "sha256": "fe82b414d26e7bb5e93d04b6755990cc73aaf9d3de6b7e8c3f294a1db6db1001"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/fit_input.npz": {
+      "bytes": 143216,
+      "sha256": "255b73896c1a9ff14c81b80dbed519aec8380407ead8bb64860746daebfcfa42"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/holdout_input.npz": {
+      "bytes": 30865,
+      "sha256": "c1f4dde3fad5c8ad24462e7cd14b960393c271b97a4c4828897b9a61eb0c2c36"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/holdout_standardization.npz": {
+      "bytes": 48852,
+      "sha256": "5f6562c78b094359b2d964f0fd3cad5a8de7a1cd16d2549d5cdfcff90b2d3f88"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/manifest.json": {
+      "bytes": 105149,
+      "sha256": "48796b96974f177cb2c1b6f85a58f12dedd91a427da078f3506b1b6a8578562c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/standardization.npz": {
+      "bytes": 214002,
+      "sha256": "fc4b2f27236212efc496488984cd9267df4ba8f1c8230e26fead5858dd66f762"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.005-heldout.npz": {
+      "bytes": 102640,
+      "sha256": "57fded807471621eb874f36bc1ea7cd5b0c000114225e79b23b00416e94afe85"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.005-observed.json": {
+      "bytes": 198789,
+      "sha256": "12e839fa23a08f140da53a2dc508c515ce1edb35ad4ad90d242b9662cdc5f50b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.005-observed.npz": {
+      "bytes": 238115,
+      "sha256": "94cc4200f75f103dcbe6e2e93a9c7b5f04b28061f50c37146054f89dfaa44962"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.005-oracle.json": {
+      "bytes": 1325,
+      "sha256": "7bec022469991e6c8f87a50cd621f52df4290b22eff8069525d713dcd917493f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.005-oracle.npz": {
+      "bytes": 27864,
+      "sha256": "164af61930a8e21acdd8f4269a29fee6cdc63153d62f4ee96c62abf491992856"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.010-heldout.npz": {
+      "bytes": 51128,
+      "sha256": "ce31987946b2576937c1f2fdff813c9dbdd95e1e3086e8b05e8a41f65656fba5"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.010-observed.json": {
+      "bytes": 72062,
+      "sha256": "f996e102033e5795d3b450740c2b475a8d3cd59658fb7599a0aac331428c1775"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.010-observed.npz": {
+      "bytes": 112461,
+      "sha256": "73decd378d84919edbaa110bb58ef26aad2621ec2c13d1cfc1bc623f79ae362f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.010-oracle.json": {
+      "bytes": 1325,
+      "sha256": "7bec022469991e6c8f87a50cd621f52df4290b22eff8069525d713dcd917493f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.010-oracle.npz": {
+      "bytes": 27864,
+      "sha256": "164af61930a8e21acdd8f4269a29fee6cdc63153d62f4ee96c62abf491992856"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.020-heldout.npz": {
+      "bytes": 51173,
+      "sha256": "6d332b63469673a7897220258e4881b4629fd5f8549715995bc4ac5a5501ec15"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.020-observed.json": {
+      "bytes": 105696,
+      "sha256": "2e1837a8c9d8b6178f163bd30267a5ed0478ec7ce4b207ecbf81c3434ba3b4c4"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.020-observed.npz": {
+      "bytes": 113855,
+      "sha256": "73bf3547e5d39197c827bbb4425d79eb4fe864660115954ff69622e35a722ce2"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.020-oracle.json": {
+      "bytes": 1325,
+      "sha256": "7bec022469991e6c8f87a50cd621f52df4290b22eff8069525d713dcd917493f"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/tau-0.020-oracle.npz": {
+      "bytes": 27864,
+      "sha256": "164af61930a8e21acdd8f4269a29fee6cdc63153d62f4ee96c62abf491992856"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3408/validation_input.npz": {
+      "bytes": 19791,
+      "sha256": "c73acd64e52fb5cf4e15e23ccad7276c090c75baf82e22aa67bbea070091aa86"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/fit_input.npz": {
+      "bytes": 143147,
+      "sha256": "caa23fdf8d465bd7dc1646a5a06bb47661c077bf8808f5210d846776d3b998e4"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/holdout_input.npz": {
+      "bytes": 30906,
+      "sha256": "d68d5b3e8b5cd5a68d580efbc55d5ad42386304a8b79c0cfb2a2885a6536d7bd"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/holdout_standardization.npz": {
+      "bytes": 49008,
+      "sha256": "ca51c0a542f649d925044433c95898fdbb9d8973e8929a8fcd59661baf3af4bc"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/manifest.json": {
+      "bytes": 105161,
+      "sha256": "1ac8dfd1bd523d2a10e67b9c56b03572447edfd9376963fc2c69f2a2e2f01690"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/standardization.npz": {
+      "bytes": 214100,
+      "sha256": "a538834b1ca6043fcceb6fade64312308cef81862e4ee6ea131222dd63c39b9e"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.005-heldout.npz": {
+      "bytes": 103741,
+      "sha256": "68c145d9d5f3be6842bd4e885862ef8c245a53af85e83d546fb3ac792bc15ee4"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.005-observed.json": {
+      "bytes": 190913,
+      "sha256": "01b24a969da049e4b51939f62be988e06ce717f9663343d0f1ff1b9fc01d0e9c"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.005-observed.npz": {
+      "bytes": 242317,
+      "sha256": "4bfab0fffdbb559093d159276331ee66a782ceb0a389607fff1920c9ac767d7e"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.005-oracle.json": {
+      "bytes": 1334,
+      "sha256": "705b55f9b8f0c3adbb57af1099406f45721b30d52289ff178dc983897cb11a9b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.005-oracle.npz": {
+      "bytes": 27733,
+      "sha256": "2f09d4f20bf7aaf73d18031f8f21d3dd4450271bf6ea225ade4e1c74615a47f4"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.010-heldout.npz": {
+      "bytes": 51481,
+      "sha256": "fee61c90b709bb3f7b187e9643b2090baaa13d46b7f2c1e5b2b482d87b37e68e"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.010-observed.json": {
+      "bytes": 86529,
+      "sha256": "5582500bfd72484d6dc5e61d7a9d7c2a04ae569f40d4cf711899b534de6b4181"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.010-observed.npz": {
+      "bytes": 114129,
+      "sha256": "db4e7ef75c994d1c0025cd6484d77d80a4b58c0c734c99ab6e2dc7dacc01acd2"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.010-oracle.json": {
+      "bytes": 1334,
+      "sha256": "705b55f9b8f0c3adbb57af1099406f45721b30d52289ff178dc983897cb11a9b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.010-oracle.npz": {
+      "bytes": 27733,
+      "sha256": "2f09d4f20bf7aaf73d18031f8f21d3dd4450271bf6ea225ade4e1c74615a47f4"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.020-heldout.npz": {
+      "bytes": 51518,
+      "sha256": "836ed8e4c65a706b7686f245ea4cea80fb570980c018eabfd5ca19ad579ee09a"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.020-observed.json": {
+      "bytes": 106528,
+      "sha256": "9ae400dbc170a11d55962b57632f7d35832d802458017edd0713d8ec1208fffd"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.020-observed.npz": {
+      "bytes": 114804,
+      "sha256": "2ae736de5e6836f6afe7ad932f9729d9312a7d918c657f834471c2f711bbf650"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.020-oracle.json": {
+      "bytes": 1334,
+      "sha256": "705b55f9b8f0c3adbb57af1099406f45721b30d52289ff178dc983897cb11a9b"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/tau-0.020-oracle.npz": {
+      "bytes": 27733,
+      "sha256": "2f09d4f20bf7aaf73d18031f8f21d3dd4450271bf6ea225ade4e1c74615a47f4"
+    },
+    "blocks/mutagenicity_edge-M0_to_M3-seed-3409/validation_input.npz": {
+      "bytes": 19870,
+      "sha256": "d93ec6020da16961b3261721a04645b2cd83d29c0f0da361d8df15d918f8cd09"
+    },
+    "coverage.csv": {
+      "bytes": 8840,
+      "sha256": "af9faab2adb72b646cc08a074922bd82eb065043cbe6b5b1931523eb0062ea93"
+    },
+    "endpoints.csv": {
+      "bytes": 282922,
+      "sha256": "289347b1194bc6b2404dc25b512e8225674d96b9c89c1ee6186aeef8bf19151d"
+    },
+    "executed-configs.json": {
+      "bytes": 8158,
+      "sha256": "71c50786c05b84fbfd56895f72a6f79e95de9899a44d2ed5a12f374374e13dfd"
+    },
+    "executed-plan.json": {
+      "bytes": 17728,
+      "sha256": "c5aa3976d7bd77b69a67140bde1b6239eeadc4689551da691433807fc17997ed"
+    },
+    "gate.json": {
+      "bytes": 1093,
+      "sha256": "c3284fd35cc78ba0a409df58788b7327770b5058cc91c138c6689508702e7c66"
+    },
+    "moments.csv": {
+      "bytes": 66574,
+      "sha256": "a55610ad6bddcccec7a3b3667adf760d9ac574242a0a97d425818953093f3400"
+    },
+    "paired-audit.json": {
+      "bytes": 190517,
+      "sha256": "bc7d21467b6a4e008fdc97174a51dc511266b03e2e4fbc99dde3e952d85a7b20"
+    },
+    "paired.csv": {
+      "bytes": 86012,
+      "sha256": "a737b21a5c84df09ef728392fe2a6040eaccb24b2abc4304624c5fe9558c13f7"
+    },
+    "provenance.json": {
+      "bytes": 141115,
+      "sha256": "59303bf8a002c0f6a5a59947b1de17721fa425ae4a771ea24582b6488c9771dc"
+    },
+    "seals/R7_FINAL.json": {
+      "bytes": 821,
+      "sha256": "e3d09eeb3fe57ee2a2797bc54ffe8989b6b0ecaeff1cd0048e84b462fc00282f"
+    },
+    "seals/R7_INPUT.json": {
+      "bytes": 80933,
+      "sha256": "5697950b2be83c5e6577f2bf852cddf81598302fb05b3c35fa4ebd9c2e4afd24"
+    },
+    "seals/R7_OBS.json": {
+      "bytes": 15841,
+      "sha256": "9bb1b7f048310bde2a0540b9316ddb9c1497f07924239d8b17aa7fdc703be6ae"
+    },
+    "seals/R7_ORACLE.json": {
+      "bytes": 8634,
+      "sha256": "18fdb6c55fae26a811a8a3dd2e219d407543e3e76431afae9dbf9162ca07a75e"
+    },
+    "separation.csv": {
+      "bytes": 333207,
+      "sha256": "fbbece9b5b96823e92245d65dca9265601ab0304a11f4106e0260c35ef468b65"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/.build.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/complete.json": {
+      "bytes": 10396,
+      "sha256": "581256490b7552a5977304cfe1559f16e12bcdb07dd423a55b208738ba7264e3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch000.pt": {
+      "bytes": 499010,
+      "sha256": "fcda39046ce5f045bf77b2faaf54ed05ea008072b3ff3d2c1bb790fabbf8a198"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch001.pt": {
+      "bytes": 499010,
+      "sha256": "e62beb4f99e6eab85b2d40fd79279e393db74b752d898c70bd118831e122cdc3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch002.pt": {
+      "bytes": 499010,
+      "sha256": "61a55cee5f3d94ca9fd413ef1d0567f821cf1bc2acd8294263e81778347b97e7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch003.pt": {
+      "bytes": 499010,
+      "sha256": "1fc9f30b09e5597b14a7dc8d0deaefde8cd2c90912a1568c37d62182cf931ab5"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch004.pt": {
+      "bytes": 499010,
+      "sha256": "b20a30f31819b69d2cce890e602c5c449a08cbbee45fa2d7a7f954be08c9092c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch005.pt": {
+      "bytes": 499010,
+      "sha256": "9454cff30e992085779af4324225d10f8448b4c1632bd5202730e66ec72a8b67"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch006.pt": {
+      "bytes": 499010,
+      "sha256": "8f790a53a1121e688bd1aa6ca76f06a5c10b9c6b0e208a5feeabf9a200624882"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch007.pt": {
+      "bytes": 499010,
+      "sha256": "c4ca9e8c2480e10db69324e2e12d42a1fd446d8d75eb748b2439b47936fc6899"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch008.pt": {
+      "bytes": 499010,
+      "sha256": "62f9fb801fc2294fb51ee98f5b970bb970d24f4938b5e0f5cd8b20abd478539d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch009.pt": {
+      "bytes": 499010,
+      "sha256": "4ca8202f7abe3f3223259ec011ea95ad1b7d2d4b94dc1cdaa39f1231a592cc15"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch010.pt": {
+      "bytes": 499010,
+      "sha256": "f5f408e8482eb86ae12f02c49799145c6a971a2aee09190afacf782653f60477"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch011.pt": {
+      "bytes": 499010,
+      "sha256": "b54bfc196661c83347ab9dc5b3dc22fd96921f924073ac80f3b070a53150e896"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch012.pt": {
+      "bytes": 499010,
+      "sha256": "315f3bc733a7d90eeb2a7e29c34f48b81d364a4089b8c40d6a0cb7f0362bd7c1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch013.pt": {
+      "bytes": 499010,
+      "sha256": "5a59ba5c16ffae71b4c096573eebd0957351595591d486b61b98a7eecd1c4ed5"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch014.pt": {
+      "bytes": 499010,
+      "sha256": "9ee6b26d2b8faa1a072e8958e139906903447bbea56f12f34337f99d2a4b8d1e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch015.pt": {
+      "bytes": 499010,
+      "sha256": "2280287a67eb55f28db716947732181136255aa3425764e6e4aac806bd0eb386"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch016.pt": {
+      "bytes": 499010,
+      "sha256": "d7074061128c85648bd7e8ea68d8abd3f6422f60af989e514dd7169ad19c2e74"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch017.pt": {
+      "bytes": 499010,
+      "sha256": "49b5f4705a8765e7afe566454b08573056a6175d0f59366b7d0c74e03e9717f9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch018.pt": {
+      "bytes": 499010,
+      "sha256": "05b63b32b7d9efc23dc89f34e9ca41eda72f8b1dffa3aa0f5ab326b32b4933f9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch019.pt": {
+      "bytes": 499010,
+      "sha256": "cdc64e1907a5a01775e0727ac23d8651910ff7317725305e3bf3417be802a841"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch020.pt": {
+      "bytes": 499010,
+      "sha256": "3b24501a388659dd07687cf23fc1e4a499aea7a32daddd4c0f4480b84ec5fcf9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch021.pt": {
+      "bytes": 499010,
+      "sha256": "336a5c859736311b9d3e1f19d49a4718e20d12e4641df8ec3dbe03d8e772c224"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch022.pt": {
+      "bytes": 499010,
+      "sha256": "d7c76e1a28b5cf4a70aea500694ecffdd3f83b5117583fdabc8d826249e588db"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch023.pt": {
+      "bytes": 499010,
+      "sha256": "2713dc7d377adad2def19509ca087e8cfc94f6a5abcf82a1ba2b258c82f5f1ac"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch024.pt": {
+      "bytes": 499010,
+      "sha256": "f7fdd6d4170ccab2ecccc1fbd879ba75c6e11d4d5223cbf203fe028e912ffda7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch025.pt": {
+      "bytes": 499010,
+      "sha256": "f7741e8f04769fe654df5bc3fc9318d746a5db2d55d100230f3b3995958b964f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch026.pt": {
+      "bytes": 499010,
+      "sha256": "256fecd36f2d12a7c2c9a0b2a787b034f4c0b72092c7612a7ee78b217c761732"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch027.pt": {
+      "bytes": 499010,
+      "sha256": "3e8ef0e63370fb8b6a1e33bb49cc569959bdb9013dfeef7780b59723a2aa885f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch028.pt": {
+      "bytes": 499010,
+      "sha256": "adcb51cdd67be8e763281272add81a90aa689c3f356a1229f6e841284d6e8e5f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch029.pt": {
+      "bytes": 499010,
+      "sha256": "278b39e40f8a8c1a56b57145bed0be91b612352b05f581a96e6fcf2a6d22e633"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch030.pt": {
+      "bytes": 499010,
+      "sha256": "88fa9c729454e3d06476f477f54d58e987eeea61970a94be13bff173445b0556"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch031.pt": {
+      "bytes": 499010,
+      "sha256": "fd548e2cc5bf14f9ba8943ca0bcc800c098bab506316a8a17ab621cc6bca9dcc"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch032.pt": {
+      "bytes": 499010,
+      "sha256": "974373d500da9559dd38b19bcdf2d9829ad7eb53deaa21a42da04fda3d3a0aa6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch033.pt": {
+      "bytes": 499010,
+      "sha256": "7f4c49bc55efd6a1c1a40c67b24cf86fc96938b086db0bf33650ec900bacda26"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch034.pt": {
+      "bytes": 499010,
+      "sha256": "60836db62a1ca0cd8acc9b7088968db2fb573f7e7e39cdb64fdb4f030d5b2ee3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch035.pt": {
+      "bytes": 499010,
+      "sha256": "cc0603e9d25b424e8a0b0dda8e6d88498f5cbef170e15741341586e8afaddb34"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch036.pt": {
+      "bytes": 499010,
+      "sha256": "b5253f3089be21a7f44c827239c7bf16c77cedc20bef5281b540936a989d3718"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch037.pt": {
+      "bytes": 499010,
+      "sha256": "3bf02a7034b58310d60b0089bb22aab08b814df792eeb25adf4cabb78fec2888"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch038.pt": {
+      "bytes": 499010,
+      "sha256": "d4802cf8d24bb21e2d64db376e184a3e5edcedd7e345401b52be92b9a2a43191"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch039.pt": {
+      "bytes": 499010,
+      "sha256": "f15a6eb5420c8d6d394757e08a65a60e73842e617c40f93a3079438f1d560e6f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch040.pt": {
+      "bytes": 499010,
+      "sha256": "fe69c022a95601b55bb7d97de2e46c9fc45cd45a57b5e7dec80bf9f6c37f42f6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch041.pt": {
+      "bytes": 499010,
+      "sha256": "66f9dd32a50e5e4519c56a280e80c3a32a9b6e7865567ffff2f55a9a90a357d6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch042.pt": {
+      "bytes": 499010,
+      "sha256": "d99fc6977563be3f4b080dbfd1c69a9152080db081719c5f67a68de14ec696e5"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch043.pt": {
+      "bytes": 499010,
+      "sha256": "8bab4025af4c025fdaa1f4aa008883b4f3d2e52523fcdfb854e0875a899a07be"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch044.pt": {
+      "bytes": 499010,
+      "sha256": "77cf8caec6b2aa2568803de81d03638ce6d81c9331506351748fb173c4670d83"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch045.pt": {
+      "bytes": 499010,
+      "sha256": "1abd048635ae44b1b3c33229704aea20d4148275837c9161ad6a327d62658c5f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch046.pt": {
+      "bytes": 499010,
+      "sha256": "1563f00dd4e308491ea5097088b4ae0a34e6294aa0947bc792523353a92bf419"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch047.pt": {
+      "bytes": 499010,
+      "sha256": "6cac1f421949a6b1a07594a1c1d93a7d6ec6e032cbff142469f4d2f01efcbe27"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch048.pt": {
+      "bytes": 499010,
+      "sha256": "f86f21d5c2ee7cd39279fd15c18db35261534453f18e49b0516adee179153fad"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch049.pt": {
+      "bytes": 499010,
+      "sha256": "4362afe24bac8f190a6bf85422cdf8ceaf427d9afa1e1b16d88bceb67ca00eef"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch050.pt": {
+      "bytes": 499010,
+      "sha256": "85936a58487bea1f154038c80c0ccd6b058cc8eb8f40bd05d08df8a9d1924e37"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch051.pt": {
+      "bytes": 499010,
+      "sha256": "f63391c68f030a69f1b793d65f90f9b4c0f648cc8384fe9184ada41e771c95a1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch052.pt": {
+      "bytes": 499010,
+      "sha256": "be93d5924694a4162e11c51e6c523a6fd5d4bca8e790031217c2df57308cd10b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch053.pt": {
+      "bytes": 499010,
+      "sha256": "67e53592fcaf9a2fbe219ba7336454dee9a0842bd1ae8dbd73d887eb9f0619ef"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch054.pt": {
+      "bytes": 499010,
+      "sha256": "dfe8ab3ef53c2e35551eb859d0554332bc3b2bb5092dff8e3090d6dada1616f2"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch055.pt": {
+      "bytes": 499010,
+      "sha256": "ff0646b7b4cab05e83741090339e67fe4b01dfa38db01ef453fa236bb3dff0b7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch056.pt": {
+      "bytes": 499010,
+      "sha256": "adf1dc09c5cddbfc66655ae7a0e38d3bc23a701b4306d8eb333f9be8c3d92677"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch057.pt": {
+      "bytes": 499010,
+      "sha256": "1b5a8d83c7c135ec3e1dcdd4dd15a3f75533ad95d1480f4708cd323e0c570fc8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch058.pt": {
+      "bytes": 499010,
+      "sha256": "2534a25878c6efe2461ffbd40f6405174fbe6c79749e8999fb558aea29475d87"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch059.pt": {
+      "bytes": 499010,
+      "sha256": "b01a0a258b08d372928587f971158d0f4cbf42a45098b46a0e9942fe63cc13d7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch060.pt": {
+      "bytes": 499010,
+      "sha256": "2766b5b24417ca19620e1c05865c7b3844ab2f1ad9a29c6a5826eeee58800916"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch061.pt": {
+      "bytes": 499010,
+      "sha256": "98a7a1cdc0dcec5560725e1e4ff600f631f263a86d2a43e8a378249301b55f31"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch062.pt": {
+      "bytes": 499010,
+      "sha256": "07a66f3608a39704a93b386fa071d9a9193e65ba63f016fe394e60efd8aeb97e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch063.pt": {
+      "bytes": 499010,
+      "sha256": "2a361b8eb8f2ddfbd0920e3a4fb89ea215a8c89972dea65dc69663fad3781ffd"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch064.pt": {
+      "bytes": 499010,
+      "sha256": "887b97e07018d0ad1f0daf9f5591f380ae3d6b3bb8a611159cd6d50763ed83fa"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch065.pt": {
+      "bytes": 499010,
+      "sha256": "70fdc46d6c1901c8d933d2498389b06d01a6000563bf8f1cffddd99ec1ba7d03"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch066.pt": {
+      "bytes": 499010,
+      "sha256": "43a2030c61bd81bd4f8d14b17667fbed65a372aee7150b1c65154dd462f73324"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch067.pt": {
+      "bytes": 499010,
+      "sha256": "678225f55584968faba35596e7ff449990331dff99256d1abccb4f6c885cfd51"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch068.pt": {
+      "bytes": 499010,
+      "sha256": "55e52ca22282cdda41b7fab49468b6ffd2d6623e925b18307558860430f2b64c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch069.pt": {
+      "bytes": 499010,
+      "sha256": "2b2c6dc0756566809faaeb2c184c31d0a375a391859a9cb319520db5296761c7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch070.pt": {
+      "bytes": 499010,
+      "sha256": "fc249ce9931dc675d9941816308f8025aa6066ac1d86ca98b224ec409dd21287"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch071.pt": {
+      "bytes": 499010,
+      "sha256": "7b1a3f2236e711b8d4434d12e18708be322fc2bdefb6e17ef4694724e501b543"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch072.pt": {
+      "bytes": 499010,
+      "sha256": "261a050e7906cb5583cb621ff917e708f004b77b170e68499d25e643f93c400a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch073.pt": {
+      "bytes": 499010,
+      "sha256": "8a12aed01720ba9d6962f90def084a436bdd8c5a6e96b3dad99db84839565d34"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch074.pt": {
+      "bytes": 499010,
+      "sha256": "c77b4bb5c2e55a2c3ec2780f6d2fffd5c8eaec8d3d07049fb38ca4539fed61bb"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch075.pt": {
+      "bytes": 499010,
+      "sha256": "a99062c4498ab078b476e3bb2b2ba0f39691acfa700ed2e20b0a61fbc6cf27d7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch076.pt": {
+      "bytes": 499010,
+      "sha256": "7d864b96bdd7bdb085a0dd3210cf72d20e2605adc941d9b8b8a26af39f4bc018"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch077.pt": {
+      "bytes": 499010,
+      "sha256": "d20df6faf7a1ed47bde15a7bd114653bfd189f45f9b05d6b109b6059542c3e7b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch078.pt": {
+      "bytes": 499010,
+      "sha256": "fe599c2aad9d097bb96033d85e6b2e93a8d8eedc5ed13cb96d06bd33aca534dc"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch079.pt": {
+      "bytes": 499010,
+      "sha256": "f153a75e79069e4da4f01ab3daa361282e42e0592e3f7304eb5338ca9fc44468"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch080.pt": {
+      "bytes": 499010,
+      "sha256": "db960a8d71d94cab5b5267365f11b7b1aa8ddace3bf9a5538589218f2413e34c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch081.pt": {
+      "bytes": 499010,
+      "sha256": "1cba694b43944be04615f10087c16942f05ce52b479f6e84bb2af8cff6769e6a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch082.pt": {
+      "bytes": 499010,
+      "sha256": "bf9859e3dbcc4fcf8e995f43c96159283935fc7b2b9919354862a33095e23da9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch083.pt": {
+      "bytes": 499010,
+      "sha256": "48d2c2dcd6e8dd6e5b3a2310c6330ded7d6850424904412761f3aacdb89e9531"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch084.pt": {
+      "bytes": 499010,
+      "sha256": "d562f20a3f6640f5b897ea8bec4feb1bfea9cc48498f2550c8a1093290e46c25"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch085.pt": {
+      "bytes": 499010,
+      "sha256": "2b64b6b4d3d0eeb1114feab17c3e8672cc277e6dd0f6da1071f48166645454d6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch086.pt": {
+      "bytes": 499010,
+      "sha256": "38ae9d326f202aa4f46c37bc9e05d3ad0da1afef21332ed79a9a89debe21beed"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch087.pt": {
+      "bytes": 499010,
+      "sha256": "f31f050cb2754e578939d7f984c9b5fc6a17cc2cd1f164e02dce89581bd01b2d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch088.pt": {
+      "bytes": 499010,
+      "sha256": "e617876767c86428df7354064e7261a344866ce50e81a664a2905bc07228019b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch089.pt": {
+      "bytes": 499010,
+      "sha256": "6a40984e62436a70c23ca7d7b19f8fa8b31a94b185e9cd86096fc7d9a48ad42f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch090.pt": {
+      "bytes": 499010,
+      "sha256": "e18f67bfe08fb16987be348dca2857bd2aa7c26bd4f7bea6bae417977aebb8b1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch091.pt": {
+      "bytes": 499010,
+      "sha256": "bcccc61dfc4c9599227aec0d24462a21b5a86148c8b6a195c8ab5b2cb2a59431"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch092.pt": {
+      "bytes": 499010,
+      "sha256": "16817c0e775b835c0aba7834fc49faea9b424d3a1f680119536bbefb8f8158c1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch093.pt": {
+      "bytes": 499010,
+      "sha256": "e68ab4d499c9eda68b9b844bd706347ab9e90035cbcb1c83b1314363ae97aeeb"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch094.pt": {
+      "bytes": 499010,
+      "sha256": "9e00c0eff292da525d08fc477c730c08725a5c5a4ab45813cf05d0abec1cafcc"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch095.pt": {
+      "bytes": 499010,
+      "sha256": "33649a6664f15075a87b9be094e78645c09ef95edf614a36c6d041bf311c3395"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch096.pt": {
+      "bytes": 499010,
+      "sha256": "ff945c93c2ad0d3a93bcdd30e15706a6e41d6cd9795c2d9b15722334ff074ce9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch097.pt": {
+      "bytes": 499010,
+      "sha256": "36a6272275d6b8b0feb2f50f3b0f8842d73513de9a0b762e9042109fc3bea697"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch098.pt": {
+      "bytes": 499010,
+      "sha256": "ec605e7de4610a1db0ebb6b5ce8760b43f933eb2efa17ff2b301cd4b3fe7be78"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/epochs/epoch099.pt": {
+      "bytes": 499010,
+      "sha256": "739d2f091920bdf220a12d24d5afce01589439938a4985c75b367cabc4104e7d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/frozen.pt": {
+      "bytes": 1268149,
+      "sha256": "91b459a0b6369619903102df54d2dd1d270b36e63dbf4b8b19e10e39b8cdc3b6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/initialization.pt": {
+      "bytes": 172599,
+      "sha256": "a72030047b752a6b62254686a5430cdbbeff7b8db1097c9b96e0969b4d6f1e01"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/prepared.json": {
+      "bytes": 93819,
+      "sha256": "0a1ce0e68f74a101f5df8fbf57d6282f0c7b79c0a01ef0b5bf549aabe65d8798"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3405/mean/source.pt": {
+      "bytes": 169405,
+      "sha256": "9001596c7ea3d1ae3b1919998a362312564f35f451692ccd33b05e0b6809fc12"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/.build.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/complete.json": {
+      "bytes": 10395,
+      "sha256": "8318c45e93465444223048ad20c5a98e589679a86c4d8a0b004639336232a3fc"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch000.pt": {
+      "bytes": 499010,
+      "sha256": "6c4c42652f41fc8e680ef925624f334668dda084eae8d32e50d23c918c7e6e02"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch001.pt": {
+      "bytes": 499010,
+      "sha256": "5e9c830ae8880f917ce0a4bb42bd0bf41483b5719b5fc3088a8f1cc45deb999f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch002.pt": {
+      "bytes": 499010,
+      "sha256": "22331e2acc1a1b31dc59db14c85d212c701ff8a8ff139d030b17697d2a3eca6f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch003.pt": {
+      "bytes": 499010,
+      "sha256": "f4f3d652eac0defb69be8f54a94e4edd9792f24b2eb101cb985bfae6aad2b44b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch004.pt": {
+      "bytes": 499010,
+      "sha256": "db0c7a0230ebda35208979b1e0ea7933ecc759fcd4b5c10b3f68833620090377"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch005.pt": {
+      "bytes": 499010,
+      "sha256": "a48a5c3c1cb9a3f5062c5ca007210998e5464f65f41228d8d7e6343737e8678d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch006.pt": {
+      "bytes": 499010,
+      "sha256": "01a3641b553f29011720ca9be7f8e0e37c1950af5d7515a065b370e236c38d76"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch007.pt": {
+      "bytes": 499010,
+      "sha256": "29779098830d8ddc26ec92d27a33218431ae58ea146cef8fa6ab9803e9221d95"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch008.pt": {
+      "bytes": 499010,
+      "sha256": "7e72f66eca7add2505d58e0fb784c7c1e28b199c0e6ca79dbc745fec3f558b92"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch009.pt": {
+      "bytes": 499010,
+      "sha256": "90212ef41c432955e0e441a2f914005317c2ac0143c25eee4ed2c64634478d53"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch010.pt": {
+      "bytes": 499010,
+      "sha256": "497d6822eafac2de61cf67c013acbe52fd3a0ec68b499cb6e29591a640d697c4"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch011.pt": {
+      "bytes": 499010,
+      "sha256": "9187b88f0c8a4b69d8b84318f54e551ba0e32fc85f3033f1ad5d0653f7c6ae58"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch012.pt": {
+      "bytes": 499010,
+      "sha256": "2604a351e1fee37799882c1d4939ffd920953cbbd809a47af8a69ef9be577021"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch013.pt": {
+      "bytes": 499010,
+      "sha256": "1b5079238c982a65ab194ade3dbda5e98fe11e231b7d44bffda2987a6e70ba43"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch014.pt": {
+      "bytes": 499010,
+      "sha256": "f4bd3dd6edb9b6a15a169d2157208f4c506a100a80a08ff51f3e118c980f0fab"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch015.pt": {
+      "bytes": 499010,
+      "sha256": "80c8423d9b90bed7015cdc168d5c3739b1585b659b5c8cc93c3bc54f70ca1985"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch016.pt": {
+      "bytes": 499010,
+      "sha256": "26996a50d6c96e00e1e18dcb5c728697cd794e747328ea6dac49f2351a904456"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch017.pt": {
+      "bytes": 499010,
+      "sha256": "f5948aa06a04403b129fcb8cd987fd4851b95b7519855f7656fe01a34a4caa6f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch018.pt": {
+      "bytes": 499010,
+      "sha256": "17413b649b56e4e97dd845d3cce2178dcddce037a2bd45a6f0223897c6e34aab"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch019.pt": {
+      "bytes": 499010,
+      "sha256": "5954071769e31e121787b1ff67e8b888b7af2efa40194d33a5a2a6d3041c5def"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch020.pt": {
+      "bytes": 499010,
+      "sha256": "cd43c5d0977bee0c006c2969efcc0bd5373096046082f819b948a7e7742f296d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch021.pt": {
+      "bytes": 499010,
+      "sha256": "0990809f5a3f194ec29e73aad35d1a598732596b715fabb6cc9f8385ec49f721"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch022.pt": {
+      "bytes": 499010,
+      "sha256": "d4bb9e32fb852c235ed8b3b0b9954a1dc49f42ecee61bf1ae8a7606d8c8436ff"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch023.pt": {
+      "bytes": 499010,
+      "sha256": "33cc8d6aaf4f82dc6cd05ed9c4d0291d18832e98b61abebe90bee5590628de3a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch024.pt": {
+      "bytes": 499010,
+      "sha256": "c29da16823ddb3275b4820d699798e0b1065a4fe1c16c846375ba5bd492096b1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch025.pt": {
+      "bytes": 499010,
+      "sha256": "cd76ce452e49a7314831ce19cbd7b51be6cb9b9f3c4c212ce8384ceb4bf1bb61"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch026.pt": {
+      "bytes": 499010,
+      "sha256": "d813b99a60fbe22cdc7b75db2494de63d7b53b2207a80bb381f300b1476dbe67"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch027.pt": {
+      "bytes": 499010,
+      "sha256": "83e5a32af388f9db208bee9b65c7f9896a5ddb92b1e37d12d8adaea7eb7de811"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch028.pt": {
+      "bytes": 499010,
+      "sha256": "9a772e2152339b19bfc29f535d6b6a180cdc4949e748d4d24b69dd3570014316"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch029.pt": {
+      "bytes": 499010,
+      "sha256": "d4d65c487f0eeb4af7bf1227b1bb4ac471e2f9266c3ce75b10ffd6eb517d8b60"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch030.pt": {
+      "bytes": 499010,
+      "sha256": "228ff60fa772380cc14755f8a4ebac68a95322a32f08a9c26ca8794156030249"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch031.pt": {
+      "bytes": 499010,
+      "sha256": "50e5ee74f2fa29ec32ac2b4c4efde00b929f2d5de61e1d76d632d84ce7b55341"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch032.pt": {
+      "bytes": 499010,
+      "sha256": "98d6e7de2efbdce4fda216e8ff4c591461b88fe94ef237ec552192f5166d5f4d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch033.pt": {
+      "bytes": 499010,
+      "sha256": "21dded9d85858688ba49be6b4d911871f863235e8bc975f161daec28282b2600"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch034.pt": {
+      "bytes": 499010,
+      "sha256": "5ec8913496ceaf2504deab97e7b8f600abaff7d7aad3b4196b2f4999b4ab3e48"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch035.pt": {
+      "bytes": 499010,
+      "sha256": "7efaf9309780768a59f2372a01092bb42c118d73e754aed8e546efe1da43b257"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch036.pt": {
+      "bytes": 499010,
+      "sha256": "a9838f3840997e2f29cb7d5ae2ec9245eaee251f288f39585777f18853a1617f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch037.pt": {
+      "bytes": 499010,
+      "sha256": "8a71174b76298fe396d2bd0e2499862ca8613628b1db3529835ed8a86b2e5a1f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch038.pt": {
+      "bytes": 499010,
+      "sha256": "c1fa1216afbd3a736561c60ab7327feed86aab4b5e3779e018cd58b95f09506b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch039.pt": {
+      "bytes": 499010,
+      "sha256": "d38af0e6c1e5972dd9f57e9504e47a8815d6cded3d6f5bc5b74be4be7e279328"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch040.pt": {
+      "bytes": 499010,
+      "sha256": "8a7b324b547d4e8d26605ed008975727d5e8c6a52b9bee2cbe8a5bdfc3be86bb"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch041.pt": {
+      "bytes": 499010,
+      "sha256": "758e4c73160820a0b9c22e6f1c01889037c9fda4a750d1953d9947ede300ba1f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch042.pt": {
+      "bytes": 499010,
+      "sha256": "5ff7fa203e747c24f59ea982c945c684aac66115920792253509d88abbfb8435"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch043.pt": {
+      "bytes": 499010,
+      "sha256": "5db703b8cd75e0526d3c0380c51bd6f79b0bdca7c3b287bcb30ec81ca751968d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch044.pt": {
+      "bytes": 499010,
+      "sha256": "0074c2d3178d5ad3a75e190f705a3e72532b1a462926288740c202e3ae10f0f1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch045.pt": {
+      "bytes": 499010,
+      "sha256": "8e6ebe1fe803951ea113610134213f5cfac6d5562838877198b7986317132545"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch046.pt": {
+      "bytes": 499010,
+      "sha256": "253fa48e26d4cfe61cf2ec0ad6ab25b95492db37cc10563cdce96e04a61ddf7e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch047.pt": {
+      "bytes": 499010,
+      "sha256": "4a2753e5aae11a840b9ec3401801c95c2f7b32282179a27e5264d600f87d5c22"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch048.pt": {
+      "bytes": 499010,
+      "sha256": "82111a802fd1f738ee9d4bb4f7864fd86e7185ad45ea580d91bbaa56336c5be5"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch049.pt": {
+      "bytes": 499010,
+      "sha256": "333a00529e0bfab2e087cd73de8df3e254f08e2524a52e6cad885964d33e57d8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch050.pt": {
+      "bytes": 499010,
+      "sha256": "1e2ec2d1b8c3139d6e0fb990c21cd99f62e497108f984ab217486dba0914038f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch051.pt": {
+      "bytes": 499010,
+      "sha256": "21f2df6606fe50101500a5a055c7770dc3441aef09fbede68394c895a075d00a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch052.pt": {
+      "bytes": 499010,
+      "sha256": "6a0b044a92ae04b5e3a68fa88b8ed0a2e23764fb1d33069bcb7387810dc00b10"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch053.pt": {
+      "bytes": 499010,
+      "sha256": "17cbacd2d754935be5916d09715db98c47ac0696c81eebf2045740e11cb2dcc1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch054.pt": {
+      "bytes": 499010,
+      "sha256": "e1fae70c2da90879feef7f6a6ace8511d159f27cafad2e4e6cc4543690664197"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch055.pt": {
+      "bytes": 499010,
+      "sha256": "897fb3f5ece58df8a7fb2659d1e87dd2136ccfb9150aaeea066959c7e0706719"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch056.pt": {
+      "bytes": 499010,
+      "sha256": "65add427c4b5b486ecb940d9c1d7904375ff7f4bd1fedcff21273bfbe3137400"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch057.pt": {
+      "bytes": 499010,
+      "sha256": "b61f7578620a52ca1b2540e81d5d0facdcd01266703e0bd3e9e3e5040aa261d1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch058.pt": {
+      "bytes": 499010,
+      "sha256": "9e044714feb216f572f638fc5083df9041bdecb05832fa72a8b8d9478b2a4f45"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch059.pt": {
+      "bytes": 499010,
+      "sha256": "fe4eec6352e6241b0cbbd085463ec1642c80a6eda0b0837b14ae550c88d418ef"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch060.pt": {
+      "bytes": 499010,
+      "sha256": "77915b8bee63a6fec4a7e4c30ce06f3d13def8499803409eed4729b2f3791fbd"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch061.pt": {
+      "bytes": 499010,
+      "sha256": "85dfb374fcc66299973eb31d73ca875690ccce4163d057dbbf4fbc081bacbe14"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch062.pt": {
+      "bytes": 499010,
+      "sha256": "f5d89a6dbed81a34cec1cb6ee56f20e676b5551ec33c0a531c172b48a95f0b5b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch063.pt": {
+      "bytes": 499010,
+      "sha256": "f7270e5504e13639d156cc67f940d4e6f9480852ef42403f44b024ad9e352eed"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch064.pt": {
+      "bytes": 499010,
+      "sha256": "6cdabdfd184384912038ab961ea7a93c02a0e88b027e7017747abeeb26f0c36c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch065.pt": {
+      "bytes": 499010,
+      "sha256": "de719b02decd76a5d988a8830311df61d4153edcbbb45538cfbd3be9fd1573bc"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch066.pt": {
+      "bytes": 499010,
+      "sha256": "9cbffa82d8ec133c1d0910a8f5907c4ca76c7fae5a57d3caaa2a3498d85ef887"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch067.pt": {
+      "bytes": 499010,
+      "sha256": "c62866fff0f1041e9f1d9773f8a5f7bb0e4796a528c827c8d62365da7aab7be1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch068.pt": {
+      "bytes": 499010,
+      "sha256": "c5592a5adf755e5124ff6f1aebac950098ebfb6ed375abcbc0e29bed83cab9a9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch069.pt": {
+      "bytes": 499010,
+      "sha256": "835cd1b17c55d3071fc376d12a7e7bf142eb63a4b0f5c091f9bdeeaf5fb1b779"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch070.pt": {
+      "bytes": 499010,
+      "sha256": "acccb7b8a67160f3cf90707dccc48efa4ab78bb1dd16bccc7d2cb0adec070f09"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch071.pt": {
+      "bytes": 499010,
+      "sha256": "4e3ed3a8adb51af6aaf12098ea1243b7fbaa04507368ce97642eec6ea15b414d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch072.pt": {
+      "bytes": 499010,
+      "sha256": "2c3a4b22f79623261c1d2a9cdb7df9bacc1c2a6c1ce6742e72249f4cd39f0c96"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch073.pt": {
+      "bytes": 499010,
+      "sha256": "e4f51d058b5c2a8994b34a7470d2c80c451d6010e88ec6c51707ef12e64c44b5"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch074.pt": {
+      "bytes": 499010,
+      "sha256": "5b882f7813a38bbcfc4cbf504484c6f9acbfecfa0f460be9f5af1b20c8ea5f2a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch075.pt": {
+      "bytes": 499010,
+      "sha256": "a9e942a05b30b6edf97bcfe7c970bbfa315c4a5a8915e54bbfc319b77405c273"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch076.pt": {
+      "bytes": 499010,
+      "sha256": "787b65da0cb4cbcae341bd4dd8401726516ab544e95be87b750335adc5bcb735"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch077.pt": {
+      "bytes": 499010,
+      "sha256": "dfa2ada586ff62ca2ec35c3b5fb86c08830694ba2735fa175f6ecb7d83d5c813"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch078.pt": {
+      "bytes": 499010,
+      "sha256": "58e358b341a92656b388a101e66767420e8fc40ac596faf2299ee2bb8b224004"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch079.pt": {
+      "bytes": 499010,
+      "sha256": "6b697f99b500edd1b7674e2436225679db20e66471350e5dee8e43fdaa67c63f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch080.pt": {
+      "bytes": 499010,
+      "sha256": "c5b3fe878c92bcbadaae34ddd4a1e51874f65c68da7c8a3341725152f12fe6b9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch081.pt": {
+      "bytes": 499010,
+      "sha256": "f21fced6e0fd647ae146e498d13b39383cbbac1423b06aa837a6975ad735a407"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch082.pt": {
+      "bytes": 499010,
+      "sha256": "0cf4c891a0d4c6365a0c86f9d8d179cf9d7220cc6e1e409b4acbd5ef4604e610"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch083.pt": {
+      "bytes": 499010,
+      "sha256": "1639541740916f6da781454e1116ea07f448164e3a38e54ba097f25858663bf4"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch084.pt": {
+      "bytes": 499010,
+      "sha256": "8f1a972cb59841429f1fb9821bf2d67f512d126a150f3ca730c05dd4b2664c7c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch085.pt": {
+      "bytes": 499010,
+      "sha256": "bf7e066a107cc21771357d15f9081a55c9288206aa401ac52388fa84cf0214e8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch086.pt": {
+      "bytes": 499010,
+      "sha256": "4d4639e2269d83117ece9a4bc3921004ae2481e1d0b7868e47a14bf461b68719"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch087.pt": {
+      "bytes": 499010,
+      "sha256": "8ec0931ce5ef001ee992663e71c0493a69ad6d8e8fc6112ea90d38bec87f958d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch088.pt": {
+      "bytes": 499010,
+      "sha256": "9e9f104ac9017649f6ceb1ff72daff0c226492b27c47d9354347069255cdbf3c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch089.pt": {
+      "bytes": 499010,
+      "sha256": "0e3b3f8f7481d114727fd8852c880e525eb5180e47da66c1c849ecd6918ec0ba"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch090.pt": {
+      "bytes": 499010,
+      "sha256": "87f4b49e0e5b19f2d762b2aaf0ddbda65d58ea13e37a977111e975555debb701"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch091.pt": {
+      "bytes": 499010,
+      "sha256": "76d128eb4e9722038495bb6b21af9320e6e7709e104f82ec75a39610b3307084"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch092.pt": {
+      "bytes": 499010,
+      "sha256": "026aecbff56cfe34142a7c57ed1347883f98fe1916b458719efe1df5339a311a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch093.pt": {
+      "bytes": 499010,
+      "sha256": "bbfc4af18f0e1e2cf0ba40ecc4429aa9178cce2046384492c3785cdb8b7aa8f1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch094.pt": {
+      "bytes": 499010,
+      "sha256": "042ad87141ad63159ef6247701a13ec425b1da9e0302d186f5c2be19bb23905f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch095.pt": {
+      "bytes": 499010,
+      "sha256": "1d8bd3f3fc3f7ba9128546d02ef786f9ce41c9b4da194afd466d3d98e1bd4faa"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch096.pt": {
+      "bytes": 499010,
+      "sha256": "51c88d766d40450a50cfbbfbcc0a736fb03bb8c5f130693ba13cfef706050f40"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch097.pt": {
+      "bytes": 499010,
+      "sha256": "c8823fec7c51bdfe85968b59f23671e3b2ad9c365edbec16b6f2b8064104c752"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch098.pt": {
+      "bytes": 499010,
+      "sha256": "61ffd3846f345c3084521adced9f49472d3295cd638589e8456dc754660b9eed"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/epochs/epoch099.pt": {
+      "bytes": 499010,
+      "sha256": "9a6a22be9f862e4558f9adbb17d396353eecdaaa1ecee024935117c9dd453b87"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/frozen.pt": {
+      "bytes": 1268149,
+      "sha256": "e71bb78e59a775ae9143103b15d47705f4a1d8e93f36e5c9d9a03a514893f45d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/initialization.pt": {
+      "bytes": 172599,
+      "sha256": "1b23a44bdde190ed1b502d9b0f01443301e1e20c407f6782cbd0b0204ea538cf"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/prepared.json": {
+      "bytes": 93805,
+      "sha256": "0e34d281678d59ccabde7697f167466275687b4b25da78a2b11506783f8b7bd8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3406/mean/source.pt": {
+      "bytes": 169405,
+      "sha256": "5875f111eb03d3491c5d4f2a71bdc9361a91df3355c915777250bdaaaab58674"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/.build.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/complete.json": {
+      "bytes": 10395,
+      "sha256": "1a6a843eb0c78ca797c5b4fe7f0a60f78a076bfd0446a7c46364222eef2576db"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch000.pt": {
+      "bytes": 499010,
+      "sha256": "801f2fc23525d8e9fbb5c6d34b4becb6c940c9681b2671e096bd9b249c391a5a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch001.pt": {
+      "bytes": 499010,
+      "sha256": "f78d01c17dc3112bfebc48404e8bc7f48aa9a866173ed26e52c0ae028bb06131"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch002.pt": {
+      "bytes": 499010,
+      "sha256": "7a76a8adb47352d5f1d08cfc8fbe3e55d4414b93032e1554547cb58fde98bc8d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch003.pt": {
+      "bytes": 499010,
+      "sha256": "dddf9c697719b7d2d45b5280512984110f096967f3a81cfea8c1d3bdef7993a0"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch004.pt": {
+      "bytes": 499010,
+      "sha256": "3bb8fa848541581c3f2f6f04ec00547ea29fdee66e56ca3637fbd36d38a88448"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch005.pt": {
+      "bytes": 499010,
+      "sha256": "70003ca2a6ef7acef20ab75cf19dd6446cc00a60470bb0adcc218435874795a3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch006.pt": {
+      "bytes": 499010,
+      "sha256": "a211c273496ab559594c1114c838ed7cdc19787d4e23dd2d7b7d6408ee5e9763"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch007.pt": {
+      "bytes": 499010,
+      "sha256": "f603dd4f94c5f32d49c51c493d4af2e964953a3fe5fb3ffbd2cc2ddda804de9c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch008.pt": {
+      "bytes": 499010,
+      "sha256": "e261054149b80a73792298a14283b561c5bd789a0f426fdf4ffdf329552ee899"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch009.pt": {
+      "bytes": 499010,
+      "sha256": "a51f8d8b2620ca031e156e99dcaabbaeccaf2d2340a0dc557ea1d0ed1664f7cf"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch010.pt": {
+      "bytes": 499010,
+      "sha256": "fd96b357b86c9ab9d55fb6cd58d605708354d701f71867ddfb3901fa438cea8d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch011.pt": {
+      "bytes": 499010,
+      "sha256": "820137bea331022cbcbf32da12e547b70f57511038609fe117155ab656f0a30a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch012.pt": {
+      "bytes": 499010,
+      "sha256": "b43af48204ff8af4fe472d5636aea86afc884ce562dca3916d3bf30708d4533a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch013.pt": {
+      "bytes": 499010,
+      "sha256": "333903912e1bc6f652804193408f9c65fe0587ce7fe25f8d2952b6734d69ab4f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch014.pt": {
+      "bytes": 499010,
+      "sha256": "f8483e69b910cfe31641737a9d60a85a95235da266179b9a29e21111fb8ddcb1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch015.pt": {
+      "bytes": 499010,
+      "sha256": "a1d041b1ab3f3b48269c127becaa2a94832edb46238606eeac0a769ca7726c79"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch016.pt": {
+      "bytes": 499010,
+      "sha256": "42231bb4ea8162cd0e4efdf528a08671f9c0191b60b457fa267b987fb1ccf273"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch017.pt": {
+      "bytes": 499010,
+      "sha256": "3b2bdc6120aa2ddc298c7063df36611b56f41646aa67b9429444c634904989af"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch018.pt": {
+      "bytes": 499010,
+      "sha256": "5adc62c4dc257ca091849fdf8b75b1a7ca33f4b1f22c89830eaa882a0eb8ca28"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch019.pt": {
+      "bytes": 499010,
+      "sha256": "8f81649186c80bf66a6bc9ff079950bdd8aa8e9009ed89d4a67b6ea12589f01c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch020.pt": {
+      "bytes": 499010,
+      "sha256": "b2b1fa8715f679b3b208a0dc2f6e60ed3b93f4c58ed041a2570424a6667e8716"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch021.pt": {
+      "bytes": 499010,
+      "sha256": "8a28d82ed4c0c8cc6b6b32455cb8b0c4e2e9d23e41262d1fe0df3a9688c896d8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch022.pt": {
+      "bytes": 499010,
+      "sha256": "de383ff406ea968456cd0a8cc2eeb48d06e63bc0df5e1754ac22b4fc175c43da"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch023.pt": {
+      "bytes": 499010,
+      "sha256": "f9c46c55b68eaba0e71544f3929cf321f414707dac64f8171d4b3c8c95b78b97"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch024.pt": {
+      "bytes": 499010,
+      "sha256": "d2805d8290dd7854fd8739cc9e88ded40610fa1ff8efe72d14649d48b2085170"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch025.pt": {
+      "bytes": 499010,
+      "sha256": "734c0e149273b61170ca3da23709336abb1317c225f7451243bc8e7922ab71c5"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch026.pt": {
+      "bytes": 499010,
+      "sha256": "8f6b3de73240670cb3c829106b5a9e7d7a0f7b98304122f789f4edc378a53a96"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch027.pt": {
+      "bytes": 499010,
+      "sha256": "ecedc82b1b28e87fda57d18b1309f173d71976873643ddd4b37dcb390fbfa8c9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch028.pt": {
+      "bytes": 499010,
+      "sha256": "1a83db76413772fb94d579f1d3b641f71fa36a4da258b3015aa1b93e3df98f6d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch029.pt": {
+      "bytes": 499010,
+      "sha256": "c050ab0300dcb14b2b0228d04ed310f4ca3e83fed281c4268cfb04129bc53ffb"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch030.pt": {
+      "bytes": 499010,
+      "sha256": "8eb9590568104c716f2ba3cd9cdb4edee45cc24ca7231f3b00b8a1226f530bdb"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch031.pt": {
+      "bytes": 499010,
+      "sha256": "6bec1782699595bc4e3381f6ac34931125ce1657c6c646a5212120388e75ff6b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch032.pt": {
+      "bytes": 499010,
+      "sha256": "88457e4bef487c372293b0f0e0f28f00726c55ea81ee28e302b085ea5dfb0900"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch033.pt": {
+      "bytes": 499010,
+      "sha256": "3d237b57e6ef6d429fb078c15a98983237e8fd944645b441f65fd422eeef1d3d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch034.pt": {
+      "bytes": 499010,
+      "sha256": "f340adfaf83bc827c19767ed9f43319b05ee7e770ef53848789feb382b49ff31"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch035.pt": {
+      "bytes": 499010,
+      "sha256": "22a1ed681f2166717ca3ef6e8d41ffdcac9a73ea28603b80c6c85d4f32546e8b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch036.pt": {
+      "bytes": 499010,
+      "sha256": "3feae486926413442920fb0f5ae53679ab3d0f1e0aaac25f69d7de58ba6b3560"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch037.pt": {
+      "bytes": 499010,
+      "sha256": "5e3ecb1c33df92151c6e0ca3b1f82675ad5b0818c47de99b21f7b07b55ff3278"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch038.pt": {
+      "bytes": 499010,
+      "sha256": "ed47b183a8d8f10db75478889a4460ee107b6571f3d19c1b4bc762729cc3fd3e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch039.pt": {
+      "bytes": 499010,
+      "sha256": "c578b55af588a45a03dc77afd5ff49eba6ed0c2c01d1fd99dc859c2ae0af1741"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch040.pt": {
+      "bytes": 499010,
+      "sha256": "bc98eb0798547db26c7e8b53041bb5845a570fdafb262b0a0dfa8d4b37636721"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch041.pt": {
+      "bytes": 499010,
+      "sha256": "1871bb23180a14bab8b73941f0fc5e603a407e11f69df787f86f2a69795f1a06"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch042.pt": {
+      "bytes": 499010,
+      "sha256": "ea21fa14cdf7b6df435e85924f89b03979ee54d2cb512a043e89f22a5ef22417"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch043.pt": {
+      "bytes": 499010,
+      "sha256": "ebc921978f80687031536cff88da6342acbe1267016b63b5737c73123385c515"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch044.pt": {
+      "bytes": 499010,
+      "sha256": "7d3952fb44bca3f398ef5ceb77bfe15943500704ffc6dbc5c72fef68dfea9d4a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch045.pt": {
+      "bytes": 499010,
+      "sha256": "2de6c6e7ac09ce758973689ee5740a3ce87a69a5fc4e26198acd310b83498b36"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch046.pt": {
+      "bytes": 499010,
+      "sha256": "5893225a9da4e5752abe01ad3fc3f657c721cb565af2dfdf52601eae31730cbe"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch047.pt": {
+      "bytes": 499010,
+      "sha256": "83c136ca2041c571799a9130fcbcbd2340fa111b6e26f21a970f88fc30914e43"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch048.pt": {
+      "bytes": 499010,
+      "sha256": "1c5325590bd63f554915be29fd384008b1840467b98e0b24df50d384f10007ce"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch049.pt": {
+      "bytes": 499010,
+      "sha256": "85b6e4faddc97e2798a6f1ef9b752fb77f0ee3051fbacba4e772206bddd4468e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch050.pt": {
+      "bytes": 499010,
+      "sha256": "21bdeac22cf0c677daf2cba19789d0a2169f94e642c681de4971d87f16dd42f4"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch051.pt": {
+      "bytes": 499010,
+      "sha256": "3c22eef76a4047a882f3ed5f912c01cd0601934de291996e603c0b30bfa37426"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch052.pt": {
+      "bytes": 499010,
+      "sha256": "6340c7b297c7272f0732cd8016d9fb57992df0ad6eb3082083f10fd0133a80c9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch053.pt": {
+      "bytes": 499010,
+      "sha256": "9de5aae8e8048b17618f830513e5156b07cb61af9bc7a2b274b02e0f25428718"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch054.pt": {
+      "bytes": 499010,
+      "sha256": "8ef54e266501d943e1beed089b84043e0de14ee8d274426c35973ff80fd08508"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch055.pt": {
+      "bytes": 499010,
+      "sha256": "57a7ab2e29a5d79f7a9c2554178c556ba6994ac5daf58135d0a1880bffc3da24"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch056.pt": {
+      "bytes": 499010,
+      "sha256": "e33f4eae94ce797a4db7d44119edc65ec07cb031efdc52aaae589ff0c507bf05"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch057.pt": {
+      "bytes": 499010,
+      "sha256": "a7d2d8373d289c2a1a4bd3b623889d2283a67267b77cacb1ba2ba660f1feae98"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch058.pt": {
+      "bytes": 499010,
+      "sha256": "a44a681ac611b44958509548c5dc9d8ab1dbe908a03d78406304be34013dd708"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch059.pt": {
+      "bytes": 499010,
+      "sha256": "bfd7f4969928eb9f2f1e29a9517c94353dba9210584cac0baced38cab8bab51e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch060.pt": {
+      "bytes": 499010,
+      "sha256": "52274b6d7dde11653e349779d7c5d3ecef4e116842c2e80c12fff0229be49f4a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch061.pt": {
+      "bytes": 499010,
+      "sha256": "bfd8ecaffc1bf6d00b61df188e424d00b0e47d247b2d543083320a82c2545ff9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch062.pt": {
+      "bytes": 499010,
+      "sha256": "0f4bd996553073d7ece1e04ac11c4a96021767df9b35bde744d50f5cc9dce0d3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch063.pt": {
+      "bytes": 499010,
+      "sha256": "bbe27655aa98a504d6b1377a3c337985db5adf8f77357d047b57088a8b3b00de"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch064.pt": {
+      "bytes": 499010,
+      "sha256": "19bcef4e34faa235b4249153d9dcce2a4da486b14e6d23137ac23536d3063916"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch065.pt": {
+      "bytes": 499010,
+      "sha256": "26f63e3583e1e97a310baf106b319ce28f443ab01f3f239b6bbc182ce23b4444"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch066.pt": {
+      "bytes": 499010,
+      "sha256": "7da371f91316e2a7def94aa1b57d6402d0301a1380f1d82dc70cd6ddaca54812"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch067.pt": {
+      "bytes": 499010,
+      "sha256": "bacdbb98ffd255ad07dedf34ffeaaaff485f73be6038a3182f8d607be06d1e5e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch068.pt": {
+      "bytes": 499010,
+      "sha256": "58501273bf0fb52adffe75467447c1f5b111b60cdcc19dc41765fe31bf5c0764"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch069.pt": {
+      "bytes": 499010,
+      "sha256": "e06921f1cc20df1170942948f44aade1b9f5c681a622141059ecd31374d66aa6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch070.pt": {
+      "bytes": 499010,
+      "sha256": "3f362e5c452ee9ef1131c000e4d8eeb8b1c27489861cfb3585df9756e0ffb582"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch071.pt": {
+      "bytes": 499010,
+      "sha256": "99984283053cc8f312791c40b46b8609f0467c62aa580e146615f5cf10c32e68"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch072.pt": {
+      "bytes": 499010,
+      "sha256": "da30d565e3899546beb61467fff2b0cffa61279afe625f7630c083d2a6fc2f59"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch073.pt": {
+      "bytes": 499010,
+      "sha256": "c5bf7a6deefc09cf8bdf8c7bf027afcdc1b61bd811166531860676228981f523"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch074.pt": {
+      "bytes": 499010,
+      "sha256": "ad647305e51d6d05a21b080bdec5522cbea52a487e496615ac2af30a6f6519ea"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch075.pt": {
+      "bytes": 499010,
+      "sha256": "ca7da56e3a59595aa714c4208c0cb9c04dd43156456d1c341e85616938f7c7c4"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch076.pt": {
+      "bytes": 499010,
+      "sha256": "1d06e06c301439fc5359b67ef72b4f091e22501e61014d8b321b685f429cf81d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch077.pt": {
+      "bytes": 499010,
+      "sha256": "bd7b4b678ec820e392e3f75ee50f7e98df65dd9e10480820a44e94caa1a15c0a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch078.pt": {
+      "bytes": 499010,
+      "sha256": "2bf5f335351995e0b4875dfad73b5d017077a74b04516f7d6031a8b9727fccf4"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch079.pt": {
+      "bytes": 499010,
+      "sha256": "d3e0a439d8c7a952ae8291315c9b7e73efbee3540d6a14ba7bfcfea0ad0f6ffb"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch080.pt": {
+      "bytes": 499010,
+      "sha256": "68c2b139957f7aaede33996ceeb8355e84ac358ecbcf2cbc274d3bcb0ae0cb03"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch081.pt": {
+      "bytes": 499010,
+      "sha256": "3277eee0ec921b2c9f119b18aa84308e5f7298ffb2de71b744ab99fee7a7df85"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch082.pt": {
+      "bytes": 499010,
+      "sha256": "594f76b6fa857665c90a80bf7cc4cbe45bde44dfc3d077aba3cd1576e0561c73"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch083.pt": {
+      "bytes": 499010,
+      "sha256": "309fe59601450169a3cab5f29d0682d43a246e86a33dade39e793c7ddf57cbe0"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch084.pt": {
+      "bytes": 499010,
+      "sha256": "e2d75fb78f26ed000812ced3cbc79891d5b3605e6c5319bead201435d64e2f73"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch085.pt": {
+      "bytes": 499010,
+      "sha256": "fe45e77b0cbb22af722f472cf9a5d346fba0f13ed98260f2eb804a4966506f9d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch086.pt": {
+      "bytes": 499010,
+      "sha256": "7a228a11cdf69c6e75360031aad2eb128c4ce6432b3de33f8e1d64d756e12849"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch087.pt": {
+      "bytes": 499010,
+      "sha256": "53046cbf27a9953d3a30fc221350547dc37f2bd9c75573a09d9ef2c257c8b47a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch088.pt": {
+      "bytes": 499010,
+      "sha256": "b8be55251e24f82bfd2c5b59ca4cb6ab47e74ec843cbfd39944e123cba56a9d5"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch089.pt": {
+      "bytes": 499010,
+      "sha256": "9b0483031512ed9082228e09ea67314da5f045f881dfba581dfe9f54f5d75961"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch090.pt": {
+      "bytes": 499010,
+      "sha256": "aea8ad9491995cc562d38882e37145dbd2042c68bed8ee4e69617e9029b9cfb2"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch091.pt": {
+      "bytes": 499010,
+      "sha256": "f8811e15fdbd902a517474cd2fad6e064da4bd68a410a60d3802d664c0be31d6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch092.pt": {
+      "bytes": 499010,
+      "sha256": "fb4dffb02db0fb5e1fb2a8a8091fbb0eee16b10f09188e186969609d3e84d7e1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch093.pt": {
+      "bytes": 499010,
+      "sha256": "b1bcd19f544b492adb977abe11844c587bbd682f69ff893a200875b0b78b6d84"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch094.pt": {
+      "bytes": 499010,
+      "sha256": "691267aab1f76f55984ede55974dd2f3a253086e366a758893d92ca85bb783dc"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch095.pt": {
+      "bytes": 499010,
+      "sha256": "f4821012b475c14875bc599de9b7d9d34a31a7a1f0b10f7d321e7b0aa3429b6e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch096.pt": {
+      "bytes": 499010,
+      "sha256": "244eb53c6eb1712444d8ebd75b11d9d584456dda92320cb8bfae08ea709c409c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch097.pt": {
+      "bytes": 499010,
+      "sha256": "c73cc6e033df0a4afc7f64b5719ff425826c1e40eb7393ecd89d60bec5071ba7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch098.pt": {
+      "bytes": 499010,
+      "sha256": "ca6b868b8bd7602c684757f5253ce42dd1920aa25e23890430838e3e1b5c4197"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/epochs/epoch099.pt": {
+      "bytes": 499010,
+      "sha256": "3f0dd2ed80691cb4c6dba1e99bd5bcee35c323c5af0509ae858930182f451e03"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/frozen.pt": {
+      "bytes": 1268149,
+      "sha256": "93ce7cd4bf51c4bb5bb5de8b4a6318119b0f9a9b9e44288af2b7e5accd2a8e9b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/initialization.pt": {
+      "bytes": 172599,
+      "sha256": "d69129f69420007f3fd1fb981bb445730b8bcc27305d6dec15e69daa70a9a314"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/prepared.json": {
+      "bytes": 93793,
+      "sha256": "220455570db17f3934ceabff2a040323a3744ec5f3b5b8bd82430a830105e186"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3407/mean/source.pt": {
+      "bytes": 169405,
+      "sha256": "85894302cb96b9eb41f2570c19650ded6b9ae61535b5d9a66e313c4b69272cdb"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/.build.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/complete.json": {
+      "bytes": 10394,
+      "sha256": "52ace88439f16b1cb46f3ea6ad578498c45d082af6132443a9ea2c17195f8f9c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch000.pt": {
+      "bytes": 499010,
+      "sha256": "9409569a8e50608a7dd128d3f10e21ac4815e616ee2bb98393b5b4918407611b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch001.pt": {
+      "bytes": 499010,
+      "sha256": "cd3774815a55dbfb1edbb911de8fd3ac65abb3c8de97f8ec3178132061f2e577"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch002.pt": {
+      "bytes": 499010,
+      "sha256": "2c32236136eb997e387ecb12e3a3e1e7a624ee0cc55659d580ce55b4d8a7cba8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch003.pt": {
+      "bytes": 499010,
+      "sha256": "bd1ac27da53043d98773286ec41124b254bf789d5f60fda8f6b5e2e38db2adc6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch004.pt": {
+      "bytes": 499010,
+      "sha256": "f5daa90305ea0ac9eb876ef01736a8a1c654b5ddb4f7184f26c0d756bb3e853a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch005.pt": {
+      "bytes": 499010,
+      "sha256": "edab7c54d24c6999cc09739694dc58e003bd7f8b811d1ba4dd3c0b02996a08db"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch006.pt": {
+      "bytes": 499010,
+      "sha256": "9e8179b9ad900edec685b8b66307c3b8c245733775d8ed3933c9c1d9f50628a7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch007.pt": {
+      "bytes": 499010,
+      "sha256": "573dd4a48c7d699e521434612df58e3d165bbecf6adb0910055ffbb205f48312"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch008.pt": {
+      "bytes": 499010,
+      "sha256": "dca490b903b45afeea1b6b6d9e4cc1b0d55a2e73d68820fe86df9f89f45a23d0"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch009.pt": {
+      "bytes": 499010,
+      "sha256": "718000b28f86bdf2ed2f5724ec18bd5721dcf340f203851aecc7e4604e46bd45"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch010.pt": {
+      "bytes": 499010,
+      "sha256": "82958675cbe4828ac674d9adcb5fde06038e7ed0c46520f3cd9de4b38336a180"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch011.pt": {
+      "bytes": 499010,
+      "sha256": "ad70055b3eaa9abb22daa5289e28d5a32b327ca8a6dd3a17b7a6af421708e7c3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch012.pt": {
+      "bytes": 499010,
+      "sha256": "3189de62a34397018e60ffdbf4395dd5b403faadbcae80e4d13f87974d6af11c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch013.pt": {
+      "bytes": 499010,
+      "sha256": "2f0cb8b6e9b794555279db94aed598c24c57befe9d445535bb4490ceff03e900"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch014.pt": {
+      "bytes": 499010,
+      "sha256": "1330500f5139c827a0eb140be4ce51afbe3b318e3bc0f4ed0dc31b3afd3bac4f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch015.pt": {
+      "bytes": 499010,
+      "sha256": "c1f98cceb689a4024da00423a7a01ba71b875719dd573e57e5451900acfd3e0c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch016.pt": {
+      "bytes": 499010,
+      "sha256": "c80f58e06105fa03e3f6eeb5bdd0b382e3d7c084928caf5e8a9343fe1042011a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch017.pt": {
+      "bytes": 499010,
+      "sha256": "0c30ea387e35bdefce9381d6a74214e622977555ab0d7080e3d7393de7f41176"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch018.pt": {
+      "bytes": 499010,
+      "sha256": "f3ea689f582354fea49611171a1adc7a8babf85d0a7e063d32a41d0c360ff29e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch019.pt": {
+      "bytes": 499010,
+      "sha256": "cf439ece05f022c0778af8bc30c1cba2ed84c29e424dc9bf180965c94f343b73"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch020.pt": {
+      "bytes": 499010,
+      "sha256": "679fde40cc4afedda5bd95f361bf58629fa339a96243240b95791a9f894be765"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch021.pt": {
+      "bytes": 499010,
+      "sha256": "50abe197bc3a8503aedda87f981d7feb2bc8e8875079dbb08402cdecac7df820"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch022.pt": {
+      "bytes": 499010,
+      "sha256": "7ff6991c0ae3c4a8260105e021e2d101e275f722e3959d9f1433a0c26b3ddd62"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch023.pt": {
+      "bytes": 499010,
+      "sha256": "33a7ee73c11a2576c3a2d26c8fa8d72f609afe28eab3b5792d3552c304289e7f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch024.pt": {
+      "bytes": 499010,
+      "sha256": "b88361432abccf5b0a5ff0018006e43c5608c9c67cfb2abd45628bf3fd5b8421"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch025.pt": {
+      "bytes": 499010,
+      "sha256": "37c1a0624f2acc8e893a270099682117f5ebc2b3016bdd5d3c6115d78576ac53"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch026.pt": {
+      "bytes": 499010,
+      "sha256": "0d97a377ad2b1cccb65a346f4c4afa26606868994eded91a9bf2df54a2d21925"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch027.pt": {
+      "bytes": 499010,
+      "sha256": "749ebe6b98646a35c1ffd71184ddf58c443406de58c17592b17a4987202ef432"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch028.pt": {
+      "bytes": 499010,
+      "sha256": "b34ed99d249d0d8abb6072f651e18afa9a6c5b9ee6ead16bd484d6b4b98d12dd"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch029.pt": {
+      "bytes": 499010,
+      "sha256": "5487ef5a02b340b840d117dddb231c67c2282d80cbb6715c6e06a73b489355f1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch030.pt": {
+      "bytes": 499010,
+      "sha256": "394bf75c6d6d0d4aab975ff8ee58b192470507d3704c3a4f7a00832c3515c64a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch031.pt": {
+      "bytes": 499010,
+      "sha256": "cea5a5510fb951be7f35976d58c1522122d8879702b724ffaad80b16ba5df647"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch032.pt": {
+      "bytes": 499010,
+      "sha256": "d7fbc9b379927b89bda25475454c4f7bada88616644a23e3859ea10b185b2813"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch033.pt": {
+      "bytes": 499010,
+      "sha256": "5b2bd4c77ab5ed900d455b7ebc735b0ca9665b522d6d1fab520552c5bdeae96b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch034.pt": {
+      "bytes": 499010,
+      "sha256": "2143fe297510e169c69f622c4d9c037cf5320e8036688f5ff038413144eba39c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch035.pt": {
+      "bytes": 499010,
+      "sha256": "cc0a7544113f16154338859ad8b4941bc1372b8b6f3f9e814f49e078481d3dec"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch036.pt": {
+      "bytes": 499010,
+      "sha256": "41e43d65287a422314c46856778b3987ace1d008ce4aff52484d1828d22f77a8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch037.pt": {
+      "bytes": 499010,
+      "sha256": "698da50c38369dba9a0502ba1e8a1335596484bd525be8032be9aa1e38d589c3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch038.pt": {
+      "bytes": 499010,
+      "sha256": "87682df5fb0694ba20e46c1a3ca55175ef433a532cf1814cae6b0d3d00a25bb9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch039.pt": {
+      "bytes": 499010,
+      "sha256": "d3047aa50f669999c96ad08311872989654e5714d4bd685318cf9443df184b6d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch040.pt": {
+      "bytes": 499010,
+      "sha256": "0f8bcb3ada3b00f2ac22635463d5305799170143d84ea9be8eb26d5ef68b1e70"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch041.pt": {
+      "bytes": 499010,
+      "sha256": "ac432fef4c6004ae37cf1713403f5babdb928c3836d40e88e35e23ce7bdbab2e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch042.pt": {
+      "bytes": 499010,
+      "sha256": "8f6c7008731e64e26809ce0348802bb1aa42e2cdaf69f74e6d464f3c62cfdedf"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch043.pt": {
+      "bytes": 499010,
+      "sha256": "839292639b261912e59d27454f1dd55445487ce2ecc6a1098071dc6711cb0594"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch044.pt": {
+      "bytes": 499010,
+      "sha256": "cb59a47b7aa276de99c7226c1e147653e4ca6c086920df3656c465319494fdf7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch045.pt": {
+      "bytes": 499010,
+      "sha256": "28dd530fffaad4905c01128f0b6d5df43a24f8912be04898400b31dec58e9531"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch046.pt": {
+      "bytes": 499010,
+      "sha256": "0689dfeae69b08b174b1b896ea7f59bc8edce50a085c50dafdff9cd765efec48"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch047.pt": {
+      "bytes": 499010,
+      "sha256": "01856844ba1e9cd572ee0601afeb73b73746d80540d661778dd0cd6b94b8414b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch048.pt": {
+      "bytes": 499010,
+      "sha256": "730f4063e4a19e1d204ae1393176edf01657571451a35c970eb041ec9292da08"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch049.pt": {
+      "bytes": 499010,
+      "sha256": "416b9bbcb410b398a9a3d97676477819ffdf3c48d8e587d42fbcc3215ea05dee"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch050.pt": {
+      "bytes": 499010,
+      "sha256": "5ed7e9bc0c64f79348602d9eb61b0b5e3e2897dcaeaeeaf65240345ab057f230"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch051.pt": {
+      "bytes": 499010,
+      "sha256": "af5ef75e8f2f0398536a72583d19e1d2005e555cb181e66de86ac7eac0739086"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch052.pt": {
+      "bytes": 499010,
+      "sha256": "f66ce6b4e3d365a7a4a6dee7a0c99771c5ab536e57c74d244b727501a3f70194"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch053.pt": {
+      "bytes": 499010,
+      "sha256": "fb95e155482302573fb8498e1474e331ed1cd96d322394aaec3247daf5c6660c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch054.pt": {
+      "bytes": 499010,
+      "sha256": "859b048a6b6285419da7f130908d94a2f904a383e651544b36e28fc802a2a80b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch055.pt": {
+      "bytes": 499010,
+      "sha256": "daaa487c709fe32c6c7cce53c0aed0f6833fc3f46c6400302fb3cb29530ac955"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch056.pt": {
+      "bytes": 499010,
+      "sha256": "2a3019a23e32b791e4096cd960a95c1584512bc3b6748818d5fa365933912dd8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch057.pt": {
+      "bytes": 499010,
+      "sha256": "5687b6a63553b2fd87cbcc86391fe40f55bc1b83aa7cd25001177f852a4fd721"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch058.pt": {
+      "bytes": 499010,
+      "sha256": "94a6a28f27f934fd768e2c981198e5f04cee86d8d61fb25f9c450055a3190f14"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch059.pt": {
+      "bytes": 499010,
+      "sha256": "0bdfcfb24c1983693240b25ca55179213f3f6056829ae8ccc9798ca75f7def0a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch060.pt": {
+      "bytes": 499010,
+      "sha256": "3c1d1fea632992a26eedaf987ff6bbc8f1966f68bd674327a30f7d2f4c26f4fa"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch061.pt": {
+      "bytes": 499010,
+      "sha256": "8e00f5832a43cd614282f2beac4cd5975a0c409b0fb3fcdea2583002a2e8e718"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch062.pt": {
+      "bytes": 499010,
+      "sha256": "ca534a7ad95e9b1c32d08b374d23f7905d8c0f3068839cfc6fe33fc01ff217e3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch063.pt": {
+      "bytes": 499010,
+      "sha256": "65aa1dbc853ea458ced9441075b56993b001d6cd922afa772d46801e8adfb14a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch064.pt": {
+      "bytes": 499010,
+      "sha256": "96c454d930e77e2f5a22a5863c8434aea87d313c5635208d9a5e23dadccd4d44"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch065.pt": {
+      "bytes": 499010,
+      "sha256": "26d61ca0ce5e60d5206a51f77d3cbac923ea6ba2b54a626665ac86763c592809"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch066.pt": {
+      "bytes": 499010,
+      "sha256": "92c08c3e3ba58917d90ba5cde056d02a0d8d7cffdc13c7e8a179beb96c6359c6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch067.pt": {
+      "bytes": 499010,
+      "sha256": "7f981c041f10ed5057acb12359621a4c97fd33bb6bbc1b0b94d697001c12425a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch068.pt": {
+      "bytes": 499010,
+      "sha256": "725ff5b643fd2436cb37bf5a918936129d135d63e5329272fa2594e5cfb2b37e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch069.pt": {
+      "bytes": 499010,
+      "sha256": "65e0e0b361d78b56bd4a87d607f3a6297930a3e9d847d8969ff50716ac5a5a10"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch070.pt": {
+      "bytes": 499010,
+      "sha256": "a225bc24a6c9e39330ea3d2a66b82e725770937b6c8a8e3e3e2f7aa83cf0ee75"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch071.pt": {
+      "bytes": 499010,
+      "sha256": "4a0e96b505b30d66cb7802c1928d63bcfc161c19e8ed981fc7345ebe85fd3232"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch072.pt": {
+      "bytes": 499010,
+      "sha256": "6b88d4551f6ebc83c7085e955951acabed5b4da052e260fc1c8dcea27d50eb88"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch073.pt": {
+      "bytes": 499010,
+      "sha256": "f8bb9079481bd19649fcbe621b2ec140625c9aa0c348f11f5453e936e7f6ee16"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch074.pt": {
+      "bytes": 499010,
+      "sha256": "a66097cf304120fab68e14c0f000190b535ef9537149502915eed0025a5f4272"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch075.pt": {
+      "bytes": 499010,
+      "sha256": "7e439d808fa4e979a2520912fafcb67f163b6dde9fb1a85534b37d998c2559c3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch076.pt": {
+      "bytes": 499010,
+      "sha256": "b3729e34b450d6b42513b9207fe145ade073d59591db2d1b5181b01cd6adbade"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch077.pt": {
+      "bytes": 499010,
+      "sha256": "9872b38d98e455a33adef560db68a076f8b1b2713ebf752464c016a8495088d3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch078.pt": {
+      "bytes": 499010,
+      "sha256": "198d8972a2a5edf297cc969cd6478aa3479d75a555a6154be225433c0c85a4a2"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch079.pt": {
+      "bytes": 499010,
+      "sha256": "4c1d5e405f2aba862b9065d4e248e4126c8c277947aca0bb766640e00d189248"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch080.pt": {
+      "bytes": 499010,
+      "sha256": "138e9eaab76660752fec9f1cf824fbc3529e138e2848f18f04efb4f213338357"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch081.pt": {
+      "bytes": 499010,
+      "sha256": "461be7bffcd951bab4e1c3f624094c913e41d346d8bc4e6488f7b3e73d663f12"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch082.pt": {
+      "bytes": 499010,
+      "sha256": "47d8dac693e22c8df35e06b803c2e69f2bd62f58893939b646bfb67ad3411d2b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch083.pt": {
+      "bytes": 499010,
+      "sha256": "250d5b6f696bf4a87ef79e50ba08f4773b8b8d0ca9bdd4cf952cf8cacfb9aa6f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch084.pt": {
+      "bytes": 499010,
+      "sha256": "0a438184ee0bea4e49fb25a0adc1c4abc74938cf8c3a2dd137def21eca0a5555"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch085.pt": {
+      "bytes": 499010,
+      "sha256": "1b81c4dc7471f48fe42dddf227ef719a888b2dd595ef0d9ba6ef5310cecae733"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch086.pt": {
+      "bytes": 499010,
+      "sha256": "49049c772d46f03b88ba591fae5f5f87d442f4689541e6bd643377402de13e81"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch087.pt": {
+      "bytes": 499010,
+      "sha256": "b0bc044b2ba45366840b2097fa93655c670405e458d5c53c72f602c278013a3f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch088.pt": {
+      "bytes": 499010,
+      "sha256": "a9c418759c5bc564e5c4c2565af9a0974008029d85e9fa905149c1cb84efdd25"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch089.pt": {
+      "bytes": 499010,
+      "sha256": "6801bf75b171f2bcc3b9a083209ef5da329e3612d75f0a05a40cdc3a5ab52b0c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch090.pt": {
+      "bytes": 499010,
+      "sha256": "7c07183370ad84da8aa96ac2c81a27665bc3c372dddf6275c5554f531ba9907a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch091.pt": {
+      "bytes": 499010,
+      "sha256": "1df68ac834fd0856ec8d73fc1dc9cccd754bd9a3cb872d10410fa38949c91cf7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch092.pt": {
+      "bytes": 499010,
+      "sha256": "47e8a23276b827f1e2259acb49637fa840a2283dbba26824794e1a0af93545c8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch093.pt": {
+      "bytes": 499010,
+      "sha256": "5d8b4715bf8fbf6b2708bd9087f5ddbd94836264fbafdd4d20b1c8289c23627c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch094.pt": {
+      "bytes": 499010,
+      "sha256": "618bcc0812c54599b512004a0fbfad64bcd6205e9a815bb83856c36581957c3b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch095.pt": {
+      "bytes": 499010,
+      "sha256": "94a989a845f611575a15df62fa513b76d86f22dbc750b051e822b5890bc4201d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch096.pt": {
+      "bytes": 499010,
+      "sha256": "e805b418b712f80819569fe0e833426226650835c6edc2329bfd62be8dbfee44"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch097.pt": {
+      "bytes": 499010,
+      "sha256": "e0ae9418c7f77366f23dd819e429f690426fb4dad0339fd96533770f543f932d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch098.pt": {
+      "bytes": 499010,
+      "sha256": "e44c353a18e8f690e8b4dda759d2c453b955735b100f82507a9179065034fa78"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/epochs/epoch099.pt": {
+      "bytes": 499010,
+      "sha256": "13c23f6474d5c8a1da40743d04d9e79a6013576a60e994099fc5edb7b9f76ee1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/frozen.pt": {
+      "bytes": 1268149,
+      "sha256": "f6623dfb1182cb4e64950560fa98bb9be4a09af82b1dc3c5557073901d050990"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/initialization.pt": {
+      "bytes": 172599,
+      "sha256": "6fb0d4e48873d8914f5deb32aead81cd2a5cc4ac1a2e77b73cc0cfda31266b00"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/prepared.json": {
+      "bytes": 93799,
+      "sha256": "1e40816fbcfe861e81c536561970cbc0fb305f230d4ea1522d6560c9c94d3d4b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3408/mean/source.pt": {
+      "bytes": 169405,
+      "sha256": "175e62487d864c6cd111494937867aeca6196217d4b701f2cc8a036ff451935d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/.build.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/complete.json": {
+      "bytes": 10394,
+      "sha256": "193305e7a06dcec7dded71b44fb0d4a1e463c610d18233fda0a6d862e7b36d36"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch000.pt": {
+      "bytes": 499010,
+      "sha256": "1dbddae85d6469e07cfd36b4ea15f760e30e8d65f65c5c99ec1e7a790edb46f6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch001.pt": {
+      "bytes": 499010,
+      "sha256": "ef3be9c8fe799b3422bbaf0fa2d2c651d9be0b0b1b3bf85fb7872935218bb477"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch002.pt": {
+      "bytes": 499010,
+      "sha256": "ea3ac7a34a6da796a97bd37f0f45108b6a2304df12cc7f1a6c2ddf0233189b38"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch003.pt": {
+      "bytes": 499010,
+      "sha256": "740b988830bd9e171077127ce08a231d00cd83bff6d55e63e3cf3106a02a4180"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch004.pt": {
+      "bytes": 499010,
+      "sha256": "0bb09c3db19b8c6d7ce52326c73204e06c9d76246c4ad277e60021113e121bac"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch005.pt": {
+      "bytes": 499010,
+      "sha256": "bd89d07f55d458c1f7df9977ae5d11b4681ae25063e64179951f7fcc319afdfc"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch006.pt": {
+      "bytes": 499010,
+      "sha256": "2cde47332efcf814864b834ab3920cca9410857e19370ca4ad9ca2c7322fcfe4"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch007.pt": {
+      "bytes": 499010,
+      "sha256": "8006115dd39a1c7c76a8a0ef958e79286da7e29dc522f2842af7327a91eb64e4"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch008.pt": {
+      "bytes": 499010,
+      "sha256": "defb52e80b9122376cb3cb0e89d0d6a140fa9c4bc7cc981b681f53680af3d93e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch009.pt": {
+      "bytes": 499010,
+      "sha256": "2924d1439b72e93cf838500fc9d1f1a568641a9f90deca4cf7e14377491ca014"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch010.pt": {
+      "bytes": 499010,
+      "sha256": "fc7c86de8b139de83320e463c7f0a22f1483e7a0e9c7f5dcb7d6297b2d26faf2"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch011.pt": {
+      "bytes": 499010,
+      "sha256": "d74bd1b79e4e72b566f44b1410bfc2d269871125a0ca2100d0213ba278d797fd"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch012.pt": {
+      "bytes": 499010,
+      "sha256": "81aa5c66cf2aa534f267bdb90cf161d9a52c3610f4f2190efefd2743d9e027ae"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch013.pt": {
+      "bytes": 499010,
+      "sha256": "5850909b9162a9b64e7dd633d997af7820a0624f7d7e48e4dd511b952ba04bd7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch014.pt": {
+      "bytes": 499010,
+      "sha256": "f7e0b367ec910a4539804c5759aa667cbdcbcffea7fa39a1264c0eb01140d805"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch015.pt": {
+      "bytes": 499010,
+      "sha256": "12120702404a30c6590a97de3e2e9198a4c2575ef2e298bd961d79e1496a2c48"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch016.pt": {
+      "bytes": 499010,
+      "sha256": "abd23777cd21f358b1187447ec9f883a17942b571cf4be727ed83f48983cced1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch017.pt": {
+      "bytes": 499010,
+      "sha256": "a27173566117863a375bba6be2fb3f84a289de44416adf1b7e788d84119ea7d0"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch018.pt": {
+      "bytes": 499010,
+      "sha256": "8300fe839722e5c5309e19548b5df91963e2071f80cf5dd7e4ad2c089a35664b"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch019.pt": {
+      "bytes": 499010,
+      "sha256": "29208bfd78fbe2e0cdeb8008a69f4873cf4d203d6a9a36a2436373ef4ffe01a0"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch020.pt": {
+      "bytes": 499010,
+      "sha256": "5ea6cb86cf061860f25a2241ec10a04eefb8ffc15582b60d62d7d98f6383e3ba"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch021.pt": {
+      "bytes": 499010,
+      "sha256": "5339ddffaf2df38a6966970a9a491558e2800c89dca3854ae633adf3509f20d0"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch022.pt": {
+      "bytes": 499010,
+      "sha256": "152429d09c95658aea90732a27838e97a9b9a15837b36954186e89e519e06178"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch023.pt": {
+      "bytes": 499010,
+      "sha256": "ed1e89242552bf0fba123a61372b743a627fc745d62bd9151d5477e5a3584a67"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch024.pt": {
+      "bytes": 499010,
+      "sha256": "d97436ace6c7bd57e9af610006028f077ce3cc7d1e88193c847c43689a145d99"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch025.pt": {
+      "bytes": 499010,
+      "sha256": "5e88e3e03734475128cd2bd2786a1dc6847b5c68dbe7ed2723bc8ab3d7c85670"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch026.pt": {
+      "bytes": 499010,
+      "sha256": "329436d442a4b33af23af4690e6b5e4d03695db8352185643b442f88331f8a28"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch027.pt": {
+      "bytes": 499010,
+      "sha256": "909e0e1ee819bce07aa7c65e4b1bd6f74851152ecce9b6540a05772f78570b2e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch028.pt": {
+      "bytes": 499010,
+      "sha256": "e7d62003edfc6f94c140a5e9d19f58b29da2a6ae8f669a862c92662299292892"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch029.pt": {
+      "bytes": 499010,
+      "sha256": "7cc31e7f891b0a5f078163266d00485225d100182786fd2e5ced0352b8682878"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch030.pt": {
+      "bytes": 499010,
+      "sha256": "1dad10425f53a5a2916d59a426a344af19e3bd6e0d08bd5779a546f57d2b96a6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch031.pt": {
+      "bytes": 499010,
+      "sha256": "6eb519ce14c67086f169d7b343275360b21ed02255a4b5133131449eead5395c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch032.pt": {
+      "bytes": 499010,
+      "sha256": "9228d66f22e17a89c4fc5c33161fa3de1a2f5837a52fb93ec0f21196c4cc933e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch033.pt": {
+      "bytes": 499010,
+      "sha256": "3fffebe426bc04b7e4bbb881198d587ae47a1800542d47c96827dee61557fbec"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch034.pt": {
+      "bytes": 499010,
+      "sha256": "c17c93c5419ae25571b67e519da9faaf48ab8c3ea6713bfe178b30f6bb93f5dc"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch035.pt": {
+      "bytes": 499010,
+      "sha256": "87a9765f6ff309da5bd16e477cbed98e417780e7767be1a2db7b539a8f181217"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch036.pt": {
+      "bytes": 499010,
+      "sha256": "ac17eab5060c82b446dba88b0875d87d7264a1378ffe8b093d9b70fa3f87af72"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch037.pt": {
+      "bytes": 499010,
+      "sha256": "60444800d0f9da8bd62e4dd864f4db4fdc8c0eac7ea425c55bd849104848ff86"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch038.pt": {
+      "bytes": 499010,
+      "sha256": "ba933584d45f076c720e1f412d301cbc48274ff9562e8bd3e377bf163a235112"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch039.pt": {
+      "bytes": 499010,
+      "sha256": "3bee1ce67c0a0a46813d5bf15907c024752ebdff33ee1f9e49388c58617db4fe"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch040.pt": {
+      "bytes": 499010,
+      "sha256": "87b01cdad83432d3b6ebeabe39b85c8d5983747d22263e842602d431e02c50cd"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch041.pt": {
+      "bytes": 499010,
+      "sha256": "a5a2cbef9af8f4b4105ffe28e2638be8b5abe722b3b64c00be816a4cec28e90c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch042.pt": {
+      "bytes": 499010,
+      "sha256": "0c6ef5e1f394e56a413c966b7f22ee2a4249e6289aabcf7b5ad9d61066346c83"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch043.pt": {
+      "bytes": 499010,
+      "sha256": "d0ac1ef294ce125f586223fa0837db9362a1f0afa4ff408fa28ab094b822424f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch044.pt": {
+      "bytes": 499010,
+      "sha256": "1a854302797d54a94ecfa1d7e03378bad86995b0b6ea2b4a733aacce02b921be"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch045.pt": {
+      "bytes": 499010,
+      "sha256": "0a8a7c6eee2741c75c4d781928f13f193de1aee75bd641c7050ccee04b282c93"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch046.pt": {
+      "bytes": 499010,
+      "sha256": "76ebec5d01456f34967eaab8db34522b3907a10c8c6180a56e6da3c03b3a46ea"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch047.pt": {
+      "bytes": 499010,
+      "sha256": "84ddc50727aefa966bff1f623f5d0fd6051c7e0f2ab12780f5134835158a3fdd"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch048.pt": {
+      "bytes": 499010,
+      "sha256": "204874d42f2a59df8b2d466e1aa1a3fe426f4b7de76007d71c03aba3c652740d"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch049.pt": {
+      "bytes": 499010,
+      "sha256": "9342100c9a2093b51c40ab5f09ee47b1c03e14275897afbf02e6d5cfa56d6233"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch050.pt": {
+      "bytes": 499010,
+      "sha256": "50dba2d3727be99ad7441f2f7b94c555ecd4a3ffbf782bde3335a7e515aa96fa"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch051.pt": {
+      "bytes": 499010,
+      "sha256": "f20b2b3123f62d1e3ca93e9df741d4ef420e521a0410f9dd5770a745a8af1eb9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch052.pt": {
+      "bytes": 499010,
+      "sha256": "9723a1fcbbba3bf3d8ac451ce07d62cb41b9ec0c333cb73ff773c8b72e89c4e8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch053.pt": {
+      "bytes": 499010,
+      "sha256": "54fa7518dc8e43a2189bed0373ae770b455f3c90421362c69014fdd0b3a4cdb1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch054.pt": {
+      "bytes": 499010,
+      "sha256": "7d3f3f454746a7b9b449a3a3181cadf01e3533c9e8a2aeca713d0f15f767502c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch055.pt": {
+      "bytes": 499010,
+      "sha256": "77df8d9afb8fd057e076c639909b9ae27682cdde11bb51b704172c28e9d1555c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch056.pt": {
+      "bytes": 499010,
+      "sha256": "2b3523c60cd3a3b7c40b6816e55b1fe0843678d1f78ce3232a656543a934f698"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch057.pt": {
+      "bytes": 499010,
+      "sha256": "7a4e706e41205b2929d8f72b515e0c23c7ca698fcabd8031f1263389ad128e45"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch058.pt": {
+      "bytes": 499010,
+      "sha256": "ea5bb2c8b16417451f885b0204ea439d6e10387d76fec93513064d20a3f3dda9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch059.pt": {
+      "bytes": 499010,
+      "sha256": "aa756a24e7625a950d9107cc96e2715113cf93460318109971e84d027186c67f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch060.pt": {
+      "bytes": 499010,
+      "sha256": "9421ebc13d8ea33fcaaa40be0d58b2c5a7df73f0e34ad08e30db03657a9919a8"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch061.pt": {
+      "bytes": 499010,
+      "sha256": "3c0fa4b0a0aa82c031ada46e06c379ea9964beb43f48caedc77db2c67effe208"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch062.pt": {
+      "bytes": 499010,
+      "sha256": "212ad018a54f32b001d5ef65a81095c320f5f8a88e1759aaf5540148d4a5bfa2"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch063.pt": {
+      "bytes": 499010,
+      "sha256": "a63ad9bf2db4ea6e3c0976a89339af948202f273a7e9886e316ed5e00561fc3f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch064.pt": {
+      "bytes": 499010,
+      "sha256": "f3a93b1fc2fb97af0e3b036380fc71da70e4500803428724f398d2c9bcc25429"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch065.pt": {
+      "bytes": 499010,
+      "sha256": "d994947acd2561368a49bab952ab95e592ad05b3958506190cb4b298a4752112"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch066.pt": {
+      "bytes": 499010,
+      "sha256": "7a93d8c7946f835fb011314ba3d907af1dfd06b738d7680211e2d6674c303a68"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch067.pt": {
+      "bytes": 499010,
+      "sha256": "c78261c817d92182054c1f9b6778b8f05f4a667c7f65e305dcc09c08190a67f9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch068.pt": {
+      "bytes": 499010,
+      "sha256": "729fbc75d824040089135ddfe250db8308d7b68a951ce82fc07841ba1f9fe7d4"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch069.pt": {
+      "bytes": 499010,
+      "sha256": "398ab0ec871fff7e4e23ae6869697904d6b292adbb96c93a5b62acbc80b43e96"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch070.pt": {
+      "bytes": 499010,
+      "sha256": "5223410fedcb00be3ed1a6a610840e0ec75bea2cd36344797eb067f2a14805a2"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch071.pt": {
+      "bytes": 499010,
+      "sha256": "b9793936020385e4e45159df050453607c50a1a75641c7b22858175b18b738f1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch072.pt": {
+      "bytes": 499010,
+      "sha256": "bf85646fbb841f4fc29dfd3249e817e56930137e89fed9e9ad363de418dcc002"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch073.pt": {
+      "bytes": 499010,
+      "sha256": "2f12bed3ffabe2ecefb7df2712e75e46e3a77366b8c823ec9f1aa47ec771288f"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch074.pt": {
+      "bytes": 499010,
+      "sha256": "c10e6d51df9eb8102ca01112b8512a536e7ad2257e321b449b7a3741d7b22057"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch075.pt": {
+      "bytes": 499010,
+      "sha256": "9c57246a87a4016daaa555935e8674be585963fc78094bf41d0f99b91f7252d3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch076.pt": {
+      "bytes": 499010,
+      "sha256": "bff3de231f4f412cacf75d6355fbaa8b603fa3ce62742e68364928230d831a5a"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch077.pt": {
+      "bytes": 499010,
+      "sha256": "1ea7d9361a162b0f232e5f13f6470132303f4aef78e926898c620bd53c373847"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch078.pt": {
+      "bytes": 499010,
+      "sha256": "938de2f9a6cce32ec6975d236122c9f0f26cbab2874960a63564214278a9604c"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch079.pt": {
+      "bytes": 499010,
+      "sha256": "2fd7260b855971eb53bf9c753178a8d53b0787953f3e979118f57d60c1f09061"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch080.pt": {
+      "bytes": 499010,
+      "sha256": "d90460eef064f07d0842b45c1e4b4eb90e589f6e404168b140afeceaca845cd2"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch081.pt": {
+      "bytes": 499010,
+      "sha256": "1ec7f29d4ee0aa4cd2fb980bf75d06d0035250092466093fbff3d3c43627ac23"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch082.pt": {
+      "bytes": 499010,
+      "sha256": "32b4909edb9fbb5b15e58634bee4a7276ed38c3b3c9a2093e0020f14e79abc76"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch083.pt": {
+      "bytes": 499010,
+      "sha256": "f1e19df12ebc791884efce817efe3f4e8304647d51bf43c5e649b8aa94543a03"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch084.pt": {
+      "bytes": 499010,
+      "sha256": "dd5b019c0f6c631e51192002671d89381c39103aa247b1b74e4dbd2d7b4a4901"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch085.pt": {
+      "bytes": 499010,
+      "sha256": "ef975ab1055775ceae854ab8af3fcf0a8c51baab01dff5727c20e0b3b6b87d4e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch086.pt": {
+      "bytes": 499010,
+      "sha256": "814c78e0c33b9f4f6073b4f396234927981f879ea2097b82a9dcda9f845af5f6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch087.pt": {
+      "bytes": 499010,
+      "sha256": "3f20e5305dc314a826993dee26f09222c01cd22eec319bd2eab633a5d00364d1"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch088.pt": {
+      "bytes": 499010,
+      "sha256": "f63dfc6b9341e250180ba5cf9dd7ba144bce8f182ff9b888a48a66eccbcdb6be"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch089.pt": {
+      "bytes": 499010,
+      "sha256": "0e0f55ffd9592c1d2fad55f7f0cd88f47b3637dbd173720d9b46b3606d811ce7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch090.pt": {
+      "bytes": 499010,
+      "sha256": "c82538d492ee253845bec8cb915dfd7dcc1d08b14fb7360614b9b947c1129c6e"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch091.pt": {
+      "bytes": 499010,
+      "sha256": "c2760ba6b156ba33cccd8a9b53e8c71354c414379ec3336e9692d7f2c3e3cf65"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch092.pt": {
+      "bytes": 499010,
+      "sha256": "d87fce3821c7b2b7838cdd446d4d75f3a80b38564c3be167ecbe9f5c6d5871f9"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch093.pt": {
+      "bytes": 499010,
+      "sha256": "6ac58157ee6097f006da0f53428d3eb2a747bd2e2ef8e7e4fbb06a5609a4b4f6"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch094.pt": {
+      "bytes": 499010,
+      "sha256": "e6facb6dc15ae9a10527f939d9f8936b79eeb66a209549b61a3f48483dd68f55"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch095.pt": {
+      "bytes": 499010,
+      "sha256": "626c118c30eaa43a32e2c76fe0301946dba5c97b47baeb7d9b25715fb8960fc0"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch096.pt": {
+      "bytes": 499010,
+      "sha256": "0a3030d2623f9e49dce7343c6d80aa34c285bab0e76681c9db27f966a1701288"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch097.pt": {
+      "bytes": 499010,
+      "sha256": "afadfa11ccf78978c53eb30170f7b8ca766f2ea3203c6c72d93d78f8173ca436"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch098.pt": {
+      "bytes": 499010,
+      "sha256": "4fca0ffb0a4862876d01a6ce346a0268619b04f58ab541c0d73087950567e7e4"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/epochs/epoch099.pt": {
+      "bytes": 499010,
+      "sha256": "9ebbf40e6abbdfae41ad46abd5d71357eee4d7fae038c42606ff1f989a3f6a59"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/frozen.pt": {
+      "bytes": 1268149,
+      "sha256": "c23187aa5698046e240aa9e212f41309d8d9bf3550507ee52cc2e56aaa36dff5"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/initialization.pt": {
+      "bytes": 172599,
+      "sha256": "ca844019cb3212f1152b816fbcee964a54b194cd13ac64f327ac90324f78f3b3"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/prepared.json": {
+      "bytes": 93810,
+      "sha256": "fc6ad30fdc8d70cbf153142141febeeb8818d79c3aeea3b8fb890a8a965bd2f7"
+    },
+    "source-refit/mutagenicity_edge/M0/seed3409/mean/source.pt": {
+      "bytes": 169405,
+      "sha256": "ad0bbf6efd771462060f7a9dd711882f612fc4e0871ac76b28b6af0fa8b90450"
+    }
+  },
+  "seals": {
+    "R7_INPUT": "1e406e2f70c192b8ef8f2d46e959d9c26b3fd74951ae129403d1252de2ccba02",
+    "R7_OBS": "ec45ee8728f85c2509554e7d07cca9c66f202fcd0ada5772c2e6b776c3abf27f",
+    "R7_ORACLE": "71c40ff984c0e74c2bf0fa3074283ff6dfb261967ab1c6377933e08a7724b66d",
+    "R7_FINAL": "1d00cca4b659cc547f4a7aa52f201d0c1b8e8e56b3b5f3ffa152b6bad1380d35"
+  },
+  "stdout": {
+    "path": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-013/pilot.log",
+    "sha256": "4b431a4454ce241b36115e73de3c6d8e44ab67d6d5495ecc4c7611bf0bbca94f"
+  },
+  "omitted_final_artifacts": []
+}
