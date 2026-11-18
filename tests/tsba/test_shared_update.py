@@ -46,6 +46,8 @@ class SharedUpdateTests(unittest.TestCase):
         self.assertTrue(report["single_cut_refinement"])
         self.assertEqual(report["single_cut_initial"]["reason"], "stationary")
         self.assertLessEqual(report["objective"], report["single_cut_initial"]["objective"])
+        self.assertEqual(report["iterations"], report["epigraph_iterations"] + report["refinement_iterations"])
+        self.assertLessEqual(report["iterations"], 20)
         np.testing.assert_allclose(correction.ravel(), [-optimum, optimum], rtol=0., atol=1e-7)
 
     def test_round_local_powered_posterior_full_dimension_gradients_and_replay(self):

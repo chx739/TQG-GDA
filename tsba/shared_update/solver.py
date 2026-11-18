@@ -234,6 +234,7 @@ def solve_master(source_logits, features, statistics, *, regularization,
             or not 0 < feasibility_tol < 1 or not 0 < optimality_tol < 1
             or master_maxiter < 1):
         raise ValueError("Invalid regularization, tolerance or master iteration budget")
+    budget = int(master_maxiter)
     w0 = np.zeros(shape) if initial is None else _array(initial, "initial", 2)
     if w0.shape != shape:
         raise ValueError("Initial correction has incompatible dimensions")
@@ -297,7 +298,7 @@ def solve_master(source_logits, features, statistics, *, regularization,
         result = minimize(objective, x0, jac=True, method="SLSQP",
                           constraints={"type": "ineq", "fun": constraints, "jac": constraint_jacobian},
                           options={"ftol": max(1e-14, min(1e-12, feasibility_tol * .001, scaled_optimality_tol ** 2)),
-                                   "maxiter": int(master_maxiter)})
+                                   "maxiter": budget})
         w, info = certify(result, explicit_epigraph=True)
         return w, info, result.x
 
@@ -308,18 +309,23 @@ def solve_master(source_logits, features, statistics, *, regularization,
         retry_info.update(zero_start_retry=True, warm_start_failure=info)
         return retry_w, retry_info
     if (len(stats) != 1 or info["reason"] != "stationary" or info["objective"] >= 0.
-            or info["iterations"] >= master_maxiter):
+            or info["iterations"] >= budget):
+        return w, info
+    initial_kkt = info["kkt"]
+    if (initial_kkt["stationarity_residual"] <= initial_kkt["stationarity_tolerance"]
+            or initial_kkt["complementarity_residual"] > max(feasibility_tol, optimality_tol)):
         return w, info
 
     # For one cut, minimizing over the epigraph variable leaves the smooth
     # candidate risk plus the original coefficient penalty.
     refined = minimize(smooth_single_cut, vector[:-1], jac=True, method="L-BFGS-B",
                        options={"ftol": 0., "gtol": scaled_optimality_tol / 10,
-                                "maxiter": int(master_maxiter - info["iterations"])})
+                                "maxiter": budget - info["iterations"]})
     trial_w, trial = certify(refined, explicit_epigraph=False)
     if trial["valid"] and trial["objective"] <= info["objective"] + feasibility_tol:
         trial.update(single_cut_refinement=True, single_cut_initial=info,
-                     epigraph_iterations=info["iterations"])
+                     epigraph_iterations=info["iterations"], refinement_iterations=trial["iterations"],
+                     iterations=info["iterations"] + trial["iterations"])
         return trial_w, trial
     return w, dict(info, single_cut_refinement_failure=trial)
 
