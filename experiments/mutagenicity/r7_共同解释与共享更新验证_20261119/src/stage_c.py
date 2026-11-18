@@ -19,6 +19,7 @@ from .fit import (assert_density_execution, assert_fitter_sources, config, fit_b
 from .matched_tsba import blind_inputs, fit_matched_tsba, predict_matched
 from .paired import paired_bootstrap
 from .r5_inputs import load_inputs, load_labels
+from . import source_refit_stage
 from .seals import _signature, seal, verify_seal
 from .stage_p import _bank_diagnostics, _endpoints, _FIT_ARRAYS, _oracles
 from .stage_s import _assert_pinned_method, csv_write, json_read
@@ -104,6 +105,8 @@ def _verify_pilot(plan_path, plan, p_output, repo, tau, pilot_keys):
     gate = _sealed_json(p_output, 'gate.json', final['files'])
     execution = _sealed_json(p_output, 'executed-configs.json', records['INPUT']['files'])
     assert_density_execution(plan, execution)
+    if plan.get('source_refit') and execution.get('source_refit_applied') is not True:
+        raise ValueError('The sealed pilot did not use the registered source refit')
     if gate['passed'] is not True or gate['next_phase'] != 'C' or execution['phase'] != 'P':
         raise ValueError('The sealed P decision did not authorize all-direction evaluation')
     if digest(plan_path) != records['INPUT']['files']['executed-plan.json']:
@@ -142,8 +145,9 @@ def _input_arrays(loaded):
     }
 
 
-def _prepare_block(plan, repo, root, block, task, reused_input=None):
-    loaded = load_inputs(plan, *task, repository=repo, include_tsba=True)
+def _prepare_block(plan, repo, root, block, task, reused_input=None, *, refit_root=None):
+    loaded = (load_inputs(plan, *task, repository=repo, include_tsba=True) if refit_root is None
+              else source_refit_stage.load(plan, task, refit_root, repo, include_tsba=True))
     block.mkdir()
     inputs = _input_arrays(loaded)
     if reused_input is None:
@@ -428,6 +432,8 @@ def run(plan_path, root, p_output, workers, repo):
     root.mkdir(parents=True, exist_ok=False)
     (root / 'blocks').mkdir()
     tasks = [(root / 'blocks' / _block_name(task), task) for task in grid]
+    prior_sources = {key: p_output / 'source-refit' for key in source_refit_stage.source_keys(pilot_keys)}
+    source_roots = source_refit_stage.prepare(plan, grid, root, workers, repo, reuse=prior_sources)
     view = _fit_view(plan, tau)
     input_names = ['executed-plan.json', 'executed-configs.json', 'provenance.json', 'blocks.json']
     (root / 'executed-plan.json').write_bytes(plan_path.read_bytes())
@@ -435,6 +441,8 @@ def run(plan_path, root, p_output, workers, repo):
                                                    p_output=str(p_output), workers=workers, threads_per_worker=1,
                                                    separation_variant=view['separation_variant'],
                                                    density_coordinates=view['density_coordinates'],
+                                                   source_refit=plan.get('source_refit'),
+                                                   source_refit_applied=bool(source_roots),
                                                    common=[config(plan, seed, tau).to_dict()
                                                            for seed in plan['real_model_seeds']],
                                                    matched_tsba=view['phases']['C']['matched_tsba'],
@@ -444,8 +452,15 @@ def run(plan_path, root, p_output, workers, repo):
                                          target=task[2], seed=task[3], reused_p=task in pilot_keys,
                                          repeat_independent_audit=task in audit_keys) for block, task in tasks])
     for block, task in tasks:
-        _prepare_block(plan, repo, root, block, task, (p_output, pilot_members['INPUT']) if task in pilot_keys else None)
+        reused_input = (p_output, pilot_members['INPUT']) if task in pilot_keys else None
+        if source_roots:
+            setting, source, _, seed = task
+            _prepare_block(plan, repo, root, block, task, reused_input,
+                           refit_root=source_roots[setting, source, seed])
+        else:
+            _prepare_block(plan, repo, root, block, task, reused_input)
         input_names.extend(str(block.relative_to(root) / name) for name in (*_INPUT_FILES, 'matched_input.pt'))
+    input_names += source_refit_stage.local_files(root)
     seal(root, 'R7_INPUT', input_names, expected=input_names)
     _fit_all(view, root, tasks, workers, pilot_keys, audit_keys)
     observed_names = _freeze_observations(plan, view, root, p_output, tasks, tau, pilot_keys, audit_keys,

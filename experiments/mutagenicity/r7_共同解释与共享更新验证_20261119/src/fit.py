@@ -164,15 +164,24 @@ def fitter_source_files(plan):
         files.append('posterior_mass_explanations.py')
     if plan.get('density_coordinates') == 'angular_raw_origin_v1':
         files.extend(['angular_explanations.py', 'coverage.py', 'stage_s.py', 'stage_p.py', 'stage_c.py'])
+    if 'source_refit' in plan:
+        files.extend(['source_refit_inputs.py', 'source_refit_stage.py', 'r5_inputs.py',
+                      'stage_s.py', 'stage_p.py', 'stage_c.py'])
     return files
 
 
 def assert_fitter_sources(plan, repo, frozen, additional=()):
     """Same file identity check for S-to-P and P-to-C fitting/replay."""
-    for name in dict.fromkeys([*fitter_source_files(plan), *additional]):
-        path = Path(__file__).with_name(name).resolve()
-        if frozen.get(str(path.relative_to(Path(repo).resolve()))) != digest(path):
-            raise ValueError(f'Fitting or replay implementation differs from the passed phase: {name}')
+    repo = Path(repo).resolve()
+    paths = [Path(__file__).with_name(name).resolve() for name in (*fitter_source_files(plan), *additional)]
+    if 'source_refit' in plan:
+        from .source_refit_inputs import _DEPENDENCIES
+
+        paths.extend(repo / name for name in _DEPENDENCIES)
+    for path in dict.fromkeys(paths):
+        relative = str(path.relative_to(repo))
+        if frozen.get(relative) != digest(path):
+            raise ValueError(f'Fitting or replay implementation differs from the passed phase: {relative}')
 
 
 def assert_density_execution(plan, executed):
@@ -180,6 +189,8 @@ def assert_density_execution(plan, executed):
     expected = plan.get('density_coordinates', 'source_standardized_v1')
     if executed.get('density_coordinates', 'source_standardized_v1') != expected:
         raise ValueError('Passed phase executed different density coordinates')
+    if executed.get('source_refit') != plan.get('source_refit'):
+        raise ValueError('Passed phase recorded a different source-refit branch')
 
 
 def fit_block(plan, seed, block, *, phase='S'):

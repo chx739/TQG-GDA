@@ -22,6 +22,24 @@ from tsba.shared_update.solver import _partition, _risk_terms, relative_risks, s
 
 
 class SharedUpdateTests(unittest.TestCase):
+    def test_round_local_source_refit_schedules_once_and_reuses_pilot_checkpoints(self):
+        module = importlib.import_module(
+            'experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src.source_refit_stage')
+        plan = dict(source_refit=dict(pooling='mean', recipe='r5_frozen_role_source_refit_v1'))
+        tasks = [('edges', 0, 1, 9), ('edges', 0, 3, 9), ('edges', 1, 3, 9)]
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            prior = {('edges', 0, 9): root / 'P' / 'source-refit'}
+            with patch.object(module, 'ProcessPoolExecutor') as pool:
+                worker = pool.return_value.__enter__.return_value
+                worker.map.side_effect = lambda fn, keys, *_: iter(key[0] for key in keys)
+                roots = module.prepare(plan, tasks, root, 2, root, reuse=prior)
+                self.assertEqual(worker.map.call_args.args[1], [('edges', 1, 9)])
+            self.assertEqual(roots, prior | {('edges', 1, 9): root / 'source-refit'})
+            with self.assertRaisesRegex(ValueError, 'unregistered checkpoint'):
+                module.prepare(plan, tasks, root, 2, root, reuse={('edges', 3, 9): root / 'bad'})
+            self.assertEqual(module.prepare({}, tasks, root, 2, root), {})
+
     def test_round_local_angular_density_preserves_raw_moments_and_mass(self):
         module = importlib.import_module(
             'experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src.angular_explanations')

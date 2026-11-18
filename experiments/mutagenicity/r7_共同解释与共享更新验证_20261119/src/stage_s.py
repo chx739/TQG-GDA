@@ -181,12 +181,17 @@ def run(plan_path, root, workers, repo):
         temporary = Path(temporary)
         check_seals(temporary / 'seals')
         check_replay(plan, temporary / 'replay')
-    regression_command = [sys.executable, '-m', 'unittest', 'discover', '-s', 'tests/tsba',
-                          '-p', 'test_shared_update.py', '-v']
-    regression = subprocess.run(regression_command, cwd=repo, capture_output=True, text=True)
-    (root / 'engineering-regression.txt').write_text(regression.stdout + regression.stderr)
-    regression.check_returncode()
-    write_json(root / 'engineering.json', dict(passed=True, command=regression_command,
+    patterns = ['test_shared_update.py']
+    if 'source_refit' in plan:
+        patterns.append('test_r7_source_refit.py')
+    commands = [[sys.executable, '-m', 'unittest', 'discover', '-s', 'tests/tsba', '-p', pattern, '-v']
+                for pattern in patterns]
+    with (root / 'engineering-regression.txt').open('x') as stream:
+        for command in commands:
+            regression = subprocess.run(command, cwd=repo, capture_output=True, text=True)
+            stream.write(regression.stdout + regression.stderr)
+            regression.check_returncode()
+    write_json(root / 'engineering.json', dict(passed=True, commands=commands,
                                                exact_controls=True, sealed_label_access=True,
                                                small_pipeline_replay=True, known_moment=True))
     stage_config = plan['phases']['S']
@@ -203,6 +208,7 @@ def run(plan_path, root, workers, repo):
                                                    threads_per_worker=torch.get_num_threads(), dtype='float64',
                                                    separation_variant=plan.get('separation_variant', 'stock'),
                                                    density_coordinates=plan.get('density_coordinates', 'source_standardized_v1'),
+                                                   source_refit=plan.get('source_refit'), source_refit_applied=False,
                                                    world_ids=[world['id'] for world in stage_config['worlds']],
                                                    common=common, numpy=np.__version__, scipy=scipy.__version__,
                                                    hostname=platform.node(), executable=sys.executable))

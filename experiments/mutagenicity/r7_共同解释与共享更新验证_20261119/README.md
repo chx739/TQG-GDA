@@ -15,7 +15,7 @@
 
 [初次 S 实测报告](report.md) · [门槛输出](results/gate.json) · [S 阶段补充计划](docs/s-separation-followup.md)
 
-[独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮实测](docs/iteration-02.md) · [第三轮投影实测](docs/iteration-03.md) · [第四轮源类条件锚定](docs/iteration-04.md) · [第五轮源混合模板](docs/iteration-05.md) · [第六轮判别后验锚定](docs/iteration-06.md) · [第七轮类别质量约束](docs/iteration-07.md) · [第八轮混合模板与类别质量](docs/iteration-08.md) · [第九轮角向解释](docs/iteration-09.md)
+[独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮实测](docs/iteration-02.md) · [第三轮投影实测](docs/iteration-03.md) · [第四轮源类条件锚定](docs/iteration-04.md) · [第五轮源混合模板](docs/iteration-05.md) · [第六轮判别后验锚定](docs/iteration-06.md) · [第七轮类别质量约束](docs/iteration-07.md) · [第八轮混合模板与类别质量](docs/iteration-08.md) · [第九轮角向解释](docs/iteration-09.md) · [第十轮图读出成对对照](docs/iteration-10.md)
 
 ## 合成阶段执行
 
@@ -33,3 +33,13 @@ S 使用固定生成参数的解析源 logits。真实目标条件概率与抽�
 `S-audit` 使用初次 S 的封存档案，做固定 W 独立分离诊断。`--plan` 可用于登记后的迭代版本。P 入口需要优化版本通过的同配置 S 封存目录，入口会校验合成阶段的拟合实现哈希。
 
 `C` 入口需要同配置通过的 `--p-output`。它沿用 R5 M00 源模型缓存和 R3 的候选更新验收，按登记的实际迭代数重训 A 上的 score，并和 J 共用 A/H 折。已完成小规模工程联调。
+
+登记 `source_refit` 的分支用该轮新训练的冻结源模型及其匹配 TSBA 坐标。P 和 C 将源模型与冻结表示纳入输入封存。C 复用 P 的同一源检查点，其他源检查点按场景和种子各训练一次。
+
+`D` 入口需要同配置通过的 `--c-output` 及本地原始文件认证记录。记录含 `zip_sha256` 和以原始文件名为键的 `raw_sha256`。入口核对 C 判定与代码，封存执行锁，再加载 NCI1 并按方案选源模型。当前通过了生成图上的完整流程联调，真实运行等待 C 晋级。
+
+```bash
+python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.run D \
+  --plan /path/to/executed-plan.json --c-output /path/to/passed-C \
+  --acquisition /path/to/nci1-sha256.json --output /path/to/new-D --workers 4
+```

@@ -1,0 +1,745 @@
+{
+  "schema_version": 1,
+  "experiment": "R7",
+  "status": "planned",
+  "registered_on": "2026-11-19",
+  "method_commit": "6ee45d6847022f6988403668a8541f419df7b559",
+  "provenance": {
+    "r5_archive_index": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/results/archive-index.json",
+    "r5_actual_config": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/executed-configs.json",
+    "reuse": [
+      "source_fit_and_validation_roles",
+      "archived_unlabeled_graph_features",
+      "domain_indices"
+    ],
+    "fresh_target_adaptation": true,
+    "runner_status": "source_refit_and_gated_phases_implemented",
+    "new_source_fit": true
+  },
+  "target_split": {
+    "hash": "sha256",
+    "key_template": "r7-v1|{tu_dataset}|{zero_based_tu_graph_id_decimal}",
+    "byte_order": "big",
+    "holdout_fraction": [
+      3,
+      10
+    ],
+    "rule": "10*h < 3*2**256",
+    "retain_domain_order": true,
+    "holdout_inputs_for_adaptation": false,
+    "stratify_on_labels": false
+  },
+  "real_settings": [
+    {
+      "id": "mutagenicity_edge",
+      "tu_dataset": "Mutagenicity",
+      "domain_index_pattern": "data/idx_Mutagenicity_{domain}.npy",
+      "domain_counts": [
+        1084,
+        1084,
+        1084,
+        1085
+      ],
+      "planned_adaptation_holdout_counts": [
+        [
+          761,
+          323
+        ],
+        [
+          777,
+          307
+        ],
+        [
+          762,
+          322
+        ],
+        [
+          747,
+          338
+        ]
+      ]
+    },
+    {
+      "id": "mutagenicity_node",
+      "tu_dataset": "Mutagenicity",
+      "domain_index_pattern": "data/node_Mutagenicity_{domain}.npy",
+      "domain_counts": [
+        1084,
+        1084,
+        1084,
+        1085
+      ],
+      "planned_adaptation_holdout_counts": [
+        [
+          763,
+          321
+        ],
+        [
+          770,
+          314
+        ],
+        [
+          766,
+          318
+        ],
+        [
+          748,
+          337
+        ]
+      ]
+    },
+    {
+      "id": "proteins_edge",
+      "tu_dataset": "PROTEINS",
+      "domain_index_pattern": "data/idx_PROTEINS_{domain}.npy",
+      "domain_counts": [
+        278,
+        278,
+        278,
+        279
+      ],
+      "planned_adaptation_holdout_counts": [
+        [
+          181,
+          97
+        ],
+        [
+          207,
+          71
+        ],
+        [
+          189,
+          89
+        ],
+        [
+          196,
+          83
+        ]
+      ]
+    }
+  ],
+  "real_model_seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "features": {
+    "raw_cache_key": "h",
+    "source_logits_dtype": "float64",
+    "output_dimension_real": 16,
+    "use_fixed_source_fit_per_feature_standardization": true,
+    "use_intercept": true,
+    "source_model_state_key": "state",
+    "source_head_state_keys": [
+      "head.weight",
+      "head.bias"
+    ]
+  },
+  "shared_update": {
+    "seed_from": "task_seed",
+    "primary_tau": 0.005,
+    "sensitivity_tau": [
+      0.01,
+      0.02
+    ],
+    "regularization": 0.1,
+    "coordinate_floor": 1e-06,
+    "variance_floor": 0.001,
+    "mean_radius": 2,
+    "variance_upper_multiplier": 100,
+    "scale_min": 0.25,
+    "scale_max": 4,
+    "shift_bound": 4,
+    "prior_floor": 0.0001,
+    "nonreference_prior_logit_bounds": [
+      -12,
+      12
+    ],
+    "inner_starts": 5,
+    "inner_maxiter": 150,
+    "master_maxiter": 200,
+    "search_rounds": 10,
+    "feasibility_tol": 1e-08,
+    "optimality_tol": 1e-06,
+    "separation_tol": 1e-06,
+    "reuse_reference_across_tau": true
+  },
+  "controls": {
+    "primary_groups": [
+      "B0",
+      "E",
+      "J",
+      "P",
+      "P_mass",
+      "J_bias",
+      "J_cal",
+      "O",
+      "C05",
+      "C075"
+    ],
+    "single": "fixed_reference",
+    "pointwise": {
+      "bank": "same_retained_explanations_as_joint",
+      "exact_separation_limit": 100,
+      "require_exact_final_separation_check": true
+    },
+    "oracle": {
+      "labels_in": "adaptation_pool_after_observation_seal",
+      "evaluate_on": "holdout_pool",
+      "same_features_and_regularization": true
+    },
+    "fixed_source_logit_multipliers": [
+      0.5,
+      0.75
+    ],
+    "pointwise_mass": {
+      "bank": "same_retained_explanations_as_joint",
+      "additional_constraint": "same_bank_target_mean_class_probability_interval",
+      "binary_separation": "exact_sort_and_fill",
+      "exact_separation_limit": 100,
+      "require_exact_final_separation_check": true,
+      "ties": "ascending_graph_id"
+    },
+    "restricted_joint": {
+      "J_bias": {
+        "bank": "same_retained_explanations_as_joint",
+        "restriction": "intercept_only"
+      },
+      "J_cal": {
+        "bank": "same_retained_explanations_as_joint",
+        "restriction": "nonnegative_shared_source_logit_scaling_plus_class_bias",
+        "use_class_centered_source_weights_and_bias": true
+      },
+      "regularization_on_original_W": true,
+      "widths": "primary_tau_only"
+    }
+  },
+  "phases": {
+    "S": {
+      "seeds": [
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "source_count": 512,
+      "adaptation_count": 512,
+      "holdout_count": 4096,
+      "source_class_means": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "source_class_diagonal_variance": [
+        0.64,
+        1
+      ],
+      "source_prior": [
+        0.5,
+        0.5
+      ],
+      "class_order": [
+        0,
+        1
+      ],
+      "reference_source_logits": "analytical_source_log_posterior_up_to_class_common_shift",
+      "generation": "target_x = inverse(L) @ (r-b)",
+      "worlds": [
+        {
+          "id": "well_specified",
+          "L_diagonal": [
+            1.2,
+            0.8
+          ],
+          "b": [
+            0.4,
+            0.2
+          ],
+          "target_prior": [
+            0.35,
+            0.65
+          ]
+        },
+        {
+          "id": "no_shift",
+          "L_diagonal": [
+            1,
+            1
+          ],
+          "b": [
+            0,
+            0
+          ],
+          "target_prior": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "id": "semantic_reflection",
+          "L_diagonal": [
+            -1,
+            1
+          ],
+          "b": [
+            0,
+            0
+          ],
+          "target_prior": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "id": "angle_shift",
+          "source_class_means_override": [
+            [
+              -1,
+              -1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "L_diagonal": [
+            1.4,
+            0.7
+          ],
+          "b": [
+            0,
+            0
+          ],
+          "target_prior": [
+            0.5,
+            0.5
+          ],
+          "extra_diagnostics": [
+            "J_vs_J_cal_true_risk",
+            "decision_boundary_direction"
+          ]
+        }
+      ],
+      "width_grid": [
+        0.005,
+        0.01,
+        0.02
+      ],
+      "known_moment_fixture": {
+        "regularization": 1e-09,
+        "numeric_atol": 1e-06
+      },
+      "gate": {
+        "minimum_seed_count": 4,
+        "true_directional_risk_slack_nats": 0.005,
+        "centered_logit_rms_nonzero": 1e-06,
+        "required_positive_worlds": [
+          "well_specified",
+          "angle_shift"
+        ],
+        "no_shift_mean_nll_increase_cap": 0.005,
+        "no_shift_each_seed_nll_increase_cap": 0.02
+      },
+      "rng_streams": "SeedSequence([seed, world_index]).spawn(3) in source, adaptation, holdout order"
+    },
+    "P": {
+      "setting": "mutagenicity_edge",
+      "directions": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "expected_blocks": 10,
+      "width_grid": [
+        0.005,
+        0.01,
+        0.02
+      ],
+      "independent_audit": {
+        "tau": 0.005,
+        "seed_offset": 7001,
+        "aggregate_fixed_updates": [
+          "J",
+          "P"
+        ],
+        "individual_graph_count": 2,
+        "individual_graph_rank": "descending_absolute_J_binary_margin_change_then_graph_id",
+        "individual_class": 1,
+        "individual_query_signs": [
+          -1,
+          1
+        ],
+        "inner_starts": 10,
+        "inner_maxiter": 300,
+        "positive_observed_risk_witness_threshold": 1e-06,
+        "keep_fixed_reference_threshold": true,
+        "augmented_pair": [
+          "J_plus",
+          "P_plus"
+        ],
+        "augmented_mass_pair": [
+          "J_plus",
+          "P_mass_plus"
+        ]
+      },
+      "gate": {
+        "complete_blocks": 10,
+        "minimum_seed_improvement_count_per_direction": 4,
+        "minimum_nonzero_J_seeds_per_direction": 4,
+        "centered_logit_rms_nonzero": 1e-06,
+        "minimum_mean_ba_gain_either_direction_pp": 0.5,
+        "minimum_mean_ba_gain_each_direction_pp": 0,
+        "minimum_positive_net_corrections_seeds_in_BA_gain_direction": 4,
+        "allow_observed_harmful_explanation_witness": false,
+        "mean_nll_decrease_vs_B0_for_J": 0.005,
+        "oracle_is_diagnostic": true
+      },
+      "mechanism_criteria": {
+        "contrasts": [
+          [
+            "J",
+            "P"
+          ],
+          [
+            "J",
+            "P_mass"
+          ]
+        ],
+        "minimum_mean_nll_decrease_at_least_one_direction": 0.002,
+        "maximum_mean_nll_increase_other_direction": 0.002,
+        "require_augmented_pair_for_mechanism_claim": true,
+        "required_for_P_to_C": false
+      }
+    },
+    "C": {
+      "settings": [
+        "mutagenicity_edge",
+        "mutagenicity_node",
+        "proteins_edge"
+      ],
+      "domains": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "directions": "ordered_cross_domain_pairs",
+      "directions_per_setting": 12,
+      "primary_tau": 0.005,
+      "primary_blocks_total": 180,
+      "reuse_same_R7_P_blocks": 10,
+      "new_blocks": 170,
+      "enable_only_if_P_passes": true,
+      "classification_criteria": {
+        "average_nll_improves_each_setting": true,
+        "minimum_mean_ba_gain_each_setting_pp": 0,
+        "comparisons_evaluated_separately": [
+          [
+            "J",
+            "B0"
+          ],
+          [
+            "J",
+            "A0"
+          ]
+        ],
+        "minimum_mean_ba_gain_for_PROTEINS_and_one_Mutagenicity_split_pp": 0.5,
+        "require_complete_favorable_intervals_for_clear_cross_dataset_development_claim": true
+      },
+      "matched_tsba": {
+        "compared_groups": [
+          "B1",
+          "A0"
+        ],
+        "use_R5_M00_implementation": true,
+        "source_and_target_batch": 128,
+        "attempts_per_group": 30,
+        "score_batch": 128,
+        "score_exact_updates": 7200,
+        "score_lr": 0.001,
+        "lambda_boundary": 1,
+        "boundary_tau": 0.1,
+        "damping": 0.01,
+        "kappa_sigma": 1,
+        "estimated_models_max": 180,
+        "expected_trajectories_if_full": 360,
+        "expected_attempts_if_full": 10800,
+        "seed_offsets": {
+          "score_initialization": 101,
+          "score_training": 102,
+          "score_diagnostic": 103,
+          "adaptation_batches": 201
+        }
+      },
+      "independent_audit_repeat": {
+        "setting": "proteins_edge",
+        "directions": [
+          [
+            0,
+            3
+          ]
+        ],
+        "seeds": [
+          3405,
+          3406,
+          3407,
+          3408,
+          3409
+        ],
+        "inherits": "P.independent_audit"
+      }
+    },
+    "D": {
+      "setting": "nci1_edge",
+      "enable_only_if_C_point_estimate_gate_and_complete_primary_pairs": true,
+      "freeze_before_target_access": true,
+      "primary_tau": 0.005,
+      "source_domain": 0,
+      "directions": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "source_checkpoints_new": 5,
+      "expected_blocks": 15,
+      "source_model": {
+        "encoder": "gin",
+        "num_layers": 3,
+        "hidden": 64,
+        "emb_dim": 16,
+        "dropout": 0,
+        "source_epochs": 100,
+        "source_lr": 0.001,
+        "source_batch": 128,
+        "optimizer": "Adam",
+        "role_split": "R5_class_stratified_source_roles",
+        "selection": "minimum_source_validation_CE",
+        "features": "source_fit_sorted_node_label_onehot_plus_unknown",
+        "edge_attr": null,
+        "pooling": "mean"
+      },
+      "confirmation": {
+        "complete_blocks": 15,
+        "minimum_mean_nll_decrease_vs_B0": 0.005,
+        "minimum_mean_ba_gain_vs_B0_pp": 0.5,
+        "require_favorable_paired_intervals_for_both": true,
+        "minimum_directions_with_positive_mean_ba": 2,
+        "maximum_nll_increase_any_direction": 0.005,
+        "maximum_ba_decrease_any_direction_pp": 1
+      }
+    }
+  },
+  "evaluation": {
+    "primary_pool": "holdout",
+    "primary_tau": 0.005,
+    "main_contrast": [
+      "J",
+      "B0",
+      "NLL"
+    ],
+    "mechanism_contrast": [
+      "J",
+      "P",
+      "NLL"
+    ],
+    "classification_metrics": [
+      "BA",
+      "Accuracy",
+      "Macro-F1",
+      "class_recall",
+      "corrected",
+      "harmed",
+      "net_corrections"
+    ],
+    "cohort_bootstrap_replicates": 2000,
+    "cohort_bootstrap_seed": 20261119,
+    "nll_tie_tolerance": 1e-08,
+    "multi_setting_aggregation": "per_setting_equal_directions_within_seed",
+    "classification_endpoint": [
+      "J",
+      "B0",
+      "BA"
+    ],
+    "additional_mechanism_contrasts": [
+      [
+        "J",
+        "E"
+      ],
+      [
+        "J",
+        "P_mass"
+      ],
+      [
+        "J",
+        "J_bias"
+      ],
+      [
+        "J",
+        "J_cal"
+      ]
+    ],
+    "paired_interval": {
+      "level": 0.95,
+      "percentiles": [
+        2.5,
+        97.5
+      ],
+      "metrics": [
+        "NLL",
+        "BA",
+        "Accuracy",
+        "directional_risk_gap"
+      ],
+      "strata": [
+        "target_domain",
+        "class"
+      ],
+      "reuse_draws_across_methods_seeds_and_source_directions": true,
+      "minimum_graphs_per_class_for_interval": 10,
+      "conditional_on_fitted_models": true
+    },
+    "marginal_fit_diagnostic": "holdout_coordinate_CDF_sup_distance_against_fixed_reference"
+  },
+  "execution": {
+    "mode": "planned_only",
+    "runtime": "CPU",
+    "statistics_dtype": "float64",
+    "maximum_workers": 4,
+    "threads_per_worker": 1,
+    "seals": [
+      "R7_INPUT",
+      "R7_OBS",
+      "R7_ORACLE",
+      "R7_FINAL"
+    ]
+  },
+  "protocol_revision": 2,
+  "previous_plan_commit": "cd1ee882a0354b5cf39789fb04d920c944dee3b0",
+  "external_input": {
+    "id": "nci1_edge",
+    "tu_dataset": "NCI1",
+    "origin": "TUDataset",
+    "source_url": "https://www.chrsmrrs.com/graphkerneldatasets/NCI1.zip",
+    "source_documentation": "https://chrsmrrs.github.io/datasets/docs/datasets/",
+    "archive_status": "raw_archive_and_source_checkpoints_pending",
+    "expected_raw_files": [
+      "NCI1_A.txt",
+      "NCI1_graph_indicator.txt",
+      "NCI1_node_labels.txt",
+      "NCI1_graph_labels.txt"
+    ],
+    "domain_index_pattern": "data/idx_NCI1_{domain}.npy",
+    "domain_counts": [
+      1027,
+      1027,
+      1027,
+      1029
+    ],
+    "planned_adaptation_holdout_counts": [
+      [
+        718,
+        309
+      ],
+      [
+        715,
+        312
+      ],
+      [
+        704,
+        323
+      ],
+      [
+        739,
+        290
+      ]
+    ],
+    "index_sha256": [
+      "b4213925bcbdbc8ff8d97e73491361cea837892385a01b4eb55ad3d446eed2b8",
+      "6f78c32b047d77340659c9d0a1cd960c4f9eac6555383d368d8d412c46f0271f",
+      "4a154448c13d839cab7a4c628fc04b912ae51adc307d75d65b3b0eb1405370fa",
+      "adc00d80aceefe02334ccf635fbc553ff973d47d43527767a18555618fdcd5da"
+    ],
+    "raw_directory": "data/NCI1/raw"
+  },
+  "development_iteration": 10,
+  "parent_attempt": "attempt-011/P",
+  "selection": "Isolate per-layer GIN readout pooling by refitting both source branches with identical R5 roles, initialization, optimizer and model selection. Keep the V8 mixture-mass estimator on both matched frozen representations.",
+  "separation_variant": "mixture_mass_v1",
+  "finite_master_retry": "If warm solve is invalid, one deterministic zero-start retry under the same objective, maxiter and verifier.",
+  "finite_master_multiplier_verification": "Existing verifier first; rejected active cut multipliers may be recovered by a minimax residual LP and the same KKT gates.",
+  "source_mixture_options": {
+    "component_counts": [
+      1,
+      2,
+      4
+    ],
+    "mixture_n_init": 5,
+    "mixture_maxiter": 300,
+    "mixture_tol": 1e-06,
+    "mixture_reg_covar": 0.001
+  },
+  "posterior_mass_options": {
+    "mass_weight": 1.0,
+    "mass_floor": 1e-08
+  },
+  "source_refit": {
+    "pooling": "mean",
+    "recipe": "r5_frozen_role_source_refit_v1"
+  },
+  "paired_pooling_diagnostic": {
+    "primary": "mean",
+    "reference": "sum",
+    "same_roles_and_graph_ids": true,
+    "aim": "Separate the readout effect on B0 from the marginal effect of target adaptation.",
+    "contrasts": [
+      [
+        "B0_mean",
+        "B0_sum"
+      ],
+      [
+        "J_mean",
+        "B0_mean"
+      ],
+      [
+        "J_sum",
+        "B0_sum"
+      ],
+      [
+        "J_mean",
+        "J_sum"
+      ]
+    ],
+    "paired_effect": "(J_mean - B0_mean) - (J_sum - B0_sum)",
+    "source_selection": "minimum_source_validation_CE_per_pooling_and_seed",
+    "effect_metrics": [
+      "NLL",
+      "BA",
+      "Accuracy",
+      "net_corrections"
+    ],
+    "affects_primary_p_gate": false,
+    "final_seal_required_in_both_p_branches": true
+  }
+}

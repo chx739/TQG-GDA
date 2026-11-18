@@ -15,6 +15,7 @@ from .fit import (assert_density_execution, assert_fitter_sources, config, expla
                   master, moment, read_npz, width_key, write_npz)
 from .r5_inputs import load_inputs, load_labels
 from .seals import seal, verify_seal
+from . import source_refit_stage
 from .stage_s import _assert_pinned_method, _fit, _leaf_paths, csv_write, json_read
 
 
@@ -25,9 +26,11 @@ _CONTRASTS = [('J', 'B0'), ('J', 'P'), ('J', 'P_mass'), ('J', 'E'), ('J', 'J_bia
               ('J', 'O'), ('O', 'B0'), ('J', 'C05'), ('J', 'C075'), ('J_plus', 'P_plus'), ('J_plus', 'P_mass_plus')]
 
 
-def _initialize(plan, repo, block, setting, source, target, seed):
+def _initialize(plan, repo, block, setting, source, target, seed, *, refit_root=None):
     block.mkdir()
-    loaded = load_inputs(plan, setting, source, target, seed, repository=repo)
+    task = setting, source, target, seed
+    loaded = (load_inputs(plan, *task, repository=repo) if refit_root is None
+              else source_refit_stage.load(plan, task, refit_root, repo))
     write_npz(block / 'fit_input.npz', **{key: loaded[key] for key in _FIT_ARRAYS})
     for pool in ('holdout', 'validation'):
         write_npz(block / f'{pool}_input.npz', **{f'{pool}_{key}': loaded[f'{pool}_{key}']
@@ -248,7 +251,10 @@ def run(plan_path, root, s_output, workers, repo):
     if digest(plan_path) != digest(s_output / 'executed-plan.json'):
         raise ValueError('The pilot and passed S must use the same frozen plan')
     plan = json_read(plan_path)
-    assert_density_execution(plan, json_read(s_output / 'executed-configs.json'))
+    synthetic_execution = json_read(s_output / 'executed-configs.json')
+    assert_density_execution(plan, synthetic_execution)
+    if plan.get('source_refit') and synthetic_execution.get('source_refit_applied') is not False:
+        raise ValueError('The synthetic phase must retain its analytical source head')
     if plan.get('development_iteration') and plan.get('separation_variant') == 'stock':
         raise ValueError('This stock plan is a synthetic comparator only')
     frozen = json_read(s_output / 'provenance.json')['file_hashes']
@@ -264,9 +270,15 @@ def run(plan_path, root, s_output, workers, repo):
     for (source, target), seed in product(p['directions'], plan['real_model_seeds']):
         block = root / 'blocks' / f'{p["setting"]}-M{source}_to_M{target}-seed-{seed}'
         tasks.append((block, p['setting'], source, target, seed))
-        _initialize(plan, repo, *tasks[-1])
     if len(tasks) != p['expected_blocks'] or len({task[0] for task in tasks}) != len(tasks):
         raise ValueError('Registered pilot block keys are incomplete or duplicated')
+    source_roots = source_refit_stage.prepare(plan, [task[1:] for task in tasks], root, workers, repo)
+    for block, setting, source, target, seed in tasks:
+        if source_roots:
+            _initialize(plan, repo, block, setting, source, target, seed,
+                        refit_root=source_roots[setting, source, seed])
+        else:
+            _initialize(plan, repo, block, setting, source, target, seed)
     specs = [(block, '', seed) for block, _, _, _, seed in tasks]
     widths = p['width_grid']
     (root / 'executed-plan.json').write_bytes(Path(plan_path).read_bytes())
@@ -275,10 +287,13 @@ def run(plan_path, root, s_output, workers, repo):
                                                    independent_audit=p['independent_audit'],
                                                    separation_variant=plan.get('separation_variant', 'stock'),
                                                    density_coordinates=plan.get('density_coordinates', 'source_standardized_v1'),
+                                                   source_refit=plan.get('source_refit'),
+                                                   source_refit_applied=bool(source_roots),
                                                    common=[config(plan, seed, tau).to_dict()
                                                            for seed, tau in product(plan['real_model_seeds'], widths)]))
     write_json(root / 'provenance.json', provenance(repo))
     files = ['executed-plan.json', 'executed-configs.json', 'provenance.json']
+    files += source_refit_stage.local_files(root)
     files += _leaf_paths(root, specs, ['fit_input.npz', 'holdout_input.npz', 'validation_input.npz', 'manifest.json'])
     seal(root, 'R7_INPUT', files, expected=files)
     _fit(plan, root, specs, workers, phase='P')
