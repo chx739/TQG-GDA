@@ -120,6 +120,33 @@ def relative_risks(source_logits, features, correction, statistics):
     return _risk_terms(z, u, w, stats)[0]
 
 
+def _chebyshev_multipliers(residual_columns, active_slack, complementarity_tol):
+    """Minimize the infinity-norm stationarity residual on the active simplex."""
+    from warnings import catch_warnings, filterwarnings
+
+    from scipy.optimize import OptimizeWarning, linprog
+
+    residual_scale = float(np.abs(residual_columns).max()) or 1.
+    normalized = residual_columns / residual_scale
+    signed = np.concatenate((normalized, -normalized), axis=0)
+    inequalities = np.column_stack((signed, -np.ones(len(signed))))
+    slack = np.abs(active_slack)
+    upper = np.divide(complementarity_tol, slack, out=np.ones_like(slack), where=slack > complementarity_tol)
+    count = len(slack)
+    with catch_warnings():
+        # SciPy passes this native HiGHS option through. A fixed thread
+        # count would conflict with a scheduler initialized by another LP.
+        filterwarnings("ignore", message=r"Unrecognized options detected: \{'parallel': False\}",
+                       category=OptimizeWarning)
+        return linprog(
+            np.r_[np.zeros(count), 1.], A_ub=inequalities, b_ub=np.zeros(len(signed)),
+            A_eq=[np.r_[np.ones(count), 0.]], b_eq=[1.],
+            bounds=[(0., maximum) for maximum in upper] + [(0., None)], method="highs-ds",
+            options={"maxiter": 1000, "parallel": False, "dual_feasibility_tolerance": 1e-10,
+                     "primal_feasibility_tolerance": 1e-10},
+        )
+
+
 def _kkt(gradient, stats, risks, epigraph, regularization, w,
          feasibility_tol, optimality_tol, minimize):
     """Find simplex multipliers on near-active constraints, then check KKT."""
@@ -152,18 +179,39 @@ def _kkt(gradient, stats, risks, epigraph, regularization, w,
                        options={"ftol": 1e-14, "maxiter": 1000})
         weights = np.asarray(fit.x, dtype=np.float64)
         multiplier_success = bool(fit.success)
-    mass_error = float(weights.sum()) - 1.
-    stationarity = float(np.max(np.abs(residual_columns @ weights + mass_error * target)))
-    complementarity = float(np.max(np.abs(weights * slack[active])))
-    simplex_error = max(abs(mass_error), float(np.maximum(-weights, 0).max()))
-    valid = (math.isfinite(stationarity) and stationarity <= optimality_tol * scale
-             and simplex_error <= feasibility_tol
-             and complementarity <= max(feasibility_tol, optimality_tol))
-    return dict(valid=bool(valid), stationarity_residual=stationarity,
-                stationarity_tolerance=optimality_tol * scale,
-                complementarity_residual=complementarity, simplex_residual=simplex_error,
-                multiplier_solver_success=multiplier_success,
-                active_indices=active.tolist(), active_weights=weights.tolist())
+    active_slack = slack[active]
+    complementarity_tol = max(feasibility_tol, optimality_tol)
+
+    def verify(weights, solver_success):
+        mass_error = float(weights.sum()) - 1.
+        stationarity = float(np.max(np.abs(residual_columns @ weights + mass_error * target)))
+        complementarity = float(np.max(np.abs(weights * active_slack)))
+        simplex_error = max(abs(mass_error), float(np.maximum(-weights, 0).max()))
+        valid = (math.isfinite(stationarity) and stationarity <= optimality_tol * scale
+                 and simplex_error <= feasibility_tol and complementarity <= complementarity_tol)
+        return dict(valid=bool(valid), stationarity_residual=stationarity,
+                    stationarity_tolerance=optimality_tol * scale,
+                    complementarity_residual=complementarity, simplex_residual=simplex_error,
+                    multiplier_solver_success=solver_success, active_indices=active.tolist(),
+                    active_weights=weights.tolist())
+
+    first = verify(weights, multiplier_success)
+    if first["valid"] or len(active) == 1:
+        return first
+    # Nearly dependent active cuts can stall the least-squares fit. Check the
+    # same active set with the norm used by the original acceptance rule.
+    try:
+        lp = _chebyshev_multipliers(residual_columns, active_slack, complementarity_tol)
+    except (ValueError, RuntimeError, ArithmeticError) as error:
+        return dict(first, multiplier_lp=dict(success=False, error=str(error)))
+    lp_detail = dict(success=bool(lp.success), status=int(lp.status), message=str(lp.message),
+                     iterations=None if lp.nit is None else int(lp.nit))
+    if lp.success and lp.x is not None and np.isfinite(lp.x).all():
+        retry = verify(lp.x[:-1], True)
+        if retry["valid"]:
+            return dict(retry, multiplier_lp=lp_detail, initial_multiplier_failure=first)
+        lp_detail["verification"] = retry
+    return dict(first, multiplier_lp=lp_detail)
 
 
 def solve_master(source_logits, features, statistics, *, regularization,

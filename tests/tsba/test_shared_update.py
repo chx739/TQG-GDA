@@ -206,6 +206,28 @@ class SharedUpdateTests(unittest.TestCase):
         self.assertGreater(w[0, 0], 1e-3)
         self.assertLess(master["objective"], -1e-6)
 
+    def test_multiplier_lp_verifies_nearly_dependent_active_cuts(self):
+        u = np.array([[1., 0.], [-1., 0.], [0., 1.], [0., -1.]])
+        z0 = np.zeros((len(u), 2))
+        first_class = np.array([[.1, 1e-5], [-.1, 0.], [.1, 0.]])
+        stats = np.stack((first_class, -first_class), axis=1)
+
+        def stalled_multiplier_fit(objective, x0, **kwargs):
+            if kwargs["options"]["maxiter"] == 1000:
+                return OptimizeResult(x=np.array([.5, .5, 0.]), success=True)
+            return minimize(objective, x0, **kwargs)
+
+        with patch("scipy.optimize.minimize", side_effect=stalled_multiplier_fit):
+            w, master = solve_master(z0, u, stats, regularization=.1, master_maxiter=200)
+        self.assertTrue(master["valid"], master)
+        kkt = master["kkt"]
+        self.assertTrue(kkt["multiplier_lp"]["success"])
+        self.assertFalse(kkt["initial_multiplier_failure"]["valid"])
+        self.assertGreater(kkt["initial_multiplier_failure"]["stationarity_residual"],
+                           kkt["stationarity_tolerance"])
+        np.testing.assert_allclose(kkt["active_weights"], [0., .5, .5], atol=1e-12, rtol=0.)
+        np.testing.assert_allclose(w, 0., atol=1e-12, rtol=0.)
+
     def test_master_handles_large_features_without_changing_original_penalty(self):
         u = np.array([[1e6, 1.]])
         z0 = np.zeros((1, 2))
