@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "valid": true,
+  "primary_tau": 0.005,
+  "checks": {
+    "complete_primary_rows": true,
+    "well_specified:joint_signal": true,
+    "well_specified:analytic_oracle": true,
+    "no_shift:mean_harm_cap": true,
+    "no_shift:each_seed_harm_cap": true,
+    "angle_shift:joint_signal": true,
+    "angle_shift:analytic_oracle": true
+  },
+  "failed_checks": [],
+  "expected_primary_rows": 40,
+  "found_primary_rows": 40,
+  "missing": [],
+  "duplicates": [],
+  "unexpected": [],
+  "malformed": [],
+  "invalid_rows": [],
+  "worlds": {
+    "well_specified": {
+      "joint_passing_seeds": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "analytic_oracle_improving_seeds": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "joint_mean_expected_nll_delta": -0.054916686639802224,
+      "joint_max_expected_nll_delta": -0.014089078422522475,
+      "analytic_oracle_mean_expected_nll_delta": -0.10441981166324972,
+      "registered_seeds": 5,
+      "valid_joint_rows": 5,
+      "valid_analytic_oracle_rows": 5
+    },
+    "no_shift": {
+      "joint_passing_seeds": [],
+      "analytic_oracle_improving_seeds": [],
+      "joint_mean_expected_nll_delta": 0.00010937510686793803,
+      "joint_max_expected_nll_delta": 0.00022407547435540553,
+      "analytic_oracle_mean_expected_nll_delta": 0.0,
+      "registered_seeds": 5,
+      "valid_joint_rows": 5,
+      "valid_analytic_oracle_rows": 5
+    },
+    "semantic_reflection": {
+      "joint_passing_seeds": [
+        20,
+        22,
+        23
+      ],
+      "analytic_oracle_improving_seeds": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "joint_mean_expected_nll_delta": -0.0037096054947771684,
+      "joint_max_expected_nll_delta": 0.028168201085895992,
+      "analytic_oracle_mean_expected_nll_delta": -2.8935192001448846,
+      "registered_seeds": 5,
+      "valid_joint_rows": 5,
+      "valid_analytic_oracle_rows": 5
+    },
+    "angle_shift": {
+      "joint_passing_seeds": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "analytic_oracle_improving_seeds": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "joint_mean_expected_nll_delta": -0.012280455757109664,
+      "joint_max_expected_nll_delta": -0.009965326599243183,
+      "analytic_oracle_mean_expected_nll_delta": -0.01419061932574125,
+      "registered_seeds": 5,
+      "valid_joint_rows": 5,
+      "valid_analytic_oracle_rows": 5
+    }
+  },
+  "scope": "statistical_stage_S_gate_only; runner_must_also_verify_engineering_and_seals",
+  "expected_observation_blocks": 20,
+  "widths": [
+    0.005,
+    0.01,
+    0.02
+  ],
+  "next_phase": "P",
+  "engineering_regression_passed": true,
+  "known_moment_passed": true,
+  "input_and_frozen_replay_passed": true
+}
