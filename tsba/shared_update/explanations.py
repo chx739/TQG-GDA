@@ -133,11 +133,21 @@ class ExplanationSet:
         scale_x = self.target * np.exp(log_scale)
         difference = scale_x[:, None, :] + shift - mean
         inverse_variance = np.exp(-log_variance)
-        # Shift out the common energy per coordinate before summing so that
-        # a distant uninformative coordinate cannot erase class differences.
+        # Factor differences to a reference class in each coordinate before
+        # summing. Subtracting two large squared distances can lose a class
+        # gap even when the softmax itself is stable.
         coordinate_energy = -0.5 * (log_variance + difference ** 2 * inverse_variance)
-        coordinate_offset = coordinate_energy.max(axis=1, keepdims=True)
-        relative_energy = (coordinate_energy - coordinate_offset).sum(axis=2)
+        reference = coordinate_energy.argmax(axis=1, keepdims=True)
+        coordinate_offset = np.take_along_axis(coordinate_energy, reference, axis=1)
+        reference_diff = np.take_along_axis(difference, reference, axis=1)
+        reference_mean = np.take_along_axis(mean[None, :, :], reference, axis=1)
+        reference_log_var = np.take_along_axis(log_variance[None, :, :], reference, axis=1)
+        log_var_gap = log_variance - reference_log_var
+        inverse_var_gap = (np.sign(log_var_gap) * np.maximum(inverse_variance, np.exp(-reference_log_var))
+                           * np.expm1(-np.abs(log_var_gap)))
+        squared_gap = ((reference_mean - mean) * (difference + reference_diff) * inverse_variance
+                       + reference_diff ** 2 * inverse_var_gap)
+        relative_energy = -0.5 * (log_var_gap + squared_gap).sum(axis=2)
         class_offset = relative_energy.max(axis=1, keepdims=True)
         log_joint = relative_energy - class_offset + np.log(prior)
         log_norm = logsumexp(log_joint, axis=1)

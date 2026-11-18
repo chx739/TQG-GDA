@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from scipy.special import logit, logsumexp, softmax
+from scipy.special import expit, logit, logsumexp, softmax
 from scipy.stats import norm
 
 from scripts.run_task import synthetic_task
@@ -30,6 +30,8 @@ class SharedUpdateTests(unittest.TestCase):
         statistic = q.T @ u / len(u)
         actual = relative_risks(z0, u, w, [statistic])[0]
         self.assertAlmostEqual(actual, expected, places=13)
+        with self.assertRaisesRegex(ValueError, "mean target features"):
+            relative_risks(z0, u, w, [statistic / 2])
 
     def test_fitted_explanation_uses_change_of_variables_and_fixed_threshold(self):
         source = np.array([[-1.5], [-.8], [-.5], [.6], [1.3], [2.]])
@@ -109,9 +111,22 @@ class SharedUpdateTests(unittest.TestCase):
         np.testing.assert_allclose(posterior[0], posterior[1], atol=1e-15, rtol=0.)
         self.assertLess(posterior[1, 0], 1e-3)
 
+    def test_posterior_preserves_small_odds_from_large_squared_distances(self):
+        source = np.repeat([[-.5, .5], [.5, -.5]], 2, axis=0)
+        target = np.array([[1e6, 1e6 + .0005], [1e7, 1e7 + .0005]])
+        cfg = SharedUpdateConfig()
+        family = ExplanationSet(source, np.array([0, 0, 1, 1]), target, cfg)
+        q = family._target_terms(family._initial)[-1][:, 0]
+        # Equal variances and swapped means reduce the log-odds to the
+        # coordinate difference divided by the variance.
+        expected = expit((target[:, 1] - target[:, 0]) / cfg.variance_floor)
+        np.testing.assert_allclose(q, expected, atol=3e-7, rtol=0.)
+
     def test_master_gradient_and_prediction_preserve_logit_differences_at_large_scale(self):
         cases = [([1., 0., 0.], [1e18, 1e18, -2e18], [1., 0., -np.inf]),
-                 ([1e18, 0., 1.], [-1e18, 0., 0.], [0., 0., 1.])]
+                 ([1e18, 0., 1.], [-1e18, 0., 0.], [0., 0., 1.]),
+                 ([0., -1e18, -1e18], [1., 1e18, 1e18], [1., 0., 0.]),
+                 ([0., 1e18, 1e18], [-1., -1e18, -1e18], [-1., 0., 0.])]
         for source, delta, shifted in cases:
             with self.subTest(source=source, delta=delta):
                 source_logits = np.array([source])
@@ -119,6 +134,9 @@ class SharedUpdateTests(unittest.TestCase):
                 _, gradient = _partition(source_logits, np.ones((1, 1)), correction)
                 expected = softmax(shifted)
                 np.testing.assert_allclose(gradient[:, 0], expected, atol=1e-15, rtol=0.)
+                statistic = np.array([[[1.], [0.], [0.]]])
+                _, risk_gradient = _risk_terms(source_logits, np.ones((1, 1)), correction, statistic)
+                np.testing.assert_allclose(risk_gradient[:, 0], expected, atol=1e-15, rtol=0.)
                 logits = corrected_logits(torch.from_numpy(source_logits), torch.ones((1, 1), dtype=torch.float64),
                                           torch.from_numpy(correction))
                 np.testing.assert_allclose(logits.softmax(-1).numpy()[0], expected, atol=1e-15, rtol=0.)
@@ -130,6 +148,43 @@ class SharedUpdateTests(unittest.TestCase):
         expected = logsumexp([1., 0., -128.]) - logsumexp([1., 0., 0.])
         actual = relative_risks(z0, np.ones((1, 1)), correction, statistic)
         np.testing.assert_allclose(actual, [expected], atol=1e-12, rtol=0.)
+        for base, delta, sign in ((0., 1e18, -1), (1e18, -1e18, 1)):
+            risk = relative_risks([[base, 0.]], [[1.]], [[delta], [0.]], [[[1.], [0.]]])
+            np.testing.assert_allclose(risk, [sign * np.log(2.)], atol=1e-14, rtol=0.)
+
+    def test_master_certifies_optimum_with_close_cuts(self):
+        statistics = np.array([[[.50102], [.49898]], [[.501], [.499]]])
+        w, master = solve_master([[0., 0.]], [[1.]], statistics, regularization=.1)
+        self.assertTrue(master["valid"], master)
+        self.assertGreater(w[0, 0], 1e-3)
+        self.assertLess(master["objective"], -1e-6)
+
+    def test_master_handles_large_features_without_changing_original_penalty(self):
+        u = np.array([[1e6, 1.]])
+        z0 = np.zeros((1, 2))
+        q = np.array([[.6, .4]])
+        statistics = q.T @ u
+        w, master = solve_master(z0, u, [statistics], regularization=.1, master_maxiter=200)
+        self.assertTrue(master["valid"], master)
+        direct = (q * np.log(softmax(u @ w.T, axis=1) / .5)).sum()
+        original_penalty = .1 * np.square(w).sum() / 2
+        self.assertAlmostEqual(master["objective"], -direct + original_penalty, places=11)
+        self.assertLess(master["objective"], -.02)
+
+    def test_multiclass_search_retains_valid_update_with_near_active_cuts(self):
+        rng = np.random.default_rng(5)
+        y = np.tile(np.arange(3), 10)
+        means = rng.normal(size=(3, 2))
+        sources = means[y] + .6 * rng.normal(size=(len(y), 2))
+        targets = (means[y] + .6 * rng.normal(size=(len(y), 2)) - .15) / .8
+        z0 = rng.normal(size=(len(y), 3))
+        mean, scale = sources.mean(axis=0), sources.std(axis=0)
+        cfg = SharedUpdateConfig(inner_starts=3, search_rounds=4)
+        family = ExplanationSet((sources - mean) / scale, y, (targets - mean) / scale, cfg)
+        _, result = solve_shared_update(z0, family.features, family, cfg)
+        self.assertEqual(result["status"], "completed", result["stop_reason"])
+        self.assertGreater(result["candidate_count"], 1)
+        self.assertLess(result["final_regularized_objective"], -.4)
 
     def test_master_and_prediction_remove_common_feature_weights_before_matmul(self):
         z0, u = np.zeros((1, 3)), np.ones((1, 2))

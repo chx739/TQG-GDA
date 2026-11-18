@@ -32,7 +32,7 @@ def _lse(values):
     return maximum[:, 0] + np.log(np.exp(values - maximum).sum(axis=1))
 
 
-def _partition(z, u, correction):
+def _partition_terms(z, u, correction):
     source_offset = z.max(axis=1, keepdims=True)
     delta = u @ correction.T
     # TwoSum keeps the rounding residual until the common row offset is removed.
@@ -41,16 +41,24 @@ def _partition(z, u, correction):
     residual = (z - (total - rounded_delta)) + (delta - rounded_delta)
     total_offset = total.max(axis=1, keepdims=True)
     updated = (total - total_offset) + residual
-    offset = updated.max(axis=1, keepdims=True)
-    centered = updated - offset
+    reference = updated.argmax(axis=1)
+    offset = updated[np.arange(len(z)), reference]
+    centered = updated - offset[:, None]
     log_norm = _lse(centered)
     baseline_norm = _lse(z - source_offset)
-    change = float(np.mean((total_offset[:, 0] - source_offset[:, 0])
-                           + (offset[:, 0] + (log_norm - baseline_norm))))
     probabilities = np.exp(centered - log_norm[:, None])
     gradient = probabilities.T @ u / len(u)
-    if not math.isfinite(change) or not np.isfinite(gradient).all():
-        raise FloatingPointError("Non-finite log-partition change or gradient")
+    if not np.isfinite(gradient).all():
+        raise FloatingPointError("Non-finite log-partition gradient")
+    offset_change = (total_offset - source_offset)[:, 0] + offset
+    return reference, source_offset[:, 0], log_norm - baseline_norm, offset_change, gradient
+
+
+def _partition(z, u, correction):
+    _, _, norm_change, offset_change, gradient = _partition_terms(z, u, correction)
+    change = float(np.mean(offset_change + norm_change))
+    if not math.isfinite(change):
+        raise FloatingPointError("Non-finite log-partition change")
     return change, gradient
 
 
@@ -67,22 +75,48 @@ def _center_correction(w):
     # Relative cross-entropy is unchanged by adding the same feature
     # weights to every class. Remove the shared same-sign component before
     # matrix multiplication so it cannot mask smaller class differences.
-    return w - np.clip(0., w.min(axis=0), w.max(axis=0))
+    lower, upper = w.min(axis=0), w.max(axis=0)
+    shared = np.clip(0., lower, upper)
+    # Sterbenz's bound makes the subtraction exact for every class. An
+    # inexact shift can erase a small class gap after adding source logits.
+    exact = np.maximum(np.abs(lower), np.abs(upper)) * 0.5 <= np.abs(shared)
+    return w - np.where(exact, shared, 0.)
 
 
 def _risk_terms(z, u, w, statistics):
     centered = _center_correction(w)
-    partition, gradient = _partition(z, u, centered)
-    return partition - np.einsum("kcd,cd->k", statistics, centered), gradient
+    reference, source_offset, norm_change, _, gradient = _partition_terms(z, u, centered)
+    rows = np.arange(len(z))
+    one_hot = np.zeros_like(z)
+    one_hot[rows, reference] = 1.
+    reference_statistic = one_hot.T @ u / len(u)
+    # The reference class's correction is already in A(W). Combine it
+    # with S before taking the inner product, avoiding two large scalars.
+    moment_change = np.einsum("kcd,cd->k", reference_statistic - statistics, centered)
+    risks = (np.mean(z[rows, reference] - source_offset) + moment_change) + np.mean(norm_change)
+    if not np.isfinite(risks).all():
+        raise FloatingPointError("Non-finite relative risk")
+    return risks, gradient
+
+
+def _statistics(statistics, classes, features):
+    stats = _array(statistics, "statistics", 3)
+    if not len(stats) or stats.shape[1:] != (classes, features.shape[1]):
+        raise ValueError("Expected at least one statistic with shape [classes, features]")
+    # Probability-weighted class moments must sum to the unlabeled moment.
+    tolerance = 1e-10 * np.maximum(1., np.abs(features).mean(axis=0))
+    if (np.abs(stats.sum(axis=1) - features.mean(axis=0)) > tolerance).any():
+        raise ValueError("Class statistics must sum to the mean target features")
+    return stats
 
 
 def relative_risks(source_logits, features, correction, statistics):
     """Return A(W)-<W,S_k> for all retained conditional-label statistics."""
     z, u = _inputs(source_logits, features)
     w = _array(correction, "correction", 2)
-    stats = _array(statistics, "statistics", 3)
-    if w.shape != (z.shape[1], u.shape[1]) or stats.shape[1:] != w.shape or not len(stats):
-        raise ValueError("Correction/statistics have incompatible dimensions or no candidates")
+    if w.shape != (z.shape[1], u.shape[1]):
+        raise ValueError("Correction has incompatible dimensions")
+    stats = _statistics(statistics, z.shape[1], u)
     return _risk_terms(z, u, w, stats)[0]
 
 
@@ -95,26 +129,34 @@ def _kkt(gradient, stats, risks, epigraph, regularization, w,
         active = np.array([int(np.argmax(risks))])
     columns = stats[active].reshape(len(active), -1).T
     target = (gradient + regularization * w).ravel()
-    if len(active) == 1:
-        weights = np.ones(1)
+    residual_columns = columns - target[:, None]
+    single = int(np.argmin(np.abs(residual_columns).max(axis=0)))
+    weights = np.zeros(len(active))
+    weights[single] = 1.
+    scale = max(1., float(np.max(np.abs(target))), float(np.max(np.abs(columns))))
+    if len(active) == 1 or np.max(np.abs(residual_columns[:, single])) <= optimality_tol * scale:
         multiplier_success = True
     else:
+        # Center and scale before fitting simplex multipliers. With nearly
+        # identical cuts the unscaled least squares can stop at its start.
+        normalized = residual_columns / np.max(np.abs(residual_columns))
+
         def objective(weight):
-            residual = columns @ weight - target
-            return .5 * float(residual @ residual), columns.T @ residual
-        fit = minimize(objective, np.full(len(active), 1 / len(active)), jac=True,
+            residual = normalized @ weight
+            return .5 * float(residual @ residual), normalized.T @ residual
+
+        fit = minimize(objective, weights, jac=True,
                        method="SLSQP", bounds=[(0., 1.)] * len(active),
                        constraints={"type": "eq", "fun": lambda v: v.sum() - 1,
                                     "jac": lambda v: np.ones_like(v)},
                        options={"ftol": 1e-14, "maxiter": 1000})
         weights = np.asarray(fit.x, dtype=np.float64)
         multiplier_success = bool(fit.success)
-    stationarity = float(np.max(np.abs(target - columns @ weights)))
+    mass_error = float(weights.sum()) - 1.
+    stationarity = float(np.max(np.abs(residual_columns @ weights + mass_error * target)))
     complementarity = float(np.max(np.abs(weights * slack[active])))
-    simplex_error = max(abs(float(weights.sum()) - 1), float(np.maximum(-weights, 0).max()))
-    scale = max(1., float(np.max(np.abs(target))), float(np.max(np.abs(columns))))
-    valid = (multiplier_success and math.isfinite(stationarity)
-             and stationarity <= optimality_tol * scale
+    simplex_error = max(abs(mass_error), float(np.maximum(-weights, 0).max()))
+    valid = (math.isfinite(stationarity) and stationarity <= optimality_tol * scale
              and simplex_error <= feasibility_tol
              and complementarity <= max(feasibility_tol, optimality_tol))
     return dict(valid=bool(valid), stationarity_residual=stationarity,
@@ -135,10 +177,8 @@ def solve_master(source_logits, features, statistics, *, regularization,
     from scipy.optimize import minimize
 
     z, u = _inputs(source_logits, features)
-    stats = _array(statistics, "statistics", 3)
     shape = (z.shape[1], u.shape[1])
-    if not len(stats) or stats.shape[1:] != shape:
-        raise ValueError("Expected at least one statistic with shape [classes, features]")
+    stats = _statistics(statistics, z.shape[1], u)
     if (not math.isfinite(regularization) or regularization <= 0
             or not 0 < feasibility_tol < 1 or not 0 < optimality_tol < 1
             or master_maxiter < 1):
@@ -146,30 +186,38 @@ def solve_master(source_logits, features, statistics, *, regularization,
     w0 = np.zeros(shape) if initial is None else _array(initial, "initial", 2)
     if w0.shape != shape:
         raise ValueError("Initial correction has incompatible dimensions")
-    risk0 = relative_risks(z, u, w0, stats)
-    x0 = np.r_[w0.ravel(), risk0.max()]
-    flattened = stats.reshape(len(stats), -1)
+    # Bound the magnitudes seen by SLSQP while optimizing the same logits
+    # and the same L2 penalty on the original coefficients.
+    feature_scales = np.maximum(1., np.abs(u).max(axis=0))
+    scaled_u, scaled_stats = u / feature_scales, stats / feature_scales
+    initial_scaled = w0 * feature_scales
+    risk0 = _risk_terms(z, scaled_u, initial_scaled, scaled_stats)[0]
+    x0 = np.r_[initial_scaled.ravel(), risk0.max()]
+    flattened = scaled_stats.reshape(len(stats), -1)
+    inverse_scale = np.broadcast_to(1. / feature_scales, shape).ravel()
 
     def objective(vector):
-        w = vector[:-1]
-        return float(vector[-1] + regularization * (w @ w) / 2), np.r_[regularization * w, 1.]
+        w = vector[:-1] * inverse_scale
+        return (float(vector[-1] + regularization * (w @ w) / 2),
+                np.r_[regularization * w * inverse_scale, 1.])
 
     def constraints(vector):
-        return vector[-1] - _risk_terms(z, u, vector[:-1].reshape(shape), stats)[0]
+        return vector[-1] - _risk_terms(z, scaled_u, vector[:-1].reshape(shape), scaled_stats)[0]
 
     def constraint_jacobian(vector):
-        _, gradient = _risk_terms(z, u, vector[:-1].reshape(shape), stats)
+        _, gradient = _risk_terms(z, scaled_u, vector[:-1].reshape(shape), scaled_stats)
         return np.column_stack((flattened - gradient.ravel(), np.ones(len(stats))))
 
+    scaled_optimality_tol = optimality_tol / feature_scales.max()
     result = minimize(objective, x0, jac=True, method="SLSQP",
                       constraints={"type": "ineq", "fun": constraints, "jac": constraint_jacobian},
-                      options={"ftol": max(1e-14, min(1e-12, feasibility_tol * .001, optimality_tol ** 2)),
+                      options={"ftol": max(1e-14, min(1e-12, feasibility_tol * .001, scaled_optimality_tol ** 2)),
                                "maxiter": int(master_maxiter)})
     if not np.isfinite(result.x).all():
         return np.zeros(shape), dict(valid=False, reason="nonfinite_master_solution",
                                      solver_success=bool(result.success), solver_status=int(result.status),
                                      solver_message=str(result.message))
-    w = result.x[:-1].reshape(shape).copy()
+    w = result.x[:-1].reshape(shape) / feature_scales
     risks, gradient = _risk_terms(z, u, w, stats)
     epigraph = float(result.x[-1])
     worst = float(risks.max())
@@ -177,15 +225,17 @@ def solve_master(source_logits, features, statistics, *, regularization,
     violation = max(0., worst - epigraph)
     kkt = _kkt(gradient, stats, risks, epigraph, regularization, w,
                feasibility_tol, optimality_tol, minimize)
-    checks = dict(solver_success=bool(result.success), feasible=violation <= feasibility_tol,
-                  stationary=kkt["valid"], no_worse_than_zero=worst + penalty <= feasibility_tol)
+    checks = dict(feasible=violation <= feasibility_tol, stationary=kkt["valid"],
+                  no_worse_than_zero=worst + penalty <= feasibility_tol)
     failures = [name for name, passed in checks.items() if not passed]
-    return w, dict(valid=not failures, reason="solved" if not failures else "+".join(failures),
-                   solver_status=int(result.status), solver_message=str(result.message),
+    solved_reason = "solved" if result.success else "verified_after_solver_exit"
+    return w, dict(valid=not failures, reason="+".join(failures) if failures else solved_reason,
+                   solver_success=bool(result.success), solver_status=int(result.status), solver_message=str(result.message),
                    iterations=int(result.nit), candidates=len(stats), **checks,
                    epigraph=epigraph, constraint_violation=violation,
                    known_candidate_risks=risks.tolist(), found_worst_risk=worst,
-                   regularization_penalty=penalty, objective=worst + penalty, kkt=kkt)
+                   regularization_penalty=penalty, objective=worst + penalty, kkt=kkt,
+                   feature_scales=feature_scales.tolist())
 
 
 def _json(value):
@@ -262,9 +312,9 @@ def solve_shared_update(source_logits, features, explanations, config):
     def validate(candidate):
         if candidate is None:
             raise ValueError("No explanation returned")
-        stat = _array(candidate.statistic, "explanation statistic", 2)
+        _statistics([candidate.statistic], z.shape[1], u)
         loss = float(candidate.observation_loss)
-        if stat.shape != zero.shape or not math.isfinite(loss) or loss > threshold + feasibility_tol:
+        if not math.isfinite(loss) or loss > threshold + feasibility_tol:
             raise ValueError("Explanation is infeasible or has invalid dimensions")
         _json(candidate.parameters)
 

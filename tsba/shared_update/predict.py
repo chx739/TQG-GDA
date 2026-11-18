@@ -18,6 +18,8 @@ def corrected_logits(source_logits, features, correction):
     """Return probability-equivalent logits using compensated addition."""
     lower, upper = correction.amin(dim=0), correction.amax(dim=0)
     shared = lower.clamp_min(0) + upper.clamp_max(0)
+    exact = torch.maximum(lower.abs(), upper.abs()) * 0.5 <= shared.abs()
+    shared = torch.where(exact, shared, 0.)
     correction_logits = features @ (correction - shared).T
     total = source_logits + correction_logits
     rounded_correction = total - source_logits
