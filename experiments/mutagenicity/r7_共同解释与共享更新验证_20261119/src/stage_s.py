@@ -209,6 +209,7 @@ def run(plan_path, root, workers, repo):
                                                    separation_variant=plan.get('separation_variant', 'stock'),
                                                    density_coordinates=plan.get('density_coordinates', 'source_standardized_v1'),
                                                    target_posterior_power=plan.get('target_posterior_power', 1.),
+                                                   target_posterior_power_effective=1.,
                                                    source_refit=plan.get('source_refit'), source_refit_applied=False,
                                                    world_ids=[world['id'] for world in stage_config['worlds']],
                                                    common=common, numpy=np.__version__, scipy=scipy.__version__,

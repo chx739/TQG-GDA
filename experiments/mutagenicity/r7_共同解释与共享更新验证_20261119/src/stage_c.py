@@ -443,6 +443,7 @@ def run(plan_path, root, p_output, workers, repo):
                                                    separation_variant=view['separation_variant'],
                                                    density_coordinates=view['density_coordinates'],
                                                    target_posterior_power=view['target_posterior_power'],
+                                                   target_posterior_power_effective=view['target_posterior_power'],
                                                    source_refit=plan.get('source_refit'),
                                                    source_refit_applied=bool(source_roots),
                                                    common=[config(plan, seed, tau).to_dict()

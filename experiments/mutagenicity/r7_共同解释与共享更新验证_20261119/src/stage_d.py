@@ -282,6 +282,7 @@ def run(plan_path, root, c_output, acquisition, workers, repo):
                                                    separation_variant=plan.get('separation_variant', 'stock'),
                                                    density_coordinates=plan.get('density_coordinates', 'source_standardized_v1'),
                                                    target_posterior_power=plan.get('target_posterior_power', 1.),
+                                                   target_posterior_power_effective=plan.get('target_posterior_power', 1.),
                                                    source_pooling=source_spec.get('pooling', 'sum'),
                                                    source_refit=plan.get('source_refit'),
                                                    common=[config(plan, seed, tau).to_dict()
