@@ -1,6 +1,6 @@
 # R7 共同解释与共享更新验证
 
-第十二轮按原门槛首次通过真实 P。全方向 C 已封存，Mutagenicity 边数划分的平均 BA 提高 0.53 个百分点，节点数划分接近零，PROTEINS 有主比较缺失。C 整体尚未通过。第十三轮重新验证按无标签 A 类比例做均衡分类的效果。[真实试点](docs/iteration-12.md#同配置重跑通过-p) · [全方向结果](docs/iteration-12.md#全方向-c-的封存结果) · [均衡分类验证](docs/iteration-13.md)
+第十二轮按原门槛首次通过真实 P。全方向 C 已封存，Mutagenicity 边数划分的平均 BA 提高 0.53 个百分点，节点数划分接近零，PROTEINS 有主比较缺失。C 整体尚未通过。第十三轮加入按无标签 A 类比例做均衡分类，合成扩展的正确设定通过 11/15，低于预定 12/15，停在 S。[真实试点](docs/iteration-12.md#同配置重跑通过-p) · [全方向结果](docs/iteration-12.md#全方向-c-的封存结果) · [均衡分类验证](docs/iteration-13.md)
 
 研究问题是，源标签和无标签目标图约束出的共同监督统计，能否为固定分类器提供有用的更新，以及保留图之间的共同约束是否比逐图区间更有价值。
 
@@ -17,7 +17,7 @@
 
 [初次 S 实测报告](report.md) · [门槛输出](results/gate.json) · [S 阶段补充计划](docs/s-separation-followup.md)
 
-[独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮实测](docs/iteration-02.md) · [第三轮投影实测](docs/iteration-03.md) · [第四轮源类条件锚定](docs/iteration-04.md) · [第五轮源混合模板](docs/iteration-05.md) · [第六轮判别后验锚定](docs/iteration-06.md) · [第七轮类别质量约束](docs/iteration-07.md) · [第八轮混合模板与类别质量](docs/iteration-08.md) · [第九轮角向解释](docs/iteration-09.md) · [第十轮图读出成对对照](docs/iteration-10.md) · [第十一轮候选后验置信度](docs/iteration-11.md) · [第十二轮较低后验强度](docs/iteration-12.md)
+[独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮实测](docs/iteration-02.md) · [第三轮投影实测](docs/iteration-03.md) · [第四轮源类条件锚定](docs/iteration-04.md) · [第五轮源混合模板](docs/iteration-05.md) · [第六轮判别后验锚定](docs/iteration-06.md) · [第七轮类别质量约束](docs/iteration-07.md) · [第八轮混合模板与类别质量](docs/iteration-08.md) · [第九轮角向解释](docs/iteration-09.md) · [第十轮图读出成对对照](docs/iteration-10.md) · [第十一轮候选后验置信度](docs/iteration-11.md) · [第十二轮较低后验强度](docs/iteration-12.md) · [第十三轮均衡分类和合成扩展](docs/iteration-13.md)
 
 ## 合成阶段执行
 

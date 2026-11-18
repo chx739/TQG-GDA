@@ -1,0 +1,159 @@
+{
+  "passed": false,
+  "valid": false,
+  "primary_tau": 0.005,
+  "checks": {
+    "complete_primary_rows": true,
+    "well_specified:joint_signal": false,
+    "well_specified:analytic_oracle": true,
+    "no_shift:mean_harm_cap": true,
+    "no_shift:each_seed_harm_cap": true,
+    "angle_shift:joint_signal": true,
+    "angle_shift:analytic_oracle": true
+  },
+  "failed_checks": [
+    "well_specified:joint_signal"
+  ],
+  "expected_primary_rows": 120,
+  "found_primary_rows": 120,
+  "missing": [],
+  "duplicates": [],
+  "unexpected": [],
+  "malformed": [],
+  "invalid_rows": [],
+  "worlds": {
+    "well_specified": {
+      "joint_passing_seeds": [
+        66,
+        67,
+        69,
+        70,
+        71,
+        72,
+        74,
+        76,
+        77,
+        78,
+        79
+      ],
+      "analytic_oracle_improving_seeds": [
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79
+      ],
+      "joint_mean_expected_nll_delta": -0.010952526174739012,
+      "joint_max_expected_nll_delta": 0.00192882042503042,
+      "analytic_oracle_mean_expected_nll_delta": -0.10434902112152522,
+      "registered_seeds": 15,
+      "valid_joint_rows": 15,
+      "valid_analytic_oracle_rows": 15
+    },
+    "no_shift": {
+      "joint_passing_seeds": [],
+      "analytic_oracle_improving_seeds": [],
+      "joint_mean_expected_nll_delta": 7.89442138243641e-05,
+      "joint_max_expected_nll_delta": 0.0003436614929619492,
+      "analytic_oracle_mean_expected_nll_delta": 0.0,
+      "registered_seeds": 15,
+      "valid_joint_rows": 15,
+      "valid_analytic_oracle_rows": 15
+    },
+    "semantic_reflection": {
+      "joint_passing_seeds": [
+        68,
+        70,
+        73,
+        74,
+        76
+      ],
+      "analytic_oracle_improving_seeds": [
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79
+      ],
+      "joint_mean_expected_nll_delta": 0.0014184956927585507,
+      "joint_max_expected_nll_delta": 0.08581724143712076,
+      "analytic_oracle_mean_expected_nll_delta": -2.877878595259815,
+      "registered_seeds": 15,
+      "valid_joint_rows": 15,
+      "valid_analytic_oracle_rows": 15
+    },
+    "angle_shift": {
+      "joint_passing_seeds": [
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79
+      ],
+      "analytic_oracle_improving_seeds": [
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79
+      ],
+      "joint_mean_expected_nll_delta": -0.012013345876827604,
+      "joint_max_expected_nll_delta": -0.010196797544588743,
+      "analytic_oracle_mean_expected_nll_delta": -0.013887457611964773,
+      "registered_seeds": 15,
+      "valid_joint_rows": 15,
+      "valid_analytic_oracle_rows": 15
+    }
+  },
+  "scope": "statistical_stage_S_gate_only; runner_must_also_verify_engineering_and_seals",
+  "expected_observation_blocks": 60,
+  "widths": [
+    0.005,
+    0.01,
+    0.02
+  ],
+  "next_phase": null,
+  "engineering_regression_passed": true,
+  "known_moment_passed": true,
+  "input_and_frozen_replay_passed": true
+}
