@@ -103,6 +103,10 @@ class DecisionTests(unittest.TestCase):
             elif row['metric'] in ('BA', 'Accuracy'):
                 self.assertEqual(row['estimate'], 25.)
                 self.assertEqual(row['complete_pairs'], 2)
+        omitted = deepcopy(blocks)
+        del omitted[0]['decisions']['J']
+        with self.assertRaisesRegex(ValueError, 'explicit frozen decisions'):
+            paired.paired_bootstrap(plan, omitted, phase='P', comparisons=[('J', 'J_argmax')])
         invalid = deepcopy(blocks)
         invalid[0]['decisions']['J'] = np.array([0, 1, 0, 2])
         with self.assertRaisesRegex(ValueError, 'binary decision'):

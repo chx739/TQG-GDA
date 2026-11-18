@@ -235,7 +235,8 @@ def check_gate(plan):
     for setting, source, target, seed in grid:
         logits = {'B0': np.broadcast_to([.2, 0.], (len(labels), 2)), 'J': np.eye(2)[labels]}
         cohorts.append(dict(setting=setting, source=source, target=target, seed=seed,
-                            ids=np.arange(len(labels)) + 100 * target, y=labels, logits=logits))
+                            ids=np.arange(len(labels)) + 100 * target, y=labels, logits=logits,
+                            decisions={name: value.argmax(1) for name, value in logits.items()}))
 
     def decision(data):
         paired = paired_bootstrap(toy, data, phase='D', comparisons=[('J', 'B0')], tau=tau)
@@ -244,7 +245,8 @@ def check_gate(plan):
     assert decision(cohorts)['passed']
     assert decision(cohorts[:-1])['assessment'] == 'incomplete'
     adverse_target = toy['phases']['D']['directions'][-1][1]
-    adverse = [row | {'logits': row['logits'] | {'J': np.eye(2)[1 - labels]}}
+    adverse = [row | {'logits': row['logits'] | {'J': np.eye(2)[1 - labels]},
+                     'decisions': row['decisions'] | {'J': 1-labels}}
                if row['target'] == adverse_target else row for row in cohorts]
     rejected = decision(adverse)
     assert not rejected['passed'] and not rejected['direction_limits_met']

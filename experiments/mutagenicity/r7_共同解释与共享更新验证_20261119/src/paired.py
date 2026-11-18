@@ -10,6 +10,8 @@ from itertools import permutations
 
 import numpy as np
 
+from .decisions import ALIASES, BALANCED, decision_policy
+
 
 _METRICS = ("NLL", "BA", "Accuracy", "directional_risk_gap")
 _SCALES = np.asarray([1., 100., 100., 1.])
@@ -184,10 +186,15 @@ def paired_bootstrap(plan, blocks, *, phase, comparisons, tau=None):
         raise ValueError("Comparisons must be distinct nonempty method-name pairs")
     names = {name for pair in comparisons for name in pair}
     normalized, cohorts = {}, {}
+    explicit_actions = decision_policy(plan) is not None
     for block in blocks:
         key = (block["setting"], block["source"], block["target"], block["seed"])
         if key not in expected or key in normalized:
             raise ValueError("Unexpected or duplicate setting/direction/seed block")
+        if explicit_actions:
+            for name in BALANCED | set(ALIASES):
+                if block['logits'].get(name) is not None and name not in block.get('decisions', {}):
+                    raise ValueError('Registered classification policy requires explicit frozen decisions: ' + name)
         ids, y = np.asarray(block["ids"]), np.asarray(block["y"])
         if (ids.ndim != 1 or not len(ids) or not np.issubdtype(ids.dtype, np.integer)
                 or np.any(ids < 0) or len(np.unique(ids)) != len(ids)
