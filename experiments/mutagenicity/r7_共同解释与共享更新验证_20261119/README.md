@@ -1,6 +1,6 @@
 # R7 共同解释与共享更新验证
 
-第五轮在 M0→M1 的留出 BA 上升 1.09 pp。第十轮成对比较 sum/mean 图读出，mean 分支在 M3 降低 NLL，同时降低 BA，两个分支的 P 均未通过。第十一轮检验控制候选标签后验的置信度能否得到稳定分类收益。研究问题是，源标签和无标签目标图约束出的共同监督统计，能否为固定分类器提供有用的更新，以及保留图之间的共同约束是否比逐图区间更有价值。
+第十一轮控制候选标签后验的置信度，两个真实方向的平均 BA 都转正，M0→M1 达到该方向门槛。M0→M3 的 NLL 仍缺充分改善，P 未通过。第十二轮固定一个更低的后验强度继续验证。研究问题是，源标签和无标签目标图约束出的共同监督统计，能否为固定分类器提供有用的更新，以及保留图之间的共同约束是否比逐图区间更有价值。
 
 [完整实验协议](docs/r7-protocol.md) · [计划配置](configs/r7-plan.json) · [方法实现](../../../docs/method/shared-update.md) · [返回总览](../../README.md)
 
@@ -15,7 +15,7 @@
 
 [初次 S 实测报告](report.md) · [门槛输出](results/gate.json) · [S 阶段补充计划](docs/s-separation-followup.md)
 
-[独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮实测](docs/iteration-02.md) · [第三轮投影实测](docs/iteration-03.md) · [第四轮源类条件锚定](docs/iteration-04.md) · [第五轮源混合模板](docs/iteration-05.md) · [第六轮判别后验锚定](docs/iteration-06.md) · [第七轮类别质量约束](docs/iteration-07.md) · [第八轮混合模板与类别质量](docs/iteration-08.md) · [第九轮角向解释](docs/iteration-09.md) · [第十轮图读出成对对照](docs/iteration-10.md) · [第十一轮候选后验置信度](docs/iteration-11.md)
+[独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮实测](docs/iteration-02.md) · [第三轮投影实测](docs/iteration-03.md) · [第四轮源类条件锚定](docs/iteration-04.md) · [第五轮源混合模板](docs/iteration-05.md) · [第六轮判别后验锚定](docs/iteration-06.md) · [第七轮类别质量约束](docs/iteration-07.md) · [第八轮混合模板与类别质量](docs/iteration-08.md) · [第九轮角向解释](docs/iteration-09.md) · [第十轮图读出成对对照](docs/iteration-10.md) · [第十一轮候选后验置信度](docs/iteration-11.md) · [第十二轮较低后验强度](docs/iteration-12.md)
 
 ## 合成阶段执行
 
