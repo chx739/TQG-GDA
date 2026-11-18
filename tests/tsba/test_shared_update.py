@@ -1,4 +1,5 @@
 import json
+import importlib
 import tempfile
 import unittest
 from pathlib import Path
@@ -21,6 +22,57 @@ from tsba.shared_update.solver import _partition, _risk_terms, relative_risks, s
 
 
 class SharedUpdateTests(unittest.TestCase):
+    def test_round_local_angular_density_preserves_raw_moments_and_mass(self):
+        module = importlib.import_module(
+            'experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src.angular_explanations')
+        result = module.check_angular_explanations()
+        self.assertTrue(result['passed'])
+        self.assertTrue(result['exact_2D_bypass'])
+        self.assertTrue(result['original_B0_mass_and_full_moments'])
+        self.assertLess(result['maximum_gradient_error'], 5e-7)
+
+    def test_round_local_angular_plan_and_pins_cross_stage_boundaries(self):
+        prefix = 'experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src.'
+        fit = importlib.import_module(prefix+'fit')
+        stage_s = importlib.import_module(prefix+'stage_s')
+        stage_p = importlib.import_module(prefix+'stage_p')
+        stage_c = importlib.import_module(prefix+'stage_c')
+        from experiments.common.io import digest
+
+        plan = dict(separation_variant='mixture_mass_v1', density_coordinates='angular_raw_origin_v1',
+                    shared_update={}, controls={}, source_mixture_options={}, posterior_mass_options={},
+                    real_model_seeds=[0], phases=dict(S=dict(width_grid=[.005]),
+                    P=dict(width_grid=[.005], independent_audit={}), C={}))
+        for phase in ('S', 'P'):
+            view = stage_s._worker_plan(plan, phase)
+            self.assertEqual(view['density_coordinates'], plan['density_coordinates'])
+            self.assertEqual(view['separation_variant'], plan['separation_variant'])
+        view = stage_c._fit_view(plan, .005)
+        self.assertEqual(view['density_coordinates'], plan['density_coordinates'])
+        self.assertEqual(stage_s._worker_plan(view, 'P')['density_coordinates'], plan['density_coordinates'])
+        for stage in (stage_p, stage_c):
+            self.assertIs(stage.assert_fitter_sources, fit.assert_fitter_sources)
+            self.assertIs(stage.assert_density_execution, fit.assert_density_execution)
+            stage.assert_density_execution(plan, dict(density_coordinates=plan['density_coordinates']))
+            with self.assertRaisesRegex(ValueError, 'density coordinates'):
+                stage.assert_density_execution(plan, {})
+            with self.assertRaisesRegex(ValueError, 'density coordinates'):
+                stage.assert_density_execution(plan, dict(density_coordinates='source_standardized_v1'))
+        fit.assert_density_execution({}, {})  # Original archives retain their default.
+        files = fit.fitter_source_files(plan)
+        self.assertTrue({'angular_explanations.py', 'projected_explanations.py', 'coverage.py',
+                         'stage_s.py', 'stage_p.py', 'stage_c.py'} <= set(files))
+        repo = Path(__file__).resolve().parents[2]
+        paths = [Path(fit.__file__).with_name(name) for name in files]
+        frozen = {str(path.relative_to(repo)): digest(path) for path in paths}
+        for stage in (stage_p, stage_c):
+            stage.assert_fitter_sources(plan, repo, frozen)
+            bad = dict(frozen)
+            angular_key = str(Path(fit.__file__).with_name('angular_explanations.py').relative_to(repo))
+            bad[angular_key] = '0'*64
+            with self.assertRaisesRegex(ValueError, 'angular_explanations.py'):
+                stage.assert_fitter_sources(plan, repo, bad)
+
     def test_invalid_warm_master_retries_once_from_zero(self):
         z0 = np.zeros((3, 2))
         u = np.ones((3, 1))

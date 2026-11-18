@@ -11,7 +11,8 @@ from tsba.shared_update.solver import relative_risks
 
 from .coverage import _cdf_diagnostic, hull_distance
 from .evaluate import classification, exact_methods, methods, predict, replay_predictions
-from .fit import config, explanation_family, features, fitter_source_files, master, moment, read_npz, width_key, write_npz
+from .fit import (assert_density_execution, assert_fitter_sources, config, explanation_family, features,
+                  master, moment, read_npz, width_key, write_npz)
 from .r5_inputs import load_inputs, load_labels
 from .seals import seal, verify_seal
 from .stage_s import _assert_pinned_method, _fit, _leaf_paths, csv_write, json_read
@@ -56,8 +57,10 @@ def _oracles(plan, root, block, seed, repo):
 
 def _bank_diagnostics(plan, cfg, fit, std, held, arrays, adapt_y, holdout_y):
     src = std['source_u'][:, :-1]
-    adapt = explanation_family(plan, src, fit['source_y'], std['adapt_u'][:, :-1], cfg, std['v0'])
-    holdout = explanation_family(plan, src, fit['source_y'], held['holdout_u'][:, :-1], cfg, std['v0'])
+    adapt = explanation_family(plan, src, fit['source_y'], std['adapt_u'][:, :-1], cfg, std['v0'],
+                               source_mean=std['mean'], source_scale=std['scale'])
+    holdout = explanation_family(plan, src, fit['source_y'], held['holdout_u'][:, :-1], cfg, std['v0'],
+                                 source_mean=std['mean'], source_scale=std['scale'])
     h_posterior = np.stack([holdout._target_terms(theta)[-1] for theta in arrays['theta']])
     h_stats = np.stack([moment(q, held['holdout_u']) for q in h_posterior])
     pool_moments = []
@@ -87,7 +90,8 @@ def _bank_diagnostics(plan, cfg, fit, std, held, arrays, adapt_y, holdout_y):
 def _source_template_diagnostics(plan, cfg, fit, std, validation, labels, theta):
     source_x = std['source_u'][:, :-1]
     val_x = features(validation['validation_h'], std['mean'], std['scale'])[:, :-1]
-    family = explanation_family(plan, source_x, fit['source_y'], val_x, cfg, std['v0'])
+    family = explanation_family(plan, source_x, fit['source_y'], val_x, cfg, std['v0'],
+                                source_mean=std['mean'], source_scale=std['scale'])
     empirical = np.bincount(fit['source_y'], minlength=family.classes) / len(source_x)
     normalizer = getattr(family, 'source_prior_normalizer', None)
     prior = empirical if normalizer is None else np.asarray(normalizer, dtype=np.float64)
@@ -236,7 +240,7 @@ def run(plan_path, root, s_output, workers, repo):
     root, s_output, repo = (Path(p).resolve() for p in (root, s_output, repo))
     prior = verify_seal(s_output, 'R7_FINAL')
     input_record = verify_seal(s_output, 'R7_INPUT')
-    if 'gate.json' not in prior['files'] or not {'executed-plan.json', 'provenance.json'} <= input_record['files'].keys():
+    if 'gate.json' not in prior['files'] or not {'executed-plan.json', 'executed-configs.json', 'provenance.json'} <= input_record['files'].keys():
         raise ValueError('The prior gate or configuration is outside the verified seals')
     decision = json_read(s_output / 'gate.json')
     if not decision['passed'] or decision['next_phase'] != 'P':
@@ -244,13 +248,11 @@ def run(plan_path, root, s_output, workers, repo):
     if digest(plan_path) != digest(s_output / 'executed-plan.json'):
         raise ValueError('The pilot and passed S must use the same frozen plan')
     plan = json_read(plan_path)
+    assert_density_execution(plan, json_read(s_output / 'executed-configs.json'))
     if plan.get('development_iteration') and plan.get('separation_variant') == 'stock':
         raise ValueError('This stock plan is a synthetic comparator only')
     frozen = json_read(s_output / 'provenance.json')['file_hashes']
-    for name in fitter_source_files(plan):
-        path = Path(__file__).parent / name
-        if frozen.get(str(path.relative_to(repo))) != digest(path):
-            raise ValueError(f'The pilot fitter differs from the passed synthetic implementation: {name}')
+    assert_fitter_sources(plan, repo, frozen)
     if not 1 <= workers <= plan['execution']['maximum_workers']:
         raise ValueError('Worker count exceeds the registered CPU budget')
     _assert_pinned_method(plan, repo)
@@ -272,6 +274,7 @@ def run(plan_path, root, s_output, workers, repo):
                                                    workers=workers, threads_per_worker=torch.get_num_threads(),
                                                    independent_audit=p['independent_audit'],
                                                    separation_variant=plan.get('separation_variant', 'stock'),
+                                                   density_coordinates=plan.get('density_coordinates', 'source_standardized_v1'),
                                                    common=[config(plan, seed, tau).to_dict()
                                                            for seed, tau in product(plan['real_model_seeds'], widths)]))
     write_json(root / 'provenance.json', provenance(repo))

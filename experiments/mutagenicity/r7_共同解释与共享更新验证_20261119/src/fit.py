@@ -7,7 +7,7 @@ import numpy as np
 from scipy.special import softmax
 import torch
 
-from experiments.common.io import write_json
+from experiments.common.io import digest, write_json
 from tsba.shared_update.config import SharedUpdateConfig
 from tsba.shared_update.explanations import ExplanationSet
 from tsba.shared_update.predict import corrected_logits, update_features
@@ -104,8 +104,13 @@ def width_key(tau):
     return f'tau-{tau:.3f}'
 
 
-def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None):
+def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None, *, source_mean=None, source_scale=None):
     variant = plan.get('separation_variant', 'stock')
+    coordinates = plan.get('density_coordinates', 'source_standardized_v1')
+    if coordinates not in ('source_standardized_v1', 'angular_raw_origin_v1'):
+        raise ValueError(f'Unregistered density coordinates: {coordinates}')
+    if coordinates == 'angular_raw_origin_v1' and variant != 'mixture_mass_v1':
+        raise ValueError('Angular density coordinates are registered only for mixture_mass_v1')
     if variant == 'stock':
         return ExplanationSet(source_x, source_y, target_x, cfg)
     if variant == 'restore_trust_v1':
@@ -113,7 +118,10 @@ def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None):
         return RestoredExplanationSet(source_x, source_y, target_x, cfg)
     if variant in ('projected_restore_v1', 'anchored_projected_v1', 'source_mixture_v1', 'posterior_anchored_v1', 'posterior_mass_v1', 'mixture_mass_v1'):
         if variant == 'mixture_mass_v1':
-            from .posterior_mass_explanations import MixtureMassExplanationSet as family_class
+            if coordinates == 'angular_raw_origin_v1':
+                from .angular_explanations import AngularMixtureMassExplanationSet as family_class
+            else:
+                from .posterior_mass_explanations import MixtureMassExplanationSet as family_class
         elif variant == 'posterior_mass_v1':
             from .posterior_mass_explanations import PosteriorMassExplanationSet as family_class
         elif variant == 'posterior_anchored_v1':
@@ -131,6 +139,8 @@ def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None):
             options['source_head_bias'] = float(v0[1, -1] - v0[0, -1])
         if variant in ('posterior_mass_v1', 'mixture_mass_v1'):
             options.update(plan['posterior_mass_options'])
+        if coordinates == 'angular_raw_origin_v1':
+            options.update(source_mean=source_mean, source_scale=source_scale)
         return family_class(source_x, source_y, target_x, cfg,
                             source_head_normal=v0[1, :-1] - v0[0, :-1], **options)
     raise ValueError(f'Unregistered separation algorithm: {variant}')
@@ -152,7 +162,24 @@ def fitter_source_files(plan):
         files.append('posterior_anchored_explanations.py')
     if variant in ('posterior_mass_v1', 'mixture_mass_v1'):
         files.append('posterior_mass_explanations.py')
+    if plan.get('density_coordinates') == 'angular_raw_origin_v1':
+        files.extend(['angular_explanations.py', 'coverage.py', 'stage_s.py', 'stage_p.py', 'stage_c.py'])
     return files
+
+
+def assert_fitter_sources(plan, repo, frozen, additional=()):
+    """Same file identity check for S-to-P and P-to-C fitting/replay."""
+    for name in dict.fromkeys([*fitter_source_files(plan), *additional]):
+        path = Path(__file__).with_name(name).resolve()
+        if frozen.get(str(path.relative_to(Path(repo).resolve()))) != digest(path):
+            raise ValueError(f'Fitting or replay implementation differs from the passed phase: {name}')
+
+
+def assert_density_execution(plan, executed):
+    """A frozen plan alone cannot prove its worker received the density view."""
+    expected = plan.get('density_coordinates', 'source_standardized_v1')
+    if executed.get('density_coordinates', 'source_standardized_v1') != expected:
+        raise ValueError('Passed phase executed different density coordinates')
 
 
 def fit_block(plan, seed, block, *, phase='S'):
@@ -173,7 +200,8 @@ def fit_block(plan, seed, block, *, phase='S'):
     z = data['adapt_z0']
     if not np.allclose(u @ v0.T, z - z.mean(axis=1, keepdims=True), rtol=1e-10, atol=1e-12):
         raise ValueError('Source head does not reconstruct adaptation logits')
-    base = explanation_family(plan, source_u[:, :-1], data['source_y'], u[:, :-1], primary, v0)
+    base = explanation_family(plan, source_u[:, :-1], data['source_y'], u[:, :-1], primary, v0,
+                              source_mean=mean, source_scale=scale)
     base.fit()
     if hasattr(base, 'projection_report'):
         base.fit_report['projection'] = base.projection_report

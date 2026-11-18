@@ -65,18 +65,23 @@ def _leaf_paths(root, specs, filenames):
     return [str((block / name).relative_to(root)) for block, _, _ in specs for name in filenames]
 
 
+def _worker_plan(plan, phase):
+    worker_plan = {key: plan[key] for key in ('shared_update', 'controls')}
+    worker_plan['separation_variant'] = plan.get('separation_variant', 'stock')
+    for key in ('source_mixture_options', 'posterior_mass_options', 'density_coordinates'):
+        if key in plan:
+            worker_plan[key] = plan[key]
+    worker_plan['phases'] = {phase: {key: plan['phases'][phase][key]
+                                   for key in ('width_grid', 'independent_audit')
+                                   if key in plan['phases'][phase]}}
+    return worker_plan
+
+
 def _fit(plan, root, specs, workers, *, phase='S'):
     verify_seal(root, 'R7_INPUT')
     errors = []
     with ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context('spawn')) as pool:
-        worker_plan = {key: plan[key] for key in ('shared_update', 'controls')}
-        worker_plan['separation_variant'] = plan.get('separation_variant', 'stock')
-        for key in ('source_mixture_options', 'posterior_mass_options'):
-            if key in plan:
-                worker_plan[key] = plan[key]
-        worker_plan['phases'] = {phase: {key: plan['phases'][phase][key]
-                                       for key in ('width_grid', 'independent_audit')
-                                       if key in plan['phases'][phase]}}
+        worker_plan = _worker_plan(plan, phase)
         pending = {pool.submit(fit_block, worker_plan, seed, block, phase=phase): block.name
                    for block, _, seed in specs}
         for future in as_completed(pending):
@@ -197,6 +202,7 @@ def run(plan_path, root, workers, repo):
     write_json(root / 'executed-configs.json', dict(phase='S', plan_sha256=digest(plan_path), workers=workers,
                                                    threads_per_worker=torch.get_num_threads(), dtype='float64',
                                                    separation_variant=plan.get('separation_variant', 'stock'),
+                                                   density_coordinates=plan.get('density_coordinates', 'source_standardized_v1'),
                                                    world_ids=[world['id'] for world in stage_config['worlds']],
                                                    common=common, numpy=np.__version__, scipy=scipy.__version__,
                                                    hostname=platform.node(), executable=sys.executable))

@@ -14,7 +14,8 @@ import torch
 from experiments.common.io import digest, provenance, save_tensor, write_json
 
 from .evaluate import classification, exact_methods, methods, replay_heldout, replay_predictions
-from .fit import config, fit_block, fitter_source_files, read_npz, width_key, write_npz
+from .fit import (assert_density_execution, assert_fitter_sources, config, fit_block,
+                  read_npz, width_key, write_npz)
 from .matched_tsba import blind_inputs, fit_matched_tsba, predict_matched
 from .paired import paired_bootstrap
 from .r5_inputs import load_inputs, load_labels
@@ -102,6 +103,7 @@ def _verify_pilot(plan_path, plan, p_output, repo, tau, pilot_keys):
         raise ValueError('Pilot verdict or configuration is outside the verified seals')
     gate = _sealed_json(p_output, 'gate.json', final['files'])
     execution = _sealed_json(p_output, 'executed-configs.json', records['INPUT']['files'])
+    assert_density_execution(plan, execution)
     if gate['passed'] is not True or gate['next_phase'] != 'C' or execution['phase'] != 'P':
         raise ValueError('The sealed P decision did not authorize all-direction evaluation')
     if digest(plan_path) != records['INPUT']['files']['executed-plan.json']:
@@ -111,12 +113,9 @@ def _verify_pilot(plan_path, plan, p_output, repo, tau, pilot_keys):
             or any(config(plan, seed, tau).to_dict() not in execution['common']
                    for seed in plan['real_model_seeds'])):
         raise ValueError('The sealed pilot used different primary fitting or audit parameters')
-    sources = fitter_source_files(plan) + ['evaluate.py', 'real_audit.py', 'separation_audit.py', 'r5_inputs.py']
     frozen = _sealed_json(p_output, 'provenance.json', records['INPUT']['files'])['file_hashes']
-    for name in sources:
-        path = Path(__file__).with_name(name).resolve()
-        if frozen.get(str(path.relative_to(repo))) != digest(path):
-            raise ValueError(f'Pilot fitting or replay implementation differs: {name}')
+    assert_fitter_sources(plan, repo, frozen,
+                          additional=['evaluate.py', 'real_audit.py', 'separation_audit.py', 'r5_inputs.py'])
     for task in pilot_keys:
         block = Path('blocks') / _block_name(task)
         for stage, members in stage_members.items():
@@ -171,6 +170,7 @@ def _fit_view(plan, tau):
     return dict(shared_update=plan['shared_update'], controls=plan['controls'],
                 separation_variant=plan.get('separation_variant', 'stock'),
                 source_mixture_options=plan.get('source_mixture_options', {}),
+                density_coordinates=plan.get('density_coordinates', 'source_standardized_v1'),
                 posterior_mass_options=plan.get('posterior_mass_options', {}), phases={
                     'S': {'width_grid': [tau]},
                     'P': {'width_grid': [tau], 'independent_audit': plan['phases']['P']['independent_audit']},
@@ -434,6 +434,7 @@ def run(plan_path, root, p_output, workers, repo):
     write_json(root / 'executed-configs.json', dict(phase='C', primary_tau=tau, p_final_digest=prior,
                                                    p_output=str(p_output), workers=workers, threads_per_worker=1,
                                                    separation_variant=view['separation_variant'],
+                                                   density_coordinates=view['density_coordinates'],
                                                    common=[config(plan, seed, tau).to_dict()
                                                            for seed in plan['real_model_seeds']],
                                                    matched_tsba=view['phases']['C']['matched_tsba'],

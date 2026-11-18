@@ -210,7 +210,7 @@ class ProjectedExplanationSet(RestoredExplanationSet):
             raise ValueError("Projection floors, Fisher regularization, and rank tolerance must be positive")
         (self.projection_basis, self.projection_mean, self.projection_scale,
          self.projection_report) = _source_projection(
-            source, labels, normal, coordinate_floor=coordinate_floor,
+            self.density_coordinates(source), labels, normal, coordinate_floor=coordinate_floor,
             fisher_regularization=fisher_regularization, rank_tolerance=rank_tolerance)
         self.full_source, self.full_target = _readonly(source), _readonly(target)
         self.full_dimension = source.shape[1]
@@ -225,10 +225,15 @@ class ProjectedExplanationSet(RestoredExplanationSet):
             raise ValueError("Projection requires a finite matrix in full source-standardized coordinates")
         if self.projection_report["mode"] == "identity":
             return values.copy()
+        values = self.density_coordinates(values)
         projected = (values @ self.projection_basis - self.projection_mean) / self.projection_scale
         if not np.isfinite(projected).all():
             raise ValueError("Non-finite projected features")
         return projected
+
+    def density_coordinates(self, full_x):
+        """Default identity; optional density views leave update features intact."""
+        return full_x
 
 
 def check_projected_explanations():

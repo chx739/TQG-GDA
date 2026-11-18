@@ -224,8 +224,10 @@ def diagnostics(cfg, fit, standard, held, truth, observed, detail_j, *, plan=Non
     from .fit import explanation_family
 
     v0 = standard.get('v0')
-    family = explanation_family(plan or {}, source_u[:, :-1], labels, adapt_u[:, :-1], cfg, v0)
-    holdout_family = explanation_family(plan or {}, source_u[:, :-1], labels, holdout_u[:, :-1], cfg, v0)
+    family = explanation_family(plan or {}, source_u[:, :-1], labels, adapt_u[:, :-1], cfg, v0,
+                                source_mean=mean, source_scale=scale)
+    holdout_family = explanation_family(plan or {}, source_u[:, :-1], labels, holdout_u[:, :-1], cfg, v0,
+                                        source_mean=mean, source_scale=scale)
     if family.dimension != dimension:
         raise ValueError('Analytic S coverage requires the full generating coordinate space')
     threshold, reference_loss = float(detail_j["threshold"]), float(detail_j["reference_loss"])
