@@ -17,3 +17,17 @@
 若 mean 改善 B0 但没有额外适配收益，证据支持规模受控的源表示；共同解释还需要额外归纳假设。若同源 `J_mean−B0_mean` 在两个方向通过原 P 门槛，才按该分支扩展 C。C 的 A0/B1 也用同一源表示和匹配 TSBA 流程，D 采用同一种读出。若两分支都缺乏额外改善，本轮结果可区分“表示换过仍取不到任务更新”与“只看冻结表示的幅度变换”。
 
 [mean 试验计划](../configs/r7-iteration10-pooling-mean.json) · [sum 对照计划](../configs/r7-iteration10-pooling-sum.json) · [阶段门槛](r7-protocol.md)
+
+两个 P 都封存后，使用配对脚本核对图 ID、源模型初始化及代码身份，并计算图级配对区间。输出放在两个封存目录之外。[配对诊断](../scripts/audit_pooling_pair.py)
+
+```bash
+python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.audit_pooling_pair \
+  --sum-output /path/to/attempt-012/P --mean-output /path/to/attempt-013/P \
+  --output /path/to/pooling-pair.json
+```
+
+## 封存结果
+
+两分支的 S 均通过，评分表逐字节一致。正确设定和角度偏移分别有 5/5 和 4/5 个种子满足门槛，期望 NLL 平均差分别为 −0.00392 和 −0.01114。无偏移均值差为 +0.00004。这里两分支共用同一解析源模型，sum/mean 的效果以真实 P 的独立源模型结果为准。[sum S 门槛](../results/iteration-10/sum/S/gate.json) · [mean S 门槛](../results/iteration-10/mean/S/gate.json)
+
+两个 P 的输入已封存。五对真实源模型的初始权重哈希完全相同。fresh sum 的源 fit 与目标 A 表示和 B0 logits 分别在 10/10 块与第八轮缓存逐值一致，说明 fresh sum 在这批图上复现了原源模型输入。
