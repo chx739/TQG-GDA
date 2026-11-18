@@ -77,7 +77,10 @@ def _bank_diagnostics(cfg, fit, std, held, arrays, adapt_y, holdout_y):
                                  source_prediction_moment=hull_distance(ss, bank, **tolerance),
                                  empirical_risk_change=risk, retained_worst_change=worst, gap=risk - worst))
     fit_quality = _cdf_diagnostic(adapt, arrays['ref_theta'], held['holdout_u'][:, :-1])
-    return pool_moments, fit_quality, h_posterior
+    expanded = None
+    if 'audit_theta' in arrays:
+        expanded = np.stack([holdout._target_terms(theta)[-1] for theta in arrays['audit_theta']])
+    return pool_moments, fit_quality, h_posterior, expanded
 
 
 def _endpoints(name, record, key, std, arrays, labels, source_pairs, reference):
@@ -143,11 +146,12 @@ def _evaluate(plan, root, repo, tasks):
                                        exact_separation_violation=record.get('exact_separation_violation'),
                                        independent_audit=record.get('independent_audit')))
             cfg = config(plan, seed, tau)
-            pool_moments, fit_quality, h_q = _bank_diagnostics(cfg, fit, std, held, arrays, labels['adapt'], h_y)
+            pool_moments, fit_quality, h_q, expanded_q = _bank_diagnostics(cfg, fit, std, held, arrays, labels['adapt'], h_y)
             moments.extend(metadata | item for item in pool_moments)
             coverage.append(metadata | fit_quality)
             if tau == primary:
                 cohorts.append(dict(**metadata, ids=held['holdout_ids'], y=h_y, candidate_posteriors=h_q,
+                                    expanded_candidate_posteriors=expanded_q,
                                     logits={name: arrays[f'holdout_logits_{name}'] if record['valid'] else None
                                             for name, record in results.items()}))
     paired = paired_bootstrap(plan, cohorts, phase='P', comparisons=_CONTRASTS, tau=primary)
@@ -208,6 +212,8 @@ def run(plan_path, root, s_output, workers, repo):
     if digest(plan_path) != digest(s_output / 'executed-plan.json'):
         raise ValueError('The pilot and passed S must use the same frozen plan')
     plan = json_read(plan_path)
+    if plan.get('development_iteration') and plan.get('separation_variant') == 'stock':
+        raise ValueError('This stock plan is a synthetic comparator only')
     fit_sources = ['fit.py', 'controls.py']
     if plan.get('separation_variant') == 'restore_trust_v1':
         fit_sources.append('restored_separation.py')

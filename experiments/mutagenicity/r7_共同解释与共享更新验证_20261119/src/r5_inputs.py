@@ -207,7 +207,7 @@ def _numpy(value):
     return result
 
 
-def load_inputs(plan, setting, source, target, seed, *, repository=None):
+def load_inputs(plan, setting, source, target, seed, *, repository=None, include_tsba=False):
     """Return frozen NumPy arrays, ordered IDs, provenance and a sealable manifest.
 
     ``source_y`` is the only label array loaded or returned.  Source head
@@ -279,6 +279,18 @@ def load_inputs(plan, setting, source, target, seed, *, repository=None):
         result[name + "_ids"] = list(selected)
         result[name + "_h"] = _numpy(h[selected])
         result[name + "_z0"] = _numpy(z0[selected])
+    if include_tsba:
+        x = _tensor(frozen['x'], (context['total'], dimension), 'archived TSBA RMS coordinates')
+        mean = _tensor(frozen['mean'], (dimension,), 'archived TSBA source mean')
+        scale = float(frozen['scale'])
+        if not np.isfinite(scale) or scale <= 0:
+            raise ValueError('Invalid archived TSBA source scale')
+        torch.testing.assert_close((h - mean) / scale, x, rtol=1e-10, atol=1e-12)
+        result.update(tsba_mean=_numpy(mean), tsba_scale=scale,
+                      tsba_initial_head={k: v.detach().cpu().clone() for k, v in frozen['initial_head'].items()},
+                      r5_plan=deepcopy(old_plan), r5_model_config=deepcopy(old_plan['model']))
+        for pool, selected in ids.items():
+            result[f'{pool}_x'] = _numpy(x[selected])
     return result
 
 

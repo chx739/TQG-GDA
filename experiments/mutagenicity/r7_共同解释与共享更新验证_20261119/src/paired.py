@@ -93,14 +93,17 @@ def _block_metrics(block, cohort, order, names, replicates):
     logits = block["logits"]
     logs = {name: _log_probabilities(value, n)[order]
             for name, value in logits.items() if name in names | {"B0"} and value is not None}
-    bank = block.get("candidate_posteriors")
-    if bank is not None:
+    banks = {}
+    for bank_name in ('candidate_posteriors', 'expanded_candidate_posteriors'):
+        bank = block.get(bank_name)
+        if bank is None:
+            continue
         bank = np.asarray(bank, dtype=np.float64)
         if (bank.ndim != 3 or bank.shape[1:] != (n, 2) or not len(bank)
                 or not np.isfinite(bank).all() or np.any(bank < 0)
                 or not np.allclose(bank.sum(axis=2), 1., rtol=0, atol=1e-10)):
             raise ValueError("Candidate posteriors must be finite probabilities [K, n_graphs, 2]")
-        bank = bank[:, order, :]
+        banks[bank_name] = bank[:, order, :]
     rows = np.arange(n)
     baseline_loss = -logs["B0"][rows, y] if "B0" in logs else None
     result = {}
@@ -123,6 +126,8 @@ def _block_metrics(block, cohort, order, names, replicates):
                 samples[:, 1] = weights @ (correct * balanced)
         else:
             reasons[1] = "target_class_absent"
+        key = 'expanded_candidate_posteriors' if name.endswith('_plus') else 'candidate_posteriors'
+        bank = banks.get(key)
         if bank is None or baseline_loss is None:
             reasons[3] = "missing_candidate_bank" if bank is None else "missing_B0_for_relative_risk"
         else:
@@ -143,6 +148,7 @@ def paired_bootstrap(plan, blocks, *, phase, comparisons, tau=None):
     missing method, including a numerical fallback excluded by the protocol.
     The optional ``candidate_posteriors`` is the retained joint bank's [K,n,2]
     posterior array evaluated on these same H graph IDs, in the same row order.
+    Arms ending in `_plus` use `expanded_candidate_posteriors` instead for gap metrics.
     The caller supplies one fixed width/pool per call, after label seal checks.
 
     Comparisons are (left, right) method-name pairs; all deltas are left minus
