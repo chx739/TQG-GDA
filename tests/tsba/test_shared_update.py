@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 import numpy as np
 import torch
-from scipy.optimize import OptimizeResult, minimize
+from scipy.optimize import OptimizeResult, brentq, minimize
 from scipy.special import expit, logit, logsumexp, softmax
 from scipy.stats import norm
 
@@ -22,6 +22,32 @@ from tsba.shared_update.solver import _partition, _risk_terms, relative_risks, s
 
 
 class SharedUpdateTests(unittest.TestCase):
+    def test_single_cut_stationarity_refinement_keeps_the_same_objective(self):
+        z0 = np.zeros((4, 2))
+        u = np.ones((4, 1))
+        stats = np.array([[[.25], [.75]]])
+        regularization = .1
+        optimum = brentq(lambda t: expit(2 * t) - .75 + regularization * t, 0., 1.)
+        stalled = np.array([[-optimum - 3e-6], [optimum + 3e-6]])
+        epigraph = float(relative_risks(z0, u, stalled, stats)[0])
+        methods = []
+
+        def stalled_epigraph(objective, initial, **kwargs):
+            methods.append((kwargs["method"], kwargs["options"]["maxiter"]))
+            if kwargs["method"] == "SLSQP":
+                return OptimizeResult(x=np.r_[stalled.ravel(), epigraph], success=True,
+                                      status=0, message="simulated stationarity stall", nit=11)
+            return minimize(objective, initial, **kwargs)
+
+        with patch("scipy.optimize.minimize", side_effect=stalled_epigraph):
+            correction, report = solve_master(z0, u, stats, regularization=regularization, master_maxiter=20)
+        self.assertEqual(methods, [("SLSQP", 20), ("L-BFGS-B", 9)])
+        self.assertTrue(report["valid"])
+        self.assertTrue(report["single_cut_refinement"])
+        self.assertEqual(report["single_cut_initial"]["reason"], "stationary")
+        self.assertLessEqual(report["objective"], report["single_cut_initial"]["objective"])
+        np.testing.assert_allclose(correction.ravel(), [-optimum, optimum], rtol=0., atol=1e-7)
+
     def test_round_local_powered_posterior_full_dimension_gradients_and_replay(self):
         prefix = 'experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src.'
         fit = importlib.import_module(prefix+'fit')

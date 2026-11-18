@@ -222,6 +222,8 @@ def solve_master(source_logits, features, statistics, *, regularization,
     A candidate with info['valid'] == False MUST NOT be deployed. The enclosing
     solve_shared_update function replaces such a candidate with the zero update.
     An invalid warm solve is retried once from zero under the same checks.
+    A stationary-only failure from a cold start with one cut and objective
+    below zero can be refined using the equivalent smooth objective.
     """
     from scipy.optimize import minimize
 
@@ -256,21 +258,16 @@ def solve_master(source_logits, features, statistics, *, regularization,
 
     scaled_optimality_tol = optimality_tol / feature_scales.max()
 
-    def attempt(initial_scaled):
-        risk0, _ = _risk_terms(z, scaled_u, initial_scaled, scaled_stats)
-        x0 = np.r_[initial_scaled.ravel(), risk0.max()]
-        result = minimize(objective, x0, jac=True, method="SLSQP",
-                          constraints={"type": "ineq", "fun": constraints, "jac": constraint_jacobian},
-                          options={"ftol": max(1e-14, min(1e-12, feasibility_tol * .001, scaled_optimality_tol ** 2)),
-                                   "maxiter": int(master_maxiter)})
+    def certify(result, *, explicit_epigraph):
         if not np.isfinite(result.x).all():
             return np.zeros(shape), dict(valid=False, reason="nonfinite_master_solution",
                                          solver_success=bool(result.success), solver_status=int(result.status),
                                          solver_message=str(result.message))
-        w = result.x[:-1].reshape(shape) / feature_scales
+        scaled = result.x[:-1] if explicit_epigraph else result.x
+        w = scaled.reshape(shape) / feature_scales
         risks, gradient = _risk_terms(z, u, w, stats)
-        epigraph = float(result.x[-1])
         worst = float(risks.max())
+        epigraph = float(result.x[-1]) if explicit_epigraph else worst
         penalty = regularization * float(np.sum(w * w)) / 2
         violation = max(0., worst - epigraph)
         kkt = _kkt(gradient, stats, risks, epigraph, regularization, w,
@@ -287,13 +284,44 @@ def solve_master(source_logits, features, statistics, *, regularization,
                        regularization_penalty=penalty, objective=worst + penalty, kkt=kkt,
                        feature_scales=feature_scales.tolist())
 
+    def smooth_single_cut(vector):
+        risks, gradient = _risk_terms(z, scaled_u, vector.reshape(shape), scaled_stats)
+        w = vector * inverse_scale
+        penalty = regularization * float(w @ w) / 2
+        derivative = (gradient - scaled_stats[0]).ravel() + regularization * w * inverse_scale
+        return float(risks[0] + penalty), derivative
+
+    def attempt(initial_scaled):
+        risk0, _ = _risk_terms(z, scaled_u, initial_scaled, scaled_stats)
+        x0 = np.r_[initial_scaled.ravel(), risk0.max()]
+        result = minimize(objective, x0, jac=True, method="SLSQP",
+                          constraints={"type": "ineq", "fun": constraints, "jac": constraint_jacobian},
+                          options={"ftol": max(1e-14, min(1e-12, feasibility_tol * .001, scaled_optimality_tol ** 2)),
+                                   "maxiter": int(master_maxiter)})
+        w, info = certify(result, explicit_epigraph=True)
+        return w, info, result.x
+
     initial_scaled = w0 * feature_scales
-    w, info = attempt(initial_scaled)
-    if info["valid"] or np.max(np.abs(initial_scaled)) <= np.finfo(np.float64).eps:
+    w, info, vector = attempt(initial_scaled)
+    if not info["valid"] and np.max(np.abs(initial_scaled)) > np.finfo(np.float64).eps:
+        retry_w, retry_info, _ = attempt(np.zeros(shape))
+        retry_info.update(zero_start_retry=True, warm_start_failure=info)
+        return retry_w, retry_info
+    if (len(stats) != 1 or info["reason"] != "stationary" or info["objective"] >= 0.
+            or info["iterations"] >= master_maxiter):
         return w, info
-    retry_w, retry_info = attempt(np.zeros(shape))
-    retry_info.update(zero_start_retry=True, warm_start_failure=info)
-    return retry_w, retry_info
+
+    # For one cut, minimizing over the epigraph variable leaves the smooth
+    # candidate risk plus the original coefficient penalty.
+    refined = minimize(smooth_single_cut, vector[:-1], jac=True, method="L-BFGS-B",
+                       options={"ftol": 0., "gtol": scaled_optimality_tol / 10,
+                                "maxiter": int(master_maxiter - info["iterations"])})
+    trial_w, trial = certify(refined, explicit_epigraph=False)
+    if trial["valid"] and trial["objective"] <= info["objective"] + feasibility_tol:
+        trial.update(single_cut_refinement=True, single_cut_initial=info,
+                     epigraph_iterations=info["iterations"])
+        return trial_w, trial
+    return w, dict(info, single_cut_refinement_failure=trial)
 
 
 def _json(value):
