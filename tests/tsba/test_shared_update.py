@@ -22,6 +22,33 @@ from tsba.shared_update.solver import _partition, _risk_terms, relative_risks, s
 
 
 class SharedUpdateTests(unittest.TestCase):
+    def test_exhausted_single_cut_can_retry_in_original_coordinates(self):
+        z0 = np.zeros((4, 2))
+        u = np.full((4, 1), 3.)
+        stats = np.array([[[.75], [2.25]]])
+        stalled = np.array([[-.14], [.14]])
+        epigraph = float(relative_risks(z0, u, stalled, stats)[0]) - .001
+        launches = []
+
+        def exhaust_epigraph(objective, initial, **kwargs):
+            launches.append((kwargs["method"], initial.copy(), kwargs["options"]["maxiter"]))
+            if kwargs["method"] == "SLSQP":
+                return OptimizeResult(x=np.r_[3 * stalled.ravel(), epigraph], success=False,
+                                      status=9, message="iteration limit", nit=20)
+            return minimize(objective, initial, **kwargs)
+
+        with patch("scipy.optimize.minimize", side_effect=exhaust_epigraph):
+            correction, report = solve_master(z0, u, stats, regularization=.1, master_maxiter=20)
+        self.assertEqual([(method, budget) for method, _, budget in launches],
+                         [("SLSQP", 20), ("L-BFGS-B", 20)])
+        np.testing.assert_allclose(launches[1][1], stalled.ravel(), rtol=0., atol=1e-16)
+        self.assertTrue(report["valid"])
+        self.assertTrue(report["single_cut_unscaled_retry"])
+        self.assertFalse(report["single_cut_initial"]["feasible"])
+        self.assertEqual(report["constraint_violation"], 0.)
+        optimum = brentq(lambda t: 3 * (expit(6 * t) - .75) + .1 * t, 0., 1.)
+        np.testing.assert_allclose(correction.ravel(), [-optimum, optimum], rtol=0., atol=1e-7)
+
     def test_single_cut_stationarity_refinement_keeps_the_same_objective(self):
         z0 = np.zeros((4, 2))
         u = np.ones((4, 1))

@@ -223,7 +223,9 @@ def solve_master(source_logits, features, statistics, *, regularization,
     solve_shared_update function replaces such a candidate with the zero update.
     An invalid warm solve is retried once from zero under the same checks.
     A stationary-only failure from a cold start with one cut and objective
-    below zero can be refined using the equivalent smooth objective.
+    below zero can be refined using the equivalent smooth objective. A
+    cold single-cut solve that exhausts its epigraph budget can try the
+    same smooth objective in the original coordinates with its own budget.
     """
     from scipy.optimize import minimize
 
@@ -259,13 +261,15 @@ def solve_master(source_logits, features, statistics, *, regularization,
 
     scaled_optimality_tol = optimality_tol / feature_scales.max()
 
-    def certify(result, *, explicit_epigraph):
+    def certify(result, *, explicit_epigraph, unscaled=False):
         if not np.isfinite(result.x).all():
             return np.zeros(shape), dict(valid=False, reason="nonfinite_master_solution",
                                          solver_success=bool(result.success), solver_status=int(result.status),
                                          solver_message=str(result.message))
-        scaled = result.x[:-1] if explicit_epigraph else result.x
-        w = scaled.reshape(shape) / feature_scales
+        coefficients = result.x[:-1] if explicit_epigraph else result.x
+        w = coefficients.reshape(shape)
+        if not unscaled:
+            w = w / feature_scales
         risks, gradient = _risk_terms(z, u, w, stats)
         worst = float(risks.max())
         epigraph = float(result.x[-1]) if explicit_epigraph else worst
@@ -285,11 +289,11 @@ def solve_master(source_logits, features, statistics, *, regularization,
                        regularization_penalty=penalty, objective=worst + penalty, kkt=kkt,
                        feature_scales=feature_scales.tolist())
 
-    def smooth_single_cut(vector):
-        risks, gradient = _risk_terms(z, scaled_u, vector.reshape(shape), scaled_stats)
-        w = vector * inverse_scale
+    def smooth_single_cut(vector, work_u, work_stats, penalty_scale):
+        risks, gradient = _risk_terms(z, work_u, vector.reshape(shape), work_stats)
+        w = vector * penalty_scale
         penalty = regularization * float(w @ w) / 2
-        derivative = (gradient - scaled_stats[0]).ravel() + regularization * w * inverse_scale
+        derivative = (gradient - work_stats[0]).ravel() + regularization * w * penalty_scale
         return float(risks[0] + penalty), derivative
 
     def attempt(initial_scaled):
@@ -308,22 +312,34 @@ def solve_master(source_logits, features, statistics, *, regularization,
         retry_w, retry_info, _ = attempt(np.zeros(shape))
         retry_info.update(zero_start_retry=True, warm_start_failure=info)
         return retry_w, retry_info
-    if (len(stats) != 1 or info["reason"] != "stationary" or info["objective"] >= 0.
-            or info["iterations"] >= budget):
+    if len(stats) != 1 or info["valid"] or info.get("objective", 0.) >= 0.:
         return w, info
-    initial_kkt = info["kkt"]
-    if (initial_kkt["stationarity_residual"] <= initial_kkt["stationarity_tolerance"]
-            or initial_kkt["complementarity_residual"] > max(feasibility_tol, optimality_tol)):
-        return w, info
+
+    exhausted = info["iterations"] >= budget
+    if exhausted:
+        # Large feature scales can make progress in the epigraph scaling
+        # slow. Eliminate the constraint and try the original coefficients.
+        initial_vector = w.ravel()
+        arguments = u, stats, 1.
+        refinement_budget, gtol = budget, optimality_tol / 10
+    else:
+        initial_kkt = info["kkt"]
+        if (info["reason"] != "stationary"
+                or initial_kkt["stationarity_residual"] <= initial_kkt["stationarity_tolerance"]
+                or initial_kkt["complementarity_residual"] > max(feasibility_tol, optimality_tol)):
+            return w, info
+        initial_vector = vector[:-1]
+        arguments = scaled_u, scaled_stats, inverse_scale
+        refinement_budget = budget - info["iterations"]
+        gtol = scaled_optimality_tol / 10
 
     # For one cut, minimizing over the epigraph variable leaves the smooth
     # candidate risk plus the original coefficient penalty.
-    refined = minimize(smooth_single_cut, vector[:-1], jac=True, method="L-BFGS-B",
-                       options={"ftol": 0., "gtol": scaled_optimality_tol / 10,
-                                "maxiter": budget - info["iterations"]})
-    trial_w, trial = certify(refined, explicit_epigraph=False)
+    refined = minimize(smooth_single_cut, initial_vector, args=arguments, jac=True, method="L-BFGS-B",
+                       options={"ftol": 0., "gtol": gtol, "maxiter": refinement_budget})
+    trial_w, trial = certify(refined, explicit_epigraph=False, unscaled=exhausted)
     if trial["valid"] and trial["objective"] <= info["objective"] + feasibility_tol:
-        trial.update(single_cut_refinement=True, single_cut_initial=info,
+        trial.update(single_cut_refinement=True, single_cut_unscaled_retry=exhausted, single_cut_initial=info,
                      epigraph_iterations=info["iterations"], refinement_iterations=trial["iterations"],
                      iterations=info["iterations"] + trial["iterations"])
         return trial_w, trial
