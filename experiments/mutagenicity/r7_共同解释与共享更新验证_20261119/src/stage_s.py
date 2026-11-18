@@ -220,7 +220,8 @@ def run(plan_path, root, workers, repo):
     # Missing numerical controls remain visible but do not replace the registered S science endpoints.
     decision['expected_observation_blocks'] = len(specs)
     decision['widths'] = widths
-    decision['next_phase'] = 'P' if decision['passed'] else None
+    stock_comparator = plan.get('development_iteration') and plan.get('separation_variant') == 'stock'
+    decision['next_phase'] = 'P' if decision['passed'] and not stock_comparator else None
     decision['engineering_regression_passed'] = True
     decision['known_moment_passed'] = known_moment['passed']
     decision['input_and_frozen_replay_passed'] = True

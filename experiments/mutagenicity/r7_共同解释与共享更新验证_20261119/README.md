@@ -15,7 +15,7 @@
 
 [实测报告](report.md) · [门槛输出](results/gate.json) · [S 阶段补充计划](docs/s-separation-followup.md)
 
-[独立分离审计与第一轮迭代](docs/iteration-01.md)
+[独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮方案](docs/iteration-02.md)
 
 ## 合成阶段执行
 
