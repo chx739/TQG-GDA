@@ -1,6 +1,6 @@
 # R7 共同解释与共享更新验证
 
-**状态：已完成 S，按冻结运行器的门槛未启动 P/C/D。第一轮迭代见下。** 研究问题是，源标签和无标签目标图约束出的共同监督统计，能否为固定分类器提供有用的更新，以及保留图之间的共同约束是否比逐图区间更有价值。
+**状态：第二轮迭代的独立 S 已通过，P 两个真实图方向运行中。** 研究问题是，源标签和无标签目标图约束出的共同监督统计，能否为固定分类器提供有用的更新，以及保留图之间的共同约束是否比逐图区间更有价值。
 
 [完整实验协议](docs/r7-protocol.md) · [计划配置](configs/r7-plan.json) · [方法实现](../../../docs/method/shared-update.md) · [返回总览](../../README.md)
 
@@ -13,7 +13,7 @@
 
 三个开发设置、NCI1 外部确认和合成机制对照属于同一轮，统一归档于此。方法依赖 `tsba.shared_update`，开发设置复用 [R5 源模型和冻结表示档案](../r5_原始方法与请求价值_20261114/results/archive-index.json)。本轮共封存 20 个合成块。S_angle 的 J 在主宽度下 5/5 改善；S+ 有 3 个种子的局部分离未核验，正式推进条件未通过。真实图部分保留为有条件计划。
 
-[实测报告](report.md) · [门槛输出](results/gate.json) · [S 阶段补充计划](docs/s-separation-followup.md)
+[初次 S 实测报告](report.md) · [门槛输出](results/gate.json) · [S 阶段补充计划](docs/s-separation-followup.md)
 
 [独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮方案](docs/iteration-02.md)
 
