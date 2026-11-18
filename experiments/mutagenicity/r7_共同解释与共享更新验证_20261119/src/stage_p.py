@@ -84,6 +84,32 @@ def _bank_diagnostics(plan, cfg, fit, std, held, arrays, adapt_y, holdout_y):
     return pool_moments, fit_quality, h_posterior, expanded
 
 
+def _source_template_diagnostics(plan, cfg, fit, std, validation, labels, theta):
+    source_x = std['source_u'][:, :-1]
+    val_x = features(validation['validation_h'], std['mean'], std['scale'])[:, :-1]
+    family = explanation_family(plan, source_x, fit['source_y'], val_x, cfg, std['v0'])
+    prior = np.bincount(fit['source_y'], minlength=family.classes) / len(source_x)
+    if np.any(prior <= cfg.prior_floor):
+        return {'status': 'empirical_source_prior_below_floor'}
+    parameters = theta.copy()
+    tail = 2 * family.dimension + family.classes - 1
+    parameters[-tail:1 - family.classes] = 0.
+    latent = prior - cfg.prior_floor
+    parameters[1 - family.classes:] = np.log(latent[:-1] / latent[-1])
+    q = family._target_terms(parameters)[-1]
+    z0 = validation['validation_z0']
+    predictions = z0.argmax(axis=1)
+    base = classification(z0, labels, predictions)
+    candidate = classification(np.log(np.maximum(q, np.finfo(np.float64).tiny)), labels, predictions)
+    return dict(status='scored', observations=len(labels), source_prior=prior.tolist(),
+                nll_delta=candidate['sampled_nll'] - base['sampled_nll'],
+                ba_delta_pp=100 * (candidate['balanced_accuracy'] - base['balanced_accuracy'])
+                if base['balanced_accuracy'] is not None else None,
+                component_counts=list(getattr(family, 'source_component_counts', ())),
+                posterior_probability_floor=float(np.finfo(np.float64).tiny),
+                scope='reference templates with identity map and source-fit prior')
+
+
 def _endpoints(name, record, key, std, arrays, labels, source_pairs, reference):
     val_h, val_z = source_pairs['validation_h'], source_pairs['validation_z0']
     val_u = features(val_h, std['mean'], std['scale'])
@@ -149,12 +175,14 @@ def _evaluate(plan, root, repo, tasks):
             cfg = config(plan, seed, tau)
             pool_moments, fit_quality, h_q, expanded_q = _bank_diagnostics(plan, cfg, fit, std, held, arrays, labels['adapt'], h_y)
             moments.extend(metadata | item for item in pool_moments)
-            coverage.append(metadata | fit_quality)
             if tau == primary:
+                fit_quality['source_template_validation'] = _source_template_diagnostics(
+                    plan, cfg, fit, std, source_pairs, v_y, arrays['ref_theta'])
                 cohorts.append(dict(**metadata, ids=held['holdout_ids'], y=h_y, candidate_posteriors=h_q,
                                     expanded_candidate_posteriors=expanded_q,
                                     logits={name: arrays[f'holdout_logits_{name}'] if record['valid'] else None
                                             for name, record in results.items()}))
+            coverage.append(metadata | fit_quality)
     paired = paired_bootstrap(plan, cohorts, phase='P', comparisons=_CONTRASTS, tau=primary)
     return endpoints, moments, coverage, separation, paired
 

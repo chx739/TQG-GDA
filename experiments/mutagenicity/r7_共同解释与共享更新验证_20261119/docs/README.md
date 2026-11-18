@@ -11,3 +11,5 @@
 [第三轮源任务投影验证](iteration-03.md)
 
 [第四轮源类条件锚定](iteration-04.md)
+
+[第五轮源混合模板](iteration-05.md)

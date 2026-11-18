@@ -137,6 +137,8 @@ def _true_parameters(model, family):
     class_parameters = np.concatenate((model['means'].ravel(), np.log(model['variances']).ravel()))
     affine_and_prior = np.concatenate((np.log(model['diagonal']), model['shift'],
                                        np.log(latent[:-1]) - np.log(latent[-1])))
+    if hasattr(family, 'source_component_counts'):
+        return None, 'specified_generating_parameters_are_not_the_fixed_finite_sample_mixture'
     anchored = getattr(family, 'fixed_class_parameters', None)
     if anchored is not None:
         if not np.allclose(class_parameters, anchored, rtol=0., atol=1e-12):
@@ -146,17 +148,22 @@ def _true_parameters(model, family):
 
 
 def _cdf_diagnostic(family, reference_parameters, holdout):
-    means, log_variances, log_scale, shift, _, prior = family._unpack(reference_parameters)
-    scales, deviations = np.exp(log_scale), np.exp(.5 * log_variances)
+    mixture_cdf = getattr(family, 'coordinate_cdf', None)
+    if mixture_cdf is None:
+        means, log_variances, log_scale, shift, _, prior = family._unpack(reference_parameters)
+        scales, deviations = np.exp(log_scale), np.exp(.5 * log_variances)
     distances = []
     count = len(holdout)
     if not count:
         raise ValueError("Holdout CDF diagnostic requires nonempty holdout inputs")
     for coordinate in range(family.dimension):
         values = np.sort(holdout[:, coordinate])
-        standardized = ((scales[coordinate] * values[:, None] + shift[coordinate]
-                         - means[:, coordinate]) / deviations[:, coordinate])
-        model_cdf = ndtr(standardized) @ prior
+        if mixture_cdf is None:
+            standardized = ((scales[coordinate] * values[:, None] + shift[coordinate]
+                             - means[:, coordinate]) / deviations[:, coordinate])
+            model_cdf = ndtr(standardized) @ prior
+        else:
+            model_cdf = mixture_cdf(reference_parameters, coordinate, values)
         right = np.arange(1, count + 1) / count
         left = np.arange(count) / count
         distances.append(float(max(np.max(right - model_cdf), np.max(model_cdf - left))))
