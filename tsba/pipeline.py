@@ -5,20 +5,10 @@ import torch
 from torch.nn import functional as F
 from .adapt import adapt_classifier
 from .classifier import Coordinates, ResidualClassifier
-from .encoder import GraphEncoder
 from .predict import Predictor, save_predictor
-from .pretrain import SourceModel, pretrain_encoder, encode
+from .pretrain import prepare_source, encode, source_identity
 from .score import bandwidth, train_score
 from .utils import identity, set_seed, finite, NumericalError, file_hash
-
-
-SOURCE_KEYS = ("seed", "encoder", "hidden", "num_layers", "emb_dim", "dropout", "source_epochs",
-               "source_lr", "source_batch")
-
-
-def source_identity(cfg, fingerprints):
-    return identity(dict(config={k: getattr(cfg, k) for k in SOURCE_KEYS},
-                         train=fingerprints["source_train"], validation=fingerprints["source_validation"]))
 
 
 @torch.no_grad()
@@ -52,20 +42,7 @@ def run_task(cfg, data, output_dir=None, source_checkpoint=None, logger=None):
         # A: source semantics, frozen complete-graph coordinates.
         # 阶段一 / §3.2：训练或复用 z0(G)=W0 h_theta0(G)+b0。
         # 源模型是编码器加线性头，不是 SEGA 的参照库分类器。
-        if source_checkpoint is None:
-            source, source_info = pretrain_encoder(cfg, data, logger)
-        else:
-            ck = torch.load(source_checkpoint, map_location="cpu", weights_only=True)
-            if ck.get("format") != "tsba-source-v1" or ck.get("source_identity") != source_key:
-                raise ValueError("source checkpoint architecture/data/roles/config identity mismatch")
-            source = SourceModel(GraphEncoder(**ck["encoder_spec"]), dimensions[2]).to(cfg.device)
-            source.load_state_dict(ck["state"])
-            source.encoder.freeze()
-            source.eval()
-            source_info = ck["info"]
-        if out is not None:
-            torch.save(dict(format="tsba-source-v1", source_identity=source_key, encoder_spec=source.encoder.spec,
-                            state={k: v.cpu() for k, v in source.state_dict().items()}, info=source_info), out / "source.pt")
+        source, source_info = prepare_source(cfg, data, dimensions[2], source_key, source_checkpoint, out, logger)
         dtype = getattr(torch, cfg.adaptation_dtype)
         # §3.2：encode 内部冻结编码器（含 BN 统计并关闭 dropout）。
         # h_source:[nS,d] 是整图表示；后续适配不更新 theta0。

@@ -8,7 +8,16 @@ from torch import nn
 from torch.nn import functional as F
 from torch_geometric.data import Batch
 from .encoder import GraphEncoder
-from .utils import finite
+from .utils import finite, identity
+
+
+SOURCE_KEYS = ("seed", "encoder", "hidden", "num_layers", "emb_dim", "dropout", "source_epochs",
+               "source_lr", "source_batch")
+
+
+def source_identity(cfg, fingerprints):
+    return identity(dict(config={k: getattr(cfg, k) for k in SOURCE_KEYS},
+                         train=fingerprints["source_train"], validation=fingerprints["source_validation"]))
 
 
 # §3.2：z0(G)=W0·h_theta0(G)+b0；encoder 对应 h，head 对应 W0,b0。
@@ -100,6 +109,25 @@ def pretrain_encoder(cfg, data, logger=None):
     model.eval().zero_grad(set_to_none=True)
     return model, dict(selected_epoch=selected, selection="source_validation_ce" if data.source_validation.graphs
                       else "last_predeclared_epoch", history=history)
+
+
+def prepare_source(cfg, data, classes, source_key, checkpoint=None, output_dir=None, logger=None):
+    if checkpoint is None:
+        model, info = pretrain_encoder(cfg, data, logger)
+    else:
+        artifact = torch.load(checkpoint, map_location="cpu", weights_only=True)
+        if artifact.get("format") != "tsba-source-v1" or artifact.get("source_identity") != source_key:
+            raise ValueError("source checkpoint architecture/data/roles/config identity mismatch")
+        model = SourceModel(GraphEncoder(**artifact["encoder_spec"]), classes).to(cfg.device)
+        model.load_state_dict(artifact["state"])
+        model.encoder.freeze()
+        model.eval()
+        info = artifact["info"]
+    if output_dir is not None:
+        torch.save(dict(format="tsba-source-v1", source_identity=source_key, encoder_spec=model.encoder.spec,
+                        state={key: value.cpu() for key, value in model.state_dict().items()}, info=info),
+                   output_dir / "source.pt")
+    return model, info
 
 
 @torch.no_grad()

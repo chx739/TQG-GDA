@@ -6,6 +6,7 @@
 |---|---|---|
 | 方法 | [中文设计原文](method/design-zh.md) · [英文译文](method/design-en.md) | 理解方法定义与公式 |
 | 方法 | [实现映射与数值选择](method/implementation.md) | 对照设计理解当前实现 |
+| 方法 | [共同域解释与共享分类更新](method/shared-update.md) | 独立的共享 logit 适配方法、求解与运行 |
 | 方法 | [SEGA 参考来源](method/sega-reference.md) | 了解参考快照及适用边界 |
 | 使用 | [数据协议、运行与推断](guides/usage.md) | 使用训练和推断入口 |
 | 使用 | [实验记录规范](guides/experiment-records.md) | 区分计划、实际配置与结果证据 |

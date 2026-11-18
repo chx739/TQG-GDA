@@ -27,6 +27,7 @@
 - [真实数据验证](experiments/mutagenicity/README.md)：Mutagenicity R1–R4 及补跑结果、协议与档案。
 - [人工代码审查导航](docs/guides/code-review-guide.md)：阅读顺序、公式与测试入口。
 - [实现映射与数值选择](docs/method/implementation.md)。
+- [共同域解释与共享分类更新](docs/method/shared-update.md)：独立的图级适配入口 `--method shared-update`，复用源模型并拟合共享 logit 修正。
 - [数据角色、运行和推断](docs/guides/usage.md)。
 - [SEGA 参考及来源](docs/method/sega-reference.md)：参考快照保持原字节。
 

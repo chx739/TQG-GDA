@@ -12,6 +12,7 @@ dependencies = ["torch>=2.1", "torch-geometric>=2.4", "numpy>=1.24"]
 [project.optional-dependencies]
 test = ["pytest>=7"]
 experiments = ["scipy", "matplotlib"]
+shared-update = ["scipy>=1.10"]
 
 [project.scripts]
 tsba = "scripts.run_task:main"
