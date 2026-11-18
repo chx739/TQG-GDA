@@ -5,11 +5,11 @@
 | 分类 | 阅读入口 | 内容 |
 |---|---|---|
 | 合成数据 | [合成实验](synthetic_data/README.md) | E1/E2、控制实验、源后验、静态 score 与 P0 训练预算 |
-| Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R6 结果与 R7 计划；跨数据集轮次包含 PROTEINS |
+| Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R6 结果与 R7 合成验证；跨数据集轮次包含 PROTEINS |
 
-## 当前计划：R7 共同解释与共享更新
+## 最新验证：R7 共同解释与共享更新
 
-[R7｜共同解释集合能否支持有用的共享分类更新？](mutagenicity/r7_共同解释与共享更新验证_20261119/README.md)拟先以已知后验验证机制，再复用 R5 冻结表示做留出图对照。通过事先登记的门槛后，按三种开发设置扩展到全方向，并预指定 NCI1 作外部确认。本轮分别检查分类效果、共同约束和简单校准能否解释收益。
+[R7｜共同解释集合能否支持有用的共享分类更新？](mutagenicity/r7_共同解释与共享更新验证_20261119/README.md)已完成 S 合成阶段。S_angle 的 J 在主宽度下 5/5 达标；S+ 有 3 个种子的局部分离未核验，按冻结运行器的口径未进入真实图验证。留出图对照、三设置全方向和 NCI1 确认保留为有条件计划。
 
 ## 阶段总结
 
@@ -58,7 +58,7 @@ Mutagenicity 的小幅收益无需 score 也能获得；PROTEINS 整体退化，
 
 | 编号与研究问题 | 状态 | 结论与后续关系 |
 |---|---|---|
-| [R7｜共同解释集合能否支持有用的共享分类更新？](mutagenicity/r7_共同解释与共享更新验证_20261119/README.md) | 计划中 | 合成验证、两方向试跑、全方向开发评价与有条件 NCI1 外部确认 |
+| [R7｜共同解释集合能否支持有用的共享分类更新？](mutagenicity/r7_共同解释与共享更新验证_20261119/README.md) | 已完成 S | 20 个合成块，局部分离门槛未过；P/C/D 未触发 |
 | [R6｜源梯度与密度请求分别如何影响泛化？](mutagenicity/r6_源梯度与密度请求分解_20261114/README.md) | 已完成；完整证据在运行档案 | 纯请求仍无平均 NLL 收益；源驱动代价更大，PROTEINS 覆盖不完整 |
 | [R5｜原始 TSBA 在不同数据设置上是否有整体收益与请求价值？](mutagenicity/r5_原始方法与请求价值_20261114/README.md) | 已完成 | Mutagenicity 小幅 Accuracy 收益无需 score；PROTEINS 总体退化，score 未显示稳定额外收益 |
 | [E1/E2｜符号、几何与适配能否按设计运行？](synthetic_data/e1_e2_符号几何与适配_20261109/README.md) | 已完成 | 存在高维反例；后续控制拆解原因 |

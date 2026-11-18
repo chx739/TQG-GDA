@@ -1,0 +1,194 @@
+{
+  "passed": true,
+  "valid": true,
+  "checks": {
+    "finite_master_valid": true,
+    "zero_master_valid": true,
+    "design_probabilities": true,
+    "design_risks": true,
+    "risk_identity": true,
+    "source_moment_restores_zero_probabilities": true,
+    "source_moment_restores_zero_risks": true
+  },
+  "failed_checks": [],
+  "regularization": 1e-09,
+  "numeric_atol": 1e-06,
+  "source_probabilities": [
+    0.42,
+    0.53,
+    0.47,
+    0.48
+  ],
+  "probabilities": [
+    [
+      0.3480514641085107,
+      0.6519485358914893
+    ],
+    [
+      0.45395642479658294,
+      0.5460435752034171
+    ],
+    [
+      0.5460435752034171,
+      0.45395642479658294
+    ],
+    [
+      0.5559643130920073,
+      0.4440356869079926
+    ]
+  ],
+  "risks": [
+    -0.02663121953718922,
+    -0.011389125554354493
+  ],
+  "direct_risks": [
+    -0.02663121953718921,
+    -0.011389125554354484
+  ],
+  "statistics": [
+    [
+      [
+        0.125
+      ],
+      [
+        -0.125
+      ]
+    ],
+    [
+      [
+        0.07499999999999998
+      ],
+      [
+        -0.07499999999999998
+      ]
+    ]
+  ],
+  "source_statistic": [
+    [
+      -1.3877787807814457e-17
+    ],
+    [
+      0.0
+    ]
+  ],
+  "correction": [
+    [
+      0.15242093982834706
+    ],
+    [
+      -0.15242093982834717
+    ]
+  ],
+  "master": {
+    "valid": true,
+    "reason": "solved",
+    "solver_success": true,
+    "solver_status": 0,
+    "solver_message": "Optimization terminated successfully",
+    "iterations": 7,
+    "candidates": 2,
+    "feasible": true,
+    "stationary": true,
+    "no_worse_than_zero": true,
+    "epigraph": -0.011389125554344464,
+    "constraint_violation": 0.0,
+    "known_candidate_risks": [
+      -0.02663121953718922,
+      -0.011389125554354493
+    ],
+    "found_worst_risk": -0.011389125554354493,
+    "regularization_penalty": 2.3232142898156615e-11,
+    "objective": -0.01138912553112235,
+    "kkt": {
+      "valid": true,
+      "stationarity_residual": 3.635980405647388e-15,
+      "stationarity_tolerance": 1e-06,
+      "complementarity_residual": 1.0028436414621922e-14,
+      "simplex_residual": 0.0,
+      "multiplier_solver_success": true,
+      "active_indices": [
+        1
+      ],
+      "active_weights": [
+        1.0
+      ]
+    },
+    "feature_scales": [
+      1.0
+    ]
+  },
+  "zero_correction": [
+    [
+      0.0
+    ],
+    [
+      0.0
+    ]
+  ],
+  "zero_probabilities": [
+    [
+      0.42000000000000004,
+      0.5800000000000001
+    ],
+    [
+      0.53,
+      0.4699999999999999
+    ],
+    [
+      0.47,
+      0.53
+    ],
+    [
+      0.48000000000000004,
+      0.52
+    ]
+  ],
+  "zero_risks": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "zero_master": {
+    "valid": true,
+    "reason": "solved",
+    "solver_success": true,
+    "solver_status": 0,
+    "solver_message": "Optimization terminated successfully",
+    "iterations": 1,
+    "candidates": 3,
+    "feasible": true,
+    "stationary": true,
+    "no_worse_than_zero": true,
+    "epigraph": 0.0,
+    "constraint_violation": 0.0,
+    "known_candidate_risks": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "found_worst_risk": 0.0,
+    "regularization_penalty": 0.0,
+    "objective": 0.0,
+    "kkt": {
+      "valid": true,
+      "stationarity_residual": 2.7755575615628914e-17,
+      "stationarity_tolerance": 1e-06,
+      "complementarity_residual": 0.0,
+      "simplex_residual": 0.0,
+      "multiplier_solver_success": true,
+      "active_indices": [
+        0,
+        1,
+        2
+      ],
+      "active_weights": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "feature_scales": [
+      1.0
+    ]
+  }
+}

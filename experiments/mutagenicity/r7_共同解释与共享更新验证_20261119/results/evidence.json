@@ -1,0 +1,53 @@
+{
+  "phase": "S",
+  "attempt": "attempt-001",
+  "code_commit": "bd259d3911d0f63b94e4a1e5ff2d2fdac881ed34",
+  "git_status_at_launch": "",
+  "method_commit": "fea693841b6da36af7d77f92d564f5410ade1808",
+  "registered_plan_commit": "2e9242ab9db57a9dba25e278d458159926e7ed8a",
+  "plan_bytes_match": true,
+  "executed_config_artifacts": {
+    "executed-plan.json": {
+      "sha256": "a0f10b472a5bf0f4b4be3af6d54832f805be44348243ab9f0002f4efca757a7c",
+      "archive_path": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-001/S/executed-plan.json"
+    },
+    "executed-configs.json": {
+      "sha256": "be502ddf0799a5c10738a326b59315a957d1a632b5b4ec8875af1ef47a10f03b",
+      "archive_path": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-001/S/executed-configs.json"
+    }
+  },
+  "provenance_sha256": "90485f25d494d96042a16c6844d38fe8042142d319234386864c8594ec8705d4",
+  "command": [
+    "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r7_共同解释与共享更新验证_20261119/scripts/run.py",
+    "S",
+    "--output",
+    "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-001/S",
+    "--workers",
+    "4"
+  ],
+  "raw_archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-001/S",
+  "log_sha256": "cfa389eb51749b637fd6cce908450cd9c2eecd0f3e8be7f50ef0b0ecf88c1107",
+  "seals": {
+    "R7_INPUT": "f77ed90d8763f490909bc82e9ad4f074b06dea80d8301043d92ede20b3455d01",
+    "R7_OBS": "424126552919b09c3a977aca76ac1037c6032bb7c8e58b6987ae99b8adf4d880",
+    "R7_ORACLE": "5145363f4a9153c3ddf8921354b96417199e4ad059348ab2185337d2b8a87e71",
+    "R7_FINAL": "5b3f53bc2274a34ca3d9ce2e15a00a1e78b08b765041fbb4729541e949ffc928"
+  },
+  "status": {
+    "S": "completed_gate_failed",
+    "P": "not_triggered",
+    "C": "not_triggered",
+    "D": "not_triggered"
+  },
+  "observation_blocks": 20,
+  "block_widths": 60,
+  "primary_gate_records": 40,
+  "count_policy": "local search incomplete output marked unverified by pre-run runner",
+  "posthoc_audit": {
+    "file": "splus-frozen-output-audit.csv",
+    "collects": "replayed retained-bank outputs and final local search exits without refitting",
+    "raw_point_criteria_count": 4,
+    "registered_runner_count": 2,
+    "eligibility_status_changed": false
+  }
+}
