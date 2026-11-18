@@ -1,0 +1,163 @@
+{
+  "phase": "C",
+  "primary_tau": 0.005,
+  "p_final_digest": "209aebeffa776bb9ca9f989532b508b16d44226e2cd4033267724afb17e87d91",
+  "p_output": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-016/P",
+  "workers": 4,
+  "threads_per_worker": 1,
+  "separation_variant": "mixture_mass_v1",
+  "density_coordinates": "angular_raw_origin_v1",
+  "target_posterior_power": 0.375,
+  "target_posterior_power_effective": 0.375,
+  "source_refit": null,
+  "source_refit_applied": false,
+  "common": [
+    {
+      "seed": 3405,
+      "coordinate_floor": 1e-06,
+      "variance_floor": 0.001,
+      "mean_radius": 2,
+      "scale_min": 0.25,
+      "scale_max": 4,
+      "shift_bound": 4,
+      "prior_floor": 0.0001,
+      "tau": 0.005,
+      "regularization": 0.1,
+      "inner_starts": 5,
+      "inner_maxiter": 150,
+      "master_maxiter": 200,
+      "search_rounds": 10,
+      "feasibility_tol": 1e-08,
+      "optimality_tol": 1e-06,
+      "separation_tol": 1e-06
+    },
+    {
+      "seed": 3406,
+      "coordinate_floor": 1e-06,
+      "variance_floor": 0.001,
+      "mean_radius": 2,
+      "scale_min": 0.25,
+      "scale_max": 4,
+      "shift_bound": 4,
+      "prior_floor": 0.0001,
+      "tau": 0.005,
+      "regularization": 0.1,
+      "inner_starts": 5,
+      "inner_maxiter": 150,
+      "master_maxiter": 200,
+      "search_rounds": 10,
+      "feasibility_tol": 1e-08,
+      "optimality_tol": 1e-06,
+      "separation_tol": 1e-06
+    },
+    {
+      "seed": 3407,
+      "coordinate_floor": 1e-06,
+      "variance_floor": 0.001,
+      "mean_radius": 2,
+      "scale_min": 0.25,
+      "scale_max": 4,
+      "shift_bound": 4,
+      "prior_floor": 0.0001,
+      "tau": 0.005,
+      "regularization": 0.1,
+      "inner_starts": 5,
+      "inner_maxiter": 150,
+      "master_maxiter": 200,
+      "search_rounds": 10,
+      "feasibility_tol": 1e-08,
+      "optimality_tol": 1e-06,
+      "separation_tol": 1e-06
+    },
+    {
+      "seed": 3408,
+      "coordinate_floor": 1e-06,
+      "variance_floor": 0.001,
+      "mean_radius": 2,
+      "scale_min": 0.25,
+      "scale_max": 4,
+      "shift_bound": 4,
+      "prior_floor": 0.0001,
+      "tau": 0.005,
+      "regularization": 0.1,
+      "inner_starts": 5,
+      "inner_maxiter": 150,
+      "master_maxiter": 200,
+      "search_rounds": 10,
+      "feasibility_tol": 1e-08,
+      "optimality_tol": 1e-06,
+      "separation_tol": 1e-06
+    },
+    {
+      "seed": 3409,
+      "coordinate_floor": 1e-06,
+      "variance_floor": 0.001,
+      "mean_radius": 2,
+      "scale_min": 0.25,
+      "scale_max": 4,
+      "shift_bound": 4,
+      "prior_floor": 0.0001,
+      "tau": 0.005,
+      "regularization": 0.1,
+      "inner_starts": 5,
+      "inner_maxiter": 150,
+      "master_maxiter": 200,
+      "search_rounds": 10,
+      "feasibility_tol": 1e-08,
+      "optimality_tol": 1e-06,
+      "separation_tol": 1e-06
+    }
+  ],
+  "matched_tsba": {
+    "compared_groups": [
+      "B1",
+      "A0"
+    ],
+    "use_R5_M00_implementation": true,
+    "source_and_target_batch": 128,
+    "attempts_per_group": 30,
+    "score_batch": 128,
+    "score_exact_updates": 7200,
+    "score_lr": 0.001,
+    "lambda_boundary": 1,
+    "boundary_tau": 0.1,
+    "damping": 0.01,
+    "kappa_sigma": 1,
+    "estimated_models_max": 180,
+    "expected_trajectories_if_full": 360,
+    "expected_attempts_if_full": 10800,
+    "seed_offsets": {
+      "score_initialization": 101,
+      "score_training": 102,
+      "score_diagnostic": 103,
+      "adaptation_batches": 201
+    }
+  },
+  "audit": {
+    "tau": 0.005,
+    "seed_offset": 7001,
+    "aggregate_fixed_updates": [
+      "J",
+      "P"
+    ],
+    "individual_graph_count": 2,
+    "individual_graph_rank": "descending_absolute_J_binary_margin_change_then_graph_id",
+    "individual_class": 1,
+    "individual_query_signs": [
+      -1,
+      1
+    ],
+    "inner_starts": 10,
+    "inner_maxiter": 300,
+    "positive_observed_risk_witness_threshold": 1e-06,
+    "keep_fixed_reference_threshold": true,
+    "augmented_pair": [
+      "J_plus",
+      "P_plus"
+    ],
+    "augmented_mass_pair": [
+      "J_plus",
+      "P_mass_plus"
+    ]
+  }
+}
