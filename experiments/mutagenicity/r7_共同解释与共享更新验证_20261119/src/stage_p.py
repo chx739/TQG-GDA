@@ -15,6 +15,7 @@ from .fit import (assert_density_execution, assert_fitter_sources, config, expla
                   master, moment, read_npz, width_key, write_npz)
 from .r5_inputs import load_inputs, load_labels
 from .seals import seal, verify_seal
+from .decisions import cohort_decisions, decision_contrasts, decision_for, decision_metadata, policy_metadata
 from . import source_refit_stage
 from .stage_s import _assert_pinned_method, _fit, _leaf_paths, csv_write, json_read
 
@@ -38,8 +39,9 @@ def _initialize(plan, repo, block, setting, source, target, seed, *, refit_root=
     write_json(block / 'manifest.json', loaded['manifest'])
 
 
-def _oracles(plan, root, block, seed, repo):
-    labels = load_labels(root, str((block / 'manifest.json').relative_to(root)), 'adapt', repository=repo)
+def _oracles(plan, root, block, seed, repo, *, label_reader=None):
+    reader = load_labels if label_reader is None else label_reader
+    labels = reader(root, str((block / 'manifest.json').relative_to(root)), 'adapt', repository=repo)
     std = read_npz(block / 'standardization.npz')
     held = read_npz(block / 'holdout_standardization.npz')
     z, u = std['adapt_z0'], std['adapt_u']
@@ -136,8 +138,9 @@ def _endpoints(name, record, key, std, arrays, labels, source_pairs, reference):
         delta -= delta.mean(1, keepdims=True)
         row = dict(**key, pool=pool, method=name, valid=record['valid'], status=record['status'],
                    stop_reason=record['stop_reason'], n=len(y))
+        row.update(decision_metadata(name, arrays))
         if record['valid']:
-            row.update(classification(z, y, b0.argmax(1)))
+            row.update(classification(z, y, b0.argmax(1), decisions=decision_for(name, z, arrays)))
             row['centered_rms'] = float(np.sqrt(np.mean(delta ** 2)))
             row['mean_predicted_p1'] = float(softmax(z, axis=1)[:, 1].mean())
         rows.append(row)
@@ -191,9 +194,10 @@ def _evaluate(plan, root, repo, tasks):
                 cohorts.append(dict(**metadata, ids=held['holdout_ids'], y=h_y, candidate_posteriors=h_q,
                                     expanded_candidate_posteriors=expanded_q,
                                     logits={name: arrays[f'holdout_logits_{name}'] if record['valid'] else None
-                                            for name, record in results.items()}))
+                                            for name, record in results.items()},
+                                    **({'decisions': actions} if (actions := cohort_decisions(arrays, results)) else {})))
             coverage.append(metadata | fit_quality)
-    paired = paired_bootstrap(plan, cohorts, phase='P', comparisons=_CONTRASTS, tau=primary)
+    paired = paired_bootstrap(plan, cohorts, phase='P', comparisons=decision_contrasts(plan, _CONTRASTS), tau=primary)
     return endpoints, moments, coverage, separation, paired
 
 
@@ -291,6 +295,7 @@ def run(plan_path, root, s_output, workers, repo):
                                                    target_posterior_power_effective=plan.get('target_posterior_power', 1.),
                                                    source_refit=plan.get('source_refit'),
                                                    source_refit_applied=bool(source_roots),
+                                                   **policy_metadata(plan),
                                                    common=[config(plan, seed, tau).to_dict()
                                                            for seed, tau in product(plan['real_model_seeds'], widths)]))
     write_json(root / 'provenance.json', provenance(repo))

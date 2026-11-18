@@ -17,6 +17,7 @@ from . import nci1_inputs
 from .evaluate import exact_methods, methods, replay_predictions
 from .fit import config, fitter_source_files, master, moment, predict, read_npz, width_key, write_npz
 from .paired import paired_bootstrap
+from .decisions import cohort_decisions, decision_contrasts, policy_metadata
 from .seals import seal, verify_seal
 from .stage_c import _block_name, _input_arrays, _oracle_files, _seed_outcomes, _shared_observations
 from .stage_p import _bank_diagnostics, _endpoints, _source_template_diagnostics
@@ -165,7 +166,8 @@ def _evaluate(plan, root, repo, tasks, tau):
         coverage.append(metadata | fit_quality)
         cohorts.append(dict(**metadata, ids=held['holdout_ids'], y=h_y, candidate_posteriors=posterior,
                             logits={name: arrays[f'holdout_logits_{name}'] if record['valid'] else None
-                                    for name, record in records.items()}))
+                                    for name, record in records.items()},
+                            **({'decisions': actions} if (actions := cohort_decisions(arrays, records)) else {})))
     return endpoints, moments, coverage, separation, cohorts
 
 
@@ -285,6 +287,7 @@ def run(plan_path, root, c_output, acquisition, workers, repo):
                                                    target_posterior_power_effective=plan.get('target_posterior_power', 1.),
                                                    source_pooling=source_spec.get('pooling', 'sum'),
                                                    source_refit=plan.get('source_refit'),
+                                                   **policy_metadata(plan),
                                                    common=[config(plan, seed, tau).to_dict()
                                                            for seed in plan['real_model_seeds']]))
     prepared = root / 'external'
@@ -324,7 +327,7 @@ def run(plan_path, root, c_output, acquisition, workers, repo):
     oracle_names = _leaf_paths(root, specs, _oracle_files(tau))
     seal(root, 'R7_ORACLE', oracle_names, expected=oracle_names)
     endpoints, moments, coverage, separation, cohorts = _evaluate(plan, root, repo, tasks, tau)
-    paired = paired_bootstrap(plan, cohorts, phase='D', comparisons=_CONTRASTS, tau=tau)
+    paired = paired_bootstrap(plan, cohorts, phase='D', comparisons=decision_contrasts(plan, _CONTRASTS), tau=tau)
     rows = _seed_outcomes(paired['interval_rows'], plan['evaluation']['nll_tie_tolerance'])
     tables = dict(endpoints=endpoints, moments=moments, coverage=coverage, separation=separation, paired=rows)
     for name, values in tables.items():

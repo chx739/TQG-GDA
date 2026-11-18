@@ -12,6 +12,7 @@ def main():
     parser.add_argument('--output', type=Path)
     parser.add_argument('--s-output', type=Path)
     parser.add_argument('--p-output', type=Path)
+    parser.add_argument('--matched-from', type=Path, help='Sealed C donor pinned by matched_tsba_reuse in the C plan')
     parser.add_argument('--c-output', type=Path, help='Sealed and passing C attempt for D')
     parser.add_argument('--acquisition', type=Path,
                         help='D JSON with zip_sha256 and raw_sha256 for the four local NCI1 files')
@@ -24,6 +25,8 @@ def main():
         parser.error('P requires the passed --s-output directory')
     if args.command == 'C' and args.p_output is None:
         parser.error('C requires the passed --p-output directory')
+    if args.command != 'C' and args.matched_from is not None:
+        parser.error('--matched-from is only valid for C')
     if args.command == 'D' and (args.plan is None or args.c_output is None or args.acquisition is None):
         parser.error('D requires the executed --plan, passed --c-output and local --acquisition record')
     if args.command == 'S-audit' and args.original is None:
@@ -67,7 +70,7 @@ def main():
         stage_p.run(plan, args.output, args.s_output, args.workers, round_dir.parents[2])
     elif args.command == 'C':
         from ..src import stage_c
-        stage_c.run(plan, args.output, args.p_output, args.workers, round_dir.parents[2])
+        stage_c.run(plan, args.output, args.p_output, args.workers, round_dir.parents[2], matched_from=args.matched_from)
     else:
         from ..src import stage_d
         stage_d.run(plan, args.output, args.c_output, args.acquisition, args.workers, round_dir.parents[2])

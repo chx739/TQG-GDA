@@ -14,6 +14,7 @@ from tsba.shared_update.predict import corrected_logits, update_features
 from tsba.shared_update.solver import solve_master, solve_shared_update
 
 from .controls import solve_pointwise, solve_restricted
+from .decisions import decision_policy, freeze_decisions, probability_method
 
 
 def config(plan, seed, tau):
@@ -96,7 +97,7 @@ def run_width(plan, cfg, base, z, u, v0, ids):
 
 
 def predict(name, z, u, w):
-    multiplier = {'C05': .5, 'C075': .75}.get(name, 1.)
+    multiplier = {'C05': .5, 'C075': .75}.get(probability_method(name), 1.)
     return logits(z, u, w, multiplier)
 
 
@@ -156,6 +157,8 @@ def fitter_source_files(plan):
     """Modules that must remain identical across gated adaptation phases."""
     variant = plan.get('separation_variant', 'stock')
     files = ['fit.py', 'controls.py']
+    if decision_policy(plan) is not None:
+        files.extend(['decisions.py', 'evaluate.py', 'paired.py', 'stage_s.py', 'stage_p.py', 'stage_c.py', 'stage_d.py'])
     if variant != 'stock':
         files.append('restored_separation.py')
     if variant in ('projected_restore_v1', 'anchored_projected_v1', 'source_mixture_v1', 'posterior_anchored_v1', 'posterior_mass_v1', 'mixture_mass_v1'):
@@ -199,6 +202,8 @@ def assert_density_execution(plan, executed):
         raise ValueError('Passed phase recorded a different source-refit branch')
     if executed.get('target_posterior_power', 1.) != plan.get('target_posterior_power', 1.):
         raise ValueError('Passed phase executed a different target posterior power')
+    if decision_policy(executed) != decision_policy(plan):
+        raise ValueError('Passed phase executed a different classification decision policy')
 
 
 def fit_block(plan, seed, block, *, phase='S'):
@@ -234,6 +239,7 @@ def fit_block(plan, seed, block, *, phase='S'):
             supplemental, audit_records = audit(plan, cfg, base, z, u, data['adapt_ids'], arrays, records)
             arrays.update(supplemental)
             records.update(audit_records)
+        freeze_decisions(plan, arrays, records)
         key = width_key(tau)
         write_npz(block / f'{key}-observed.npz', **arrays)
         write_json(block / f'{key}-observed.json', records)

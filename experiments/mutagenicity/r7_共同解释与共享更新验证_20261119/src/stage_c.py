@@ -1,4 +1,4 @@
-"""R7 all-direction development evaluation using the sealed pilot and fresh A0/B1."""
+"""R7 all-direction development evaluation using the sealed pilot and matched A0/B1."""
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import hashlib
 from itertools import permutations, product
@@ -13,12 +13,14 @@ import torch
 
 from experiments.common.io import digest, provenance, save_tensor, write_json
 
+from .decisions import cohort_decisions, decision_contrasts, decision_policy, policy_metadata
 from .evaluate import classification, exact_methods, methods, replay_heldout, replay_predictions
 from .fit import (assert_density_execution, assert_fitter_sources, config, fit_block,
                   read_npz, width_key, write_npz)
 from .matched_tsba import blind_inputs, fit_matched_tsba, predict_matched
+from .matched_reuse import open_donor
 from .paired import paired_bootstrap
-from .r5_inputs import load_inputs, load_labels
+from .r5_inputs import evaluation_labels, load_inputs
 from . import source_refit_stage
 from .seals import _signature, seal, verify_seal
 from .stage_p import _bank_diagnostics, _endpoints, _FIT_ARRAYS, _oracles
@@ -111,14 +113,19 @@ def _verify_pilot(plan_path, plan, p_output, repo, tau, pilot_keys):
         raise ValueError('The sealed P decision did not authorize all-direction evaluation')
     if digest(plan_path) != records['INPUT']['files']['executed-plan.json']:
         raise ValueError('C must use the identical plan and parameters from the passing pilot')
+    policy = decision_policy(plan)
     if (execution['separation_variant'] != plan.get('separation_variant', 'stock')
             or execution['independent_audit'] != plan['phases']['P']['independent_audit']
             or any(config(plan, seed, tau).to_dict() not in execution['common']
                    for seed in plan['real_model_seeds'])):
         raise ValueError('The sealed pilot used different primary fitting or audit parameters')
     frozen = _sealed_json(p_output, 'provenance.json', records['INPUT']['files'])['file_hashes']
-    assert_fitter_sources(plan, repo, frozen,
-                          additional=['evaluate.py', 'real_audit.py', 'separation_audit.py', 'r5_inputs.py'])
+    additional = ['evaluate.py', 'real_audit.py', 'separation_audit.py', 'r5_inputs.py']
+    if 'matched_tsba_reuse' in plan:
+        additional.extend(['stage_c.py', 'matched_reuse.py'])
+    if policy is not None:
+        additional.extend(['decisions.py', 'paired.py', 'stage_p.py', 'stage_c.py'])
+    assert_fitter_sources(plan, repo, frozen, additional=additional)
     for task in pilot_keys:
         block = Path('blocks') / _block_name(task)
         for stage, members in stage_members.items():
@@ -180,24 +187,26 @@ def _fit_view(plan, tau):
                     'S': {'width_grid': [tau]},
                     'P': {'width_grid': [tau], 'independent_audit': plan['phases']['P']['independent_audit']},
                     'C': plan['phases']['C'],
-                }, real_model_seeds=plan['real_model_seeds'])
+                }, real_model_seeds=plan['real_model_seeds'], **policy_metadata(plan))
 
 
-def _fit_blind(view, block, seed, reused, audited):
+def _fit_blind(view, block, seed, reused, audited, reuse_matched=False):
     torch.set_num_threads(1)
     if not reused:
         # The existing fitter's P branch adds the registered audit; its S branch
         # is the same one-width fit without the extra queries.
         fit_block(view, seed, block, phase='P' if audited else 'S')
-    inputs = torch.load(block / 'matched_input.pt', map_location='cpu', weights_only=True)
-    fit_matched_tsba(view, inputs, seed, output_directory=block / 'matched')
+    if not reuse_matched:
+        inputs = torch.load(block / 'matched_input.pt', map_location='cpu', weights_only=True)
+        fit_matched_tsba(view, inputs, seed, output_directory=block / 'matched')
 
 
-def _fit_all(view, root, tasks, workers, pilot_keys, audit_keys):
+def _fit_all(view, root, tasks, workers, pilot_keys, audit_keys, *, reuse_matched=False):
     verify_seal(root, 'R7_INPUT')
     errors = []
     with ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context('spawn')) as pool:
-        waiting = {pool.submit(_fit_blind, view, block, task[-1], task in pilot_keys, task in audit_keys): block.name
+        waiting = {pool.submit(_fit_blind, view, block, task[-1], task in pilot_keys, task in audit_keys,
+                               reuse_matched): block.name
                    for block, task in tasks}
         for future in as_completed(waiting):
             name = waiting[future]
@@ -242,9 +251,10 @@ def _matched_files(attempts):
                     for name, iteration in product(_MATCHED_ARMS, range(attempts + 1))]
 
 
-def _freeze_observations(plan, view, root, p_output, tasks, tau, pilot_keys, audit_keys, pilot_members):
+def _freeze_observations(plan, view, root, p_output, tasks, tau, pilot_keys, audit_keys, pilot_members, *, donor=None):
     files = []
     key = width_key(tau)
+    matched_files = _matched_files(view['phases']['C']['matched_tsba']['attempts_per_group'])
     for block, task in tasks:
         reused = task in pilot_keys
         if reused:
@@ -259,10 +269,30 @@ def _freeze_observations(plan, view, root, p_output, tasks, tau, pilot_keys, aud
         if (set(records) != expected or set(methods(arrays)) != expected
                 or any(type(record['valid']) is not bool for record in records.values())):
             raise ValueError(f'{block.name}: incomplete primary shared-update arms')
-        predictions, _ = _matched_observations(view, block)
-        write_npz(block / 'matched-predictions.npz', **predictions)
-        names = list(_shared_observations(tau)) + _matched_files(view['phases']['C']['matched_tsba']['attempts_per_group'])
+        if donor is not None:
+            donor.copy_observations(block, block.relative_to(root), matched_files)
+        predictions, state = _matched_observations(view, block)
+        if donor is None:
+            write_npz(block / 'matched-predictions.npz', **predictions)
+        else:
+            donor.verify_replay(block, predictions, state)
+        names = list(_shared_observations(tau)) + matched_files
         files.extend(str(block.relative_to(root) / name) for name in names)
+    return files
+
+
+def _freeze_oracles(view, root, repo, tasks, p_output, tau, pilot_keys, pilot_members):
+    files = []
+    with evaluation_labels(root, repository=repo, stage='R7_OBS') as label_reader:
+        def read_adaptation_labels(_root, manifest, pool, *, repository):
+            return label_reader.load(manifest, pool)
+
+        for block, task in tasks:
+            if task in pilot_keys:
+                _copy_verified(root, p_output, block, _oracle_files(tau), pilot_members)
+            else:
+                _oracles(view, root, block, task[-1], repo, label_reader=read_adaptation_labels)
+            files.extend(str(block.relative_to(root) / name) for name in _oracle_files(tau))
     return files
 
 
@@ -280,7 +310,12 @@ def _matched_endpoints(record, name, key, logits, labels, reference):
 
 
 def _evaluate(plan, view, root, repo, tasks, tau, pilot_keys):
-    verify_seal(root, 'R7_ORACLE')
+    with evaluation_labels(root, repository=repo) as label_reader:
+        tables = _evaluate_frozen(plan, view, root, tasks, tau, pilot_keys, label_reader)
+    return tables
+
+
+def _evaluate_frozen(plan, view, root, tasks, tau, pilot_keys, label_reader):
     key = width_key(tau)
     endpoints, moments, coverage, separation, cohorts = [], [], [], [], []
     for block, task in tasks:
@@ -288,9 +323,9 @@ def _evaluate(plan, view, root, repo, tasks, tau, pilot_keys):
         metadata = dict(setting=setting, source=source, target=target, seed=seed, tau=tau,
                         block_origin='reused_P' if task in pilot_keys else 'new_C')
         manifest = str((block / 'manifest.json').relative_to(root))
-        a_y = load_labels(root, manifest, 'adapt', repository=repo, authenticated_snapshot=True)
-        h_y = load_labels(root, manifest, 'holdout', repository=repo)
-        v_y = load_labels(root, manifest, 'validation', repository=repo)
+        a_y = label_reader.load(manifest, 'adapt', authenticated_snapshot=True)
+        h_y = label_reader.load(manifest, 'holdout')
+        v_y = label_reader.load(manifest, 'validation')
         fit, std, held = (read_npz(block / name) for name in
                           ('fit_input.npz', 'standardization.npz', 'holdout_standardization.npz'))
         source_pairs = read_npz(block / 'validation_input.npz') | {'source_z0': fit['source_z0']}
@@ -326,8 +361,12 @@ def _evaluate(plan, view, root, repo, tasks, tau, pilot_keys):
             plan, config(plan, seed, tau), fit, std, held, arrays, a_y, h_y)
         moments.extend(metadata | row for row in block_moments)
         coverage.append(metadata | fit_quality)
-        cohorts.append(dict(**metadata, ids=held['holdout_ids'], y=h_y, logits=holdout_logits,
-                            candidate_posteriors=original_q, expanded_candidate_posteriors=expanded_q))
+        cohort = dict(**metadata, ids=held['holdout_ids'], y=h_y, logits=holdout_logits,
+                      candidate_posteriors=original_q, expanded_candidate_posteriors=expanded_q)
+        actions = cohort_decisions(arrays, records)
+        if actions:
+            cohort['decisions'] = actions
+        cohorts.append(cohort)
     return endpoints, moments, coverage, separation, cohorts
 
 
@@ -360,7 +399,7 @@ def _seed_outcomes(rows, tie):
     return rows
 
 
-def _block_contrasts(endpoints):
+def _block_contrasts(endpoints, contrasts):
     grouped = {}
     fields = ('setting', 'source', 'target', 'seed', 'tau', 'block_origin')
     for row in endpoints:
@@ -369,7 +408,7 @@ def _block_contrasts(endpoints):
             grouped.setdefault(key, {})[row['method']] = row
     results = []
     for key, arms in grouped.items():
-        for left, right in _PRIMARY_CONTRASTS + _AUDIT_CONTRASTS:
+        for left, right in contrasts:
             if left not in arms or right not in arms:
                 continue
             a, b = arms[left], arms[right]
@@ -420,7 +459,7 @@ def _coverage_gate(plan, rows):
                 scope='R7 development evaluation on two datasets; relations are conditional on fixed models')
 
 
-def run(plan_path, root, p_output, workers, repo):
+def run(plan_path, root, p_output, workers, repo, *, matched_from=None):
     """Run C only from a verified P pass, including exact pilot-artifact reuse."""
     plan_path, root, p_output, repo = (Path(path).resolve() for path in (plan_path, root, p_output, repo))
     plan = json_read(plan_path)
@@ -430,6 +469,9 @@ def run(plan_path, root, p_output, workers, repo):
         raise ValueError('Worker count exceeds the registered CPU budget')
     _assert_pinned_method(plan, repo)
     torch.set_num_threads(1)
+    matched_files = _matched_files(plan['phases']['C']['matched_tsba']['attempts_per_group'])
+    donor = open_donor(plan, matched_from, repo,
+                       [(str(Path('blocks') / _block_name(task)), task) for task in grid], matched_files)
     root.mkdir(parents=True, exist_ok=False)
     (root / 'blocks').mkdir()
     tasks = [(root / 'blocks' / _block_name(task), task) for task in grid]
@@ -438,18 +480,17 @@ def run(plan_path, root, p_output, workers, repo):
     view = _fit_view(plan, tau)
     input_names = ['executed-plan.json', 'executed-configs.json', 'provenance.json', 'blocks.json']
     (root / 'executed-plan.json').write_bytes(plan_path.read_bytes())
-    write_json(root / 'executed-configs.json', dict(phase='C', primary_tau=tau, p_final_digest=prior,
-                                                   p_output=str(p_output), workers=workers, threads_per_worker=1,
-                                                   separation_variant=view['separation_variant'],
-                                                   density_coordinates=view['density_coordinates'],
-                                                   target_posterior_power=view['target_posterior_power'],
-                                                   target_posterior_power_effective=view['target_posterior_power'],
-                                                   source_refit=plan.get('source_refit'),
-                                                   source_refit_applied=bool(source_roots),
-                                                   common=[config(plan, seed, tau).to_dict()
-                                                           for seed in plan['real_model_seeds']],
-                                                   matched_tsba=view['phases']['C']['matched_tsba'],
-                                                   audit=view['phases']['P']['independent_audit']))
+    execution = dict(phase='C', primary_tau=tau, p_final_digest=prior, p_output=str(p_output),
+                     workers=workers, threads_per_worker=1, separation_variant=view['separation_variant'],
+                     density_coordinates=view['density_coordinates'], target_posterior_power=view['target_posterior_power'],
+                     target_posterior_power_effective=view['target_posterior_power'], source_refit=plan.get('source_refit'),
+                     source_refit_applied=bool(source_roots),
+                     common=[config(plan, seed, tau).to_dict() for seed in plan['real_model_seeds']],
+                     matched_tsba=view['phases']['C']['matched_tsba'], audit=view['phases']['P']['independent_audit'],
+                     **policy_metadata(view))
+    if donor is not None:
+        execution['matched_tsba_reuse'] = donor.lock
+    write_json(root / 'executed-configs.json', execution)
     write_json(root / 'provenance.json', provenance(repo))
     write_json(root / 'blocks.json', [dict(path=str(block.relative_to(root)), setting=task[0], source=task[1],
                                          target=task[2], seed=task[3], reused_p=task in pilot_keys,
@@ -462,26 +503,23 @@ def run(plan_path, root, p_output, workers, repo):
                            refit_root=source_roots[setting, source, seed])
         else:
             _prepare_block(plan, repo, root, block, task, reused_input)
+        if donor is not None:
+            donor.verify_inputs(block, block.relative_to(root), task, view)
         input_names.extend(str(block.relative_to(root) / name) for name in (*_INPUT_FILES, 'matched_input.pt'))
     input_names += source_refit_stage.local_files(root)
     seal(root, 'R7_INPUT', input_names, expected=input_names)
-    _fit_all(view, root, tasks, workers, pilot_keys, audit_keys)
+    _fit_all(view, root, tasks, workers, pilot_keys, audit_keys, reuse_matched=donor is not None)
     observed_names = _freeze_observations(plan, view, root, p_output, tasks, tau, pilot_keys, audit_keys,
-                                          pilot_members['OBS'])
+                                          pilot_members['OBS'], donor=donor)
     seal(root, 'R7_OBS', observed_names, expected=observed_names)
-    oracle_names = []
-    for block, task in tasks:
-        if task in pilot_keys:
-            _copy_verified(root, p_output, block, _oracle_files(tau), pilot_members['ORACLE'])
-        else:
-            _oracles(view, root, block, task[-1], repo)
-        oracle_names.extend(str(block.relative_to(root) / name) for name in _oracle_files(tau))
+    oracle_names = _freeze_oracles(view, root, repo, tasks, p_output, tau, pilot_keys, pilot_members['ORACLE'])
     seal(root, 'R7_ORACLE', oracle_names, expected=oracle_names)
     if verify_seal(p_output, 'R7_FINAL')['digest'] != prior:
         raise ValueError('Pilot evidence changed after C verified its verdict')
     endpoints, moments, coverage, separation, cohorts = _evaluate(plan, view, root, repo, tasks, tau, pilot_keys)
-    paired = paired_bootstrap(plan, cohorts, phase='C', comparisons=_PRIMARY_CONTRASTS, tau=tau)
-    new = _pair_subset(plan, cohorts, set(grid) - pilot_keys, _PRIMARY_CONTRASTS, tau)
+    contrasts = decision_contrasts(plan, _PRIMARY_CONTRASTS)
+    paired = paired_bootstrap(plan, cohorts, phase='C', comparisons=contrasts, tau=tau)
+    new = _pair_subset(plan, cohorts, set(grid) - pilot_keys, contrasts, tau)
     audit = _pair_subset(plan, cohorts, pilot_keys | audit_keys, _AUDIT_CONTRASTS, tau)
     tie = plan['evaluation']['nll_tie_tolerance']
     paired_rows = _seed_outcomes(paired['interval_rows'], tie)
@@ -489,7 +527,7 @@ def run(plan_path, root, p_output, workers, repo):
     audit_rows = _seed_outcomes([row for report in audit.values() for row in report['interval_rows']], tie)
     tables = dict(endpoints=endpoints, moments=moments, coverage=coverage, separation=separation,
                   paired=paired_rows, paired_new=new_rows, paired_audit=audit_rows,
-                  block_contrasts=_block_contrasts(endpoints))
+                  block_contrasts=_block_contrasts(endpoints, [*contrasts, *_AUDIT_CONTRASTS]))
     final_names = []
     for name, rows in tables.items():
         csv_write(root / f'{name}.csv', rows)

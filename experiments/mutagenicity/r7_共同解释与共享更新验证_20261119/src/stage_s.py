@@ -25,6 +25,7 @@ from .evaluate import (_committed_truth, endpoint, exact_methods, fit_oracles, m
 from .fit import config, fit_block, read_npz, width_key, write_npz
 from .seals import seal, verify_seal
 from .synthetic import check_known_moment, generate, synthetic_gate
+from .decisions import decision_for, decision_metadata, decision_policy, policy_metadata, probability_method
 
 
 def json_read(path):
@@ -68,7 +69,7 @@ def _leaf_paths(root, specs, filenames):
 def _worker_plan(plan, phase):
     worker_plan = {key: plan[key] for key in ('shared_update', 'controls')}
     worker_plan['separation_variant'] = plan.get('separation_variant', 'stock')
-    for key in ('source_mixture_options', 'posterior_mass_options', 'density_coordinates', 'target_posterior_power'):
+    for key in ('source_mixture_options', 'posterior_mass_options', 'density_coordinates', 'target_posterior_power', 'decision_policy'):
         if key in plan:
             worker_plan[key] = plan[key]
     worker_plan['phases'] = {phase: {key: plan['phases'][phase][key]
@@ -130,12 +131,14 @@ def _evaluate(plan, root, specs):
                 # Each contrast against the retained joint set uses exactly those candidates.
                 worst = float(relative_risks(standard['adapt_z0'], standard['adapt_u'], arrays[f'w_{name}'],
                                              observed['stats']).max())
-                if name in ('C05', 'C075'):
-                    multiplier = {'C05': .5, 'C075': .75}[name]
+                if probability_method(name) in ('C05', 'C075'):
+                    multiplier = {'C05': .5, 'C075': .75}[probability_method(name)]
                     worst = float(relative_risks(standard['adapt_z0'], standard['adapt_u'],
                                                  (multiplier - 1) * standard['v0'], observed['stats']).max())
                 metrics[name] = endpoint(result, arrays[f'adapt_logits_{name}'], arrays[f'holdout_logits_{name}'],
-                                         b0a, b0h, truth, worst, method=name, **width)
+                                         b0a, b0h, truth, worst, method=name, **width,
+                                         decisions=decision_for(name, arrays[f'holdout_logits_{name}'], arrays))
+                metrics[name].update(decision_metadata(name, arrays))
                 if name in ('J', 'J_cal'):
                     metrics[name]['boundary_normal_error_degrees'] = coverage.boundary_angle(
                         standard['v0'], arrays[f'w_{name}'], truth, standard)
@@ -184,6 +187,8 @@ def run(plan_path, root, workers, repo):
     patterns = ['test_shared_update.py']
     if 'source_refit' in plan:
         patterns.append('test_r7_source_refit.py')
+    if decision_policy(plan) is not None:
+        patterns.append('test_r7_decisions.py')
     commands = [[sys.executable, '-m', 'unittest', 'discover', '-s', 'tests/tsba', '-p', pattern, '-v']
                 for pattern in patterns]
     with (root / 'engineering-regression.txt').open('x') as stream:
@@ -211,6 +216,7 @@ def run(plan_path, root, workers, repo):
                                                    target_posterior_power=plan.get('target_posterior_power', 1.),
                                                    target_posterior_power_effective=1.,
                                                    source_refit=plan.get('source_refit'), source_refit_applied=False,
+                                                   **policy_metadata(plan),
                                                    world_ids=[world['id'] for world in stage_config['worlds']],
                                                    common=common, numpy=np.__version__, scipy=scipy.__version__,
                                                    hostname=platform.node(), executable=sys.executable))

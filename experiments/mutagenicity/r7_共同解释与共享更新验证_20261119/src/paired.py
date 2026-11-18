@@ -116,7 +116,16 @@ def _block_metrics(block, cohort, order, names, replicates):
             continue
         logp = logs[name]
         loss = -logp[rows, y]
-        correct = (logp.argmax(axis=1) == y).astype(np.float64)
+        decisions = block.get('decisions', {})
+        if name in decisions:
+            actions = np.asarray(decisions[name])
+            if (actions.shape != (n,) or not np.issubdtype(actions.dtype, np.integer)
+                    or not np.isin(actions, [0, 1]).all()):
+                raise ValueError('Valid methods require one frozen binary decision per graph')
+            prediction = actions[order]
+        else:
+            prediction = logp.argmax(axis=1)
+        correct = (prediction == y).astype(np.float64)
         point[0], point[2] = loss.mean(), correct.mean()
         if weights is not None:
             samples[:, 0], samples[:, 2] = weights @ loss, weights @ correct
@@ -146,6 +155,9 @@ def paired_bootstrap(plan, blocks, *, phase, comparisons, tau=None):
     Each block is a dict with ``setting, source, target, seed, ids, y, logits``.
     ``logits`` maps method names to [n, 2] arrays; use None for an invalid or
     missing method, including a numerical fallback excluded by the protocol.
+    Optional ``decisions`` maps names to frozen binary classification actions.
+    These affect BA/Accuracy only; NLL and risk gaps always use unshifted logits.
+    The bootstrap never estimates or refits decision thresholds from its draws.
     The optional ``candidate_posteriors`` is the retained joint bank's [K,n,2]
     posterior array evaluated on these same H graph IDs, in the same row order.
     Arms ending in `_plus` use `expanded_candidate_posteriors` instead for gap metrics.

@@ -6,6 +6,7 @@ file, after R7_OBS (adaptation labels) or R7_ORACLE (holdout labels) verifies.
 Holdout arrays returned here are for the coordinator to retain until fitting
 finishes; they must not be passed to an adaptation worker.
 """
+from contextlib import contextmanager
 from copy import deepcopy
 import hashlib
 import io
@@ -316,11 +317,21 @@ def load_labels(root, manifest_relative_path, pool, *, repository=None, authenti
     blob = path.read_bytes()
     if input_seal["files"].get(relative) != _sha(blob):
         raise PermissionError("Label request manifest was not sealed in R7_INPUT")
+    return _labels_from_manifest(blob, pool, _repository(repository), authenticated_snapshot)
+
+
+def _labels_from_manifest(blob, pool, repository, authenticated_snapshot):
+    """Common byte/role checks after a caller authenticates the R7 manifest.
+
+    R5 seal metadata, repository indices, source roles and all consumed archived
+    bytes are authenticated afresh for each request. No labels/context are
+    cached, including during a batch evaluation scope.
+    """
     manifest = json.loads(blob)
     if manifest.get("format") != _FORMAT:
         raise ValueError("Unknown R7 input manifest format")
     context = _context(manifest["r7_plan"], manifest["setting"], manifest["source"],
-                       manifest["target"], manifest["seed"], _repository(repository))
+                       manifest["target"], manifest["seed"], repository)
     if manifest["ids"] != context["ids"]:
         raise PermissionError("Sealed label request IDs differ from the registered task and hash folds")
     provenance = manifest["provenance"]
@@ -363,3 +374,41 @@ def load_labels(root, manifest_relative_path, pool, *, repository=None, authenti
     labels = np.asarray(result, dtype=np.int64)
     labels.setflags(write=False)
     return labels
+
+
+class _EvaluationLabels:
+    def __init__(self, capability, repository):
+        self._capability = capability
+        self._repository = repository
+
+    def load(self, manifest_relative_path, pool, *, authenticated_snapshot=False):
+        """Read the registered pool; an OBS scope permits only nonsnapshot A."""
+        if pool not in ("adapt", "holdout", "validation"):
+            raise ValueError("Target label pool must be 'adapt' or 'holdout'")
+        required = "R7_ORACLE" if pool in ("holdout", "validation") or authenticated_snapshot else "R7_OBS"
+        blob = self._capability.read_bytes(manifest_relative_path, "R7_INPUT", required_stage=required)
+        return _labels_from_manifest(blob, pool, self._repository, authenticated_snapshot)
+
+
+@contextmanager
+def evaluation_labels(root, *, repository=None, stage="R7_ORACLE"):
+    """Efficient scoped labels for already frozen C evaluation/oracle batches.
+
+    Usage: ``with evaluation_labels(root, repository=repo) as labels: ...``;
+    use ``labels.load(manifest, pool, authenticated_snapshot=...)`` inside it.
+    Publish/return evaluation results only after normal context exit. Full
+    cryptographic chain verification happens at entry and exit; each request
+    additionally rechecks seal metadata, the exact manifest, R5 dependencies,
+    pool IDs and consumed label bytes. Nothing remains authorized after exit.
+
+    ``stage='R7_OBS'`` supports adaptation-label oracle preparation only. It
+    never permits H, source-validation labels, whole-file label snapshots or
+    automatic promotion when an ORACLE seal later appears on disk. Standalone
+    ``load_labels`` retains its original independent full-verification checks.
+    """
+    from .seals import verified_seal_chain
+
+    if stage not in ("R7_OBS", "R7_ORACLE"):
+        raise ValueError("Label evaluation scopes require OBS or ORACLE")
+    with verified_seal_chain(root, stage) as capability:
+        yield _EvaluationLabels(capability, _repository(repository))

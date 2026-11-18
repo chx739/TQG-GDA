@@ -6,6 +6,7 @@ from experiments.common.io import digest, write_json
 
 from .fit import config, features, master, moment, predict, read_npz, width_key, write_npz
 from .seals import verify_seal
+from .decisions import ALIASES, decision_for, decision_policy, verify_frozen_decisions
 
 
 def methods(arrays):
@@ -17,6 +18,8 @@ def exact_methods(plan, tau, *, oracle=False):
     names = set(plan['controls']['primary_groups'])
     if not main:
         names -= {'P_mass', 'J_bias', 'J_cal'}
+    if not oracle and decision_policy(plan) is not None:
+        names.update(ALIASES)
     if not oracle:
         return names - {'O'}
     return {'O', 'O_analytic'}
@@ -46,6 +49,7 @@ def replay_heldout(plan, block, *, phase='S'):
 
 
 def replay_predictions(standard, held, arrays):
+    verify_frozen_decisions(arrays)
     output = {}
     for name in methods(arrays):
         old = arrays[f'adapt_logits_{name}']
@@ -58,6 +62,8 @@ def replay_predictions(standard, held, arrays):
             raise ValueError(f'{name}: nonfinite holdout logits')
         output[f'holdout_logits_{name}'] = new
         output[f'holdout_probability_{name}'] = softmax(new, axis=1)
+        if 'decision_rule_' + name in arrays:
+            output[f'holdout_decision_{name}'] = decision_for(name, new, arrays)
     return output
 
 
@@ -104,8 +110,10 @@ def loss(logits, q):
     return -np.sum(q * log_softmax(logits, axis=1), axis=1)
 
 
-def classification(logits, y, b0):
-    pred = logits.argmax(axis=1)
+def classification(logits, y, b0, *, decisions=None):
+    pred = logits.argmax(axis=1) if decisions is None else np.asarray(decisions)
+    if pred.shape != y.shape or not np.issubdtype(pred.dtype, np.integer) or not np.isin(pred, [0, 1]).all():
+        raise ValueError('Classification actions must be one binary integer per graph')
     confusion = np.bincount(2 * y + pred, minlength=4).reshape(2, 2)
     row_count, col_count = confusion.sum(axis=1), confusion.sum(axis=0)
     recall = [float(correct / count) if count else None for correct, count in zip(confusion.diagonal(), row_count)]
@@ -119,7 +127,7 @@ def classification(logits, y, b0):
                 n=len(y), class_1_count=int(row_count[1]), predicted_class_1=float(pred.mean()))
 
 
-def endpoint(result, a, h, b0a, b0h, truth, worst, **key):
+def endpoint(result, a, h, b0a, b0h, truth, worst, *, decisions=None, **key):
     change = h - b0h
     change -= change.mean(axis=1, keepdims=True)
     arisk = float(np.mean(loss(a, truth['adapt_q']) - loss(b0a, truth['adapt_q'])))
@@ -132,4 +140,4 @@ def endpoint(result, a, h, b0a, b0h, truth, worst, **key):
                 adapt_true_risk_delta=arisk if applied else None,
                 found_worst_risk=worst,
                 true_directional_risk_gap=(arisk - worst if applied and worst is not None else None),
-                **(classification(h, truth['holdout_y'], b0h.argmax(axis=1)) if applied else {}))
+                **(classification(h, truth['holdout_y'], b0h.argmax(axis=1), decisions=decisions) if applied else {}))
