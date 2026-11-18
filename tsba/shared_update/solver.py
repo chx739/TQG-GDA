@@ -338,8 +338,9 @@ def solve_master(source_logits, features, statistics, *, regularization,
     refined = minimize(smooth_single_cut, initial_vector, args=arguments, jac=True, method="L-BFGS-B",
                        options={"ftol": 0., "gtol": gtol, "maxiter": refinement_budget})
     trial_w, trial = certify(refined, explicit_epigraph=False, unscaled=exhausted)
+    trial.update(single_cut_unscaled_retry=exhausted, single_cut_refinement_budget=refinement_budget)
     if trial["valid"] and trial["objective"] <= info["objective"] + feasibility_tol:
-        trial.update(single_cut_refinement=True, single_cut_unscaled_retry=exhausted, single_cut_initial=info,
+        trial.update(single_cut_refinement=True, single_cut_initial=info,
                      epigraph_iterations=info["iterations"], refinement_iterations=trial["iterations"],
                      iterations=info["iterations"] + trial["iterations"])
         return trial_w, trial
