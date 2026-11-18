@@ -12,7 +12,7 @@ from tsba.shared_update.solver import relative_risks
 from .coverage import _cdf_diagnostic, hull_distance
 from .evaluate import classification, exact_methods, methods, predict, replay_predictions
 from .fit import (assert_density_execution, assert_fitter_sources, config, explanation_family, features,
-                  master, moment, read_npz, width_key, write_npz)
+                  mass_option_metadata, master, moment, read_npz, width_key, write_npz)
 from .r5_inputs import load_inputs, load_labels
 from .seals import seal, verify_seal
 from .decisions import cohort_decisions, decision_contrasts, decision_for, decision_metadata, policy_metadata
@@ -295,7 +295,7 @@ def run(plan_path, root, s_output, workers, repo):
                                                    target_posterior_power_effective=plan.get('target_posterior_power', 1.),
                                                    source_refit=plan.get('source_refit'),
                                                    source_refit_applied=bool(source_roots),
-                                                   **policy_metadata(plan),
+                                                   **policy_metadata(plan), **mass_option_metadata(plan),
                                                    common=[config(plan, seed, tau).to_dict()
                                                            for seed, tau in product(plan['real_model_seeds'], widths)]))
     write_json(root / 'provenance.json', provenance(repo))

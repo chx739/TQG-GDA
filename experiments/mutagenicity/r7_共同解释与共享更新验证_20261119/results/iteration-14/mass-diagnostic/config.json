@@ -1,0 +1,173 @@
+{
+  "worlds": [
+    "well_specified",
+    "no_shift"
+  ],
+  "seeds": [
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79
+  ],
+  "tasks": [
+    [
+      "well_specified",
+      65
+    ],
+    [
+      "well_specified",
+      66
+    ],
+    [
+      "well_specified",
+      67
+    ],
+    [
+      "well_specified",
+      68
+    ],
+    [
+      "well_specified",
+      69
+    ],
+    [
+      "well_specified",
+      70
+    ],
+    [
+      "well_specified",
+      71
+    ],
+    [
+      "well_specified",
+      72
+    ],
+    [
+      "well_specified",
+      73
+    ],
+    [
+      "well_specified",
+      74
+    ],
+    [
+      "well_specified",
+      75
+    ],
+    [
+      "well_specified",
+      76
+    ],
+    [
+      "well_specified",
+      77
+    ],
+    [
+      "well_specified",
+      78
+    ],
+    [
+      "well_specified",
+      79
+    ],
+    [
+      "no_shift",
+      65
+    ],
+    [
+      "no_shift",
+      66
+    ],
+    [
+      "no_shift",
+      67
+    ],
+    [
+      "no_shift",
+      68
+    ],
+    [
+      "no_shift",
+      69
+    ],
+    [
+      "no_shift",
+      70
+    ],
+    [
+      "no_shift",
+      71
+    ],
+    [
+      "no_shift",
+      72
+    ],
+    [
+      "no_shift",
+      73
+    ],
+    [
+      "no_shift",
+      74
+    ],
+    [
+      "no_shift",
+      75
+    ],
+    [
+      "no_shift",
+      76
+    ],
+    [
+      "no_shift",
+      77
+    ],
+    [
+      "no_shift",
+      78
+    ],
+    [
+      "no_shift",
+      79
+    ]
+  ],
+  "workers": 4,
+  "primary_tau": 0.005,
+  "effective_pseudo_count": 1,
+  "original_mass_weight": 1,
+  "exact_change": "posterior_mass_options.mass_weight=1/n_adaptation",
+  "parent_final": "1aceaf5a3dc7fed8d17d83952907bac1226716f11b8f63ff6097786357396b96",
+  "execution_commit": "b10c51f673501ab8f003d3f3e662310881a5e14e",
+  "original_plan_sha256": "a4a3e7f400bedce49bd8f57bfa843b68cfa3d86e6a21fb1fc513291fea870ac4",
+  "script_sha256": "2b06250636d1917f12ff1767eb38d199df16aaa56a1ac8af42f9b75c4e906614",
+  "target_truth_before_observation_seal": false,
+  "diagnostic_only": true,
+  "original_gate_thresholds_unchanged": {
+    "minimum_seed_count": 12,
+    "true_directional_risk_slack_nats": 0.005,
+    "centered_logit_rms_nonzero": 1e-06,
+    "required_positive_worlds": [
+      "well_specified",
+      "angle_shift"
+    ],
+    "no_shift_mean_nll_increase_cap": 0.005,
+    "no_shift_each_seed_nll_increase_cap": 0.02
+  },
+  "runtime": {
+    "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2",
+    "torch": "2.5.1"
+  }
+}

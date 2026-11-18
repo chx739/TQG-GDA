@@ -22,7 +22,7 @@ from tsba.shared_update.solver import relative_risks
 from . import controls, coverage
 from .evaluate import (_committed_truth, endpoint, exact_methods, fit_oracles, methods, replay_heldout,
                        replay_predictions, vault)
-from .fit import config, fit_block, read_npz, width_key, write_npz
+from .fit import config, fit_block, mass_option_metadata, read_npz, width_key, write_npz
 from .seals import seal, verify_seal
 from .synthetic import check_known_moment, generate, synthetic_gate
 from .decisions import decision_for, decision_metadata, decision_policy, policy_metadata, probability_method
@@ -216,7 +216,7 @@ def run(plan_path, root, workers, repo):
                                                    target_posterior_power=plan.get('target_posterior_power', 1.),
                                                    target_posterior_power_effective=1.,
                                                    source_refit=plan.get('source_refit'), source_refit_applied=False,
-                                                   **policy_metadata(plan),
+                                                   **policy_metadata(plan), **mass_option_metadata(plan),
                                                    world_ids=[world['id'] for world in stage_config['worlds']],
                                                    common=common, numpy=np.__version__, scipy=scipy.__version__,
                                                    hostname=platform.node(), executable=sys.executable))

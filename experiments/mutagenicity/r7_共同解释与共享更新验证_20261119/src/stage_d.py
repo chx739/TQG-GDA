@@ -15,7 +15,7 @@ from experiments.common.io import digest, provenance, write_json
 
 from . import nci1_inputs
 from .evaluate import exact_methods, methods, replay_predictions
-from .fit import config, fitter_source_files, master, moment, predict, read_npz, width_key, write_npz
+from .fit import config, fitter_source_files, mass_option_metadata, master, moment, predict, read_npz, width_key, write_npz
 from .paired import paired_bootstrap
 from .decisions import cohort_decisions, decision_contrasts, policy_metadata
 from .seals import seal, verify_seal
@@ -276,7 +276,8 @@ def run(plan_path, root, c_output, acquisition, workers, repo):
     lock = root / 'D_LOCK.json'
     write_json(lock, authorization | dict(primary_tau=tau, opened_raw_inputs=False,
                                           acquisition_sha256=hashlib.sha256(acquisition_bytes).hexdigest(),
-                                          source_model=source_spec, source_refit=plan.get('source_refit')))
+                                          source_model=source_spec, source_refit=plan.get('source_refit'),
+                                          **mass_option_metadata(plan)))
     lock_sha256 = digest(lock)
     (root / 'executed-plan.json').write_bytes(plan_bytes)
     (root / 'acquisition.json').write_bytes(acquisition_bytes)
@@ -289,7 +290,7 @@ def run(plan_path, root, c_output, acquisition, workers, repo):
                                                    target_posterior_power_effective=plan.get('target_posterior_power', 1.),
                                                    source_pooling=source_spec.get('pooling', 'sum'),
                                                    source_refit=plan.get('source_refit'),
-                                                   **policy_metadata(plan),
+                                                   **policy_metadata(plan), **mass_option_metadata(plan),
                                                    common=[config(plan, seed, tau).to_dict()
                                                            for seed in plan['real_model_seeds']]))
     prepared = root / 'external'

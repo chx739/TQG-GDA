@@ -1,0 +1,79 @@
+{
+  "scope": "paired post-seal mechanism diagnostic; not complete S or permission for P",
+  "reused_source_A": true,
+  "only_change": "effective mass pseudo-count n_A to 1",
+  "summaries": {
+    "well_specified": {
+      "old": {
+        "complete": true,
+        "passing_seeds": [
+          66,
+          67,
+          69,
+          70,
+          71,
+          72,
+          74,
+          76,
+          77,
+          78,
+          79
+        ],
+        "valid_count": 15,
+        "mean_delta": -0.010952526174739022,
+        "max_delta": 0.001928820425030342,
+        "gate": false,
+        "maximum_true_risk_gap": 0.0031720131081387137,
+        "mean_reference_qmass": 0.5654789473603196
+      },
+      "fixed_pseudocount": {
+        "complete": true,
+        "passing_seeds": [
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79
+        ],
+        "valid_count": 15,
+        "mean_delta": -0.0536933482718143,
+        "max_delta": -0.0007772976439197055,
+        "gate": true,
+        "maximum_true_risk_gap": 0.00015036604426028107,
+        "mean_reference_qmass": 0.6508301682333842
+      }
+    },
+    "no_shift": {
+      "old": {
+        "complete": true,
+        "passing_seeds": [],
+        "valid_count": 15,
+        "mean_delta": 7.894421382435383e-05,
+        "max_delta": 0.00034366149296199966,
+        "gate": true,
+        "maximum_true_risk_gap": 0.0027279630647818283,
+        "mean_reference_qmass": 0.4949137742092843
+      },
+      "fixed_pseudocount": {
+        "complete": true,
+        "passing_seeds": [],
+        "valid_count": 15,
+        "mean_delta": 7.839846644917547e-05,
+        "max_delta": 0.00034346769944720856,
+        "gate": true,
+        "maximum_true_risk_gap": 0.002728162328867155,
+        "mean_reference_qmass": 0.5000409414495864
+      }
+    }
+  }
+}

@@ -105,7 +105,23 @@ def width_key(tau):
     return f'tau-{tau:.3f}'
 
 
+def mass_option_metadata(plan):
+    """Validate and record fixed-count registration without changing legacy records."""
+    options = plan.get('posterior_mass_options', {})
+    if 'mass_pseudo_count' not in options:
+        return {}
+    if plan.get('separation_variant') not in ('posterior_mass_v1', 'mixture_mass_v1'):
+        raise ValueError('mass_pseudo_count requires a posterior mass explanation family')
+    if 'mass_weight' in options:
+        raise ValueError('mass_pseudo_count and mass_weight are mutually exclusive')
+    count = options['mass_pseudo_count']
+    if type(count) is not int or count < 1:
+        raise ValueError('mass_pseudo_count must be a positive integer')
+    return {'posterior_mass_options': dict(options)}
+
+
 def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None, *, source_mean=None, source_scale=None):
+    fixed_count = mass_option_metadata(plan)
     variant = plan.get('separation_variant', 'stock')
     coordinates = plan.get('density_coordinates', 'source_standardized_v1')
     if coordinates not in ('source_standardized_v1', 'angular_raw_origin_v1'):
@@ -146,6 +162,10 @@ def explanation_family(plan, source_x, source_y, target_x, cfg, v0=None, *, sour
             options['source_head_bias'] = float(v0[1, -1] - v0[0, -1])
         if variant in ('posterior_mass_v1', 'mixture_mass_v1'):
             options.update(plan['posterior_mass_options'])
+            if fixed_count:
+                if not len(target_x):
+                    raise ValueError('mass_pseudo_count requires nonempty target inputs')
+                options['mass_weight'] = options.pop('mass_pseudo_count') / len(target_x)
         if coordinates == 'angular_raw_origin_v1':
             options.update(source_mean=source_mean, source_scale=source_scale, target_posterior_power=power)
         return family_class(source_x, source_y, target_x, cfg,
@@ -204,6 +224,8 @@ def assert_density_execution(plan, executed):
         raise ValueError('Passed phase executed a different target posterior power')
     if decision_policy(executed) != decision_policy(plan):
         raise ValueError('Passed phase executed a different classification decision policy')
+    if mass_option_metadata(executed) != mass_option_metadata(plan):
+        raise ValueError('Passed phase executed a different posterior mass pseudo-count registration')
 
 
 def fit_block(plan, seed, block, *, phase='S'):

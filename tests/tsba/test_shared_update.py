@@ -206,6 +206,51 @@ class SharedUpdateTests(unittest.TestCase):
         self.assertTrue(result['original_B0_mass_and_full_moments'])
         self.assertLess(result['maximum_gradient_error'], 5e-7)
 
+    def test_round_local_fixed_mass_count_matches_legacy_weight(self):
+        prefix = 'experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src.'
+        fit = importlib.import_module(prefix + 'fit')
+        stage_s = importlib.import_module(prefix + 'stage_s')
+        stage_c = importlib.import_module(prefix + 'stage_c')
+        rng = np.random.default_rng(418)
+        labels = np.repeat([0, 1], 16)
+        source = rng.normal(size=(32, 3)) + (2 * labels[:, None] - 1)
+        target = rng.normal(size=(7, 3))
+        head = np.array([[-.5, 0., 0., .1], [.5, 0., 0., -.1]])
+        cfg = SharedUpdateConfig(seed=418)
+        fixed_options = dict(mass_pseudo_count=1, mass_floor=1e-8)
+        legacy_options = dict(mass_weight=1 / len(target), mass_floor=1e-8)
+        base = dict(source_mixture_options={'component_counts': [1], 'mixture_n_init': 1},
+                    posterior_mass_options=fixed_options, shared_update={}, controls={}, real_model_seeds=[418],
+                    phases=dict(S=dict(width_grid=[.005]), P=dict(width_grid=[.005], independent_audit={}),
+                                C={}, D=dict(width_grid=[.005])))
+        cases = [('posterior_mass_v1', 'source_standardized_v1'), ('mixture_mass_v1', 'source_standardized_v1'),
+                 ('mixture_mass_v1', 'angular_raw_origin_v1')]
+        for variant, coordinates in cases:
+            with self.subTest(variant=variant, coordinates=coordinates):
+                plan = base | {'separation_variant': variant, 'density_coordinates': coordinates}
+                legacy = plan | {'posterior_mass_options': legacy_options}
+                kwargs = {'source_mean': source.mean(axis=0), 'source_scale': source.std(axis=0)}
+                fixed, weighted = [fit.explanation_family(p, source, labels, target, cfg, head, **kwargs)
+                                   for p in (plan, legacy)]
+                self.assertEqual(fixed.mass_weight, weighted.mass_weight)
+                self.assertEqual(fixed.mass_coefficient, weighted.mass_coefficient)
+                np.testing.assert_array_equal(fixed._initial, weighted._initial)
+                value, gradient = fixed._observation(fixed._initial)
+                expected_value, expected_gradient = weighted._observation(weighted._initial)
+                self.assertEqual(value, expected_value)
+                np.testing.assert_array_equal(gradient, expected_gradient)
+                for phase in ('S', 'P', 'D'):
+                    self.assertEqual(stage_s._worker_plan(plan, phase)['posterior_mass_options'], fixed_options)
+                self.assertEqual(stage_c._fit_view(plan, .005)['posterior_mass_options'], fixed_options)
+                execution = {'density_coordinates': coordinates, 'separation_variant': variant}
+                fit.assert_density_execution(plan, execution | fit.mass_option_metadata(plan))
+                fit.assert_density_execution(legacy, execution)
+                with self.assertRaisesRegex(ValueError, 'pseudo-count registration'):
+                    fit.assert_density_execution(plan, execution)
+                with self.assertRaisesRegex(ValueError, 'mutually exclusive'):
+                    fit.explanation_family(plan | {'posterior_mass_options': fixed_options | legacy_options},
+                                           source, labels, target, cfg, head, **kwargs)
+
     def test_round_local_angular_plan_and_pins_cross_stage_boundaries(self):
         prefix = 'experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src.'
         fit = importlib.import_module(prefix+'fit')

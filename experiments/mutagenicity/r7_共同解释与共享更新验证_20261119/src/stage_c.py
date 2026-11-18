@@ -16,7 +16,7 @@ from experiments.common.io import digest, provenance, save_tensor, write_json
 from .decisions import cohort_decisions, decision_contrasts, decision_policy, policy_metadata
 from .evaluate import classification, exact_methods, methods, replay_heldout, replay_predictions
 from .fit import (assert_density_execution, assert_fitter_sources, config, fit_block,
-                  read_npz, width_key, write_npz)
+                  mass_option_metadata, read_npz, width_key, write_npz)
 from .matched_tsba import blind_inputs, fit_matched_tsba, predict_matched
 from .matched_reuse import open_donor
 from .paired import paired_bootstrap
@@ -487,7 +487,7 @@ def run(plan_path, root, p_output, workers, repo, *, matched_from=None):
                      source_refit_applied=bool(source_roots),
                      common=[config(plan, seed, tau).to_dict() for seed in plan['real_model_seeds']],
                      matched_tsba=view['phases']['C']['matched_tsba'], audit=view['phases']['P']['independent_audit'],
-                     **policy_metadata(view))
+                     **policy_metadata(view), **mass_option_metadata(view))
     if donor is not None:
         execution['matched_tsba_reuse'] = donor.lock
     write_json(root / 'executed-configs.json', execution)
