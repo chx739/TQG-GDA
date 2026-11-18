@@ -173,6 +173,7 @@ def solve_master(source_logits, features, statistics, *, regularization,
 
     A candidate with info['valid'] == False MUST NOT be deployed. The enclosing
     solve_shared_update function replaces such a candidate with the zero update.
+    An invalid warm solve is retried once from zero under the same checks.
     """
     from scipy.optimize import minimize
 
@@ -190,9 +191,6 @@ def solve_master(source_logits, features, statistics, *, regularization,
     # and the same L2 penalty on the original coefficients.
     feature_scales = np.maximum(1., np.abs(u).max(axis=0))
     scaled_u, scaled_stats = u / feature_scales, stats / feature_scales
-    initial_scaled = w0 * feature_scales
-    risk0 = _risk_terms(z, scaled_u, initial_scaled, scaled_stats)[0]
-    x0 = np.r_[initial_scaled.ravel(), risk0.max()]
     flattened = scaled_stats.reshape(len(stats), -1)
     inverse_scale = np.broadcast_to(1. / feature_scales, shape).ravel()
 
@@ -209,33 +207,45 @@ def solve_master(source_logits, features, statistics, *, regularization,
         return np.column_stack((flattened - gradient.ravel(), np.ones(len(stats))))
 
     scaled_optimality_tol = optimality_tol / feature_scales.max()
-    result = minimize(objective, x0, jac=True, method="SLSQP",
-                      constraints={"type": "ineq", "fun": constraints, "jac": constraint_jacobian},
-                      options={"ftol": max(1e-14, min(1e-12, feasibility_tol * .001, scaled_optimality_tol ** 2)),
-                               "maxiter": int(master_maxiter)})
-    if not np.isfinite(result.x).all():
-        return np.zeros(shape), dict(valid=False, reason="nonfinite_master_solution",
-                                     solver_success=bool(result.success), solver_status=int(result.status),
-                                     solver_message=str(result.message))
-    w = result.x[:-1].reshape(shape) / feature_scales
-    risks, gradient = _risk_terms(z, u, w, stats)
-    epigraph = float(result.x[-1])
-    worst = float(risks.max())
-    penalty = regularization * float(np.sum(w * w)) / 2
-    violation = max(0., worst - epigraph)
-    kkt = _kkt(gradient, stats, risks, epigraph, regularization, w,
-               feasibility_tol, optimality_tol, minimize)
-    checks = dict(feasible=violation <= feasibility_tol, stationary=kkt["valid"],
-                  no_worse_than_zero=worst + penalty <= feasibility_tol)
-    failures = [name for name, passed in checks.items() if not passed]
-    solved_reason = "solved" if result.success else "verified_after_solver_exit"
-    return w, dict(valid=not failures, reason="+".join(failures) if failures else solved_reason,
-                   solver_success=bool(result.success), solver_status=int(result.status), solver_message=str(result.message),
-                   iterations=int(result.nit), candidates=len(stats), **checks,
-                   epigraph=epigraph, constraint_violation=violation,
-                   known_candidate_risks=risks.tolist(), found_worst_risk=worst,
-                   regularization_penalty=penalty, objective=worst + penalty, kkt=kkt,
-                   feature_scales=feature_scales.tolist())
+
+    def attempt(initial_scaled):
+        risk0, _ = _risk_terms(z, scaled_u, initial_scaled, scaled_stats)
+        x0 = np.r_[initial_scaled.ravel(), risk0.max()]
+        result = minimize(objective, x0, jac=True, method="SLSQP",
+                          constraints={"type": "ineq", "fun": constraints, "jac": constraint_jacobian},
+                          options={"ftol": max(1e-14, min(1e-12, feasibility_tol * .001, scaled_optimality_tol ** 2)),
+                                   "maxiter": int(master_maxiter)})
+        if not np.isfinite(result.x).all():
+            return np.zeros(shape), dict(valid=False, reason="nonfinite_master_solution",
+                                         solver_success=bool(result.success), solver_status=int(result.status),
+                                         solver_message=str(result.message))
+        w = result.x[:-1].reshape(shape) / feature_scales
+        risks, gradient = _risk_terms(z, u, w, stats)
+        epigraph = float(result.x[-1])
+        worst = float(risks.max())
+        penalty = regularization * float(np.sum(w * w)) / 2
+        violation = max(0., worst - epigraph)
+        kkt = _kkt(gradient, stats, risks, epigraph, regularization, w,
+                   feasibility_tol, optimality_tol, minimize)
+        checks = dict(feasible=violation <= feasibility_tol, stationary=kkt["valid"],
+                      no_worse_than_zero=worst + penalty <= feasibility_tol)
+        failures = [name for name, passed in checks.items() if not passed]
+        solved_reason = "solved" if result.success else "verified_after_solver_exit"
+        return w, dict(valid=not failures, reason="+".join(failures) if failures else solved_reason,
+                       solver_success=bool(result.success), solver_status=int(result.status),
+                       solver_message=str(result.message), iterations=int(result.nit),
+                       candidates=len(stats), **checks, epigraph=epigraph, constraint_violation=violation,
+                       known_candidate_risks=risks.tolist(), found_worst_risk=worst,
+                       regularization_penalty=penalty, objective=worst + penalty, kkt=kkt,
+                       feature_scales=feature_scales.tolist())
+
+    initial_scaled = w0 * feature_scales
+    w, info = attempt(initial_scaled)
+    if info["valid"] or np.max(np.abs(initial_scaled)) <= np.finfo(np.float64).eps:
+        return w, info
+    retry_w, retry_info = attempt(np.zeros(shape))
+    retry_info.update(zero_start_retry=True, warm_start_failure=info)
+    return retry_w, retry_info
 
 
 def _json(value):

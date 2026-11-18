@@ -2,9 +2,11 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 import torch
+from scipy.optimize import OptimizeResult, minimize
 from scipy.special import expit, logit, logsumexp, softmax
 from scipy.stats import norm
 
@@ -19,6 +21,39 @@ from tsba.shared_update.solver import _partition, _risk_terms, relative_risks, s
 
 
 class SharedUpdateTests(unittest.TestCase):
+    def test_invalid_warm_master_retries_once_from_zero(self):
+        z0 = np.zeros((3, 2))
+        u = np.ones((3, 1))
+        statistics = np.array([[[.8], [.2]]])
+        initial = np.array([[.1], [-.1]])
+        launches = []
+
+        def premature_warm_exit(objective, x0, **kwargs):
+            launches.append((x0.copy(), kwargs["options"]))
+            if len(launches) == 1:
+                return OptimizeResult(x=x0, status=0, success=True, message="premature exit", nit=1)
+            return minimize(objective, x0, **kwargs)
+
+        with patch("scipy.optimize.minimize", side_effect=premature_warm_exit):
+            w, info = solve_master(z0, u, statistics, regularization=.1, master_maxiter=200, initial=initial)
+        self.assertTrue(info["valid"], info)
+        self.assertTrue(info["zero_start_retry"])
+        self.assertEqual(info["warm_start_failure"]["reason"], "stationary")
+        self.assertFalse(info["warm_start_failure"]["valid"])
+        self.assertEqual(len(launches), 2)
+        np.testing.assert_array_equal(launches[0][0][:-1], initial.ravel())
+        np.testing.assert_array_equal(launches[1][0], 0.)
+        self.assertEqual(launches[0][1], launches[1][1])
+        cold_w, _ = solve_master(z0, u, statistics, regularization=.1, master_maxiter=200)
+        np.testing.assert_array_equal(w, cold_w)
+
+        launches.clear()
+        with patch("scipy.optimize.minimize", side_effect=premature_warm_exit):
+            _, invalid = solve_master(z0, u, statistics, regularization=.1, master_maxiter=200)
+        self.assertFalse(invalid["valid"])
+        self.assertNotIn("zero_start_retry", invalid)
+        self.assertEqual(len(launches), 1)
+
     def test_finite_risk_matches_direct_conditional_nll(self):
         z0 = np.array([[1.2, -0.3], [-1.4, 2.], [.9, .2]])
         u = np.array([[-2., 1.], [.5, 1.], [1.4, 1.]])
