@@ -1,0 +1,51 @@
+{
+  "passed": false,
+  "next_phase": null,
+  "complete_primary_pairs": true,
+  "audits_complete": true,
+  "observed_harm_witness_found": false,
+  "both_ba_non_decreasing": false,
+  "practically_helpful": false,
+  "directions": {
+    "M0->M1": {
+      "valid_pairs": 5,
+      "expected_pairs": 5,
+      "dnll": 0.02296479334237709,
+      "dba": 0.49261083743842304,
+      "nll_wins": 0,
+      "nonzero": 5,
+      "positive_net_corrections": 4,
+      "nll_pass": false,
+      "nonzero_pass": true
+    },
+    "M0->M3": {
+      "valid_pairs": 5,
+      "expected_pairs": 5,
+      "dnll": 0.05001710934572268,
+      "dba": -1.0723935852896793,
+      "nll_wins": 0,
+      "nonzero": 5,
+      "positive_net_corrections": 1,
+      "nll_pass": false,
+      "nonzero_pass": true
+    }
+  },
+  "mechanism": [
+    {
+      "contrast": [
+        "J",
+        "P"
+      ],
+      "primary_point_criteria": false,
+      "expanded_point_criteria": false
+    },
+    {
+      "contrast": [
+        "J",
+        "P_mass"
+      ],
+      "primary_point_criteria": false,
+      "expanded_point_criteria": false
+    }
+  ]
+}
