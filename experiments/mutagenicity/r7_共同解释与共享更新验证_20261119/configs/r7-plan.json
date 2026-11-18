@@ -1,0 +1,453 @@
+{
+  "schema_version": 1,
+  "experiment": "R7",
+  "status": "planned",
+  "registered_on": "2026-11-19",
+  "method_commit": "fea693841b6da36af7d77f92d564f5410ade1808",
+  "provenance": {
+    "r5_archive_index": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/results/archive-index.json",
+    "r5_actual_config": "experiments/mutagenicity/r5_原始方法与请求价值_20261114/configs/executed-configs.json",
+    "reuse": [
+      "source_checkpoint",
+      "source_fit_and_validation_roles",
+      "raw_frozen_embeddings",
+      "source_head",
+      "domain_indices"
+    ],
+    "fresh_target_adaptation": true,
+    "runner_status": "not_implemented"
+  },
+  "target_split": {
+    "hash": "sha256",
+    "key_template": "r7-v1|{tu_dataset}|{zero_based_tu_graph_id_decimal}",
+    "byte_order": "big",
+    "holdout_fraction": [
+      3,
+      10
+    ],
+    "rule": "10*h < 3*2**256",
+    "retain_domain_order": true,
+    "holdout_inputs_for_adaptation": false,
+    "stratify_on_labels": false
+  },
+  "real_settings": [
+    {
+      "id": "mutagenicity_edge",
+      "tu_dataset": "Mutagenicity",
+      "domain_index_pattern": "data/idx_Mutagenicity_{domain}.npy",
+      "domain_counts": [
+        1084,
+        1084,
+        1084,
+        1085
+      ],
+      "planned_adaptation_holdout_counts": [
+        [
+          761,
+          323
+        ],
+        [
+          777,
+          307
+        ],
+        [
+          762,
+          322
+        ],
+        [
+          747,
+          338
+        ]
+      ]
+    },
+    {
+      "id": "mutagenicity_node",
+      "tu_dataset": "Mutagenicity",
+      "domain_index_pattern": "data/node_Mutagenicity_{domain}.npy",
+      "domain_counts": [
+        1084,
+        1084,
+        1084,
+        1085
+      ],
+      "planned_adaptation_holdout_counts": [
+        [
+          763,
+          321
+        ],
+        [
+          770,
+          314
+        ],
+        [
+          766,
+          318
+        ],
+        [
+          748,
+          337
+        ]
+      ]
+    },
+    {
+      "id": "proteins_edge",
+      "tu_dataset": "PROTEINS",
+      "domain_index_pattern": "data/idx_PROTEINS_{domain}.npy",
+      "domain_counts": [
+        278,
+        278,
+        278,
+        279
+      ],
+      "planned_adaptation_holdout_counts": [
+        [
+          181,
+          97
+        ],
+        [
+          207,
+          71
+        ],
+        [
+          189,
+          89
+        ],
+        [
+          196,
+          83
+        ]
+      ]
+    }
+  ],
+  "real_model_seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "features": {
+    "raw_cache_key": "h",
+    "source_logits_dtype": "float64",
+    "output_dimension_real": 16,
+    "use_fixed_source_fit_per_feature_standardization": true,
+    "use_intercept": true,
+    "source_model_state_key": "state",
+    "source_head_state_keys": [
+      "head.weight",
+      "head.bias"
+    ]
+  },
+  "shared_update": {
+    "seed_from": "task_seed",
+    "primary_tau": 0.01,
+    "sensitivity_tau": [
+      0.005,
+      0.02
+    ],
+    "regularization": 0.1,
+    "coordinate_floor": 1e-06,
+    "variance_floor": 0.001,
+    "mean_radius": 2,
+    "variance_upper_multiplier": 100,
+    "scale_min": 0.25,
+    "scale_max": 4,
+    "shift_bound": 4,
+    "prior_floor": 0.0001,
+    "nonreference_prior_logit_bounds": [
+      -12,
+      12
+    ],
+    "inner_starts": 5,
+    "inner_maxiter": 150,
+    "master_maxiter": 200,
+    "search_rounds": 10,
+    "feasibility_tol": 1e-08,
+    "optimality_tol": 1e-06,
+    "separation_tol": 1e-06,
+    "reuse_reference_across_tau": true
+  },
+  "controls": {
+    "primary_groups": [
+      "B0",
+      "E",
+      "J",
+      "P",
+      "O",
+      "C05",
+      "C075"
+    ],
+    "single": "fixed_reference",
+    "pointwise": {
+      "bank": "same_retained_explanations_as_joint",
+      "exact_separation_limit": 100,
+      "require_exact_final_separation_check": true
+    },
+    "oracle": {
+      "labels_in": "adaptation_pool_after_observation_seal",
+      "evaluate_on": "holdout_pool",
+      "same_features_and_regularization": true
+    },
+    "fixed_source_logit_multipliers": [
+      0.5,
+      0.75
+    ]
+  },
+  "phases": {
+    "S": {
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "source_count": 512,
+      "adaptation_count": 512,
+      "holdout_count": 4096,
+      "source_class_means": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "source_class_diagonal_variance": [
+        0.64,
+        1
+      ],
+      "source_prior": [
+        0.5,
+        0.5
+      ],
+      "class_order": [
+        0,
+        1
+      ],
+      "reference_source_logits": "analytical_source_log_posterior_up_to_class_common_shift",
+      "generation": "target_x = inverse(L) @ (r-b)",
+      "worlds": [
+        {
+          "id": "well_specified",
+          "L_diagonal": [
+            1.2,
+            0.8
+          ],
+          "b": [
+            0.4,
+            0.2
+          ],
+          "target_prior": [
+            0.35,
+            0.65
+          ]
+        },
+        {
+          "id": "no_shift",
+          "L_diagonal": [
+            1,
+            1
+          ],
+          "b": [
+            0,
+            0
+          ],
+          "target_prior": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "id": "semantic_reflection",
+          "L_diagonal": [
+            -1,
+            1
+          ],
+          "b": [
+            0,
+            0
+          ],
+          "target_prior": [
+            0.5,
+            0.5
+          ]
+        }
+      ],
+      "width_grid": [
+        0.005,
+        0.01,
+        0.02
+      ],
+      "known_moment_fixture": {
+        "regularization": 1e-09,
+        "numeric_atol": 1e-06
+      },
+      "gate": {
+        "minimum_seed_count": 4,
+        "true_directional_risk_slack_nats": 0.005,
+        "centered_logit_rms_nonzero": 1e-06
+      },
+      "rng_streams": "SeedSequence([seed, world_index]).spawn(3) in source, adaptation, holdout order"
+    },
+    "P": {
+      "setting": "mutagenicity_edge",
+      "directions": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "expected_blocks": 10,
+      "width_grid": [
+        0.005,
+        0.01,
+        0.02
+      ],
+      "independent_audit": {
+        "tau": 0.01,
+        "seed_offset": 7001,
+        "aggregate_fixed_updates": [
+          "J",
+          "P"
+        ],
+        "individual_graph_count": 2,
+        "individual_graph_rank": "descending_absolute_J_binary_margin_change_then_graph_id",
+        "individual_class": 1,
+        "individual_query_signs": [
+          -1,
+          1
+        ],
+        "inner_starts": 10,
+        "inner_maxiter": 300,
+        "positive_observed_risk_witness_threshold": 1e-06,
+        "keep_fixed_reference_threshold": true,
+        "augmented_pair": [
+          "J_plus",
+          "P_plus"
+        ]
+      },
+      "gate": {
+        "complete_blocks": 10,
+        "minimum_seed_improvement_count_per_direction": 4,
+        "mean_nll_decrease_vs_B0_for_J_and_O": 0.005,
+        "minimum_J_fraction_of_oracle_nll_gain": 0.1,
+        "minimum_nonzero_J_seeds_per_direction": 4,
+        "centered_logit_rms_nonzero": 1e-06,
+        "J_vs_P_minimum_mean_nll_decrease_at_least_one_direction": 0.002,
+        "J_vs_P_maximum_mean_nll_increase_other_direction": 0.002,
+        "require_augmented_pair_gate": true,
+        "minimum_mean_ba_gain_either_direction_pp": 0.5,
+        "minimum_mean_ba_gain_each_direction_pp": 0,
+        "minimum_positive_net_corrections_seeds_in_BA_gain_direction": 4,
+        "allow_observed_harmful_explanation_witness": false
+      }
+    },
+    "C": {
+      "settings": [
+        "mutagenicity_edge",
+        "mutagenicity_node",
+        "proteins_edge"
+      ],
+      "domains": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "directions": "ordered_cross_domain_pairs",
+      "directions_per_setting": 12,
+      "primary_tau": 0.01,
+      "primary_blocks_total": 180,
+      "reuse_same_R7_P_blocks": 10,
+      "new_blocks": 170,
+      "enable_only_if_P_passes": true,
+      "classification_criteria": {
+        "average_nll_improves_each_setting": true,
+        "minimum_mean_ba_gain_each_setting_pp": 0,
+        "minimum_mean_ba_gain_in_at_least_two_settings_pp": 0.5,
+        "comparisons_evaluated_separately": [
+          [
+            "J",
+            "B0"
+          ],
+          [
+            "J",
+            "A0"
+          ]
+        ]
+      },
+      "matched_tsba": {
+        "compared_groups": [
+          "B1",
+          "A0"
+        ],
+        "use_R5_M00_implementation": true,
+        "source_and_target_batch": 128,
+        "attempts_per_group": 30,
+        "score_batch": 128,
+        "score_exact_updates": 7200,
+        "score_lr": 0.001,
+        "lambda_boundary": 1,
+        "boundary_tau": 0.1,
+        "damping": 0.01,
+        "kappa_sigma": 1,
+        "estimated_models_max": 180,
+        "expected_trajectories_if_full": 360,
+        "expected_attempts_if_full": 10800,
+        "seed_offsets": {
+          "score_initialization": 101,
+          "score_training": 102,
+          "score_diagnostic": 103,
+          "adaptation_batches": 201
+        }
+      }
+    }
+  },
+  "evaluation": {
+    "primary_pool": "holdout",
+    "primary_tau": 0.01,
+    "main_contrast": [
+      "J",
+      "B0",
+      "NLL"
+    ],
+    "mechanism_contrast": [
+      "J",
+      "P",
+      "NLL"
+    ],
+    "classification_metrics": [
+      "BA",
+      "Accuracy",
+      "Macro-F1",
+      "class_recall",
+      "corrected",
+      "harmed",
+      "net_corrections"
+    ],
+    "cohort_bootstrap_replicates": 2000,
+    "cohort_bootstrap_seed": 20261119,
+    "nll_tie_tolerance": 1e-08,
+    "multi_setting_aggregation": "per_setting_equal_directions_within_seed"
+  },
+  "execution": {
+    "mode": "planned_only",
+    "runtime": "CPU",
+    "statistics_dtype": "float64",
+    "maximum_workers": 4,
+    "threads_per_worker": 1,
+    "seals": [
+      "R7_INPUT",
+      "R7_OBS",
+      "R7_ORACLE",
+      "R7_FINAL"
+    ]
+  }
+}

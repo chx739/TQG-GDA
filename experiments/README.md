@@ -1,11 +1,15 @@
 # TSBA 实验
 
-实验按数据类型和真实数据集归档。先看阶段总结，再进入各轮报告、协议与证据。状态核验日期：2026-11-15。
+实验按数据类型和真实数据集归档。先看阶段总结，再进入各轮报告、协议与证据。索引更新日期：2026-11-19。
 
 | 分类 | 阅读入口 | 内容 |
 |---|---|---|
 | 合成数据 | [合成实验](synthetic_data/README.md) | E1/E2、控制实验、源后验、静态 score 与 P0 训练预算 |
-| Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R6；R5/R6 包含 Mutagenicity 两种划分与 PROTEINS 设置 |
+| Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R6 结果与 R7 计划；跨数据集轮次包含 PROTEINS |
+
+## 当前计划：R7 共同解释与共享更新
+
+[R7｜共同解释集合能否支持有用的共享分类更新？](mutagenicity/r7_共同解释与共享更新验证_20261119/README.md)拟先以已知后验验证机制，再复用 R5 冻结表示，在两条 Mutagenicity 迁移方向上做留出图对照。通过事先登记的门槛后，按三种设置扩展到全方向。本轮同时对照单解释、共同解释、逐图区间及同空间监督诊断。
 
 ## 阶段总结
 
@@ -54,6 +58,7 @@ Mutagenicity 的小幅收益无需 score 也能获得；PROTEINS 整体退化，
 
 | 编号与研究问题 | 状态 | 结论与后续关系 |
 |---|---|---|
+| [R7｜共同解释集合能否支持有用的共享分类更新？](mutagenicity/r7_共同解释与共享更新验证_20261119/README.md) | 计划中 | 已知后验验证、两方向初试及有条件全方向扩展 |
 | [R6｜源梯度与密度请求分别如何影响泛化？](mutagenicity/r6_源梯度与密度请求分解_20261114/README.md) | 已完成；完整证据在运行档案 | 纯请求仍无平均 NLL 收益；源驱动代价更大，PROTEINS 覆盖不完整 |
 | [R5｜原始 TSBA 在不同数据设置上是否有整体收益与请求价值？](mutagenicity/r5_原始方法与请求价值_20261114/README.md) | 已完成 | Mutagenicity 小幅 Accuracy 收益无需 score；PROTEINS 总体退化，score 未显示稳定额外收益 |
 | [E1/E2｜符号、几何与适配能否按设计运行？](synthetic_data/e1_e2_符号几何与适配_20261109/README.md) | 已完成 | 存在高维反例；后续控制拆解原因 |
