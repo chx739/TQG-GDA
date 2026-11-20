@@ -1,0 +1,114 @@
+{
+  "verification": "independent exact recomputation from frozen E actions and E-pair arrays",
+  "implementation_commit": "b27add71bfe1052090c620500712d90624c9e057",
+  "obs_sha256": "749cda7029bfce7ea224944d78726806ba4a5bd208db972001bddc19d5c3374d",
+  "final_sha256": "1a00edf3d0e7da62fd12383e2960026119b886369eb3e200d6c6228e0c6f7954",
+  "final_members_verified": 11,
+  "scope": "Only source-episode E offsets, matched exactly to R9 roles and authorized E receipt. OS pread read just these bytes; raw labels never serialized.",
+  "production_scorer_imported": false,
+  "directions": 24,
+  "e_graph_appearances": 1955,
+  "e_pair_appearances": 96333,
+  "endpoint_rows": 288,
+  "paired_contrast_rows": 264,
+  "brier_rows": 96,
+  "all_exact_brier_values_match": true,
+  "all_confusions_and_pair_counts_match": true,
+  "max_abs_differences": {
+    "accuracy": 0.0,
+    "macro_f1": 0.0,
+    "paired_accuracy_pp": 0.0,
+    "paired_macro_f1_pp": 0.0,
+    "disagreement_pp": 0.0,
+    "brier": 0.0,
+    "summary_accuracy": 0.0,
+    "summary_macro_f1": 0.0,
+    "summary_gain_pp": 0.0,
+    "summary_macro_f1_diff_pp": 0.0,
+    "summary_brier": 0.0
+  },
+  "settings": {
+    "mutagenicity_edge": {
+      "passed": false,
+      "clauses": {
+        "accuracy_at_least_half_pp": false,
+        "positive_groups": false,
+        "accuracy_above_WL_selected": false,
+        "accuracy_above_Size": true,
+        "accuracy_above_Base": true,
+        "accuracy_above_WL_C1": true,
+        "accuracy_above_CalAnchor": false,
+        "accuracy_above_TargetUnary": false,
+        "accuracy_above_SourceFull": false,
+        "accuracy_above_PermMean": false,
+        "accuracy_above_EqualCount": false,
+        "brier_below_Product": true,
+        "brier_below_CalProduct": false,
+        "brier_below_Unary": false
+      },
+      "targetfull_minus_anchor_accuracy_pp": -0.3419704107777502,
+      "positive_source_groups": 0,
+      "brier": {
+        "Product": 0.23663686242717458,
+        "CalProduct": 0.2345403078137818,
+        "Unary": 0.23481030443329287,
+        "Full": 0.23486569944071808
+      }
+    },
+    "mutagenicity_node": {
+      "passed": false,
+      "clauses": {
+        "accuracy_at_least_half_pp": false,
+        "positive_groups": false,
+        "accuracy_above_WL_selected": true,
+        "accuracy_above_Size": true,
+        "accuracy_above_Base": false,
+        "accuracy_above_WL_C1": true,
+        "accuracy_above_CalAnchor": true,
+        "accuracy_above_TargetUnary": false,
+        "accuracy_above_SourceFull": false,
+        "accuracy_above_PermMean": false,
+        "accuracy_above_EqualCount": false,
+        "brier_below_Product": true,
+        "brier_below_CalProduct": false,
+        "brier_below_Unary": false
+      },
+      "targetfull_minus_anchor_accuracy_pp": -0.4612389201515319,
+      "positive_source_groups": 0,
+      "brier": {
+        "Product": 0.2391308358553345,
+        "CalProduct": 0.23549668394375164,
+        "Unary": 0.23550047140346425,
+        "Full": 0.23588740475679773
+      }
+    },
+    "proteins_edge": {
+      "passed": false,
+      "clauses": {
+        "accuracy_at_least_half_pp": false,
+        "positive_groups": false,
+        "accuracy_above_WL_selected": false,
+        "accuracy_above_Size": true,
+        "accuracy_above_Base": true,
+        "accuracy_above_WL_C1": false,
+        "accuracy_above_CalAnchor": false,
+        "accuracy_above_TargetUnary": true,
+        "accuracy_above_SourceFull": true,
+        "accuracy_above_PermMean": true,
+        "accuracy_above_EqualCount": false,
+        "brier_below_Product": true,
+        "brier_below_CalProduct": false,
+        "brier_below_Unary": true
+      },
+      "targetfull_minus_anchor_accuracy_pp": 0.46296296296296297,
+      "positive_source_groups": 1,
+      "brier": {
+        "Product": 0.24131981267392671,
+        "CalProduct": 0.23146617867458455,
+        "Unary": 0.2353240902742316,
+        "Full": 0.234010495431253
+      }
+    }
+  },
+  "continue_real_development": false
+}
