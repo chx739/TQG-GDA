@@ -4,7 +4,7 @@
 
 ## 指定强源起点
 
-种子 3405，每设置十二方向等权。Centered 使用原强源 margin 加上 (uᵀ(d_mathrm{Full}−d_mathrm{Cal}))。同一 H 上分别计分两个异域更新，再取平均。同阳性数对照按原强源 margin 排序，匹配本域 Centered 的预测阳性数。
+种子 3405，每设置十二方向等权。Centered 使用原强源 margin 加上 $u^\top(d_{\mathrm{Full}}-d_{\mathrm{Cal}})$。同一 H 上分别计分两个异域更新，再取平均。同阳性数对照按原强源 margin 排序，匹配本域 Centered 的预测阳性数。
 
 | 设置／起点 | Accuracy 原值 → Centered | ΔAccuracy pp | ΔMacro-F1 pp | ΔNLL | 纠正／误改 | 正／平／负方向 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -24,7 +24,7 @@
 | Mutagenicity 节点数／WL | +0.148 | +14.399 | +0.662 | +0.074 | +0.235 | +0.155 | +0.153 | +0.504 | +0.731 |
 | PROTEINS 边数／Size | +12.038 | +0.539 | +1.734 | +1.742 | +1.048 | +1.395 | +0.781 | +4.968 | +5.845 |
 
-三个指定起点都胜过单模型参照、反号、两个异域平均和等阳性数对照。在既有 H 上，增量包含排序变化的贡献。PROTEINS 的同阳性数比较为 20 次纠正与 12 次误改。边数 Mutagenicity 的异域相对差为 +0.366 pp，节点数为 +0.155 pp。正式晋级仍要求 PROTEINS 和至少一个 Mutagenicity 设置同时通过平均增益、方向覆盖及对照条件。按协议，以这批已有开发图结束单位系数规则。[精确判定](../results/iteration-12/centered-target-update-001/gate.json) · [所有对照的 Accuracy、Macro-F1 与 NLL](../results/iteration-12/centered-target-update-001/paired-summary.csv)
+在三个指定起点上，Centered 的平均 Accuracy 均高于两个单模型参照、反号更新、异域参考平均和等阳性数对照。在既有 H 上，增量包含排序变化的贡献。PROTEINS 的同阳性数比较为 20 次纠正与 12 次误改。边数 Mutagenicity 的异域相对差为 +0.366 pp，节点数为 +0.155 pp。正式晋级仍要求 PROTEINS 和至少一个 Mutagenicity 设置同时通过平均增益、方向覆盖及对照条件。按协议，以这批已有开发图结束单位系数规则。[精确判定](../results/iteration-12/centered-target-update-001/gate.json) · [所有对照的 Accuracy、Macro-F1 与 NLL](../results/iteration-12/centered-target-update-001/paired-summary.csv)
 
 ## 逐方向纠正与误改
 
