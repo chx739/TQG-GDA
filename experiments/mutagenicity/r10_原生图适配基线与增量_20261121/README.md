@@ -6,6 +6,16 @@
 
 [全方向源监督 WL 和规模参照](docs/structural-reference.md)已登记，覆盖三个既有开发设置，各十二方向五种子。
 
+从仓库根目录检查 60 个源组与 180 个开发块的角色与历史档案身份。源监督参照沿用 R7 C 的角色、R9 的 WL 表示与 R8 的 logistic 目标、R11 的配对重抽样以及 R13 验证过的历史参照读取方式。
+
+```sh
+round=experiments/mutagenicity/r10_原生图适配基线与增量_20261121
+python -m experiments.mutagenicity.r10_原生图适配基线与增量_20261121.scripts.structural_reference --config "$round/configs/structural-reference.json" --preflight
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.mutagenicity.r10_原生图适配基线与增量_20261121.scripts.structural_reference --config "$round/configs/structural-reference.json" --reviewed-commit REVIEWED_COMMIT --output /path/to/new-structural-attempt
+```
+
+结构参照先写入 FIT，封存每组的 S/V ID、模型与全部 V 候选指标，再逐图推断三个 H。OBS 绑定 FIT、完整预测网格和对应历史参照。评分程序验证 OBS 与全部 H 读口后打开标签，由 FINAL 记录结果与读口。
+
 从仓库根目录选择新档案路径运行。中断后使用下面的独立验收入口续跑。
 
 ```sh
