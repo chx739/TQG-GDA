@@ -16,7 +16,7 @@ from experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.src im
 
 DIRECTIONS = ('small_to_large','large_to_small')
 ROLES = ('D','C','U','E')
-PHASE_ROLES = {'fit':('D','C'),'score':('U','E')}
+PHASE_ROLES = {'fit':('D','C'),'score':('U','E'),'replay_E':('E',)}
 IDENTITY = ('setting','source','direction','seed')
 
 
@@ -76,7 +76,7 @@ def source_graphs(repo, archive, source, s, v):
 
 
 class Archive:
-    def __init__(self, repo, cfg):
+    def __init__(self, repo, cfg, *, load_graphs=True):
         self.repo = repo
         root = Path(cfg['r10'])
         record = roc_transfer.stage(root,'FIT',cfg['r10_fit_sha256'])
@@ -102,7 +102,8 @@ class Archive:
         for setting in cfg['settings']:
             registration = next(x for x in index if x['setting']==setting)
             by_setting[setting] = source_inputs.SourceArchive(
-                repo,registration,actual[setting]['config'],specs[setting],cfg['domains'],cfg['seed'])
+                repo,registration,actual[setting]['config'],specs[setting],cfg['domains'],cfg['seed'],
+                load_graphs=load_graphs)
         self.by_setting = by_setting
         self.scope = cfg
 

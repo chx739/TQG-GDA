@@ -53,7 +53,7 @@ class ValidationArchive:
 
 
 class SourceArchive:
-    def __init__(self, repo, registration, plan, spec, domains, seed):
+    def __init__(self, repo, registration, plan, spec, domains, seed, *, load_graphs=True):
         self.repo = repo
         self.root = Path(registration['archive_root'])
         self.spec, self.domains, self.seed = spec, tuple(domains), seed
@@ -74,14 +74,15 @@ class SourceArchive:
         if (self.plan != plan or self.plan['dataset'] != spec['tu_dataset']
                 or self.plan['setting']['id'] != spec['id'] or seed not in self.plan['seeds']):
             raise ValueError('R5 source design differs from its registered setting')
-        graph_path = self._member('inputs/graphs.pt', 'INPUT')
-        if digest(graph_path) != self.receipt['inputs/graphs.pt']:
-            raise PermissionError('R5 graph container differs')
-        self.graphs = torch.load(graph_path, mmap=True, weights_only=True, map_location='cpu')
-        self.graph_hashes = json.loads(self._read('inputs/graph_hashes.json'))
         self.count = sum(spec['domain_counts'])
-        if len(self.graphs) != self.count or len(self.graph_hashes) != self.count:
-            raise ValueError('R5 graph inventory differs')
+        if load_graphs:
+            graph_path = self._member('inputs/graphs.pt', 'INPUT')
+            if digest(graph_path) != self.receipt['inputs/graphs.pt']:
+                raise PermissionError('R5 graph container differs')
+            self.graphs = torch.load(graph_path, mmap=True, weights_only=True, map_location='cpu')
+            self.graph_hashes = json.loads(self._read('inputs/graph_hashes.json'))
+            if len(self.graphs) != self.count or len(self.graph_hashes) != self.count:
+                raise ValueError('R5 graph inventory differs')
 
     def _member(self, name, stage):
         checksum = self.seal_files[stage][name]
