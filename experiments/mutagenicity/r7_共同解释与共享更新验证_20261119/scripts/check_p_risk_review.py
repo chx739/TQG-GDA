@@ -51,7 +51,10 @@ def run(config_path):
                     q = family._target_terms(theta)[-1]
                     direct = -(q*change).sum(axis=1).mean()
                     indirect = -change[:, 0].mean() - moment[1] @ update
-                    worst = max(worst, abs(direct-indirect), abs(q.T @ std['adapt_u']/len(q)-moment).max())
+                    errors = (abs(direct-indirect), abs(q.T @ std['adapt_u']/len(q)-moment).max())
+                    if not np.isfinite(errors).all():
+                        raise ValueError('Nonfinite posterior moment or risk reconstruction')
+                    worst = max(worst, *errors)
                     count += 1
             held = read_npz(scope, f'{d}/{width}-heldout.npz', 'R7_OBS')
             ids = np.asarray(json.loads(scope.read_bytes(f'{d}/manifest.json','R7_INPUT'))['ids']['holdout'])
