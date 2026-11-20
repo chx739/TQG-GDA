@@ -1,0 +1,16 @@
+{
+  "registration_commit": "89880e471c8baac8cc4c185125f0c81114ae503b",
+  "protocol": "docs/weighted-source-residuals.md",
+  "r10": "/home/hxchen/research/GDA/TSBA/experiments/r10/attempt-003-structural",
+  "r10_fit_sha256": "c18d510d41cf9203145579ba71bb6411e9d00d42dffeb197a95e504839282491",
+  "settings": ["mutagenicity_edge", "mutagenicity_node", "proteins_edge"],
+  "domains": [0, 1, 2, 3],
+  "seed": 3405,
+  "model_C": 1.0,
+  "neighbor_count": 8,
+  "regularization_per_calibration_graph": 0.01,
+  "max_relative_weight": 4.0,
+  "weight_solver": {"max_iterations": 10000, "max_first_order_gap": 1e-10},
+  "minimum_u_mae_gain_fraction": [1, 100],
+  "minimum_e_accuracy_gain_fraction": [1, 200]
+}
