@@ -41,9 +41,11 @@ R7 第十四轮两个开发方向的同图结果中，J 用普通 argmax 的平�
 
 GALA 在同一篇论文里评估了 Mutagenicity 和 PROTEINS。两张主表各列十二个方向及其平均，第 V-B 节明确报告五次运行的普通 Accuracy 均值和标准差。它研究无源适配，以每张图实际连边占可能连边的比例划域。可以沿用这种报告方式。要比较具体分数，还须让两种方法用相同的划分、适配图和测试图。[GALA 原文 §V-B 及表 II、III](https://arxiv.org/html/2410.16606v1#S5.SS2)
 
-RNA 的表 1、2 也在四域 Mutagenicity、PROTEINS 上直接报告 classification accuracy。它在适配时只能访问目标数据。与允许访问带标签源图的算法并列时，表中应标明适配阶段的数据权限。[RNA，IJCAI 2024](https://www.ijcai.org/proceedings/2024/0520.pdf)
+RNA 的表 1、2 也在四域 Mutagenicity、PROTEINS 上逐方向报告普通 Accuracy，§4.1 明确给出五次运行。它在适配时只能访问目标数据。与允许访问带标签源图的算法并列时，表中应标明适配阶段的数据权限。[RNA，IJCAI 2024](https://www.ijcai.org/proceedings/2024/0520.pdf)
 
-GDABench 的图级附录表 15、16 用相同迁移方向分别报告 Micro-F1 和 Macro-F1。当前任务每张图恰有一个真实类别和一个预测类别，全类别 Micro-F1 在同一批图上恰等于普通 Accuracy。与这组文献对照时，主表可列 Accuracy 和 Macro-F1，按固定预测从同一份混淆矩阵计算。BA 是各类召回的平均，Macro-F1 是各类 F1 的平均，二者在类别不均衡时可给出不同排序。这里新增的是文献对读口径，各轮的晋级规则仍按事前登记判定。[GDABench 附录 E、表 15–16](https://papers.neurips.cc/paper_files/paper/2024/file/a2c548b2ed3141400d86a235eaa6fad0-Supplemental-Datasets_and_Benchmarks_Track.pdf)
+GDABench 的图级附录把每个数据集按密度分成两半，表 15、16 对每个数据集的两个方向分别报告 Micro-F1 和 Macro-F1。当前任务每张图恰有一个真实类别和一个预测类别，全类别 Micro-F1 在同一批图上恰等于普通 Accuracy。与这组文献对照时，主表可列 Accuracy 和 Macro-F1，按固定预测从同一份混淆矩阵计算。BA 是各类召回的平均，Macro-F1 是各类 F1 的平均，二者在类别不均衡时可给出不同排序。这里新增的是文献对读口径，各轮的晋级规则仍按事前登记判定。[GDABench 附录 E、表 15–16](https://proceedings.neurips.cc/paper_files/paper/2024/file/a2c548b2ed3141400d86a235eaa6fad0-Paper-Datasets_and_Benchmarks_Track.pdf#page=28)
+
+对 Mutagenicity 做了一次只用拓扑的直接检查。在同一原始图序上运行 GALA 公开的密度划分函数，保留的 4,336 张中，655 张与本仓边数划分被分到不同的域。即使任意调整同密度图的并列次序，至少 615 张仍落入不同域。论文可以沿用它的指标和报表格式，要计算方法间的百分点差，需让双方在相同任务上运行。[固定版本、域交叉表及并列检查](../../experiments/mutagenicity/r10_原生图适配基线与增量_20261121/docs/size-support.md)
 
 R10 的 PROTEINS 边数划分展示了两项指标为何都值得给。十二个方向、五个种子等权汇总，原 GNN 的 Accuracy 为 55.46%，Macro-F1 为 49.32%。只用节点数和边数的源分类器将 Accuracy 提到 65.60%，Macro-F1 降到 43.01%，并在 60 个方向与种子的组合中有 38 个对全部留出图给出同一类。因此论文主表用普通 Accuracy 判断多分对了多少图，同时保留同一批预测的 Macro-F1，让两类的 F1 在汇总中各占一半。每个方法只用一套事先固定的决策规则。[R10 逐块端点](../../experiments/mutagenicity/r10_原生图适配基线与增量_20261121/results/attempt-003-structural/endpoints.csv) · [大小分类器的判决分布](../../experiments/mutagenicity/r10_原生图适配基线与增量_20261121/docs/classifier-choice.md)
 
