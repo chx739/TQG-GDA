@@ -1,0 +1,17 @@
+{
+  "registration_commit": "f7201b005a27b52d3cfd9d7db17ef1bdbd0ed8e4",
+  "construction_amendment_commit": "8970e6ede6acea2362055d3a59c239ce00e1d7a7",
+  "protocol": "docs/source-screen.md",
+  "r7_archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-016/C",
+  "r7_final_digest": "a97d6884ee74c456fce8b7c7e3ae9a5a5d6a72e22ac4b7b8835a06bf130a420c",
+  "r9_source_options": "experiments/mutagenicity/r9_目标近邻与源标签传递_20261121/configs/source-bridge.json",
+  "settings": ["mutagenicity_edge", "proteins_edge"],
+  "domains": [0, 1, 2, 3],
+  "seed": 3405,
+  "worlds": [
+    {"name": "j1", "positive_percent": [2, 63, 65, 70], "optimal_j": 1},
+    {"name": "j3", "positive_percent": [30, 35, 37, 98], "optimal_j": 3}
+  ],
+  "estimator": {"covariance_tolerance": 1e-12, "feasibility_tolerance": 1e-10},
+  "minimum_correct_domains": 3
+}
