@@ -67,7 +67,7 @@ class Vocabulary:
 
 def fit_logistic(x, y, offset, options, *, penalty=1.):
     """Minimize average CE + penalty*||weights||^2/(2*n), with a free intercept."""
-    if set(y) != {0, 1} or x.ndim != 2 or len(x) != len(y) or y.shape != offset.shape:
+    if set(y) != {0, 1} or x.ndim != 2 or x.shape[0] != len(y) or y.shape != offset.shape:
         raise ValueError('Invalid binary source logistic inputs')
     n = len(y)
     def objective(theta):

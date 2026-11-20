@@ -14,6 +14,19 @@ OPTIONS = json.loads((ROOT/'configs/pilot-plan.json').read_text())['projection']
 
 
 class PilotTests(unittest.TestCase):
+    def test_sparse_logistic_matches_dense_for_frozen_score_pipeline(self):
+        from scipy.sparse import csr_matrix
+
+        x = np.array([[1., 0., .3], [.3, .8, 0.], [0., 1., .5], [.9, .2, 0.]])
+        y = np.array([0, 1, 1, 0])
+        offset = np.array([.2, -.5, .3, .7])
+        constraints = json.loads((ROOT/'configs/pilot-plan.json').read_text())['source_solver']
+        dense = composition.fit_logistic(x, y, offset, constraints)
+        sparse = composition.fit_logistic(csr_matrix(x), y, offset, constraints)
+        self.assertAlmostEqual(dense['training_objective'], sparse['training_objective'], places=14)
+        np.testing.assert_allclose(composition.scores(x, dense), composition.scores(csr_matrix(x), sparse),
+                                   atol=1e-8, rtol=0)
+
     def test_unordered_pairs_unknown_and_edgeless(self):
         def graph(nodes, edge_index, kinds):
             return dict(x=torch.nn.functional.one_hot(torch.tensor(nodes), 3),
