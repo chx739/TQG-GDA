@@ -1,0 +1,128 @@
+{
+  "plan": {
+    "registration_commit": "f9e06a4",
+    "protocol": "docs/matched-grade.md",
+    "setting": "mutagenicity_edge",
+    "parent_r8_obs_sha256": "3e691eb79b6027a8077cb78eb94ff3333d988dc8e5dc4123618579dfc4328969",
+    "fixed_mass_final_sha256": "3acfe24a9626f9692accb07a46f6ec21ee651838c5e351e6821b0d35a56a0c8d",
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "directions": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "model": {
+      "mode": "graph",
+      "disc": "JS",
+      "hidden": 128,
+      "layers": 5,
+      "dropout": 0.5,
+      "learning_rate": 0.001,
+      "weight_decay": 0.001,
+      "domain_weight": 0.005,
+      "epochs": 200,
+      "batch_size": 0
+    },
+    "execution": {
+      "device": "cpu",
+      "torch_threads_per_worker": 2,
+      "interop_threads": 1,
+      "max_workers_after_first_seed": 4,
+      "inference_batch_size": 64,
+      "dtype": "float32",
+      "restart_policy": "restart incomplete model from registered seed and initialization; retain interrupted trace"
+    }
+  },
+  "code_commit": "ca91fcd58893027791e9d97567ea7e8b20a536b6",
+  "git_status": "",
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-u",
+    "-m",
+    "experiments.mutagenicity.r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121.scripts.run",
+    "prepare",
+    "--config",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/configs/r10-grade.json",
+    "--root",
+    "/home/hxchen/research/GDA/TSBA/experiments/r10/attempt-001"
+  ],
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "prepared_utc": "2026-11-20T17:18:53.114586+00:00",
+  "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+  "versions": {
+    "torch": "2.5.1",
+    "torch-geometric": "2.6.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2"
+  },
+  "code_hashes": {
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/data.py": "3e9f6d2adc66b51e54c2a46610e5a26a9eee2083c9bee3914e73cf84b19b10d7",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/training.py": "f2ad9af2024fdd8cf8b318064b44335138346ed51ac008d24311045521b9f47b",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/jobs.py": "930d757dabcfc0b4e67f84e9a5d15291d51b638a5dabe0a31e3b2e08b33ef55a",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/scripts/run.py": "96fccd7827aada6b506581e403f7feafeef9c74a4ce12d8135b87fccadacf9e2",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/scripts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/upstream/tugraph.py": "290b13ebe3b61f533f8979945e35081a219753b9817ac177e6393c47bbbafd96",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/upstream/benchmark_grade.py": "97ded8ad26c105c356c43c023629a2158b77f501a4933d8783935dd47d362774",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/upstream/reverse_layer.py": "9f73946a42e327a67d205dff9eba40d655e65980498eec9fb7df5e76a026c960",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/upstream/grade_base.py": "3ca44cf13213aee7d32b75d3de42b838bf9723c78194d89f99f5b048f7e86f82",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/upstream/run_all_M.sh": "36d4c8f20f4db4db58000939cb3482cb66dfd2f7ff355c5f5677e7f05d9a194f",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/upstream/SOURCE.json": "fee32fe153bb3a1ffb89866b8b7ea2e37eb45705f25deb91d8a0a22d5d570f8e",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/upstream/base.py": "bdf5d1211bb27e5aa5cd205e5ebc0c77534b126d63c7f38ced60905544a4423e",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/upstream/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/upstream/grade.py": "367969f09114e179ebb8fcfb363396f17511f9dac6375e36f1c4d58c2d534df7",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/upstream/LICENSE": "f452c78bf633efa976065d8e52535d08ec6d0fdd7fb729b9498600e837c86360",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/configs/r10-grade.json": "fd63a48e3848acc3252422a7dec3ecd91d383d8067813965ada045c621be63ec",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/docs/matched-grade.md": "bd34e036d52aa42d717ccd2c7e95515daa459c54460f6778a11ee22674606f96"
+  },
+  "upstream": {
+    "upstream_repo": "pygda-team/pygda",
+    "commit": "4ae3d8e7ce0ccef9f815a544ae763363e5210db0",
+    "files": {
+      "grade_base.py": {
+        "path": "pygda/nn/grade_base.py",
+        "git_blob": "80120f4014a2453a76653c6cbc5de6111c24a88c"
+      },
+      "reverse_layer.py": {
+        "path": "pygda/nn/reverse_layer.py",
+        "git_blob": "9b557c2cc0a96d64b168002a805709b7775938fd"
+      },
+      "grade.py": {
+        "path": "pygda/models/grade.py",
+        "git_blob": "e6f1baf0708717581916752bf151bc901d3a9d26"
+      },
+      "base.py": {
+        "path": "pygda/models/base.py",
+        "git_blob": "fd2c59fdb9c8a34c6a2f1590796014e6770ecd76"
+      },
+      "LICENSE": {
+        "path": "LICENSE",
+        "git_blob": "b72e43efde4818c27d051cf11189da75d346d5de"
+      },
+      "run_all_M.sh": {
+        "path": "benchmark/graph/run_all_M.sh",
+        "git_blob": "e34765ad6fdfad974dc1457fc09d5c239c4bb637"
+      },
+      "benchmark_grade.py": {
+        "path": "benchmark/graph/grade.py",
+        "git_blob": "b8ef4017cb00c4356716504e91be41186ff40134"
+      },
+      "tugraph.py": {
+        "path": "pygda/datasets/tugraph.py",
+        "git_blob": "634db80181eafca43ccb046822cd77d3d0643dbb"
+      }
+    }
+  }
+}

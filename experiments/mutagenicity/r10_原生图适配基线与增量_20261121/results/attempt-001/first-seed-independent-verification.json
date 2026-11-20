@@ -1,0 +1,85 @@
+{
+  "training_code_commit": "ca91fcd58893027791e9d97567ea7e8b20a536b6",
+  "input_sha256": "0514289b5060e70805dcf5c8d67c3d5cac56a3a83cc1bb04565212eac5202040",
+  "verified_jobs": [
+    {
+      "job": "source-only-3405",
+      "seed": 3405,
+      "target": null,
+      "attempt": "attempt-001",
+      "pid": 2784532,
+      "supervisor_pid": 2784521,
+      "command": [
+        "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+        "-u",
+        "-m",
+        "experiments.mutagenicity.r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121.scripts.run",
+        "worker",
+        "--root",
+        "/home/hxchen/research/GDA/TSBA/experiments/r10/attempt-001",
+        "--job",
+        "source-only-3405"
+      ],
+      "returncode": 0,
+      "done_sha256": "2d44716c98227da0015921336d5b6a2d54e9194c22791e9b0d762eefacd2b694",
+      "initial_parameter_sha256": "e931764fcd64f6184212c0a28519051b840eb0f23f07e5997d4bd3099454b461",
+      "updates": 200,
+      "elapsed_training_seconds": 139.50085570802912,
+      "peak_process_rss_mib": 2304.93359375
+    },
+    {
+      "job": "grade-M1-3405",
+      "seed": 3405,
+      "target": 1,
+      "attempt": "attempt-001",
+      "pid": 2784533,
+      "supervisor_pid": 2784521,
+      "command": [
+        "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+        "-u",
+        "-m",
+        "experiments.mutagenicity.r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121.scripts.run",
+        "worker",
+        "--root",
+        "/home/hxchen/research/GDA/TSBA/experiments/r10/attempt-001",
+        "--job",
+        "grade-M1-3405"
+      ],
+      "returncode": 0,
+      "done_sha256": "b46c3f8236ab127cb70cc589ab35a620150c7fcb7c4c64d90023499caca72aff",
+      "initial_parameter_sha256": "e931764fcd64f6184212c0a28519051b840eb0f23f07e5997d4bd3099454b461",
+      "updates": 200,
+      "elapsed_training_seconds": 201.29867972806096,
+      "peak_process_rss_mib": 2214.7109375
+    },
+    {
+      "job": "grade-M3-3405",
+      "seed": 3405,
+      "target": 3,
+      "attempt": "attempt-001",
+      "pid": 2784534,
+      "supervisor_pid": 2784521,
+      "command": [
+        "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+        "-u",
+        "-m",
+        "experiments.mutagenicity.r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121.scripts.run",
+        "worker",
+        "--root",
+        "/home/hxchen/research/GDA/TSBA/experiments/r10/attempt-001",
+        "--job",
+        "grade-M3-3405"
+      ],
+      "returncode": 0,
+      "done_sha256": "9b1b2bce7b0a626b11b274daa63b065154816747879ebb58db64b4e7273da17f",
+      "initial_parameter_sha256": "e931764fcd64f6184212c0a28519051b840eb0f23f07e5997d4bd3099454b461",
+      "updates": 200,
+      "elapsed_training_seconds": 169.49033031985164,
+      "peak_process_rss_mib": 2383.015625
+    }
+  ],
+  "missing_jobs": [],
+  "supervision_ledgers": [
+    "supervision/launch-001.jsonl"
+  ]
+}
