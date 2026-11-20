@@ -43,6 +43,24 @@ class StrongAnchorTests(TestCase):
         np.testing.assert_allclose(w_full[1]-w_full[0],d,atol=2e-5)
         np.testing.assert_array_equal((c+u@d)>0, (c+u@(w_full[1]-w_full[0]))>0)
 
+    def test_large_anchor_keeps_the_relative_loss_of_a_finite_update(self):
+        u = np.ones((4,1))
+        for sign in (-1.,1.):
+            c = np.full(4,sign*1e20)
+            d,note = solver.solve_binary(c,u,np.array([.5]),self.lam,**self.opt)
+            np.testing.assert_allclose(d,[-10.*sign],rtol=0.,atol=1e-12)
+            self.assertAlmostEqual(note['objective'],-2.5,places=12)
+
+    def test_teacher_score_moment_is_invariant_to_a_large_shared_intercept(self):
+        x = np.arange(-3.,4.)
+        u = np.column_stack((x,np.ones_like(x)))
+        s = expit(.5+.6*x)@u/len(x)
+        for intercept in (0.,1e12,-1e12):
+            v0 = np.array([[0.,0.],[1.,intercept]])
+            cal,note = solver.calibrated_teacher(x+intercept,u,s,v0)
+            np.testing.assert_allclose(cal,s,rtol=0.,atol=1e-13)
+            self.assertAlmostEqual(note['slope']/note['sd'],.6,places=12)
+
     def test_score_only_basis_preserves_penalty_and_projected_stationarity(self):
         q = solver.score_basis(np.array([[0.,0.,0.],[2.,1.,5.]]))
         np.testing.assert_allclose(q.T@q,np.eye(2),atol=1e-14)

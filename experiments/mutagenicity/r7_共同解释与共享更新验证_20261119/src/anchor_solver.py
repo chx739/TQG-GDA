@@ -31,10 +31,15 @@ def score_basis(v0):
 
 
 def terms(c, u, s, lam, d):
-    z = c+u@d
+    step = u@d
+    z = c+step
     p = expit(z)
+    # softplus(t) = max(t, 0) + log1p(exp(-abs(t))). Two large positive
+    # margins have a linear difference of exactly step, even if c+step rounds to c.
+    linear = np.where(c >= 0., np.where(z >= 0., step, -c), np.maximum(z, 0.))
+    tails = np.log1p(np.exp(-np.abs(z))) - np.log1p(np.exp(-np.abs(c)))
     # The contrast d is represented by the two changes (-d/2, +d/2).
-    value = np.mean(np.logaddexp(0.,z)-np.logaddexp(0.,c)) - s@d + lam*(d@d)/4
+    value = np.mean(linear + tails) - s@d + lam*(d@d)/4
     gradient = u.T@p/len(c) - s + (lam/2)*d
     return float(value), gradient, p*expit(-z)
 
@@ -84,21 +89,32 @@ def solve_binary(c, u, s, lam, *, maxiter, tolerance, q=None):
 
 def calibrated_teacher(margin, u, s, v0):
     """Match positive mass and raw GNN score moment with a two-parameter teacher."""
-    mass, score_moment = float(s[-1]),float(s@(v0[1]-v0[0]))
+    mass = float(s[-1])
     if not 0.<mass<1.:
         raise ArithmeticError('A finite calibrated teacher requires interior positive mass')
-    mean, sd = float(margin.mean()),float(margin.std())
+    # Center before taking score moments. The shared intercept cancels
+    # analytically and can be orders of magnitude larger than the score spread.
+    contrast = (v0[1]-v0[0])[:-1]
+    centered_moment = (s[:-1] - mass*u[:,:-1].mean(axis=0)) @ contrast
+    origin = float(margin[0])
+    shift = margin-origin
+    mean_shift = float(shift.mean())
+    mean = origin+mean_shift
+    centered = shift-mean_shift
+    sd = float(norm(centered)/np.sqrt(len(centered)))
+    coordinates = dict(score_origin=origin, mean_offset=mean_shift, mean=mean, sd=sd)
     offset = float(logit(mass))
     if np.ptp(margin)==0.:
-        if abs(score_moment-mean*mass)>1e-12*max(1.,abs(mean)):
+        if abs(centered_moment)>1e-12:
             raise ArithmeticError('Constant B0 score is incompatible with the teacher moment')
         prob = np.full(len(margin),mass)
-        return u.T@prob/len(prob),dict(intercept=offset,slope=0.,mean=mean,sd=0.,
-                                       mass_error=0.,standard_score_error=0.,
-                                       raw_score_error=float(prob@margin/len(prob)-score_moment))
+        v = u.T@prob/len(prob)
+        mass_error = float(v[-1]-mass)
+        return v,dict(intercept=offset,slope=0.,**coordinates,mass_error=mass_error,
+                      standard_score_error=0.,raw_score_error=mean*mass_error-centered_moment)
 
-    z = (margin-mean)/sd
-    target = (score_moment-mean*mass)/sd
+    z = centered/sd
+    target = centered_moment/sd
     wanted = mass*len(z)
     order = np.sort(z)
     k = int(wanted)
@@ -127,8 +143,10 @@ def calibrated_teacher(margin, u, s, v0):
     b = float(brentq(residual,-bound,bound,xtol=1e-13))
     a,prob = at_slope(b)
     v = u.T@prob/len(prob)
-    errors = dict(mass_error=float(v[-1]-mass),standard_score_error=float(z@prob/len(prob)-target),
-                  raw_score_error=float(margin@prob/len(prob)-score_moment))
+    mass_error = float(v[-1]-mass)
+    score_error = float(z@prob/len(prob)-target)
+    errors = dict(mass_error=mass_error,standard_score_error=score_error,
+                  raw_score_error=mean*mass_error+sd*score_error)
     if max(abs(errors[k]) for k in ('mass_error','standard_score_error'))>1e-11:
         raise ArithmeticError('Calibrated teacher failed its two-moment check')
-    return v,dict(intercept=a,slope=b,mean=mean,sd=sd,**errors)
+    return v,dict(intercept=a,slope=b,**coordinates,**errors)
