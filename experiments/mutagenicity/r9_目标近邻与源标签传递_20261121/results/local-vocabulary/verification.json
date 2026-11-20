@@ -1,0 +1,26 @@
+{
+  "directions": 36,
+  "radius_rows": 72,
+  "tolerance": 2e-14,
+  "alternate_count": "node-position bitmaps and candidate row bitmaps",
+  "graph_counts": {
+    "mutagenicity_edge": {
+      "distinct_queries_within_setting": 1525,
+      "distinct_graphs_read_within_setting": 4337
+    },
+    "mutagenicity_node": {
+      "distinct_queries_within_setting": 1524,
+      "distinct_graphs_read_within_setting": 4337
+    },
+    "proteins_edge": {
+      "distinct_queries_within_setting": 388,
+      "distinct_graphs_read_within_setting": 1113
+    }
+  },
+  "files": {
+    "directions-by-radius.csv": "d364c93cca3136af276b495c6c633e4e78979f4ccf063d6499f285859e44fe78",
+    "directions-union.csv": "de76ad13e0e2cbe3d888499784180a997743017a315075471d71576d2c898b1a",
+    "summary.csv": "3831da11212957abbefb788d12316cd43eb6fdd8b3115dedc4037f09a2363129",
+    "checks.json": "869fa8d60308327e6fc74448b0f4d820d11e14fda77ea48ed23d0a1a471ba65e"
+  }
+}
