@@ -4,6 +4,7 @@ from fractions import Fraction
 import csv
 import io
 import json
+from math import lcm
 from pathlib import Path
 from statistics import fmean
 
@@ -138,6 +139,49 @@ def sampled_difference(left,right):
     return None if left is None or right is None else left-right
 
 
+def integer_draws(weights, n):
+    if weights is None:
+        return None
+    counts = np.rint(weights*n).astype(np.int64)
+    if not np.array_equal(counts.astype(float)/n,weights) or not np.all(counts.sum(axis=1)==n):
+        raise ArithmeticError('Bootstrap weights are not the registered integer graph draws')
+    return counts
+
+
+def exact_match_curve(own, foreign, counts, order):
+    if counts is None:
+        return None
+    n = len(own)
+    net = 2*own.astype(np.int64)-foreign[0].astype(np.int64)-foreign[1].astype(np.int64)
+    return counts@net[order],2*n
+
+
+def exact_direction_curve(curves):
+    if any(c is None for c in curves):
+        return None
+    denominator = curves[0][1]
+    if any(d!=denominator for _,d in curves):
+        raise ArithmeticError('Mixed H identities in one seeded direction')
+    return np.sum([values for values,_ in curves],axis=0),denominator*len(curves)
+
+
+def exact_accuracy_interval(curves, percentile):
+    if any(c is None for c in curves):
+        return None
+    denominator = lcm(*(d for _,d in curves))
+    factors = [denominator//d for _,d in curves]
+    sums = sorted(sum(int(value)*factor for value,factor in zip(row,factors,strict=True))
+                  for row in zip(*(values for values,_ in curves),strict=True))
+    values = []
+    for q in percentile:
+        position = Fraction(str(q))*(len(sums)-1)/100
+        row,remainder = divmod(position.numerator,position.denominator)
+        mix = Fraction(remainder,position.denominator)
+        upper = sums[row+1] if remainder else sums[row]
+        values.append(((1-mix)*sums[row]+mix*upper)/(denominator*len(curves)))
+    return values
+
+
 def score_blocks(roles, actions, cohorts, domains):
     endpoints,contrasts,moments = [],[],{}
     pairs = comparison_names()
@@ -179,7 +223,10 @@ def score_blocks(roles, actions, cohorts, domains):
                 corrected=None if gain is None else str(gain),harmed=None if harm is None else str(harm),
                 changed=None if changed is None else str(changed),disagreement_upper_pp=None if upper is None else float(100*upper),
                 accuracy_pp=float(100*delta[0]),macro_f1_pp=float(100*delta[1])))
-        moments[key] = dict(absolute={name:(p,abs_sample[name],None) for name,p in abs_point.items()},contrasts=effects)
+        exact = exact_match_curve(flags[aliases['EOwn'][0]],[flags[m] for m in aliases['EOtherMean']],
+                                  cohort['integer_draws'],order)
+        moments[key] = dict(absolute={name:(p,abs_sample[name],None) for name,p in abs_point.items()},contrasts=effects,
+                            exact_E_match=exact)
     return endpoints,contrasts,moments
 
 
@@ -211,16 +258,25 @@ def aggregate(cfg, roles, moments, percentile):
                     draws = sampled_mean([v[1] for v in values])
                     counts = [v[2] for v in values]
                     rates = None if counts[0] is None else mean_values([v[3:] for v in counts])[0]
-                    directions[pair] = points,draws,rates,len(keys)
+                    exact = (exact_direction_curve([moments[k]['exact_E_match'] for k in keys])
+                             if name=='EMatch' else None)
+                    directions[pair] = points,draws,rates,len(keys),exact
                 for pair in (*directions,None):
                     selected = list(directions.values()) if pair is None else [directions[pair]]
                     p = mean_values([v[0] for v in selected])
                     d = sampled_mean([v[1] for v in selected])
                     ci = np.percentile(100*d,percentile,axis=0) if d is not None else [[None,None],[None,None]]
+                    lower_exact = None
+                    if name=='EMatch':
+                        exact_ci = exact_accuracy_interval([v[4] for v in selected],percentile)
+                        if exact_ci is not None:
+                            lower_exact = str(exact_ci[0])
+                            ci[0][0],ci[1][0] = (float(100*v) for v in exact_ci)
                     rates = [v[2] for v in selected]
                     rows.append(dict(setting=setting,scope=scope,kind=kind,name=name,source=None if pair is None else pair[0],
                         target=None if pair is None else pair[1],directions=len(selected),blocks=sum(v[3] for v in selected),
                         accuracy_exact=str(p[0]),accuracy_pp=float(100*p[0]),accuracy_lo_pp=ci[0][0],accuracy_hi_pp=ci[1][0],
+                        accuracy_lo_exact=lower_exact,
                         macro_f1_pp=float(100*p[1]),macro_f1_lo_pp=ci[0][1],macro_f1_hi_pp=ci[1][1],
                         disagreement_upper_pp=None if rates[0] is None else float(100*sum(rates)/len(rates))))
     return rows
@@ -248,7 +304,9 @@ def gate(summary,cfg):
                    and r['setting']==setting and r['kind']=='contrasts'}
         m,b = current['EMatch'],current['EOwnMinusB0']
         low = m['accuracy_lo_pp']
-        passed = Fraction(m['accuracy_exact'])>=cutoff and low is not None and low>0. and Fraction(b['accuracy_exact'])>0.
+        exact_lower = m['accuracy_lo_exact']
+        passed = (Fraction(m['accuracy_exact'])>=cutoff and exact_lower is not None
+                  and Fraction(exact_lower)>0 and Fraction(b['accuracy_exact'])>0)
         details[setting] = dict(passed=passed,own_minus_other_pp=m['accuracy_pp'],ci95_low_pp=low,
                                 ci95_high_pp=m['accuracy_hi_pp'],own_minus_b0_pp=b['accuracy_pp'])
     proceed = details['proteins_edge']['passed'] and any(
@@ -276,7 +334,9 @@ def score(out,repo,cfg,c,obs_sha):
             if y.shape!=ids.shape or not np.isin(y,[0,1]).all():
                 raise ValueError('Malformed binary H labels')
             order = np.argsort(ids,kind='stable')
-            cohorts[setting,target] = y,order,paired._cohort(setting,target,ids[order],y[order],reps,draw_seed,minimum)
+            cohort = paired._cohort(setting,target,ids[order],y[order],reps,draw_seed,minimum)
+            cohort['integer_draws'] = integer_draws(cohort['weights'],len(ids))
+            cohorts[setting,target] = y,order,cohort
             access[f'{setting}-M{target}'] = ids.tolist()
     if len(access)!=12:
         raise PermissionError('Unexpected number of authorized H cohorts')

@@ -65,7 +65,8 @@ class HeadCrossoverTests(TestCase):
         roles={'a':dict(setting=setting,source=0,target=1,complete=True),
                **{str(i):dict(setting=setting,source=0,target=2,complete=True) for i in range(5)}}
         points={k:dict(absolute={},contrasts=dict(EMatch=((F(1),F(1)) if k=='a' else (F(0),F(0)),
-                np.array([[1.,1.]]) if k=='a' else np.zeros((1,2)),(F(0),F(0),F(0),F(1)))))
+                np.array([[1.,1.]]) if k=='a' else np.zeros((1,2)),(F(0),F(0),F(0),F(1)))),
+                exact_E_match=(np.array([int(k=='a')]),1))
                 for k in roles}
         lines=score.aggregate(dict(settings=[setting]),roles,points,[2.5,97.5])
         row=next(r for r in lines if r['scope']=='complete' and r['source'] is None)
@@ -74,11 +75,27 @@ class HeadCrossoverTests(TestCase):
     def test_gate_requires_exact_match_strict_intervals_and_b0(self):
         opts=dict(settings=['mutagenicity_edge','mutagenicity_node','proteins_edge'],minimum_match_accuracy_fraction=[1,200])
         rows=[dict(setting=s,scope='complete',kind='contrasts',source=None,
-                   name=m,accuracy_pp=.5,accuracy_exact='1/200',accuracy_lo_pp=.01,accuracy_hi_pp=1.)
+                   name=m,accuracy_pp=.5,accuracy_exact='1/200',accuracy_lo_pp=.01,accuracy_hi_pp=1.,accuracy_lo_exact='1/10000')
               for s in opts['settings'] for m in ('EMatch','EOwnMinusB0')]
         self.assertTrue(score.gate(rows,opts)['continue_cross_setting_target_match'])
-        rows[-2]['accuracy_lo_pp']=0.
+        rows[-2]['accuracy_lo_pp']=5.55e-17
+        rows[-2]['accuracy_lo_exact']='0'
         self.assertFalse(score.gate(rows,opts)['continue_cross_setting_target_match'])
+
+    def test_exact_accuracy_interval_keeps_zero_bootstrap_lower_endpoint(self):
+        y=np.array([0]*10+[1]*11)
+        ids=np.arange(21)
+        own=np.array(list(map(int,'101011000011101001101')))==y
+        foreign=[np.array(list(map(int,string)))==y for string in
+                 ('101011011011000001000','010100000110001100000')]
+        c=paired._cohort('toy',1,ids,y,2000,20261119,10)
+        counts=score.integer_draws(c['weights'],len(y))
+        curve=score.exact_match_curve(own,foreign,counts,ids)
+        low,high=score.exact_accuracy_interval([curve],[2.5,97.5])
+        self.assertEqual(low,F(0))
+        self.assertGreater(high,F(0))
+        np.testing.assert_allclose(curve[0]/curve[1],
+            c['weights']@own.astype(float)-.5*(c['weights']@foreign[0]+c['weights']@foreign[1]),atol=1e-14)
 
     def test_no_label_reader_before_verified_complete_obs(self):
         cfg=dict(phase1_seed=3405,reserve_seeds=[],settings=['proteins_edge'],domains=[0,1],
