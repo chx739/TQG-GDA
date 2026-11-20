@@ -66,7 +66,7 @@ class HeadCrossoverTests(TestCase):
                **{str(i):dict(setting=setting,source=0,target=2,complete=True) for i in range(5)}}
         points={k:dict(absolute={},contrasts=dict(EMatch=((F(1),F(1)) if k=='a' else (F(0),F(0)),
                 np.array([[1.,1.]]) if k=='a' else np.zeros((1,2)),(F(0),F(0),F(0),F(1)))),
-                exact_E_match=(np.array([int(k=='a')]),1))
+                exact_accuracy={'EMatch':(np.array([int(k=='a')]),1)})
                 for k in roles}
         lines=score.aggregate(dict(settings=[setting]),roles,points,[2.5,97.5])
         row=next(r for r in lines if r['scope']=='complete' and r['source'] is None)

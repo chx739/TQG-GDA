@@ -226,7 +226,7 @@ def score_blocks(roles, actions, cohorts, domains):
         exact = exact_match_curve(flags[aliases['EOwn'][0]],[flags[m] for m in aliases['EOtherMean']],
                                   cohort['integer_draws'],order)
         moments[key] = dict(absolute={name:(p,abs_sample[name],None) for name,p in abs_point.items()},contrasts=effects,
-                            exact_E_match=exact)
+                            exact_accuracy={'EMatch':exact})
     return endpoints,contrasts,moments
 
 
@@ -242,7 +242,7 @@ def slices(cfg, roles):
             yield setting,'without_beta_seen',{k:r for k,r in complete.items() if not seen(r)}
 
 
-def aggregate(cfg, roles, moments, percentile):
+def aggregate(cfg, roles, moments, percentile, exact_contrasts=('EMatch',)):
     rows = []
     for setting,scope,subset in slices(cfg,roles):
         by_direction = defaultdict(list)
@@ -258,8 +258,8 @@ def aggregate(cfg, roles, moments, percentile):
                     draws = sampled_mean([v[1] for v in values])
                     counts = [v[2] for v in values]
                     rates = None if counts[0] is None else mean_values([v[3:] for v in counts])[0]
-                    exact = (exact_direction_curve([moments[k]['exact_E_match'] for k in keys])
-                             if name=='EMatch' else None)
+                    exact = (exact_direction_curve([moments[k]['exact_accuracy'][name] for k in keys])
+                             if name in exact_contrasts else None)
                     directions[pair] = points,draws,rates,len(keys),exact
                 for pair in (*directions,None):
                     selected = list(directions.values()) if pair is None else [directions[pair]]
@@ -267,7 +267,7 @@ def aggregate(cfg, roles, moments, percentile):
                     d = sampled_mean([v[1] for v in selected])
                     ci = np.percentile(100*d,percentile,axis=0) if d is not None else [[None,None],[None,None]]
                     lower_exact = None
-                    if name=='EMatch':
+                    if name in exact_contrasts:
                         exact_ci = exact_accuracy_interval([v[4] for v in selected],percentile)
                         if exact_ci is not None:
                             lower_exact = str(exact_ci[0])
@@ -314,8 +314,7 @@ def gate(summary,cfg):
     return dict(settings=details,continue_cross_setting_target_match=proceed)
 
 
-def score(out,repo,cfg,c,obs_sha):
-    roles,groups,actions = observed(out,cfg,c,obs_sha)
+def read_h_cohorts(repo,c,roles):
     grants,cohorts,access = {},{},{}
     for key,r in roles.items():
         task = {k:r[k] for k in cross.IDENTITY}
@@ -340,6 +339,12 @@ def score(out,repo,cfg,c,obs_sha):
             access[f'{setting}-M{target}'] = ids.tolist()
     if len(access)!=12:
         raise PermissionError('Unexpected number of authorized H cohorts')
+    return cohorts, access, percentile
+
+
+def score(out,repo,cfg,c,obs_sha):
+    roles,_,actions = observed(out,cfg,c,obs_sha)
+    cohorts,access,percentile = read_h_cohorts(repo,c,roles)
     endpoints,contrasts,moments = score_blocks(roles,actions,cohorts,cfg['domains'])
     parity = historical_endpoints(repo,cfg,c,endpoints,roles)
     summary = aggregate(cfg,roles,moments,percentile)
