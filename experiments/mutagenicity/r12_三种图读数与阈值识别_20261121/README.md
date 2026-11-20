@@ -57,3 +57,5 @@ export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
 python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.reverse_vote_check --config "$round/configs/reverse-vote-check.json" --output "$out" --phase freeze
 python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.reverse_vote_check --config "$round/configs/reverse-vote-check.json" --output "$out" --phase score --obs-sha256 "$obs_sha"
 ```
+
+[四个票型的能力上界与逐格纠错](docs/reverse-vote-diagnosis.md)说明为何在当前三个开发设置中，四格规则即使知道目标真类也达不到七个改善方向，并量化原 GNN 的第三张票能提供多少额外区分。
