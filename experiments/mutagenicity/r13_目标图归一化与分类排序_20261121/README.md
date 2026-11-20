@@ -4,7 +4,7 @@ R12 中依赖同图三项读数推断阈值的办法未通过源内筛查。本�
 
 [设计、反例与投入标准](docs/pilot.md) · [实验总览](../../README.md)
 
-R16 后另行登记一个只看源验证图与无标签适配图的检查，检验求和池化幅值能否改变原分类器的排序与动作。[读出尺度诊断](docs/readout-scale.md)
+R16 后另行登记一个只看源验证图与无标签适配图的检查，检验求和池化幅值能否改变原分类器的排序与动作。[读出尺度诊断](docs/readout-scale.md) · [36 方向实测结果](docs/readout-scale-results.md)
 
 ## 运行
 
@@ -16,3 +16,9 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```
 
 [配置](configs/pilot.json)规定数值复核容差。正式路径使用历史 batch size 128，另以 47 重做统计及前向，核对矩、logits 和类别。编码器使用原 checkpoint 的 float32，分类头使用历史 R7 的 float64 乘加。先导达到登记条件才使用 `--extend-from <先导目录>` 和独立输出目录补种子。
+
+补充诊断使用独立结果目录：
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r13_目标图归一化与分类排序_20261121.scripts.readout_scale --config experiments/mutagenicity/r13_目标图归一化与分类排序_20261121/configs/readout-scale.json --output /tmp/r13-readout-scale
+```

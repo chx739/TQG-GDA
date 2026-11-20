@@ -1,0 +1,104 @@
+{
+  "code_commit": "f06bcae64aa007cab84c436c4c57c0c65ee5a3fb",
+  "code_sha256": {
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/configs/readout-scale.json": "d42bd698ae8a079f7b5f8b1ecdb29a017d7e7e7aaee83ced0584c4ed7d5cebb9",
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/scripts/readout_scale.py": "cb18089be6ce9107eb77f8baa72b94c2a8a8b74541af2e636c6c163448b3a5f7",
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/docs/readout-scale.md": "aeb29b9744373ec8e22b717a6eb4ce887eed45a6f572ac5423d121fc6be49dec",
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/configs/pilot.json": "86de60a0255601ce30c2f17c4253fa4e13513dc2961119bdd1b5c8be42f4950e",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/results/local-vocabulary/checks.json": "869fa8d60308327e6fc74448b0f4d820d11e14fda77ea48ed23d0a1a471ba65e",
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/src/historical.py": "b21399709abd17a7c35968130f00b2a21fb057de7fbfcbc93c080f404a722026",
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/src/observation.py": "5bd8d827f0118491843d248993c50e7461bbb79232aaa30470fda66e6e0d57c7",
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/src/readout_scale.py": "d7fdad53152e9b2a706b84050de2195fc65d281efd5be8a2fc43686bbee5322a",
+    "experiments/common/io.py": "06f1e4efbecfcedc6f355d3674c6a3ddd33bad9b7d00f92256dac84b8aae6b41",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/r5_inputs.py": "a45a0b4bd19e8da89c2f65f8801ef0d00a97a2ac9f92af81862355df73901d6a",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/seals.py": "b1e4e91a7aa2304bb9d43af06babe419aa4f6cbc8932a00bf7c8f55776fa3133",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/inputs.py": "200700156227f954cfc77ed165306c38c105e884aa93604edf43878aafd98d1d",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/prior_run.py": "21c6bb41b1c099861faf4c962cb30b6f337c336adce91fe81da2fd2c80006f88",
+    "tsba/encoder.py": "69ce0009bc581ddfe7a68845190a8689f17f2efc23d23b245255fcab8ffdf937",
+    "tsba/pretrain.py": "d8714b9cf85043c4eff443145eba8b4fc23187e732fff3b6deab4ea99307bd70"
+  },
+  "plan": {
+    "registration_commit": "3fc7730142459495fe510fb0e648c1710c71fa4e",
+    "protocol": "docs/readout-scale.md",
+    "cohort_config": "configs/pilot.json",
+    "r9_checks": "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/results/local-vocabulary/checks.json",
+    "r9_checks_sha256": "869fa8d60308327e6fc74448b0f4d820d11e14fda77ea48ed23d0a1a471ba65e",
+    "native_logit_tolerance": {
+      "atol": 5e-05,
+      "rtol": 1e-05
+    },
+    "historical_head_tolerance": {
+      "atol": 2e-05,
+      "rtol": 2e-06
+    },
+    "minimum_disagreement_fraction": [
+      1,
+      200
+    ]
+  },
+  "historical_plan": {
+    "registration_commit": "20ef8493593001e6cb4b8959029640ecce8cba7c",
+    "protocol": "docs/pilot.md",
+    "r7_archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-016/C",
+    "r7_final_digest": "a97d6884ee74c456fce8b7c7e3ae9a5a5d6a72e22ac4b7b8835a06bf130a420c",
+    "settings": [
+      "mutagenicity_edge",
+      "mutagenicity_node",
+      "proteins_edge"
+    ],
+    "domains": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "phase1_seed": 3405,
+    "reserve_seeds": [
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "check_batch_size": 47,
+    "original_buffer_tolerance": {
+      "atol": 2e-05,
+      "rtol": 2e-06
+    },
+    "rebatch_tolerance": {
+      "atol": 2e-05,
+      "rtol": 2e-05
+    },
+    "minimum_positive_directions": 7,
+    "minimum_positive_settings": 2,
+    "reference_controls": {
+      "r11_attempt": "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/results/attempt-002-prior",
+      "r11_unlabeled_sha256": "899bbe090e40115977da0c78d57a67a87e2e5f688c8e68ce5e2597842c37b0cb",
+      "r10_archive": "/home/hxchen/research/GDA/TSBA/experiments/r10/attempt-001",
+      "r10_obs_sha256": "6dc48700834a4dd721af933d29bfd80bb90d4ad0f47a90dd8b6876aedf334a00"
+    }
+  },
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-u",
+    "-m",
+    "experiments.mutagenicity.r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121.scripts.readout_scale",
+    "--config",
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/configs/readout-scale.json",
+    "--output",
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/results/readout-scale-001"
+  ],
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "graph_roles": [
+    "V",
+    "Q",
+    "R"
+  ],
+  "seed": 3405,
+  "started_utc": "2026-11-20T19:20:46.301528+00:00",
+  "versions": {
+    "torch": "2.5.1",
+    "torch-geometric": "2.6.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2"
+  }
+}
