@@ -27,3 +27,5 @@
 [源校准与 MLLS 对照实测](accuracy-and-prior-control-results.md)
 
 [冻结更新头交叉协议](reference-head-crossover.md) · [交叉实测报告](reference-head-crossover-results.md)
+
+[改判移植协议](transfer-of-flips.md) · [强源模型移植实测](transfer-of-flips-results.md)

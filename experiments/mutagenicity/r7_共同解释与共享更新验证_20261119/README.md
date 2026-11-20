@@ -2,6 +2,8 @@
 
 [第十二轮已有更新头的跨目标域交叉验证](docs/reference-head-crossover-results.md)已完成 180 个评价块。E 在三种开发设置均通过目标匹配门槛，PROTEINS 的匹配增益几乎全由同阳性数对照解释。[预登记协议](docs/reference-head-crossover.md)
 
+[将 E 改判移植到强源模型](docs/transfer-of-flips-results.md)已完成 180 块。三个设置均未达到相对指定强源模型的收益门槛。[预登记协议](docs/transfer-of-flips.md)
+
 第十二轮按原门槛首次通过真实 P。全方向 C 已封存，Mutagenicity 边数划分的平均 BA 提高 0.53 个百分点，节点数划分接近零，PROTEINS 有主比较缺失。C 整体尚未通过。第十三轮合成扩展未过门槛。第十四轮用配对消融定位到类别比例锚点过强，固定伪计数后的正确设定诊断为 15/15。独立种子的正式 S 已通过，同配置真实 P 未通过。[真实试点](docs/iteration-12.md#同配置重跑通过-p) · [全方向结果](docs/iteration-12.md#全方向-c-的封存结果) · [均衡分类验证](docs/iteration-13.md) · [固定类别比例锚点](docs/iteration-14.md)
 
 研究问题是，源标签和无标签目标图约束出的共同监督统计，能否为固定分类器提供有用的更新，以及保留图之间的共同约束是否比逐图区间更有价值。
@@ -59,4 +61,13 @@ python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119
 ```sh
 round=experiments/mutagenicity/r7_共同解释与共享更新验证_20261119
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.reference_head_crossover --config "$round/configs/reference-head-crossover.json" --output /path/to/new-head-crossover
+```
+
+## 冻结改判移植
+
+复用上节已封存的交叉预测，在相同 H 上先组合并封存 E、WL 与 Size 的新动作，再按原角色评分。
+
+```sh
+round=experiments/mutagenicity/r7_共同解释与共享更新验证_20261119
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.transfer_flips --config "$round/configs/transfer-of-flips.json" --output /path/to/new-flip-transfer
 ```

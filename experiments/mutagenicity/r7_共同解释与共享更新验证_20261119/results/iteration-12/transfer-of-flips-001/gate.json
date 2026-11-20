@@ -1,0 +1,53 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "base": "WL",
+      "passed": false,
+      "own_minus_base_pp": -0.4841438938994858,
+      "ci95": [
+        -0.7935889594293845,
+        -0.18150275610354383
+      ],
+      "ci95_lower_exact": "-34546445/4353191232",
+      "own_minus_base_exact": "-1567505897/323768597880",
+      "own_minus_other_exact": "1843284199/323768597880",
+      "own_minus_other_pp": 0.5693214879607273,
+      "positive": 4,
+      "tied": 0,
+      "negative": 8
+    },
+    "mutagenicity_node": {
+      "base": "WL",
+      "passed": false,
+      "own_minus_base_pp": -0.11156141232214929,
+      "ci95": [
+        -0.4547645841654277,
+        0.23750480272540142
+      ],
+      "ci95_lower_exact": "-1228056493/270042245100",
+      "own_minus_base_exact": "-120505177/108016898040",
+      "own_minus_other_exact": "128660323/9001408170",
+      "own_minus_other_pp": 1.429335505846748,
+      "positive": 4,
+      "tied": 0,
+      "negative": 8
+    },
+    "proteins_edge": {
+      "base": "Size",
+      "passed": false,
+      "own_minus_base_pp": 0.06703781008299763,
+      "ci95": [
+        -0.3730400451388632,
+        0.49768727512330446
+      ],
+      "ci95_lower_exact": "-910950701/244196491200",
+      "own_minus_base_exact": "8185199/12209824560",
+      "own_minus_other_exact": "671140027/24419649120",
+      "own_minus_other_pp": 2.7483606488445727,
+      "positive": 5,
+      "tied": 1,
+      "negative": 6
+    }
+  },
+  "continue_cross_setting_transfer": false
+}
