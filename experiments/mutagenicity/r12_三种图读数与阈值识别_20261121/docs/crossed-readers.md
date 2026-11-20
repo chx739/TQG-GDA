@@ -10,6 +10,8 @@
 
 在这套三票上，对同一批图换模型引起的边际差异，平均超过固定模型换域。分类正确性没有进入这些计算。原 R12 使用另一套读数 U、L、T，其中 U 可以直接从已有跨域 B0 margin 与各源原四档切点重建。仅取能构造两个阈值世界的源，Mutagenicity 六个可比源对与目标的组合中，同图仅 U 就换档的比例平均为 54.4%；PROTEINS 的两个合格源 M2、M3 在 M0 的共同 A 上有 132/181 张换档，在 M1 上有 117/181 张。由此能确证原十六格也有同图不同格的情况，L/T 的额外贡献须靠同读数重放。[逐对图数、换档与总变差](../results/reader-crossover/pairs.tsv) · [计数与汇总](../results/reader-crossover/summary.tsv) · [三源同图一致数](../results/reader-crossover/same-graph-three-readers.tsv)
 
+随后用重新前向得到的原 U、L、T 完成同样的交叉核对。A 内原十六格的“同图换源模型／同模型换目标域”平均 TV 在 Mutagenicity 边数为 0.419／0.284，在 PROTEINS 为 0.567／0.465。三个源模型给同图完全相同档和两张辅助票的，仅为 181/2,988 和 12/724。合并真实开发 A/H 的 16,092 条方向内记录，图号顺序及 U 档均与历史 B0 分数独立重建的结果完全一致。固定同一读者的读数分布依然会随目标而变，仅凭无标签频表还不能测出是哪一类的响应变了。[原十六格的配对与分母](../results/reader-crossover/original-16-pairs.tsv) · [同图一致数](../results/reader-crossover/original-16-same-graph-three-readers.tsv) · [读数与历史图号核对](../results/reader-crossover/original-16-parity.json)
+
 ## 用同一个读数，类别方向稳定是否够用？
 
 另用已发表的 R12 八格 V、A、H 汇总及 R11 的 A 实测比例做事后检验。由源 V 两类各加半计数的归一化八格分布 g₀、g₁，取 W=1[g₁(x)>g₀(x)]。它使源两类在该事件的概率差最大。对每个方向只用该源的 W，源类均值为 m₀、m₁，m₁>m₀。由 A 上的事件率 u 估 p=clip((u−m₀)/(m₁−m₀),0,1)。定义规则时只需源类与无标签 A，误差和下表符号的复算使用了早已公开的类别汇总。
