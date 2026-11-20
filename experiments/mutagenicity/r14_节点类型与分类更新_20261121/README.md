@@ -6,6 +6,8 @@
 
 ## 运行
 
+[实测补充：恢复节点类型、跨池梯度一致性与整图分类](docs/gradient-interpretation.md)
+
 从仓库根目录使用 [固定配置](configs/pilot.json)。预检仅核验历史 S/V/A 图、角色和源 checkpoint。正式执行先封存全部恢复头、源 BN 统计及各池更新方向，再前向 H 图。H 标签在全批预测封存后打开。
 
 ```sh
