@@ -4,6 +4,7 @@ import json
 from statistics import fmean
 
 import numpy as np
+from scipy.special import expit
 
 from experiments.common.io import write_json
 from experiments.mutagenicity.r8_图结构观察量与类别约束_20261121.src.pilot import write_table
@@ -92,13 +93,12 @@ def verify_observation(out, cfg, expected, topology, obs_sha):
             if set(x)!={'c_ids','u_ids','e_ids'} or fit_est['reason']!=row['reason']:
                 raise PermissionError(f'Unavailable direction has unexpected predictions: {key}')
             continue
-        if set(x)!={'u_ids','e_ids','c_ids','wl_u','wl_e','size_u','size_e','weights',*models.METHODS}:
+        if set(x)!={'u_ids','e_ids','c_ids','wl_c','wl_u','wl_e','size_u','size_e','weights',*models.METHODS}:
             raise PermissionError(f'Frozen prediction columns differ: {key}')
-        for z in ('wl','size'):
-            for pool in ('u','e'):
-                a = x[f'{z}_{pool}']
-                if a.dtype!=np.float64 or a.shape!=x[f'{pool}_ids'].shape or not np.isfinite(a).all():
-                    raise PermissionError(f'Malformed {z} margin in {pool}: {key}')
+        for stem,pool in (('wl','c'),('wl','u'),('wl','e'),('size','u'),('size','e')):
+            a = x[f'{stem}_{pool}']
+            if a.dtype!=np.float64 or a.shape!=x[f'{pool}_ids'].shape or not np.isfinite(a).all():
+                raise PermissionError(f'Malformed {stem} margin in {pool}: {key}')
         for method in models.METHODS:
             a = x[method]
             if a.dtype!=np.int64 or a.shape!=x['e_ids'].shape or not np.isin(a,[0,1]).all():
@@ -112,6 +112,8 @@ def verify_observation(out, cfg, expected, topology, obs_sha):
         calib = Fraction(pos_c,n_c)
         model = json.loads(raw[f'models/{key}.json'])
         constant = Fraction(model['prior_exact']) if model['status']=='single_class_D' else None
+        f_c,f_u = (tuple(np.full(len(x[f'wl_{p}']),float(constant)) for p in ('c','u'))
+                   if constant is not None else (expit(x['wl_c']),expit(x['wl_u'])))
         if len(groups)!=2 or x['weights'].shape!=(2,len(x['c_ids'])) or x['weights'].dtype!=np.float64:
             raise PermissionError(f'Size layers or C weights differ: {key}')
         for z,g in enumerate(groups):
@@ -130,7 +132,16 @@ def verify_observation(out, cfg, expected, topology, obs_sha):
                     raise PermissionError(f'Matching or decomposition check failed: {key}/{z}')
             elif np.any(w!=0.):
                 raise PermissionError(f'Empty U stratum has nonzero C weights: {key}/{z}')
-            rates = models.clipped_rates(g['raw'],source_prior=calib,constant=constant,has_u=bool(u.any()))
+            uniform = bool(u.any()) and np.array_equal(w,np.full(len(w),1./len(w)))
+            if (g['matching_uniform']!=uniform or type(g['neighbors_uniform'])!=bool
+                    or (not u.any() and g['neighbors_uniform'])):
+                raise PermissionError(f'Invalid uniform-weight dispatch: {key}/{z}')
+            shared_wl = models.common_wl_probability(f_c,f_u[u])
+            if shared_wl!=g['shared_wl_probability']:
+                raise PermissionError(f'Invalid shared WL probability: {key}/{z}')
+            rates = models.clipped_rates(g['raw'],source_prior=calib,constant=constant,has_u=bool(u.any()),
+                                         matching_uniform=uniform,neighbors_uniform=g['neighbors_uniform'],
+                                         shared_wl_probability=shared_wl)
             if (g['exact_rate']!={k:str(v) for k,v in rates.items()}
                     or g['clipped']!={k:float(v) for k,v in rates.items()}):
                 raise PermissionError(f'Wrong clipping or exact threshold rate: {key}/{z}')

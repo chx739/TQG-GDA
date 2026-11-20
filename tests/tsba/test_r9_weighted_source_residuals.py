@@ -174,6 +174,43 @@ class ResidualTests(TestCase):
         for name in ('UniformResidual','CPrior'):
             np.testing.assert_array_equal(actions[name],[0,0])
 
+    def test_uniform_matching_and_neighbor_fallback_share_c_prior_at_exact_ties(self):
+        d,c,u,e=range(2),range(2,42),range(42,49),range(49,51)
+        roles=dict(zip(data.ROLES,map(list,(d,c,u,e)),strict=True))
+        features={i:({(0,b'c' if i in c else b'u'):1.},None) for i in range(51)}
+        _,estimate,actions=m.fitted_predictions(features,roles,np.zeros(2,dtype=int),np.array([0,1]*20),CFG,None)
+        row=estimate['groups'][0]
+        self.assertTrue(row['matching_uniform'])
+        self.assertTrue(row['neighbors_uniform'])
+        for name in ('WeightedResidual','WeightedLabels','UniformResidual','CPrior','Neighbors8'):
+            self.assertEqual(row['exact_rate'][name],'1/2')
+            np.testing.assert_array_equal(actions[name],[0,0])
+        # Tied positive support is uniform only when the top-k rule keeps
+        # every C graph. A row with no positive similarities falls back.
+        edges=np.array([[.3,.3,.3],[.1,.1,.3],[0.,0.,0.]])
+        np.testing.assert_array_equal(m.uniform_neighbors(edges,3),[True,False,True])
+        np.testing.assert_array_equal(m.uniform_neighbors(edges,2),[False,False,True])
+
+    def test_shared_wl_probabilities_reduce_residual_even_with_two_d_classes(self):
+        d,c,u,e=range(3),range(3,5),range(5,12),range(12,14)
+        roles=dict(zip(data.ROLES,map(list,(d,c,u,e)),strict=True))
+        features={i:({(0,b'd' if i in d else b'b' if i==4 else b'a'):1.},np.zeros(2)) for i in range(14)}
+        optimizer=dict(max_iterations=4000,gradient_tolerance=1e-10,
+                       function_tolerance=1e-15,stationarity_tolerance=1e-7)
+        fit,estimate,actions=m.fitted_predictions(features,roles,np.array([1,1,0]),np.array([0,1]),CFG,optimizer)
+        self.assertEqual(fit['status'],'ok')
+        row=estimate['groups'][1]
+        self.assertFalse(row['matching_uniform'])
+        self.assertFalse(row['neighbors_uniform'])
+        self.assertAlmostEqual(row['shared_wl_probability'],2/3,places=7)
+        self.assertEqual(row['exact_rate']['UniformResidual'],'1/2')
+        self.assertEqual(row['exact_rate']['WeightedResidual'],row['exact_rate']['WeightedLabels'])
+        np.testing.assert_array_equal(actions['UniformResidual'],[0,0])
+        self.assertIsNone(m.common_wl_probability(np.array([.5]),np.array([np.nextafter(.5,1.)])))
+        raw=dict.fromkeys(m.ESTIMATORS,.6) | {'SizeMean':.9}
+        rates=m.clipped_rates(raw,source_prior=Fraction(1,2),constant=None,has_u=True,shared_wl_probability=.6)
+        self.assertEqual(rates['SizeMean'],Fraction.from_float(.9))
+
     def test_stratified_and_pool_error_are_distinct(self):
         records = [
             dict(exact_rate={'arm':'0'},raw={'arm':0.},status='fit'),

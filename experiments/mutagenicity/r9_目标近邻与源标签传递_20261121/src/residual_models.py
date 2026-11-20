@@ -140,12 +140,32 @@ def estimates(f_c,yc,f_u,size_u,w,neighbor_weights,*,constant=None):
                 SizeMean=float(size_u.mean()),CPrior=float(yc.mean())),model_gap,identity_residual
 
 
-def clipped_rates(raw, *, source_prior, constant, has_u):
+def uniform_neighbors(kernel, k):
+    high = kernel.max(axis=1)
+    return (high==0.) | ((kernel.shape[1]<=k) & (kernel.min(axis=1)==high))
+
+
+def common_wl_probability(f_c, f_u):
+    if len(f_u) and np.all(f_c==f_c[0]) and np.all(f_u==f_c[0]):
+        return float(f_c[0])
+    return None
+
+
+def clipped_rates(raw, *, source_prior, constant, has_u, matching_uniform=False, neighbors_uniform=False,
+                  shared_wl_probability=None):
     rates = {name:Fraction.from_float(float(np.clip(value,0.,1.))) for name,value in raw.items()}
     if has_u:
         rates['CPrior'] = source_prior
         if constant is not None:
             rates.update(WLMean=constant,SizeMean=constant,UniformResidual=source_prior)
+        if shared_wl_probability is not None:
+            rates.update(UniformResidual=source_prior,WeightedResidual=rates['WeightedLabels'])
+            if constant is None:
+                rates['WLMean'] = Fraction.from_float(shared_wl_probability)
+        if matching_uniform:
+            rates.update(WeightedLabels=source_prior,WeightedResidual=rates['UniformResidual'])
+        if neighbors_uniform:
+            rates['Neighbors8'] = source_prior
     elif constant is not None:
         rates = dict.fromkeys(ESTIMATORS,constant)
     return rates
@@ -170,12 +190,17 @@ def fitted_predictions(features, roles, yd, yc, cfg, optimizer):
                  if constant is not None else tuple(map(expit,(wl_u,wl_c,sz_u))))
     source_prior = Fraction(int(yc.sum()),len(yc))
     neighbor, fallback = bridge.row_weights(kernel,c,cfg['neighbor_count'])
+    neighbor_uniform = uniform_neighbors(kernel,cfg['neighbor_count'])
     for z in (0,1):
         selected_u,selected_e = zu==z,ze==z
         n_u,n_e = int(selected_u.sum()),int(selected_e.sum())
+        matching_uniform = neighbors_uniform = False
+        shared_wl = common_wl_probability(f_c,f_u[selected_u])
         if n_u:
             mean = np.asarray(um[selected_u].mean(axis=0)).ravel()
             weights[z],diagnostics = match(gram,kernel[selected_u].mean(axis=0),mean@mean,cfg)
+            matching_uniform = np.array_equal(weights[z],np.full(len(c),1./len(c)))
+            neighbors_uniform = bool(neighbor_uniform[selected_u].all())
             raw,model_gap,identity = estimates(f_c,yc,f_u[selected_u],p_u[selected_u],weights[z],neighbor[selected_u],
                                                    constant=constant)
             record = dict(size_action=z,status='fit',u_n=n_u,e_n=n_e,raw=raw,diagnostics=diagnostics,
@@ -184,7 +209,9 @@ def fitted_predictions(features, roles, yd, yc, cfg, optimizer):
             raw = dict.fromkeys(ESTIMATORS,float(f_u.mean()))
             record = dict(size_action=z,status='fallback_WL',u_n=0,e_n=n_e,raw=raw,diagnostics=None,
                           weighted_model_gap=None,decomposition_error=None)
-        rates = clipped_rates(raw,source_prior=source_prior,constant=constant,has_u=bool(n_u))
+        rates = clipped_rates(raw,source_prior=source_prior,constant=constant,has_u=bool(n_u),
+                              matching_uniform=matching_uniform,neighbors_uniform=neighbors_uniform,
+                              shared_wl_probability=shared_wl)
         thresholds_used = {}
         for name in ESTIMATORS:
             if n_u:
@@ -193,9 +220,10 @@ def fitted_predictions(features, roles, yd, yc, cfg, optimizer):
                 cut,count = 0.,0
             thresholds_used[name] = dict(cut=thresholds.encode_threshold(cut),u_predicted_positive=count)
             actions[name][selected_e] = wl_e[selected_e]>cut
-        groups.append(dict(**record,clipped={k:float(v) for k,v in rates.items()},
+        groups.append(dict(**record,matching_uniform=matching_uniform,neighbors_uniform=neighbors_uniform,
+                           shared_wl_probability=shared_wl,clipped={k:float(v) for k,v in rates.items()},
                            exact_rate={k:str(v) for k,v in rates.items()},thresholds=thresholds_used))
     arrays = dict(u_ids=np.asarray(u),e_ids=np.asarray(e),c_ids=np.asarray(c),
-                  wl_u=wl_u,wl_e=wl_e,size_u=sz_u,size_e=sz_e,weights=weights,**actions)
+                  wl_c=wl_c,wl_u=wl_u,wl_e=wl_e,size_u=sz_u,size_e=sz_e,weights=weights,**actions)
     return model,dict(groups=groups,nearest_fallback_rows=fallback,calibration_positive=int(yc.sum()),
                       calibration_n=len(yc)),arrays
