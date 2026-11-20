@@ -1,0 +1,15 @@
+{
+  "registration_commit": "dbc6c0d844b64609260404c492d77c59a28c18dc",
+  "protocol": "docs/pilot.md",
+  "r13_config": "experiments/mutagenicity/r13_目标图归一化与分类排序_20261121/configs/pilot.json",
+  "r13_attempt": "experiments/mutagenicity/r13_目标图归一化与分类排序_20261121/results/attempt-001",
+  "r13_obs_sha256": "955a997bf660300f99ce0b812aa9f06c4504ecaffc9cdc273485c71a69169189",
+  "max_masks_per_graph": 4,
+  "move_fraction": 0.05,
+  "zero_gradient_floor": 1e-12,
+  "maximum_derivative_check_step": 1e-5,
+  "derivative_check": {"atol": 2e-10, "rtol": 2e-10},
+  "type_optimizer": {"ftol": 1e-15, "gtol": 1e-10, "max_iterations": 6000, "stationarity_tolerance": 2e-7},
+  "minimum_binding_gain_fraction": [1, 200],
+  "minimum_positive_directions": 7
+}
