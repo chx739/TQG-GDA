@@ -1,0 +1,36 @@
+{
+  "analysis_type": "posthoc_source_calibration_and_mlls",
+  "protocol_commit": "199f51658e7143ce57bcb1b9e3740c5e7bc470dd",
+  "input": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-020/P",
+  "source_final_digest": "a7958a2c9d54e4fce7d9a1fa7569400d67cc149a19d2b6f0aaac56f7e3f8f20f",
+  "setting": "mutagenicity_edge",
+  "directions": [[0, 1], [0, 3]],
+  "seeds": [3405, 3406, 3407, 3408, 3409],
+  "tau": 0.005,
+  "calibration": {
+    "fit_pool": "source_validation",
+    "initial_inverse_temperature": 1.0,
+    "initial_intercept": 0.0,
+    "temperature_bounds": [0.05, 100.0],
+    "max_iterations": 2000,
+    "optimizer_ftol": 1e-15,
+    "optimizer_gtol": 1e-10,
+    "projected_gradient_tolerance": 1e-7
+  },
+  "mlls": {
+    "source_prior": "mean_calibrated_source_validation_probability",
+    "target_fit_pool": "unlabeled_adaptation",
+    "initial_prior": "source_prior",
+    "prior_floor": 1e-8,
+    "tolerance": 1e-10,
+    "max_iterations": 100000
+  },
+  "checks_atol": 1e-12,
+  "primary_endpoint": "holdout Accuracy using fixed argmax",
+  "comparisons": [
+    ["SourceCal", "B0"], ["MLLS", "B0"], ["MLLS", "SourceCal"],
+    ["J_argmax", "B0"], ["J", "B0"], ["J_argmax", "MLLS"], ["J", "MLLS"],
+    ["J_argmax", "SourceCal"], ["J", "SourceCal"], ["J", "J_argmax"],
+    ["SourceCal_balanced", "B0_balanced"], ["MLLS_balanced", "SourceCal_balanced"], ["J", "MLLS_balanced"]
+  ]
+}
