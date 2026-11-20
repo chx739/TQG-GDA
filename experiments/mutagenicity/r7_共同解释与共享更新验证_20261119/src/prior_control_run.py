@@ -47,6 +47,9 @@ def fit_blocks(archive, scope, plan, repo):
             np.testing.assert_allclose(validation['validation_h'] @ fit_data['source_head_weight'].T
                                        + fit_data['source_head_bias'], z_val, rtol=0, atol=atol)
             observed = read_npz(scope, f'{relative}/{width}-observed.npz', 'R7_OBS')
+            valid = json.loads(scope.read_bytes(f'{relative}/{width}-observed.json', 'R7_OBS'))
+            if any(valid[name]['valid'] is not True for name in EXISTING):
+                raise ValueError(f'{key}: a registered comparator is invalid')
             verify_frozen_decisions(observed)
             a_margins = margin(observed['adapt_logits_B0'])
             np.testing.assert_allclose(a_margins, margin(fit_data['adapt_z0']), rtol=0, atol=atol)
@@ -179,6 +182,8 @@ def score(archive, plan, repo, output, obs_sha, original):
     intervals = paired_bootstrap(original, cohorts, phase='P', comparisons=plan['comparisons'], tau=plan['tau'])
     # Prior controls have no explanation banks. Retain the registered paired
     # classification/NLL resamples and record AUROC by seed as a separate diagnostic.
+    intervals['metadata'].pop('directional_gap', None)
+    intervals['metadata']['candidate_max_recomputed_each_replicate'] = False
     intervals['interval_rows'] = [row for row in intervals['interval_rows'] if row['metric'] != 'directional_risk_gap']
     for name, rows in (('endpoints', endpoint_rows), ('paired-seeds', paired_rows)):
         with (output/f'{name}.csv').open('x', newline='', encoding='utf-8') as stream:

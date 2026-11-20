@@ -66,3 +66,7 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 完整参数及十块 H 预测在新 OBS 中封存后统一打开 H 标签。24 项 R7 工程测试通过。独立输出目录重放的 15 个参数、预测与结果文件逐字节相同，原有四臂共 40 个 H 端点复核通过。区间条件于固定模型和开发图，适用范围仍是这两个方向。
 
 [执行配置](../results/iteration-14/accuracy-prior-control/executed-config.json) · [端点 CSV](../results/iteration-14/accuracy-prior-control/endpoints.csv) · [逐种子差值](../results/iteration-14/accuracy-prior-control/paired-seeds.csv) · [配对区间与种子 SD](../results/iteration-14/accuracy-prior-control/paired-intervals.json) · [拟合参数](../results/iteration-14/accuracy-prior-control/parameters.json) · [OBS](../results/iteration-14/accuracy-prior-control/OBS.json) · [FINAL](../results/iteration-14/accuracy-prior-control/FINAL.json) · [复核记录](../results/iteration-14/accuracy-prior-control/verification.json)
+
+## 独立审查
+
+从校准一阶条件和混合似然的一维导数独立求根，五个校准器与十个目标先验相对归档的最大参数差分别为 1.28×10⁻⁹、1.39×10⁻⁹。对所有 117 项原协议配对区间独立复算，端点最大差 1.42×10⁻¹⁴。已验证每块参与比较的历史臂均有效。旧输出的 metadata 继承了通用函数的候选风险说明；本对照没有风险候选库，原文件为历史记录。修复后入口明确标记未重算候选最大值，并在读入已封存臂时验证有效状态。完整重放产生逐字节相同的参数、逐块指标和分类预测检查，117 项区间记录完全一致。
