@@ -1,0 +1,81 @@
+{
+  "blocks": 180,
+  "source_groups": 60,
+  "h_cohorts": 12,
+  "methods": {
+    "B0": 180,
+    "SourceCal": 180,
+    "WL_fixed": 180,
+    "WL_selected": 180,
+    "Size": 180,
+    "GRADE": 10,
+    "SourceOnly": 10,
+    "SourceFusion": 10,
+    "R13_A_node": 36,
+    "R13_A_graph": 36,
+    "R13_S_node": 36,
+    "R13_S_graph": 36
+  },
+  "comparisons": [
+    {
+      "left": "WL_selected",
+      "right": "B0",
+      "blocks": 180
+    },
+    {
+      "left": "WL_selected",
+      "right": "SourceCal",
+      "blocks": 180
+    },
+    {
+      "left": "WL_selected",
+      "right": "Size",
+      "blocks": 180
+    },
+    {
+      "left": "WL_fixed",
+      "right": "B0",
+      "blocks": 180
+    },
+    {
+      "left": "WL_selected",
+      "right": "WL_fixed",
+      "blocks": 180
+    },
+    {
+      "left": "WL_selected",
+      "right": "GRADE",
+      "blocks": 10
+    },
+    {
+      "left": "WL_selected",
+      "right": "SourceOnly",
+      "blocks": 10
+    },
+    {
+      "left": "WL_selected",
+      "right": "SourceFusion",
+      "blocks": 10
+    },
+    {
+      "left": "R13_A_node",
+      "right": "WL_selected",
+      "blocks": 36
+    },
+    {
+      "left": "R13_A_graph",
+      "right": "WL_selected",
+      "blocks": 36
+    },
+    {
+      "left": "R13_S_node",
+      "right": "WL_selected",
+      "blocks": 36
+    },
+    {
+      "left": "R13_S_graph",
+      "right": "WL_selected",
+      "blocks": 36
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r10_原生图适配基线与增量_20261121/scripts/structural_reference.py", line 93, in <module>
+    main()
+  File "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r10_原生图适配基线与增量_20261121/scripts/structural_reference.py", line 79, in main
+    fit_sha = structural_observation.fit(output, repo, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r10_原生图适配基线与增量_20261121/src/structural_observation.py", line 107, in fit
+    fitted = structural.fit_models(s, v, y_s, y_v, plan)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r10_原生图适配基线与增量_20261121/src/structural.py", line 81, in fit_models
+    fitted_size = fit_candidates((s_size - mean) / scale, (v_size - mean) / scale,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r10_原生图适配基线与增量_20261121/src/structural.py", line 65, in fit_candidates
+    fitted = fit_logistic(s, ys, np.zeros(len(ys)), plan['solver'], penalty=1. / c)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r8_图结构观察量与类别约束_20261121/src/composition.py", line 87, in fit_logistic
+    raise ValueError(f'Source logistic fit failed: {result.message}, stationarity {error:g}')
+ValueError: Source logistic fit failed: ABNORMAL: , stationarity 1.82529e-09

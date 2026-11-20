@@ -4,7 +4,7 @@
 
 [作者原文件与一步等价核验](docs/implementation-check.md) · [初始启动记录](results/startup/launch.json) · [生成回归记录](results/startup/r10-tests.log)
 
-[全方向源监督 WL 和规模参照](docs/structural-reference.md)已登记，覆盖三个既有开发设置，各十二方向五种子。
+[全方向源监督 WL 和大小参照](docs/structural-reference-results.md)已完成三个开发设置各十二方向五种子，共 180 块。源选模 WL 相对 B0 的 Accuracy 差依次为 +2.44、+0.12、−2.18 pp。[结构参照协议](docs/structural-reference.md)
 
 从仓库根目录检查 60 个源组与 180 个开发块的角色与历史档案身份。源监督参照沿用 R7 C 的角色、R9 的 WL 表示与 R8 的 logistic 目标、R11 的配对重抽样以及 R13 验证过的历史参照读取方式。
 

@@ -1,0 +1,52 @@
+{
+  "seal_sha256": {
+    "FIT": "c18d510d41cf9203145579ba71bb6411e9d00d42dffeb197a95e504839282491",
+    "OBS": "2c39eec6a7f76355500ef92804f927ebee6364ae12f6467a8e13213346c49273",
+    "FINAL": "174c0b5601291b6dc0e29a7b756b7f6b7131b25b3f171657bc93831bab0b667b"
+  },
+  "blocks": 180,
+  "source_groups": 60,
+  "fits_with_three_targets": 60,
+  "validation_candidates": 480,
+  "selected_C_counts": {
+    "wl": {
+      "100.0": 38,
+      "10.0": 12,
+      "1.0": 7,
+      "0.1": 3
+    },
+    "size": {
+      "10.0": 9,
+      "100.0": 24,
+      "1.0": 11,
+      "0.1": 16
+    }
+  },
+  "line_search_recoveries": [
+    {
+      "group": "mutagenicity_edge-M0-seed-3405",
+      "family": "size",
+      "C": 1.0,
+      "gradient_inf": 1.8252868903994033e-09,
+      "training_objective": 0.6294895952677134,
+      "original_error": "Source logistic fit failed: ABNORMAL: , stationarity 1.82529e-09",
+      "reported_objective": 0.6294895952677134,
+      "gradient_tolerance": 1e-07
+    },
+    {
+      "group": "proteins_edge-M0-seed-3405",
+      "family": "size",
+      "C": 10.0,
+      "gradient_inf": 1.2435067510231468e-08,
+      "training_objective": 0.4112562789837681,
+      "original_error": "Source logistic fit failed: ABNORMAL: , stationarity 7.25271e-10",
+      "reported_objective": 0.4112562789837681,
+      "gradient_tolerance": 1e-07
+    }
+  ],
+  "r10_p_to_c_matches": 10,
+  "b0_sourcecal_endpoint_matches_versus_r11": 360,
+  "matched_r11_bootstrap_draws": 12,
+  "h_label_reads": 12,
+  "target_labels_reopened": false
+}
