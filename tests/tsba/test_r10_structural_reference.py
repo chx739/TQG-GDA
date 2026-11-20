@@ -77,6 +77,28 @@ class StructuralReferenceTests(unittest.TestCase):
         np.testing.assert_array_equal(reused['WL_fixed'], predicted['WL_fixed'])
         np.testing.assert_array_equal(reused['WL_selected'], reused['WL_fixed'])
 
+    def test_line_search_retries_same_fit_at_existing_stationarity_limit(self):
+        x = np.array([[-1.], [1.]])
+        y = np.array([0, 1])
+        default = PLAN['solver']
+        plan = dict(PLAN, C=[1.])
+        failure = ValueError('Source logistic fit failed: ABNORMAL: , stationarity 1.82529e-09')
+        answer = dict(weights=[1.], intercept=0., training_objective=.5, gradient_inf=2e-9)
+        with patch.object(structural, 'fit_logistic', side_effect=[failure, answer]) as logistic:
+            fitted = structural.fit_candidates(x, x, y, y, plan)
+        initial, retry = logistic.call_args_list
+        self.assertIs(initial.args[0], retry.args[0])
+        self.assertIs(initial.args[1], retry.args[1])
+        self.assertIs(initial.args[2], retry.args[2])
+        self.assertEqual(initial.kwargs, retry.kwargs)
+        self.assertEqual(initial.args[3], default)
+        self.assertEqual(retry.args[3], dict(default, gradient_tolerance=default['stationarity_tolerance']))
+        self.assertEqual(fitted['candidates']['1.0']['line_search_recovery']['original_error'], str(failure))
+        with patch.object(structural, 'fit_logistic', side_effect=ValueError('Invalid binary source logistic inputs')) as logistic:
+            with self.assertRaisesRegex(ValueError, 'Invalid binary'):
+                structural.fit_candidates(x, x, y, y, plan)
+            logistic.assert_called_once()
+
     def test_role_guard_rejects_a_h_and_reordered_ids_at_source_fit(self):
         pools = [dict(source=[2, 1], validation=[3], adapt=[4+t], holdout=[7+t]) for t in range(3)]
         structural.check_roles(pools)

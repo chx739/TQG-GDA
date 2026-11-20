@@ -61,8 +61,23 @@ def choose(candidates):
 
 def fit_candidates(s, v, ys, yv, plan):
     fits, validation = {}, []
+    options = plan['solver']
     for c in plan['C']:
-        fitted = fit_logistic(s, ys, np.zeros(len(ys)), plan['solver'], penalty=1. / c)
+        offset = np.zeros(len(ys))
+        penalty = 1. / c
+        try:
+            fitted = fit_logistic(s, ys, offset, options, penalty=penalty)
+        except ValueError as error:
+            if not str(error).startswith('Source logistic fit failed: ABNORMAL:'):
+                raise
+            # Retry the same objective with the pre-registered stationarity limit
+            # as the optimizer's success threshold before the line search stalls.
+            retry = dict(options, gradient_tolerance=options['stationarity_tolerance'])
+            fitted = fit_logistic(s, ys, offset, retry, penalty=penalty)
+            if not np.isfinite(fitted['training_objective']):
+                raise ValueError(f'Nonfinite recovery objective for C={c}') from error
+            fitted['line_search_recovery'] = dict(original_error=str(error),
+                                                  gradient_tolerance=retry['gradient_tolerance'])
         fits[str(c)] = fitted
         validation.append(validation_metrics(c, scores(v, fitted), yv))
     return dict(candidates=fits, validation=validation, selected_C=choose(validation))
