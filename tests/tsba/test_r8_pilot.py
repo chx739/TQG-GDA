@@ -101,3 +101,58 @@ class PilotTests(unittest.TestCase):
                 with self.assertRaises(PermissionError):
                     pilot.evaluate_observation(output, 'bad-digest', {}, plan, ROOT)
                 broker.assert_not_called()
+
+    def test_legal_obs_scores_both_target_pools_and_retains_gate(self):
+        import csv
+        from tempfile import TemporaryDirectory
+        from unittest.mock import call, patch
+
+        from experiments.common.io import digest, write_json
+        from experiments.mutagenicity.r8_图结构观察量与类别约束_20261121.src import inputs, pilot
+
+        plan = json.loads((ROOT/'configs/pilot-plan.json').read_text())
+        plan.update(setting='generated', directions=[[0, 1]], seeds=[7])
+        original = dict(real_model_seeds=[7], phases={'P': dict(setting='generated', directions=[[0, 1]])},
+                        evaluation=dict(cohort_bootstrap_replicates=20, cohort_bootstrap_seed=123,
+                                        paired_interval=dict(strata=['target_domain', 'class'],
+                                                             reuse_draws_across_methods_seeds_and_source_directions=True,
+                                                             conditional_on_fitted_models=True,
+                                                             minimum_graphs_per_class_for_interval=2,
+                                                             percentiles=[2.5, 97.5], level=.95)))
+        key, task = next(inputs.task_grid(plan))
+        manifest = f'blocks/{key}/manifest.json'
+        source = {'validation_v_by_class': [dict(n=10, mean=.3, sd=.1), dict(n=9, mean=.65, sd=.13)]}
+        result = dict(status='base_feasible', valid=True, intercept=0., slope=0.)
+        status = dict(task=task, source_key='src', manifest=manifest, mu=[.3, .65],
+                      solutions={name: result for name in pilot.PROJECTED})
+        v = np.linspace(.1, .9, 8)
+        labels = np.array([0, 0, 0, 0, 1, 1, 1, 1])
+        scores = np.array([-2., -.9, -.8, .2, -.1, .6, .9, 1.8])
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            (output/'predictions').mkdir()
+            write_json(output/'source-statistics.json', {'src': source})
+            write_json(output/'block-status.json', {key: status})
+            write_json(output/'executed-config.json', {'plan': plan})
+            write_json(output/'input-checks.json', {})
+            for suffix, start in (('A', 0), ('H', 8)):
+                data = dict(ids=np.arange(start, start+len(v)), v=v)
+                data.update({f'z_{name}': scores for name in pilot.METHODS})
+                data.update({f'decision_{name}': (scores > 0).astype(int) for name in pilot.METHODS})
+                pilot.fit.write_npz(output/f'predictions/{key}-{suffix}.npz', **data)
+            hashes = {str(p.relative_to(output)): digest(p) for p in output.rglob('*') if p.is_file()}
+            write_json(output/'OBS.json', dict(stage='R8_OBS', parent=plan['r7_final_digest'], files=hashes))
+            obs = digest(output/'OBS.json')
+            with patch.object(pilot.r5_inputs, 'evaluation_labels') as broker:
+                load = broker.return_value.__enter__.return_value.load
+                load.return_value = labels
+                gate = pilot.evaluate_observation(output, obs, original, plan, ROOT)
+                self.assertEqual(load.call_args_list, [call(manifest, 'adapt', authenticated_snapshot=True),
+                                                       call(manifest, 'holdout', authenticated_snapshot=True)])
+            self.assertFalse(gate['passed'])
+            self.assertEqual(gate['directions']['M0->M1']['SamePrior']['accuracy_pp'], 0.)
+            with (output/'endpoints.csv').open() as stream:
+                rows = list(csv.DictReader(stream))
+            self.assertEqual(len(rows), 2*len(pilot.METHODS))
+            self.assertEqual({row['pool'] for row in rows}, {'adapt', 'holdout'})
+            self.assertEqual(json.loads((output/'FINAL.json').read_text())['observation_sha256'], obs)
