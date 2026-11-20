@@ -1,0 +1,63 @@
+{
+  "passed": false,
+  "settings": {
+    "mutagenicity_edge": {
+      "supported": 3,
+      "paired_both": 0,
+      "product_both": 3,
+      "denominator": 4,
+      "domains": {
+        "0": {
+          "supported": false,
+          "paired_both": false,
+          "product_both": false
+        },
+        "1": {
+          "supported": true,
+          "paired_both": false,
+          "product_both": true
+        },
+        "2": {
+          "supported": true,
+          "paired_both": false,
+          "product_both": true
+        },
+        "3": {
+          "supported": true,
+          "paired_both": false,
+          "product_both": true
+        }
+      },
+      "passed": false
+    },
+    "proteins_edge": {
+      "supported": 2,
+      "paired_both": 0,
+      "product_both": 1,
+      "denominator": 4,
+      "domains": {
+        "0": {
+          "supported": false,
+          "paired_both": false,
+          "product_both": false
+        },
+        "1": {
+          "supported": false,
+          "paired_both": false,
+          "product_both": false
+        },
+        "2": {
+          "supported": true,
+          "paired_both": false,
+          "product_both": true
+        },
+        "3": {
+          "supported": true,
+          "paired_both": false,
+          "product_both": false
+        }
+      },
+      "passed": false
+    }
+  }
+}

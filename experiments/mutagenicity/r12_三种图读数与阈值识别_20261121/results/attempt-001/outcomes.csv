@@ -1,0 +1,33 @@
+setting,source,seed,world,arm,support,selected_j,optimal_j,status,exact_optimum,reasons,true_accuracy_fraction,accuracy_gain_vs_middle_pp,gain_vs_exchanged_oracle_pp,prior,unfolding_rank,reconstructed_table_max_error,actual_L_order,actual_L_contrast,actual_T_contrast,actual_D_contrast,actual_view_class_ranks,stratum_oracle_j,exchanged_selected_j,gain_vs_exchanged_fit_pp
+mutagenicity_edge,0,3405,j1,paired,insufficient_support,,1,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+mutagenicity_edge,0,3405,j1,product,insufficient_support,,1,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+mutagenicity_edge,0,3405,j3,paired,insufficient_support,,3,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+mutagenicity_edge,0,3405,j3,product,insufficient_support,,3,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+mutagenicity_edge,1,3405,j1,paired,supported,2,1,valid,False,[],0.675,0.0,7.5,0.4736796433474561,"[4, 2, 2]",0.011995627128779926,positive,0.21598663201216106,0.27026388747603725,0.35000000000000003,"{'U': 2, 'L': 2, 'T': 2}",1,2,0.0
+mutagenicity_edge,1,3405,j1,product,supported,1,1,valid,True,[],0.74,6.5,14.0,0.4999999999999999,"[2, 2, 2]",4.85722573273506e-17,positive,0.21598663201216117,0.27026388747603725,0.3500000000000001,"{'U': 2, 'L': 2, 'T': 2}",,3,14.0
+mutagenicity_edge,1,3405,j3,paired,supported,2,3,fallback,False,['infeasible_positive_mass_U1'],0.675,0.0,7.5,0.488124416265255,"[4, 2, 2]",,positive,0.1928763553827504,0.28654461507920004,0.35,"{'U': 2, 'L': 2, 'T': 2}",3,2,0.0
+mutagenicity_edge,1,3405,j3,product,supported,3,3,valid,True,[],0.74,6.5,14.0,0.5000000000000002,"[2, 2, 2]",4.163336342344337e-17,positive,0.1928763553827504,0.28654461507920004,0.3499999999999999,"{'U': 2, 'L': 2, 'T': 2}",,1,14.0
+mutagenicity_edge,2,3405,j1,paired,supported,2,1,fallback,False,['infeasible_positive_mass_U4'],0.675,0.0,7.5,0.4830113841246257,"[4, 2, 2]",,positive,0.0930882509778827,0.14211080148744826,0.34999999999999987,"{'U': 2, 'L': 2, 'T': 2}",1,2,0.0
+mutagenicity_edge,2,3405,j1,product,supported,1,1,valid,True,[],0.74,6.5,14.0,0.4999999999999993,"[2, 2, 2]",4.163336342344337e-17,positive,0.09308825097788281,0.1421108014874483,0.3499999999999999,"{'U': 2, 'L': 2, 'T': 2}",,3,14.0
+mutagenicity_edge,2,3405,j3,paired,supported,2,3,fallback,False,['infeasible_positive_mass_U4'],0.675,0.0,7.5,0.5674235809010961,"[4, 2, 2]",,positive,0.18195404813661187,0.2533605160429233,0.35,"{'U': 2, 'L': 2, 'T': 2}",3,2,0.0
+mutagenicity_edge,2,3405,j3,product,supported,3,3,valid,True,[],0.74,6.5,14.0,0.49999999999999917,"[2, 2, 2]",2.7755575615628914e-17,positive,0.18195404813661192,0.25336051604292337,0.35000000000000003,"{'U': 2, 'L': 2, 'T': 2}",,1,14.0
+mutagenicity_edge,3,3405,j1,paired,supported,2,1,fallback,False,"['infeasible_D_class0', 'infeasible_D_class1', 'infeasible_positive_mass_U1', 'infeasible_positive_mass_U4']",0.675,0.0,7.5,0.5081416759110813,"[4, 2, 2]",,positive,0.18149019607843142,0.14485784313725492,0.35000000000000003,"{'U': 2, 'L': 2, 'T': 2}",1,2,0.0
+mutagenicity_edge,3,3405,j1,product,supported,1,1,valid,True,[],0.74,6.5,14.0,0.5000000000000013,"[2, 2, 2]",2.7755575615628914e-17,positive,0.18149019607843137,0.14485784313725492,0.3500000000000001,"{'U': 2, 'L': 2, 'T': 2}",,3,14.0
+mutagenicity_edge,3,3405,j3,paired,supported,2,3,fallback,False,"['infeasible_D_class0', 'infeasible_positive_mass_U1', 'infeasible_positive_mass_U4']",0.675,0.0,7.5,0.6210416572549012,"[4, 2, 2]",,positive,0.1726336134453781,0.12462310924369746,0.35000000000000003,"{'U': 2, 'L': 2, 'T': 2}",3,2,0.0
+mutagenicity_edge,3,3405,j3,product,supported,3,3,valid,True,[],0.74,6.5,14.0,0.5000000000000002,"[2, 2, 2]",2.7755575615628914e-17,positive,0.17263361344537814,0.12462310924369757,0.3500000000000001,"{'U': 2, 'L': 2, 'T': 2}",,1,14.0
+proteins_edge,0,3405,j1,paired,insufficient_support,,1,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+proteins_edge,0,3405,j1,product,insufficient_support,,1,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+proteins_edge,0,3405,j3,paired,insufficient_support,,3,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+proteins_edge,0,3405,j3,product,insufficient_support,,3,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+proteins_edge,1,3405,j1,paired,insufficient_support,,1,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+proteins_edge,1,3405,j1,product,insufficient_support,,1,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+proteins_edge,1,3405,j3,paired,insufficient_support,,3,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+proteins_edge,1,3405,j3,product,insufficient_support,,3,insufficient_support,False,['empty_U_Y_stratum'],,,,,,,,,,,,,,
+proteins_edge,2,3405,j1,paired,supported,2,1,fallback,False,"['infeasible_positive_mass_U1', 'infeasible_positive_mass_U4']",0.675,0.0,7.5,0.3886860813727131,"[4, 2, 2]",,positive,0.4903535353535354,0.32175757575757574,0.35000000000000003,"{'U': 2, 'L': 2, 'T': 2}",1,2,0.0
+proteins_edge,2,3405,j1,product,supported,1,1,valid,True,[],0.74,6.5,14.0,0.49999999999999994,"[2, 2, 2]",2.7755575615628914e-17,positive,0.4903535353535353,0.32175757575757585,0.3500000000000001,"{'U': 2, 'L': 2, 'T': 2}",,3,14.0
+proteins_edge,2,3405,j3,paired,supported,2,3,fallback,False,"['infeasible_D_class1', 'infeasible_L_class1', 'infeasible_positive_mass_U1']",0.675,0.0,7.5,0.29220196767872686,"[4, 2, 2]",,positive,0.5562525252525254,0.4091515151515152,0.35000000000000003,"{'U': 2, 'L': 2, 'T': 2}",3,2,0.0
+proteins_edge,2,3405,j3,product,supported,3,3,valid,True,[],0.74,6.5,14.0,0.5000000000000001,"[2, 2, 2]",2.7755575615628914e-17,positive,0.5562525252525252,0.409151515151515,0.34999999999999987,"{'U': 2, 'L': 2, 'T': 2}",,1,14.0
+proteins_edge,3,3405,j1,paired,supported,2,1,fallback,False,['nonpositive_covariance_product'],0.675,0.0,7.5,,"[4, 2, 2]",,positive,0.10190909090909095,0.419439393939394,0.3500000000000001,"{'U': 2, 'L': 2, 'T': 2}",1,2,0.0
+proteins_edge,3,3405,j1,product,supported,1,1,valid,True,[],0.74,6.5,14.0,0.5,"[2, 2, 2]",5.551115123125783e-17,positive,0.10190909090909106,0.419439393939394,0.35,"{'U': 2, 'L': 2, 'T': 2}",,0,24.0
+proteins_edge,3,3405,j3,paired,supported,2,3,fallback,False,['infeasible_L_class1'],0.675,0.0,7.5,0.11944756804131845,"[4, 2, 2]",,negative,-0.039393939393939426,0.3890151515151515,0.34999999999999987,"{'U': 2, 'L': 2, 'T': 2}",3,2,0.0
+proteins_edge,3,3405,j3,product,supported,0,3,valid,False,[],0.5,-17.5,-10.0,0.5000000000000017,"[2, 2, 2]",7.632783294297951e-17,negative,-0.039393939393939315,0.3890151515151514,0.3499999999999999,"{'U': 2, 'L': 2, 'T': 2}",,1,-10.0
