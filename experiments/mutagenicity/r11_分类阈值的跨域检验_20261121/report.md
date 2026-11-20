@@ -41,3 +41,15 @@
 [阈值与拟合预算](results/attempt-001/thresholds.csv) · [逐块端点和召回](results/attempt-001/endpoints.csv) · [均值及五种子 SD](results/attempt-001/endpoint-summary.csv) · [逐块纠正与损害](results/attempt-001/paired-blocks.csv) · [配对方向及等权区间](results/attempt-001/paired-summary.csv) · [分域与共用经验上限](results/attempt-001/h-upper.csv) · [登记门槛](results/attempt-001/gate.json)
 
 [实际配置](results/attempt-001/executed-config.json) · [拟合标签 ID](results/attempt-001/fit-label-access.json) · [H 标签读口](results/attempt-001/h-label-access.json) · [OBS](results/attempt-001/OBS.json) · [FINAL](results/attempt-001/FINAL.json) · [核验](results/attempt-001/verification.json) · [生成测试](results/attempt-001/engineering-tests.log)
+
+## 事后归因与独立复算
+
+独立穷举重现了 60 个源验证阈值、180 个本域阈值、五臂的全部 H 决策及 60 个三域共享上限。再用相同 A 子集的真实标签构造一个简单对照：对 H 中所有图预测 A 中的多数类。这个监督对照在查阅主结果后加入，不参与原门槛。
+
+| 设置 | A 多数类常数的 H Accuracy | OwnA 的 H Accuracy | OwnA 减常数，百分点 [95% 条件区间] |
+|---|---:|---:|---:|
+| Mutagenicity 边数 | 55.98% | 71.19% | +15.21 [13.74, 16.64] |
+| Mutagenicity 节点数 | 57.17% | 72.80% | +15.64 [14.05, 17.26] |
+| PROTEINS 边数 | 72.09% | 73.92% | +1.83 [0.03, 3.46] |
+
+在 PROTEINS 上，SourceV 为 55.48%。只知道每个 A 的多数类就能恢复 OwnA 相对 SourceV 的 18.44 个百分点中的 16.61 个百分点。其余收益主要来自目标 M2，OwnA 比常数高 8.39 个百分点；M0、M1、M3 分别为 −0.14、−0.94、0.00。五种子与各源方向共用 H 图。区间固定了 A、源模型和域内类别数。这个结果支持先检验无标签先验估计的价值，同时保留两个 Mutagenicity 设置作对照。无标签估计的主张须用只读源标签和无标签 A 的方法另行检验。[后续先验对照](docs/prior-control.md)
