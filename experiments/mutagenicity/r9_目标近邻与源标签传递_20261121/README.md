@@ -16,6 +16,8 @@
 
 [真实 U/E 比例定阈诊断](docs/true-rate-replay-results.md)复用了全部 24 个源内方向。PROTEINS 上将 E 真实比例和 E 排序同时用于定阈，Accuracy 仍比原 WL 低 4.583 个百分点。
 
+[伪目标结构共变筛查](docs/reference-geometry-results.md)完成了全部 24 个源内方向。TargetFull 在三个设置均低于联合 Base，未进入真实四域验证。
+
 从仓库根目录执行。输出使用一个新的存档目录。
 
 ```sh
@@ -48,3 +50,14 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 round=experiments/mutagenicity/r9_目标近邻与源标签传递_20261121
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r9_目标近邻与源标签传递_20261121.scripts.true_rate_replay --config "$round/configs/true-rate-replay.json" --output /path/to/new-true-rate-replay
 ```
+
+## 复现伪目标参照共变试验
+
+复用 attempt-002 的 24 个源内方向。组合预测并封存 OBS 后才读取对应的 E 标签。
+
+```sh
+round=experiments/mutagenicity/r9_目标近邻与源标签传递_20261121
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r9_目标近邻与源标签传递_20261121.scripts.reference_geometry --config "$round/configs/reference-geometry.json" --output /path/to/new-reference-geometry
+```
+
+也可先加 `--phase freeze`，随后对同一目录使用 `--phase score --obs-sha256` 并传入第一阶段输出的 OBS 摘要。

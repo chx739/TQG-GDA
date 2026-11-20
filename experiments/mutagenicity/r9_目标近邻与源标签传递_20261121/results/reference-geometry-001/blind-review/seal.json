@@ -1,0 +1,58 @@
+{
+  "directory": "/tmp/r9-geometry-ind-7On9yE",
+  "canonical_hash": "31484db21fd29dd85109e05eac3d960edb2f706c1383773cdce6d851fde211b1",
+  "evaluation_graph_occurrences": 1955,
+  "direction_count": 24,
+  "columns": [
+    "task",
+    "graph_id",
+    "WL",
+    "Size",
+    "Base",
+    "TargetFull",
+    "SourceFull",
+    "TargetDiag",
+    "BaseSameCount"
+  ],
+  "canonicalization": "No header, UTF-8; sort task by ASCII, graph_id by numeric ascending; join fields with TAB, each row ends with LF; integer actions 0 or 1.",
+  "by_direction_sha256": {
+    "mutagenicity_edge-M0-large_to_small-seed-3405": "00f126a6f241a5dd2d206927ccb71f482d3ed33399128aa6f85dc8a63ec56378",
+    "mutagenicity_edge-M0-small_to_large-seed-3405": "8efb71296e09b0bf000047c323774628e9b9c767af905a115ed5be09abdc6d71",
+    "mutagenicity_edge-M1-large_to_small-seed-3405": "0f95a976522903c00a1ef2130ebc806b4c70700b5c408be1f04c41cba9c133d9",
+    "mutagenicity_edge-M1-small_to_large-seed-3405": "d88c9ac2bc26b9877a8081ddc89c75138ebce23be0a4218204ff3015691630d9",
+    "mutagenicity_edge-M2-large_to_small-seed-3405": "8b0137ec0927114c10d62d82f3b997138a49b03c7b7074bcd76e8a93d09c2be9",
+    "mutagenicity_edge-M2-small_to_large-seed-3405": "c7dbc99edf18db98c767fefea6c4d545315d105407a146497fe2aef4468212c7",
+    "mutagenicity_edge-M3-large_to_small-seed-3405": "16000af1183da1a0314f1e2b2df3ac8f9dbfca16adcbb2579a6a1d7482367715",
+    "mutagenicity_edge-M3-small_to_large-seed-3405": "e18d1766ac3951b7d495e3de29d09fc6df3814083d94d92908d068da17aed46a",
+    "mutagenicity_node-M0-large_to_small-seed-3405": "83465ab62efc8205e2e7b69f823147143f7a89d790716bd6bb42c9fd104f2bd2",
+    "mutagenicity_node-M0-small_to_large-seed-3405": "0bebdca44127fc17774099dc39970443b4674f2545e8ad440bf773985808512d",
+    "mutagenicity_node-M1-large_to_small-seed-3405": "ab8f37a375a532cf62da3116cf19e2184afe992f8df620f13d443cb6cc9a94cb",
+    "mutagenicity_node-M1-small_to_large-seed-3405": "587b646d97228442259645de62e4f7193093a1b10deb8145f34f084b002db8fc",
+    "mutagenicity_node-M2-large_to_small-seed-3405": "e2b152152c5ddef7755af3d2fdb5b957247df2d275e3f03ca18d3a2456d26574",
+    "mutagenicity_node-M2-small_to_large-seed-3405": "5a677b2994946fc7e1f269df98d5e4f1fd440407a3c8b932a27200347007146d",
+    "mutagenicity_node-M3-large_to_small-seed-3405": "807c51515c1cc1bb7f952d38cd01052511b1bf4455de9b0bb330812b1c5b8c55",
+    "mutagenicity_node-M3-small_to_large-seed-3405": "2228ed98deec100262257b5c93bae359236177950c011186cc0177d23360dd6c",
+    "proteins_edge-M0-large_to_small-seed-3405": "01935735b4eef9315bbb2c06a6750da981a8a91774283f68051be8c8f6b61a33",
+    "proteins_edge-M0-small_to_large-seed-3405": "cc4b17361b2ecad1d0800edb03218c81206824f25e7255b0da6266c38fa155af",
+    "proteins_edge-M1-large_to_small-seed-3405": "d251859e23aa20c23ed005bdf06fea82dbf8e9e0b6e80ff020413ad9a7548eb7",
+    "proteins_edge-M1-small_to_large-seed-3405": "d2cf48bbd74894972f217c94a10e0dbf7945bc940874af817ec7dcb4f20e17c1",
+    "proteins_edge-M2-large_to_small-seed-3405": "042b5373cd67c078f32edb92e163713a5c73cc7921e95fa8cfd7e7123c5f5509",
+    "proteins_edge-M2-small_to_large-seed-3405": "d3e03913059cab6bcee402c3d0cfee607515e83fca2696e73fbff27cba77da02",
+    "proteins_edge-M3-large_to_small-seed-3405": "ec87fcb6212ad5f5fa91f4c6e8ba2b474e18bdc7f0139175b83d757e437f05f6",
+    "proteins_edge-M3-small_to_large-seed-3405": "8a8e7b74181c2d91bd7a1081ea8a2644865d2e15a5ad43f01a1c345b6d95f893"
+  },
+  "files": {
+    "actions.tsv": "31484db21fd29dd85109e05eac3d960edb2f706c1383773cdce6d851fde211b1",
+    "blind.json": "5f4289fe0cfee43bfc0540ecf9f5a0da9a45d1401bf6f7b3905af8a52934d09b",
+    "fit-access.json": "b9259c01d89c617212d9b24e5185b4d3258be65f2336ad347209edbaf9a31c54",
+    "inputs.json": "ce85c92ceeca02280b21bbccf22eca146b49f2efaac363fcfb203093923f268a",
+    "prepare.py": "9ec95280810c506b9a5847d0c92e15a066ee0b273d6a56e0bbebf3f34ee13f47",
+    "independent.py": "1ec53bf8baa45d4c0819664a7435c96f5ef3b1f8883c1fa0f1785ff0fd3ac5df"
+  },
+  "versions": {
+    "scipy": "1.15.2",
+    "numpy": "1.26.4",
+    "torch": "2.5.1",
+    "torch-geometric": "2.6.1"
+  }
+}
