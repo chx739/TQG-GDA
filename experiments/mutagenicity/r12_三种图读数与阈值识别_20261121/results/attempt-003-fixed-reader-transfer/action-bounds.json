@@ -1,0 +1,510 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "Anchor": {
+        "accuracy_upper_exact": "10973671/210924168",
+        "accuracy_upper_pp": 5.202661745239171,
+        "max_positive_directions": 7
+      },
+      "EqualCount": {
+        "accuracy_upper_exact": "368579/7533006",
+        "accuracy_upper_pp": 4.892854193930019,
+        "max_positive_directions": 7
+      }
+    },
+    "proteins_edge": {
+      "Anchor": {
+        "accuracy_upper_exact": "153511/6293724",
+        "accuracy_upper_pp": 2.4391123601861158,
+        "max_positive_directions": 3
+      },
+      "EqualCount": {
+        "accuracy_upper_exact": "30887/1048954",
+        "accuracy_upper_pp": 2.944552382659297,
+        "max_positive_directions": 3
+      }
+    }
+  },
+  "per_block": [
+    {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 1,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 307,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 2,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 322,
+      "changed": 6,
+      "accuracy_upper_exact": "3/161"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 3,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 338,
+      "changed": 16,
+      "accuracy_upper_exact": "8/169"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 1,
+      "target": 0,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 323,
+      "changed": 77,
+      "accuracy_upper_exact": "77/323"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 1,
+      "target": 2,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 322,
+      "changed": 3,
+      "accuracy_upper_exact": "3/322"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 1,
+      "target": 3,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 338,
+      "changed": 33,
+      "accuracy_upper_exact": "33/338"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 2,
+      "target": 0,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 323,
+      "changed": 43,
+      "accuracy_upper_exact": "43/323"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 2,
+      "target": 1,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 307,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 2,
+      "target": 3,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 338,
+      "changed": 27,
+      "accuracy_upper_exact": "27/338"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 3,
+      "target": 0,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 323,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 3,
+      "target": 1,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 307,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 3,
+      "target": 2,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 322,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 1,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 307,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 2,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 322,
+      "changed": 10,
+      "accuracy_upper_exact": "5/161"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 3,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 338,
+      "changed": 26,
+      "accuracy_upper_exact": "1/13"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 1,
+      "target": 0,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 323,
+      "changed": 82,
+      "accuracy_upper_exact": "82/323"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 1,
+      "target": 2,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 322,
+      "changed": 4,
+      "accuracy_upper_exact": "2/161"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 1,
+      "target": 3,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 338,
+      "changed": 8,
+      "accuracy_upper_exact": "4/169"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 2,
+      "target": 0,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 323,
+      "changed": 42,
+      "accuracy_upper_exact": "42/323"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 2,
+      "target": 1,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 307,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 2,
+      "target": 3,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 338,
+      "changed": 20,
+      "accuracy_upper_exact": "10/169"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 3,
+      "target": 0,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 323,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 3,
+      "target": 1,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 307,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "mutagenicity_edge",
+      "source": 3,
+      "target": 2,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 322,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 0,
+      "target": 1,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 71,
+      "changed": 3,
+      "accuracy_upper_exact": "3/71"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 0,
+      "target": 2,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 89,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 0,
+      "target": 3,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 83,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 1,
+      "target": 0,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 97,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 1,
+      "target": 2,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 89,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 1,
+      "target": 3,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 83,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 2,
+      "target": 0,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 97,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 2,
+      "target": 1,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 71,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 2,
+      "target": 3,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 83,
+      "changed": 4,
+      "accuracy_upper_exact": "4/83"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 3,
+      "target": 0,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 97,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 3,
+      "target": 1,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 71,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 3,
+      "target": 2,
+      "seed": 3405,
+      "against": "Anchor",
+      "n": 89,
+      "changed": 18,
+      "accuracy_upper_exact": "18/89"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 0,
+      "target": 1,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 71,
+      "changed": 4,
+      "accuracy_upper_exact": "4/71"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 0,
+      "target": 2,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 89,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 0,
+      "target": 3,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 83,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 1,
+      "target": 0,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 97,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 1,
+      "target": 2,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 89,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 1,
+      "target": 3,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 83,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 2,
+      "target": 0,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 97,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 2,
+      "target": 1,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 71,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 2,
+      "target": 3,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 83,
+      "changed": 6,
+      "accuracy_upper_exact": "6/83"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 3,
+      "target": 0,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 97,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 3,
+      "target": 1,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 71,
+      "changed": 0,
+      "accuracy_upper_exact": "0"
+    },
+    {
+      "setting": "proteins_edge",
+      "source": 3,
+      "target": 2,
+      "seed": 3405,
+      "against": "EqualCount",
+      "n": 89,
+      "changed": 20,
+      "accuracy_upper_exact": "20/89"
+    }
+  ]
+}

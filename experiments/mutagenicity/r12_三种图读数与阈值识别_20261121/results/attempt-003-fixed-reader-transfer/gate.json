@@ -1,0 +1,111 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "passed": false,
+      "clauses": {
+        "anchor_gain": false,
+        "positive_directions": false,
+        "strictly_above_B0": true,
+        "strictly_above_WL": false,
+        "strictly_above_Size": true,
+        "strictly_above_B": false,
+        "strictly_above_B2": false,
+        "strictly_above_PoolMajority": true,
+        "strictly_above_DirectP": true,
+        "strictly_above_Point": true,
+        "strictly_above_HashRange": true,
+        "strictly_above_EqualCount": false,
+        "strictly_above_OtherMean": true
+      },
+      "positive": 1,
+      "tied": 5,
+      "negative": 6,
+      "accuracy_pp": {
+        "Anchor": -1.1568114849693278,
+        "B0": 0.3221808497890883,
+        "WL": -1.1568114849693278,
+        "Size": 9.660827138521011,
+        "B": -0.7409523038083955,
+        "B2": -1.3952172414429953,
+        "PoolMajority": 18.104101753167836,
+        "DirectP": 0.8340498978844328,
+        "Point": 7.635769988775417,
+        "HashRange": 4.594140085664814,
+        "Other1": 1.3533665675705955,
+        "Other2": 2.703446417383608,
+        "EqualCount": -0.47387646919626586,
+        "OtherMean": 2.0284064924771017
+      },
+      "accuracy_exact": {
+        "Anchor": "-2439995/210924168",
+        "B0": "52156021/16188429894",
+        "WL": "-2439995/210924168",
+        "Size": "3127872457/32376859788",
+        "B": "-479794177/64753719576",
+        "B2": "-225863765/16188429894",
+        "PoolMajority": "11723079281/64753719576",
+        "DirectP": "135019583/16188429894",
+        "Point": "117724883/1541755228",
+        "HashRange": "39143113/852022626",
+        "Other1": "109544399/8094214947",
+        "Other2": "218822764/8094214947",
+        "EqualCount": "-124940/26365521",
+        "OtherMean": "109455721/5396143298"
+      }
+    },
+    "proteins_edge": {
+      "passed": false,
+      "clauses": {
+        "anchor_gain": false,
+        "positive_directions": false,
+        "strictly_above_B0": true,
+        "strictly_above_WL": true,
+        "strictly_above_Size": true,
+        "strictly_above_B": true,
+        "strictly_above_B2": true,
+        "strictly_above_PoolMajority": false,
+        "strictly_above_DirectP": false,
+        "strictly_above_Point": true,
+        "strictly_above_HashRange": true,
+        "strictly_above_EqualCount": true,
+        "strictly_above_OtherMean": true
+      },
+      "positive": 1,
+      "tied": 9,
+      "negative": 2,
+      "accuracy_pp": {
+        "Anchor": 0.008881863901245114,
+        "B0": 7.408238959987153,
+        "WL": 11.507015625783897,
+        "Size": 0.008881863901245114,
+        "B": 7.048748290941864,
+        "B2": 7.281519530695042,
+        "PoolMajority": -1.8583390685508752,
+        "DirectP": -0.9006117938847763,
+        "Point": 12.47211630696846,
+        "HashRange": 1.133778616717487,
+        "Other1": 1.9613665931330957,
+        "Other2": -0.013537295248409367,
+        "EqualCount": 0.5617977528089888,
+        "OtherMean": 0.9739146489423433
+      },
+      "accuracy_exact": {
+        "Anchor": "559/6293724",
+        "B0": "45226649/610491228",
+        "WL": "70249321/610491228",
+        "Size": "559/6293724",
+        "B": "21515995/305245614",
+        "B2": "22226519/305245614",
+        "PoolMajority": "-11344997/610491228",
+        "DirectP": "-1374539/152622807",
+        "Point": "6345098/50874269",
+        "HashRange": "937/82644",
+        "Other1": "1387/70716",
+        "Other2": "-1/7387",
+        "EqualCount": "1/178",
+        "OtherMean": "1477/151656"
+      }
+    }
+  },
+  "advance": false
+}

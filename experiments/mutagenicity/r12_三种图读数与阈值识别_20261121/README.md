@@ -4,7 +4,7 @@ R11 显示，用 A 的标签选择阈值能改善分类，直接从分类分数�
 
 已完成八源域，两个设置真实配对均为 0/4 域同时选对阈值。[筛查报告](report.md)
 
-[固定源端读数的真实域试验](docs/fixed-reader-transfer.md)沿用原 L/T 探针和 B0 切点，在 24 个方向检验按源内大小变化约束的比例校正。
+[固定源端读数的真实域试验](docs/fixed-reader-transfer.md)沿用原 L/T 探针和 B0 切点，在 24 个方向检验按源内大小变化约束的比例校正。[实测报告](docs/fixed-reader-transfer-results.md)
 
 [同图换源模型的读数差异](docs/crossed-readers.md)及[从可行比例到分类动作的条件](docs/fixed-reader-identification.md)记录此试验的依据。
 
@@ -28,4 +28,16 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```sh
 round=experiments/mutagenicity/r12_三种图读数与阈值识别_20261121
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.conditional_votes --config "$round/configs/conditional-votes.json" --output /path/to/new-conditional-votes-attempt
+```
+
+## 运行固定源端读数试验
+
+从仓库根目录选用新的输出目录。冻结阶段仅打开源 V 标签；核验 24 个方向的封存后，使用实际 OBS SHA-256 统一读取原角色 H 标签。
+
+```sh
+round=experiments/mutagenicity/r12_三种图读数与阈值识别_20261121
+out=/path/to/new-fixed-reader-attempt
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.fixed_reader_transfer --config "$round/configs/fixed-reader-transfer.json" --output "$out" --phase freeze
+python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.fixed_reader_transfer --config "$round/configs/fixed-reader-transfer.json" --output "$out" --phase score --obs-sha256 "$obs_sha"
 ```
