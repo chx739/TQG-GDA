@@ -1,6 +1,6 @@
 # R12｜按 Size 判决分组的联合投票先导
 
-**本域无标签 A 可以帮助纠正一部分 B0 和 WL 的共同错误，但收益随设置反转。** PROTEINS 上，Own 相对 OwnLock 在两票一致的图上纠正 167 次、误改 92 次，Accuracy 等权提高 **7.329 个百分点**。两种 Mutagenicity 划分均出现净损害。三个设置都未达到登记门槛，先导在种子 3405 收束。[登记协议](conditional-votes.md)
+**PROTEINS 上，允许推翻 B0 和 WL 的共识能改善 Accuracy；这项增益大部分也可由纯源规则实现。** Own 相对强制保留两票共识的 OwnLock 纠正 167 次、误改 92 次，等权提高 7.329 个百分点。若改与同信息的源静态表比较，则共识图上纠正 24 次、误改 20 次，只贡献 +0.465 个百分点。两种 Mutagenicity 划分的共识改判均有净损害。三个设置都未达到登记门槛，先导在种子 3405 收束。[登记协议](conditional-votes.md) · [比例、模板与源静态贡献的分解](vote-attribution.md) · [源图支持核对](vote-support.md)
 
 ## Scope 与固定规则对照
 
