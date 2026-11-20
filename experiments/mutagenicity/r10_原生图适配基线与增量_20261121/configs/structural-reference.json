@@ -3,22 +3,44 @@
   "protocol": "docs/structural-reference.md",
   "r7_archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-016/C",
   "r7_final_digest": "a97d6884ee74c456fce8b7c7e3ae9a5a5d6a72e22ac4b7b8835a06bf130a420c",
-  "settings": ["mutagenicity_edge", "mutagenicity_node", "proteins_edge"],
-  "domains": [0, 1, 2, 3],
-  "seeds": [3405, 3406, 3407, 3408, 3409],
-  "C": [0.1, 1.0, 10.0, 100.0],
+  "settings": [
+    "mutagenicity_edge",
+    "mutagenicity_node",
+    "proteins_edge"
+  ],
+  "domains": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "C": [
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
   "solver": {
     "max_iterations": 4000,
     "gradient_tolerance": 1e-10,
     "function_tolerance": 1e-15,
-    "stationarity_tolerance": 1e-7
+    "stationarity_tolerance": 1e-07
   },
   "reference_controls": {
-    "r11_attempt": "experiments/mutagenicity/r11_分类阈值的跨域检验_20261121/results/attempt-002-prior",
+    "r11_attempt": "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/results/attempt-002-prior",
     "r11_unlabeled_sha256": "899bbe090e40115977da0c78d57a67a87e2e5f688c8e68ce5e2597842c37b0cb",
     "r10_archive": "/home/hxchen/research/GDA/TSBA/experiments/r10/attempt-001",
     "r10_obs_sha256": "6dc48700834a4dd721af933d29bfd80bb90d4ad0f47a90dd8b6876aedf334a00",
-    "r13_attempt": "experiments/mutagenicity/r13_目标图归一化与分类排序_20261121/results/attempt-001",
-    "r13_obs_sha256": "955a997bf660300f99ce0b812aa9f06c4504ecaffc9cdc273485c71a69169189"
+    "r13_attempt": "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/results/attempt-001",
+    "r13_obs_sha256": "955a997bf660300f99ce0b812aa9f06c4504ecaffc9cdc273485c71a69169189",
+    "r10_r7_archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-020/P",
+    "r10_r7_final_digest": "a7958a2c9d54e4fce7d9a1fa7569400d67cc149a19d2b6f0aaac56f7e3f8f20f"
   }
 }

@@ -73,7 +73,9 @@ class StructuralReferenceTests(unittest.TestCase):
         for method in predicted:
             np.testing.assert_allclose(structural.predict(fitted, vf[:1])[method], predicted[method][:1])
         fitted['wl']['selected_C'] = 1.
-        np.testing.assert_array_equal(structural.predict(fitted, vf)['WL_selected'], predicted['WL_fixed'])
+        reused = structural.predict(fitted, vf)
+        np.testing.assert_array_equal(reused['WL_fixed'], predicted['WL_fixed'])
+        np.testing.assert_array_equal(reused['WL_selected'], reused['WL_fixed'])
 
     def test_role_guard_rejects_a_h_and_reordered_ids_at_source_fit(self):
         pools = [dict(source=[2, 1], validation=[3], adapt=[4+t], holdout=[7+t]) for t in range(3)]
@@ -89,6 +91,17 @@ class StructuralReferenceTests(unittest.TestCase):
         pools[1]['holdout'] = pools[0]['adapt']
         with self.assertRaises(PermissionError):
             structural.check_roles(pools)
+
+    def test_reference_requires_role_hash_task_and_order(self):
+        task = dict(setting='mutagenicity_edge', source=0, target=1, seed=3405)
+        ids = [5, 3, 8]
+        exact = dict(task, h_ids=ids, r7_manifest_sha256='r7 seal digest')
+        check = dict(checksum_name='r7_manifest_sha256', ids_name='h_ids')
+        obs.check_reference_role(exact, task, 'r7 seal digest', ids, **check)
+        for bad in (dict(exact, r7_manifest_sha256='other'), dict(exact, seed=3406),
+                    dict(exact, h_ids=sorted(ids))):
+            with self.assertRaises(PermissionError):
+                obs.check_reference_role(bad, task, 'r7 seal digest', ids, **check)
 
     def test_incomplete_fit_or_observation_never_constructs_holdout_reader(self):
         structural.validate_plan(PLAN)

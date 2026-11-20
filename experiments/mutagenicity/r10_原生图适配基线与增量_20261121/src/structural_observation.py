@@ -44,7 +44,7 @@ def observation_members(plan):
 def preflight(repo, plan):
     """Authenticate all role manifests and registries without reading graph tensors or labels."""
     c = open_c(plan)
-    arms = historical.ReferenceArms(plan, repo)
+    arms = PublishedReferences(plan, repo)
     r13 = PublishedR13(plan, repo)
     r10_blocks, r11_blocks, r13_blocks = 0, 0, 0
     for setting, source, seed, targets in inputs.registered(plan):
@@ -52,10 +52,11 @@ def preflight(repo, plan):
         for target in targets:
             task = dict(setting=setting, source=source, target=target, seed=seed)
             key = inputs.key(**task)
-            manifest, _, _ = historical.context(c, task, repo)
+            manifest, checksum, _ = historical.context(c, task, repo)
             pools.append(manifest['ids'])
-            r10_blocks += f'observation/{key}.npz' in arms.obs10
-            r11_blocks += f'unlabeled/{key}.npz' in arms.obs11
+            lineage = arms.role_lineage(key, task, manifest, checksum)
+            r10_blocks += 'r10_p_manifest_sha256' in lineage
+            r11_blocks += 'r11_c_manifest_sha256' in lineage
             r13_blocks += key in r13.roles
         structural.check_roles(pools)
     if r11_blocks != len(tasks(plan)):
@@ -144,6 +145,44 @@ def bind(archive, repo, task, role, access):
     return manifest, context
 
 
+def check_reference_role(row, task, manifest_sha, ids, *, checksum_name, ids_name):
+    if (any(row[k] != v for k, v in task.items()) or row[checksum_name] != manifest_sha
+            or row[ids_name] != ids):
+        raise PermissionError('The published arm does not match the authenticated historical role')
+
+
+class PublishedReferences:
+    def __init__(self, plan, repo):
+        self.arms = historical.ReferenceArms(plan, repo)
+        options = plan['reference_controls']
+        self.legacy = open_c(dict(plan, r7_archive=options['r10_r7_archive'],
+                                  r7_final_digest=options['r10_r7_final_digest']))
+        self.r11_roles = json.loads(prior_run.read_member(self.arms.r11, self.arms.obs11, 'roles.json'))
+        self.r10_roles = json.loads(prior_run.read_member(self.arms.r10, self.arms.obs10, 'roles.json'))['tasks']
+
+    def role_lineage(self, key, task, manifest, checksum):
+        h_ids = manifest['ids']['holdout']
+        check_reference_role(self.r11_roles[key], task, checksum, h_ids,
+                             checksum_name='manifest_sha256', ids_name='holdout_ids')
+        if f'unlabeled/{key}.npz' not in self.arms.obs11:
+            raise PermissionError('Published R11 SourceCal is missing the sealed H prediction')
+        result = dict(r11_c_manifest_sha256=checksum)
+        if f'observation/{key}.npz' in self.arms.obs10:
+            legacy, legacy_sha = self.legacy.roles(task)
+            old = self.r10_roles[key]
+            check_reference_role(old, task, legacy_sha, h_ids, checksum_name='r7_manifest_sha256', ids_name='h_ids')
+            # P and C embed different experiment plans. Every graph, role, label binding
+            # and consumed R5 file (including the source checkpoint) must agree.
+            if ({k: v for k, v in legacy.items() if k != 'r7_plan'}
+                    != {k: v for k, v in manifest.items() if k != 'r7_plan'}
+                    or old['source_ids'] != legacy['ids']['source'] or old['a_ids'] != legacy['ids']['adapt']
+                    or old['r7_manifest'] != f'blocks/{key}/manifest.json'):
+                raise PermissionError('Historical R10 P provenance does not match the C source and target roles')
+            result.update(r10_p_manifest_sha256=legacy_sha, r10_c_manifest_sha256=checksum,
+                          r10_p_and_c_roles_and_r5_provenance_equal=True)
+        return result
+
+
 class PublishedR13:
     def __init__(self, plan, repo):
         controls = plan['reference_controls']
@@ -178,7 +217,7 @@ def freeze(output, repo, plan, fit_sha):
     archive = open_c(plan)
     if json.loads(frozen['historical-plan.json']) != archive.plan:
         raise PermissionError('Historical C plan has changed after source fitting')
-    controls = historical.ReferenceArms(plan, repo)
+    controls = PublishedReferences(plan, repo)
     r13 = PublishedR13(plan, repo)
     (output / 'predictions').mkdir()
     stores, features, roles = {}, {}, {}
@@ -209,7 +248,8 @@ def freeze(output, repo, plan, fit_sha):
             logits = {name: np.column_stack((np.zeros(len(h_ids)), margins))
                       for name, margins in structural.predict(model, held).items()}
             b0 = archive.b0(task, h_ids)
-            references, lineage = controls.get(task, h_ids, b0)
+            reference_roles = controls.role_lineage(key, task, manifest, role['manifest_sha256'])
+            references, lineage = controls.arms.get(task, h_ids, b0)
             extra, extra_lineage = r13.get(key, dict(role, held_ids=h_ids), b0)
             logits.update(B0=b0, **references, **extra)
             lineage.update(extra_lineage)
@@ -218,7 +258,7 @@ def freeze(output, repo, plan, fit_sha):
                 arrays[f'logits_{name}'] = z
                 arrays[f'action_{name}'] = structural.decisions(z[:, 1] - z[:, 0])
             prior_run.save_predictions(output, f'predictions/{key}.npz', arrays)
-            roles[key] = dict(role, group=group, fit_sha256=sha(blob), reference_sha256=lineage,
+            roles[key] = dict(role, group=group, fit_sha256=sha(blob), reference_sha256=lineage, reference_roles=reference_roles,
                               b0_sha256=archive.digests[f'blocks/{key}/holdout_input.npz'])
     write_json(output / 'roles.json', roles)
     write_json(output / 'observation-access.json', archive.digests)
