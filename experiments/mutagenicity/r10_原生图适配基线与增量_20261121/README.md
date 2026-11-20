@@ -1,6 +1,6 @@
 # R10｜公开图级适配方法在同一批留出图上能多分对多少？
 
-以 GDABench 发布的 graph-mode GRADE 及同架构 source-only 为参照，在两个既有 Mutagenicity 开发方向建立同图的 Accuracy 比较。15 个模型已完成，GRADE 相对同架构源模型的两方向等权 Accuracy 差 +0.074 pp，配对区间跨零。[实测报告](report.md)[实施与判读](docs/matched-grade.md) · [实验索引](../../README.md)
+以 GDABench 发布的 graph-mode GRADE 及同架构 source-only 为参照，在两个既有 Mutagenicity 开发方向建立同图的 Accuracy 比较。15 个模型已完成，GRADE 相对同架构源模型的两方向等权 Accuracy 差 +0.074 pp，配对区间跨零。[实测报告](report.md) · [实施与判读](docs/matched-grade.md) · [实验索引](../../README.md)
 
 [作者原文件与一步等价核验](docs/implementation-check.md) · [初始启动记录](results/startup/launch.json) · [生成回归记录](results/startup/r10-tests.log)
 

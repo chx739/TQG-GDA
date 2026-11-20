@@ -39,4 +39,6 @@ CUDA 不可用，CPU 每模型两个 Torch 线程、一个 interop 线程。首�
 
 训练提交为 `ca91fcd`，评分提交为 `4fd8f49`。原始 checkpoint、二进制预测、日志和源码 tar 在 `/home/hxchen/research/GDA/TSBA/experiments/r10/attempt-001`。Git 档案保留索引、所有哈希、逐轮轨迹、配对结果和可定位的进程记录。
 
+策略侧在 FINAL 发布后独立按 R7 的图 ID 对齐 H 标签与八臂预测。80 个端点、130 个逐块对照与 117 行配对区间均可复现，最大数值差小于 7×10⁻¹⁴。FINAL 文件的 SHA-256 为 `e30d36d00fb06ccadd7f7da8010ed30aeb8108149964e913aee3eb0dcf7ccc98`。R7 共享更新的普通 Accuracy 高于 GRADE 3.62 个百分点，却低于只用源验证标签的 SourceCal 1.01 个百分点。两项比较共同解释了为什么超越一个已发表模型仍不足以把改善归因于共享更新。[R7 同决策对照](../r7_共同解释与共享更新验证_20261119/docs/accuracy-and-prior-control-results.md)
+
 [端点](results/attempt-001/evaluation/endpoints.csv) · [逐种子对比](results/attempt-001/evaluation/paired-seeds.csv) · [方向及等权区间](results/attempt-001/evaluation/paired-intervals.json) · [全量训练验收](results/attempt-001/observation/training-verification.json) · [历史预测身份与重载](results/attempt-001/observation/lineage.json) · [实际配置](results/attempt-001/executed-config.json) · [过程档案索引](results/evidence.json) · [OBS](results/attempt-001/OBS.json) · [FINAL](results/attempt-001/FINAL.json)
