@@ -16,6 +16,8 @@
 
 ## 机制对照
 
+[起点导数与单位步 NLL 的分解](strong-anchor-directional-risk.md)显示，三个设置的 Full 方向在原强源起点均给出负的平均 NLL 导数；分子边数和 PROTEINS 在单位步的平均 NLL 上升。该诊断区分了局部概率变化与分类改判。
+
 表内均为 Full 相对对照的等权 Accuracy 差，单位为百分点。同阳性数对照按原强源 margin 排序，以 Full 的阳性数截取，因此属于整批 H 上的排序诊断。
 
 | 设置／指定起点 | B0Teacher | CalTeacher | ScoreOnly | 原 E 软修正 | 异域 Full 平均 | 同阳性数 |
