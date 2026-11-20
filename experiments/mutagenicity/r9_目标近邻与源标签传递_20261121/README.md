@@ -12,6 +12,8 @@
 
 [源校准残差的结构加权协议](docs/weighted-source-residuals.md)使用每个源域内的自然大小段，检验局部结构能否帮助估准目标组的正例比例并改善分类。
 
+[按大小段借用源分类残差](docs/weighted-source-residuals-results.md)完成了三个设置共 24 个源内伪方向。加权残差在三个设置均输给未经残差校正的 WL 概率均值，未进入真实跨域验证。[登记协议](docs/weighted-source-residuals.md)
+
 从仓库根目录执行。输出使用一个新的存档目录。
 
 ```sh
@@ -25,4 +27,13 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```sh
 round=experiments/mutagenicity/r9_目标近邻与源标签传递_20261121
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r9_目标近邻与源标签传递_20261121.scripts.paired_action_support --config "$round/configs/paired-action-support.json" --output /path/to/new-paired-action-attempt
+```
+
+## 运行源内大小段残差试验
+
+复用 R10 的历史源图角色与 R9 的 WL，使用 R11 的硬阳性率阈值。D/C 与 U/E 标签按方向分阶段读取。
+
+```sh
+round=experiments/mutagenicity/r9_目标近邻与源标签传递_20261121
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r9_目标近邻与源标签传递_20261121.scripts.weighted_source_residuals --config "$round/configs/weighted-source-residuals.json" --output /path/to/new-weighted-residual-attempt
 ```

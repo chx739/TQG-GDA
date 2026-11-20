@@ -1,0 +1,77 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "passed": false,
+      "complete": true,
+      "u_proportion_pass": false,
+      "e_proportion_pass": false,
+      "e_accuracy_pass": false,
+      "u_strat_mae_reduction_pp": {
+        "WLMean": -0.33110331921805797,
+        "UniformResidual": 0.7645028206162351,
+        "WeightedLabels": 1.1534664411708673,
+        "Neighbors8": 3.361637348206429
+      },
+      "e_strat_mae_reduction_pp": {
+        "WLMean": -0.8871245086393269,
+        "UniformResidual": 0.7967642505520705
+      },
+      "e_accuracy_gain_pp": {
+        "WLMean": -0.3430601977800333,
+        "UniformResidual": 0.3507831493143887,
+        "WL": -2.3267580304973525,
+        "Size": 8.552590269926462
+      },
+      "strongest_d_classifier": "WL"
+    },
+    "mutagenicity_node": {
+      "passed": false,
+      "complete": true,
+      "u_proportion_pass": false,
+      "e_proportion_pass": false,
+      "e_accuracy_pass": false,
+      "u_strat_mae_reduction_pp": {
+        "WLMean": -1.102866500542045,
+        "UniformResidual": 0.3119495975100079,
+        "WeightedLabels": 1.288379739979005,
+        "Neighbors8": 1.1051775664084629
+      },
+      "e_strat_mae_reduction_pp": {
+        "WLMean": -2.7806474045350784,
+        "UniformResidual": 0.02870654475993701
+      },
+      "e_accuracy_gain_pp": {
+        "WLMean": -0.7955095845908933,
+        "UniformResidual": -0.3283020924524135,
+        "WL": -2.1808802985291007,
+        "Size": 7.001206383177761
+      },
+      "strongest_d_classifier": "WL"
+    },
+    "proteins_edge": {
+      "passed": false,
+      "complete": true,
+      "u_proportion_pass": false,
+      "e_proportion_pass": false,
+      "e_accuracy_pass": false,
+      "u_strat_mae_reduction_pp": {
+        "WLMean": -0.5812162957056248,
+        "UniformResidual": -0.2691846423625886,
+        "WeightedLabels": -0.12679163193086643,
+        "Neighbors8": 0.697438136840767
+      },
+      "e_strat_mae_reduction_pp": {
+        "WLMean": -6.443752434012417,
+        "UniformResidual": 0.9831451411261452
+      },
+      "e_accuracy_gain_pp": {
+        "WLMean": -3.133767457669015,
+        "UniformResidual": -0.46296296296296297,
+        "WL": -7.507274028756231,
+        "Size": 2.280800683887447
+      },
+      "strongest_d_classifier": "WL"
+    }
+  },
+  "register_real_domain_validation": false
+}
