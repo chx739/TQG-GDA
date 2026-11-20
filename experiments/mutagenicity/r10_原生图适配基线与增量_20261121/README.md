@@ -6,6 +6,8 @@
 
 [全方向源监督 WL 和大小参照](docs/structural-reference-results.md)已完成三个开发设置各十二方向五种子，共 180 块。源选模 WL 相对 B0 的 Accuracy 差依次为 +2.44、+0.12、−2.18 pp。[结构参照协议](docs/structural-reference.md)
 
+在同一源的三个目标间改选 WL 或 B0，两种 Mutagenicity 划分的事后额外空间均小于 0.1 个百分点。PROTEINS 为 1.08 个百分点。[选择上界与分歧图分析](docs/classifier-choice.md)
+
 从仓库根目录检查 60 个源组与 180 个开发块的角色与历史档案身份。源监督参照沿用 R7 C 的角色、R9 的 WL 表示与 R8 的 logistic 目标、R11 的配对重抽样以及 R13 验证过的历史参照读取方式。
 
 ```sh
