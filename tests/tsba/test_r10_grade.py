@@ -131,3 +131,17 @@ class GradeTests(unittest.TestCase):
         alt.y = torch.tensor([0,1])
         with self.assertRaises(PermissionError):
             training.js_forward(model,source,alt,.7,.005)
+
+    def test_missing_observation_cannot_open_holdout_label_scope(self):
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+        from experiments.mutagenicity.r10_原生图适配基线与增量_20261121.src import scoring
+
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            with patch.object(scoring.r5_inputs, 'evaluation_labels') as labels:
+                with self.assertRaises(FileNotFoundError):
+                    scoring.score(root, root, {'tasks':{}}, PLAN, root)
+                labels.assert_not_called()
+            with self.assertRaises(PermissionError):
+                scoring.complete_training(root, {}, PLAN)
