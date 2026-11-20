@@ -5,6 +5,7 @@
 [将 E 改判移植到强源模型](docs/transfer-of-flips-results.md)已完成 180 块。三个设置均未达到相对指定强源模型的收益门槛。[预登记协议](docs/transfer-of-flips.md)
 
 [直接在强源模型上求解同一目标解释的更新](docs/strong-anchor-refit.md)登记了单种子 36 个既有开发方向，比较完整修正、仅利用源 GNN 分数的修正和直接移植原 E 的连续修正。
+使用相同完整更新空间的[教师校准对照](docs/strong-anchor-score-teacher.md)检验先验和 GNN 分数斜率能否解释这项更新。
 
 第十二轮按原门槛首次通过真实 P。全方向 C 已封存，Mutagenicity 边数划分的平均 BA 提高 0.53 个百分点，节点数划分接近零，PROTEINS 有主比较缺失。C 整体尚未通过。第十三轮合成扩展未过门槛。第十四轮用配对消融定位到类别比例锚点过强，固定伪计数后的正确设定诊断为 15/15。独立种子的正式 S 已通过，同配置真实 P 未通过。[真实试点](docs/iteration-12.md#同配置重跑通过-p) · [全方向结果](docs/iteration-12.md#全方向-c-的封存结果) · [均衡分类验证](docs/iteration-13.md) · [固定类别比例锚点](docs/iteration-14.md)
 
