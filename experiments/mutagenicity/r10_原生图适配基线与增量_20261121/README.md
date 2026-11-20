@@ -12,6 +12,8 @@
 
 在 PROTEINS 上，即使逐图知道哪个模型正确，B0 与 WL 二选一仍低于 Size 0.92 个百分点。[共同错误与三张票的改判空间](docs/vote-bounds.md)
 
+图大小和 PROTEINS 原始属性的源端核对见[结构输入核查](docs/size-support.md)。PROTEINS 的八方向源内筛查仅给 WL 与大小联合基线增加按节点类型的属性中位数。[固定比较与投入条件](docs/source-attribute-screen.md)
+
 从仓库根目录检查 60 个源组与 180 个开发块的角色与历史档案身份。源监督参照沿用 R7 C 的角色、R9 的 WL 表示与 R8 的 logistic 目标、R11 的配对重抽样以及 R13 验证过的历史参照读取方式。
 
 ```sh
