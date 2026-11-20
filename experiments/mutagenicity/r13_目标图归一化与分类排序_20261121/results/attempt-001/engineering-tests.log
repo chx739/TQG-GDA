@@ -1,0 +1,39 @@
+test_affine_and_nonmoment_buffers_are_checked (test_r13_normalization.BatchNormTests.test_affine_and_nonmoment_buffers_are_checked) ... ok
+test_equal_size_graphs_give_identical_node_and_graph_predictions (test_r13_normalization.BatchNormTests.test_equal_size_graphs_give_identical_node_and_graph_predictions) ... ok
+test_exact_paired_interaction_and_other_mean (test_r13_normalization.BatchNormTests.test_exact_paired_interaction_and_other_mean) ... ok
+test_gate_is_exact_and_prefers_graph_only_when_both_settings_pass (test_r13_normalization.BatchNormTests.test_gate_is_exact_and_prefers_graph_only_when_both_settings_pass) ... ok
+test_gin_and_gine_interleave_and_hold_under_repartition (test_r13_normalization.BatchNormTests.test_gin_and_gine_interleave_and_hold_under_repartition) ... ok
+test_no_verified_obs_no_h_reader (test_r13_normalization.BatchNormTests.test_no_verified_obs_no_h_reader) ... ok
+test_same_k_and_real_alien_roles_are_swapped_only_within_group (test_r13_normalization.BatchNormTests.test_same_k_and_real_alien_roles_are_swapped_only_within_group) ... ok
+test_topk_diagnostic_tie_is_smallest_numeric_id (test_r13_normalization.BatchNormTests.test_topk_diagnostic_tie_is_smallest_numeric_id) ... ok
+test_weighted_population_variance_includes_between_graph_means (test_r13_normalization.BatchNormTests.test_weighted_population_variance_includes_between_graph_means) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.377s
+
+OK
+test_bounded_root_matches_finite_mixture (test_r11_prior.PriorTests.test_bounded_root_matches_finite_mixture) ... ok
+test_em_failure_is_not_replaced_with_root (test_r11_prior.PriorTests.test_em_failure_is_not_replaced_with_root) ... ok
+test_exact_constant_scores_keep_prior_even_after_logit_rounding (test_r11_prior.PriorTests.test_exact_constant_scores_keep_prior_even_after_logit_rounding) ... ok
+test_gate_requires_each_control_and_both_exact_directions (test_r11_prior.PriorTests.test_gate_requires_each_control_and_both_exact_directions) ... ok
+test_incomplete_or_mutated_seal_stops_before_a_or_h_session (test_r11_prior.PriorTests.test_incomplete_or_mutated_seal_stops_before_a_or_h_session) ... ok
+test_main_group_rejects_shifted_a_or_h_ids (test_r11_prior.PriorTests.test_main_group_rejects_shifted_a_or_h_ids) ... ok
+test_same_source_swap_controls_use_unchanged_foreign_priors (test_r11_prior.PriorTests.test_same_source_swap_controls_use_unchanged_foreign_priors) ... ok
+test_source_only_fit_once_and_exact_a_scores (test_r11_prior.PriorTests.test_source_only_fit_once_and_exact_a_scores) ... ok
+test_swap_mean_counts_and_intervals_share_the_same_draw (test_r11_prior.PriorTests.test_swap_mean_counts_and_intervals_share_the_same_draw) ... ok
+test_tiny_nonzero_drift_is_distinct_from_flat (test_r11_prior.PriorTests.test_tiny_nonzero_drift_is_distinct_from_flat) ... ok
+test_all_one_and_all_zero_strict_thresholds (test_r11_thresholds.ThresholdTests.test_all_one_and_all_zero_strict_thresholds) ... ok
+test_equal_distance_secondary_tie_picks_smaller_threshold (test_r11_thresholds.ThresholdTests.test_equal_distance_secondary_tie_picks_smaller_threshold) ... ok
+test_equal_margins_move_together_and_reference_resolves_ties (test_r11_thresholds.ThresholdTests.test_equal_margins_move_together_and_reference_resolves_ties) ... ok
+test_float64_distance_resolves_subnormal_gap_exactly (test_r11_thresholds.ThresholdTests.test_float64_distance_resolves_subnormal_gap_exactly) ... ok
+test_h_upper_matches_independent_fraction_enumeration (test_r11_thresholds.ThresholdTests.test_h_upper_matches_independent_fraction_enumeration) ... ok
+test_label_session_seeks_only_granted_valid_records (test_r11_thresholds.ThresholdTests.test_label_session_seeks_only_granted_valid_records) ... ok
+test_no_new_obs_no_h_decoder (test_r11_thresholds.ThresholdTests.test_no_new_obs_no_h_decoder) ... ok
+test_paired_other_mean_is_formed_inside_each_draw (test_r11_thresholds.ThresholdTests.test_paired_other_mean_is_formed_inside_each_draw) ... ok
+test_same_source_crossed_a_never_reads_h_or_crosses_selected_ids (test_r11_thresholds.ThresholdTests.test_same_source_crossed_a_never_reads_h_or_crosses_selected_ids) ... ok
+test_unsigned_labels_never_underflow_unit_counts (test_r11_thresholds.ThresholdTests.test_unsigned_labels_never_underflow_unit_counts) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.053s
+
+OK
