@@ -63,3 +63,11 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 独立审查还按原协议重算了方向区间。五种子共用同一批 H 图，按类别分层，并对五个模型复用同一次图抽样。M0→M3 平均 ΔNLL 为 +0.05264，95% 区间 [+0.03719, +0.06793]；同一抽样下平均 ΔAUROC 的区间为 [−0.00579, +0.00621]。3408 单模型分层 ΔNLL 区间 [+0.30871, +0.38379]。上文逐模型区间允许类别比例随重采样变化，回答不同的问题。两者均条件于已训练模型。
 
 3408 的 A 图上，正类 log-odds 的改变量最小 +0.538、平均 +1.837、最大 +4.994。H 图上最小 +0.516、平均 +1.861，表明每一张留出图都被推向正类。源模型在 A 上的平均正类概率为 0.566，更新后为 0.868。这把失效范围缩小到普遍的单向偏移；此数字仅用于解释已有更新。后续用独立登记的先验校正对照检验共享更新的额外分类价值。
+
+补充复核可从仓库根目录用同一 Python 环境运行：
+
+```bash
+python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.check_p_risk_review --config experiments/mutagenicity/r7_共同解释与共享更新验证_20261119/configs/r7-iteration14-p-risk-replay.json
+```
+
+[补充复核的原始输出与代码哈希](../results/iteration-14/p-risk-review.json)
