@@ -1,0 +1,201 @@
+{
+  "verified": true,
+  "final_sha256": "bf355dec5a5cf2f753cf77f4980497b0dd0ce059f6954e7a8ce8f5061dce4b2d",
+  "obs_sha256": "2deb9b577e080920638d766cdd199c036fa34b3ce5d1cba573edeb7c203e6db1",
+  "production_scorer_invoked": false,
+  "method": "Rebuilt all 11 CSVs from authenticated original H offset grants, sealed actions/readouts and source contingency counts. Exact rational class contrasts, empirical intervals by vertex enumeration, mixing estimates, paired counts, equal-direction summaries and registered gate; numeric CSV floats checked to 1e-12 relative/1e-14 absolute.",
+  "counts": {
+    "directions": 24,
+    "source_groups": 8,
+    "distinct_target_H_cohorts": 8,
+    "distinct_H_graphs_by_setting": {
+      "mutagenicity_edge": 1290,
+      "proteins_edge": 340
+    },
+    "final_members": 15,
+    "obs_members": 85,
+    "verified_rows": {
+      "endpoints": 336,
+      "paired-blocks": 336,
+      "prior-coverage": 192,
+      "class-coverage": 384,
+      "proportion-errors": 540,
+      "moment-drift": 96,
+      "proportion-by-direction": 144,
+      "summary": 30,
+      "paired-summary": 28,
+      "proportion-summary": 12,
+      "coverage-summary": 4
+    },
+    "verified_nonkey_fields": {
+      "endpoints": 2688,
+      "paired-blocks": 2688,
+      "prior-coverage": 1728,
+      "class-coverage": 3072,
+      "proportion-errors": 2700,
+      "moment-drift": 1536,
+      "proportion-by-direction": 720,
+      "summary": 120,
+      "paired-summary": 308,
+      "proportion-summary": 12,
+      "coverage-summary": 60
+    }
+  },
+  "settings": {
+    "mutagenicity_edge": {
+      "accuracy_exact": {
+        "Anchor": "11534945599/16188429894",
+        "B0": "45182079847/64753719576",
+        "WL": "11534945599/16188429894",
+        "Size": "1863569477/3083510456",
+        "B": "3822541509/5396143298",
+        "B2": "2723185823/3809042328",
+        "PoolMajority": "5611270775/10792286596",
+        "DirectP": "1150016041/1660351784",
+        "SizeRange": "45390703931/64753719576",
+        "Point": "40446258845/64753719576",
+        "HashRange": "42415827343/64753719576",
+        "Other1": "6359192677/9250531368",
+        "Other2": "2078101039/3083510456",
+        "EqualCount": "896030521/1269680776",
+        "OtherMean": "6296747897/9250531368"
+      },
+      "SizeRange_minus_Anchor_pp": -1.1568114849693278,
+      "anchor_wins_ties_losses": [
+        1,
+        5,
+        6
+      ],
+      "coverage": {
+        "SizeRange": {
+          "class_combinations": 96,
+          "class_eligible": 89,
+          "class_covered": 38,
+          "class_missing_H": 1,
+          "class_missing_V": 6,
+          "class_zero_contrast": 0,
+          "full_range_fallback": 5,
+          "average_class_width": 0.10509215836039228,
+          "eligible_Abins": 45,
+          "p_H_covered": 20,
+          "p_H_eligible_graphs": 3755,
+          "p_H_covered_graphs": 1942,
+          "p_H_weighted_coverage": 0.5171770972037284,
+          "feasible_intervals": 32,
+          "average_p_interval_width": 0.6003252197143507
+        },
+        "HashRange": {
+          "class_combinations": 96,
+          "class_eligible": 89,
+          "class_covered": 31,
+          "class_missing_H": 1,
+          "class_missing_V": 6,
+          "class_zero_contrast": 0,
+          "full_range_fallback": 5,
+          "average_class_width": 0.09127259522448111,
+          "eligible_Abins": 45,
+          "p_H_covered": 11,
+          "p_H_eligible_graphs": 3755,
+          "p_H_covered_graphs": 984,
+          "p_H_weighted_coverage": 0.26205059920106527,
+          "feasible_intervals": 30,
+          "average_p_interval_width": 0.439678906665738
+        }
+      },
+      "proportion_error": {
+        "Anchor": 0.134597355429458,
+        "SizeRange": 0.14594569343253924,
+        "Point": 0.3168867301620126,
+        "HashRange": 0.1948843411921649,
+        "Other1": 0.17281590207566347,
+        "Other2": 0.17667471868762383
+      },
+      "passed": false,
+      "failed_clauses": [
+        "anchor_gain",
+        "positive_directions",
+        "strictly_above_EqualCount",
+        "strictly_above_WL",
+        "strictly_above_B",
+        "strictly_above_B2"
+      ]
+    },
+    "proteins_edge": {
+      "accuracy_exact": {
+        "Anchor": "397313201/610491228",
+        "B0": "352140775/610491228",
+        "WL": "327118103/610491228",
+        "Size": "397313201/610491228",
+        "B": "177167717/305245614",
+        "B2": "176457193/305245614",
+        "PoolMajority": "408712421/610491228",
+        "DirectP": "100716395/152622807",
+        "SizeRange": "33113952/50874269",
+        "Point": "26768854/50874269",
+        "HashRange": "390445805/610491228",
+        "Other1": "385393453/610491228",
+        "Other2": "33120839/50874269",
+        "EqualCount": "65656283/101748538",
+        "OtherMean": "782843521/1220982456"
+      },
+      "SizeRange_minus_Anchor_pp": 0.008881863901245114,
+      "anchor_wins_ties_losses": [
+        1,
+        9,
+        2
+      ],
+      "coverage": {
+        "SizeRange": {
+          "class_combinations": 96,
+          "class_eligible": 69,
+          "class_covered": 33,
+          "class_missing_H": 19,
+          "class_missing_V": 8,
+          "class_zero_contrast": 0,
+          "full_range_fallback": 10,
+          "average_class_width": 0.3190762739675783,
+          "eligible_Abins": 37,
+          "p_H_covered": 27,
+          "p_H_eligible_graphs": 1007,
+          "p_H_covered_graphs": 823,
+          "p_H_weighted_coverage": 0.817279046673287,
+          "feasible_intervals": 37,
+          "average_p_interval_width": 0.5827040978581619
+        },
+        "HashRange": {
+          "class_combinations": 96,
+          "class_eligible": 69,
+          "class_covered": 31,
+          "class_missing_H": 19,
+          "class_missing_V": 8,
+          "class_zero_contrast": 0,
+          "full_range_fallback": 10,
+          "average_class_width": 0.2513785932264193,
+          "eligible_Abins": 37,
+          "p_H_covered": 25,
+          "p_H_eligible_graphs": 1007,
+          "p_H_covered_graphs": 702,
+          "p_H_weighted_coverage": 0.6971201588877854,
+          "feasible_intervals": 36,
+          "average_p_interval_width": 0.5414004798989565
+        }
+      },
+      "proportion_error": {
+        "Anchor": 0.24976696032833318,
+        "SizeRange": 0.2527162605627861,
+        "Point": 0.3522586408323657,
+        "HashRange": 0.27422342099670705,
+        "Other1": 0.2416407643416659,
+        "Other2": 0.2384905756370153
+      },
+      "passed": false,
+      "failed_clauses": [
+        "anchor_gain",
+        "positive_directions",
+        "strictly_above_PoolMajority",
+        "strictly_above_DirectP"
+      ]
+    }
+  },
+  "advance": false
+}

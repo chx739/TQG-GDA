@@ -1,0 +1,24 @@
+{
+  "analysis": "post-score sensitivity; no change to registered outcomes or gate",
+  "obs_sha256": "2deb9b577e080920638d766cdd199c036fa34b3ce5d1cba573edeb7c203e6db1",
+  "obs_members": 85,
+  "direction_count": 24,
+  "physical_H_roles": 8,
+  "H_only_reads": {
+    "mutagenicity_edge-M1": 307,
+    "mutagenicity_edge-M2": 322,
+    "mutagenicity_edge-M3": 338,
+    "mutagenicity_edge-M0": 323,
+    "proteins_edge-M1": 71,
+    "proteins_edge-M2": 89,
+    "proteins_edge-M3": 83,
+    "proteins_edge-M0": 97
+  },
+  "original_thresholds_counts_and_folds_reproduced": true,
+  "supports_and_empty_reference_fallbacks_same_for_both": true,
+  "full_bin_uses_scored_labels": true,
+  "threshold_grid": "closed endpoints, zero, unique reference margins inside interval",
+  "restricted_threshold_check": "direct candidate scoring and sorted prefix label counts",
+  "original_script_sha256": "01fc3b4a0a42f0543ae45cc7fc46fadc4e3e9ad7c525edb172eb6a178feb7d87",
+  "script_sha256": "82ef1add267a493d3219e0d3e9060c78c68ae958862bc2bbd3bf24e10261987d"
+}

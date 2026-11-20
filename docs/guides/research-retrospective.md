@@ -43,6 +43,8 @@ GALA 在同一篇论文里评估了 Mutagenicity 和 PROTEINS。两张主表各�
 
 RNA 的表 1、2 也在四域 Mutagenicity、PROTEINS 上逐方向报告普通 Accuracy，§4.1 明确给出五次运行。它在适配时只能访问目标数据。与允许访问带标签源图的算法并列时，表中应标明适配阶段的数据权限。[RNA，IJCAI 2024](https://www.ijcai.org/proceedings/2024/0520.pdf)
 
+USBD 的图级无源适配预印本进一步区分了数据集协议。§4.1 在 TU 图分类与 Spurious-Motif 上报告五次运行的 Accuracy，OGB 的 ogbg-molhiv 则用 AUC。对本项目当前两套 TU 数据，几项最接近的工作指向同一主指标。若以后换到不同基准，再按该基准的任务口径登记。[USBD 原文 §4.1](https://arxiv.org/html/2602.08431v1#S4.SS1)
+
 GDABench 的图级附录把每个数据集按密度分成两半，表 15、16 对每个数据集的两个方向分别报告 Micro-F1 和 Macro-F1。当前任务每张图恰有一个真实类别和一个预测类别，全类别 Micro-F1 在同一批图上恰等于普通 Accuracy。与这组文献对照时，主表可列 Accuracy 和 Macro-F1，按固定预测从同一份混淆矩阵计算。BA 是各类召回的平均，Macro-F1 是各类 F1 的平均，二者在类别不均衡时可给出不同排序。这里新增的是文献对读口径，各轮的晋级规则仍按事前登记判定。[GDABench 附录 E、表 15–16](https://proceedings.neurips.cc/paper_files/paper/2024/file/a2c548b2ed3141400d86a235eaa6fad0-Paper-Datasets_and_Benchmarks_Track.pdf#page=28)
 
 对 Mutagenicity 做了一次只用拓扑的直接检查。在同一原始图序上运行 GALA 公开的密度划分函数，保留的 4,336 张中，655 张与本仓边数划分被分到不同的域。即使任意调整同密度图的并列次序，至少 615 张仍落入不同域。论文可以沿用它的指标和报表格式，要计算方法间的百分点差，需让双方在相同任务上运行。[固定版本、域交叉表及并列检查](../../experiments/mutagenicity/r10_原生图适配基线与增量_20261121/docs/size-support.md)
@@ -107,6 +109,8 @@ R7 在强源分类器上只保留完整目标解释超出简单分数校准的�
 这个先导还可以省下一步。对每个方向，先数新规则和原模型判决不同的图。分歧为零时，真标签取任何值都无法产生 Accuracy 胜出。PROTEINS 的 12 个方向中只有 4 个有分歧，所以冻结动作时就可知 7 个胜方向的门槛已经不可达。开分后能区分纠错与误改：35 次改判中有 20 次纠正、15 次误改；9 个平局里有 8 个逐图完全一致，另一个是 3 次纠正与 3 次误改。下次把这个无标签上界和主对照一并列入开分前的摘要。出于机制诊断需要仍可计分，是否扩大运行可提前判断。[R7 冻结预测与独立盲算核对](../../experiments/mutagenicity/r7_共同解释与共享更新验证_20261119/docs/centered-target-update-results.md) · [逐方向分歧和净纠错](../../experiments/mutagenicity/r7_共同解释与共享更新验证_20261119/results/iteration-12/centered-target-update-001/paired-blocks.csv)
 
 均值还须对照已有的简单适配法。R7、R11 和 R16 在种子 3405 的 36 个方向使用相同顺序的评价图，两个源模型 WL 和 Size 的分类动作逐图一致。PROTEINS 的 R7 修正得到 65.62% Accuracy，R11 按估计的正类比例定阈值得到 65.99%，整池猜估计多数类得到 66.95%；三者的 Macro-F1 分别为 43.18%、56.36%、39.36%。对池多数，R7 有 0 胜、9 平、3 负；在 77 次分歧中纠正了 31 次、误改了 46 次。对按比例定阈值，R7 在两种分子划分分别高 2.67 和 2.27 个百分点。R11 在 24 个方向使用了 R7 适配池的真子集，适合在同一评价图上比较实际结果，若要解释机制差异须匹配适配池。在两个分子设置上，去掉任意一个目标域及指向它的三个方向后，R7 相对 WL 的平均差分别落在 [+0.542, +0.732]、[−0.148, +0.410] 个百分点。这里的范围仅描述单种子在四种删除下的敏感度。分子边数留下了可解释的局部正结果，节点数与蛋白质给出了限制其外推的具体证据。[R11 同图基线](../../experiments/mutagenicity/r11_分类阈值的跨域检验_20261121/docs/roc-rate-transfer-results.md) · [R16 单图源融合](../../experiments/mutagenicity/r16_目标图结构与监督分数蒸馏_20261121/report.md) · [R7 分类端点](../../experiments/mutagenicity/r7_共同解释与共享更新验证_20261119/results/iteration-12/centered-target-update-001/endpoint-summary.csv)
+
+R12 还给出了一条具体的止损经验。要投入更精确的无标签比例估计器，先把真实比例送入同一个分类规则，再对照直接用另一半目标图选阈值的效果。Mutagenicity 的整档经验真比例经原赔率公式仍使 Accuracy 下降 1.60 个百分点。PROTEINS 在相同可移动范围内直接选阈值提高 2.94 个百分点，但去掉一个方向后其余方向平均下降 1.18 个百分点。以后看到平均增益，要同时看改善方向数和删去贡献最大方向后的结果；看到代理量改善，要先检验它有多大机会改变正确判决。[R12 诊断和逐方向证据](../../experiments/mutagenicity/r12_三种图读数与阈值识别_20261121/docs/fixed-reader-target-diagnostics.md)
 
 ## 两个会话怎样交接
 

@@ -8,6 +8,8 @@ R11 显示，用 A 的标签选择阈值能改善分类，直接从分类分数�
 
 [同图换源模型的读数差异](docs/crossed-readers.md)及[从可行比例到分类动作的条件](docs/fixed-reader-identification.md)记录此试验的依据。
 
+[给目标比例与直接给阈值的对照](docs/fixed-reader-target-diagnostics.md)说明为何精确的正类比例仍可能降低分类准确率，以及 PROTEINS 的阈值收益集中在哪个迁移方向。
+
 [按图大小判决分组的三票先导](docs/conditional-votes-results.md)已完成种子 3405 的 36 个开发方向。PROTEINS 出现净纠正，Own 仍低于最强固定参照，三个设置均未晋级。[登记协议](docs/conditional-votes.md) · [相同观测下的正反例](docs/vote-identification.md)给出该方法可识别和失效的具体条件。
 
 ## 运行源内筛查
