@@ -114,7 +114,12 @@ def prior_interval(bands, options):
             < -options['feasibility_tolerance']
             or lo > hi + options['feasibility_tolerance']):
         return dict(status='numerical_failure', lp_message='LP endpoints failed primal replay')
-    return dict(status='feasible', lower=min(lo, hi), upper=max(lo, hi))
+    if bands.point_rows is not None and model.offsets[0] == 1.:
+        # Both certified LP endpoints solve the same analytic mass equality.
+        # Retain its exact boundary value despite roundoff in the LP vectors.
+        lo = hi = float(model.rhs[0])
+    return dict(status='feasible', lower=float(np.clip(min(lo, hi), 0., 1.)),
+                upper=float(np.clip(max(lo, hi), 0., 1.)))
 
 
 def _valid(intercept, slope, status, **metadata):
