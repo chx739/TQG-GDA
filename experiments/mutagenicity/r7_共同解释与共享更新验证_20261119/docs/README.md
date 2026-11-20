@@ -25,3 +25,5 @@
 [第十四轮 P 五种子损失与排序复盘](iteration-14-p-risk-replay.md)
 
 [源校准与 MLLS 对照实测](accuracy-and-prior-control-results.md)
+
+[冻结更新头交叉协议](reference-head-crossover.md) · [交叉实测报告](reference-head-crossover-results.md)

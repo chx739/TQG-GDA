@@ -1,6 +1,6 @@
 # R7 共同解释与共享更新验证
 
-[第十二轮已有更新头的跨目标域交叉验证](docs/reference-head-crossover.md)检验单解释与共同解释更新是否能在自己的目标域多分对图。
+[第十二轮已有更新头的跨目标域交叉验证](docs/reference-head-crossover-results.md)已完成 180 个评价块。E 在三种开发设置均通过目标匹配门槛，PROTEINS 的匹配增益几乎全由同阳性数对照解释。[预登记协议](docs/reference-head-crossover.md)
 
 第十二轮按原门槛首次通过真实 P。全方向 C 已封存，Mutagenicity 边数划分的平均 BA 提高 0.53 个百分点，节点数划分接近零，PROTEINS 有主比较缺失。C 整体尚未通过。第十三轮合成扩展未过门槛。第十四轮用配对消融定位到类别比例锚点过强，固定伪计数后的正确设定诊断为 15/15。独立种子的正式 S 已通过，同配置真实 P 未通过。[真实试点](docs/iteration-12.md#同配置重跑通过-p) · [全方向结果](docs/iteration-12.md#全方向-c-的封存结果) · [均衡分类验证](docs/iteration-13.md) · [固定类别比例锚点](docs/iteration-14.md)
 
@@ -50,4 +50,13 @@ S 使用固定生成参数的解析源 logits。真实目标条件概率与抽�
 python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.run D \
   --plan /path/to/executed-plan.json --c-output /path/to/passed-C \
   --acquisition /path/to/nci1-sha256.json --output /path/to/new-D --workers 4
+```
+
+## 冻结更新头交叉推断
+
+复用第十二轮修复版 C 的原有 E/J、源坐标和 H。使用指定的新输出目录，全部交叉预测封存后才按原角色评分。
+
+```sh
+round=experiments/mutagenicity/r7_共同解释与共享更新验证_20261119
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.reference_head_crossover --config "$round/configs/reference-head-crossover.json" --output /path/to/new-head-crossover
 ```

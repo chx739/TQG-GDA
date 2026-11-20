@@ -1,0 +1,125 @@
+{
+  "checked_endpoints": {
+    "r7": 538,
+    "r10": 360,
+    "r11": 180
+  },
+  "original_c_gate": {
+    "passed": false,
+    "next_phase": null,
+    "contrasts": {
+      "J-B0": {
+        "complete_primary_pairs": false,
+        "point_estimate_pass": false,
+        "clear_development_replication": false,
+        "favorable_interval_datasets": [
+          "Mutagenicity"
+        ],
+        "settings": {
+          "mutagenicity_edge": {
+            "dataset": "Mutagenicity",
+            "nll_delta": -0.19212805178454845,
+            "ba_pp_delta": 0.5335496141558185,
+            "complete": true,
+            "nll_ci": [
+              -0.229381196742989,
+              -0.15741536831409275
+            ],
+            "ba_pp_ci": [
+              0.14429412454363752,
+              0.9164862904306922
+            ],
+            "favorable_intervals": true
+          },
+          "mutagenicity_node": {
+            "dataset": "Mutagenicity",
+            "nll_delta": -0.1284424648320696,
+            "ba_pp_delta": -0.03201563835036873,
+            "complete": true,
+            "nll_ci": [
+              -0.16205042963810443,
+              -0.09651994625261413
+            ],
+            "ba_pp_ci": [
+              -0.43984434653129445,
+              0.38220682199633116
+            ],
+            "favorable_intervals": false
+          },
+          "proteins_edge": {
+            "dataset": "PROTEINS",
+            "nll_delta": null,
+            "ba_pp_delta": null,
+            "complete": false,
+            "nll_ci": [
+              null,
+              null
+            ],
+            "ba_pp_ci": [
+              null,
+              null
+            ],
+            "favorable_intervals": false
+          }
+        }
+      },
+      "J-A0": {
+        "complete_primary_pairs": false,
+        "point_estimate_pass": false,
+        "clear_development_replication": false,
+        "favorable_interval_datasets": [],
+        "settings": {
+          "mutagenicity_edge": {
+            "dataset": "Mutagenicity",
+            "nll_delta": -0.41456553071721747,
+            "ba_pp_delta": 0.22074514194468464,
+            "complete": true,
+            "nll_ci": [
+              -0.48384038501253895,
+              -0.3516326570983976
+            ],
+            "ba_pp_ci": [
+              -0.15661415800503276,
+              0.5747419636056292
+            ],
+            "favorable_intervals": false
+          },
+          "mutagenicity_node": {
+            "dataset": "Mutagenicity",
+            "nll_delta": -0.24808793331040632,
+            "ba_pp_delta": -0.36234574503309036,
+            "complete": true,
+            "nll_ci": [
+              -0.3094882171307057,
+              -0.1919762456892426
+            ],
+            "ba_pp_ci": [
+              -0.7496529517031478,
+              0.036660770969206634
+            ],
+            "favorable_intervals": false
+          },
+          "proteins_edge": {
+            "dataset": "PROTEINS",
+            "nll_delta": null,
+            "ba_pp_delta": null,
+            "complete": false,
+            "nll_ci": [
+              null,
+              null
+            ],
+            "ba_pp_ci": [
+              null,
+              null
+            ],
+            "favorable_intervals": false
+          }
+        }
+      }
+    },
+    "scope": "R7 development evaluation on two datasets; relations are conditional on fixed models",
+    "reused_p_blocks": 10,
+    "new_c_blocks": 170,
+    "repeated_audit_blocks": 5
+  }
+}
