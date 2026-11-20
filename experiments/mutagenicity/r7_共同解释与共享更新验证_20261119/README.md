@@ -8,6 +8,7 @@
 使用相同完整更新空间的[教师校准对照](docs/strong-anchor-score-teacher.md)检验先验和 GNN 分数斜率能否解释这项更新。
 [八样本算例和 36 个未标记适配池的矩核验](docs/strong-anchor-mechanism.md)说明重新求解何时能改变判决，以及该改变的正确性还取决于什么。
 [独立核验记录](docs/strong-anchor-review.md)涵盖两个数值修复、角色和判据的核对及中断评分恢复。
+[仅应用两种教师的更新差](docs/centered-target-update.md)检验原解释超出分数校准的部分能否直接纠正强源判决。
 
 第十二轮按原门槛首次通过真实 P。全方向 C 已封存，Mutagenicity 边数划分的平均 BA 提高 0.53 个百分点，节点数划分接近零，PROTEINS 有主比较缺失。C 整体尚未通过。第十三轮合成扩展未过门槛。第十四轮用配对消融定位到类别比例锚点过强，固定伪计数后的正确设定诊断为 15/15。独立种子的正式 S 已通过，同配置真实 P 未通过。[真实试点](docs/iteration-12.md#同配置重跑通过-p) · [全方向结果](docs/iteration-12.md#全方向-c-的封存结果) · [均衡分类验证](docs/iteration-13.md) · [固定类别比例锚点](docs/iteration-14.md)
 
