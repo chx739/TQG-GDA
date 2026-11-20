@@ -2,4 +2,4 @@
 
 首轮只使用 Mutagenicity 边数划分 M0 内已有的源训练图。在同一来源内构造小图到大图、大图到小图两个伪迁移，检验通过中间图改变源样本的投票权是否能提高图分类 Accuracy。登记时未运行本轮实验。
 
-[来源内试验与停止条件](docs/source-bridge.md) · [实验索引](../../README.md)
+[来源内试验与停止条件](docs/source-bridge.md) · [图级强基线的同协议接入准备](docs/native-comparators.md) · [实验索引](../../README.md)
