@@ -42,6 +42,10 @@ PooledBridge 与 TargetBridge 共用无标签 A 和 A→S 权重。它把同一�
 
 ## 复现与封存
 
+独立以 S 的授权标签逐块核对 PooledBridge。若 A→S 的平均正类票为 q，它对每个 h 的普通决策精确等价于 B(h)>1−q。小图→大图的五次 q 为 0.6171 至 0.6431（源正类 148/427），大图→小图为 0.4101 至 0.4583（源正类 274/441）；同一块 H 内 q 完全相同。其两方向 Accuracy 均高于 B，但其等权 BA 和 NLL 劣于 B。这说明该分数可移动分类阈值，目标专属先验的估计精度及域外可重复性仍需单独检验。
+
+从正式封存独立重建了所有角色、60 项分类端点、50 组纠正/损害、50 个逐扰动 Accuracy 区间和 45 行方向/等权汇总区间。哈希和整数计数吻合，区间绝对误差在 10⁻¹² 内。跨切点有一对归一化 WL 完全相同的源图与候选中转图，部分扰动包含该中转图。无标签路径核对表明，即便所有经此同指纹端点且受影响的查询决策都翻转，等权 Accuracy 变化也至多 0.652 pp。
+
 执行代码为 `22773c08c904adebdd6bc53d3b52a9b996d801fa`，含预评分修订 `e48b5b4`、稀疏拟合修复以及生成回归。R9 十项回归及 R7–R9 共 55 项相关测试通过。十块均可评价，五种候选跳转合计没有触发均匀回退。事后不读取标签复核了两个封存链、角色构造、两跳乘积、同权重重排、PooledBridge 权重、排除项以及门槛精确分数。每个对比的纠正加损害与封存动作的分歧数一致。
 
 [方案与预评分修订](docs/source-bridge.md) · [无标签预检](results/preflight/input-checks.json) · [实际命令与配置](results/attempt-001/executed-config.json) · [角色](results/attempt-001/roles.json) · [OBS](results/attempt-001/OBS.json) · [FINAL](results/attempt-001/FINAL.json) · [核验](results/attempt-001/verification.json)
