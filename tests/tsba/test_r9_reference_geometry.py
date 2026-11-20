@@ -1,6 +1,7 @@
 from fractions import Fraction
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from types import SimpleNamespace
 from unittest import TestCase, mock
 
 import numpy as np
@@ -103,9 +104,22 @@ class ReferenceGeometryTests(TestCase):
     def test_no_E_reader_before_successful_obs_replay(self):
         with TemporaryDirectory() as tmp, mock.patch.object(run.data,'ScopedLabels') as labels:
             ref = run.Reference({}, {}, {}, {})
+            out = Path(tmp)
             with self.assertRaises(FileNotFoundError):
-                run.score(Path(tmp),dict(source_obs_sha256='old'),ref,None,{},'missing')
+                run.score(out,dict(source_obs_sha256='old'),ref,None,{},'missing',
+                          execution={'obs_sha256':'missing'})
             labels.assert_not_called()
+            self.assertFalse((out/'score-execution.json').exists())
+            with mock.patch.object(run,'observed',return_value=({},{})):
+                labels.side_effect = RuntimeError('fake E port reached')
+                with self.assertRaisesRegex(RuntimeError,'fake E port reached'):
+                    run.score(out,{},ref,SimpleNamespace(by_setting={}),{},'verified',
+                              execution={'obs_sha256':'verified'})
+                self.assertIn('verified',(out/'score-execution.json').read_text())
+                with self.assertRaises(FileExistsError):
+                    run.score(out,{},ref,SimpleNamespace(by_setting={}),{},'verified',
+                              execution={'obs_sha256':'verified'})
+                labels.assert_called_once()
 
     def test_exact_advance_uses_all_controls_and_source_group_signs(self):
         ref = run.Reference(dict(settings=['mutagenicity_edge','mutagenicity_node','proteins_edge']),{},{},{})

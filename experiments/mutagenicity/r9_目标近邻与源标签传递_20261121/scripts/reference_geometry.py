@@ -74,14 +74,17 @@ def main():
             print('R9 reference geometry OBS',obs,flush=True)
         if args.phase != 'freeze':
             phase = 'score_E_only'
-            io.write_json(output/'score-execution.json',dict(code_commit=revision, obs_sha256=obs,
+            execution = dict(code_commit=revision, obs_sha256=obs,
                 command=[sys.executable,*sys.orig_argv[1:]], cwd=str(Path.cwd()),
-                started_utc=datetime.now(timezone.utc).isoformat()))
-            final = reference_geometry.score(output,cfg,reference,archive,features,obs)
+                started_utc=datetime.now(timezone.utc).isoformat())
+            final = reference_geometry.score(output,cfg,reference,archive,features,obs,execution=execution)
             print('R9 reference geometry FINAL',final,flush=True)
     except Exception:
         name = f'execution-failure-{args.phase}.json'
-        io.write_json(output/name,dict(phase=phase,traceback=traceback.format_exc()))
+        try:
+            io.write_json(output/name,dict(phase=phase,traceback=traceback.format_exc()))
+        except FileExistsError:
+            pass  # Preserve the first failure record and propagate the current exception.
         raise
 
 

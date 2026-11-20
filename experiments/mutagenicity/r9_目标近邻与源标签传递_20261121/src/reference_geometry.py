@@ -190,8 +190,10 @@ def gate(reference, contrasts):
     return dict(settings=settings,continue_real_four_domain_pilot=proceed)
 
 
-def score(output, cfg, reference, archive, features, obs_sha):
+def score(output, cfg, reference, archive, features, obs_sha, *, execution=None):
     predictions,models = observed(output,cfg,reference,features,obs_sha)
+    if execution is not None:
+        write_json(output/'score-execution.json', execution)
     endpoints, pairs, endpoints_by_key, pairs_by_key, geometry = [], [], {}, {}, []
     with data.ScopedLabels(archive.by_setting,reference.roles,'replay_E') as port:
         for key,row in reference.roles.items():
