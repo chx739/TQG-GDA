@@ -20,3 +20,5 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 [固定 A 均值的工作点诊断](docs/fixed-mass-diagnostic-results.md)
 
 [分数档内漂移的历史分解](docs/conditional-drift.md)显示，M0→M1 的类 0 在相同主分类器分数档内仍有明显的结构分数差异，M0→M3 的类 1 则有两项相反的变化。
+
+[源融合收益与图大小的关系](docs/size-matched-flips.md)按相同图大小和源校准判决分组，检验融合在给定翻转预算时是否选中了更需要纠正的图。
