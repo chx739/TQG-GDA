@@ -12,12 +12,19 @@ import torch
 
 from experiments.common import io
 from experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src import r5_inputs, seals
-from experiments.mutagenicity.r8_图结构观察量与类别约束_20261121.src import composition
+from experiments.mutagenicity.r8_图结构观察量与类别约束_20261121.src import composition, inputs as r8_inputs, pilot
 from experiments.mutagenicity.r9_目标近邻与源标签传递_20261121.src import (
     geometry_models, reference_geometry, residual_inputs, true_rate_replay, weighted_residuals, wl)
 from experiments.mutagenicity.r11_分类阈值的跨域检验_20261121.src import inputs, prior_run, roc_score, roc_transfer
 from experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.src import source_inputs
 from ..src import source_attribute_screen as runner, source_attributes, structural, structural_observation
+
+
+CODE_MODULES = (
+    io, r5_inputs, seals, composition, r8_inputs, pilot, geometry_models, reference_geometry,
+    residual_inputs, true_rate_replay, weighted_residuals, wl, inputs, prior_run, roc_score,
+    roc_transfer, source_inputs, runner, source_attributes, structural, structural_observation,
+)
 
 
 def main():
@@ -42,10 +49,7 @@ def main():
     if inputs.sha(git('show',f"{cfg['registration_commit']}:{protocol_path}"))!=io.digest(protocol):
         raise PermissionError('Registered node attribute protocol changed')
     revision = git('rev-parse','HEAD').decode().strip()
-    modules = (io,r5_inputs,seals,composition,geometry_models,reference_geometry,residual_inputs,true_rate_replay,
-               weighted_residuals,wl,inputs,prior_run,roc_score,roc_transfer,source_inputs,runner,source_attributes,
-               structural,structural_observation)
-    checked = [config,protocol,Path(__file__),*(Path(m.__file__) for m in modules)]
+    checked = [config,protocol,Path(__file__),*(Path(m.__file__) for m in CODE_MODULES)]
     hashes = {str(p.resolve().relative_to(repo)):io.digest(p) for p in checked}
     if any(inputs.sha(git('show',f'{revision}:{file}'))!=sha for file,sha in hashes.items()):
         raise PermissionError('Actual code or config differs from the recorded revision')

@@ -1,5 +1,6 @@
 from fractions import Fraction
 from hashlib import sha256
+from inspect import getmodule
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import TestCase, mock
@@ -10,9 +11,15 @@ import torch
 
 from experiments.mutagenicity.r10_原生图适配基线与增量_20261121.src import (
     source_attribute_screen as run, source_attributes as a)
+from experiments.mutagenicity.r10_原生图适配基线与增量_20261121.scripts import source_attribute_screen as cli
 
 
 class SourceAttributeTests(TestCase):
+    def test_code_inventory_covers_implementations_used_for_reading_and_writing(self):
+        for function in (a.sha, run.inputs.npz_member, run.write_table):
+            with self.subTest(function=function.__name__):
+                self.assertIn(getmodule(function), cli.CODE_MODULES)
+
     def test_raw_hash_and_type_alignment_keep_negative_and_even_median(self):
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
