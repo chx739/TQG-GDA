@@ -41,3 +41,7 @@ A 和 H 各有 20 个真标签类条件矩，两池都没有超过对应样本�
 [实际命令和代码版本](results/attempt-001/executed-config.json) · [OBS](results/attempt-001/OBS.json) · [FINAL](results/attempt-001/FINAL.json) · [封存与重放核验](results/attempt-001/verification.json) · [运行日志](results/attempt-001/run.log) · [工程测试](results/attempt-001/engineering-tests.log)
 
 [补丁后冻结分数重放](results/attempt-001/post-run-solver-check.json)
+
+独立审查从封存的逐图预测和相应图 ID 重算 220 行端点、170 行配对、40 行类均值及 480 行矩残差，净纠错数逐项一致，四类浮点结果的最大绝对差不超过 3.34×10⁻¹⁶。按同一批图重建两个域各 2,000 次 bootstrap，153 行区间端点最大差不超过 4.27×10⁻¹⁴。OBS 的 24 个成员和 FINAL 的 7 个成员摘要全部吻合。正式运行在拟合前会读取历史封存文件的字节校验哈希，上述目标标签读取时间指标签值的解码和评分。
+
+针对两个方向的 Accuracy 分化，保留一次事后诊断，固定各臂在 A 的平均预测概率，比较源与目标斜率在这一条件下的净纠错。其结果只用于归因。[固定预测正类比例的诊断](docs/fixed-mass-diagnostic.md)
