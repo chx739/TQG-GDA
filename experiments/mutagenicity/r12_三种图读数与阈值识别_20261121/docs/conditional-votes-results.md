@@ -63,12 +63,12 @@ PROTEINS 的净纠正集中在 Size 反对共识的图上。Own 相对 OwnLock �
 
 PROTEINS 上 Own 的 Accuracy 也低于 Size **0.695 pp**、低于 DirectP **1.604 pp**。因此推翻两票共识带来的纠正尚不足以超过固定强参照。三个设置的 Own 均超过异域规则平均，但在两种 Mutagenicity 划分分别输给第一份异域规则。区间按原 R11 的目标域和类分层、同图配对重采样 2,000 次。它们描述这批图和种子 3405 的不确定性。两种 Mutagenicity 划分共享分子，结果未建立跨种子的稳定优势。
 
-PROTEINS 的 24 个同域 Size 层中，9 个拟合比例，8 个层缺 A，另 7 个层的源 V 缺一类。后两类直接回退到源比例。Mutagenicity 边数的 24 层均拟合，节点数有 2 层缺 A 回退。模板总变差、混合拟合误差、估计比例和精确动作均已留档。小拟合误差与正确改判是不同的检验。
+PROTEINS 的 24 个同域 Size 层中，9 个拟合比例，8 个层缺 A，另 7 个层的源 V 缺一类。后两类直接回退到源比例。Mutagenicity 边数的 24 层均拟合，节点数有 2 层缺 A 回退。模板总变差、混合拟合误差、估计比例和精确动作均已留档。小拟合误差与正确改判是不同的检验。进一步的源支持核对发现，PROTEINS 有 429/1,020 个 H 图次落入源 V 空层，其中 410 个图次所在层在对应源 S+V 内也为空。Own 和 Static 在六个 PROTEINS 方向的动作完全一致，因此它最多能赢六个方向，低于七个方向的门槛。[源支持与盲算](vote-support.md)
 
 [逐方向纠正／误改](../results/attempt-002-conditional-votes/paired-blocks.csv) · [配对区间](../results/attempt-002-conditional-votes/paired-summary.csv) · [门槛](../results/attempt-002-conditional-votes/gate.json) · [拟合及回退](../results/attempt-002-conditional-votes/rules.json)
 
 ## 实现、执行和复核
 
-执行提交为 `48847bb`。复用 R10 Size/WL、R7 B0、R16 B/B₂ 及 R11 等预算 A 的冻结参照，GNN 更新为零。A 类别读取为零，全部 36 块预测封存后只按 12 个不同的 H 角色各读取一次标签。正式运行前完成干净上下文审查。21 项 R12 测试及 80 项相关回归通过。封存后以历史端点和八格计数复核 468 个端点、468 条配对净变化及 108 个共识分层，12 个 H 的重采样哈希均与 R11 一致。归档复核无需再次读取图类别。
+执行提交为 `48847bb`。复用 R10 Size/WL、R7 B0、R16 B/B₂ 及 R11 等预算 A 的冻结参照，GNN 更新为零。A 类别读取为零，全部 36 块预测封存后只按 12 个不同的 H 角色各读取一次标签。正式运行前完成干净上下文审查。封存后的 216 个 H 动作向量与审查侧盲算哈希逐项一致。21 项 R12 测试及 80 项相关回归通过。封存后以历史端点和八格计数复核 468 个端点、468 条配对净变化及 108 个共识分层，12 个 H 的重采样哈希均与 R11 一致。归档复核无需再次读取图类别。
 
-[配置](../results/attempt-002-conditional-votes/executed-config.json) · [源 V 计数](../results/attempt-002-conditional-votes/source-counts.json) · [OBS](../results/attempt-002-conditional-votes/OBS.json) · [FINAL](../results/attempt-002-conditional-votes/FINAL.json) · [复核](../results/attempt-002-conditional-votes/verification.json) · [运行日志](../results/attempt-002-conditional-votes/run.log) · [工程回归](../results/attempt-002-conditional-votes/engineering-tests.log)
+[配置](../results/attempt-002-conditional-votes/executed-config.json) · [源 V 计数](../results/attempt-002-conditional-votes/source-counts.json) · [OBS](../results/attempt-002-conditional-votes/OBS.json) · [FINAL](../results/attempt-002-conditional-votes/FINAL.json) · [复核](../results/attempt-002-conditional-votes/verification.json) · [盲算比对](../results/attempt-002-conditional-votes/blind-review-match.json) · [运行日志](../results/attempt-002-conditional-votes/run.log) · [工程回归](../results/attempt-002-conditional-votes/engineering-tests.log)
