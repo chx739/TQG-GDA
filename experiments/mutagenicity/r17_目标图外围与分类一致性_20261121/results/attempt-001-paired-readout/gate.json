@@ -1,0 +1,119 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "passed": false,
+      "clauses": {
+        "base_gain_at_least_half_pp": false,
+        "at_least_three_positive_source_groups": false,
+        "strictly_above_SourcePair": false,
+        "strictly_above_Shuffled": true,
+        "strictly_above_WL_selected": false,
+        "strictly_above_Size": true,
+        "strictly_above_Base": false,
+        "strictly_above_EqualPositive": false
+      },
+      "positive_source_groups": 1,
+      "group_gain_vs_C1_exact": {
+        "0": "-323/23326",
+        "1": "109/11832",
+        "2": "-218/11877",
+        "3": "-156/5795"
+      },
+      "accuracy_exact": {
+        "WL_C1": "-1476748431727/118354177678560",
+        "SourcePair": "-24285323547/2320670150560",
+        "Shuffled": "68607212033/622916724624",
+        "WL_selected": "-3946818492413/59177088839280",
+        "Size": "5691661255723/59177088839280",
+        "Base": "-667078559807/14794272209820",
+        "EqualPositive": "-22193395/1940550544"
+      },
+      "accuracy_pp": {
+        "WL_C1": -1.2477366331231032,
+        "SourcePair": -1.046478903567563,
+        "Shuffled": 11.013865789911506,
+        "WL_selected": -6.669504312948255,
+        "Size": 9.618014957074136,
+        "Base": -4.5090326198284565,
+        "EqualPositive": -1.1436648774039868
+      }
+    },
+    "mutagenicity_node": {
+      "passed": false,
+      "clauses": {
+        "base_gain_at_least_half_pp": false,
+        "at_least_three_positive_source_groups": false,
+        "strictly_above_SourcePair": false,
+        "strictly_above_Shuffled": true,
+        "strictly_above_WL_selected": false,
+        "strictly_above_Size": true,
+        "strictly_above_Base": false,
+        "strictly_above_EqualPositive": true
+      },
+      "positive_source_groups": 0,
+      "group_gain_vs_C1_exact": {
+        "0": "-79/2915",
+        "1": "0",
+        "2": "-325/23326",
+        "3": "-1/206"
+      },
+      "accuracy_exact": {
+        "WL_C1": "-80345233/7003514870",
+        "SourcePair": "-5937/2495240",
+        "Shuffled": "4432509398011/57484850052960",
+        "WL_selected": "-427443965567/5225895459360",
+        "Size": "1272950357227/14371212513240",
+        "Base": "-255491079757/2874242502648",
+        "EqualPositive": "5195681/2560116240"
+      },
+      "accuracy_pp": {
+        "WL_C1": -1.1472129993492826,
+        "SourcePair": -0.23793302447860726,
+        "Shuffled": 7.710743602753404,
+        "WL_selected": -8.179343978292053,
+        "Size": 8.857640620471296,
+        "Base": -8.888988299408265,
+        "EqualPositive": 0.20294707399692133
+      }
+    },
+    "proteins_edge": {
+      "passed": false,
+      "clauses": {
+        "base_gain_at_least_half_pp": false,
+        "at_least_three_positive_source_groups": false,
+        "strictly_above_SourcePair": false,
+        "strictly_above_Shuffled": false,
+        "strictly_above_WL_selected": true,
+        "strictly_above_Size": true,
+        "strictly_above_Base": true,
+        "strictly_above_EqualPositive": false
+      },
+      "positive_source_groups": 0,
+      "group_gain_vs_C1_exact": {
+        "0": "0",
+        "1": "0",
+        "2": "-1/27",
+        "3": "0"
+      },
+      "accuracy_exact": {
+        "WL_C1": "-1/108",
+        "SourcePair": "-1/108",
+        "Shuffled": "-14/783",
+        "WL_selected": "12353/517824",
+        "Size": "2875/50112",
+        "Base": "61/2160",
+        "EqualPositive": "-1/108"
+      },
+      "accuracy_pp": {
+        "WL_C1": -0.9259259259259259,
+        "SourcePair": -0.9259259259259259,
+        "Shuffled": -1.7879948914431674,
+        "WL_selected": 2.3855595723643557,
+        "Size": 5.737148786717753,
+        "Base": 2.824074074074074,
+        "EqualPositive": -0.9259259259259259
+      }
+    }
+  },
+  "continue_real_development": false
+}

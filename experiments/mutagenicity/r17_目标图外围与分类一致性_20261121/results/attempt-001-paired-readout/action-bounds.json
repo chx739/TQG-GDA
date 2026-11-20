@@ -1,0 +1,1324 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "comparisons": {
+        "WL_C1": {
+          "upper_exact": "5268687005419/118354177678560",
+          "upper_pp": 4.4516274023958085,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "SourcePair": {
+          "upper_exact": "3325842538087/118354177678560",
+          "upper_pp": 2.810076165726662,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "Shuffled": {
+          "upper_exact": "1786809981043/7397136104910",
+          "upper_pp": 24.155429286436522,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "WL_selected": {
+          "upper_exact": "10585956461257/59177088839280",
+          "upper_pp": 17.888606332101887,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "Size": {
+          "upper_exact": "3668214414029/11835417767856",
+          "upper_pp": 30.99353555555565,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "Base": {
+          "upper_exact": "155137607887/778645905780",
+          "upper_pp": 19.924025379879524,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "EqualPositive": {
+          "upper_exact": "6537454263/207638908208",
+          "upper_pp": 3.148472663153852,
+          "max_positive_directions": 7,
+          "max_positive_source_groups": 4
+        }
+      },
+      "possible_by_separate_pairwise_bounds": true
+    },
+    "mutagenicity_node": {
+      "comparisons": {
+        "WL_C1": {
+          "upper_exact": "590608028029/14371212513240",
+          "upper_pp": 4.1096603886754925,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "SourcePair": {
+          "upper_exact": "35526313/2560116240",
+          "upper_pp": 1.3876835920543982,
+          "max_positive_directions": 6,
+          "max_positive_source_groups": 4
+        },
+        "Shuffled": {
+          "upper_exact": "10496554268131/57484850052960",
+          "upper_pp": 18.259688002074753,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "WL_selected": {
+          "upper_exact": "399976773381/2129068520480",
+          "upper_pp": 18.786467862989443,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "Size": {
+          "upper_exact": "353650276381/1197601042770",
+          "upper_pp": 29.529890485317384,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "Base": {
+          "upper_exact": "12621296341/53226713012",
+          "upper_pp": 23.712334703355662,
+          "max_positive_directions": 8,
+          "max_positive_source_groups": 4
+        },
+        "EqualPositive": {
+          "upper_exact": "1180233368707/28742425026480",
+          "upper_pp": 4.106241444901282,
+          "max_positive_directions": 7,
+          "max_positive_source_groups": 4
+        }
+      },
+      "possible_by_separate_pairwise_bounds": true
+    },
+    "proteins_edge": {
+      "comparisons": {
+        "WL_C1": {
+          "upper_exact": "1/108",
+          "upper_pp": 0.9259259259259259,
+          "max_positive_directions": 1,
+          "max_positive_source_groups": 1
+        },
+        "SourcePair": {
+          "upper_exact": "1/108",
+          "upper_pp": 0.9259259259259259,
+          "max_positive_directions": 1,
+          "max_positive_source_groups": 1
+        },
+        "Shuffled": {
+          "upper_exact": "83/3132",
+          "upper_pp": 2.6500638569604087,
+          "max_positive_directions": 2,
+          "max_positive_source_groups": 1
+        },
+        "WL_selected": {
+          "upper_exact": "209201/2589120",
+          "upper_pp": 8.0800040168088,
+          "max_positive_directions": 5,
+          "max_positive_source_groups": 3
+        },
+        "Size": {
+          "upper_exact": "6143/50112",
+          "upper_pp": 12.258540868454661,
+          "max_positive_directions": 3,
+          "max_positive_source_groups": 2
+        },
+        "Base": {
+          "upper_exact": "797/7830",
+          "upper_pp": 10.178799489144316,
+          "max_positive_directions": 4,
+          "max_positive_source_groups": 2
+        },
+        "EqualPositive": {
+          "upper_exact": "1/108",
+          "upper_pp": 0.9259259259259259,
+          "max_positive_directions": 1,
+          "max_positive_source_groups": 1
+        }
+      },
+      "possible_by_separate_pairwise_bounds": false
+    }
+  },
+  "cannot_advance_by_pairwise_bounds": true,
+  "per_block": [
+    {
+      "key": "mutagenicity_edge-M0-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 109,
+      "changed": 6,
+      "accuracy_upper_pp": 5.504587155963303
+    },
+    {
+      "key": "mutagenicity_edge-M0-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 107,
+      "changed": 7,
+      "accuracy_upper_pp": 6.542056074766355
+    },
+    {
+      "key": "mutagenicity_edge-M1-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 116,
+      "changed": 3,
+      "accuracy_upper_pp": 2.586206896551724
+    },
+    {
+      "key": "mutagenicity_edge-M1-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 102,
+      "changed": 5,
+      "accuracy_upper_pp": 4.901960784313726
+    },
+    {
+      "key": "mutagenicity_edge-M2-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 107,
+      "changed": 2,
+      "accuracy_upper_pp": 1.8691588785046729
+    },
+    {
+      "key": "mutagenicity_edge-M2-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 111,
+      "changed": 2,
+      "accuracy_upper_pp": 1.8018018018018018
+    },
+    {
+      "key": "mutagenicity_edge-M3-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 122,
+      "changed": 10,
+      "accuracy_upper_pp": 8.19672131147541
+    },
+    {
+      "key": "mutagenicity_edge-M3-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 95,
+      "changed": 4,
+      "accuracy_upper_pp": 4.2105263157894735
+    },
+    {
+      "key": "mutagenicity_edge-M0-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 109,
+      "changed": 3,
+      "accuracy_upper_pp": 2.7522935779816513
+    },
+    {
+      "key": "mutagenicity_edge-M0-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 107,
+      "changed": 2,
+      "accuracy_upper_pp": 1.8691588785046729
+    },
+    {
+      "key": "mutagenicity_edge-M1-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 116,
+      "changed": 1,
+      "accuracy_upper_pp": 0.8620689655172413
+    },
+    {
+      "key": "mutagenicity_edge-M1-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 102,
+      "changed": 2,
+      "accuracy_upper_pp": 1.9607843137254901
+    },
+    {
+      "key": "mutagenicity_edge-M2-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 107,
+      "changed": 2,
+      "accuracy_upper_pp": 1.8691588785046729
+    },
+    {
+      "key": "mutagenicity_edge-M2-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 111,
+      "changed": 5,
+      "accuracy_upper_pp": 4.504504504504505
+    },
+    {
+      "key": "mutagenicity_edge-M3-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 122,
+      "changed": 8,
+      "accuracy_upper_pp": 6.557377049180328
+    },
+    {
+      "key": "mutagenicity_edge-M3-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 95,
+      "changed": 2,
+      "accuracy_upper_pp": 2.1052631578947367
+    },
+    {
+      "key": "mutagenicity_edge-M0-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 109,
+      "changed": 42,
+      "accuracy_upper_pp": 38.53211009174312
+    },
+    {
+      "key": "mutagenicity_edge-M0-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 107,
+      "changed": 65,
+      "accuracy_upper_pp": 60.74766355140187
+    },
+    {
+      "key": "mutagenicity_edge-M1-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 116,
+      "changed": 20,
+      "accuracy_upper_pp": 17.24137931034483
+    },
+    {
+      "key": "mutagenicity_edge-M1-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 102,
+      "changed": 13,
+      "accuracy_upper_pp": 12.745098039215685
+    },
+    {
+      "key": "mutagenicity_edge-M2-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 107,
+      "changed": 15,
+      "accuracy_upper_pp": 14.018691588785046
+    },
+    {
+      "key": "mutagenicity_edge-M2-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 111,
+      "changed": 27,
+      "accuracy_upper_pp": 24.324324324324323
+    },
+    {
+      "key": "mutagenicity_edge-M3-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 122,
+      "changed": 21,
+      "accuracy_upper_pp": 17.21311475409836
+    },
+    {
+      "key": "mutagenicity_edge-M3-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 95,
+      "changed": 8,
+      "accuracy_upper_pp": 8.421052631578947
+    },
+    {
+      "key": "mutagenicity_edge-M0-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 109,
+      "changed": 23,
+      "accuracy_upper_pp": 21.10091743119266
+    },
+    {
+      "key": "mutagenicity_edge-M0-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 107,
+      "changed": 26,
+      "accuracy_upper_pp": 24.299065420560748
+    },
+    {
+      "key": "mutagenicity_edge-M1-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 116,
+      "changed": 12,
+      "accuracy_upper_pp": 10.344827586206897
+    },
+    {
+      "key": "mutagenicity_edge-M1-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 102,
+      "changed": 11,
+      "accuracy_upper_pp": 10.784313725490197
+    },
+    {
+      "key": "mutagenicity_edge-M2-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 107,
+      "changed": 13,
+      "accuracy_upper_pp": 12.149532710280374
+    },
+    {
+      "key": "mutagenicity_edge-M2-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 111,
+      "changed": 18,
+      "accuracy_upper_pp": 16.216216216216218
+    },
+    {
+      "key": "mutagenicity_edge-M3-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 122,
+      "changed": 28,
+      "accuracy_upper_pp": 22.950819672131146
+    },
+    {
+      "key": "mutagenicity_edge-M3-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 95,
+      "changed": 24,
+      "accuracy_upper_pp": 25.263157894736842
+    },
+    {
+      "key": "mutagenicity_edge-M0-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 109,
+      "changed": 50,
+      "accuracy_upper_pp": 45.87155963302752
+    },
+    {
+      "key": "mutagenicity_edge-M0-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 107,
+      "changed": 67,
+      "accuracy_upper_pp": 62.61682242990654
+    },
+    {
+      "key": "mutagenicity_edge-M1-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 116,
+      "changed": 18,
+      "accuracy_upper_pp": 15.517241379310345
+    },
+    {
+      "key": "mutagenicity_edge-M1-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 102,
+      "changed": 15,
+      "accuracy_upper_pp": 14.705882352941176
+    },
+    {
+      "key": "mutagenicity_edge-M2-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 107,
+      "changed": 23,
+      "accuracy_upper_pp": 21.49532710280374
+    },
+    {
+      "key": "mutagenicity_edge-M2-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 111,
+      "changed": 44,
+      "accuracy_upper_pp": 39.63963963963964
+    },
+    {
+      "key": "mutagenicity_edge-M3-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 122,
+      "changed": 33,
+      "accuracy_upper_pp": 27.049180327868854
+    },
+    {
+      "key": "mutagenicity_edge-M3-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 95,
+      "changed": 20,
+      "accuracy_upper_pp": 21.05263157894737
+    },
+    {
+      "key": "mutagenicity_edge-M0-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 109,
+      "changed": 33,
+      "accuracy_upper_pp": 30.275229357798164
+    },
+    {
+      "key": "mutagenicity_edge-M0-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 107,
+      "changed": 26,
+      "accuracy_upper_pp": 24.299065420560748
+    },
+    {
+      "key": "mutagenicity_edge-M1-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 116,
+      "changed": 12,
+      "accuracy_upper_pp": 10.344827586206897
+    },
+    {
+      "key": "mutagenicity_edge-M1-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 102,
+      "changed": 20,
+      "accuracy_upper_pp": 19.607843137254903
+    },
+    {
+      "key": "mutagenicity_edge-M2-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 107,
+      "changed": 14,
+      "accuracy_upper_pp": 13.08411214953271
+    },
+    {
+      "key": "mutagenicity_edge-M2-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 111,
+      "changed": 30,
+      "accuracy_upper_pp": 27.027027027027028
+    },
+    {
+      "key": "mutagenicity_edge-M3-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 122,
+      "changed": 18,
+      "accuracy_upper_pp": 14.754098360655737
+    },
+    {
+      "key": "mutagenicity_edge-M3-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 95,
+      "changed": 19,
+      "accuracy_upper_pp": 20.0
+    },
+    {
+      "key": "mutagenicity_edge-M0-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 109,
+      "changed": 6,
+      "accuracy_upper_pp": 5.504587155963303
+    },
+    {
+      "key": "mutagenicity_edge-M0-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 107,
+      "changed": 6,
+      "accuracy_upper_pp": 5.607476635514018
+    },
+    {
+      "key": "mutagenicity_edge-M1-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 116,
+      "changed": 2,
+      "accuracy_upper_pp": 1.7241379310344827
+    },
+    {
+      "key": "mutagenicity_edge-M1-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 102,
+      "changed": 2,
+      "accuracy_upper_pp": 1.9607843137254901
+    },
+    {
+      "key": "mutagenicity_edge-M2-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 107,
+      "changed": 2,
+      "accuracy_upper_pp": 1.8691588785046729
+    },
+    {
+      "key": "mutagenicity_edge-M2-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 111,
+      "changed": 4,
+      "accuracy_upper_pp": 3.6036036036036037
+    },
+    {
+      "key": "mutagenicity_edge-M3-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 122,
+      "changed": 6,
+      "accuracy_upper_pp": 4.918032786885246
+    },
+    {
+      "key": "mutagenicity_edge-M3-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 95,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "mutagenicity_node-M0-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 106,
+      "changed": 3,
+      "accuracy_upper_pp": 2.830188679245283
+    },
+    {
+      "key": "mutagenicity_node-M0-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 110,
+      "changed": 13,
+      "accuracy_upper_pp": 11.818181818181818
+    },
+    {
+      "key": "mutagenicity_node-M1-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 108,
+      "changed": 3,
+      "accuracy_upper_pp": 2.7777777777777777
+    },
+    {
+      "key": "mutagenicity_node-M1-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 108,
+      "changed": 1,
+      "accuracy_upper_pp": 0.9259259259259259
+    },
+    {
+      "key": "mutagenicity_node-M2-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 107,
+      "changed": 2,
+      "accuracy_upper_pp": 1.8691588785046729
+    },
+    {
+      "key": "mutagenicity_node-M2-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 109,
+      "changed": 7,
+      "accuracy_upper_pp": 6.422018348623853
+    },
+    {
+      "key": "mutagenicity_node-M3-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 103,
+      "changed": 1,
+      "accuracy_upper_pp": 0.970873786407767
+    },
+    {
+      "key": "mutagenicity_node-M3-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 114,
+      "changed": 6,
+      "accuracy_upper_pp": 5.2631578947368425
+    },
+    {
+      "key": "mutagenicity_node-M0-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 106,
+      "changed": 5,
+      "accuracy_upper_pp": 4.716981132075472
+    },
+    {
+      "key": "mutagenicity_node-M0-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 110,
+      "changed": 1,
+      "accuracy_upper_pp": 0.9090909090909091
+    },
+    {
+      "key": "mutagenicity_node-M1-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 108,
+      "changed": 1,
+      "accuracy_upper_pp": 0.9259259259259259
+    },
+    {
+      "key": "mutagenicity_node-M1-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 108,
+      "changed": 1,
+      "accuracy_upper_pp": 0.9259259259259259
+    },
+    {
+      "key": "mutagenicity_node-M2-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 107,
+      "changed": 2,
+      "accuracy_upper_pp": 1.8691588785046729
+    },
+    {
+      "key": "mutagenicity_node-M2-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 109,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "mutagenicity_node-M3-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 103,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "mutagenicity_node-M3-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 114,
+      "changed": 2,
+      "accuracy_upper_pp": 1.7543859649122806
+    },
+    {
+      "key": "mutagenicity_node-M0-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 106,
+      "changed": 28,
+      "accuracy_upper_pp": 26.41509433962264
+    },
+    {
+      "key": "mutagenicity_node-M0-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 110,
+      "changed": 28,
+      "accuracy_upper_pp": 25.454545454545453
+    },
+    {
+      "key": "mutagenicity_node-M1-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 108,
+      "changed": 27,
+      "accuracy_upper_pp": 25.0
+    },
+    {
+      "key": "mutagenicity_node-M1-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 108,
+      "changed": 16,
+      "accuracy_upper_pp": 14.814814814814815
+    },
+    {
+      "key": "mutagenicity_node-M2-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 107,
+      "changed": 14,
+      "accuracy_upper_pp": 13.08411214953271
+    },
+    {
+      "key": "mutagenicity_node-M2-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 109,
+      "changed": 20,
+      "accuracy_upper_pp": 18.34862385321101
+    },
+    {
+      "key": "mutagenicity_node-M3-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 103,
+      "changed": 11,
+      "accuracy_upper_pp": 10.679611650485437
+    },
+    {
+      "key": "mutagenicity_node-M3-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 114,
+      "changed": 14,
+      "accuracy_upper_pp": 12.280701754385966
+    },
+    {
+      "key": "mutagenicity_node-M0-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 106,
+      "changed": 13,
+      "accuracy_upper_pp": 12.264150943396226
+    },
+    {
+      "key": "mutagenicity_node-M0-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 110,
+      "changed": 31,
+      "accuracy_upper_pp": 28.181818181818183
+    },
+    {
+      "key": "mutagenicity_node-M1-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 108,
+      "changed": 7,
+      "accuracy_upper_pp": 6.481481481481482
+    },
+    {
+      "key": "mutagenicity_node-M1-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 108,
+      "changed": 20,
+      "accuracy_upper_pp": 18.51851851851852
+    },
+    {
+      "key": "mutagenicity_node-M2-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 107,
+      "changed": 26,
+      "accuracy_upper_pp": 24.299065420560748
+    },
+    {
+      "key": "mutagenicity_node-M2-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 109,
+      "changed": 24,
+      "accuracy_upper_pp": 22.01834862385321
+    },
+    {
+      "key": "mutagenicity_node-M3-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 103,
+      "changed": 18,
+      "accuracy_upper_pp": 17.475728155339805
+    },
+    {
+      "key": "mutagenicity_node-M3-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 114,
+      "changed": 24,
+      "accuracy_upper_pp": 21.05263157894737
+    },
+    {
+      "key": "mutagenicity_node-M0-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 106,
+      "changed": 35,
+      "accuracy_upper_pp": 33.0188679245283
+    },
+    {
+      "key": "mutagenicity_node-M0-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 110,
+      "changed": 29,
+      "accuracy_upper_pp": 26.363636363636363
+    },
+    {
+      "key": "mutagenicity_node-M1-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 108,
+      "changed": 27,
+      "accuracy_upper_pp": 25.0
+    },
+    {
+      "key": "mutagenicity_node-M1-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 108,
+      "changed": 21,
+      "accuracy_upper_pp": 19.444444444444443
+    },
+    {
+      "key": "mutagenicity_node-M2-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 107,
+      "changed": 30,
+      "accuracy_upper_pp": 28.037383177570092
+    },
+    {
+      "key": "mutagenicity_node-M2-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 109,
+      "changed": 52,
+      "accuracy_upper_pp": 47.706422018348626
+    },
+    {
+      "key": "mutagenicity_node-M3-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 103,
+      "changed": 15,
+      "accuracy_upper_pp": 14.563106796116505
+    },
+    {
+      "key": "mutagenicity_node-M3-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 114,
+      "changed": 48,
+      "accuracy_upper_pp": 42.10526315789474
+    },
+    {
+      "key": "mutagenicity_node-M0-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 106,
+      "changed": 26,
+      "accuracy_upper_pp": 24.528301886792452
+    },
+    {
+      "key": "mutagenicity_node-M0-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 110,
+      "changed": 35,
+      "accuracy_upper_pp": 31.818181818181817
+    },
+    {
+      "key": "mutagenicity_node-M1-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 108,
+      "changed": 16,
+      "accuracy_upper_pp": 14.814814814814815
+    },
+    {
+      "key": "mutagenicity_node-M1-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 108,
+      "changed": 20,
+      "accuracy_upper_pp": 18.51851851851852
+    },
+    {
+      "key": "mutagenicity_node-M2-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 107,
+      "changed": 26,
+      "accuracy_upper_pp": 24.299065420560748
+    },
+    {
+      "key": "mutagenicity_node-M2-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 109,
+      "changed": 29,
+      "accuracy_upper_pp": 26.605504587155963
+    },
+    {
+      "key": "mutagenicity_node-M3-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 103,
+      "changed": 28,
+      "accuracy_upper_pp": 27.184466019417474
+    },
+    {
+      "key": "mutagenicity_node-M3-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 114,
+      "changed": 25,
+      "accuracy_upper_pp": 21.92982456140351
+    },
+    {
+      "key": "mutagenicity_node-M0-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 106,
+      "changed": 2,
+      "accuracy_upper_pp": 1.8867924528301887
+    },
+    {
+      "key": "mutagenicity_node-M0-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 110,
+      "changed": 12,
+      "accuracy_upper_pp": 10.909090909090908
+    },
+    {
+      "key": "mutagenicity_node-M1-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 108,
+      "changed": 2,
+      "accuracy_upper_pp": 1.8518518518518519
+    },
+    {
+      "key": "mutagenicity_node-M1-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 108,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "mutagenicity_node-M2-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 107,
+      "changed": 4,
+      "accuracy_upper_pp": 3.7383177570093458
+    },
+    {
+      "key": "mutagenicity_node-M2-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 109,
+      "changed": 6,
+      "accuracy_upper_pp": 5.504587155963303
+    },
+    {
+      "key": "mutagenicity_node-M3-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 103,
+      "changed": 2,
+      "accuracy_upper_pp": 1.941747572815534
+    },
+    {
+      "key": "mutagenicity_node-M3-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 114,
+      "changed": 8,
+      "accuracy_upper_pp": 7.017543859649122
+    },
+    {
+      "key": "proteins_edge-M0-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 27,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 29,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 30,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M2-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 29,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M2-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 27,
+      "changed": 2,
+      "accuracy_upper_pp": 7.407407407407407
+    },
+    {
+      "key": "proteins_edge-M3-small_to_large-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M3-large_to_small-seed-3405",
+      "compared_to": "WL_C1",
+      "n": 31,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 27,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 29,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 30,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M2-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 29,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M2-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 27,
+      "changed": 2,
+      "accuracy_upper_pp": 7.407407407407407
+    },
+    {
+      "key": "proteins_edge-M3-small_to_large-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M3-large_to_small-seed-3405",
+      "compared_to": "SourcePair",
+      "n": 31,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 27,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 29,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 30,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M2-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 29,
+      "changed": 4,
+      "accuracy_upper_pp": 13.793103448275861
+    },
+    {
+      "key": "proteins_edge-M2-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 27,
+      "changed": 2,
+      "accuracy_upper_pp": 7.407407407407407
+    },
+    {
+      "key": "proteins_edge-M3-small_to_large-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M3-large_to_small-seed-3405",
+      "compared_to": "Shuffled",
+      "n": 31,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 27,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 29,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 24,
+      "changed": 5,
+      "accuracy_upper_pp": 20.833333333333332
+    },
+    {
+      "key": "proteins_edge-M1-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 30,
+      "changed": 2,
+      "accuracy_upper_pp": 6.666666666666667
+    },
+    {
+      "key": "proteins_edge-M2-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 29,
+      "changed": 1,
+      "accuracy_upper_pp": 3.4482758620689653
+    },
+    {
+      "key": "proteins_edge-M2-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 27,
+      "changed": 3,
+      "accuracy_upper_pp": 11.11111111111111
+    },
+    {
+      "key": "proteins_edge-M3-small_to_large-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M3-large_to_small-seed-3405",
+      "compared_to": "WL_selected",
+      "n": 31,
+      "changed": 7,
+      "accuracy_upper_pp": 22.580645161290324
+    },
+    {
+      "key": "proteins_edge-M0-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 27,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 29,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 24,
+      "changed": 11,
+      "accuracy_upper_pp": 45.833333333333336
+    },
+    {
+      "key": "proteins_edge-M1-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 30,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M2-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 29,
+      "changed": 13,
+      "accuracy_upper_pp": 44.827586206896555
+    },
+    {
+      "key": "proteins_edge-M2-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 27,
+      "changed": 2,
+      "accuracy_upper_pp": 7.407407407407407
+    },
+    {
+      "key": "proteins_edge-M3-small_to_large-seed-3405",
+      "compared_to": "Size",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M3-large_to_small-seed-3405",
+      "compared_to": "Size",
+      "n": 31,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 27,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 29,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 24,
+      "changed": 12,
+      "accuracy_upper_pp": 50.0
+    },
+    {
+      "key": "proteins_edge-M1-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 30,
+      "changed": 1,
+      "accuracy_upper_pp": 3.3333333333333335
+    },
+    {
+      "key": "proteins_edge-M2-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 29,
+      "changed": 6,
+      "accuracy_upper_pp": 20.689655172413794
+    },
+    {
+      "key": "proteins_edge-M2-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 27,
+      "changed": 2,
+      "accuracy_upper_pp": 7.407407407407407
+    },
+    {
+      "key": "proteins_edge-M3-small_to_large-seed-3405",
+      "compared_to": "Base",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M3-large_to_small-seed-3405",
+      "compared_to": "Base",
+      "n": 31,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 27,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M0-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 29,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M1-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 30,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M2-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 29,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M2-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 27,
+      "changed": 2,
+      "accuracy_upper_pp": 7.407407407407407
+    },
+    {
+      "key": "proteins_edge-M3-small_to_large-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 24,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    },
+    {
+      "key": "proteins_edge-M3-large_to_small-seed-3405",
+      "compared_to": "EqualPositive",
+      "n": 31,
+      "changed": 0,
+      "accuracy_upper_pp": 0.0
+    }
+  ]
+}
