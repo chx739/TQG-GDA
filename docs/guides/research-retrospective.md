@@ -21,6 +21,12 @@
 
 开发数据可以反复诊断。逐次封存能保证每次运行的先后顺序，但研究者根据旧留出图选择下一种方法后，跨轮的独立性已经改变。真正的新主张需要冻结方案后，用尚未参与该选择的数据确认。这里借鉴自适应数据分析对重复查看留出集的研究。[Dwork 等的原始论文](https://proceedings.neurips.cc/paper_files/paper/2015/file/bad5f33780c42f2588878a9d07405083-Paper.pdf)
 
+## 主指标和基线如何改变结论
+
+CoCo 的 Mutagenicity 表 1 和 CoCA 的表 1 都逐项列四域之间的十二个迁移方向及 Avg；TO-UGDA 表 5 明确报告 Accuracy。我们也用普通图级 Accuracy 回答“新域里能多分对几张图”。每个方向报告同一批图、同一组种子的配对结果，再对方向等权平均。BA 和各类召回解释错误落在哪一类，AUROC 检验样本排序，NLL 检验预测概率。旧轮次照各自原定门槛判定。数据分域和目标图可见范围不同，需要在同一批图上重跑对照才能比较绝对分数。[CoCo](https://proceedings.mlr.press/v202/yin23a/yin23a.pdf) · [CoCA](https://ijcai.org/proceedings/2025/0396.pdf) · [TO-UGDA](https://www.nature.com/articles/s41598-024-59890-y)
+
+R7 第十四轮两个开发方向的同图结果中，J 用普通 argmax 的平均 Accuracy 为 68.81%，对目标先验校正 MLLS 高 2.63 个百分点，对只用源验证标签的 SourceCal 却低 1.01 个百分点。若只保留前一个对照，会把 MLLS 在 M0→M3 上退化解读为共享更新能稳定纠错。以后每个工程迭代先列一个最简单、同权限、能解释收益的对照。准备论文级比较时可复核作者开源的 LP-TGNN。其公开训练入口逐轮读取目标准确率并记录最高值，沿用我们的独立留出评估时须预先锁定训练轮数，适配和最终测试使用各自的目标图。[R7 同图结果](../../experiments/mutagenicity/r7_共同解释与共享更新验证_20261119/docs/accuracy-and-prior-control-results.md) · [LP-TGNN 原文](https://proceedings.mlr.press/v280/wen25a.html) · [作者训练入口](https://github.com/TaoWen0309/Label-Propagation-GNN/blob/main/main.py)
+
 ## 策略与执行的交接
 
 TSBA-idea 负责问题定义、方法机制、对照与停止规则、证据解释，以及审查后的优化修复。TSBA-experiment 负责实现代码、编写实验配置并执行已商定的验证。实现完成即主动通知策略会话，给出版本或 diff、设计及配置位置、已做验证和未决问题。
