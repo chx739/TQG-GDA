@@ -1,0 +1,72 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "passed": false,
+      "highest_fixed": "B2",
+      "positive_directions_vs_static": 5,
+      "failed_minimum": [
+        "Static",
+        "Global",
+        "B2"
+      ],
+      "beats_other_mean": true,
+      "gains_pp": {
+        "Static": -2.1517328936829383,
+        "Global": -1.4876422517619114,
+        "B0": -2.005534268152417,
+        "WL": -3.484526602910833,
+        "Size": 7.333112020579505,
+        "B": -3.068667421749901,
+        "B2": -3.7229323593845005,
+        "PoolMajority": 15.77638663522633,
+        "DirectP": -1.4936652200570724,
+        "OtherMean": 2.2961087513358325
+      }
+    },
+    "mutagenicity_node": {
+      "passed": false,
+      "highest_fixed": "WL",
+      "positive_directions_vs_static": 2,
+      "failed_minimum": [
+        "Static",
+        "Global",
+        "WL"
+      ],
+      "beats_other_mean": true,
+      "gains_pp": {
+        "Static": -8.896288820885678,
+        "Global": -3.4589486578446462,
+        "B0": -6.791354388165691,
+        "WL": -8.640440541575101,
+        "Size": 5.610205421522027,
+        "B": -7.0900218891344124,
+        "B2": -7.204769407577407,
+        "PoolMajority": 8.558619500975256,
+        "DirectP": -6.522769374835123,
+        "OtherMean": 3.89537094088913
+      }
+    },
+    "proteins_edge": {
+      "passed": false,
+      "highest_fixed": "PoolMajority",
+      "positive_directions_vs_static": 4,
+      "failed_minimum": [
+        "PoolMajority"
+      ],
+      "beats_other_mean": true,
+      "gains_pp": {
+        "Static": 2.545886048341386,
+        "Global": 1.327922438223797,
+        "B0": 6.704678646095141,
+        "WL": 10.803455311891884,
+        "Size": -0.6946784499907671,
+        "B": 6.345187977049852,
+        "B2": 6.57795921680303,
+        "PoolMajority": -2.5618993824428875,
+        "DirectP": -1.6041721077767885,
+        "OtherMean": 2.511041485431466
+      }
+    }
+  },
+  "extend_to_reserve_seeds": false
+}

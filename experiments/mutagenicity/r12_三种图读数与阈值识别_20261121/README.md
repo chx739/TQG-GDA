@@ -4,7 +4,7 @@ R11 显示，用 A 的标签选择阈值能改善分类，直接从分类分数�
 
 已完成八源域，两个设置真实配对均为 0/4 域同时选对阈值。[筛查报告](report.md)
 
-另已登记 [按图大小判决分组的三票先导](docs/conditional-votes.md)，检验自然目标域中能否利用联合投票纠正 GNN 和 WL 的共同错误。[相同观测下的正反例](docs/vote-identification.md)给出该方法可识别和失效的具体条件。
+[按图大小判决分组的三票先导](docs/conditional-votes-results.md)已完成种子 3405 的 36 个开发方向。PROTEINS 出现净纠正，Own 仍低于最强固定参照，三个设置均未晋级。[登记协议](docs/conditional-votes.md) · [相同观测下的正反例](docs/vote-identification.md)给出该方法可识别和失效的具体条件。
 
 ## 运行源内筛查
 
@@ -16,3 +16,12 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```
 
 [配置](configs/source-screen.json)绑定 R7 C 封存和 R5 历史输入。U 使用冻结的 V 原始 B0 margin。L 和 T 只在各自源域 S 拟合，随后封存 V 的预测和切点。经验 V 标签参与构造及评分。估计入口只接收匿名概率表。阈值打分在 float64 归一概率求和的舍入尺度内按同分处理。
+
+## 运行自然域三票先导
+
+复用 R10 的 WL/Size、R16 的 B/B₂ 及 R11 已封存的等预算 A 与固定动作。从仓库根目录执行并选择新的输出路径。
+
+```sh
+round=experiments/mutagenicity/r12_三种图读数与阈值识别_20261121
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.conditional_votes --config "$round/configs/conditional-votes.json" --output /path/to/new-conditional-votes-attempt
+```
