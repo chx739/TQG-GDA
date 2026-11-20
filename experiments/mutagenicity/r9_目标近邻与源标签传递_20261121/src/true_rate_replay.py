@@ -24,6 +24,7 @@ class Reference:
     plan: dict
     roles: dict
     topology: dict
+    provenance: dict
     counts: dict
     predictions: dict
 
@@ -65,8 +66,13 @@ def authenticate(here, cfg):
         return prior_run.read_member(root,obs_files,relative)
 
     plan = json.loads(old('executed-config.json'))['plan']
+    if obs['predecessors']!=weighted_residuals.parents(plan):
+        raise PermissionError('Original OBS references a different R10 FIT')
     roles = json.loads(old('roles.json'))
     topology = json.loads(old('source-topology.json'))
+    provenance = json.loads(old('source-provenance.json'))
+    if set(provenance)!=set(plan['settings']):
+        raise PermissionError('Original R5 provenance does not cover the registered settings')
     keys = data.grid(plan)
     if len(keys)!=24 or set(keys)!=set(roles) or set(obs_files)!=set(weighted_residuals.members(keys)):
         raise PermissionError('Original experiment does not cover all 24 registered directions')
@@ -98,7 +104,7 @@ def authenticate(here, cfg):
         if x['WL'].dtype!=np.int64 or not np.array_equal(x['WL'],x['wl_e']>0.):
             raise PermissionError(f'Original WL differs from its strict zero threshold: {key}')
         predictions[key] = x
-    return Reference(plan,roles,topology,counts,predictions)
+    return Reference(plan,roles,topology,provenance,counts,predictions)
 
 
 def action_rules(key, reference):
@@ -161,6 +167,16 @@ def verify_actions(out, cfg, reference, obs_sha):
 
 
 def validate_e_roles(archive, reference):
+    if set(archive.by_setting)!=set(reference.provenance):
+        raise PermissionError('Current R5 authorities differ from the original R9 OBS')
+    labels = 'inputs/label_records.json'
+    for setting, source in archive.by_setting.items():
+        original = reference.provenance[setting]
+        for path in ('seals/R5_INPUT.json','seals/R5_OBS.json','protocol/plan.json'):
+            if source.receipt[path]!=original[path]:
+                raise PermissionError(f'Current R5 authority does not match original R9 OBS: {setting}/{path}')
+        if source.seal_files['INPUT'][labels]!=original[labels]:
+            raise PermissionError(f'Current R5 label offsets do not match original R9 OBS: {setting}')
     for key, row in reference.roles.items():
         group = f"{row['setting']}-M{row['source']}-seed-{row['seed']}"
         fitted_roles = archive.fit_access[group]

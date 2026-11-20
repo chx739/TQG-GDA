@@ -1,6 +1,7 @@
 from fractions import Fraction
 import csv
 import io
+import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import TestCase, mock
@@ -18,7 +19,7 @@ def fixture():
              WL=np.array([0,0,0,1]))
     counts = {('key','U',0):(4,1),('key','E',0):(4,3)}
     role = dict(setting='fixture',status='ok',roles=dict(D=[4],C=[9],U=x['u_ids'].tolist(),E=x['e_ids'].tolist()))
-    return replay.Reference({},dict(key=role),{},counts,dict(key=x))
+    return replay.Reference({},dict(key=role),{},{},counts,dict(key=x))
 
 
 class TrueRateReplayTests(TestCase):
@@ -88,6 +89,36 @@ class TrueRateReplayTests(TestCase):
                 with self.assertRaises(PermissionError):
                     port.load('key',role,ref.roles['key']['roles'][role])
             opener.assert_not_called()
+
+    def test_replacing_original_label_authority_is_rejected(self):
+        ref=fixture()
+        ref.roles={}
+        fixed={'seals/R5_INPUT.json':'input','seals/R5_OBS.json':'obs',
+               'protocol/plan.json':'plan','inputs/label_records.json':'offsets'}
+        ref.provenance={'fixture':fixed}
+        src=mock.Mock(receipt=fixed.copy(),seal_files={'INPUT':{'inputs/label_records.json':'offsets'}})
+        parent=mock.Mock(by_setting={'fixture':src})
+        replay.validate_e_roles(parent,ref)
+        for path in ('seals/R5_INPUT.json','seals/R5_OBS.json'):
+            src.receipt[path]='alternative'
+            with self.assertRaises(PermissionError):
+                replay.validate_e_roles(parent,ref)
+            src.receipt[path]=fixed[path]
+        src.seal_files['INPUT']['inputs/label_records.json']='alternative'
+        with self.assertRaises(PermissionError):
+            replay.validate_e_roles(parent,ref)
+
+    def test_parent_obs_must_bind_the_original_r10_fit(self):
+        obs=dict(files={},predecessors={'r10_fit_sha256':'different'})
+        final=dict(files={'OBS.json':'obs'},predecessors={'obs_sha256':'obs'})
+        cfg=dict(source_attempt='source',source_obs_sha256='obs',source_final_sha256='final')
+        plan=json.dumps(dict(plan={'r10_fit_sha256':'original'})).encode()
+        with mock.patch.object(replay.roc_transfer,'stage',side_effect=[obs,final]),mock.patch.object(
+                replay.prior_run,'read_member',return_value=plan) as read:
+            with self.assertRaisesRegex(PermissionError,'different R10 FIT'):
+                replay.authenticate(Path('/path'),cfg)
+            self.assertEqual(read.call_args.args[2],'executed-config.json')
+            self.assertEqual(read.call_count,1)
 
     def test_accuracy_and_macro_f1_use_direction_equal_weight(self):
         ref=fixture()
