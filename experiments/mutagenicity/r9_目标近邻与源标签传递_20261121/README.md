@@ -8,7 +8,7 @@
 
 已在三个真实开发设置的无标签输入上检查局部模式能否跨图复现。半径 2 的本域命中率比等预算异域平均高 1.87 个百分点。这一差值衡量结构覆盖，未使用图类别。[协议、实测与复核](docs/local-vocabulary.md)
 
-[一处节点类型差异的跨图参照](docs/paired-action-support.md)先用实际目标图与冻结分数测可改判比例的上界。
+[一处节点类型差异的跨图参照](docs/paired-action-support-results.md)已完成三个设置 36 个方向。PROTEINS 的可改判上界为 0.425%，低于 0.5% 门槛。[登记协议](docs/paired-action-support.md)
 
 从仓库根目录执行。输出使用一个新的存档目录。
 
@@ -17,3 +17,10 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```
 
 运行器复用 R8 的类型校验和源 logistic 拟合，以及 R7 的配对图重采样。R5 输入和 R8 来源角色按封存哈希认领。两个方向完成 OBS 后才应用动作分歧前置条件并评分。
+
+从仓库根目录复算已封存 Q/R 的改判上界。
+
+```sh
+round=experiments/mutagenicity/r9_目标近邻与源标签传递_20261121
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r9_目标近邻与源标签传递_20261121.scripts.paired_action_support --config "$round/configs/paired-action-support.json" --output /path/to/new-paired-action-attempt
+```
