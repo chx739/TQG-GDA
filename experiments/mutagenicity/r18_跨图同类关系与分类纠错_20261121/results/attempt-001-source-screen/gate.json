@@ -1,0 +1,179 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "passed": false,
+      "clauses": {
+        "accuracy_at_least_half_pp": false,
+        "positive_groups": false,
+        "accuracy_above_WL_selected": false,
+        "accuracy_above_Size": true,
+        "accuracy_above_Base": true,
+        "accuracy_above_WL_C1": true,
+        "accuracy_above_CalAnchor": false,
+        "accuracy_above_TargetUnary": false,
+        "accuracy_above_SourceFull": false,
+        "accuracy_above_PermMean": false,
+        "accuracy_above_EqualCount": false,
+        "brier_below_Product": true,
+        "brier_below_CalProduct": false,
+        "brier_below_Unary": false
+      },
+      "positive_source_groups": 0,
+      "group_accuracy_diff_exact": {
+        "0": "-1/109",
+        "1": "0",
+        "2": "-1/222",
+        "3": "0"
+      },
+      "accuracy_diff_exact": {
+        "WL_selected": "-32111129/1813301328",
+        "Size": "8590533053221/59177088839280",
+        "Base": "2461381/631761384",
+        "WL_C1": "40383132367/1106113810080",
+        "Anchor": "-331/96792",
+        "CalAnchor": "-30397/5411632",
+        "TargetUnary": "-49131/10823264",
+        "SourceFull": "-9511/4431940",
+        "PermMean": "-103/42180",
+        "RelationOnly": "2536362331/3198761558880",
+        "EqualCount": "0"
+      },
+      "accuracy_diff_pp": {
+        "WL_selected": -1.770865575630351,
+        "Size": 14.51665369439204,
+        "Base": 0.38960611748944757,
+        "WL_C1": 3.6509021041948007,
+        "Anchor": -0.3419704107777502,
+        "CalAnchor": -0.56169746945099,
+        "TargetUnary": -0.45393884876133483,
+        "SourceFull": -0.21460128070325862,
+        "PermMean": -0.24419155998103367,
+        "RelationOnly": 0.0792920098704722,
+        "EqualCount": 0.0
+      },
+      "relation_brier": {
+        "Product": 0.23663686242717458,
+        "CalProduct": 0.2345403078137818,
+        "Unary": 0.23481030443329287,
+        "Full": 0.23486569944071808
+      }
+    },
+    "mutagenicity_node": {
+      "passed": false,
+      "clauses": {
+        "accuracy_at_least_half_pp": false,
+        "positive_groups": false,
+        "accuracy_above_WL_selected": true,
+        "accuracy_above_Size": true,
+        "accuracy_above_Base": false,
+        "accuracy_above_WL_C1": true,
+        "accuracy_above_CalAnchor": true,
+        "accuracy_above_TargetUnary": false,
+        "accuracy_above_SourceFull": false,
+        "accuracy_above_PermMean": false,
+        "accuracy_above_EqualCount": false,
+        "brier_below_Product": true,
+        "brier_below_CalProduct": false,
+        "brier_below_Unary": false
+      },
+      "positive_source_groups": 0,
+      "group_accuracy_diff_exact": {
+        "0": "-1/106",
+        "1": "-1/216",
+        "2": "0",
+        "3": "-1/228"
+      },
+      "accuracy_diff_exact": {
+        "WL_selected": "4219/14935824",
+        "Size": "1961984619031/11496970010592",
+        "Base": "-35541233/5215937760",
+        "WL_C1": "4058647993783/57484850052960",
+        "Anchor": "-4013/870048",
+        "CalAnchor": "1832917/514106784",
+        "TargetUnary": "-1/424",
+        "SourceFull": "-115/92432",
+        "PermMean": "-107/45792",
+        "RelationOnly": "3668377/514106784",
+        "EqualCount": "0"
+      },
+      "accuracy_diff_pp": {
+        "WL_selected": 0.028247520859913722,
+        "Size": 17.065232119623264,
+        "Base": -0.6813968002562976,
+        "WL_C1": 7.060378499802685,
+        "Anchor": -0.4612389201515319,
+        "CalAnchor": 0.3565245698061047,
+        "TargetUnary": -0.2358490566037736,
+        "SourceFull": -0.12441578674052277,
+        "PermMean": -0.23366526904262752,
+        "RelationOnly": 0.7135437839310831,
+        "EqualCount": 0.0
+      },
+      "relation_brier": {
+        "Product": 0.2391308358553345,
+        "CalProduct": 0.23549668394375164,
+        "Unary": 0.23550047140346425,
+        "Full": 0.23588740475679773
+      }
+    },
+    "proteins_edge": {
+      "passed": false,
+      "clauses": {
+        "accuracy_at_least_half_pp": false,
+        "positive_groups": false,
+        "accuracy_above_WL_selected": false,
+        "accuracy_above_Size": true,
+        "accuracy_above_Base": true,
+        "accuracy_above_WL_C1": false,
+        "accuracy_above_CalAnchor": false,
+        "accuracy_above_TargetUnary": true,
+        "accuracy_above_SourceFull": true,
+        "accuracy_above_PermMean": true,
+        "accuracy_above_EqualCount": false,
+        "brier_below_Product": true,
+        "brier_below_CalProduct": false,
+        "brier_below_Unary": true
+      },
+      "positive_source_groups": 1,
+      "group_accuracy_diff_exact": {
+        "0": "1/54",
+        "1": "0",
+        "2": "0",
+        "3": "0"
+      },
+      "accuracy_diff_exact": {
+        "WL_selected": "0",
+        "Size": "26033/776736",
+        "Base": "34061/7767360",
+        "WL_C1": "-51443/1553472",
+        "Anchor": "1/216",
+        "CalAnchor": "-43/1798",
+        "TargetUnary": "49/8640",
+        "SourceFull": "35/1728",
+        "PermMean": "1/192",
+        "RelationOnly": "-1381/66960",
+        "EqualCount": "0"
+      },
+      "accuracy_diff_pp": {
+        "WL_selected": 0.0,
+        "Size": 3.351589214353397,
+        "Base": 0.4385145017097186,
+        "WL_C1": -3.3114854982902813,
+        "Anchor": 0.46296296296296297,
+        "CalAnchor": -2.3915461624026695,
+        "TargetUnary": 0.5671296296296297,
+        "SourceFull": 2.025462962962963,
+        "PermMean": 0.5208333333333334,
+        "RelationOnly": -2.062425328554361,
+        "EqualCount": 0.0
+      },
+      "relation_brier": {
+        "Product": 0.24131981267392671,
+        "CalProduct": 0.23146617867458455,
+        "Unary": 0.2353240902742316,
+        "Full": 0.234010495431253
+      }
+    }
+  },
+  "continue_real_development": false
+}

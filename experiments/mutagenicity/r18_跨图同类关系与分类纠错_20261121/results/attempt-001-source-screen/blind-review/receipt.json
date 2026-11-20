@@ -1,0 +1,28 @@
+{
+  "R9_source_obs_sha256": "823ff737f381767bf445c034e18983b2eed8e817e7095fe2bfbf82a2ea1dbee2",
+  "directions": 24,
+  "graph_occurrences": 1955,
+  "methods": [
+    "Strong",
+    "WL",
+    "Size",
+    "Base",
+    "WL_C1",
+    "CalAnchor",
+    "Product",
+    "TargetUnary",
+    "TargetFull",
+    "SourceFull",
+    "PermMean",
+    "EqualCount",
+    "RelationOnly"
+  ],
+  "rows_order": "key lexical ascending, then integer graph_id ascending",
+  "tsv": "UTF-8, tab-delimited header, newline LF including the final row",
+  "actions_sha256": "88ccb3636fcfd361c0607fee9277cf0f97440786e644ca5f39dd47d657b01e5b",
+  "probabilities_order": "Each direction retains its exact original e_ids. Pairs are native e_ids indices (i,j) with i ascending, j=i+1 .. n-1. Indexed arrays q0, CalProduct, Unary, Full contain respective float64 probabilities.",
+  "raw_float_hashes": "per probability method, little-endian float64 C-order raw bytes in diagnostics.json",
+  "pair_count": 96333,
+  "impl_sha256": "5c03adfe56095a7e84b8360d56b6edab90d0a2420308ed270b07d0485cd1f066",
+  "math_sha256": "a4f537a036803cd0ba750875a628b010154eed6816e66ab71135c1b48711fce2"
+}
