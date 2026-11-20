@@ -4,7 +4,7 @@
 
 [作者原文件与一步等价核验](docs/implementation-check.md) · [初始启动记录](results/startup/launch.json) · [生成回归记录](results/startup/r10-tests.log)
 
-已登记两份冻结 GRADE 模型的[交叉推断](docs/reference-crossover.md)，用两个既有开发域检验适配池与留出域匹配能否多分对图。
+[冻结 GRADE 的交叉推断](docs/reference-crossover-results.md)已完成五种子和两个既有开发域。两域等权的本域匹配增量为 +0.166 pp，95% 配对区间跨零。[交叉协议](docs/reference-crossover.md)
 
 [全方向源监督 WL 和大小参照](docs/structural-reference-results.md)已完成三个开发设置各十二方向五种子，共 180 块。源选模 WL 相对 B0 的 Accuracy 差依次为 +2.44、+0.12、−2.18 pp。[结构参照协议](docs/structural-reference.md)
 
@@ -19,6 +19,13 @@ OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments
 ```
 
 结构参照先写入 FIT，封存每组的 S/V ID、模型与全部 V 候选指标，再逐图推断三个 H。OBS 绑定 FIT、完整预测网格和对应历史参照。评分程序验证 OBS 与全部 H 读口后打开标签，由 FINAL 记录结果与读口。
+
+交叉推断直接复用原 R10 的模型和输入，先保存交叉预测，再按原 H 角色统一评分。
+
+```sh
+round=experiments/mutagenicity/r10_原生图适配基线与增量_20261121
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.mutagenicity.r10_原生图适配基线与增量_20261121.scripts.reference_crossover --config "$round/configs/reference-crossover.json" --output /path/to/new-crossover-attempt
+```
 
 从仓库根目录选择新档案路径运行。中断后使用下面的独立验收入口续跑。
 
