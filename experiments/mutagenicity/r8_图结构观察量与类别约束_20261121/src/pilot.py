@@ -261,6 +261,30 @@ def write_table(path, rows):
         writer.writerows(rows)
 
 
+def classification_intervals(original, cohorts, comparisons, tau, *, seed_intervals=False):
+    summary = paired.paired_bootstrap(original, cohorts, phase='P', comparisons=comparisons, tau=tau)
+    summary['interval_rows'] = [r for r in summary['interval_rows'] if r['metric'] != 'directional_risk_gap']
+    summary['metadata'].pop('directional_gap', None)
+    summary['metadata']['candidate_max_recomputed_each_replicate'] = False
+    if seed_intervals:
+        # Restrict the registered seed grid without changing any graph draw.
+        # Direction and pooled intervals above still share graphs across seeds.
+        seed_rows = []
+        for seed in original['real_model_seeds']:
+            single_plan = dict(original, real_model_seeds=[seed])
+            single_cohorts = [block for block in cohorts if block['seed'] == seed]
+            sample = paired.paired_bootstrap(single_plan, single_cohorts, phase='P', comparisons=comparisons, tau=tau)
+            if sample['cohort_audit'] != summary['cohort_audit']:
+                raise ValueError('Per-seed intervals require the same target graphs and bootstrap draws')
+            for row in sample['interval_rows']:
+                if row['scope'] == 'direction' and row['metric'] != 'directional_risk_gap':
+                    keys = ('setting', 'source', 'target', 'left', 'right', 'metric', 'unit',
+                            'estimate', 'lower', 'upper', 'interval_replicates', 'reason')
+                    seed_rows.append(dict(seed=seed, **{key: row[key] for key in keys}))
+        summary['direction_seed_intervals'] = seed_rows
+    return summary
+
+
 def evaluate_observation(output, obs_sha, original, plan, repo):
     frozen = verified_observations(output, obs_sha, plan)
     status = json.loads(frozen['block-status.json'])
@@ -301,8 +325,7 @@ def evaluate_observation(output, obs_sha, original, plan, repo):
                             row[metric] = by_method[left][metric]-by_method[right][metric]
                     pair_rows.append(row)
     verified_observations(output, obs_sha, plan)
-    paired_summary = paired.paired_bootstrap(original, h_cohorts, phase='P', comparisons=COMPARISONS, tau=plan['r7_tau'])
-    paired_summary['interval_rows'] = [r for r in paired_summary['interval_rows'] if r['metric'] != 'directional_risk_gap']
+    paired_summary = classification_intervals(original, h_cohorts, COMPARISONS, plan['r7_tau'])
     gate = decide(status, pair_rows, original)
     for name, rows in (('conditional-means', class_rows), ('moment-residuals', moment_rows),
                        ('endpoints', endpoint_rows), ('paired-seeds', pair_rows)):

@@ -11,6 +11,30 @@ from experiments.mutagenicity.r8_图结构观察量与类别约束_20261121.src 
 
 
 class FixedMassTests(unittest.TestCase):
+    def test_seed_intervals_preserve_paired_graph_draws(self):
+        settings = dict(strata=['target_domain', 'class'], percentiles=[2.5, 97.5], level=.95,
+                        reuse_draws_across_methods_seeds_and_source_directions=True,
+                        conditional_on_fitted_models=True, minimum_graphs_per_class_for_interval=2)
+        plan = dict(phases={'P': dict(setting='toy', directions=[[0, 1]])}, real_model_seeds=[1, 2],
+                    evaluation=dict(cohort_bootstrap_replicates=100, cohort_bootstrap_seed=13,
+                                    paired_interval=settings))
+        labels = np.array([0, 0, 0, 1, 1, 1])
+        old = np.zeros((6, 2))
+        new = old.copy()
+        new[[0, 3, 4], 1] = 1.
+        arms = [{'Left': new, 'Right': old}, {'Left': old, 'Right': new}]
+        blocks = [dict(setting='toy', source=0, target=1, seed=seed, ids=np.arange(6), y=labels, logits=z)
+                  for seed, z in enumerate(arms, 1)]
+        result = fixed_mass.pilot.classification_intervals(plan, blocks, [('Left', 'Right')], .005,
+                                                          seed_intervals=True)
+        self.assertFalse(result['metadata']['candidate_max_recomputed_each_replicate'])
+        self.assertNotIn('directional_gap', result['metadata'])
+        a, b = [r for r in result['direction_seed_intervals'] if r['metric'] == 'Accuracy']
+        self.assertLess(a['lower'], a['upper'])
+        np.testing.assert_allclose([a['lower'], a['upper']], [-b['upper'], -b['lower']])
+        pooled = next(r for r in result['interval_rows'] if r['scope'] == 'direction' and r['metric'] == 'Accuracy')
+        self.assertEqual((pooled['lower'], pooled['upper']), (0., 0.))
+
     def test_both_slope_signs_match_the_unlabeled_a_mean_and_bracket(self):
         base = np.array([-2., -.4, .3, 1.7, 4.])
         v = np.array([.2, .6, .8, 0., .4])

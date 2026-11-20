@@ -10,7 +10,7 @@ from scipy.stats import rankdata
 
 from experiments.common.io import digest, write_json
 from experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src import (
-    evaluate, fit, paired, prior_control, r5_inputs, seals,
+    evaluate, fit, prior_control, r5_inputs, seals,
 )
 from experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src.p_risk_replay import auc
 from . import inputs, pilot
@@ -204,8 +204,7 @@ def score(output, obs_sha, plan, r8_config, repo):
                                           auroc_pp=100*(metrics[left]['auroc']-metrics[right]['auroc']),
                                           nll_delta=metrics[left]['sampled_nll']-metrics[right]['sampled_nll']))
     read_frozen(output, obs_sha, plan)
-    intervals = paired.paired_bootstrap(old_plan, cohorts, phase='P', comparisons=COMPARISONS, tau=r8_config['r7_tau'])
-    intervals['interval_rows'] = [r for r in intervals['interval_rows'] if r['metric'] != 'directional_risk_gap']
+    intervals = pilot.classification_intervals(old_plan, cohorts, COMPARISONS, r8_config['r7_tau'], seed_intervals=True)
     add_exact_summary(output, pair_rows, plan)
     pilot.write_table(output/'endpoints.csv', endpoint_rows)
     pilot.write_table(output/'paired-seeds.csv', pair_rows)
