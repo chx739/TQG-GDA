@@ -83,7 +83,7 @@ class StructuralReferenceTests(unittest.TestCase):
         default = PLAN['solver']
         plan = dict(PLAN, C=[1.])
         failure = ValueError('Source logistic fit failed: ABNORMAL: , stationarity 1.82529e-09')
-        answer = dict(weights=[1.], intercept=0., training_objective=.5, gradient_inf=2e-9)
+        answer = fit_logistic(x, y, np.zeros(len(y)), default)
         with patch.object(structural, 'fit_logistic', side_effect=[failure, answer]) as logistic:
             fitted = structural.fit_candidates(x, x, y, y, plan)
         initial, retry = logistic.call_args_list
@@ -94,6 +94,10 @@ class StructuralReferenceTests(unittest.TestCase):
         self.assertEqual(initial.args[3], default)
         self.assertEqual(retry.args[3], dict(default, gradient_tolerance=default['stationarity_tolerance']))
         self.assertEqual(fitted['candidates']['1.0']['line_search_recovery']['original_error'], str(failure))
+        bad = dict(answer, training_objective=answer['training_objective'] + .01)
+        with patch.object(structural, 'fit_logistic', side_effect=[failure, bad]):
+            with self.assertRaisesRegex(ValueError, 'Uncertified line-search recovery'):
+                structural.fit_candidates(x, x, y, y, plan)
         with patch.object(structural, 'fit_logistic', side_effect=ValueError('Invalid binary source logistic inputs')) as logistic:
             with self.assertRaisesRegex(ValueError, 'Invalid binary'):
                 structural.fit_candidates(x, x, y, y, plan)

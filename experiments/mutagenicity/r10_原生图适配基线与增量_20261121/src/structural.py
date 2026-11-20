@@ -74,9 +74,15 @@ def fit_candidates(s, v, ys, yv, plan):
             # as the optimizer's success threshold before the line search stalls.
             retry = dict(options, gradient_tolerance=options['stationarity_tolerance'])
             fitted = fit_logistic(s, ys, offset, retry, penalty=penalty)
-            if not np.isfinite(fitted['training_objective']):
-                raise ValueError(f'Nonfinite recovery objective for C={c}') from error
-            fitted['line_search_recovery'] = dict(original_error=str(error),
+            weights = np.asarray(fitted['weights'])
+            signed = (1 - 2*ys) * (scores(s, fitted) + offset)
+            objective = float(np.logaddexp(0., signed).mean() + penalty * (weights @ weights) / (2*len(ys)))
+            reported = fitted['training_objective']
+            if (not np.isfinite(objective) or not np.isclose(reported, objective, rtol=1e-12, atol=1e-15)
+                    or not 0. <= fitted['gradient_inf'] <= options['stationarity_tolerance']):
+                raise ValueError(f'Uncertified line-search recovery for C={c}') from error
+            fitted['training_objective'] = objective
+            fitted['line_search_recovery'] = dict(original_error=str(error), reported_objective=reported,
                                                   gradient_tolerance=retry['gradient_tolerance'])
         fits[str(c)] = fitted
         validation.append(validation_metrics(c, scores(v, fitted), yv))
