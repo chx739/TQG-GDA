@@ -4,6 +4,8 @@
 
 [作者原文件与一步等价核验](docs/implementation-check.md) · [初始启动记录](results/startup/launch.json) · [生成回归记录](results/startup/r10-tests.log)
 
+[全方向源监督 WL 和规模参照](docs/structural-reference.md)已登记，覆盖三个既有开发设置，各十二方向五种子。
+
 从仓库根目录选择新档案路径运行。中断后使用下面的独立验收入口续跑。
 
 ```sh
