@@ -6,7 +6,7 @@
 
 [固定排序的收益上限与可识别性](docs/rank-identification.md)对照五种子的纯源结构参照，并给出相同 ROC 和无标签分数对应不同最优阈值的例子。
 
-[图大小比例与 ROC 工作点迁移](docs/roc-rate-transfer.md)登记了一个无需目标标签的单种子先导。它用源模型预测目标图的类别占比，再以独立适配图的分数确定阈值。
+[图大小比例与 ROC 工作点迁移](docs/roc-rate-transfer-results.md)已完成三种设置的 36 个方向。三个设置未达到补种子条件。[登记协议](docs/roc-rate-transfer.md)
 
 从仓库根目录运行，选择一个新的结果目录：
 
@@ -22,4 +22,13 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 
 ```sh
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r11_分类阈值的跨域检验_20261121.scripts.run_prior --config experiments/mutagenicity/r11_分类阈值的跨域检验_20261121/configs/prior-control.json --output /tmp/r11-prior-control
+```
+
+## 补充｜无标签 ROC 工作点迁移
+
+复用历史 Size 模型、原 R11 的等数 A 和原 H，在新的档案目录执行。
+
+```sh
+round=experiments/mutagenicity/r11_分类阈值的跨域检验_20261121
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r11_分类阈值的跨域检验_20261121.scripts.roc_rate_transfer --config "$round/configs/roc-rate-transfer.json" --output /path/to/new-roc-attempt
 ```

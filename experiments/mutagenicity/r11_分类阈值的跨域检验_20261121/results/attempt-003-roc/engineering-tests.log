@@ -1,0 +1,32 @@
+test_bounded_root_matches_finite_mixture (test_r11_prior.PriorTests.test_bounded_root_matches_finite_mixture) ... ok
+test_em_failure_is_not_replaced_with_root (test_r11_prior.PriorTests.test_em_failure_is_not_replaced_with_root) ... ok
+test_exact_constant_scores_keep_prior_even_after_logit_rounding (test_r11_prior.PriorTests.test_exact_constant_scores_keep_prior_even_after_logit_rounding) ... ok
+test_gate_requires_each_control_and_both_exact_directions (test_r11_prior.PriorTests.test_gate_requires_each_control_and_both_exact_directions) ... ok
+test_incomplete_or_mutated_seal_stops_before_a_or_h_session (test_r11_prior.PriorTests.test_incomplete_or_mutated_seal_stops_before_a_or_h_session) ... ok
+test_main_group_rejects_shifted_a_or_h_ids (test_r11_prior.PriorTests.test_main_group_rejects_shifted_a_or_h_ids) ... ok
+test_same_source_swap_controls_use_unchanged_foreign_priors (test_r11_prior.PriorTests.test_same_source_swap_controls_use_unchanged_foreign_priors) ... ok
+test_source_only_fit_once_and_exact_a_scores (test_r11_prior.PriorTests.test_source_only_fit_once_and_exact_a_scores) ... ok
+test_swap_mean_counts_and_intervals_share_the_same_draw (test_r11_prior.PriorTests.test_swap_mean_counts_and_intervals_share_the_same_draw) ... ok
+test_tiny_nonzero_drift_is_distinct_from_flat (test_r11_prior.PriorTests.test_tiny_nonzero_drift_is_distinct_from_flat) ... ok
+test_balanced_accuracy_and_exact_endpoints (test_r11_roc_rate_transfer.ROCRateTests.test_balanced_accuracy_and_exact_endpoints) ... ok
+test_correct_source_target_mixture_selects_bayes_decision (test_r11_roc_rate_transfer.ROCRateTests.test_correct_source_target_mixture_selects_bayes_decision) ... ok
+test_incomplete_unlabeled_file_prevents_reading_published_a_counts (test_r11_roc_rate_transfer.ROCRateTests.test_incomplete_unlabeled_file_prevents_reading_published_a_counts) ... ok
+test_monotone_transform_on_a_and_h_preserves_actions (test_r11_roc_rate_transfer.ROCRateTests.test_monotone_transform_on_a_and_h_preserves_actions) ... ok
+test_setting_gate_exact_positive_direction_and_swaps (test_r11_roc_rate_transfer.ROCRateTests.test_setting_gate_exact_positive_direction_and_swaps) ... ok
+test_ties_and_near_half_are_exact_and_single_class_fallback (test_r11_roc_rate_transfer.ROCRateTests.test_ties_and_near_half_are_exact_and_single_class_fallback) ... ok
+test_two_worlds_share_margin_distribution_prevalence_and_auroc (test_r11_roc_rate_transfer.ROCRateTests.test_two_worlds_share_margin_distribution_prevalence_and_auroc) ... ok
+test_all_one_and_all_zero_strict_thresholds (test_r11_thresholds.ThresholdTests.test_all_one_and_all_zero_strict_thresholds) ... ok
+test_equal_distance_secondary_tie_picks_smaller_threshold (test_r11_thresholds.ThresholdTests.test_equal_distance_secondary_tie_picks_smaller_threshold) ... ok
+test_equal_margins_move_together_and_reference_resolves_ties (test_r11_thresholds.ThresholdTests.test_equal_margins_move_together_and_reference_resolves_ties) ... ok
+test_float64_distance_resolves_subnormal_gap_exactly (test_r11_thresholds.ThresholdTests.test_float64_distance_resolves_subnormal_gap_exactly) ... ok
+test_h_upper_matches_independent_fraction_enumeration (test_r11_thresholds.ThresholdTests.test_h_upper_matches_independent_fraction_enumeration) ... ok
+test_label_session_seeks_only_granted_valid_records (test_r11_thresholds.ThresholdTests.test_label_session_seeks_only_granted_valid_records) ... ok
+test_no_new_obs_no_h_decoder (test_r11_thresholds.ThresholdTests.test_no_new_obs_no_h_decoder) ... ok
+test_paired_other_mean_is_formed_inside_each_draw (test_r11_thresholds.ThresholdTests.test_paired_other_mean_is_formed_inside_each_draw) ... ok
+test_same_source_crossed_a_never_reads_h_or_crosses_selected_ids (test_r11_thresholds.ThresholdTests.test_same_source_crossed_a_never_reads_h_or_crosses_selected_ids) ... ok
+test_unsigned_labels_never_underflow_unit_counts (test_r11_thresholds.ThresholdTests.test_unsigned_labels_never_underflow_unit_counts) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.061s
+
+OK

@@ -1,0 +1,78 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "passed": false,
+      "strongest_source": "WL",
+      "gain_over_strongest_pp": -1.2701413932441248,
+      "positive_directions_vs_B0": 8,
+      "accuracy_gate_met": false,
+      "controls_not_beaten": [],
+      "comparisons_pp": {
+        "B0": 0.20885094151429137,
+        "SourceV": 0.06674043017602606,
+        "SourceCal": 0.6469828663792712,
+        "WL": -1.2701413932441248,
+        "Size": 9.547497230246213,
+        "NativeV": 0.5332769642594963,
+        "DirectP": 0.7207199896096359,
+        "SourcePrior": 0.8714569876371236,
+        "OtherPriorMean": 1.6256010780423866,
+        "OtherQuantileMean": 1.8368276236301933,
+        "SamePriorCal": 0.3553165463027331,
+        "PoolMajority": 17.99077184489304,
+        "MLLS": 3.6415425885032406
+      }
+    },
+    "mutagenicity_node": {
+      "passed": false,
+      "strongest_source": "WL",
+      "gain_over_strongest_pp": -1.8742431385599527,
+      "positive_directions_vs_B0": 8,
+      "accuracy_gate_met": false,
+      "controls_not_beaten": [],
+      "comparisons_pp": {
+        "B0": -0.025156985150543026,
+        "SourceV": -1.5641841653093262,
+        "SourceCal": -0.6188083736236127,
+        "WL": -1.8742431385599527,
+        "Size": 12.376402824537175,
+        "NativeV": 0.41704151218375424,
+        "DirectP": 0.24342802818002493,
+        "SourcePrior": 0.48655791319370867,
+        "OtherPriorMean": 0.5602606453074552,
+        "OtherQuantileMean": 1.3560365614809502,
+        "SamePriorCal": 1.386256527608761,
+        "PoolMajority": 15.324816903990405,
+        "MLLS": 5.508832838169882
+      }
+    },
+    "proteins_edge": {
+      "passed": false,
+      "strongest_source": "Size",
+      "gain_over_strongest_pp": 0.2025221564690525,
+      "positive_directions_vs_B0": 6,
+      "accuracy_gate_met": false,
+      "controls_not_beaten": [
+        "DirectP",
+        "OtherQuantileMean",
+        "PoolMajority"
+      ],
+      "comparisons_pp": {
+        "B0": 7.60187925255496,
+        "SourceV": 11.842119539840464,
+        "SourceCal": 8.809668760711498,
+        "WL": 11.700655918351705,
+        "Size": 0.2025221564690525,
+        "NativeV": 3.1734872036523347,
+        "DirectP": -0.706971501316969,
+        "SourcePrior": 13.388087862910293,
+        "OtherPriorMean": 11.517441574115459,
+        "OtherQuantileMean": -1.226481259121384,
+        "SamePriorCal": 2.4869497387765906,
+        "PoolMajority": -1.6646987759830678,
+        "MLLS": 10.032934985922516
+      }
+    }
+  },
+  "extend_to_reserve_seeds": false
+}
