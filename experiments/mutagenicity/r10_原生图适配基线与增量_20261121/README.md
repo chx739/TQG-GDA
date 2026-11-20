@@ -10,6 +10,8 @@
 
 在同一源的三个目标间改选 WL 或 B0，两种 Mutagenicity 划分的事后额外空间均小于 0.1 个百分点。PROTEINS 为 1.08 个百分点。[选择上界与分歧图分析](docs/classifier-choice.md)
 
+在 PROTEINS 上，即使逐图知道哪个模型正确，B0 与 WL 二选一仍低于 Size 0.92 个百分点。[共同错误与三张票的改判空间](docs/vote-bounds.md)
+
 从仓库根目录检查 60 个源组与 180 个开发块的角色与历史档案身份。源监督参照沿用 R7 C 的角色、R9 的 WL 表示与 R8 的 logistic 目标、R11 的配对重抽样以及 R13 验证过的历史参照读取方式。
 
 ```sh
