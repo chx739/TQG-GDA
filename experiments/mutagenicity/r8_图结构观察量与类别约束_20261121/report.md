@@ -34,8 +34,10 @@ A 和 H 各有 20 个真标签类条件矩，两池都没有超过对应样本�
 
 执行代码为 `dd12d512434afab239fb90ad8f0df0928e294935`。运行前 R8/R7 相关工程测试 38 项通过。目录检查中的 R8 条目通过，历史 R5 条目仍因缺少 src/__init__.py 失败。完整核验覆盖 R8_OBS/FINAL 成员哈希、A/H 的主臂逐值零更新，以及 50 条复用 R7 H 端点的四项指标。独立按逐图概率重算，零带宽 JointExact 在 A 的最大原始矩绝对残差为 $1.71\times10^{-9}$。H 的零带宽 logits 可由冻结的 A 投影参数逐值重放。
 
-补充的 `cb1b9b0` 处理零带宽下 A 均值恰好位于类均值端点的边界情形。正式执行在该补丁前已冻结代码并启动，保留 attempt-001 原始版本与产物。十块精确先验均为内点，原执行各臂均有效。代码与执行命令详见运行记录。全部目标标签读取发生在 R8_OBS 建立后，诊断用的是已登记的 A/H。
+补充的 `cb1b9b0` 与 `685d247` 处理零带宽下 A 均值恰好位于类均值端点的边界情形。正式执行在两个补丁前已冻结代码并启动，保留 attempt-001 原始版本与产物。用修订后的求解器只读重放冻结 A 分数与 H 推断，十块的四个投影臂状态和 A/H 分类动作全部相同，logit 最大绝对差 $5.64\times 10^{-12}$。此补充核验仅使用冻结分数。正式运行的全部目标标签读取发生在 R8_OBS 建立后。
 
 [逐块状态与参数](results/attempt-001/block-status.json) · [源统计和模型](results/attempt-001/source-statistics.json) · [A/H 各臂指标](results/attempt-001/endpoints.csv) · [净纠错及配对差](results/attempt-001/paired-seeds.csv) · [配对区间](results/attempt-001/paired-intervals.json) · [类条件均值](results/attempt-001/conditional-means.csv) · [矩残差和比例误差](results/attempt-001/moment-residuals.csv) · [门槛判定](results/attempt-001/gate.json)
 
 [实际命令和代码版本](results/attempt-001/executed-config.json) · [OBS](results/attempt-001/OBS.json) · [FINAL](results/attempt-001/FINAL.json) · [封存与重放核验](results/attempt-001/verification.json) · [运行日志](results/attempt-001/run.log) · [工程测试](results/attempt-001/engineering-tests.log)
+
+[补丁后冻结分数重放](results/attempt-001/post-run-solver-check.json)
