@@ -1,0 +1,126 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "anchor": "WL",
+      "passed_accuracy_gate": false,
+      "above_equal_count": true,
+      "clauses": {
+        "proper_improvement": true,
+        "positive_directions": false,
+        "strictly_above_WL": true,
+        "strictly_above_Size": true,
+        "strictly_above_Reversed": true,
+        "strictly_above_OtherMean": true
+      },
+      "positive": 6,
+      "tied": 2,
+      "negative": 4,
+      "differences_exact": {
+        "Anchor": "438882341/64753719576",
+        "WL": "438882341/64753719576",
+        "Size": "310154405/2698071649",
+        "Full": "277745843/16188429894",
+        "CalTeacher": "8803786/426011313",
+        "Reversed": "39431572/2698071649",
+        "Other1": "61205/15421224",
+        "Other2": "216595633/64753719576",
+        "OtherMean": "118398857/32376859788",
+        "EqualCount": "36837887/5396143298"
+      },
+      "differences_pp": {
+        "Anchor": 0.6777716305314223,
+        "WL": 0.6777716305314223,
+        "Size": 11.49541025402176,
+        "Full": 1.7157058764725686,
+        "CalTeacher": 2.066561551617762,
+        "Reversed": 1.461472382122051,
+        "Other1": 0.39688808099798045,
+        "Other2": 0.3344914151932022,
+        "OtherMean": 0.3656897480955913,
+        "EqualCount": 0.6826706587583287
+      }
+    },
+    "mutagenicity_node": {
+      "anchor": "WL",
+      "passed_accuracy_gate": false,
+      "above_equal_count": true,
+      "clauses": {
+        "proper_improvement": false,
+        "positive_directions": true,
+        "strictly_above_WL": true,
+        "strictly_above_Size": true,
+        "strictly_above_Reversed": true,
+        "strictly_above_OtherMean": true
+      },
+      "positive": 7,
+      "tied": 1,
+      "negative": 4,
+      "differences_exact": {
+        "Anchor": "32048237/21603379608",
+        "WL": "32048237/21603379608",
+        "Size": "3110669381/21603379608",
+        "Full": "108801925/21603379608",
+        "CalTeacher": "26330407/3600563268",
+        "Reversed": "71485283/10801689804",
+        "Other1": "16005773/21603379608",
+        "Other2": "8477249/3600563268",
+        "OtherMean": "66869267/43206759216",
+        "EqualCount": "232/151191"
+      },
+      "differences_pp": {
+        "Anchor": 0.14834825652988173,
+        "WL": 0.14834825652988173,
+        "Size": 14.398994219627008,
+        "Full": 0.5036338155151858,
+        "CalTeacher": 0.7312857750344633,
+        "Reversed": 0.6617972215192489,
+        "Other1": 0.07408920868137162,
+        "Other2": 0.23544230080169778,
+        "OtherMean": 0.1547657547415347,
+        "EqualCount": 0.1534482872657764
+      }
+    },
+    "proteins_edge": {
+      "anchor": "Size",
+      "passed_accuracy_gate": false,
+      "above_equal_count": true,
+      "clauses": {
+        "proper_improvement": true,
+        "positive_directions": false,
+        "strictly_above_WL": true,
+        "strictly_above_Size": true,
+        "strictly_above_Reversed": true,
+        "strictly_above_OtherMean": true
+      },
+      "positive": 2,
+      "tied": 9,
+      "negative": 1,
+      "differences_exact": {
+        "Anchor": "409/75828",
+        "WL": "73487957/610491228",
+        "Size": "409/75828",
+        "Full": "10110309/203497076",
+        "CalTeacher": "2973559/50874269",
+        "Reversed": "127513/7355316",
+        "Other1": "64063/3677658",
+        "Other2": "25687/2451772",
+        "OtherMean": "205187/14710632",
+        "EqualCount": "14363/1838829"
+      },
+      "differences_pp": {
+        "Anchor": 0.5393785936593343,
+        "WL": 12.037512355541987,
+        "Size": 0.5393785936593343,
+        "Full": 4.968282197823815,
+        "CalTeacher": 5.844917398223451,
+        "Reversed": 1.733616883353482,
+        "Other1": 1.7419509916365252,
+        "Other2": 1.047691220880245,
+        "OtherMean": 1.394821106258385,
+        "EqualCount": 0.7810949250854756
+      }
+    }
+  },
+  "passes_cross_setting_accuracy": false,
+  "continue_remaining_seeds": false
+}

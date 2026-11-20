@@ -31,3 +31,5 @@
 [改判移植协议](transfer-of-flips.md) · [强源模型移植实测](transfer-of-flips-results.md)
 
 [强源起点协议](strong-anchor-refit.md) · [校准教师对照](strong-anchor-score-teacher.md) · [36 方向实测](strong-anchor-refit-results.md)
+
+[教师差分回放协议](centered-target-update.md) · [教师差分实测](centered-target-update-results.md)
