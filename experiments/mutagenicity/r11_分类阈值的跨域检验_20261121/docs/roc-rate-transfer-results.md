@@ -62,3 +62,9 @@ PROTEINS 上，按 p 直接定阈比 RateROC 高 0.707 个 Accuracy 百分点和
 原 R11 和 R10 共 396 个历史端点与本次计分一致。27 项 R11 工程测试通过。另按原 Size 权重与拓扑重算 A 分数，并用穷举阈值和逐图类别核对了 324 个部署动作向量、72 个实测比例诊断动作向量、756 个端点和 972 个配对计数。
 
 [配置](../results/attempt-003-roc/executed-config.json) · [UNLABELED](../results/attempt-003-roc/UNLABELED.json) · [OBS](../results/attempt-003-roc/OBS.json) · [FINAL](../results/attempt-003-roc/FINAL.json) · [历史端点核对](../results/attempt-003-roc/historical-scoring-parity.json) · [独立复算](../results/attempt-003-roc/verification.json) · [运行日志](../results/attempt-003-roc/run.log) · [工程测试](../results/attempt-003-roc/engineering-tests.log)
+
+## 比例估计为何在同一目标上相差很大
+
+计分后复用已经公布的 A 计数和 R10 原有 Size 模型做描述性核对。按本域 A 的观察比例计算每个源模型的估计误差。同一目标内三个源的误差方差，占全部十二个方向均方误差的 70.55%（Mutagenicity 边数）、59.02%（节点数）、84.56%（PROTEINS）。计算使用分母为三的方差，另外一项是各目标的平均误差平方，再对目标等权。每个目标的三个等预算 A 子集可能略有不同，三个设置中，这引起的已观察比例最大差异分别为 0.35、0.30、0.91 个百分点。该分解描述对源模型的依赖，单源部署时无法对三个源模型取平均。[已封存的 36 个比例](../results/attempt-003-roc/prior-errors.csv)
+
+将每个源组已经拟合的四个正则强度（C=0.1、1、10、100）逐个应用于原 A，取图概率均值。若事后允许每一方向挑最接近 A 实测比例的 C，三个设置的比例平均绝对误差分别从 6.83、10.68、15.97 降至 5.85、9.77、12.03 个百分点。原有 10 个多数类判断错误，四个候选至多纠正其中 2 个。在 PROTEINS 的 P1→P3，A 中 140/181 张为正类（77.35%），四个估计仅为 14.76%、16.71%、17.21%、17.27%。单纯换这四个 C 里的选择无法解释这一失误。表中另列连续取区间内任意值的理论误差下限。全部选中 C 的均值逐位复现部署记录；本核对只用 A 的结构和已公布的总数，没有使用 H。[四个候选的逐向预测](../results/size-prior-sensitivity/size-c-envelope.csv) · [四个候选及其区间的比例误差下限](../results/size-prior-sensitivity/size-c-summary.csv)
