@@ -4,6 +4,8 @@ R11 显示，用 A 的标签选择阈值能改善分类，直接从分类分数�
 
 已完成八源域，两个设置真实配对均为 0/4 域同时选对阈值。[筛查报告](report.md)
 
+[固定源端读数的真实域试验](docs/fixed-reader-transfer.md)沿用原 L/T 探针和 B0 切点，在 24 个方向检验按源内大小变化约束的比例校正。
+
 [按图大小判决分组的三票先导](docs/conditional-votes-results.md)已完成种子 3405 的 36 个开发方向。PROTEINS 出现净纠正，Own 仍低于最强固定参照，三个设置均未晋级。[登记协议](docs/conditional-votes.md) · [相同观测下的正反例](docs/vote-identification.md)给出该方法可识别和失效的具体条件。
 
 ## 运行源内筛查
