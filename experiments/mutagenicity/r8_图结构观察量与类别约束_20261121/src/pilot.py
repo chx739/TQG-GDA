@@ -1,5 +1,6 @@
 """Run the registered R8 pilot, with H labels restricted to post-OBS evaluation."""
 from collections import Counter
+from fractions import Fraction
 import csv
 import io
 import json
@@ -316,22 +317,39 @@ def evaluate_observation(output, obs_sha, original, plan, repo):
 
 
 def decide(status, pair_rows, original):
-    def count(left, right, direction=None):
+    directions = [tuple(pair) for pair in original['phases']['P']['directions']]
+    seeds = original['real_model_seeds']
+
+    def count(left, right, selected):
         rows = [r for r in pair_rows if (r['left'], r['right']) == (left, right)
-                and (direction is None or [r['source'], r['target']] == direction)]
-        valid = [r for r in rows if r['available']]
-        return dict(available=len(valid), planned=len(rows),
-                    accuracy_pp=float(np.mean([r['accuracy_pp'] for r in valid])) if rows and len(valid) == len(rows) else None)
+                and (r['source'], r['target']) in selected]
+        table = {(r['source'], r['target'], r['seed']): r for r in rows if r['available']}
+        expected = {(source, target, seed) for source, target in selected for seed in seeds}
+        if len({(r['source'], r['target'], r['seed']) for r in rows}) != len(rows) or table.keys()-expected:
+            raise ValueError('Ambiguous or unexpected gate block')
+        mean = None
+        if table.keys() == expected:
+            per_seed = []
+            for seed in seeds:
+                delta = Fraction(0)
+                for source, target in selected:
+                    row = table[source, target, seed]
+                    delta += Fraction(row['net'], row['n'])
+                per_seed.append(delta/len(selected))
+            mean = sum(per_seed)/len(seeds)
+        return dict(available=len(table), planned=len(expected),
+                    accuracy_pp=float(100*mean) if mean is not None else None,
+                    exact_accuracy_fraction=str(mean) if mean is not None else None,
+                    strictly_positive=bool(mean is not None and mean > 0))
 
     comparisons = {f'M{source}->M{target}': {
-        name: count('Joint', name, [source, target]) for name in ('SourceCal', 'SamePrior')
-    } for source, target in original['phases']['P']['directions']}
-    extra = count('Joint', 'SourceFusion')
+        name: count('Joint', name, [(source, target)]) for name in ('SourceCal', 'SamePrior')
+    } for source, target in directions}
+    extra = count('Joint', 'SourceFusion', directions)
     grad = {name: dict(Counter(row['solutions'][name]['status'] for row in status.values()))
             for name in PROJECTED}
-    required = [item['accuracy_pp'] for row in comparisons.values() for item in row.values()]
-    required.append(extra['accuracy_pp'])
-    passed = all(delta is not None and delta > 0. for delta in required)
+    required = [item['strictly_positive'] for row in comparisons.values() for item in row.values()]
+    passed = all(required) and extra['strictly_positive']
     return dict(passed=passed, directions=comparisons, pooled_vs_source_fusion=extra, arm_status_counts=grad,
                 next_phase='larger_development_validation' if passed else None,
                 classification_endpoint='holdout Accuracy, equal directions within seed')

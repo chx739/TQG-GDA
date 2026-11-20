@@ -156,3 +156,23 @@ class PilotTests(unittest.TestCase):
             self.assertEqual(len(rows), 2*len(pilot.METHODS))
             self.assertEqual({row['pool'] for row in rows}, {'adapt', 'holdout'})
             self.assertEqual(json.loads((output/'FINAL.json').read_text())['observation_sha256'], obs)
+
+    def test_gate_uses_exact_direction_and_pooled_accuracy_ties(self):
+        from experiments.mutagenicity.r8_图结构观察量与类别约束_20261121.src import pilot
+
+        seeds = [3405, 3406, 3407, 3408, 3409]
+        original = dict(real_model_seeds=seeds, phases={'P': dict(directions=[[0, 1], [0, 3]])})
+        rows = []
+        for target, n, net in [(1, 307, [-3, -2, -1, 3, 3]), (3, 338, [-3, -3, 2, 1, 3])]:
+            for seed, delta in zip(seeds, net):
+                rows.append(dict(seed=seed, source=0, target=target, n=n, available=True,
+                                 net=delta, accuracy_pp=100*delta/n, left='Joint', right='SourceCal'))
+                rows.append(rows[-1] | {'right': 'SourceFusion'})
+                rows.append(rows[-1] | {'right': 'SamePrior', 'net': 1, 'accuracy_pp': 100/n})
+        gate = pilot.decide({}, rows, original)
+        self.assertFalse(gate['passed'])
+        for direction in gate['directions'].values():
+            self.assertEqual(direction['SourceCal']['accuracy_pp'], 0.)
+            self.assertFalse(direction['SourceCal']['strictly_positive'])
+            self.assertTrue(direction['SamePrior']['strictly_positive'])
+        self.assertEqual(gate['pooled_vs_source_fusion']['exact_accuracy_fraction'], '0')
