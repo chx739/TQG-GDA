@@ -1,0 +1,2739 @@
+{
+  "phase": "P",
+  "tau": null,
+  "expected_blocks": 10,
+  "supplied_blocks": 10,
+  "interval_rows": [
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "B",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": -0.014999283355254023,
+      "lower": -0.03222588361109303,
+      "upper": 0.002369867778589325,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.014246923272519862,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.019020180569530032,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.010928223550323746,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.01333123734207231,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.017469852041824163,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.0032478175431486134,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "B",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": -3.5022561610551834,
+      "lower": -8.193509198195063,
+      "upper": 0.9429017702186773,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -3.82679625130163,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -2.6206178410274106,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -3.948281846581054,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -5.19784796945504,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -1.9177368969107818,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.2715427822948782,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "B",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": -1.2727272727272776,
+      "lower": -5.545454545454544,
+      "upper": 2.9090909090909123,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -1.363636363636374,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.9090909090909065,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -2.2727272727272805,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -2.2727272727272805,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.45454545454545325,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.1318090543626154,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "Direct",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": 0.020316513939406478,
+      "lower": 6.684524245236067e-05,
+      "upper": 0.041767226597191495,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 0.021068874022140638,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 0.01629561672513047,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": 0.024387573744336755,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 0.02198455995258819,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.017845945252836337,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.0032478175431486134,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "Direct",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": -4.118361679972236,
+      "lower": -8.42485248177715,
+      "upper": -0.008330440819148823,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -4.442901770218683,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -3.236723359944463,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -4.564387365498106,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -5.813953488372093,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -2.5338424158278343,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.2715427822948782,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "Direct",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": -3.545454545454544,
+      "lower": -7.545454545454534,
+      "upper": 0.3636363636363598,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -3.6363636363636402,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -3.1818181818181728,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -4.545454545454547,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -4.545454545454547,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -1.818181818181813,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.1318090543626154,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "MatchedWeights",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": 0.007109858157521987,
+      "lower": -0.0070189331815669765,
+      "upper": 0.020865022335459192,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 0.009960993152779096,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 0.0044783216567321205,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": 0.010498123947425553,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 0.006069549823009224,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.00454230220766394,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.0029244181115953708,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "MatchedWeights",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": -2.7664005553627193,
+      "lower": -6.0639968760846985,
+      "upper": 0.4304061089899281,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -2.7421034363068486,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -2.698715723707039,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -3.6532454009024633,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -4.113155154460259,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.624783061436986,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.3408895188428276,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "MatchedWeights",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": -2.0000000000000027,
+      "lower": -4.999999999999995,
+      "upper": 0.9999999999999972,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -1.8181818181818272,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -2.2727272727272663,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -3.181818181818187,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -2.7272727272727337,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.0,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.2281141896460284,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "SourceBridge",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": -0.017220319384022065,
+      "lower": -0.03346039041394735,
+      "upper": -0.0022702802926718485,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.011042333257389791,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.023516099557107872,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.011294514006580436,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.01266735071958136,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.027581299379450863,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.007762070601087251,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "SourceBridge",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": 1.7060048594238169,
+      "lower": -1.431143700104137,
+      "upper": 4.918474488024991,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 3.1499479347448798,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 0.49461992363762874,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": 0.12148559527942382,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 0.6594932315168549,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 4.104477611940297,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.7965929211823768,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "SourceBridge",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": 2.636363636363632,
+      "lower": -0.2727272727272748,
+      "upper": 5.818181818181813,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 4.090909090909079,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 1.363636363636374,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": 0.9090909090908923,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 1.818181818181813,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 5.0,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.8010557051053595,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "PooledBridge",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": -0.03936370677382393,
+      "lower": -0.06867519177722178,
+      "upper": -0.009475994426871671,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.037219075801991686,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.04305852594482229,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.03603412180208532,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.03757081575214638,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.042935994568073954,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.0033657452776579225,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "PooledBridge",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": -0.38701839639014113,
+      "lower": -4.612851440472057,
+      "upper": 3.7887018396390153,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 0.4685872960777431,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.0694203401596667,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -1.232211037834091,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -2.273516140229077,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 1.1714682401943861,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.3725008707991564,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 0,
+      "target": 1,
+      "left": "TargetBridge",
+      "right": "PooledBridge",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": -3.3636363636363655,
+      "lower": -7.727272727272722,
+      "upper": 0.7272727272727366,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -2.7272727272727337,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -3.6363636363636402,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -4.545454545454547,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -4.545454545454547,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -1.3636363636363598,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.3483997249264856,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "B",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": -0.02773957455478806,
+      "lower": -0.0523240386341997,
+      "upper": -0.0016117454354920447,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.02389154796357973,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.029013008780527594,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.03326199321463341,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.022079147234199903,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.030452175580999663,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.004645554138302675,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "B",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": -2.0231884057971086,
+      "lower": -5.104782608695651,
+      "upper": 0.8939130434782633,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -2.0579710144927645,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -1.6956521739130466,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -2.3043478260869676,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -2.362318840579718,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -1.6956521739130466,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.3200897794661938,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "B",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": -1.5962441314554012,
+      "lower": -4.507042253521126,
+      "upper": 1.314553990610318,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -1.8779342723004646,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -1.4084507042253591,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -1.4084507042253591,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -1.8779342723004646,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -1.4084507042253591,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.25714674061274756,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "Direct",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": -0.0005937354114282867,
+      "lower": -0.022804288038877855,
+      "upper": 0.02150367598598,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 0.0032542911797800445,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.0018671696371678204,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.006116154071273638,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 0.0050666919091598706,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.0033063364376398896,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.004645554138302675,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "Direct",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": 3.1217391304347815,
+      "lower": -0.46376811594202,
+      "upper": 6.658623188405787,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 3.0869565217391255,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 3.4492753623188435,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": 2.8405797101449224,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 2.782608695652172,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 3.4492753623188435,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.3200897794661938,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "Direct",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": 3.0985915492957674,
+      "lower": 0.09389671361502373,
+      "upper": 6.197183098591552,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 2.816901408450704,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 3.2863849765258095,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": 3.2863849765258095,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 2.816901408450704,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 3.2863849765258095,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.25714674061274756,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "MatchedWeights",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": 0.005493887490009741,
+      "lower": -0.010600697539901826,
+      "upper": 0.022587460266578537,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 0.008588414077277506,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 0.003277802492730353,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.0005210007268475758,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 0.01293540832414286,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.0031888132827455618,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.005276258314411708,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "MatchedWeights",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": 0.28695652173912833,
+      "lower": -3.113333333333333,
+      "upper": 3.3653623188405892,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.30434782608695343,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 0.4202898550724683,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": 0.4782608695652044,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.2463768115942031,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 1.0869565217391255,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.5762942840852678,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "MatchedWeights",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": 0.8450704225352069,
+      "lower": -2.159624413145545,
+      "upper": 3.7558685446009377,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 0.0,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 0.9389671361502252,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": 1.408450704225345,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 0.4694835680751197,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 1.408450704225345,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.6121316812396812,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "SourceBridge",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": -0.019461736662275686,
+      "lower": -0.03957682292920478,
+      "upper": 0.0008906359754293376,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.0016758323904721983,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.05087648321724236,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.005030197156246641,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.017452872742882874,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.022273297804534353,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.019515599111325808,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "SourceBridge",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": 1.8347826086956587,
+      "lower": -1.0551449275362346,
+      "upper": 4.863985507246372,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 1.5072463768115938,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 2.405797101449295,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": 3.2028985507246404,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 1.0869565217391397,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.9710144927536248,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.9500549956997361,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "SourceBridge",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": 2.535211267605635,
+      "lower": -0.18779342723004797,
+      "upper": 5.352112676056336,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 2.3474178403755985,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": 4.694835680751169,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": 3.7558685446009434,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": 1.4084507042253591,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.4694835680751055,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 1.7121673735972285,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "PooledBridge",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": -0.07041556632102737,
+      "lower": -0.11120796928173192,
+      "upper": -0.027042673437732808,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.07261155032112154,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.07290851877117022,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.075158963422025,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.06393568317844256,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.06746311591237752,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.0045891944462559805,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "PooledBridge",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": -1.6028985507246376,
+      "lower": -4.156739130434779,
+      "upper": 1.095652173913038,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -1.507246376811608,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -1.2028985507246261,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -1.8115942028985472,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -1.8695652173912976,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -1.6231884057971087,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.2665642525454982,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "direction",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": 1,
+      "target": 0,
+      "left": "TargetBridge",
+      "right": "PooledBridge",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": -2.6291079812206535,
+      "lower": -5.352112676056334,
+      "upper": -0.18779342723004505,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -2.3474178403755843,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3406,
+          "estimate": -2.3474178403755843,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3407,
+          "estimate": -2.3474178403755843,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3408,
+          "estimate": -2.81690140845069,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        },
+        {
+          "seed": 3409,
+          "estimate": -3.2863849765258237,
+          "complete_pairs": 1,
+          "expected_pairs": 1
+        }
+      ],
+      "seed_sample_sd": 0.4199188690140455,
+      "expected_pairs": 5,
+      "complete_pairs": 5,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "B",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": -0.02136942895502104,
+      "lower": -0.03701139643981264,
+      "upper": -0.0060489374135183184,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.019069235618049796,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.024016594675028813,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.02209510838247858,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.017705192288136107,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.023961013811411913,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.002870885263594001,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "B",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": -2.762722283426146,
+      "lower": -5.4914715351453,
+      "upper": 0.04894227044755479,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -2.9423836328971973,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": -2.1581350074702286,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -3.1263148363340107,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -3.780083405017379,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": -1.8066945354119142,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.7872445976267716,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "B",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": -1.4344857020913395,
+      "lower": -3.856188647033718,
+      "upper": 1.0986395646606983,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -1.6207853179684193,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": -1.1587708066581328,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -1.8405889884763198,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -2.0753307725138725,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.47695262483995293,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.6330873020302461,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "Direct",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": 0.009861389263989096,
+      "lower": -0.005622043743910797,
+      "upper": 0.025601083750097266,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 0.012161582600960341,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": 0.007214223543981324,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": 0.009135709836531558,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": 0.01352562593087403,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.007269804407598224,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.002870885263594001,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "Direct",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": -0.4983112747687272,
+      "lower": -3.144365369814223,
+      "upper": 2.2689349385529347,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.6779726242397786,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": 0.10627600118719016,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.861903827676592,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -1.5156723963599603,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.4577164732455046,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.7872445976267716,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "Direct",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": -0.22343149807938828,
+      "lower": -2.6550042680324353,
+      "upper": 2.3201877934272273,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.4097311139564681,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": 0.05228339735381837,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.6295347844643686,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.8642765685019214,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.7341015791719983,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.6330873020302461,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "MatchedWeights",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": 0.006301872823765864,
+      "lower": -0.004810531025836407,
+      "upper": 0.01735936602271863,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 0.009274703615028301,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": 0.0038780620747312367,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": 0.0049885616102889885,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": 0.009502479073576042,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.0038655577452047507,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.002855559460613899,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "MatchedWeights",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": -1.2397220168117955,
+      "lower": -3.603958732626054,
+      "upper": 0.9632793439274804,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -1.523225631196901,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": -1.1392129343172854,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -1.5874922656686294,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -2.179765983027231,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.23108673015106973,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.9025493822478318,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "MatchedWeights",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": -0.5774647887323979,
+      "lower": -2.6907810499359788,
+      "upper": 1.4844963721724214,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.9090909090909136,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.6668800682885205,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.886683738796421,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -1.128894579598807,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": 0.7042253521126725,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.7349135606306474,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "SourceBridge",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": -0.018341028023148874,
+      "lower": -0.03134788617612264,
+      "upper": -0.005736267187855632,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.006359082823930995,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.03719629138717512,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.008162355581413538,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.015060111731232118,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.024927298591992608,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.012814412897988878,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "SourceBridge",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": 1.7703937340597378,
+      "lower": -0.35825099728858084,
+      "upper": 4.0226891704269345,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 2.328597155778237,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": 1.4502085125434618,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": 1.662192073002032,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": 0.8732248766279973,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": 2.537746052346961,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.6744551087132235,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "SourceBridge",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": 2.5857874519846336,
+      "lower": 0.5438860435339317,
+      "upper": 4.776243064447288,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": 3.219163465642339,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": 3.0292360221937713,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": 2.332479726845918,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": 1.613316261203586,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": 2.7347417840375527,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.6383306789291984,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "PooledBridge",
+      "metric": "NLL",
+      "unit": "nats",
+      "estimate": -0.054889636547425645,
+      "lower": -0.08019931059616991,
+      "upper": -0.028302010652716408,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.054915313061556614,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.05798352235799625,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -0.055596542612055155,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -0.05075324946529447,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.05519955524022574,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.002611429329208749,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "PooledBridge",
+      "metric": "BA",
+      "unit": "pp",
+      "estimate": -0.9949584735573893,
+      "lower": -3.5034918934146244,
+      "upper": 1.489698989883753,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -0.5193295403669325,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": -0.6361594454421464,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -1.521902620366319,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -2.0715406788101873,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": -0.22586008280136127,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.7718761781935972,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    },
+    {
+      "scope": "setting",
+      "setting": "mutagenicity_m0_pseudo",
+      "source": null,
+      "target": null,
+      "left": "TargetBridge",
+      "right": "PooledBridge",
+      "metric": "Accuracy",
+      "unit": "pp",
+      "estimate": -2.9963721724285093,
+      "lower": -5.60900554844217,
+      "upper": -0.5118758002560825,
+      "seed_estimates": [
+        {
+          "seed": 3405,
+          "estimate": -2.537345283824159,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3406,
+          "estimate": -2.9918907383696123,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3407,
+          "estimate": -3.4464361929150655,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3408,
+          "estimate": -3.6811779769526183,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        },
+        {
+          "seed": 3409,
+          "estimate": -2.3250106700810917,
+          "complete_pairs": 2,
+          "expected_pairs": 2
+        }
+      ],
+      "seed_sample_sd": 0.5772713068812688,
+      "expected_pairs": 10,
+      "complete_pairs": 10,
+      "interval_replicates": 2000,
+      "reason": null
+    }
+  ],
+  "cohort_audit": [
+    {
+      "setting": "mutagenicity_m0_pseudo",
+      "target": 0,
+      "graphs": 213,
+      "class_counts": [
+        138,
+        75
+      ],
+      "interval_eligible": true,
+      "sorted_ids": [
+        4,
+        8,
+        34,
+        62,
+        103,
+        115,
+        170,
+        185,
+        201,
+        214,
+        225,
+        249,
+        284,
+        316,
+        317,
+        330,
+        340,
+        351,
+        407,
+        429,
+        453,
+        454,
+        505,
+        512,
+        545,
+        565,
+        570,
+        605,
+        608,
+        622,
+        646,
+        671,
+        676,
+        691,
+        706,
+        742,
+        757,
+        762,
+        786,
+        800,
+        809,
+        818,
+        827,
+        852,
+        874,
+        878,
+        881,
+        902,
+        924,
+        937,
+        939,
+        946,
+        961,
+        996,
+        1057,
+        1096,
+        1104,
+        1152,
+        1170,
+        1219,
+        1292,
+        1306,
+        1309,
+        1324,
+        1325,
+        1338,
+        1348,
+        1356,
+        1387,
+        1394,
+        1405,
+        1417,
+        1425,
+        1441,
+        1454,
+        1504,
+        1535,
+        1605,
+        1611,
+        1617,
+        1632,
+        1641,
+        1687,
+        1689,
+        1712,
+        1714,
+        1786,
+        1807,
+        1826,
+        1828,
+        1900,
+        1903,
+        1911,
+        1928,
+        1932,
+        1968,
+        1969,
+        1977,
+        1996,
+        2044,
+        2056,
+        2057,
+        2070,
+        2135,
+        2142,
+        2170,
+        2173,
+        2181,
+        2208,
+        2212,
+        2214,
+        2220,
+        2268,
+        2301,
+        2371,
+        2392,
+        2404,
+        2441,
+        2448,
+        2486,
+        2489,
+        2514,
+        2521,
+        2540,
+        2574,
+        2579,
+        2599,
+        2605,
+        2618,
+        2619,
+        2651,
+        2705,
+        2728,
+        2738,
+        2747,
+        2755,
+        2796,
+        2801,
+        2845,
+        2849,
+        2957,
+        2963,
+        2985,
+        3015,
+        3042,
+        3047,
+        3090,
+        3095,
+        3105,
+        3114,
+        3133,
+        3150,
+        3151,
+        3177,
+        3199,
+        3212,
+        3239,
+        3242,
+        3270,
+        3288,
+        3343,
+        3365,
+        3403,
+        3409,
+        3461,
+        3470,
+        3483,
+        3493,
+        3504,
+        3505,
+        3514,
+        3541,
+        3543,
+        3567,
+        3601,
+        3607,
+        3677,
+        3685,
+        3712,
+        3735,
+        3783,
+        3788,
+        3799,
+        3807,
+        3849,
+        3858,
+        3898,
+        3899,
+        3917,
+        3918,
+        3929,
+        3937,
+        3938,
+        3966,
+        3982,
+        3987,
+        3997,
+        4006,
+        4010,
+        4037,
+        4058,
+        4067,
+        4096,
+        4111,
+        4119,
+        4164,
+        4182,
+        4198,
+        4247,
+        4261,
+        4311,
+        4322,
+        4335
+      ],
+      "draw_counts_sha256": "b6deb72025e0765b06277fe550cafee6d56c784aecb93c8f3094c2e84e993495",
+      "draw_counts_dtype": "int32",
+      "reason": null
+    },
+    {
+      "setting": "mutagenicity_m0_pseudo",
+      "target": 1,
+      "graphs": 220,
+      "class_counts": [
+        86,
+        134
+      ],
+      "interval_eligible": true,
+      "sorted_ids": [
+        38,
+        61,
+        87,
+        121,
+        124,
+        141,
+        142,
+        145,
+        148,
+        167,
+        206,
+        231,
+        235,
+        259,
+        276,
+        283,
+        288,
+        302,
+        306,
+        324,
+        339,
+        344,
+        350,
+        362,
+        425,
+        439,
+        447,
+        478,
+        479,
+        480,
+        489,
+        504,
+        541,
+        547,
+        561,
+        575,
+        591,
+        627,
+        647,
+        656,
+        663,
+        667,
+        685,
+        715,
+        743,
+        771,
+        790,
+        807,
+        828,
+        831,
+        840,
+        860,
+        861,
+        871,
+        882,
+        883,
+        943,
+        971,
+        985,
+        998,
+        1016,
+        1029,
+        1050,
+        1055,
+        1072,
+        1099,
+        1126,
+        1144,
+        1215,
+        1218,
+        1228,
+        1321,
+        1332,
+        1351,
+        1360,
+        1369,
+        1378,
+        1424,
+        1435,
+        1444,
+        1447,
+        1485,
+        1492,
+        1499,
+        1521,
+        1522,
+        1540,
+        1585,
+        1587,
+        1620,
+        1652,
+        1654,
+        1662,
+        1705,
+        1707,
+        1759,
+        1778,
+        1833,
+        1855,
+        1898,
+        1926,
+        1942,
+        1974,
+        1986,
+        1993,
+        2024,
+        2040,
+        2046,
+        2050,
+        2079,
+        2136,
+        2138,
+        2213,
+        2218,
+        2224,
+        2232,
+        2319,
+        2324,
+        2366,
+        2414,
+        2425,
+        2440,
+        2451,
+        2459,
+        2467,
+        2474,
+        2507,
+        2519,
+        2532,
+        2553,
+        2569,
+        2604,
+        2624,
+        2636,
+        2639,
+        2673,
+        2690,
+        2720,
+        2758,
+        2760,
+        2783,
+        2793,
+        2828,
+        2830,
+        2834,
+        2868,
+        2870,
+        2877,
+        2878,
+        2893,
+        2897,
+        2906,
+        2908,
+        2913,
+        2925,
+        2946,
+        2977,
+        2994,
+        3051,
+        3068,
+        3073,
+        3077,
+        3119,
+        3144,
+        3226,
+        3246,
+        3250,
+        3335,
+        3341,
+        3348,
+        3352,
+        3391,
+        3408,
+        3447,
+        3471,
+        3487,
+        3539,
+        3547,
+        3556,
+        3563,
+        3566,
+        3578,
+        3585,
+        3588,
+        3594,
+        3596,
+        3612,
+        3628,
+        3651,
+        3683,
+        3684,
+        3726,
+        3763,
+        3764,
+        3777,
+        3789,
+        3802,
+        3817,
+        3824,
+        3829,
+        3874,
+        3879,
+        3910,
+        3919,
+        3944,
+        3961,
+        3972,
+        3981,
+        3994,
+        4013,
+        4033,
+        4039,
+        4045,
+        4130,
+        4142,
+        4143,
+        4174,
+        4178,
+        4224,
+        4280
+      ],
+      "draw_counts_sha256": "b135d6f38dec52cf2177ac21cdcf32b1a259321c42345e59613c12b02c81c1ac",
+      "draw_counts_dtype": "int32",
+      "reason": null
+    }
+  ],
+  "metadata": {
+    "replicates": 2000,
+    "seed": 20261121,
+    "percentiles": [
+      2.5,
+      97.5
+    ],
+    "minimum_graphs_per_class": 1,
+    "conditional_on_fitted_models": true,
+    "resample_model_seeds": false,
+    "equal_directions_within_seed": true,
+    "delta_convention": "left_minus_right",
+    "rng": "numpy.default_rng(SeedSequence([seed, *sha256(setting) uint32_le words, target, class]))",
+    "bootstrap": "multinomial class-stratified graph multiplicities",
+    "numpy_version": "1.26.4"
+  }
+}

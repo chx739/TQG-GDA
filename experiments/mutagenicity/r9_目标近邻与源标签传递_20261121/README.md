@@ -1,5 +1,15 @@
 # R9｜未标记邻居能否帮助一张新图找到更可靠的源标签？
 
-首轮只使用 Mutagenicity 边数划分 M0 内已有的源训练图。在同一来源内构造小图到大图、大图到小图两个伪迁移，检验通过中间图改变源样本的投票权是否能提高图分类 Accuracy。登记时未运行本轮实验。
+首轮只使用 Mutagenicity 边数划分 M0 内已有的源训练图。在同一来源内构造小图到大图、大图到小图两个伪迁移，检验通过中间图改变源样本的投票权是否能提高图分类 Accuracy。两个方向共十块已完成并封存，未达到真实开发比较的登记条件。
 
 [来源内试验与停止条件](docs/source-bridge.md) · [图级强基线的同协议接入准备](docs/native-comparators.md) · [实验索引](../../README.md)
+
+[筛查实测报告与全部证据](report.md)
+
+从仓库根目录执行。输出使用一个新的存档目录。
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r9_目标近邻与源标签传递_20261121.scripts.run   --config experiments/mutagenicity/r9_目标近邻与源标签传递_20261121/configs/source-bridge.json   --output /tmp/r9-source-screen
+```
+
+运行器复用 R8 的类型校验和源 logistic 拟合，以及 R7 的配对图重采样。R5 输入和 R8 来源角色按封存哈希认领。两个方向完成 OBS 后才应用动作分歧前置条件并评分。

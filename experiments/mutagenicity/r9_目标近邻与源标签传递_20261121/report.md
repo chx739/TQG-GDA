@@ -1,0 +1,49 @@
+# R9 来源内两跳结构近邻筛查
+
+2026-11-21 完成 **10/10 块**，未达到真实开发比较的登记条件。TargetBridge 只通过了相对 SourceBridge 的条件。它在两个方向都低于源监督 B，也低于不逐图选择中间图的 PooledBridge。主臂相对同权重重排在大图→小图略有净纠错，在小图→大图出现净损失。
+
+## 数据、运行与评分条件
+
+只使用 R8 OBS 认证的 M0 seed 3405 的 868 张 source-fit 图。切点为 45 条无向边，小图 427 张，大图 441 张。每方向独立拟合一次稀疏 WL logistic，共两个新源模型。每方向五次 A 扰动只重算传播权重，H 固定。A 与 H 按每层约去最大公约数的三层联合指纹分组；两个方向均无 H 图与本方向 S 具有相同归一化完整指纹。
+
+| 伪方向 | 源 S | H | 每次 A | 每次源中转 |
+| --- | ---: | ---: | ---: | ---: |
+| 小图→大图 | 427 | 220 | 177 | 177 |
+| 大图→小图 | 441 | 213 | 171 | 171 |
+
+两方向的模型、权重和分类动作统一封存后，重算 Accuracy 的无标签上界。TargetBridge 对 B、Direct、MatchedWeights、SourceBridge 的等权动作分歧率依次为 **9.32%、8.56%、6.87%、8.58%**，全部达到 1% 前置条件，因此一次性打开本方向 H 标签计分。两种训练只读取各自 S；同一图在反向实验可属于 S。读取 ID 按用途分别留存。真实 M1、M3、其他目标域与 NCI1 未进入筛查。
+
+## 普通 Accuracy 与配对净纠错
+
+下表为 H 五次扰动平均 Accuracy，最后一列等权平均两方向。每方向的扰动共享五次评价图和一个源模型。
+
+| 方法 | 小图→大图 | 大图→小图 | 两方向等权 | 等权 BA | 等权 NLL |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| B | 69.55% | 80.28% | 74.91% | 74.75% | 0.56178 |
+| Direct | 71.82% | 75.59% | 73.70% | 72.48% | 0.53055 |
+| TargetBridge | 68.27% | 78.69% | 73.48% | 71.99% | 0.54041 |
+| MatchedWeights | 70.27% | 77.84% | 74.06% | 73.23% | 0.53411 |
+| SourceBridge | 65.64% | 76.15% | 70.89% | 70.22% | 0.55875 |
+| PooledBridge | 71.64% | 81.31% | 76.48% | 72.98% | 0.59530 |
+
+下表是 TargetBridge 减各对照的 Accuracy 差，单位 pp。区间采用 2,000 次按伪目标域、类别分层的同图配对重采样，各方法与 A 扰动共用抽样。范围条件于两个固定源模型和 H 图，五次 A 扰动不构成独立训练重复。每方向、每扰动的区间、纠正和损害数均可在证据表查到。
+
+| 对照 | 小图→大图 | 大图→小图 | 等权差 [95% 区间] | 原四项条件 |
+| --- | ---: | ---: | ---: | --- |
+| B | −1.27 | −1.60 | −1.43 [−3.86, +1.10] | 未通过 |
+| Direct | −3.55 | +3.10 | −0.22 [−2.66, +2.32] | 未通过 |
+| MatchedWeights | −2.00 | +0.85 | −0.58 [−2.69, +1.48] | 未通过 |
+| SourceBridge | +2.64 | +2.54 | +2.59 [+0.54, +4.78] | 通过 |
+| PooledBridge | −3.36 | −2.63 | −3.00 [−5.61, −0.51] | 仅归因 |
+
+相对 MatchedWeights，小图→大图的五次扰动合计纠正 31 次、损害 53 次。反向是纠正 37 次、损害 28 次。同一张 H 图可在多次扰动中重复计数。同权重重排逐图保留完全相同的权重多重集、非零数、熵与有效邻居数，源端点支持 Jaccard 平均为 0.516 和 0.555。端点身份的改变确实影响分类，方向不一致。
+
+PooledBridge 与 TargetBridge 共用无标签 A 和 A→S 权重。它把同一个源投票用于每张 H 图，所以它的混合概率是 B 的正斜率仿射变换，主要改变分类工作点。它在两个方向的 Accuracy 都高于逐图中转，等权 NLL 较高。这批结果没有显示逐张选择 A 中间图的 Accuracy 价值。超过源中转不足以通过控制归因。按登记停止，不进入真实目标域阶段。
+
+## 复现与封存
+
+执行代码为 `22773c08c904adebdd6bc53d3b52a9b996d801fa`，含预评分修订 `e48b5b4`、稀疏拟合修复以及生成回归。R9 十项回归及 R7–R9 共 55 项相关测试通过。十块均可评价，五种候选跳转合计没有触发均匀回退。事后不读取标签复核了两个封存链、角色构造、两跳乘积、同权重重排、PooledBridge 权重、排除项以及门槛精确分数。每个对比的纠正加损害与封存动作的分歧数一致。
+
+[方案与预评分修订](docs/source-bridge.md) · [无标签预检](results/preflight/input-checks.json) · [实际命令与配置](results/attempt-001/executed-config.json) · [角色](results/attempt-001/roles.json) · [OBS](results/attempt-001/OBS.json) · [FINAL](results/attempt-001/FINAL.json) · [核验](results/attempt-001/verification.json)
+
+[动作分歧与权重诊断](results/attempt-001/action-and-weight-checks.csv) · [预评分上界](results/attempt-001/action-gate.json) · [各类召回及端点](results/attempt-001/endpoints.csv) · [逐扰动纠正、损害及区间](results/attempt-001/paired-seeds.csv) · [方向及整体区间](results/attempt-001/paired-intervals.json) · [门槛判定](results/attempt-001/gate.json) · [评分标签 ID](results/attempt-001/scoring-label-ids.json) · [运行日志](results/attempt-001/run.log) · [工程测试](results/attempt-001/engineering-tests.log)

@@ -1,0 +1,55 @@
+{
+  "passed": false,
+  "passed_each_critical": {
+    "B": false,
+    "Direct": false,
+    "MatchedWeights": false,
+    "SourceBridge": true
+  },
+  "scores": {
+    "B": {
+      "pooled_fraction": "-3361/234300",
+      "pooled_pp": -1.434485702091336,
+      "directions": {
+        "0\u21921": "-7/550",
+        "1\u21920": "-17/1065"
+      }
+    },
+    "Direct": {
+      "pooled_fraction": "-349/156200",
+      "pooled_pp": -0.2234314980793854,
+      "directions": {
+        "0\u21921": "-39/1100",
+        "1\u21920": "11/355"
+      }
+    },
+    "MatchedWeights": {
+      "pooled_fraction": "-41/7100",
+      "pooled_pp": -0.5774647887323944,
+      "directions": {
+        "0\u21921": "-1/50",
+        "1\u21920": "3/355"
+      }
+    },
+    "SourceBridge": {
+      "pooled_fraction": "4039/156200",
+      "pooled_pp": 2.585787451984635,
+      "directions": {
+        "0\u21921": "29/1100",
+        "1\u21920": "9/355"
+      }
+    },
+    "PooledBridge": {
+      "pooled_fraction": "-14041/468600",
+      "pooled_pp": -2.9963721724285106,
+      "directions": {
+        "0\u21921": "-37/1100",
+        "1\u21920": "-28/1065"
+      }
+    }
+  },
+  "reason": "supervised_accuracy_compared",
+  "scoring_label_pools": [
+    "directional_holdout"
+  ]
+}

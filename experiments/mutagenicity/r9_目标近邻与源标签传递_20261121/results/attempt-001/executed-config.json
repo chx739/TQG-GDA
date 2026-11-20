@@ -1,0 +1,104 @@
+{
+  "plan": {
+    "registration_commit": "dc722f0",
+    "pre_score_amendment_commit": "e48b5b4",
+    "protocol": "docs/source-bridge.md",
+    "r8_observation_sha256": "3e691eb79b6027a8077cb78eb94ff3333d988dc8e5dc4123618579dfc4328969",
+    "r5_archive": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_edge/attempt-001",
+    "r5_input_seal_sha256": "d3673fa771b38c1259f1360a819880514bc121e6dcd5c4f5f6fe8d443b679c13",
+    "source_model_seed": 3405,
+    "source_role_key": "M0-seed-3405",
+    "allowed_graph_count": 868,
+    "node_types": 14,
+    "edge_types": 3,
+    "wl_depths": [
+      0,
+      1,
+      2
+    ],
+    "fingerprint_encoding": "R9-v1 SHA256 node/edge typed WL with big-endian uint32 lengths and types, fixed 32-byte previous node colors",
+    "hash_namespaces": {
+      "holdout": "R9-v1/holdout",
+      "adaptation": "R9-v1/adaptation",
+      "source_bridge": "R9-v1/source-bridge"
+    },
+    "duplicate_identity": "per_layer_positive_counts_divided_by_gcd",
+    "attribution_control": "PooledBridge_equal_mean_A_to_S_weights",
+    "directions": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "adaptation_seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "h_fraction": [
+      1,
+      2
+    ],
+    "a_fraction": [
+      4,
+      5
+    ],
+    "k": 8,
+    "source_model": {
+      "C": 1.0,
+      "max_iterations": 4000,
+      "gradient_tolerance": 1e-10,
+      "function_tolerance": 1e-15,
+      "stationarity_tolerance": 1e-07
+    },
+    "blend_weight": 0.5,
+    "weight_atol": 1e-12,
+    "minimum_accuracy_gain_fraction": [
+      1,
+      100
+    ],
+    "cohort_bootstrap_replicates": 2000,
+    "cohort_bootstrap_seed": 20261121
+  },
+  "code_commit": "22773c08c904adebdd6bc53d3b52a9b996d801fa",
+  "git_status": "",
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-u",
+    "-m",
+    "experiments.mutagenicity.r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121.scripts.run",
+    "--config",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/configs/source-bridge.json",
+    "--output",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/results/attempt-001"
+  ],
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "started_utc": "2026-11-20T17:08:09.320303+00:00",
+  "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+  "versions": {
+    "torch": "2.5.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2"
+  },
+  "n_torch_threads": 1,
+  "code_and_config_sha256": {
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/configs/source-bridge.json": "2beb0d74ccefd277f8d5542f4a4d4b368283ab5f0c28d6c44782ce04f39109fa",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/docs/source-bridge.md": "a604d5cb1c4b3486d548236959cf188497b4082c42d95569e94f71cae9a3fdcb",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/composition.py": "a028a233240733ebc7d5ac3cde244ad83aa1cca75db3c70cc4c94841764e2755",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/roles.py": "ad0cd549544506b4e288ed51b36f02dc664cdc436e2bf76e651108a1ce1bb333",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/inputs.py": "64ca21753b6b2a0cdf39deaf55266546ac18ea882405818415d756cafd2356f9",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/screen.py": "2b2bfdeb3a1882568a8748c2fb494d4d7acafb686ecbc53ba8c20b698c1c4aac",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/bridge.py": "c8b171823e509c467269a301a73f06d2cbab632566d509f6690e28010e8884c6",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/wl.py": "a7bb23b58486af49713a2ff4d2d377e18f8d4a365427b3106a6967bfd7c4dbda",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/scripts/run.py": "4d92ec2cd3b81f05001518832cb463b23dd642a5638a591365c52a523182d58a",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/scripts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

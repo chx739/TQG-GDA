@@ -1,0 +1,67 @@
+{
+  "registration_commit": "dc722f0",
+  "pre_score_amendment_commit": "e48b5b4",
+  "protocol": "docs/source-bridge.md",
+  "r8_observation_sha256": "3e691eb79b6027a8077cb78eb94ff3333d988dc8e5dc4123618579dfc4328969",
+  "r5_archive": "/home/hxchen/research/GDA/TSBA/experiments/r5/mutagenicity_edge/attempt-001",
+  "r5_input_seal_sha256": "d3673fa771b38c1259f1360a819880514bc121e6dcd5c4f5f6fe8d443b679c13",
+  "source_model_seed": 3405,
+  "source_role_key": "M0-seed-3405",
+  "allowed_graph_count": 868,
+  "node_types": 14,
+  "edge_types": 3,
+  "wl_depths": [
+    0,
+    1,
+    2
+  ],
+  "fingerprint_encoding": "R9-v1 SHA256 node/edge typed WL with big-endian uint32 lengths and types, fixed 32-byte previous node colors",
+  "hash_namespaces": {
+    "holdout": "R9-v1/holdout",
+    "adaptation": "R9-v1/adaptation",
+    "source_bridge": "R9-v1/source-bridge"
+  },
+  "duplicate_identity": "per_layer_positive_counts_divided_by_gcd",
+  "attribution_control": "PooledBridge_equal_mean_A_to_S_weights",
+  "directions": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "adaptation_seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "h_fraction": [
+    1,
+    2
+  ],
+  "a_fraction": [
+    4,
+    5
+  ],
+  "k": 8,
+  "source_model": {
+    "C": 1.0,
+    "max_iterations": 4000,
+    "gradient_tolerance": 1e-10,
+    "function_tolerance": 1e-15,
+    "stationarity_tolerance": 1e-07
+  },
+  "blend_weight": 0.5,
+  "weight_atol": 1e-12,
+  "minimum_accuracy_gain_fraction": [
+    1,
+    100
+  ],
+  "cohort_bootstrap_replicates": 2000,
+  "cohort_bootstrap_seed": 20261121
+}
