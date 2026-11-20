@@ -122,12 +122,12 @@ def paired_changes(accuracy,weights):
     return weights@values if weights is not None else None
 
 
-def aggregate(plan,pairs,curves):
-    rows,gates = [],{}
+def summarize_pairs(plan,pairs,curves,comparisons):
+    rows = []
     fixed = [(s,t) for s in plan['domains'] for t in plan['domains'] if s!=t]
     for setting in plan['settings']:
         for held in [[d] for d in fixed]+[fixed]:
-            for left,right in PAIRS:
+            for left,right in comparisons:
                 by_seed,boot,used = [],[],0
                 for seed in plan['seeds']:
                     keys = [(setting,s,t,seed,left,right) for s,t in held]
@@ -143,8 +143,16 @@ def aggregate(plan,pairs,curves):
                     source=None if len(held)>1 else held[0][0],target=None if len(held)>1 else held[0][1],
                     left=left,right=right,pairs=used,expected=len(held)*len(by_seed),
                     mean_pp=float(100*value) if complete else None, exact_fraction=str(value) if complete else None,
-                    sd_pp=100*statistics.stdev(float(x) for x in by_seed) if complete else None,
+                    sd_pp=100*statistics.stdev(float(x) for x in by_seed) if complete and len(by_seed)>1 else None,
                     lower_pp=lo,upper_pp=hi, per_seed_pp=[None if val is None else float(100*val) for val in by_seed]))
+    return rows
+
+
+def aggregate(plan,pairs,curves):
+    rows = summarize_pairs(plan,pairs,curves,PAIRS)
+    gates = {}
+    fixed = [(s,t) for s in plan['domains'] for t in plan['domains'] if s!=t]
+    for setting in plan['settings']:
         summary = {r['right']:r for r in rows if r['setting']==setting and r['scope']=='setting' and r['left']=='OwnA'}
         positive = sum(all(all((setting,s,t,seed,'OwnA',arm) in pairs for seed in plan['seeds'])
                            and sum(pairs[setting,s,t,seed,'OwnA',arm] for seed in plan['seeds'])>0

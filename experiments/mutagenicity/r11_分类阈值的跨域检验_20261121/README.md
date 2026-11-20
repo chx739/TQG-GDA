@@ -11,3 +11,11 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```
 
 复用 R7 的历史封存、R5 角色认证和配对重采样。执行要求可访问原 C 档案与认证标签文件。
+
+## 事后补充｜无标签类别先验
+
+[登记协议](docs/prior-control.md) · [执行配置](configs/prior-control.json)。复用主实验所选的 A 图与冻结的 B0 分数。无标签决策、A 比例监督对照、H 评分分阶段封存。历史 EM 是主臂，独立有界根解单独归档。两者均复用 R7 的校准、先验界与同一凹似然。
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r11_分类阈值的跨域检验_20261121.scripts.run_prior --config experiments/mutagenicity/r11_分类阈值的跨域检验_20261121/configs/prior-control.json --output /tmp/r11-prior-control
+```
