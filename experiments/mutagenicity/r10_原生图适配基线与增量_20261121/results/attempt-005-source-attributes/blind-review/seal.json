@@ -1,0 +1,44 @@
+{
+  "blind": true,
+  "full_task_sort": "ASCII ascending, then numeric ascending graph id; UTF-8, no header, TAB, LF",
+  "columns": [
+    "task",
+    "source",
+    "graph_id",
+    "WL",
+    "Size",
+    "Base",
+    "Attribute"
+  ],
+  "protocol": "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/docs/source-attribute-screen.md",
+  "protocol_sha256": "b58814782c3c281d156dafa0ee7092fd6202c15e162003ed6ba35cb1ad5b7bbf",
+  "original_role_manifest_sha256": "6298811e840521a07d4134131e02130240649e4ef6fdf71d5b204034ca039617",
+  "historical_baseline_manifest_sha256": "823ff737f381767bf445c034e18983b2eed8e817e7095fe2bfbf82a2ea1dbee2",
+  "directions": 8,
+  "graph_occurrences": 221,
+  "same_class_shuffle_verification": "Per-graph node order reversed, original value order reversed within each discrete type, median invariance asserted in both.",
+  "outputs": {
+    "actions.tsv": "59c8887c3829c943f47370ffb4cba8589f567e8ca13140883bc122474b442e19",
+    "diagnostics.json": "3d4b62cc6c81ed078db2a533a239ffcf0aaca3f66261efffc79758182459451b",
+    "fit-access.json": "d086c977f36768fa48ce3bfead2f7a1792eaee4c1eab71963a9b55fcccea5213",
+    "independent.py": "ba4e272695ad94ff89b936795ece0a0b78712e7f04dfa1713db1eff397e149ed",
+    "margins.json": "5094d7fc145825976b4a1658c29d4842c325029d8ce8b2bc536c1b2fa4fe6111"
+  },
+  "evaluable_disagreements": {
+    "WL": 30,
+    "Size": 22,
+    "Base": 17
+  },
+  "largest_historical_logit_reconstruction_difference": {
+    "WL": 3.9810807095364e-07,
+    "Size": 3.6783058821043824e-09,
+    "Base": 7.17199855948536e-07
+  },
+  "max_abs_equal_weight_source_local_accuracy_difference_fraction_before_labels": "17953/215760",
+  "software": {
+    "python": "3.12",
+    "scipy": "1.15.2",
+    "torch": "2.5.1",
+    "torch_geometric": "2.6.1"
+  }
+}
