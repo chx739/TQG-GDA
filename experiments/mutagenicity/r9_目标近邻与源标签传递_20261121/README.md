@@ -14,6 +14,8 @@
 
 [按大小段借用源分类残差](docs/weighted-source-residuals-results.md)完成了三个设置共 24 个源内伪方向。加权残差在三个设置均输给未经残差校正的 WL 概率均值，未进入真实跨域验证。[登记协议](docs/weighted-source-residuals.md)
 
+[真实 U/E 比例定阈诊断](docs/true-rate-replay-results.md)复用了全部 24 个源内方向。PROTEINS 上将 E 真实比例和 E 排序同时用于定阈，Accuracy 仍比原 WL 低 4.583 个百分点。
+
 从仓库根目录执行。输出使用一个新的存档目录。
 
 ```sh
@@ -36,4 +38,13 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```sh
 round=experiments/mutagenicity/r9_目标近邻与源标签传递_20261121
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r9_目标近邻与源标签传递_20261121.scripts.weighted_source_residuals --config "$round/configs/weighted-source-residuals.json" --output /path/to/new-weighted-residual-attempt
+```
+
+## 复算已知比例的评分后诊断
+
+使用原加权残差试验的封存预测和公开分层总数，封存三组动作后按原 E 角色评分。
+
+```sh
+round=experiments/mutagenicity/r9_目标近邻与源标签传递_20261121
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r9_目标近邻与源标签传递_20261121.scripts.true_rate_replay --config "$round/configs/true-rate-replay.json" --output /path/to/new-true-rate-replay
 ```

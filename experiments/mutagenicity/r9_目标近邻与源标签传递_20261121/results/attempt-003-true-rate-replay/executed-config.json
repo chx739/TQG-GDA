@@ -1,0 +1,66 @@
+{
+  "code_commit": "fb7906622ffc6074b5f366c582eb1b52ee91b8a8",
+  "code_sha256": {
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/configs/true-rate-replay.json": "792c3514138cfba9e5d533322e4ecac0b2cf5c8731940fa78711d5116d4b25b8",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/scripts/true_rate_replay.py": "5340606a35e6baaa9d4556e553f83e8a71cce74307aabd77037159e09d015896",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/docs/true-rate-and-accuracy.md": "9c0480eaa91cde8dee4b48e973fdc9846a0e53574f1144f65f8ec2c8c467e146",
+    "experiments/common/io.py": "06f1e4efbecfcedc6f355d3674c6a3ddd33bad9b7d00f92256dac84b8aae6b41",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/inputs.py": "200700156227f954cfc77ed165306c38c105e884aa93604edf43878aafd98d1d",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/prior_run.py": "21c6bb41b1c099861faf4c962cb30b6f337c336adce91fe81da2fd2c80006f88",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/roc_rate.py": "9fc1857b2c50ad6aad4fce1488dce7c7768533076a54104dd125071c6b2603b4",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/roc_score.py": "6e9d83c44c46f49a501d90d98cd6ee84b9c6b407f5b88b17dda9911e07e6430a",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/roc_transfer.py": "383ca6f7a5796a95cf76ed2c7d55eb233364833ef00d2e02a9ecf2c54c997be1",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/thresholds.py": "388faaeb66ed807eb4b02f1a925448e78b3103f43088344cfb99e5aa6516a1bb",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/src/source_inputs.py": "a05f0d6b82c7bc9829f34f88b5242be58cf034d979fc68d0d4a623c8b4ff52d5",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/residual_inputs.py": "adb71506bd0792fc64a1c77cb61d1f0ed9597c78e4ac9254c9db5aa9510d6eca",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/residual_models.py": "0470b4ca0d13bdfad412511f2a54a532b89578ebd4a5d10271a9ba6b9e059d87",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/weighted_residuals.py": "47ab385da6181e8cdec60271e32f6a1f870cde12849e817af7aad59b56d224c8",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/true_rate_replay.py": "8b9019368de231b8bfc9167903ba2806d97473f13654ad9de9ce2930104055e3"
+  },
+  "plan": {
+    "registration_commit": "f0d04ebc95be2aeb0850e64c419f11395aa16157",
+    "protocol": "docs/true-rate-and-accuracy.md",
+    "source_attempt": "results/attempt-002-weighted-residuals",
+    "source_obs_sha256": "6298811e840521a07d4134131e02130240649e4ef6fdf71d5b204034ca039617",
+    "source_final_sha256": "0c0e974d08575297821575bf8df6b52478efc492d22a53fdc1d1a289884a66f0",
+    "published_a_accuracy_ranges_pp": {
+      "mutagenicity_edge": [
+        "66.30",
+        "71.34"
+      ],
+      "mutagenicity_node": [
+        "62.53",
+        "73.64"
+      ],
+      "proteins_edge": [
+        "67.50",
+        "74.54"
+      ]
+    }
+  },
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-u",
+    "-m",
+    "experiments.mutagenicity.r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121.scripts.true_rate_replay",
+    "--config",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/configs/true-rate-replay.json",
+    "--output",
+    "/home/hxchen/research/GDA/TSBA/experiments/r9/attempt-003-true-rate-replay"
+  ],
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "training_updates": 0,
+  "label_phases": {
+    "freeze": [],
+    "score": [
+      "E"
+    ]
+  },
+  "started_utc": "2026-11-20T20:49:34.188016+00:00",
+  "versions": {
+    "torch": "2.5.1",
+    "torch-geometric": "2.6.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2"
+  }
+}
