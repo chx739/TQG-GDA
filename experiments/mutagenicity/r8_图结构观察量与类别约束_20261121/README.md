@@ -18,3 +18,5 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 [运行前复核与预检结果](docs/preflight-review.md) · [冻结配置](configs/pilot-plan.json)
 
 [固定 A 均值的工作点诊断](docs/fixed-mass-diagnostic-results.md)
+
+[分数档内漂移的历史分解](docs/conditional-drift.md)显示，M0→M1 的类 0 在相同主分类器分数档内仍有明显的结构分数差异，M0→M3 的类 1 则有两项相反的变化。
