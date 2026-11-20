@@ -10,6 +10,8 @@
 
 [一处节点类型差异的跨图参照](docs/paired-action-support-results.md)已完成三个设置 36 个方向。PROTEINS 的可改判上界为 0.425%，低于 0.5% 门槛。[登记协议](docs/paired-action-support.md)
 
+[源校准残差的结构加权协议](docs/weighted-source-residuals.md)使用每个源域内的自然大小段，检验局部结构能否帮助估准目标组的正例比例并改善分类。
+
 从仓库根目录执行。输出使用一个新的存档目录。
 
 ```sh
