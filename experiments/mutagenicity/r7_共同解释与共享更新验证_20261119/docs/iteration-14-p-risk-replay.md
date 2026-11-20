@@ -55,3 +55,11 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```
 
 [逐种子风险和区间](../results/iteration-14/p-risk-replay/seeds.csv) · [端点](../results/iteration-14/p-risk-replay/endpoints.csv) · [类别与错分分解](../results/iteration-14/p-risk-replay/groups.csv) · [集中度](../results/iteration-14/p-risk-replay/concentration.csv) · [逐图贡献](../results/iteration-14/p-risk-replay/graphs.csv) · [候选风险](../results/iteration-14/p-risk-replay/candidate_risks.csv) · [实际配置](../results/iteration-14/p-risk-replay/executed-config.json) · [核验记录](../results/iteration-14/p-risk-replay/evidence.json)
+
+## 策略会话的独立复核
+
+修订的重放从二分类 margin 和 A 的重建概率计算均衡决策阈值，再在 A/H 上逐图核对；普通决策直接检查 margin 的符号。补充检查使用原执行方案和源训练表示重新构造源 GMM，分别从 410 条已保留或扩充的候选参数重建 A 上的后验。直接按图求期望 ΔNLL 与矩公式、重建矩与封存矩的最大误差均不超过 6.67×10⁻¹⁶。该检查验证已保存的候选，不证明完整相容集覆盖真实标签解释。
+
+独立审查还按原协议重算了方向区间。五种子共用同一批 H 图，按类别分层，并对五个模型复用同一次图抽样。M0→M3 平均 ΔNLL 为 +0.05264，95% 区间 [+0.03719, +0.06793]；同一抽样下平均 ΔAUROC 的区间为 [−0.00579, +0.00621]。3408 单模型分层 ΔNLL 区间 [+0.30871, +0.38379]。上文逐模型区间允许类别比例随重采样变化，回答不同的问题。两者均条件于已训练模型。
+
+3408 的 A 图上，正类 log-odds 的改变量最小 +0.538、平均 +1.837、最大 +4.994。H 图上最小 +0.516、平均 +1.861，表明每一张留出图都被推向正类。源模型在 A 上的平均正类概率为 0.566，更新后为 0.868。这把失效范围缩小到普遍的单向偏移；此数字仅用于解释已有更新。后续用独立登记的先验校正对照检验共享更新的额外分类价值。

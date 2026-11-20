@@ -8,7 +8,7 @@ import numpy as np
 from scipy.special import expit, log_softmax
 from scipy.stats import rankdata
 
-from .decisions import decision_for, verify_frozen_decisions
+from .decisions import verify_frozen_decisions
 from .r5_inputs import evaluation_labels
 from .seals import verified_seal_chain
 
@@ -45,7 +45,7 @@ def replay_block(scope, plan, seed):
     if not {'B0_balanced', 'J_argmax'} <= set(records):
         raise ValueError('Expected the original sealed balanced and argmax actions')
     verify_frozen_decisions(observed)
-    outputs, errors = {}, []
+    outputs, errors, adapt_thresholds = {}, [], {}
     for pool, inputs, frozen, std in (('adapt', fit, observed, standard),
                                        ('holdout', holdout, held, held_standard)):
         ids = inputs[f'{pool}_ids']
@@ -73,7 +73,16 @@ def replay_block(scope, plan, seed):
             np.testing.assert_allclose(np.exp(logp), frozen[f'{pool}_probability_{name}'], atol=atol, rtol=0)
             if not np.array_equal((margin > 0).astype(int), logits.argmax(1)):
                 raise ValueError(f'{key}: unadjusted class replay failed for {name}')
-            decision = decision_for(name, logits, observed)
+            # Independently reconstruct the registered binary actions from A.
+            if name in ('J', 'B0_balanced'):
+                if pool == 'adapt':
+                    prior = np.maximum(np.exp(replayed).mean(axis=0), 1e-8)
+                    prior /= prior.sum()
+                    np.testing.assert_allclose(prior, observed['decision_prior_' + name], atol=atol, rtol=0)
+                    adapt_thresholds[name] = np.log(prior[1]) - np.log(prior[0])
+                decision = (margin > adapt_thresholds[name]).astype(int)
+            else:
+                decision = (margin > 0.).astype(int)
             np.testing.assert_array_equal(decision, frozen[f'{pool}_decision_{name}'])
             methods[name] = dict(logp=logp, decision=decision, margin=logits[:, 1]-logits[:, 0])
             errors.append(float(np.max(np.abs(replayed-logp))))
@@ -143,12 +152,13 @@ def score_pool(pool, labels, threshold):
                 negative_contribution=delta[delta < 0].sum()/len(ids),
                 high_conf_wrong_count=int(high_conf_wrong.sum()),
                 high_conf_wrong_contribution=delta[high_conf_wrong].sum()/len(ids),
-                high_conf_wrong_positive_share=np.maximum(delta[high_conf_wrong], 0.).sum()/positive_total)
+                high_conf_wrong_positive_share=(np.maximum(delta[high_conf_wrong], 0.).sum()/positive_total
+                                                if positive_total > 0 else None))
     for n in (1, 5, 10, 20):
-        mass[f'top{n}_positive_share'] = positive[:n].sum()/positive_total
+        mass[f'top{n}_positive_share'] = positive[:n].sum()/positive_total if positive_total > 0 else None
         mask = np.ones(len(ids), dtype=bool)
         mask[np.argsort(-delta, kind='stable')[:n]] = False
-        mass[f'drop_top{n}_delta_nll'] = delta[mask].mean()
+        mass[f'drop_top{n}_delta_nll'] = delta[mask].mean() if mask.any() else None
     return by_method, delta, group_rows, per_graph, mass
 
 
