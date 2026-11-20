@@ -89,7 +89,8 @@ def mean(indices):
     return sum(values)/len(values)
 
 
-def score_block(role,x,y):
+def score_block(role,x,y,*,active='Full',make_views=aliases,
+                comparisons=('Anchor','WL','Size',*OTHER_CONTROLS)):
     if y.shape!=x['ids'].shape or not np.isin(y,[0,1]).all():
         raise ValueError('Invalid binary H role')
     n = len(y)
@@ -100,7 +101,7 @@ def score_block(role,x,y):
     nll = {m:float(np.logaddexp(0.,(1-2*y)*x[f'margin_{m}']).mean()) for m in raw if f'margin_{m}' in x}
     endpoints,contrasts,stats,delta = [],[],{},{}
     for anchor in refit.ANCHORS:
-        views = aliases(role,anchor)
+        views = make_views(role,anchor)
         for name,members in views.items():
             point = (mean(Fraction(int(flags[m].sum()),n) for m in members),
                      mean(roc_score.f1(cells[m]) for m in members),
@@ -110,21 +111,21 @@ def score_block(role,x,y):
             endpoints.append(dict(**ids_fields,anchor=anchor,method=name,n=n,accuracy=float(point[0]),
                                   macro_f1=float(point[1]),nll=point[2],
                                   tn=str(tn),fp=str(fp),fn=str(fn),tp=str(tp),positive_count=str(tp+fp)))
-        for name in ('Anchor','WL','Size',*OTHER_CONTROLS):
-            l,r = stats[anchor,'Full'],stats[anchor,name]
-            corrected,harmed,changed = scoring.paired_counts(views['Full'],views[name],raw,flags)
+        for name in comparisons:
+            l,r = stats[anchor,active],stats[anchor,name]
+            corrected,harmed,changed = scoring.paired_counts(views[active],views[name],raw,flags)
             a,f = l[0]-r[0],l[1]-r[1]
             if a!=(corrected-harmed)/n or changed!=corrected+harmed:
                 raise ArithmeticError('Strong-anchor paired classifications do not reconcile')
             loss = None if r[2] is None else l[2]-r[2]
             delta[anchor,name] = dict(acc=a,f1=f,nll=loss,corrected=corrected,harmed=harmed,changed=changed,n=n)
-            contrasts.append(dict(**ids_fields,anchor=anchor,left='Full',right=name,n=n,
+            contrasts.append(dict(**ids_fields,anchor=anchor,left=active,right=name,n=n,
                                   corrected=str(corrected),harmed=str(harmed),changed=str(changed),
                                   accuracy_exact=str(a),accuracy_pp=float(100*a),macro_f1_pp=float(100*f),nll_delta=loss))
     return endpoints,contrasts,stats,delta
 
 
-def aggregate(roles,scores,contrasts):
+def aggregate(roles,scores,contrasts,*,active='Full'):
     endpoints,comparisons = [],[]
     for setting in sorted({r['setting'] for r in roles.values()}):
         keys = [k for k,r in roles.items() if r['setting']==setting]
@@ -140,7 +141,7 @@ def aggregate(roles,scores,contrasts):
             a = [r['acc'] for r in rows]
             overall = mean(a)
             totals = {field:str(sum(r[field] for r in rows)) for field in ('corrected','harmed','changed')}
-            comparisons.append(dict(setting=setting,anchor=anchor,left='Full',right=name,directions=len(keys),**totals,
+            comparisons.append(dict(setting=setting,anchor=anchor,left=active,right=name,directions=len(keys),**totals,
                 positive=sum(v>0 for v in a),tied=sum(v==0 for v in a),negative=sum(v<0 for v in a),
                 accuracy_exact=str(overall),accuracy_pp=float(100*overall),
                 macro_f1_pp=float(100*mean(r['f1'] for r in rows)),
