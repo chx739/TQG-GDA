@@ -19,3 +19,5 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
 ## 来源内结果
 
 两方向共完成 433 张 E 图的计分。真实对应比 B 与交换对照的等权 Accuracy 分别高 0.227 和 0.455 个百分点，与等阳性数 B 的分类动作一致。反向 NLL 改善斜率为负，筛查未晋级。[报告](report.md) · [执行与封存证据](results/evidence.json)
+
+[远处结构的配对信息](docs/natural-context.md)在三个设置的 24 个来源内方向逐折比较了完整条件表、简单词频与两个固定锚点。
