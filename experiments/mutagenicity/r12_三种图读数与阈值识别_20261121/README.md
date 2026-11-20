@@ -12,6 +12,8 @@ R11 显示，用 A 的标签选择阈值能改善分类，直接从分类分数�
 
 [按图大小判决分组的三票先导](docs/conditional-votes-results.md)已完成种子 3405 的 36 个开发方向。PROTEINS 出现净纠正，Own 仍低于最强固定参照，三个设置均未晋级。[登记协议](docs/conditional-votes.md) · [相同观测下的正反例](docs/vote-identification.md)给出该方法可识别和失效的具体条件。
 
+[反向验证试验](docs/reverse-vote-check-results.md)复用这 36 个方向。结构近邻回传在三个设置均胜过 RowPerm，但低于原强源起点及源端直接选表，未晋级。[登记协议](docs/reverse-vote-check.md) · [RowPerm 对照](docs/reverse-vote-identification.md)
+
 ## 运行源内筛查
 
 从仓库根目录使用同一配置。鉴权预检核对八组 S/V、冻结分数和图记录，无需解码标签。正式运行使用新的输出路径。
@@ -42,4 +44,16 @@ out=/path/to/new-fixed-reader-attempt
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
 python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.fixed_reader_transfer --config "$round/configs/fixed-reader-transfer.json" --output "$out" --phase freeze
 python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.fixed_reader_transfer --config "$round/configs/fixed-reader-transfer.json" --output "$out" --phase score --obs-sha256 "$obs_sha"
+```
+
+## 运行反向验证
+
+从仓库根目录选用新的输出路径。先冻结 36 个方向的判决表。核验 OBS 后，将 `obs_sha` 设为该次冻结打印的 SHA-256，再从历史聚合计数评分。
+
+```sh
+round=experiments/mutagenicity/r12_三种图读数与阈值识别_20261121
+out=/path/to/new-reverse-vote-attempt
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.reverse_vote_check --config "$round/configs/reverse-vote-check.json" --output "$out" --phase freeze
+python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.reverse_vote_check --config "$round/configs/reverse-vote-check.json" --output "$out" --phase score --obs-sha256 "$obs_sha"
 ```
