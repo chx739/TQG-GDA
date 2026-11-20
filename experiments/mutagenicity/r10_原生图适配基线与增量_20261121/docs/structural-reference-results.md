@@ -43,6 +43,6 @@ R13 的同图同角色比较限于种子 3405，共 36 块，下表单位为 pp�
 
 执行版本为 `e4247032dbf91611c02814695bdf8ff0efabb387`。60 组模型各复用到三个 H，全部 480 个源验证指标随 FIT 封存。H 图拓扑在 FIT 之后按原 ID 推断。OBS 固定全部预测与谱系后，评分独立读取 12 个目标留出标签组。核验重载全部封存成员，确认 360 个 B0/SourceCal 端点与 R11 一致，以及 12 组重抽样权重的 SHA256 与 R11 一致，复核期间使用封存产物。[实际配置](../results/attempt-003-structural/executed-config.json) · [核验记录](../results/attempt-003-structural/verification.json) · [H 读口](../results/attempt-003-structural/label-access.json) · [FIT](../results/attempt-003-structural/FIT.json) · [OBS](../results/attempt-003-structural/OBS.json) · [FINAL](../results/attempt-003-structural/FINAL.json)
 
-Attempt-002 在线搜索报错后停在源拟合，报告的梯度无穷范数为 1.83×10⁻⁹。Attempt-003 为 `ABNORMAL` 的候选从相同初值重试，使用原有 10⁻⁷ 驻点容差作为提前收敛阈值，并在返回系数处复核原目标。两次恢复均发生在大小臂。18 项 R10 工程测试通过。较早的全库测试报告了 R5、R12、R13 和 R14 的历史目录规范失败。[失败尝试](../results/attempt-002-structural/execution-failure.json) · [成功运行日志](../results/attempt-003-structural/run.log) · [工程测试](../results/attempt-003-structural/engineering-tests.log)
+Attempt-002 在线搜索报错后停在源拟合，报告的梯度无穷范数为 1.83×10⁻⁹。Attempt-003 为 `ABNORMAL` 的候选从相同初值重试，使用原有 10⁻⁷ 驻点容差作为提前收敛阈值，并在返回系数处复核原目标。两次恢复均发生在大小臂。18 项 R10 工程测试通过。R12–R14 档案索引补齐后复查目录规范，唯一失败项为历史 R5 缺少 `src/__init__.py`。[失败尝试](../results/attempt-002-structural/execution-failure.json) · [成功运行日志](../results/attempt-003-structural/run.log) · [工程测试](../results/attempt-003-structural/engineering-tests.log)
 
 完整模型、180 个逐图预测文件、验证脚本与测试日志保存在运行档案。仓库镜像封存清单、候选值、角色审计和结果表。档案索引列出全部成员的 SHA256 和字节数。[档案索引](../results/structural-reference-archive.json)
