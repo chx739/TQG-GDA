@@ -1,0 +1,58 @@
+{
+  "plan": {
+    "analysis_type": "posthoc_frozen_prediction_replay",
+    "input": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-020/P",
+    "source_final_digest": "a7958a2c9d54e4fce7d9a1fa7569400d67cc149a19d2b6f0aaac56f7e3f8f20f",
+    "source_execution_commit": "01bff2685ea74d0fac66f8d20c43debce5f339b5",
+    "setting": "mutagenicity_edge",
+    "source": 0,
+    "target": 3,
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "tau": 0.005,
+    "methods": [
+      "B0",
+      "B0_balanced",
+      "J",
+      "J_argmax",
+      "J_plus"
+    ],
+    "atol": 1e-12,
+    "high_confidence_probability": 0.9,
+    "holdout_paired_bootstrap": {
+      "seed": 141420,
+      "replicates": 2000
+    }
+  },
+  "source_archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-020/P",
+  "output": "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/results/iteration-14/p-risk-replay",
+  "code_commit": "e6c0e7a649a140fb7c31cacbd1aff3d2930ea481",
+  "code_status": "",
+  "file_hashes": {
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/configs/r7-iteration14-p-risk-replay.json": "2443fd966ac4f21b8bd9f5efc6b1808ceaaf9cc5946df62877796823ef586ace",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/scripts/audit_p_risk.py": "b5f41181ed528e9e6e5687b7c61a7eb24b954b80164047906c222a6950831434",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/p_risk_replay.py": "591cae61cf940513883fbaca5e3520960d39f399c187b0a4350696fb904dbdf5"
+  },
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-m",
+    "experiments.mutagenicity.r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119.scripts.audit_p_risk",
+    "--config",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/configs/r7-iteration14-p-risk-replay.json",
+    "--output",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/results/iteration-14/p-risk-replay"
+  ],
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "started_utc": "2026-11-20T16:21:53.971886+00:00",
+  "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.15.2",
+    "torch": "2.5.1"
+  }
+}

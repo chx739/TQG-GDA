@@ -19,6 +19,8 @@
 
 [独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮实测](docs/iteration-02.md) · [第三轮投影实测](docs/iteration-03.md) · [第四轮源类条件锚定](docs/iteration-04.md) · [第五轮源混合模板](docs/iteration-05.md) · [第六轮判别后验锚定](docs/iteration-06.md) · [第七轮类别质量约束](docs/iteration-07.md) · [第八轮混合模板与类别质量](docs/iteration-08.md) · [第九轮角向解释](docs/iteration-09.md) · [第十轮图读出成对对照](docs/iteration-10.md) · [第十一轮候选后验置信度](docs/iteration-11.md) · [第十二轮较低后验强度](docs/iteration-12.md) · [第十三轮均衡分类和合成扩展](docs/iteration-13.md) · [第十四轮固定类别比例锚点](docs/iteration-14.md)
 
+[第十四轮 P 五种子损失与排序复盘及复现入口](docs/iteration-14-p-risk-replay.md)
+
 ## 合成阶段执行
 
 在仓库根目录用已安装项目依赖的 Python 执行。`check` 只运行小型工程夹具。以下示例重放第六轮 S，使用原执行提交 `b69aa5b` 的干净工作区。初次 S 使用其原执行提交 `bd259d3`。每次执行指定一个新运行目录。
