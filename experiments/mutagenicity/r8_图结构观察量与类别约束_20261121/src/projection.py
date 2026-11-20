@@ -46,25 +46,26 @@ def _exact_coordinates(v, mu):
     difference = np.longdouble(mu[1]) - mu[0]
     # Accumulate v and -mu0 separately. Subtracting mu0 per graph can
     # round away a tiny v before positive and negative terms cancel.
-    numerator = fsum(chain(v, repeat(-float(mu[0]), len(v))))
-    mean_residual = np.longdouble(numerator) / len(v)
+    residual0 = fsum(chain(v, repeat(-float(mu[0]), len(v))))
     if difference:
         center = float(np.mean(v, dtype=np.longdouble))
-        ratio = mean_residual / difference
+        residual1 = fsum(chain(v, repeat(-float(mu[1]), len(v))))
         # An out-of-range prior certifies an empty set. A bounded impossible
         # RHS also lets HiGHS report infeasibility for very small differences.
-        if ratio < 0 or ratio > 1:
-            prior = -1. if ratio < 0 else 2.
+        if (residual0 > 0 and residual1 > 0) or (residual0 < 0 and residual1 < 0):
+            prior = -1.
             moment = 0.
         else:
-            prior = float(ratio)
+            # The two distances to the endpoints also give exact prior 0/1
+            # when the observed mean coincides with a source mean.
+            prior = float(np.longdouble(abs(residual0)) / (np.longdouble(abs(residual0)) + abs(residual1)))
             moment = (mu[1] - center) * prior
         mass_coefficient = 1.
     else:
         # Equal means identify no prior. A nonzero marginal discrepancy
         # makes the point equations inconsistent for every prior.
         center = float(mu[1])
-        prior = float(np.sign(mean_residual))
+        prior = float(np.sign(residual0))
         mass_coefficient = 0.
         moment = 0.
     centered = v - center

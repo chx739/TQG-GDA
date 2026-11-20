@@ -69,3 +69,14 @@ class ExactMomentTests(unittest.TestCase):
         interval = projection.prior_interval(bands, OPTIONS)
         self.assertEqual(interval['status'], 'feasible', interval)
         np.testing.assert_allclose([interval['lower'], interval['upper']], [0., 1.], atol=1e-9)
+
+    def test_decimal_endpoint_does_not_round_outside_the_feasible_interval(self):
+        for mu in ([.2, .8], [.8, .2]):
+            for label in (0, 1):
+                v = np.full(2, mu[label])
+                bands = projection.Bands.build(v, mu, [0., 0.], 0.)
+                interval = projection.prior_interval(bands, OPTIONS)
+                self.assertEqual(interval['status'], 'feasible', interval)
+                np.testing.assert_allclose([interval['lower'], interval['upper']], label, atol=1e-12)
+                result = projection.joint_projection(np.zeros(2), bands, interval, OPTIONS, exact=True)
+                self.assertEqual(result['status'], 'boundary_only_or_near_boundary')
