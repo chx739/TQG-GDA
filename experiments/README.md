@@ -15,6 +15,8 @@
 
 [R11｜固定排序后，域专属阈值还有多少留出 Accuracy 空间？](mutagenicity/r11_分类阈值的跨域检验_20261121/report.md) 已完成 180 块，三个设置通过监督诊断门槛。[无标签先验补充](mutagenicity/r11_分类阈值的跨域检验_20261121/docs/prior-control-results.md)完成 180 块，MLLS 未达到门槛。
 
+[R12｜同一图的结构读数能否识别阈值该往哪边调？](mutagenicity/r12_三种图读数与阈值识别_20261121/README.md) 已登记八个源模型上的机制筛查。
+
 ## 最新验证：R7 共同解释与共享更新
 
 [R7｜共同解释集合能否支持有用的共享分类更新？](mutagenicity/r7_共同解释与共享更新验证_20261119/README.md) 第十二轮首次通过完整真实 P。全方向 C 中 Mutagenicity 边数划分的 BA 提高 0.53 个百分点，节点数划分接近零，PROTEINS 主比较缺一块。C 整体未通过。
