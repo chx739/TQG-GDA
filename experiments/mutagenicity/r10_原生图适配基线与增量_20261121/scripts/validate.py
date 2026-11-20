@@ -14,6 +14,8 @@ def main():
     parser.add_argument('--receipt',type=Path)
     parser.add_argument('--resume',action='store_true')
     args = parser.parse_args()
+    if args.resume and args.seed is not None:
+        parser.error('--resume validates the entire registered model grid; omit --seed')
     repo=Path(__file__).resolve().parents[4]
     root=args.root.resolve()
     _,report=validation.validate_jobs(root,repo,seeds=[args.seed] if args.seed is not None else None,
