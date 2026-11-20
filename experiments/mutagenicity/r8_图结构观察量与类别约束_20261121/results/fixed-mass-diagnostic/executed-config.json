@@ -1,0 +1,60 @@
+{
+  "plan": {
+    "registration_commit": "9803126",
+    "type": "posthoc_fixed_slope_operating_point_diagnostic",
+    "source_attempt": "results/attempt-001",
+    "parent_obs_sha256": "3e691eb79b6027a8077cb78eb94ff3333d988dc8e5dc4123618579dfc4328969",
+    "parent_final_sha256": "079ea181968257513138312c40f4df41def8058d476d36d4c4d1f88f73959203",
+    "setting": "mutagenicity_edge",
+    "directions": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "a_mean_error_max": 1e-10,
+    "logit_shift_replay_atol": 1e-12,
+    "comparison": "holdout Accuracy with fixed binary argmax, zero decides class 0"
+  },
+  "output": "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/results/fixed-mass-diagnostic",
+  "source_attempt": "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/results/attempt-001",
+  "code_commit": "a7f8ff9af24c80271976718e83aefd731a7385d1",
+  "git_status": "",
+  "code_config_sha256": {
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/scripts/fixed_mass.py": "8e634c74f8402e0b4a25afa9263b797119cf89518265b43471ccba0f35c5021a",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/fixed_mass.py": "a4f2474f101ae6a2eefdb87ee7edfdc0ebb3ddd3e4fb283f3fee31942f46d28a",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/inputs.py": "99cf6601df28b70b55a9ef554365578e6e6e8be79ea2a398cb90f3ec85e3af4f",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/pilot.py": "82aaa3ac0039402ee51a6209f8f4699871c2a1d180523b0f4d19a51798c9b68d",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/configs/fixed-mass-diagnostic.json": "fa9f7cd5fa2846c53244ad8cd0f27babbc658e60492e34a2c946d1dc07846f42",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/docs/fixed-mass-diagnostic.md": "e2a36693cad9e668946b2ad0ff78e02f9b4d037c3083c16e1c61b82da9fda1d0"
+  },
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-u",
+    "-m",
+    "experiments.mutagenicity.r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121.scripts.fixed_mass",
+    "--config",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/configs/fixed-mass-diagnostic.json",
+    "--output",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/results/fixed-mass-diagnostic"
+  ],
+  "started_utc": "2026-11-20T16:53:29.732104+00:00",
+  "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.15.2",
+    "torch": "2.5.1"
+  }
+}

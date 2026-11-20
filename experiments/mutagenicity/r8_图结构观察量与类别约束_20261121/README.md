@@ -16,3 +16,5 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```
 
 [运行前复核与预检结果](docs/preflight-review.md) · [冻结配置](configs/pilot-plan.json)
+
+[固定 A 均值的工作点诊断](docs/fixed-mass-diagnostic-results.md)
