@@ -1,0 +1,30 @@
+{
+  "registration_commit": "f9e06a4",
+  "protocol": "docs/matched-grade.md",
+  "setting": "mutagenicity_edge",
+  "parent_r8_obs_sha256": "3e691eb79b6027a8077cb78eb94ff3333d988dc8e5dc4123618579dfc4328969",
+  "fixed_mass_final_sha256": "3acfe24a9626f9692accb07a46f6ec21ee651838c5e351e6821b0d35a56a0c8d",
+  "seeds": [3405, 3406, 3407, 3408, 3409],
+  "directions": [[0, 1], [0, 3]],
+  "model": {
+    "mode": "graph",
+    "disc": "JS",
+    "hidden": 128,
+    "layers": 5,
+    "dropout": 0.5,
+    "learning_rate": 0.001,
+    "weight_decay": 0.001,
+    "domain_weight": 0.005,
+    "epochs": 200,
+    "batch_size": 0
+  },
+  "execution": {
+    "device": "cpu",
+    "torch_threads_per_worker": 2,
+    "interop_threads": 1,
+    "max_workers_after_first_seed": 4,
+    "inference_batch_size": 64,
+    "dtype": "float32",
+    "restart_policy": "restart incomplete model from registered seed and initialization; retain interrupted trace"
+  }
+}
