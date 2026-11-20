@@ -1,0 +1,60 @@
+{
+  "passed": false,
+  "directions": {
+    "M0->M1": {
+      "SourceCal": {
+        "available": 5,
+        "planned": 5,
+        "accuracy_pp": 0.0,
+        "exact_accuracy_fraction": "0",
+        "strictly_positive": false
+      },
+      "SamePrior": {
+        "available": 5,
+        "planned": 5,
+        "accuracy_pp": 0.0,
+        "exact_accuracy_fraction": "0",
+        "strictly_positive": false
+      }
+    },
+    "M0->M3": {
+      "SourceCal": {
+        "available": 5,
+        "planned": 5,
+        "accuracy_pp": 0.0,
+        "exact_accuracy_fraction": "0",
+        "strictly_positive": false
+      },
+      "SamePrior": {
+        "available": 5,
+        "planned": 5,
+        "accuracy_pp": 0.0,
+        "exact_accuracy_fraction": "0",
+        "strictly_positive": false
+      }
+    }
+  },
+  "pooled_vs_source_fusion": {
+    "available": 10,
+    "planned": 10,
+    "accuracy_pp": -0.6541641770907619,
+    "exact_accuracy_fraction": "-1697/259415",
+    "strictly_positive": false
+  },
+  "arm_status_counts": {
+    "Joint": {
+      "base_feasible": 10
+    },
+    "SamePrior": {
+      "base_feasible": 10
+    },
+    "JointExact": {
+      "updated": 10
+    },
+    "SamePriorExact": {
+      "updated": 10
+    }
+  },
+  "next_phase": null,
+  "classification_endpoint": "holdout Accuracy, equal directions within seed"
+}

@@ -1,0 +1,55 @@
+{
+  "registration_commit": "d972abdb96a565c03cfdaf2534b373087fd25019",
+  "protocol": "docs/pilot.md",
+  "r7_archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-020/P",
+  "r7_final_digest": "a7958a2c9d54e4fce7d9a1fa7569400d67cc149a19d2b6f0aaac56f7e3f8f20f",
+  "r7_prior_control_final_sha256": "7a6a581d9c6e8f9aaf186730b74832d0b38e219c626cba24e465780b9b1ddc6d",
+  "setting": "mutagenicity_edge",
+  "directions": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      3
+    ]
+  ],
+  "seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "r7_tau": 0.005,
+  "composition": {
+    "node_types": 14,
+    "edge_types": 3,
+    "standardization": "source_fit_population_mean_sd_constant_scale_one",
+    "C": 1.0,
+    "intercept": true,
+    "class_weights": null,
+    "unknown_per_histogram": true
+  },
+  "projection": {
+    "alpha": 0.05,
+    "lp_tolerance": 1e-09,
+    "feasibility_tolerance": 1e-08,
+    "kkt_tolerance": 1e-07,
+    "interior_tolerance": 1e-08,
+    "dual_max_iterations": 2000,
+    "dual_gradient_tolerance": 1e-11,
+    "dual_function_tolerance": 1e-15
+  },
+  "source_solver": {
+    "max_iterations": 4000,
+    "gradient_tolerance": 1e-10,
+    "function_tolerance": 1e-15,
+    "stationarity_tolerance": 1e-07
+  },
+  "diagnostic_intervals": {
+    "conditional_means": "Welch 95% for within-class source-validation to target difference",
+    "paired_accuracy": "reuse R7 target-domain-by-class graph bootstrap"
+  }
+}

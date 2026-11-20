@@ -1,0 +1,802 @@
+{
+  "mutagenicity_edge-M0_to_M1-seed-3405": {
+    "task": {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 1,
+      "seed": 3405
+    },
+    "source_key": "M0-seed-3405",
+    "manifest": "blocks/mutagenicity_edge-M0_to_M1-seed-3405/manifest.json",
+    "manifest_sha256": "1cb6f61957cdae9396dd918efbe5c03951852707245ab698dddba4ebea262ba1",
+    "tau": 0.005,
+    "intervals": {
+      "Joint": {
+        "status": "feasible",
+        "lower": 0.0,
+        "upper": 0.9332259080504282
+      },
+      "JointExact": {
+        "status": "feasible",
+        "lower": 0.2315806123658465,
+        "upper": 0.23158061236584654
+      }
+    },
+    "solutions": {
+      "Joint": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "base_violation": 0.0,
+        "primal_violation": 0.0,
+        "dual_kkt_inf": 0.0
+      },
+      "SamePrior": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "target_prior": 0.4906069526526068,
+        "prior_residual": 0.0
+      },
+      "JointExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -3.0402847332444614,
+        "slope": 2.4840600837625475,
+        "base_violation": 0.25902634028676025,
+        "primal_violation": 2.9010543967089575e-12,
+        "affine_stationarity_inf": 1.7763568394002505e-15,
+        "complementarity_inf": 0.0,
+        "dual_feasibility_violation": 0.0,
+        "dual_kkt_inf": 2.9010543967089575e-12,
+        "multipliers": [
+          2.213931927866406,
+          -1.657707024903521
+        ],
+        "optimizer_iterations": 9,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      "SamePriorExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -1.8611870495635368,
+        "slope": 0.0,
+        "target_prior": 0.23158061236584654,
+        "prior_residual": 6.938893903907228e-16
+      }
+    },
+    "eps_source": [
+      0.15119901888525628,
+      0.1554589796642713
+    ],
+    "eps_adapt": 0.05714785749247808,
+    "adapt_n": 777,
+    "mu": [
+      0.2602923175697524,
+      0.5727962299660656
+    ]
+  },
+  "mutagenicity_edge-M0_to_M1-seed-3406": {
+    "task": {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 1,
+      "seed": 3406
+    },
+    "source_key": "M0-seed-3406",
+    "manifest": "blocks/mutagenicity_edge-M0_to_M1-seed-3406/manifest.json",
+    "manifest_sha256": "94e1daa3dac1ce03434617cb1057d1ac288b07d3b904863c22d248bb174e3537",
+    "tau": 0.005,
+    "intervals": {
+      "Joint": {
+        "status": "feasible",
+        "lower": 0.0,
+        "upper": 0.8015991996691805
+      },
+      "JointExact": {
+        "status": "feasible",
+        "lower": 0.034049979010551616,
+        "upper": 0.034049979010551616
+      }
+    },
+    "solutions": {
+      "Joint": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "base_violation": 0.0,
+        "primal_violation": 0.0,
+        "dual_kkt_inf": 0.0
+      },
+      "SamePrior": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "target_prior": 0.378818144323068,
+        "prior_residual": 0.0
+      },
+      "JointExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -3.4507785666295563,
+        "slope": -1.6501874779225165,
+        "base_violation": 0.34476816531251636,
+        "primal_violation": 1.3247479502265236e-11,
+        "affine_stationarity_inf": 3.552713678800501e-15,
+        "complementarity_inf": 0.0,
+        "dual_feasibility_violation": 0.0,
+        "dual_kkt_inf": 1.3247479502265236e-11,
+        "multipliers": [
+          4.035358247617299,
+          1.06560779628425
+        ],
+        "optimizer_iterations": 12,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "SamePriorExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -4.461774960183187,
+        "slope": 0.0,
+        "target_prior": 0.034049979010551616,
+        "prior_residual": 1.6306400674181987e-15
+      }
+    },
+    "eps_source": [
+      0.15119901888525628,
+      0.1554589796642713
+    ],
+    "eps_adapt": 0.05714785749247808,
+    "adapt_n": 777,
+    "mu": [
+      0.3435551601605623,
+      0.657661215603768
+    ]
+  },
+  "mutagenicity_edge-M0_to_M1-seed-3407": {
+    "task": {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 1,
+      "seed": 3407
+    },
+    "source_key": "M0-seed-3407",
+    "manifest": "blocks/mutagenicity_edge-M0_to_M1-seed-3407/manifest.json",
+    "manifest_sha256": "52e70bc2a746371e140372492a6baf11c1abd98a23394751de4812ade8390fe9",
+    "tau": 0.005,
+    "intervals": {
+      "Joint": {
+        "status": "feasible",
+        "lower": 0.0,
+        "upper": 0.8250499668222817
+      },
+      "JointExact": {
+        "status": "feasible",
+        "lower": 0.012116238363378141,
+        "upper": 0.012116238363378141
+      }
+    },
+    "solutions": {
+      "Joint": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "base_violation": 0.0,
+        "primal_violation": 0.0,
+        "dual_kkt_inf": 0.0
+      },
+      "SamePrior": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "target_prior": 0.4217431557116457,
+        "prior_residual": 0.0
+      },
+      "JointExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -4.925353145357725,
+        "slope": 0.005143531191082581,
+        "base_violation": 0.40962691734826756,
+        "primal_violation": 4.420130927940136e-12,
+        "affine_stationarity_inf": 1.7763568394002505e-15,
+        "complementarity_inf": 0.0,
+        "dual_feasibility_violation": 0.0,
+        "dual_kkt_inf": 4.420130927940136e-12,
+        "multipliers": [
+          4.923565262106387,
+          -0.0033556473268073323
+        ],
+        "optimizer_iterations": 13,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      "SamePriorExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -4.92221845984052,
+        "slope": 0.0,
+        "target_prior": 0.012116238363378141,
+        "prior_residual": 8.743006318923108e-16
+      }
+    },
+    "eps_source": [
+      0.15119901888525628,
+      0.1554589796642713
+    ],
+    "eps_adapt": 0.05714785749247808,
+    "adapt_n": 777,
+    "mu": [
+      0.34402994632336054,
+      0.6385488510912672
+    ]
+  },
+  "mutagenicity_edge-M0_to_M1-seed-3408": {
+    "task": {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 1,
+      "seed": 3408
+    },
+    "source_key": "M0-seed-3408",
+    "manifest": "blocks/mutagenicity_edge-M0_to_M1-seed-3408/manifest.json",
+    "manifest_sha256": "840a33bb1b980e57965b91b4c093d3d0097684c181f60160e13a9ce3a51063e4",
+    "tau": 0.005,
+    "intervals": {
+      "Joint": {
+        "status": "feasible",
+        "lower": 0.0,
+        "upper": 0.8343230680913011
+      },
+      "JointExact": {
+        "status": "feasible",
+        "lower": 0.09471268325198776,
+        "upper": 0.09471268325198776
+      }
+    },
+    "solutions": {
+      "Joint": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "base_violation": 0.0,
+        "primal_violation": 0.0,
+        "dual_kkt_inf": 0.0
+      },
+      "SamePrior": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "target_prior": 0.42455051501606716,
+        "prior_residual": 0.0
+      },
+      "JointExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -3.0844244920074133,
+        "slope": 1.1527819088974487,
+        "base_violation": 0.32983783176407944,
+        "primal_violation": 1.0583173226663689e-11,
+        "affine_stationarity_inf": 8.881784197001252e-16,
+        "complementarity_inf": 0.0,
+        "dual_feasibility_violation": 0.0,
+        "dual_kkt_inf": 1.0583173226663689e-11,
+        "multipliers": [
+          2.675298329062132,
+          -0.7436557391084323
+        ],
+        "optimizer_iterations": 10,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "SamePriorExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -2.42986378519237,
+        "slope": 0.0,
+        "target_prior": 0.09471268325198776,
+        "prior_residual": 2.7755575615628914e-17
+      }
+    },
+    "eps_source": [
+      0.15119901888525628,
+      0.1554589796642713
+    ],
+    "eps_adapt": 0.05714785749247808,
+    "adapt_n": 777,
+    "mu": [
+      0.32476154292350407,
+      0.643006232863499
+    ]
+  },
+  "mutagenicity_edge-M0_to_M1-seed-3409": {
+    "task": {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 1,
+      "seed": 3409
+    },
+    "source_key": "M0-seed-3409",
+    "manifest": "blocks/mutagenicity_edge-M0_to_M1-seed-3409/manifest.json",
+    "manifest_sha256": "18b216c6ea8c0f6c0082a58e3cff80491babda152eaa938a5a13b7a90ace86c5",
+    "tau": 0.005,
+    "intervals": {
+      "Joint": {
+        "status": "feasible",
+        "lower": 0.0,
+        "upper": 0.8394084297705654
+      },
+      "JointExact": {
+        "status": "feasible",
+        "lower": 0.12135081373644925,
+        "upper": 0.12135081373644925
+      }
+    },
+    "solutions": {
+      "Joint": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "base_violation": 0.0,
+        "primal_violation": 0.0,
+        "dual_kkt_inf": 0.0
+      },
+      "SamePrior": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "target_prior": 0.396601788459083,
+        "prior_residual": 0.0
+      },
+      "JointExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -2.4649497130222078,
+        "slope": 0.8010135055069244,
+        "base_violation": 0.27525097472263377,
+        "primal_violation": 4.42655877230802e-10,
+        "affine_stationarity_inf": 8.881784197001252e-16,
+        "complementarity_inf": 0.0,
+        "dual_feasibility_violation": 0.0,
+        "dual_kkt_inf": 4.42655877230802e-10,
+        "multipliers": [
+          2.1772787352122895,
+          -0.513342527543051
+        ],
+        "optimizer_iterations": 10,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "SamePriorExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -2.0102713653093485,
+        "slope": 0.0,
+        "target_prior": 0.12135081373644925,
+        "prior_residual": 2.7755575615628914e-17
+      }
+    },
+    "eps_source": [
+      0.15119901888525628,
+      0.1554589796642713
+    ],
+    "eps_adapt": 0.05714785749247808,
+    "adapt_n": 777,
+    "mu": [
+      0.31971817084107756,
+      0.644524986517499
+    ]
+  },
+  "mutagenicity_edge-M0_to_M3-seed-3405": {
+    "task": {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 3,
+      "seed": 3405
+    },
+    "source_key": "M0-seed-3405",
+    "manifest": "blocks/mutagenicity_edge-M0_to_M3-seed-3405/manifest.json",
+    "manifest_sha256": "7c14ae0ad8f43fa3e285a8cff93a09f897f3f00830ad1b48422c2d67d765d2ea",
+    "tau": 0.005,
+    "intervals": {
+      "Joint": {
+        "status": "feasible",
+        "lower": 0.07190708000729783,
+        "upper": 1.0
+      },
+      "JointExact": {
+        "status": "feasible",
+        "lower": 0.8055784865531302,
+        "upper": 0.8055784865531302
+      }
+    },
+    "solutions": {
+      "Joint": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "base_violation": 0.0,
+        "primal_violation": 0.0,
+        "dual_kkt_inf": 0.0
+      },
+      "SamePrior": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "target_prior": 0.5431526528664264,
+        "prior_residual": 0.0
+      },
+      "JointExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": 1.1230099066833095,
+        "slope": 1.6566110093549722,
+        "base_violation": 0.2624258336867097,
+        "primal_violation": 2.873549301285472e-09,
+        "affine_stationarity_inf": 8.881784197001252e-16,
+        "complementarity_inf": 0.0,
+        "dual_feasibility_violation": 0.0,
+        "dual_kkt_inf": 2.873549301285472e-09,
+        "multipliers": [
+          -1.9712589311194517,
+          -0.8482490097690457
+        ],
+        "optimizer_iterations": 9,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "SamePriorExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": 1.792770505021846,
+        "slope": 0.0,
+        "target_prior": 0.8055784865531302,
+        "prior_residual": 1.1102230246251565e-16
+      }
+    },
+    "eps_source": [
+      0.15119901888525628,
+      0.1554589796642713
+    ],
+    "eps_adapt": 0.058284108980014966,
+    "adapt_n": 747,
+    "mu": [
+      0.2602923175697524,
+      0.5727962299660656
+    ]
+  },
+  "mutagenicity_edge-M0_to_M3-seed-3406": {
+    "task": {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 3,
+      "seed": 3406
+    },
+    "source_key": "M0-seed-3406",
+    "manifest": "blocks/mutagenicity_edge-M0_to_M3-seed-3406/manifest.json",
+    "manifest_sha256": "57a81922458c3d8915cd6d549b8b101ea5927102fd3ca2a046f72858b4dcad88",
+    "tau": 0.005,
+    "intervals": {
+      "Joint": {
+        "status": "feasible",
+        "lower": 0.0,
+        "upper": 1.0
+      },
+      "JointExact": {
+        "status": "feasible",
+        "lower": 0.5949280331441755,
+        "upper": 0.5949280331441756
+      }
+    },
+    "solutions": {
+      "Joint": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "base_violation": 0.0,
+        "primal_violation": 0.0,
+        "dual_kkt_inf": 0.0
+      },
+      "SamePrior": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "target_prior": 0.4379924009597794,
+        "prior_residual": 0.0
+      },
+      "JointExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": 0.014518902347507856,
+        "slope": 1.8943698353241112,
+        "base_violation": 0.1569356321843996,
+        "primal_violation": 4.920508445138694e-13,
+        "affine_stationarity_inf": 8.881784197001252e-16,
+        "complementarity_inf": 0.0,
+        "dual_feasibility_violation": 0.0,
+        "dual_kkt_inf": 4.920508445138694e-13,
+        "multipliers": [
+          -1.019341268600802,
+          -1.0048222497824097
+        ],
+        "optimizer_iterations": 7,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      "SamePriorExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": 0.9272895404468489,
+        "slope": 0.0,
+        "target_prior": 0.5949280331441755,
+        "prior_residual": 1.1102230246251565e-16
+      }
+    },
+    "eps_source": [
+      0.15119901888525628,
+      0.1554589796642713
+    ],
+    "eps_adapt": 0.058284108980014966,
+    "adapt_n": 747,
+    "mu": [
+      0.3435551601605623,
+      0.657661215603768
+    ]
+  },
+  "mutagenicity_edge-M0_to_M3-seed-3407": {
+    "task": {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 3,
+      "seed": 3407
+    },
+    "source_key": "M0-seed-3407",
+    "manifest": "blocks/mutagenicity_edge-M0_to_M3-seed-3407/manifest.json",
+    "manifest_sha256": "feeea6d812193d4a5733602e06346845d309427c621d06d5a905923c2e62d03f",
+    "tau": 0.005,
+    "intervals": {
+      "Joint": {
+        "status": "feasible",
+        "lower": 0.0,
+        "upper": 1.0
+      },
+      "JointExact": {
+        "status": "feasible",
+        "lower": 0.701252568923471,
+        "upper": 0.701252568923471
+      }
+    },
+    "solutions": {
+      "Joint": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "base_violation": 0.0,
+        "primal_violation": 0.0,
+        "dual_kkt_inf": 0.0
+      },
+      "SamePrior": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "target_prior": 0.45018451606359994,
+        "prior_residual": 0.0
+      },
+      "JointExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": 0.2663947665488604,
+        "slope": 2.2275035349347374,
+        "base_violation": 0.2510680528598757,
+        "primal_violation": 3.1042668435787846e-12,
+        "affine_stationarity_inf": 8.881784197001252e-16,
+        "complementarity_inf": 0.0,
+        "dual_feasibility_violation": 0.0,
+        "dual_kkt_inf": 3.1042668435787846e-12,
+        "multipliers": [
+          -1.492773756838774,
+          -1.22637749232175
+        ],
+        "optimizer_iterations": 8,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      "SamePriorExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": 1.349852866729336,
+        "slope": 0.0,
+        "target_prior": 0.701252568923471,
+        "prior_residual": 0.0
+      }
+    },
+    "eps_source": [
+      0.15119901888525628,
+      0.1554589796642713
+    ],
+    "eps_adapt": 0.058284108980014966,
+    "adapt_n": 747,
+    "mu": [
+      0.34402994632336054,
+      0.6385488510912672
+    ]
+  },
+  "mutagenicity_edge-M0_to_M3-seed-3408": {
+    "task": {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 3,
+      "seed": 3408
+    },
+    "source_key": "M0-seed-3408",
+    "manifest": "blocks/mutagenicity_edge-M0_to_M3-seed-3408/manifest.json",
+    "manifest_sha256": "cea056df2e686f280ad47adc8626ead9b1ed6d2dd9f3efea00730c5c5c1ef314",
+    "tau": 0.005,
+    "intervals": {
+      "Joint": {
+        "status": "feasible",
+        "lower": 0.0039056763154069803,
+        "upper": 1.0
+      },
+      "JointExact": {
+        "status": "feasible",
+        "lower": 0.6646767816526208,
+        "upper": 0.6646767816526209
+      }
+    },
+    "solutions": {
+      "Joint": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "base_violation": 0.0,
+        "primal_violation": 0.0,
+        "dual_kkt_inf": 0.0
+      },
+      "SamePrior": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "target_prior": 0.5035303072504008,
+        "prior_residual": 0.0
+      },
+      "JointExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -0.055812707966682584,
+        "slope": 1.7119405812710786,
+        "base_violation": 0.16114647440222418,
+        "primal_violation": 2.8028690479686702e-12,
+        "affine_stationarity_inf": 4.440892098500626e-16,
+        "complementarity_inf": 0.0,
+        "dual_feasibility_violation": 0.0,
+        "dual_kkt_inf": 2.8028690479686702e-12,
+        "multipliers": [
+          -0.8622863017290328,
+          -0.918098998590426
+        ],
+        "optimizer_iterations": 7,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      "SamePriorExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": 0.7669862866405346,
+        "slope": 0.0,
+        "target_prior": 0.6646767816526208,
+        "prior_residual": 7.771561172376096e-16
+      }
+    },
+    "eps_source": [
+      0.15119901888525628,
+      0.1554589796642713
+    ],
+    "eps_adapt": 0.058284108980014966,
+    "adapt_n": 747,
+    "mu": [
+      0.32476154292350407,
+      0.643006232863499
+    ]
+  },
+  "mutagenicity_edge-M0_to_M3-seed-3409": {
+    "task": {
+      "setting": "mutagenicity_edge",
+      "source": 0,
+      "target": 3,
+      "seed": 3409
+    },
+    "source_key": "M0-seed-3409",
+    "manifest": "blocks/mutagenicity_edge-M0_to_M3-seed-3409/manifest.json",
+    "manifest_sha256": "2ce7e8a16f0f30a129aabe707125d4b65fcfd34913c3d2f3171f3582fd886c3d",
+    "tau": 0.005,
+    "intervals": {
+      "Joint": {
+        "status": "feasible",
+        "lower": 0.0,
+        "upper": 1.0
+      },
+      "JointExact": {
+        "status": "feasible",
+        "lower": 0.6125235752949391,
+        "upper": 0.6125235752949391
+      }
+    },
+    "solutions": {
+      "Joint": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "base_violation": 0.0,
+        "primal_violation": 0.0,
+        "dual_kkt_inf": 0.0
+      },
+      "SamePrior": {
+        "status": "base_feasible",
+        "valid": true,
+        "intercept": 0.0,
+        "slope": 0.0,
+        "target_prior": 0.5041840506187952,
+        "prior_residual": 0.0
+      },
+      "JointExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": -0.6978218754254399,
+        "slope": 2.4558372709254153,
+        "base_violation": 0.11560628916263695,
+        "primal_violation": 1.670200644454667e-10,
+        "affine_stationarity_inf": 4.440892098500626e-16,
+        "complementarity_inf": 0.0,
+        "dual_feasibility_violation": 0.0,
+        "dual_kkt_inf": 1.670200644454667e-10,
+        "multipliers": [
+          -0.5759472489075796,
+          -1.2737687076838866
+        ],
+        "optimizer_iterations": 7,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      "SamePriorExact": {
+        "status": "updated",
+        "valid": true,
+        "intercept": 0.476728989172539,
+        "slope": 0.0,
+        "target_prior": 0.6125235752949391,
+        "prior_residual": 2.220446049250313e-16
+      }
+    },
+    "eps_source": [
+      0.15119901888525628,
+      0.1554589796642713
+    ],
+    "eps_adapt": 0.058284108980014966,
+    "adapt_n": 747,
+    "mu": [
+      0.31971817084107756,
+      0.644524986517499
+    ]
+  }
+}

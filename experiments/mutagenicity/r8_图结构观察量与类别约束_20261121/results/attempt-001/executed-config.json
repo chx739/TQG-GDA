@@ -1,0 +1,99 @@
+{
+  "plan": {
+    "registration_commit": "d972abdb96a565c03cfdaf2534b373087fd25019",
+    "protocol": "docs/pilot.md",
+    "r7_archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-020/P",
+    "r7_final_digest": "a7958a2c9d54e4fce7d9a1fa7569400d67cc149a19d2b6f0aaac56f7e3f8f20f",
+    "r7_prior_control_final_sha256": "7a6a581d9c6e8f9aaf186730b74832d0b38e219c626cba24e465780b9b1ddc6d",
+    "setting": "mutagenicity_edge",
+    "directions": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "r7_tau": 0.005,
+    "composition": {
+      "node_types": 14,
+      "edge_types": 3,
+      "standardization": "source_fit_population_mean_sd_constant_scale_one",
+      "C": 1.0,
+      "intercept": true,
+      "class_weights": null,
+      "unknown_per_histogram": true
+    },
+    "projection": {
+      "alpha": 0.05,
+      "lp_tolerance": 1e-09,
+      "feasibility_tolerance": 1e-08,
+      "kkt_tolerance": 1e-07,
+      "interior_tolerance": 1e-08,
+      "dual_max_iterations": 2000,
+      "dual_gradient_tolerance": 1e-11,
+      "dual_function_tolerance": 1e-15
+    },
+    "source_solver": {
+      "max_iterations": 4000,
+      "gradient_tolerance": 1e-10,
+      "function_tolerance": 1e-15,
+      "stationarity_tolerance": 1e-07
+    },
+    "diagnostic_intervals": {
+      "conditional_means": "Welch 95% for within-class source-validation to target difference",
+      "paired_accuracy": "reuse R7 target-domain-by-class graph bootstrap"
+    }
+  },
+  "code_commit": "dd12d512434afab239fb90ad8f0df0928e294935",
+  "git_status": "",
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-u",
+    "-m",
+    "experiments.mutagenicity.r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121.scripts.run",
+    "run",
+    "--config",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/configs/pilot-plan.json",
+    "--output",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/results/attempt-001"
+  ],
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "started_utc": "2026-11-20T16:45:42.199547+00:00",
+  "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+  "versions": {
+    "torch": "2.5.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2"
+  },
+  "n_torch_threads": 1,
+  "code_and_config_sha256": {
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/inputs.py": "99cf6601df28b70b55a9ef554365578e6e6e8be79ea2a398cb90f3ec85e3af4f",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/pilot.py": "82aaa3ac0039402ee51a6209f8f4699871c2a1d180523b0f4d19a51798c9b68d",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/projection.py": "de73c08c26ea56bf944940c106f1df84b27ef606f06f553b89edf0f99f623afe",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/composition.py": "96734bc7f2b0ad436c5ce6f2f07b724d0502ca63a9c459ea7541390f4644b963",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/scripts/run.py": "0ec5dd9a50e74e7faecb623faea8baed32083a42ff21d42fbca4db4c5594dc06",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/scripts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/r5_inputs.py": "a45a0b4bd19e8da89c2f65f8801ef0d00a97a2ac9f92af81862355df73901d6a",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/seals.py": "b1e4e91a7aa2304bb9d43af06babe419aa4f6cbc8932a00bf7c8f55776fa3133",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/fit.py": "5c0e881a9a8a4bba78bcf063afcee54d4dcaf02e825f93e3d9bdd95dfbde99f4",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/evaluate.py": "c87f8fe658e06aaed9c8d3fc913c6976b9ed05f02d662e1f803773e43bf5fbb0",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/prior_control.py": "58eb92f40d7a80f38c9615b3d0e5383039cec6a0dd9eb71d95541fcaf12dbe4f",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/decisions.py": "e101c3f8cf6d1b43ae12a7a8cb5e2f40ef56a9b3799f1cf976e27e05750bb27c",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/paired.py": "f9cbf3b01f4991dae26239776acd3e93e003f1d44d5b97490eedca8d5d6866a3",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/p_risk_replay.py": "7cddeba318b7daa37c0d3cca08af009bcbae1f3794acbd6cc372c517b46fafd4",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/configs/pilot-plan.json": "60825bddd710a77b4e0812d3f199a7be3a0d3eb197a815d6a3b09973b42b6d18",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/docs/pilot.md": "a3f212793d9d782445345d1a8377d604372879c7bf00622a3bb0fc232f6925d4"
+  }
+}

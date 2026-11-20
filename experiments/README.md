@@ -7,7 +7,7 @@
 | 合成数据 | [合成实验](synthetic_data/README.md) | E1/E2、控制实验、源后验、静态 score 与 P0 训练预算 |
 | Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R6 结果与 R7 合成验证；跨数据集轮次包含 PROTEINS |
 
-[R8｜独立图结构分数能否为目标类别提供可迁移的约束？](mutagenicity/r8_图结构观察量与类别约束_20261121/README.md) 已登记开发试点。
+[R8｜独立图结构分数能否为目标类别提供可迁移的约束？](mutagenicity/r8_图结构观察量与类别约束_20261121/README.md) 已完成十块开发试点，主臂均零更新，未晋级。[试点报告](mutagenicity/r8_图结构观察量与类别约束_20261121/report.md)
 
 ## 最新验证：R7 共同解释与共享更新
 
