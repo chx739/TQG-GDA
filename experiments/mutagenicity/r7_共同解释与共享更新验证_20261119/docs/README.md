@@ -19,3 +19,5 @@
 [第七轮目标类别质量约束](iteration-07.md)
 
 [第八轮混合模板与类别质量](iteration-08.md)
+
+[普通 Accuracy 的文献口径与先验校正对照](accuracy-and-prior-control.md)
