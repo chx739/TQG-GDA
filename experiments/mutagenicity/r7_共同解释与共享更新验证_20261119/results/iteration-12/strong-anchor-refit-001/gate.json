@@ -1,0 +1,131 @@
+{
+  "settings": {
+    "mutagenicity_edge": {
+      "anchor": "WL",
+      "passed": false,
+      "clauses": {
+        "proper_improvement": false,
+        "positive_directions": false,
+        "strictly_above_B0Teacher": false,
+        "strictly_above_ScoreOnly": false,
+        "strictly_above_OtherMean": true,
+        "strictly_above_WL": false,
+        "strictly_above_Size": true
+      },
+      "positive": 5,
+      "tied": 0,
+      "negative": 7,
+      "differences_exact": {
+        "Anchor": "-32004811/3083510456",
+        "WL": "-32004811/3083510456",
+        "Size": "1583180587/16188429894",
+        "B0Teacher": "-526259/60858759",
+        "CalTeacher": "18932675/5396143298",
+        "ScoreOnly": "-159158967/21584573192",
+        "OriginalE": "388352059/3083510456",
+        "Other1": "62526437/32376859788",
+        "Other2": "-20312727/10792286596",
+        "OtherMean": "198532/8094214947",
+        "EqualCount": "-145293023/16188429894"
+      },
+      "differences_pp": {
+        "Anchor": -1.0379342459411462,
+        "WL": -1.0379342459411462,
+        "Size": 9.779704377549193,
+        "B0Teacher": -0.8647218718344224,
+        "CalTeacher": 0.3508556751451933,
+        "ScoreOnly": -0.737373704748491,
+        "OriginalE": 12.594478421317861,
+        "Other1": 0.19312075787897903,
+        "Other2": -0.18821522963936677,
+        "OtherMean": 0.0024527641198061204,
+        "EqualCount": -0.8975115187288836
+      }
+    },
+    "mutagenicity_node": {
+      "anchor": "WL",
+      "passed": false,
+      "clauses": {
+        "proper_improvement": false,
+        "positive_directions": false,
+        "strictly_above_B0Teacher": true,
+        "strictly_above_ScoreOnly": true,
+        "strictly_above_OtherMean": true,
+        "strictly_above_WL": false,
+        "strictly_above_Size": true
+      },
+      "positive": 2,
+      "tied": 1,
+      "negative": 9,
+      "differences_exact": {
+        "Anchor": "-9594211/2700422451",
+        "WL": "-9594211/2700422451",
+        "Size": "375233432/2700422451",
+        "B0Teacher": "670661/135870312",
+        "CalTeacher": "459631/201900744",
+        "ScoreOnly": "5711413/10801689804",
+        "OriginalE": "1034277137/21603379608",
+        "Other1": "596773165/21603379608",
+        "Other2": "377812637/21603379608",
+        "OtherMean": "481991/21368328",
+        "EqualCount": "-101065/10684164"
+      },
+      "differences_pp": {
+        "Anchor": -0.3552855589853041,
+        "WL": -0.3552855589853041,
+        "Size": 13.895360404111823,
+        "B0Teacher": 0.49360378299565544,
+        "CalTeacher": 0.22765195951927744,
+        "ScoreOnly": 0.052875180676684425,
+        "OriginalE": 4.78757099938657,
+        "Other1": 2.7624065115210374,
+        "Other2": 1.7488589464034197,
+        "OtherMean": 2.2556327289622287,
+        "EqualCount": -0.9459326906625544
+      }
+    },
+    "proteins_edge": {
+      "anchor": "Size",
+      "passed": false,
+      "clauses": {
+        "proper_improvement": false,
+        "positive_directions": false,
+        "strictly_above_B0Teacher": true,
+        "strictly_above_ScoreOnly": true,
+        "strictly_above_OtherMean": true,
+        "strictly_above_WL": true,
+        "strictly_above_Size": false
+      },
+      "positive": 6,
+      "tied": 0,
+      "negative": 6,
+      "differences_exact": {
+        "Anchor": "-6759517/152622807",
+        "WL": "21578515/305245614",
+        "Size": "-6759517/152622807",
+        "B0Teacher": "31547/4299234",
+        "CalTeacher": "18391/2097908",
+        "ScoreOnly": "949153/305245614",
+        "OriginalE": "954252/50874269",
+        "Other1": "973010/50874269",
+        "Other2": "-6471521/610491228",
+        "OtherMean": "5204599/1220982456",
+        "EqualCount": "87836/1573431"
+      },
+      "differences_pp": {
+        "Anchor": -4.428903604164481,
+        "WL": 7.069230157718171,
+        "Size": -4.428903604164481,
+        "B0Teacher": 0.7337818783532136,
+        "CalTeacher": 0.8766352003996362,
+        "ScoreOnly": 0.31094730160479883,
+        "OriginalE": 1.875706558063763,
+        "Other1": 1.912577849521533,
+        "Other2": -1.060051431238583,
+        "OtherMean": 0.42626320914147514,
+        "EqualCount": 5.5824500724849075
+      }
+    }
+  },
+  "continue_remaining_seeds": false
+}

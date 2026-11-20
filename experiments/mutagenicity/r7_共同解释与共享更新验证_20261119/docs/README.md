@@ -29,3 +29,5 @@
 [冻结更新头交叉协议](reference-head-crossover.md) · [交叉实测报告](reference-head-crossover-results.md)
 
 [改判移植协议](transfer-of-flips.md) · [强源模型移植实测](transfer-of-flips-results.md)
+
+[强源起点协议](strong-anchor-refit.md) · [校准教师对照](strong-anchor-score-teacher.md) · [36 方向实测](strong-anchor-refit-results.md)

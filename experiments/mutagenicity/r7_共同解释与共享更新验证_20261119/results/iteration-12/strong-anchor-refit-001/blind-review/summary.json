@@ -1,0 +1,106 @@
+{
+  "row_count": 17520,
+  "hashes": {
+    "own.tsv": "bdc86d6230505aff36ca90bf1d8567c584d2e6048b2d631bd462d7e9326e4ae6",
+    "other-count.tsv": "672337d91fff735fcdb842338b534b070dfe33b74da8fb06b8366556f5267e88"
+  },
+  "regularization": 0.1,
+  "max_errors": {
+    "E_replay_margin": 5.5403036989698506e-05,
+    "Full": 3.7996027765080376e-14,
+    "B0Teacher": 4.440024736762638e-14,
+    "ScoreOnly": 2.4486544019877987e-14
+  },
+  "solver_maximums": {
+    "E_Replay": 4.2429601498916725e-14,
+    "Full": 3.7996027765080376e-14,
+    "B0Teacher": 4.440024736762638e-14,
+    "ScoreOnly": 3.0895425107146934e-14
+  },
+  "solver_counts": {
+    "E_Replay": 36,
+    "Full": 72,
+    "B0Teacher": 72,
+    "ScoreOnly": 72
+  },
+  "counts": {
+    "mutagenicity_edge/Size": {
+      "FullVsBase": 1438,
+      "FullVsFull": 0,
+      "ScoreOnlyVsBase": 1271,
+      "ScoreOnlyVsFull": 291,
+      "B0TeacherVsBase": 1492,
+      "B0TeacherVsFull": 296,
+      "SoftVsBase": 1386,
+      "SoftVsFull": 2528,
+      "Other1VsFull": 549,
+      "Other2VsFull": 323,
+      "CountVsFull": 1290
+    },
+    "mutagenicity_edge/WL": {
+      "FullVsBase": 355,
+      "FullVsFull": 0,
+      "ScoreOnlyVsBase": 223,
+      "ScoreOnlyVsFull": 232,
+      "B0TeacherVsBase": 381,
+      "B0TeacherVsFull": 258,
+      "SoftVsBase": 1254,
+      "SoftVsFull": 1411,
+      "Other1VsFull": 364,
+      "Other2VsFull": 287,
+      "CountVsFull": 252
+    },
+    "mutagenicity_node/Size": {
+      "FullVsBase": 1352,
+      "FullVsFull": 0,
+      "ScoreOnlyVsBase": 1154,
+      "ScoreOnlyVsFull": 360,
+      "B0TeacherVsBase": 1544,
+      "B0TeacherVsFull": 344,
+      "SoftVsBase": 853,
+      "SoftVsFull": 2097,
+      "Other1VsFull": 917,
+      "Other2VsFull": 640,
+      "CountVsFull": 1164
+    },
+    "mutagenicity_node/WL": {
+      "FullVsBase": 296,
+      "FullVsFull": 0,
+      "ScoreOnlyVsBase": 202,
+      "ScoreOnlyVsFull": 196,
+      "B0TeacherVsBase": 307,
+      "B0TeacherVsFull": 305,
+      "SoftVsBase": 597,
+      "SoftVsFull": 653,
+      "Other1VsFull": 536,
+      "Other2VsFull": 392,
+      "CountVsFull": 202
+    },
+    "proteins_edge/Size": {
+      "FullVsBase": 388,
+      "FullVsFull": 0,
+      "ScoreOnlyVsBase": 334,
+      "ScoreOnlyVsFull": 104,
+      "B0TeacherVsBase": 458,
+      "B0TeacherVsFull": 100,
+      "SoftVsBase": 124,
+      "SoftVsFull": 492,
+      "Other1VsFull": 194,
+      "Other2VsFull": 233,
+      "CountVsFull": 170
+    },
+    "proteins_edge/WL": {
+      "FullVsBase": 172,
+      "FullVsFull": 0,
+      "ScoreOnlyVsBase": 138,
+      "ScoreOnlyVsFull": 58,
+      "B0TeacherVsBase": 152,
+      "B0TeacherVsFull": 84,
+      "SoftVsBase": 285,
+      "SoftVsFull": 367,
+      "Other1VsFull": 154,
+      "Other2VsFull": 136,
+      "CountVsFull": 46
+    }
+  }
+}

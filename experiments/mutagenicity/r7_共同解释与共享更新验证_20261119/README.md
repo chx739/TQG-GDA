@@ -4,7 +4,7 @@
 
 [将 E 改判移植到强源模型](docs/transfer-of-flips-results.md)已完成 180 块。三个设置均未达到相对指定强源模型的收益门槛。[预登记协议](docs/transfer-of-flips.md)
 
-[直接在强源模型上求解同一目标解释的更新](docs/strong-anchor-refit.md)登记了单种子 36 个既有开发方向，比较完整修正、仅利用源 GNN 分数的修正和直接移植原 E 的连续修正。
+[强源起点重求解](docs/strong-anchor-refit-results.md)已完成单种子 36 个既有开发方向。Full 在三个设置均低于指定强源起点，未达扩种子门槛。[登记协议](docs/strong-anchor-refit.md)
 使用相同完整更新空间的[教师校准对照](docs/strong-anchor-score-teacher.md)检验先验和 GNN 分数斜率能否解释这项更新。
 [八样本算例和 36 个未标记适配池的矩核验](docs/strong-anchor-mechanism.md)说明重新求解何时能改变判决，以及该改变的正确性还取决于什么。
 [独立核验记录](docs/strong-anchor-review.md)涵盖两个数值修复、角色和判据的核对及中断评分恢复。
@@ -76,4 +76,14 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```sh
 round=experiments/mutagenicity/r7_共同解释与共享更新验证_20261119
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.transfer_flips --config "$round/configs/transfer-of-flips.json" --output /path/to/new-flip-transfer
+```
+
+## 复现强源起点重求解
+
+先在完整 A 上拟合、封存 H 预测并核对 OBS。第二个命令使用第一步打印的 OBS SHA-256，只读取原 H 角色标签。
+
+```sh
+round=experiments/mutagenicity/r7_共同解释与共享更新验证_20261119
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.strong_anchor_refit --config "$round/configs/strong-anchor-refit.json" --output /path/to/new-anchor --phase freeze
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.strong_anchor_refit --config "$round/configs/strong-anchor-refit.json" --output /path/to/new-anchor --phase score --obs-sha256 OBS_SHA256
 ```

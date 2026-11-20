@@ -1,0 +1,3638 @@
+{
+  "mutagenicity_edge-M0_to_M1-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.03216503287456665,
+      "kkt_inf": 4.2408784817205e-14,
+      "full_gradient_inf": 4.2408784817205e-14,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 3.1899820580605365e-06,
+      "H_margin_max_abs_error": 2.985201409622107e-06,
+      "original_weight_max_abs_error": 1.5544578949311383e-06
+    },
+    "ref_index": 0,
+    "A_n": 777,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.499988117100926,
+      "slope": 1.8945556305720264,
+      "score_origin": -0.38968088726743577,
+      "mean_offset": 0.2152269486072993,
+      "mean": -0.17445393866013648,
+      "sd": 2.654373027087789,
+      "mass_error": 3.885780586188048e-16,
+      "standard_score_error": -5.551115123125783e-17,
+      "raw_score_error": -2.1513627533380177e-16
+    },
+    "teacher_moment_difference_inf": 0.035253112175425996,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.036050880999897075,
+            "kkt_inf": 8.943193408050831e-14,
+            "full_gradient_inf": 8.943193408050831e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.0885381336010611,
+            "kkt_inf": 2.6844064297815162e-11,
+            "full_gradient_inf": 2.6844064297815162e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.057471930335101146,
+            "kkt_inf": 5.711906642114073e-13,
+            "full_gradient_inf": 5.711906642114073e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.0076206099868445214,
+            "kkt_inf": 1.9449612431130953e-11,
+            "full_gradient_inf": 0.0457632565864921,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          3.469446951953614e-18,
+          3.469446951953614e-18
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.1381159764571449,
+            "kkt_inf": 5.585809592645319e-16,
+            "full_gradient_inf": 5.585809592645319e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.21544532897329915,
+            "kkt_inf": 2.1260770921571748e-14,
+            "full_gradient_inf": 2.1260770921571748e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.14437879402185413,
+            "kkt_inf": 1.968911145233676e-15,
+            "full_gradient_inf": 1.968911145233676e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.11759122056921872,
+            "kkt_inf": 1.4893495042567068e-11,
+            "full_gradient_inf": 0.0415808751823668,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.3877787807814457e-17,
+          1.3877787807814457e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M0_to_M2-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.01993388468196529,
+      "kkt_inf": 3.157196726277789e-15,
+      "full_gradient_inf": 3.157196726277789e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 7.934028066536314e-06,
+      "H_margin_max_abs_error": 3.5547212879905032e-06,
+      "original_weight_max_abs_error": 2.040008749440436e-06
+    },
+    "ref_index": 0,
+    "A_n": 762,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.3572062636863786,
+      "slope": 1.6392031860225476,
+      "score_origin": 2.6096910335128216,
+      "mean_offset": -2.450886901541213,
+      "mean": 0.1588041319716087,
+      "sd": 2.14180592849489,
+      "mass_error": 0.0,
+      "standard_score_error": 1.1102230246251565e-16,
+      "raw_score_error": 2.3778822560936886e-16
+    },
+    "teacher_moment_difference_inf": 0.02844322171984265,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.0886656642394941,
+            "kkt_inf": 1.3933298959045715e-13,
+            "full_gradient_inf": 1.3933298959045715e-13,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.07372750436726772,
+            "kkt_inf": 1.1169884461814661e-14,
+            "full_gradient_inf": 1.1169884461814661e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.09641272840238785,
+            "kkt_inf": 2.663910758649024e-13,
+            "full_gradient_inf": 2.663910758649024e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.046168335370921666,
+            "kkt_inf": 7.632783294297951e-16,
+            "full_gradient_inf": 0.06499470313891643,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.23641927212557856,
+            "kkt_inf": 3.4748644933690898e-12,
+            "full_gradient_inf": 3.4748644933690898e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.24734956216900236,
+            "kkt_inf": 1.4432899320127035e-15,
+            "full_gradient_inf": 1.4432899320127035e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.24237285876466097,
+            "kkt_inf": 1.0359249916214175e-11,
+            "full_gradient_inf": 1.0359249916214175e-11,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.19821363558580335,
+            "kkt_inf": 6.869504964868156e-16,
+            "full_gradient_inf": 0.05663316429987045,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          2.7755575615628914e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M0_to_M3-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.0074155627772041575,
+      "kkt_inf": 8.044780119842443e-16,
+      "full_gradient_inf": 8.044780119842443e-16,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 4.145646639130973e-05,
+      "H_margin_max_abs_error": 2.2321452125773078e-05,
+      "original_weight_max_abs_error": 8.28078536416893e-06
+    },
+    "ref_index": 0,
+    "A_n": 747,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.2144300194417945,
+      "slope": 1.6929663984317795,
+      "score_origin": -1.3276982125812,
+      "mean_offset": 1.5513656720184805,
+      "mean": 0.2236674594372805,
+      "sd": 2.041985979384058,
+      "mass_error": -4.440892098500626e-16,
+      "standard_score_error": 5.551115123125783e-17,
+      "raw_score_error": 1.402468718302373e-17
+    },
+    "teacher_moment_difference_inf": 0.012496817007088434,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.04687412399233705,
+            "kkt_inf": 2.3691118511415254e-14,
+            "full_gradient_inf": 2.3691118511415254e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.06455324206783905,
+            "kkt_inf": 1.9326727718205206e-13,
+            "full_gradient_inf": 1.9326727718205206e-13,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.05535112162062465,
+            "kkt_inf": 2.6433716326934587e-14,
+            "full_gradient_inf": 2.6433716326934587e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.01538959121205441,
+            "kkt_inf": 1.5241387533460952e-11,
+            "full_gradient_inf": 0.04440834436744589,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.24935724008429822,
+            "kkt_inf": 3.1320432358761252e-12,
+            "full_gradient_inf": 3.1320432358761252e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.2837965528021104,
+            "kkt_inf": 2.892020997680156e-11,
+            "full_gradient_inf": 2.892020997680156e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.25981312131860906,
+            "kkt_inf": 9.219819352423997e-12,
+            "full_gradient_inf": 9.219819352423997e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.2066027951982723,
+            "kkt_inf": 1.0111747013639022e-14,
+            "full_gradient_inf": 0.06509459609899193,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M1_to_M0-seed-3405": {
+    "original_E": {
+      "iterations": 9,
+      "objective": -0.22438819589623485,
+      "kkt_inf": 1.2281842209915794e-15,
+      "full_gradient_inf": 1.2281842209915794e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 8.068571588637496e-09,
+      "H_margin_max_abs_error": 6.274095021296944e-09,
+      "original_weight_max_abs_error": 1.2320858847059135e-09
+    },
+    "ref_index": 0,
+    "A_n": 761,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.04753013198451014,
+      "slope": 1.7375615136655425,
+      "score_origin": -11.89013545474529,
+      "mean_offset": 11.137145557372953,
+      "mean": -0.7529898973723359,
+      "sd": 4.823867346966319,
+      "mass_error": -5.551115123125783e-16,
+      "standard_score_error": 0.0,
+      "raw_score_error": 4.179933606864505e-16
+    },
+    "teacher_moment_difference_inf": 0.06588066333417608,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.020697159750676063,
+            "kkt_inf": 2.3418766925686896e-15,
+            "full_gradient_inf": 2.3418766925686896e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.11046750707384119,
+            "kkt_inf": 4.691234380127529e-13,
+            "full_gradient_inf": 4.691234380127529e-13,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 6,
+            "objective": -0.03978536025264302,
+            "kkt_inf": 1.9637069748057456e-15,
+            "full_gradient_inf": 1.9637069748057456e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.0005032647503113456,
+            "kkt_inf": 1.3379683848362974e-13,
+            "full_gradient_inf": 0.09359803748575882,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.7755575615628914e-17,
+          6.938893903907228e-18
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 7,
+            "objective": -0.15727637592639981,
+            "kkt_inf": 2.8275992658421956e-15,
+            "full_gradient_inf": 2.8275992658421956e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.3215611971282881,
+            "kkt_inf": 1.3528166434295663e-11,
+            "full_gradient_inf": 1.3528166434295663e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.1460132230482475,
+            "kkt_inf": 2.6757554505429937e-12,
+            "full_gradient_inf": 2.6757554505429937e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.09272196298065641,
+            "kkt_inf": 5.317265778262015e-16,
+            "full_gradient_inf": 0.15943697059732193,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.7755575615628914e-17,
+          1.3877787807814457e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M1_to_M2-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.014661174080055742,
+      "kkt_inf": 4.288236432614667e-15,
+      "full_gradient_inf": 4.288236432614667e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 2.5909522212153036e-06,
+      "H_margin_max_abs_error": 3.298318684841206e-06,
+      "original_weight_max_abs_error": 4.798757988339064e-07
+    },
+    "ref_index": 0,
+    "A_n": 762,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.09627540040677293,
+      "slope": 1.6096468048727435,
+      "score_origin": 1.302086060767512,
+      "mean_offset": -1.4536883195525754,
+      "mean": -0.1516022587850634,
+      "sd": 2.245865437215388,
+      "mass_error": -5.551115123125783e-16,
+      "standard_score_error": 3.885780586188048e-16,
+      "raw_score_error": 9.568501906564081e-16
+    },
+    "teacher_moment_difference_inf": 0.023339172353558812,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.041429225696052945,
+            "kkt_inf": 3.1056060501022387e-13,
+            "full_gradient_inf": 3.1056060501022387e-13,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.022619867333833747,
+            "kkt_inf": 2.239528007486058e-15,
+            "full_gradient_inf": 2.239528007486058e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.04642681473833136,
+            "kkt_inf": 4.922867669066022e-13,
+            "full_gradient_inf": 4.922867669066022e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.027884597255733154,
+            "kkt_inf": 5.828670879282072e-16,
+            "full_gradient_inf": 0.04444392933226809,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          6.938893903907228e-18,
+          6.938893903907228e-18
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.14702370404788048,
+            "kkt_inf": 1.0733601507606494e-15,
+            "full_gradient_inf": 1.0733601507606494e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.18325362974274217,
+            "kkt_inf": 6.730727086790012e-16,
+            "full_gradient_inf": 6.730727086790012e-16,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.15154629461617766,
+            "kkt_inf": 7.806255641895632e-16,
+            "full_gradient_inf": 7.806255641895632e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.12535181707348367,
+            "kkt_inf": 8.238626647925182e-16,
+            "full_gradient_inf": 0.05146542358623413,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.3877787807814457e-17,
+          1.3877787807814457e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M1_to_M3-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.015493952496975535,
+      "kkt_inf": 1.0668549377257364e-15,
+      "full_gradient_inf": 1.0668549377257364e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 6.168439217191235e-07,
+      "H_margin_max_abs_error": 5.241244029896563e-07,
+      "original_weight_max_abs_error": 2.965490478110122e-07
+    },
+    "ref_index": 0,
+    "A_n": 747,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.8602918926356209,
+      "slope": 1.5488551486362623,
+      "score_origin": -0.578592144966938,
+      "mean_offset": 1.2041742977477405,
+      "mean": 0.6255821527808025,
+      "sd": 1.9774084622855392,
+      "mass_error": -5.551115123125783e-16,
+      "standard_score_error": 1.2490009027033011e-15,
+      "raw_score_error": 2.1225170995018755e-15
+    },
+    "teacher_moment_difference_inf": 0.016146729947317917,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.09776438594253375,
+            "kkt_inf": 3.0919390311967554e-12,
+            "full_gradient_inf": 3.0919390311967554e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.041084576162742685,
+            "kkt_inf": 8.459812711469894e-15,
+            "full_gradient_inf": 8.459812711469894e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.09596367232054043,
+            "kkt_inf": 4.649258842498449e-12,
+            "full_gradient_inf": 4.649258842498449e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.06011493153063102,
+            "kkt_inf": 2.1278668052217916e-15,
+            "full_gradient_inf": 0.06418982778099223,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          1.734723475976807e-18
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.18093106872914352,
+            "kkt_inf": 8.453654443130176e-14,
+            "full_gradient_inf": 8.453654443130176e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.21576765315455126,
+            "kkt_inf": 1.4915152446448587e-13,
+            "full_gradient_inf": 1.4915152446448587e-13,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.18553423421338344,
+            "kkt_inf": 6.429926036055633e-14,
+            "full_gradient_inf": 6.429926036055633e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.15467003282638497,
+            "kkt_inf": 4.2696598516867616e-16,
+            "full_gradient_inf": 0.0640080850039308,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.3877787807814457e-17,
+          8.673617379884035e-18
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M2_to_M0-seed-3405": {
+    "original_E": {
+      "iterations": 7,
+      "objective": -0.6697328070625,
+      "kkt_inf": 2.097477817515972e-11,
+      "full_gradient_inf": 2.097477817515972e-11,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.9668227579927589e-07,
+      "H_margin_max_abs_error": 1.7880849245699437e-07,
+      "original_weight_max_abs_error": 2.3608711041678276e-08
+    },
+    "ref_index": 0,
+    "A_n": 761,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.0607691560361866,
+      "slope": 1.0324861685263242,
+      "score_origin": -24.91986685285635,
+      "mean_offset": 25.50758011182827,
+      "mean": 0.5877132589719167,
+      "sd": 6.744722526810736,
+      "mass_error": 3.3306690738754696e-16,
+      "standard_score_error": 2.498001805406602e-16,
+      "raw_score_error": 1.8805807424904127e-15
+    },
+    "teacher_moment_difference_inf": 0.17360477440336353,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.024278642422062194,
+            "kkt_inf": 1.9114484300919443e-12,
+            "full_gradient_inf": 1.9114484300919443e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.16539830170207437,
+            "kkt_inf": 3.560194673790651e-15,
+            "full_gradient_inf": 3.560194673790651e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.022918141031211176,
+            "kkt_inf": 2.895687162274285e-14,
+            "full_gradient_inf": 2.895687162274285e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.0015866049972746113,
+            "kkt_inf": 2.4110060458810123e-14,
+            "full_gradient_inf": 0.19908089491907502,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          5.551115123125783e-17,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 6,
+            "objective": -0.16173864425385748,
+            "kkt_inf": 5.685834442159532e-11,
+            "full_gradient_inf": 5.685834442159532e-11,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 8,
+            "objective": -0.5374233216022982,
+            "kkt_inf": 2.1357206368005643e-12,
+            "full_gradient_inf": 2.1357206368005643e-12,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 7,
+            "objective": -0.20312453323239676,
+            "kkt_inf": 1.3491648770402875e-11,
+            "full_gradient_inf": 1.3491648770402875e-11,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.07294865218280222,
+            "kkt_inf": 1.9741003005602267e-15,
+            "full_gradient_inf": 0.28545085834277584,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          5.551115123125783e-17,
+          5.551115123125783e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M2_to_M1-seed-3405": {
+    "original_E": {
+      "iterations": 5,
+      "objective": -0.2436639161722957,
+      "kkt_inf": 6.078672287745945e-12,
+      "full_gradient_inf": 6.078672287745945e-12,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 5.799926401373057e-06,
+      "H_margin_max_abs_error": 4.115946643956647e-06,
+      "original_weight_max_abs_error": 2.0058319697216498e-06
+    },
+    "ref_index": 0,
+    "A_n": 777,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.9066720034076376,
+      "slope": 0.9753931216174944,
+      "score_origin": 1.6164729003814453,
+      "mean_offset": -3.084896978678508,
+      "mean": -1.4684240782970628,
+      "sd": 3.684501919300402,
+      "mass_error": 1.1102230246251565e-16,
+      "standard_score_error": -2.7755575615628914e-17,
+      "raw_score_error": -2.6529329379100944e-16
+    },
+    "teacher_moment_difference_inf": 0.05094974518831161,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.02210898180242178,
+            "kkt_inf": 1.9460648370550615e-13,
+            "full_gradient_inf": 1.9460648370550615e-13,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.08472420144826617,
+            "kkt_inf": 3.9284405589645743e-11,
+            "full_gradient_inf": 3.9284405589645743e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.012735771011022539,
+            "kkt_inf": 1.2504797544665713e-13,
+            "full_gradient_inf": 1.2504797544665713e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.007459801610270395,
+            "kkt_inf": 2.1684043449710089e-16,
+            "full_gradient_inf": 0.05373708203246584,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.3877787807814457e-17,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.06571839096737306,
+            "kkt_inf": 2.5847379792054426e-16,
+            "full_gradient_inf": 2.5847379792054426e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.22507380203293995,
+            "kkt_inf": 2.0650148258027912e-14,
+            "full_gradient_inf": 2.0650148258027912e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.04535525190724373,
+            "kkt_inf": 2.9077496487006638e-11,
+            "full_gradient_inf": 2.9077496487006638e-11,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.03494937853336861,
+            "kkt_inf": 4.202456297374445e-12,
+            "full_gradient_inf": 0.08614886151892066,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.7755575615628914e-17,
+          1.3877787807814457e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M2_to_M3-seed-3405": {
+    "original_E": {
+      "iterations": 5,
+      "objective": -0.028788872454774683,
+      "kkt_inf": 8.838416110101832e-16,
+      "full_gradient_inf": 8.838416110101832e-16,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.0680945017327304e-06,
+      "H_margin_max_abs_error": 9.756998728960298e-07,
+      "original_weight_max_abs_error": 3.9869644416490324e-07
+    },
+    "ref_index": 0,
+    "A_n": 747,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.3674124292667151,
+      "slope": 1.3215677727456105,
+      "score_origin": -1.9500094606137066,
+      "mean_offset": 2.4501703020730115,
+      "mean": 0.5001608414593048,
+      "sd": 2.1654454325947485,
+      "mass_error": -5.551115123125783e-16,
+      "standard_score_error": -5.551115123125783e-17,
+      "raw_score_error": -3.9785140999381004e-16
+    },
+    "teacher_moment_difference_inf": 0.020365236522880636,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.01694960015214464,
+            "kkt_inf": 1.0408340855860843e-15,
+            "full_gradient_inf": 1.0408340855860843e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.03861352828766162,
+            "kkt_inf": 4.061667842336636e-11,
+            "full_gradient_inf": 4.061667842336636e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.00966438076926459,
+            "kkt_inf": 8.968520370800093e-16,
+            "full_gradient_inf": 8.968520370800093e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.0027002820192835596,
+            "kkt_inf": 3.1924556209128376e-11,
+            "full_gradient_inf": 0.03794828394497777,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          3.469446951953614e-18,
+          3.469446951953614e-18
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.12168757578489243,
+            "kkt_inf": 4.640385298237959e-16,
+            "full_gradient_inf": 4.640385298237959e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.20068448227024602,
+            "kkt_inf": 1.7550197406457357e-14,
+            "full_gradient_inf": 1.7550197406457357e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.11128149509866819,
+            "kkt_inf": 5.364632349458276e-16,
+            "full_gradient_inf": 5.364632349458276e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.09889152172229149,
+            "kkt_inf": 2.4664598048388034e-11,
+            "full_gradient_inf": 0.04260599369767784,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          6.938893903907228e-18,
+          0.0
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M3_to_M0-seed-3405": {
+    "original_E": {
+      "iterations": 6,
+      "objective": -0.4314608848828693,
+      "kkt_inf": 3.716211366411315e-15,
+      "full_gradient_inf": 3.716211366411315e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 3.505175335938304e-05,
+      "H_margin_max_abs_error": 1.5459291476283e-05,
+      "original_weight_max_abs_error": 4.360136790615421e-06
+    },
+    "ref_index": 0,
+    "A_n": 761,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.3302660488073883,
+      "slope": 1.4370273607142747,
+      "score_origin": -27.238521207013353,
+      "mean_offset": 27.145721383452923,
+      "mean": -0.09279982356042993,
+      "sd": 6.794148545863066,
+      "mass_error": -2.220446049250313e-16,
+      "standard_score_error": 0.0,
+      "raw_score_error": 2.0605700159588276e-17
+    },
+    "teacher_moment_difference_inf": 0.12703940438946226,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 6,
+            "objective": -0.06721897492737816,
+            "kkt_inf": 4.674212406019507e-15,
+            "full_gradient_inf": 4.674212406019507e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.24499521399187946,
+            "kkt_inf": 4.1374239104219335e-15,
+            "full_gradient_inf": 4.1374239104219335e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.06028346337844526,
+            "kkt_inf": 8.228660808295984e-14,
+            "full_gradient_inf": 8.228660808295984e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.044887006481468844,
+            "kkt_inf": 7.939963396097198e-15,
+            "full_gradient_inf": 0.12856882405530545,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 8,
+            "objective": -0.15995638741261642,
+            "kkt_inf": 3.693009439920125e-15,
+            "full_gradient_inf": 3.693009439920125e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.44428505714616995,
+            "kkt_inf": 3.4861002973229915e-14,
+            "full_gradient_inf": 3.4861002973229915e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 6,
+            "objective": -0.15059005351312676,
+            "kkt_inf": 1.944841857004498e-15,
+            "full_gradient_inf": 1.944841857004498e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.1482630904555008,
+            "kkt_inf": 2.9147046145305317e-15,
+            "full_gradient_inf": 0.14482430540025207,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          5.551115123125783e-17,
+          5.551115123125783e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M3_to_M1-seed-3405": {
+    "original_E": {
+      "iterations": 6,
+      "objective": -0.2258872267176539,
+      "kkt_inf": 1.1761425167122752e-15,
+      "full_gradient_inf": 1.1761425167122752e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 5.6120232017065064e-08,
+      "H_margin_max_abs_error": 1.667525761916977e-08,
+      "original_weight_max_abs_error": 3.20478141246916e-09
+    },
+    "ref_index": 0,
+    "A_n": 777,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.19281348863975745,
+      "slope": 1.4146745779301855,
+      "score_origin": -0.3494702639325853,
+      "mean_offset": 0.02618270122885997,
+      "mean": -0.32328756270372533,
+      "sd": 4.363849529211075,
+      "mass_error": -4.440892098500626e-16,
+      "standard_score_error": 0.0,
+      "raw_score_error": 1.4356851827544995e-16
+    },
+    "teacher_moment_difference_inf": 0.051010309814728635,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.03426186064508851,
+            "kkt_inf": 1.0835212935211835e-12,
+            "full_gradient_inf": 1.0835212935211835e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.12546304637768965,
+            "kkt_inf": 1.0781306403195856e-15,
+            "full_gradient_inf": 1.0781306403195856e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.020878418339351924,
+            "kkt_inf": 3.8786248518496436e-15,
+            "full_gradient_inf": 3.8786248518496436e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.011951368015276362,
+            "kkt_inf": 4.683753385137379e-16,
+            "full_gradient_inf": 0.09982401703629425,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          6.938893903907228e-18,
+          6.938893903907228e-18
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.1534027238855363,
+            "kkt_inf": 2.5077856458111114e-13,
+            "full_gradient_inf": 2.5077856458111114e-13,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.3874377654598499,
+            "kkt_inf": 2.9408704638189676e-11,
+            "full_gradient_inf": 2.9408704638189676e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.1446010644019358,
+            "kkt_inf": 1.584843367652411e-14,
+            "full_gradient_inf": 1.584843367652411e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.14070534937095505,
+            "kkt_inf": 3.824269272546811e-15,
+            "full_gradient_inf": 0.06973145765935213,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.7755575615628914e-17,
+          5.551115123125783e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_edge-M3_to_M2-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.11564007907445026,
+      "kkt_inf": 8.59724236246251e-11,
+      "full_gradient_inf": 8.59724236246251e-11,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.2324592589152417e-05,
+      "H_margin_max_abs_error": 1.1455657058512259e-05,
+      "original_weight_max_abs_error": 3.0397143427063344e-06
+    },
+    "ref_index": 0,
+    "A_n": 762,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.15159803334684493,
+      "slope": 1.440019710857886,
+      "score_origin": 5.675702243959886,
+      "mean_offset": -5.9866414609169905,
+      "mean": -0.31093921695710414,
+      "sd": 3.5844599750642656,
+      "mass_error": -1.6653345369377348e-16,
+      "standard_score_error": -2.7755575615628914e-17,
+      "raw_score_error": -4.7706968190387466e-17
+    },
+    "teacher_moment_difference_inf": 0.03211235355765324,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.01328541757023233,
+            "kkt_inf": 1.1571772186302898e-12,
+            "full_gradient_inf": 1.1571772186302898e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.07448502599820413,
+            "kkt_inf": 5.202158148698288e-13,
+            "full_gradient_inf": 5.202158148698288e-13,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.009047292672452557,
+            "kkt_inf": 1.6649051928774306e-13,
+            "full_gradient_inf": 1.6649051928774306e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -4.4015842207321805e-05,
+            "kkt_inf": 2.2624060156787786e-16,
+            "full_gradient_inf": 0.05120830961635667,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.1484689943090865,
+            "kkt_inf": 6.522820478194191e-14,
+            "full_gradient_inf": 6.522820478194191e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.32768841058808396,
+            "kkt_inf": 3.924291447354733e-14,
+            "full_gradient_inf": 3.924291447354733e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.1426383972285878,
+            "kkt_inf": 1.8056736661442585e-14,
+            "full_gradient_inf": 1.8056736661442585e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.1389526863570101,
+            "kkt_inf": 1.2585007556549057e-15,
+            "full_gradient_inf": 0.036304030664672395,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          4.163336342344337e-17,
+          4.163336342344337e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M0_to_M1-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.04908456262850539,
+      "kkt_inf": 5.303309874582496e-14,
+      "full_gradient_inf": 5.303309874582496e-14,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 6.871473505754011e-06,
+      "H_margin_max_abs_error": 4.197117859483512e-06,
+      "original_weight_max_abs_error": 4.820022401916257e-06
+    },
+    "ref_index": 0,
+    "A_n": 770,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.7271960726942079,
+      "slope": 0.8079914557599566,
+      "score_origin": -1.3730252197384536,
+      "mean_offset": 1.0596416046654045,
+      "mean": -0.3133836150730491,
+      "sd": 1.4303090363177653,
+      "mass_error": -2.220446049250313e-16,
+      "standard_score_error": -8.326672684688674e-17,
+      "raw_score_error": -4.9512010834831896e-17
+    },
+    "teacher_moment_difference_inf": 0.010296861097775167,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.05825301285221995,
+            "kkt_inf": 1.4376676932270627e-11,
+            "full_gradient_inf": 1.4376676932270627e-11,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.02177711436658514,
+            "kkt_inf": 5.328203156462763e-15,
+            "full_gradient_inf": 5.328203156462763e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.05815724701176328,
+            "kkt_inf": 8.512805044214034e-12,
+            "full_gradient_inf": 8.512805044214034e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.03449615141726529,
+            "kkt_inf": 2.0990154059319366e-16,
+            "full_gradient_inf": 0.04063173836864619,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          6.938893903907228e-18,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.05149791670966947,
+            "kkt_inf": 5.626022651222806e-13,
+            "full_gradient_inf": 5.626022651222806e-13,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.11888359804868306,
+            "kkt_inf": 3.602232487992518e-11,
+            "full_gradient_inf": 3.602232487992518e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.04983302311606816,
+            "kkt_inf": 1.2383670477955633e-12,
+            "full_gradient_inf": 1.2383670477955633e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.040637814793129,
+            "kkt_inf": 5.48172618408671e-16,
+            "full_gradient_inf": 0.023048505110789062,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.3877787807814457e-17,
+          0.0
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M0_to_M2-seed-3405": {
+    "original_E": {
+      "iterations": 3,
+      "objective": -0.006206920680523161,
+      "kkt_inf": 1.6593833945810488e-11,
+      "full_gradient_inf": 1.6593833945810488e-11,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 8.67679428351309e-06,
+      "H_margin_max_abs_error": 6.199955454838646e-06,
+      "original_weight_max_abs_error": 1.66926334128209e-06
+    },
+    "ref_index": 0,
+    "A_n": 766,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.04287424581260502,
+      "slope": 0.8905782862550673,
+      "score_origin": -2.115574889658996,
+      "mean_offset": 2.254301531930064,
+      "mean": 0.138726642271068,
+      "sd": 1.0227798188209811,
+      "mass_error": -5.551115123125783e-17,
+      "standard_score_error": -2.7755575615628914e-17,
+      "raw_score_error": -3.608871821833884e-17
+    },
+    "teacher_moment_difference_inf": 0.012865422493198761,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.03491407011079061,
+            "kkt_inf": 7.7021722333370235e-16,
+            "full_gradient_inf": 7.7021722333370235e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.04793943289873613,
+            "kkt_inf": 3.0292608699244994e-15,
+            "full_gradient_inf": 3.0292608699244994e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.03749706755085356,
+            "kkt_inf": 1.124100812432971e-15,
+            "full_gradient_inf": 1.124100812432971e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.017301192504622545,
+            "kkt_inf": 9.651971930035863e-12,
+            "full_gradient_inf": 0.0269367633114117,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.09155313286098235,
+            "kkt_inf": 1.5447712553573467e-15,
+            "full_gradient_inf": 1.5447712553573467e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.1287992791261212,
+            "kkt_inf": 1.6299895461147074e-15,
+            "full_gradient_inf": 1.6299895461147074e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.09150762434965322,
+            "kkt_inf": 7.4593109467002705e-16,
+            "full_gradient_inf": 7.4593109467002705e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.07031426571843433,
+            "kkt_inf": 2.037498307197293e-11,
+            "full_gradient_inf": 0.03774716409465243,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M0_to_M3-seed-3405": {
+    "original_E": {
+      "iterations": 3,
+      "objective": -0.0028189399407708296,
+      "kkt_inf": 8.170764412285259e-14,
+      "full_gradient_inf": 8.170764412285259e-14,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 3.8036235174843114e-06,
+      "H_margin_max_abs_error": 5.089986612638597e-06,
+      "original_weight_max_abs_error": 1.9764442705620666e-06
+    },
+    "ref_index": 0,
+    "A_n": 748,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.2445133614535205,
+      "slope": 0.8795006330014006,
+      "score_origin": 0.9685591015479008,
+      "mean_offset": -0.5817391443653456,
+      "mean": 0.38681995718255524,
+      "sd": 0.8455208102137012,
+      "mass_error": 5.551115123125783e-16,
+      "standard_score_error": 0.0,
+      "raw_score_error": 2.1472821142429501e-16
+    },
+    "teacher_moment_difference_inf": 0.0063478355003201425,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 3,
+            "objective": -0.018370001386431488,
+            "kkt_inf": 3.266926659750702e-12,
+            "full_gradient_inf": 3.266926659750702e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 3,
+            "objective": -0.03426904962068859,
+            "kkt_inf": 1.3848958438367198e-11,
+            "full_gradient_inf": 1.3848958438367198e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 3,
+            "objective": -0.01985117442056139,
+            "kkt_inf": 4.1634473646467995e-12,
+            "full_gradient_inf": 4.1634473646467995e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.008422477902626206,
+            "kkt_inf": 2.7582103268031233e-16,
+            "full_gradient_inf": 0.020344188711441266,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.21650600036122708,
+            "kkt_inf": 5.0197103418359035e-12,
+            "full_gradient_inf": 5.0197103418359035e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.25185639718267794,
+            "kkt_inf": 2.281196065379021e-11,
+            "full_gradient_inf": 2.281196065379021e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.21717288467895352,
+            "kkt_inf": 5.579262746246982e-12,
+            "full_gradient_inf": 5.579262746246982e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.17687805940247442,
+            "kkt_inf": 7.355227538141662e-16,
+            "full_gradient_inf": 0.08238207186761828,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.3877787807814457e-17,
+          0.0
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M1_to_M0-seed-3405": {
+    "original_E": {
+      "iterations": 12,
+      "objective": -0.1804840852033299,
+      "kkt_inf": 2.633310236532793e-15,
+      "full_gradient_inf": 2.633310236532793e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 8.199323531243863e-08,
+      "H_margin_max_abs_error": 5.514098178061033e-08,
+      "original_weight_max_abs_error": 2.2262381521587216e-08
+    },
+    "ref_index": 0,
+    "A_n": 763,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.09411762126973774,
+      "slope": 1.0327179910781288,
+      "score_origin": -13.461306902860706,
+      "mean_offset": 12.91251245639154,
+      "mean": -0.5487944464691665,
+      "sd": 3.198914245210243,
+      "mass_error": 2.220446049250313e-16,
+      "standard_score_error": 8.326672684688674e-17,
+      "raw_score_error": 1.4450627261123884e-16
+    },
+    "teacher_moment_difference_inf": 0.12437185226227743,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 8,
+            "objective": -0.06923041674144824,
+            "kkt_inf": 3.534310864805601e-11,
+            "full_gradient_inf": 3.534310864805601e-11,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.10963821391198213,
+            "kkt_inf": 4.2437841435427615e-14,
+            "full_gradient_inf": 4.2437841435427615e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 6,
+            "objective": -0.10789661552814417,
+            "kkt_inf": 8.760527026030474e-14,
+            "full_gradient_inf": 8.760527026030474e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.006385886994675583,
+            "kkt_inf": 1.5939432710537e-15,
+            "full_gradient_inf": 0.31382699945399756,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.7755575615628914e-17,
+          2.7755575615628914e-17
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 8,
+            "objective": -0.2941863702161873,
+            "kkt_inf": 3.787734015325839e-12,
+            "full_gradient_inf": 3.787734015325839e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 8,
+            "objective": -0.5219677954545625,
+            "kkt_inf": 2.59708470007336e-11,
+            "full_gradient_inf": 2.59708470007336e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 7,
+            "objective": -0.36532657446985306,
+            "kkt_inf": 6.693708087812666e-13,
+            "full_gradient_inf": 6.693708087812666e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.10483911246674912,
+            "kkt_inf": 2.706168622523819e-16,
+            "full_gradient_inf": 0.3152844352855579,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          5.551115123125783e-17,
+          4.163336342344337e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M1_to_M2-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.01190343282666183,
+      "kkt_inf": 1.266131297028572e-15,
+      "full_gradient_inf": 1.266131297028572e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.1734833629706287e-05,
+      "H_margin_max_abs_error": 2.5823996610441213e-05,
+      "original_weight_max_abs_error": 6.415751074358156e-06
+    },
+    "ref_index": 0,
+    "A_n": 766,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.027489617193334957,
+      "slope": 1.1251107892229872,
+      "score_origin": -2.068390465482695,
+      "mean_offset": 1.7703791014930357,
+      "mean": -0.29801136398965933,
+      "sd": 1.3416171852997725,
+      "mass_error": 5.551115123125783e-17,
+      "standard_score_error": 5.551115123125783e-17,
+      "raw_score_error": 5.793176057256672e-17
+    },
+    "teacher_moment_difference_inf": 0.012811710945279442,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.055046194531181425,
+            "kkt_inf": 2.9260526293595213e-12,
+            "full_gradient_inf": 2.9260526293595213e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.019719627389494447,
+            "kkt_inf": 1.222980050563649e-15,
+            "full_gradient_inf": 1.222980050563649e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.06036737177811356,
+            "kkt_inf": 4.289825439318662e-12,
+            "full_gradient_inf": 4.289825439318662e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.042408984018964285,
+            "kkt_inf": 1.5639775692089668e-15,
+            "full_gradient_inf": 0.0368712735116616,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          3.469446951953614e-18
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.08268061431799661,
+            "kkt_inf": 2.877168989168233e-14,
+            "full_gradient_inf": 2.877168989168233e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.08241254897653698,
+            "kkt_inf": 2.917913306810238e-14,
+            "full_gradient_inf": 2.917913306810238e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.06817453228868946,
+            "kkt_inf": 3.137622811306279e-14,
+            "full_gradient_inf": 3.137622811306279e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.028583352097186654,
+            "kkt_inf": 4.163336342344337e-16,
+            "full_gradient_inf": 0.05888873634695099,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          3.469446951953614e-18,
+          3.469446951953614e-18
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M1_to_M3-seed-3405": {
+    "original_E": {
+      "iterations": 3,
+      "objective": -0.003218153935247347,
+      "kkt_inf": 8.290649503722713e-11,
+      "full_gradient_inf": 8.290649503722713e-11,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 2.7013666088926414e-05,
+      "H_margin_max_abs_error": 2.2759332164667967e-05,
+      "original_weight_max_abs_error": 7.601796530538885e-06
+    },
+    "ref_index": 0,
+    "A_n": 748,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.46363114938844674,
+      "slope": 1.0891739080191667,
+      "score_origin": 1.7716714611845696,
+      "mean_offset": -1.3624716103647134,
+      "mean": 0.4091998508198562,
+      "sd": 0.9254741328651028,
+      "mass_error": 2.220446049250313e-16,
+      "standard_score_error": 1.1102230246251565e-16,
+      "raw_score_error": 1.9360888831086057e-16
+    },
+    "teacher_moment_difference_inf": 0.016263541772681522,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.015299048305833243,
+            "kkt_inf": 6.737232299824925e-16,
+            "full_gradient_inf": 6.737232299824925e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.020420481633731627,
+            "kkt_inf": 1.3253287356462806e-15,
+            "full_gradient_inf": 1.3253287356462806e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.016614395936575172,
+            "kkt_inf": 2.329733628236852e-15,
+            "full_gradient_inf": 2.329733628236852e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.005097169340552438,
+            "kkt_inf": 1.1169213093621032e-15,
+            "full_gradient_inf": 0.026343463248087666,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.1471091878515151,
+            "kkt_inf": 3.159009685782532e-11,
+            "full_gradient_inf": 3.159009685782532e-11,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.12980364817851064,
+            "kkt_inf": 1.1935101778409729e-11,
+            "full_gradient_inf": 1.1935101778409729e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.13512408452507194,
+            "kkt_inf": 1.9797142549425606e-11,
+            "full_gradient_inf": 1.9797142549425606e-11,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.05060749364419283,
+            "kkt_inf": 2.389733367459945e-11,
+            "full_gradient_inf": 0.1232811790491665,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M2_to_M0-seed-3405": {
+    "original_E": {
+      "iterations": 7,
+      "objective": -0.22765470524406972,
+      "kkt_inf": 4.044507784239926e-15,
+      "full_gradient_inf": 4.044507784239926e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 8.946927643194158e-09,
+      "H_margin_max_abs_error": 8.088884895229853e-09,
+      "original_weight_max_abs_error": 2.3831678297447922e-09
+    },
+    "ref_index": 0,
+    "A_n": 763,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.12981718452633892,
+      "slope": 1.1447436187508284,
+      "score_origin": -16.41441702658701,
+      "mean_offset": 16.48345283317603,
+      "mean": 0.06903580658902086,
+      "sd": 3.876204449217863,
+      "mass_error": 6.661338147750939e-16,
+      "standard_score_error": 0.0,
+      "raw_score_error": 4.5987085199220034e-17
+    },
+    "teacher_moment_difference_inf": 0.10063290867726093,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 8,
+            "objective": -0.05189692329751584,
+            "kkt_inf": 3.144619981076957e-15,
+            "full_gradient_inf": 3.144619981076957e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.11923334137671335,
+            "kkt_inf": 2.6818824938601438e-15,
+            "full_gradient_inf": 2.6818824938601438e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 7,
+            "objective": -0.07682849565747348,
+            "kkt_inf": 1.5318280498222148e-13,
+            "full_gradient_inf": 1.5318280498222148e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.004084515698954891,
+            "kkt_inf": 5.3908710898330026e-12,
+            "full_gradient_inf": 0.2807971306452943,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          2.7755575615628914e-17
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 9,
+            "objective": -0.22418171069555584,
+            "kkt_inf": 3.506916979034713e-14,
+            "full_gradient_inf": 3.506916979034713e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.4807730115348744,
+            "kkt_inf": 9.064738543118622e-12,
+            "full_gradient_inf": 9.064738543118622e-12,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 11,
+            "objective": -0.2623832330761738,
+            "kkt_inf": 7.393391454613152e-15,
+            "full_gradient_inf": 7.393391454613152e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.13005393087403191,
+            "kkt_inf": 1.0410966337329146e-15,
+            "full_gradient_inf": 0.24197437269721425,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          5.551115123125783e-17,
+          4.163336342344337e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M2_to_M1-seed-3405": {
+    "original_E": {
+      "iterations": 5,
+      "objective": -0.04898272653893974,
+      "kkt_inf": 1.9949944474184633e-12,
+      "full_gradient_inf": 1.9949944474184633e-12,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.9964863540167244e-08,
+      "H_margin_max_abs_error": 9.630762853873875e-09,
+      "original_weight_max_abs_error": 2.6385835183440065e-09
+    },
+    "ref_index": 0,
+    "A_n": 770,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.7130940327833066,
+      "slope": 1.186700991102645,
+      "score_origin": -4.276269532349973,
+      "mean_offset": 3.290201573817986,
+      "mean": -0.9860679585319869,
+      "sd": 2.295601273170296,
+      "mass_error": 4.996003610813204e-16,
+      "standard_score_error": -2.7755575615628914e-17,
+      "raw_score_error": -5.563556428541133e-16
+    },
+    "teacher_moment_difference_inf": 0.020769636071663822,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.032119073896257816,
+            "kkt_inf": 3.642919299551295e-16,
+            "full_gradient_inf": 3.642919299551295e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.021726644764936798,
+            "kkt_inf": 5.91028961882678e-14,
+            "full_gradient_inf": 5.91028961882678e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.03963000767257612,
+            "kkt_inf": 6.435824095873954e-16,
+            "full_gradient_inf": 6.435824095873954e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.018941408307847588,
+            "kkt_inf": 1.3375085571705573e-11,
+            "full_gradient_inf": 0.050243698465158054,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          6.938893903907228e-18,
+          1.0408340855860843e-17
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.0661873258890249,
+            "kkt_inf": 7.008282842946301e-16,
+            "full_gradient_inf": 7.008282842946301e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.1496175886726995,
+            "kkt_inf": 1.600080831720696e-11,
+            "full_gradient_inf": 1.600080831720696e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.06403122590232786,
+            "kkt_inf": 6.279698983036042e-16,
+            "full_gradient_inf": 6.279698983036042e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.0488787341506374,
+            "kkt_inf": 1.1150702628648357e-11,
+            "full_gradient_inf": 0.04867706077461854,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.7755575615628914e-17,
+          2.0816681711721685e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M2_to_M3-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.006133218549912561,
+      "kkt_inf": 9.835882108788496e-16,
+      "full_gradient_inf": 9.835882108788496e-16,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 9.363841622089808e-06,
+      "H_margin_max_abs_error": 8.760714443445394e-06,
+      "original_weight_max_abs_error": 4.195210440434416e-06
+    },
+    "ref_index": 0,
+    "A_n": 748,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.2607455948021635,
+      "slope": 1.2065119542829112,
+      "score_origin": 2.3252819308987034,
+      "mean_offset": -2.004712264274584,
+      "mean": 0.32056966662411934,
+      "sd": 1.4343888331613333,
+      "mass_error": 1.1102230246251565e-16,
+      "standard_score_error": 0.0,
+      "raw_score_error": 3.559038248825079e-17
+    },
+    "teacher_moment_difference_inf": 0.01931252282810003,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.02666475738733112,
+            "kkt_inf": 1.4545829818413125e-13,
+            "full_gradient_inf": 1.4545829818413125e-13,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.023671820757148052,
+            "kkt_inf": 7.548649205713076e-15,
+            "full_gradient_inf": 7.548649205713076e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.03066585519406015,
+            "kkt_inf": 5.761537080761769e-13,
+            "full_gradient_inf": 5.761537080761769e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.006136176543195325,
+            "kkt_inf": 5.767955557622884e-16,
+            "full_gradient_inf": 0.045778281946901034,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.11840682166846642,
+            "kkt_inf": 6.041103728371411e-11,
+            "full_gradient_inf": 6.041103728371411e-11,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.13886195193355025,
+            "kkt_inf": 4.0939474033052647e-16,
+            "full_gradient_inf": 4.0939474033052647e-16,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.11162316865327379,
+            "kkt_inf": 5.548051167786339e-12,
+            "full_gradient_inf": 5.548051167786339e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.084328878639858,
+            "kkt_inf": 6.206193442276553e-13,
+            "full_gradient_inf": 0.05879313945675216,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.3877787807814457e-17,
+          6.938893903907228e-18
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M3_to_M0-seed-3405": {
+    "original_E": {
+      "iterations": 7,
+      "objective": -0.29665123396672355,
+      "kkt_inf": 5.113964807179627e-15,
+      "full_gradient_inf": 5.113964807179627e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 5.875322273141137e-08,
+      "H_margin_max_abs_error": 5.748750409040326e-08,
+      "original_weight_max_abs_error": 8.691161159247313e-09
+    },
+    "ref_index": 0,
+    "A_n": 763,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.10106236774386866,
+      "slope": 1.0100079617329047,
+      "score_origin": -24.40486473576187,
+      "mean_offset": 23.52509700822044,
+      "mean": -0.8797677275414308,
+      "sd": 4.204127676226713,
+      "mass_error": 3.3306690738754696e-16,
+      "standard_score_error": 1.1102230246251565e-16,
+      "raw_score_error": 1.7373041822948077e-16
+    },
+    "teacher_moment_difference_inf": 0.16964607947650645,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 6,
+            "objective": -0.03372585363298691,
+            "kkt_inf": 5.772595942921122e-14,
+            "full_gradient_inf": 5.772595942921122e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.18600806557415706,
+            "kkt_inf": 7.871264404157863e-14,
+            "full_gradient_inf": 7.871264404157863e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.054110823313212514,
+            "kkt_inf": 6.984607510418517e-11,
+            "full_gradient_inf": 6.984607510418517e-11,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.013939337268186257,
+            "kkt_inf": 3.224627625840056e-11,
+            "full_gradient_inf": 0.20462750815034977,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.3877787807814457e-17,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.11510159463645667,
+            "kkt_inf": 6.615584816072051e-15,
+            "full_gradient_inf": 6.615584816072051e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.32779244816968833,
+            "kkt_inf": 5.020740767580634e-13,
+            "full_gradient_inf": 5.020740767580634e-13,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 6,
+            "objective": -0.09974291060707483,
+            "kkt_inf": 4.4223912726293335e-13,
+            "full_gradient_inf": 4.4223912726293335e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.09295374012497709,
+            "kkt_inf": 8.901310112720326e-16,
+            "full_gradient_inf": 0.3261782877112835,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          5.551115123125783e-17,
+          6.938893903907228e-18
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M3_to_M1-seed-3405": {
+    "original_E": {
+      "iterations": 6,
+      "objective": -0.08796699253618043,
+      "kkt_inf": 3.133344278483108e-15,
+      "full_gradient_inf": 3.133344278483108e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.1884392137062605e-07,
+      "H_margin_max_abs_error": 5.43687388443459e-08,
+      "original_weight_max_abs_error": 9.131954248342566e-09
+    },
+    "ref_index": 0,
+    "A_n": 770,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.5976267980393094,
+      "slope": 0.962230920853568,
+      "score_origin": -2.5722610196321947,
+      "mean_offset": 1.7887701581874937,
+      "mean": -0.7834908614447009,
+      "sd": 2.451890344407426,
+      "mass_error": -2.220446049250313e-16,
+      "standard_score_error": 5.551115123125783e-17,
+      "raw_score_error": 3.100771745027225e-16
+    },
+    "teacher_moment_difference_inf": 0.022806641394611638,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.03244151263226039,
+            "kkt_inf": 5.040629372232708e-14,
+            "full_gradient_inf": 5.040629372232708e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.05391334100948564,
+            "kkt_inf": 1.3296655443362226e-15,
+            "full_gradient_inf": 1.3296655443362226e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.03312347507117174,
+            "kkt_inf": 5.6349890031892613e-14,
+            "full_gradient_inf": 5.6349890031892613e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.018813856327954234,
+            "kkt_inf": 5.516420653606247e-16,
+            "full_gradient_inf": 0.10526185518897357,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.7755575615628914e-17,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.08389380284876187,
+            "kkt_inf": 2.199954628190337e-15,
+            "full_gradient_inf": 2.199954628190337e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.2275388931565199,
+            "kkt_inf": 2.0413358503557077e-15,
+            "full_gradient_inf": 2.0413358503557077e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.08039621505812816,
+            "kkt_inf": 1.4367847189777905e-15,
+            "full_gradient_inf": 1.4367847189777905e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.07894658468691963,
+            "kkt_inf": 7.560257194565585e-16,
+            "full_gradient_inf": 0.027144994717016365,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          4.163336342344337e-17,
+          5.551115123125783e-17
+        ]
+      }
+    }
+  },
+  "mutagenicity_node-M3_to_M2-seed-3405": {
+    "original_E": {
+      "iterations": 5,
+      "objective": -0.06467718357505704,
+      "kkt_inf": 2.8794702733314637e-11,
+      "full_gradient_inf": 2.8794702733314637e-11,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.2783692771023425e-07,
+      "H_margin_max_abs_error": 1.1360496099399597e-07,
+      "original_weight_max_abs_error": 4.499661441365044e-08
+    },
+    "ref_index": 0,
+    "A_n": 766,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.13457556769669432,
+      "slope": 0.9856410005974648,
+      "score_origin": -3.7112926383871345,
+      "mean_offset": 3.3925325434957223,
+      "mean": -0.3187600948914122,
+      "sd": 2.1548028524700023,
+      "mass_error": 2.7755575615628914e-16,
+      "standard_score_error": 0.0,
+      "raw_score_error": -8.84736991700364e-17
+    },
+    "teacher_moment_difference_inf": 0.015957017215635416,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.018093208960467438,
+            "kkt_inf": 7.298077073225606e-12,
+            "full_gradient_inf": 7.298077073225606e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.01978776645126326,
+            "kkt_inf": 9.441158358575175e-12,
+            "full_gradient_inf": 9.441158358575175e-12,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.023585880166935913,
+            "kkt_inf": 3.4105881069638674e-11,
+            "full_gradient_inf": 3.4105881069638674e-11,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.01265462774368389,
+            "kkt_inf": 3.116555620699742e-14,
+            "full_gradient_inf": 0.023981166271500775,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.3877787807814457e-17,
+          6.938893903907228e-18
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.08511777499361839,
+            "kkt_inf": 3.937822290467352e-16,
+            "full_gradient_inf": 3.937822290467352e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.21711057343060236,
+            "kkt_inf": 5.993469609499869e-16,
+            "full_gradient_inf": 5.993469609499869e-16,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.0808581004204984,
+            "kkt_inf": 6.92154666914746e-16,
+            "full_gradient_inf": 6.92154666914746e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.07864973154574473,
+            "kkt_inf": 6.092679400101317e-11,
+            "full_gradient_inf": 0.025833231602607754,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.7755575615628914e-17,
+          1.3877787807814457e-17
+        ]
+      }
+    }
+  },
+  "proteins_edge-M0_to_M1-seed-3405": {
+    "original_E": {
+      "iterations": 3,
+      "objective": -0.008043459116054225,
+      "kkt_inf": 1.1666796001508217e-12,
+      "full_gradient_inf": 1.1666796001508217e-12,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 9.08356691908807e-06,
+      "H_margin_max_abs_error": 2.1630604287725674e-06,
+      "original_weight_max_abs_error": 2.0983092778315005e-06
+    },
+    "ref_index": 0,
+    "A_n": 207,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.894212639029659,
+      "slope": 1.311468364759238,
+      "score_origin": -2.3625777267576225,
+      "mean_offset": 1.3320507211694352,
+      "mean": -1.0305270055881872,
+      "sd": 1.6557735978093007,
+      "mass_error": -1.6653345369377348e-16,
+      "standard_score_error": -2.7755575615628914e-17,
+      "raw_score_error": 1.2566027206894545e-16
+    },
+    "teacher_moment_difference_inf": 0.01561690062577871,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.056271203836379166,
+            "kkt_inf": 2.0265386591056256e-13,
+            "full_gradient_inf": 2.0265386591056256e-13,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.04566905516553934,
+            "kkt_inf": 4.3005529692941025e-14,
+            "full_gradient_inf": 4.3005529692941025e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.0559975050260517,
+            "kkt_inf": 7.801016776998182e-13,
+            "full_gradient_inf": 7.801016776998182e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.048748572437611895,
+            "kkt_inf": 6.198774417605612e-17,
+            "full_gradient_inf": 0.020886034401956757,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.0929947620913677,
+            "kkt_inf": 4.215378046623641e-16,
+            "full_gradient_inf": 4.215378046623641e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.10428041045731974,
+            "kkt_inf": 3.223983580102896e-15,
+            "full_gradient_inf": 3.223983580102896e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.07888531504997803,
+            "kkt_inf": 1.1796119636642288e-16,
+            "full_gradient_inf": 1.1796119636642288e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.026368704403683076,
+            "kkt_inf": 9.334588657594622e-12,
+            "full_gradient_inf": 0.06850946216899531,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          5.204170427930421e-18,
+          1.3877787807814457e-17
+        ]
+      }
+    }
+  },
+  "proteins_edge-M0_to_M2-seed-3405": {
+    "original_E": {
+      "iterations": 3,
+      "objective": -0.008586865832105389,
+      "kkt_inf": 6.116600281824702e-13,
+      "full_gradient_inf": 6.116600281824702e-13,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.378093331005914e-06,
+      "H_margin_max_abs_error": 9.230711559560234e-07,
+      "original_weight_max_abs_error": 1.122921039438396e-06
+    },
+    "ref_index": 0,
+    "A_n": 189,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.3280829152887442,
+      "slope": 1.23570535925624,
+      "score_origin": -0.9641881417987271,
+      "mean_offset": 0.37341766251188,
+      "mean": -0.5907704792868471,
+      "sd": 1.1108840319345568,
+      "mass_error": 0.0,
+      "standard_score_error": 2.7755575615628914e-17,
+      "raw_score_error": 3.0833225748554315e-17
+    },
+    "teacher_moment_difference_inf": 0.01163709345660971,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.1491800301491087,
+            "kkt_inf": 2.155862988129087e-11,
+            "full_gradient_inf": 2.155862988129087e-11,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.08498356675431538,
+            "kkt_inf": 3.7846895756254995e-12,
+            "full_gradient_inf": 3.7846895756254995e-12,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.1464744093676033,
+            "kkt_inf": 2.060578097040633e-11,
+            "full_gradient_inf": 2.060578097040633e-11,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.1219223892997428,
+            "kkt_inf": 1.3183898417423734e-16,
+            "full_gradient_inf": 0.04075828951830529,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.15616553227447333,
+            "kkt_inf": 1.9081958235744878e-16,
+            "full_gradient_inf": 1.9081958235744878e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.2062187589927083,
+            "kkt_inf": 5.278763537397424e-15,
+            "full_gradient_inf": 5.278763537397424e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.1500944902171469,
+            "kkt_inf": 2.3071822230491534e-16,
+            "full_gradient_inf": 2.3071822230491534e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.09740301171347002,
+            "kkt_inf": 2.0489381025168285e-11,
+            "full_gradient_inf": 0.0564741235913152,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "proteins_edge-M0_to_M3-seed-3405": {
+    "original_E": {
+      "iterations": 3,
+      "objective": -0.0182066226737718,
+      "kkt_inf": 2.5898467398421943e-13,
+      "full_gradient_inf": 2.5898467398421943e-13,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.0963723746648668e-05,
+      "H_margin_max_abs_error": 5.506702525082119e-06,
+      "original_weight_max_abs_error": 4.204892291484463e-06
+    },
+    "ref_index": 0,
+    "A_n": 196,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.08763317848526109,
+      "slope": 1.4160506878738108,
+      "score_origin": 0.9593840739845927,
+      "mean_offset": -1.221526225953621,
+      "mean": -0.26214215196902835,
+      "sd": 0.6732284662118421,
+      "mass_error": -1.1102230246251565e-16,
+      "standard_score_error": 0.0,
+      "raw_score_error": 2.910362528408021e-17
+    },
+    "teacher_moment_difference_inf": 0.0074067253061902705,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.15039949895397553,
+            "kkt_inf": 1.0286910212542466e-15,
+            "full_gradient_inf": 1.0286910212542466e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.06810881116915764,
+            "kkt_inf": 1.0286910212542466e-15,
+            "full_gradient_inf": 1.0286910212542466e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.15115207898618518,
+            "kkt_inf": 6.002143226879753e-16,
+            "full_gradient_inf": 6.002143226879753e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.13498255377658397,
+            "kkt_inf": 4.548630968649165e-11,
+            "full_gradient_inf": 0.03559546959009946,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.4768961014879489,
+            "kkt_inf": 3.92572432894589e-12,
+            "full_gradient_inf": 3.92572432894589e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.6565968432727094,
+            "kkt_inf": 2.208424415561794e-12,
+            "full_gradient_inf": 2.208424415561794e-12,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.46869255521547465,
+            "kkt_inf": 3.196977405028889e-12,
+            "full_gradient_inf": 3.196977405028889e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.3753757447337296,
+            "kkt_inf": 2.7755575615628914e-16,
+            "full_gradient_inf": 0.09123935142258177,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "proteins_edge-M1_to_M0-seed-3405": {
+    "original_E": {
+      "iterations": 7,
+      "objective": -0.1318949964356472,
+      "kkt_inf": 5.856426454897701e-15,
+      "full_gradient_inf": 5.856426454897701e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 5.04451688803087e-05,
+      "H_margin_max_abs_error": 5.540303698747806e-05,
+      "original_weight_max_abs_error": 1.570823381297215e-05
+    },
+    "ref_index": 0,
+    "A_n": 181,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -1.7951776020286427,
+      "slope": 0.11192603879297264,
+      "score_origin": -4.826999773121413,
+      "mean_offset": 2.053911452559934,
+      "mean": -2.773088320561479,
+      "sd": 2.4379247445688805,
+      "mass_error": 2.7755575615628914e-17,
+      "standard_score_error": 1.7121720707891086e-15,
+      "raw_score_error": 4.097177995766347e-15
+    },
+    "teacher_moment_difference_inf": 0.08351624581286266,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.07744231006549046,
+            "kkt_inf": 7.969319648637452e-14,
+            "full_gradient_inf": 7.969319648637452e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.1646215251131232,
+            "kkt_inf": 4.458239333260394e-16,
+            "full_gradient_inf": 4.458239333260394e-16,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.08991387455445436,
+            "kkt_inf": 3.112848520614442e-12,
+            "full_gradient_inf": 3.112848520614442e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.056599127232227084,
+            "kkt_inf": 2.286302767536726e-16,
+            "full_gradient_inf": 0.28241549270874805,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.1102230246251565e-16,
+          2.220446049250313e-16
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 6,
+            "objective": -0.15015761364867067,
+            "kkt_inf": 7.385585198971256e-16,
+            "full_gradient_inf": 7.385585198971256e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.2788892108750223,
+            "kkt_inf": 3.715222574030008e-13,
+            "full_gradient_inf": 3.715222574030008e-13,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 6,
+            "objective": -0.1574153089394854,
+            "kkt_inf": 5.222059763776432e-16,
+            "full_gradient_inf": 5.222059763776432e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.1420750846298387,
+            "kkt_inf": 7.439936952489974e-14,
+            "full_gradient_inf": 0.23306407149410696,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          3.3306690738754696e-16,
+          2.220446049250313e-16
+        ]
+      }
+    }
+  },
+  "proteins_edge-M1_to_M2-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.010116894515219379,
+      "kkt_inf": 3.324453440229399e-16,
+      "full_gradient_inf": 3.324453440229399e-16,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.7210619589480558e-06,
+      "H_margin_max_abs_error": 2.0038467757332867e-06,
+      "original_weight_max_abs_error": 8.699418513752333e-07
+    },
+    "ref_index": 0,
+    "A_n": 189,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.4457573637497594,
+      "slope": 0.22499984343377835,
+      "score_origin": -0.9852451379661155,
+      "mean_offset": 0.298211491742382,
+      "mean": -0.6870336462237334,
+      "sd": 0.4436980576966261,
+      "mass_error": -1.6653345369377348e-16,
+      "standard_score_error": 3.469446951953614e-17,
+      "raw_score_error": 1.2980795464809744e-16
+    },
+    "teacher_moment_difference_inf": 0.013346222213207137,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.06925227441814649,
+            "kkt_inf": 6.8935821677731934e-12,
+            "full_gradient_inf": 6.8935821677731934e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.028156893857662988,
+            "kkt_inf": 2.417992021885862e-13,
+            "full_gradient_inf": 2.417992021885862e-13,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.07218868756040672,
+            "kkt_inf": 7.2135327225386625e-12,
+            "full_gradient_inf": 7.2135327225386625e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.042352962845025426,
+            "kkt_inf": 1.6631373350384463e-16,
+            "full_gradient_inf": 0.07771518006288554,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          3.469446951953614e-18,
+          6.938893903907228e-18
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.08441506251135615,
+            "kkt_inf": 1.1124608179091666e-13,
+            "full_gradient_inf": 1.1124608179091666e-13,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.06247692290860433,
+            "kkt_inf": 1.986320721618362e-13,
+            "full_gradient_inf": 1.986320721618362e-13,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.08596485899160203,
+            "kkt_inf": 8.109485305496378e-14,
+            "full_gradient_inf": 8.109485305496378e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.07834027298403382,
+            "kkt_inf": 6.453171330633722e-16,
+            "full_gradient_inf": 0.03623940828324974,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          8.673617379884035e-19
+        ]
+      }
+    }
+  },
+  "proteins_edge-M1_to_M3-seed-3405": {
+    "original_E": {
+      "iterations": 3,
+      "objective": -0.0018745964474932255,
+      "kkt_inf": 1.5728520916247213e-15,
+      "full_gradient_inf": 1.5728520916247213e-15,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 7.848082651251698e-07,
+      "H_margin_max_abs_error": 4.2797177468578695e-07,
+      "original_weight_max_abs_error": 5.640293493994197e-07
+    },
+    "ref_index": 0,
+    "A_n": 196,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.3189672738066465,
+      "slope": 0.09200100905847831,
+      "score_origin": 0.16203468362345386,
+      "mean_offset": -0.5178808580522689,
+      "mean": -0.35584617442881505,
+      "sd": 0.2584323177944251,
+      "mass_error": 0.0,
+      "standard_score_error": 3.469446951953614e-18,
+      "raw_score_error": 8.96617217258176e-19
+    },
+    "teacher_moment_difference_inf": 0.01788532732101844,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.06592677861299176,
+            "kkt_inf": 5.43891646130612e-14,
+            "full_gradient_inf": 5.43891646130612e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.05951580634619562,
+            "kkt_inf": 4.432912370511133e-14,
+            "full_gradient_inf": 4.432912370511133e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.07629729923630395,
+            "kkt_inf": 5.0847780846963175e-14,
+            "full_gradient_inf": 5.0847780846963175e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.03983166269784038,
+            "kkt_inf": 2.8449465006019636e-16,
+            "full_gradient_inf": 0.07728466042675718,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.2174027621116187,
+            "kkt_inf": 8.101158632811689e-16,
+            "full_gradient_inf": 8.101158632811689e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.21746629703119685,
+            "kkt_inf": 1.5352302762394743e-15,
+            "full_gradient_inf": 1.5352302762394743e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.22290220171342476,
+            "kkt_inf": 8.482797797526587e-16,
+            "full_gradient_inf": 8.482797797526587e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.2010527061803295,
+            "kkt_inf": 9.124979795635331e-14,
+            "full_gradient_inf": 0.07511462830055694,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.7755575615628914e-17,
+          0.0
+        ]
+      }
+    }
+  },
+  "proteins_edge-M2_to_M0-seed-3405": {
+    "original_E": {
+      "iterations": 8,
+      "objective": -0.5664753470425016,
+      "kkt_inf": 7.287233316777275e-12,
+      "full_gradient_inf": 7.287233316777275e-12,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 4.387719343412755e-08,
+      "H_margin_max_abs_error": 2.0743016548863125e-07,
+      "original_weight_max_abs_error": 3.5685902531612523e-09
+    },
+    "ref_index": 0,
+    "A_n": 181,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -1.1054053410498828,
+      "slope": 0.697667979675234,
+      "score_origin": 15.941096059732685,
+      "mean_offset": -19.23247672756286,
+      "mean": -3.291380667830177,
+      "sd": 6.719729000217275,
+      "mass_error": -1.1102230246251565e-16,
+      "standard_score_error": -4.163336342344337e-17,
+      "raw_score_error": 8.565174045002109e-17
+    },
+    "teacher_moment_difference_inf": 0.17992976288830853,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 6,
+            "objective": -0.07679812771798067,
+            "kkt_inf": 2.1265541411130684e-15,
+            "full_gradient_inf": 2.1265541411130684e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 8,
+            "objective": -0.2475507706269524,
+            "kkt_inf": 1.2706849461530112e-15,
+            "full_gradient_inf": 1.2706849461530112e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 6,
+            "objective": -0.07863839793145323,
+            "kkt_inf": 9.571878879788276e-16,
+            "full_gradient_inf": 9.571878879788276e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.021174929353154914,
+            "kkt_inf": 7.416016951884085e-12,
+            "full_gradient_inf": 0.37723247767920143,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.1102230246251565e-16,
+          5.551115123125783e-17
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 8,
+            "objective": -0.34740734241840593,
+            "kkt_inf": 1.304512053934559e-15,
+            "full_gradient_inf": 1.304512053934559e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 8,
+            "objective": -0.6134760610964229,
+            "kkt_inf": 1.1449174941446927e-15,
+            "full_gradient_inf": 1.1449174941446927e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 9,
+            "objective": -0.3032346856987333,
+            "kkt_inf": 5.813274991592343e-12,
+            "full_gradient_inf": 5.813274991592343e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.19680181821933443,
+            "kkt_inf": 8.340552069667784e-15,
+            "full_gradient_inf": 1.0594898715466663,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.220446049250313e-16,
+          1.1102230246251565e-16
+        ]
+      }
+    }
+  },
+  "proteins_edge-M2_to_M1-seed-3405": {
+    "original_E": {
+      "iterations": 5,
+      "objective": -0.0658395439651554,
+      "kkt_inf": 3.464394569829832e-14,
+      "full_gradient_inf": 3.464394569829832e-14,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 1.2778459779205775e-07,
+      "H_margin_max_abs_error": 1.2103658181272792e-07,
+      "original_weight_max_abs_error": 3.152057445957035e-08
+    },
+    "ref_index": 0,
+    "A_n": 207,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": -0.7592609580754947,
+      "slope": 0.8549707832061193,
+      "score_origin": -2.528067353007498,
+      "mean_offset": 1.4551229574716036,
+      "mean": -1.0729443955358944,
+      "sd": 2.0255369232992773,
+      "mass_error": -5.551115123125783e-17,
+      "standard_score_error": 0.0,
+      "raw_score_error": 5.956037860332355e-17
+    },
+    "teacher_moment_difference_inf": 0.044350631074222435,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.03793448498508679,
+            "kkt_inf": 4.787836793695988e-16,
+            "full_gradient_inf": 4.787836793695988e-16,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.07770963916906876,
+            "kkt_inf": 1.5525775109992423e-16,
+            "full_gradient_inf": 1.5525775109992423e-16,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.04830129735902657,
+            "kkt_inf": 2.230854390106174e-15,
+            "full_gradient_inf": 2.230854390106174e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.0017495314328710694,
+            "kkt_inf": 1.2487995688259493e-16,
+            "full_gradient_inf": 0.12290550793446507,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.3877787807814457e-17,
+          1.3877787807814457e-17
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.12272143158780101,
+            "kkt_inf": 1.859716373953102e-12,
+            "full_gradient_inf": 1.859716373953102e-12,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.2215081933467489,
+            "kkt_inf": 2.5673907444456745e-16,
+            "full_gradient_inf": 2.5673907444456745e-16,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.10818174027061778,
+            "kkt_inf": 5.830232130410451e-13,
+            "full_gradient_inf": 5.830232130410451e-13,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.08816323565323275,
+            "kkt_inf": 2.913051038217704e-12,
+            "full_gradient_inf": 0.0905755299585737,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.7755575615628914e-17,
+          6.938893903907228e-18
+        ]
+      }
+    }
+  },
+  "proteins_edge-M2_to_M3-seed-3405": {
+    "original_E": {
+      "iterations": 4,
+      "objective": -0.021746498856986995,
+      "kkt_inf": 7.528699885739343e-16,
+      "full_gradient_inf": 7.528699885739343e-16,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 9.864222133976197e-06,
+      "H_margin_max_abs_error": 3.947627532863152e-06,
+      "original_weight_max_abs_error": 2.4842600458395425e-06
+    },
+    "ref_index": 0,
+    "A_n": 196,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.47126621053044954,
+      "slope": 0.7208094541056552,
+      "score_origin": 1.0311262260310026,
+      "mean_offset": -0.9745077780565614,
+      "mean": 0.056618447974441155,
+      "sd": 0.4915113261506301,
+      "mass_error": 2.220446049250313e-16,
+      "standard_score_error": -3.858025010572419e-15,
+      "raw_score_error": -1.883691168356795e-15
+    },
+    "teacher_moment_difference_inf": 0.011853152780031129,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.017648213282185507,
+            "kkt_inf": 1.3105835861004778e-15,
+            "full_gradient_inf": 1.3105835861004778e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 4,
+            "objective": -0.019091772382299938,
+            "kkt_inf": 4.597017211338539e-16,
+            "full_gradient_inf": 4.597017211338539e-16,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.015168417019199788,
+            "kkt_inf": 7.73686670285656e-16,
+            "full_gradient_inf": 7.73686670285656e-16,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 3,
+            "objective": -0.007415378905248048,
+            "kkt_inf": 4.208053110201058e-13,
+            "full_gradient_inf": 0.030031845829409567,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.14031792151103492,
+            "kkt_inf": 1.9130140180290134e-11,
+            "full_gradient_inf": 1.9130140180290134e-11,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 5,
+            "objective": -0.2374544230718615,
+            "kkt_inf": 4.996003610813204e-16,
+            "full_gradient_inf": 4.996003610813204e-16,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 4,
+            "objective": -0.15007610966242999,
+            "kkt_inf": 3.275413967829266e-11,
+            "full_gradient_inf": 3.275413967829266e-11,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.08342915546834756,
+            "kkt_inf": 5.342948306008566e-16,
+            "full_gradient_inf": 0.08021850049033805,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          1.214306433183765e-17,
+          1.0408340855860843e-17
+        ]
+      }
+    }
+  },
+  "proteins_edge-M3_to_M0-seed-3405": {
+    "original_E": {
+      "iterations": 8,
+      "objective": -0.6026821277236354,
+      "kkt_inf": 9.873265399695796e-14,
+      "full_gradient_inf": 9.873265399695796e-14,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 8.990649149609453e-07,
+      "H_margin_max_abs_error": 4.527615307114985e-07,
+      "original_weight_max_abs_error": 7.359265744022458e-08
+    },
+    "ref_index": 0,
+    "A_n": 181,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 2.060527350694593,
+      "slope": 0.8548775059908942,
+      "score_origin": 143.31268260802216,
+      "mean_offset": -132.10507689777347,
+      "mean": 11.207605710248686,
+      "sd": 15.635206092853059,
+      "mass_error": 3.3306690738754696e-16,
+      "standard_score_error": -6.245004513516506e-17,
+      "raw_score_error": 2.7564632469352604e-15
+    },
+    "teacher_moment_difference_inf": 0.24885550581634397,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 7,
+            "objective": -0.05926850422774485,
+            "kkt_inf": 1.728191157887582e-14,
+            "full_gradient_inf": 1.728191157887582e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 11,
+            "objective": -0.22442502369658282,
+            "kkt_inf": 1.7375857697121688e-14,
+            "full_gradient_inf": 1.7375857697121688e-14,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 6,
+            "objective": -0.05646586609348446,
+            "kkt_inf": 9.84611672793026e-11,
+            "full_gradient_inf": 9.84611672793026e-11,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 6,
+            "objective": -0.051433606254117914,
+            "kkt_inf": 3.227692682797612e-14,
+            "full_gradient_inf": 0.30297755102676366,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 8,
+            "objective": -1.627741052810701,
+            "kkt_inf": 7.041351009207109e-14,
+            "full_gradient_inf": 7.041351009207109e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 11,
+            "objective": -1.9777019248563545,
+            "kkt_inf": 1.8712833366185677e-11,
+            "full_gradient_inf": 1.8712833366185677e-11,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 8,
+            "objective": -1.6526881530776858,
+            "kkt_inf": 7.479182204117585e-12,
+            "full_gradient_inf": 7.479182204117585e-12,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 7,
+            "objective": -1.515460374079898,
+            "kkt_inf": 7.646471395468477e-15,
+            "full_gradient_inf": 0.7421607278238955,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          2.220446049250313e-16,
+          2.220446049250313e-16
+        ]
+      }
+    }
+  },
+  "proteins_edge-M3_to_M1-seed-3405": {
+    "original_E": {
+      "iterations": 6,
+      "objective": -0.2604222457008409,
+      "kkt_inf": 1.0364105407223434e-14,
+      "full_gradient_inf": 1.0364105407223434e-14,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 3.202028953097624e-08,
+      "H_margin_max_abs_error": 3.9603312185221284e-08,
+      "original_weight_max_abs_error": 3.1407134323813146e-09
+    },
+    "ref_index": 0,
+    "A_n": 207,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.7822624412291075,
+      "slope": 0.7813787768025976,
+      "score_origin": 3.0063580874923748,
+      "mean_offset": -0.13381422295422926,
+      "mean": 2.8725438645381454,
+      "sd": 3.6712586353121948,
+      "mass_error": -1.1102230246251565e-16,
+      "standard_score_error": -1.3877787807814457e-17,
+      "raw_score_error": -3.698653820940667e-16
+    },
+    "teacher_moment_difference_inf": 0.1086811379026904,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.04380215302665682,
+            "kkt_inf": 3.3653635433950058e-15,
+            "full_gradient_inf": 3.3653635433950058e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.1259417064903331,
+            "kkt_inf": 1.2041409536145409e-12,
+            "full_gradient_inf": 1.2041409536145409e-12,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.032341422363427096,
+            "kkt_inf": 2.1367890096213316e-14,
+            "full_gradient_inf": 2.1367890096213316e-14,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.025228834876868073,
+            "kkt_inf": 1.1921801418409359e-15,
+            "full_gradient_inf": 0.1775851328297035,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          0.0
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.34271277548471846,
+            "kkt_inf": 4.377574691627473e-15,
+            "full_gradient_inf": 4.377574691627473e-15,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.6578983636421778,
+            "kkt_inf": 4.304421402645531e-13,
+            "full_gradient_inf": 4.304421402645531e-13,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.33298441815504665,
+            "kkt_inf": 9.832412661836543e-15,
+            "full_gradient_inf": 9.832412661836543e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.3121895751466117,
+            "kkt_inf": 3.448765866212507e-11,
+            "full_gradient_inf": 0.14281362948441784,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          0.0,
+          2.220446049250313e-16
+        ]
+      }
+    }
+  },
+  "proteins_edge-M3_to_M2-seed-3405": {
+    "original_E": {
+      "iterations": 6,
+      "objective": -0.10042214254167972,
+      "kkt_inf": 6.35533292658863e-14,
+      "full_gradient_inf": 6.35533292658863e-14,
+      "subspace_dimension": 17,
+      "A_margin_max_abs_error": 7.786037548029867e-08,
+      "H_margin_max_abs_error": 3.355550060035739e-08,
+      "original_weight_max_abs_error": 2.215574029795775e-08
+    },
+    "ref_index": 0,
+    "A_n": 189,
+    "regularization": 0.1,
+    "calibrated_teacher": {
+      "intercept": 0.46795624172248523,
+      "slope": 0.7578994122078713,
+      "score_origin": 0.4774402201130736,
+      "mean_offset": 0.8692907399532501,
+      "mean": 1.3467309600663238,
+      "sd": 2.0522156112191583,
+      "mass_error": -1.1102230246251565e-16,
+      "standard_score_error": 0.0,
+      "raw_score_error": -1.4951717198411749e-16
+    },
+    "teacher_moment_difference_inf": 0.07930137523786329,
+    "anchors": {
+      "WL": {
+        "solutions": {
+          "Full": {
+            "iterations": 4,
+            "objective": -0.06373841862142295,
+            "kkt_inf": 2.6924719398468966e-11,
+            "full_gradient_inf": 2.6924719398468966e-11,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 6,
+            "objective": -0.08282319084758571,
+            "kkt_inf": 3.900508388499091e-13,
+            "full_gradient_inf": 3.900508388499091e-13,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.052856485053474705,
+            "kkt_inf": 1.7091363047061492e-15,
+            "full_gradient_inf": 1.7091363047061492e-15,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 4,
+            "objective": -0.04672051152780333,
+            "kkt_inf": 1.873708841143626e-13,
+            "full_gradient_inf": 0.08003876572410035,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          6.938893903907228e-18,
+          6.938893903907228e-18
+        ]
+      },
+      "Size": {
+        "solutions": {
+          "Full": {
+            "iterations": 5,
+            "objective": -0.08242043010672433,
+            "kkt_inf": 3.812976410305646e-14,
+            "full_gradient_inf": 3.812976410305646e-14,
+            "subspace_dimension": 17
+          },
+          "B0Teacher": {
+            "iterations": 7,
+            "objective": -0.20627183785783249,
+            "kkt_inf": 1.1449174941446927e-15,
+            "full_gradient_inf": 1.1449174941446927e-15,
+            "subspace_dimension": 17
+          },
+          "CalTeacher": {
+            "iterations": 5,
+            "objective": -0.07072927903821744,
+            "kkt_inf": 2.8299778102522377e-11,
+            "full_gradient_inf": 2.8299778102522377e-11,
+            "subspace_dimension": 17
+          },
+          "ScoreOnly": {
+            "iterations": 5,
+            "objective": -0.06798521567978123,
+            "kkt_inf": 3.5561831257524545e-16,
+            "full_gradient_inf": 0.09141885108013886,
+            "subspace_dimension": 2
+          }
+        },
+        "gradient_identity_inf": [
+          6.938893903907228e-18,
+          6.938893903907228e-18
+        ]
+      }
+    }
+  }
+}

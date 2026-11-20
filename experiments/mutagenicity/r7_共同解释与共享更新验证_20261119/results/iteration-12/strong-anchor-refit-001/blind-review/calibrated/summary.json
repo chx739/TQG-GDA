@@ -1,0 +1,280 @@
+{
+  "rows": 17520,
+  "sha256": "373cc9bd751c07338bafa32160219c51e97e66fb697ce88e8c7dd51b8690a01d",
+  "max_residuals": {
+    "E_replay_margin": 5.5403036989698506e-05,
+    "teacher_moment_difference": 0.2488555058163444,
+    "Full": 3.7996027765080376e-14,
+    "B0Teacher": 4.440024736762638e-14,
+    "ScoreOnly": 2.4486544019877987e-14,
+    "CalTeacher": 3.1356482080996395e-14,
+    "gradient_identity": 6.938893903907228e-18
+  },
+  "max_calibration_errors": {
+    "mass_error": 2.220446049250313e-16,
+    "margin_cross_error": 3.552713678800501e-15,
+    "standardized_cross_error": 1.1102230246251565e-16
+  },
+  "full_calteacher_disagreement": {
+    "mutagenicity_edge/Size": 179,
+    "mutagenicity_edge/WL": 144,
+    "mutagenicity_node/Size": 120,
+    "mutagenicity_node/WL": 97,
+    "proteins_edge/Size": 23,
+    "proteins_edge/WL": 36
+  },
+  "teachers": {
+    "mutagenicity_edge-M0_to_M1-seed-3405": {
+      "intercept": -0.3754718232751687,
+      "slope": 0.71374882551855,
+      "mass_error": 0.0,
+      "margin_cross_error": 2.220446049250313e-16,
+      "standardized_cross_error": 0.0
+    },
+    "mutagenicity_edge-M0_to_M2-seed-3405": {
+      "intercept": 0.2356675959582843,
+      "slope": 0.7653369356272461,
+      "mass_error": 1.1102230246251565e-16,
+      "margin_cross_error": 2.220446049250313e-16,
+      "standardized_cross_error": 5.551115123125783e-17
+    },
+    "mutagenicity_edge-M0_to_M3-seed-3405": {
+      "intercept": 0.028992167726408724,
+      "slope": 0.829078365632286,
+      "mass_error": 1.1102230246251565e-16,
+      "margin_cross_error": 0.0,
+      "standardized_cross_error": 0.0
+    },
+    "mutagenicity_edge-M1_to_M0-seed-3405": {
+      "intercept": 0.318757794717806,
+      "slope": 0.3602009318847207,
+      "mass_error": 0.0,
+      "margin_cross_error": 0.0,
+      "standardized_cross_error": 5.551115123125783e-17
+    },
+    "mutagenicity_edge-M1_to_M2-seed-3405": {
+      "intercept": 0.2049311049833705,
+      "slope": 0.7167156046840069,
+      "mass_error": 0.0,
+      "margin_cross_error": 1.1102230246251565e-16,
+      "standardized_cross_error": 0.0
+    },
+    "mutagenicity_edge-M1_to_M3-seed-3405": {
+      "intercept": 0.37028886255372145,
+      "slope": 0.7832752707278466,
+      "mass_error": 0.0,
+      "margin_cross_error": 1.1102230246251565e-16,
+      "standardized_cross_error": 0.0
+    },
+    "mutagenicity_edge-M2_to_M0-seed-3405": {
+      "intercept": -0.029198342038929077,
+      "slope": 0.15308059959799927,
+      "mass_error": 0.0,
+      "margin_cross_error": 0.0,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "mutagenicity_edge-M2_to_M1-seed-3405": {
+      "intercept": -0.5179381183509508,
+      "slope": 0.2647286235645925,
+      "mass_error": 0.0,
+      "margin_cross_error": 2.7755575615628914e-17,
+      "standardized_cross_error": 0.0
+    },
+    "mutagenicity_edge-M2_to_M3-seed-3405": {
+      "intercept": 0.06216509340108495,
+      "slope": 0.610298349177074,
+      "mass_error": 0.0,
+      "margin_cross_error": 1.1102230246251565e-16,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "mutagenicity_edge-M3_to_M0-seed-3405": {
+      "intercept": 0.34989409853659104,
+      "slope": 0.21150955870537533,
+      "mass_error": 0.0,
+      "margin_cross_error": 0.0,
+      "standardized_cross_error": 5.551115123125783e-17
+    },
+    "mutagenicity_edge-M3_to_M1-seed-3405": {
+      "intercept": 0.2976169868485177,
+      "slope": 0.32418042108476275,
+      "mass_error": 0.0,
+      "margin_cross_error": 1.1102230246251565e-16,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "mutagenicity_edge-M3_to_M2-seed-3405": {
+      "intercept": -0.026681419850853372,
+      "slope": 0.4017396541949297,
+      "mass_error": 1.6653345369377348e-16,
+      "margin_cross_error": 2.220446049250313e-16,
+      "standardized_cross_error": 0.0
+    },
+    "mutagenicity_node-M0_to_M1-seed-3405": {
+      "intercept": -0.5501635035607103,
+      "slope": 0.5649069083979759,
+      "mass_error": 1.6653345369377348e-16,
+      "margin_cross_error": 1.8041124150158794e-16,
+      "standardized_cross_error": 1.1102230246251565e-16
+    },
+    "mutagenicity_node-M0_to_M2-seed-3405": {
+      "intercept": -0.16366948742590456,
+      "slope": 0.8707429202911788,
+      "mass_error": 5.551115123125783e-17,
+      "margin_cross_error": 5.551115123125783e-17,
+      "standardized_cross_error": 0.0
+    },
+    "mutagenicity_node-M0_to_M3-seed-3405": {
+      "intercept": -0.15785213102164458,
+      "slope": 1.040188038398632,
+      "mass_error": 0.0,
+      "margin_cross_error": 5.551115123125783e-17,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "mutagenicity_node-M1_to_M0-seed-3405": {
+      "intercept": 0.08305183524853876,
+      "slope": 0.32283390923167965,
+      "mass_error": 0.0,
+      "margin_cross_error": 3.3306690738754696e-16,
+      "standardized_cross_error": 8.326672684688674e-17
+    },
+    "mutagenicity_node-M1_to_M2-seed-3405": {
+      "intercept": 0.2774087480823057,
+      "slope": 0.8386228214359042,
+      "mass_error": 5.551115123125783e-17,
+      "margin_cross_error": 0.0,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "mutagenicity_node-M1_to_M3-seed-3405": {
+      "intercept": -0.01794881578956381,
+      "slope": 1.1768820643828148,
+      "mass_error": 1.1102230246251565e-16,
+      "margin_cross_error": 5.551115123125783e-17,
+      "standardized_cross_error": 5.551115123125783e-17
+    },
+    "mutagenicity_node-M2_to_M0-seed-3405": {
+      "intercept": 0.10942912190130272,
+      "slope": 0.29532591320920043,
+      "mass_error": 0.0,
+      "margin_cross_error": 1.1102230246251565e-16,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "mutagenicity_node-M2_to_M1-seed-3405": {
+      "intercept": -0.20335053448473983,
+      "slope": 0.5169456059169086,
+      "mass_error": 0.0,
+      "margin_cross_error": 2.7755575615628914e-17,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "mutagenicity_node-M2_to_M3-seed-3405": {
+      "intercept": -0.008896169007485577,
+      "slope": 0.8411331198276324,
+      "mass_error": 0.0,
+      "margin_cross_error": 1.1102230246251565e-16,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "mutagenicity_node-M3_to_M0-seed-3405": {
+      "intercept": 0.31241950951602837,
+      "slope": 0.24024198109972947,
+      "mass_error": 1.1102230246251565e-16,
+      "margin_cross_error": 1.6653345369377348e-16,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "mutagenicity_node-M3_to_M1-seed-3405": {
+      "intercept": -0.2901501056954307,
+      "slope": 0.39244451655366225,
+      "mass_error": 0.0,
+      "margin_cross_error": 2.7755575615628914e-17,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "mutagenicity_node-M3_to_M2-seed-3405": {
+      "intercept": 0.011230355345950988,
+      "slope": 0.4574158603269192,
+      "mass_error": 0.0,
+      "margin_cross_error": 0.0,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "proteins_edge-M0_to_M1-seed-3405": {
+      "intercept": -0.0779757038308444,
+      "slope": 0.7920577828360127,
+      "mass_error": 1.1102230246251565e-16,
+      "margin_cross_error": 1.3877787807814457e-17,
+      "standardized_cross_error": 0.0
+    },
+    "proteins_edge-M0_to_M2-seed-3405": {
+      "intercept": 0.32906781004289754,
+      "slope": 1.1123621581852328,
+      "mass_error": 0.0,
+      "margin_cross_error": 4.163336342344337e-17,
+      "standardized_cross_error": 0.0
+    },
+    "proteins_edge-M0_to_M3-seed-3405": {
+      "intercept": 0.6390159456239995,
+      "slope": 2.1033731622218585,
+      "mass_error": 1.1102230246251565e-16,
+      "margin_cross_error": 1.734723475976807e-17,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "proteins_edge-M1_to_M0-seed-3405": {
+      "intercept": -1.6678640778376632,
+      "slope": 0.04591037481460399,
+      "mass_error": 0.0,
+      "margin_cross_error": 0.0,
+      "standardized_cross_error": 1.734723475976807e-18
+    },
+    "proteins_edge-M1_to_M2-seed-3405": {
+      "intercept": -0.09736173714602037,
+      "slope": 0.5071012584590121,
+      "mass_error": 5.551115123125783e-17,
+      "margin_cross_error": 8.326672684688674e-17,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "proteins_edge-M1_to_M3-seed-3405": {
+      "intercept": -0.19228726955464834,
+      "slope": 0.35599653264599,
+      "mass_error": 0.0,
+      "margin_cross_error": 0.0,
+      "standardized_cross_error": 1.3877787807814457e-17
+    },
+    "proteins_edge-M2_to_M0-seed-3405": {
+      "intercept": -0.7636816047514458,
+      "slope": 0.10382382677228152,
+      "mass_error": 0.0,
+      "margin_cross_error": 1.1102230246251565e-16,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "proteins_edge-M2_to_M1-seed-3405": {
+      "intercept": -0.30637555290907337,
+      "slope": 0.42209587659034514,
+      "mass_error": 0.0,
+      "margin_cross_error": 2.7755575615628914e-17,
+      "standardized_cross_error": 0.0
+    },
+    "proteins_edge-M2_to_M3-seed-3405": {
+      "intercept": 0.38823432417212916,
+      "slope": 1.466516468197871,
+      "mass_error": 0.0,
+      "margin_cross_error": 0.0,
+      "standardized_cross_error": 2.7755575615628914e-17
+    },
+    "proteins_edge-M3_to_M0-seed-3405": {
+      "intercept": 1.447735299166323,
+      "slope": 0.05467644627861152,
+      "mass_error": 1.1102230246251565e-16,
+      "margin_cross_error": 3.552713678800501e-15,
+      "standardized_cross_error": 1.3877787807814457e-17
+    },
+    "proteins_edge-M3_to_M1-seed-3405": {
+      "intercept": 0.17087952486485236,
+      "slope": 0.21283675557119994,
+      "mass_error": 2.220446049250313e-16,
+      "margin_cross_error": 0.0,
+      "standardized_cross_error": 4.163336342344337e-17
+    },
+    "proteins_edge-M3_to_M2-seed-3405": {
+      "intercept": -0.029402124258391782,
+      "slope": 0.3693078875652959,
+      "mass_error": 1.1102230246251565e-16,
+      "margin_cross_error": 2.220446049250313e-16,
+      "standardized_cross_error": 2.7755575615628914e-17
+    }
+  }
+}
