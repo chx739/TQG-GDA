@@ -86,3 +86,18 @@ class PilotTests(unittest.TestCase):
         expected_nll = lambda z: (np.logaddexp(0., z)-reflected*z).mean()
         self.assertGreater(expected_nll(after), expected_nll(logits)+.8)
         self.assertLess(bands.slack(reflected).min(), -.2)
+
+    def test_obs_tamper_aborts_before_target_label_access(self):
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        from experiments.mutagenicity.r8_图结构观察量与类别约束_20261121.src import pilot
+
+        plan = json.loads((ROOT/'configs/pilot-plan.json').read_text())
+        with TemporaryDirectory() as directory:
+            output = Path(directory)
+            (output/'OBS.json').write_text('{}')
+            with patch.object(pilot.r5_inputs, 'evaluation_labels') as broker:
+                with self.assertRaises(PermissionError):
+                    pilot.evaluate_observation(output, 'bad-digest', {}, plan, ROOT)
+                broker.assert_not_called()
