@@ -1,0 +1,131 @@
+{
+  "plan": {
+    "analysis_type": "posthoc_source_calibration_and_mlls",
+    "protocol_commit": "199f51658e7143ce57bcb1b9e3740c5e7bc470dd",
+    "input": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-020/P",
+    "source_final_digest": "a7958a2c9d54e4fce7d9a1fa7569400d67cc149a19d2b6f0aaac56f7e3f8f20f",
+    "setting": "mutagenicity_edge",
+    "directions": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "tau": 0.005,
+    "calibration": {
+      "fit_pool": "source_validation",
+      "initial_inverse_temperature": 1.0,
+      "initial_intercept": 0.0,
+      "temperature_bounds": [
+        0.05,
+        100.0
+      ],
+      "max_iterations": 2000,
+      "optimizer_ftol": 1e-15,
+      "optimizer_gtol": 1e-10,
+      "projected_gradient_tolerance": 1e-07
+    },
+    "mlls": {
+      "source_prior": "mean_calibrated_source_validation_probability",
+      "target_fit_pool": "unlabeled_adaptation",
+      "initial_prior": "source_prior",
+      "prior_floor": 1e-08,
+      "tolerance": 1e-10,
+      "max_iterations": 100000
+    },
+    "checks_atol": 1e-12,
+    "primary_endpoint": "holdout Accuracy using fixed argmax",
+    "comparisons": [
+      [
+        "SourceCal",
+        "B0"
+      ],
+      [
+        "MLLS",
+        "B0"
+      ],
+      [
+        "MLLS",
+        "SourceCal"
+      ],
+      [
+        "J_argmax",
+        "B0"
+      ],
+      [
+        "J",
+        "B0"
+      ],
+      [
+        "J_argmax",
+        "MLLS"
+      ],
+      [
+        "J",
+        "MLLS"
+      ],
+      [
+        "J_argmax",
+        "SourceCal"
+      ],
+      [
+        "J",
+        "SourceCal"
+      ],
+      [
+        "J",
+        "J_argmax"
+      ],
+      [
+        "SourceCal_balanced",
+        "B0_balanced"
+      ],
+      [
+        "MLLS_balanced",
+        "SourceCal_balanced"
+      ],
+      [
+        "J",
+        "MLLS_balanced"
+      ]
+    ]
+  },
+  "source_archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-020/P",
+  "output": "/home/hxchen/research/GDA/TSBA/repository/experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/results/iteration-14/accuracy-prior-control",
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "commit": "6906aaad081e9f19717f71dc7d73a916149dae62",
+  "git_status": "",
+  "code_hashes": {
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/scripts/audit_prior_control.py": "c42bfb5ae8d99e42009d61d464bcac6544404adf202ac15663572d207c3fdcf7",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/prior_control.py": "58eb92f40d7a80f38c9615b3d0e5383039cec6a0dd9eb71d95541fcaf12dbe4f",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/prior_control_run.py": "557e98f33928b7006066cde02c2ddf805df4e4bd7d29d0cd5ec3918eed5bec37"
+  },
+  "config_sha256": "8c6d4719809bc789c50a2d6cedea50835b22ac0c91be2e245c5382cac4385e29",
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-m",
+    "experiments.mutagenicity.r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119.scripts.audit_prior_control",
+    "--config",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/configs/r7-p-accuracy-prior-control.json",
+    "--output",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/results/iteration-14/accuracy-prior-control"
+  ],
+  "started_utc": "2026-11-20T16:26:28.842298+00:00",
+  "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.15.2",
+    "torch": "2.5.1"
+  }
+}

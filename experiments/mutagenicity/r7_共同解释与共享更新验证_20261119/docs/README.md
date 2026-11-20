@@ -23,3 +23,5 @@
 [普通 Accuracy 的文献口径与先验校正对照](accuracy-and-prior-control.md)
 
 [第十四轮 P 五种子损失与排序复盘](iteration-14-p-risk-replay.md)
+
+[源校准与 MLLS 对照实测](accuracy-and-prior-control-results.md)
