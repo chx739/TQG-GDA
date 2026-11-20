@@ -35,6 +35,21 @@ R8、R9 又给了一个判断投入的例子。R8 在 M0→M1 上使用本域斜
 
 R11 和 R12 给后续迭代留下一个具体判断。即使给 PROTEINS 当前校正规则目标适配集的标签比例，其留出 Accuracy 仍比只猜该适配集多数类低 7.00 个百分点。R12 用同一批图构造类别占比和主分数分布完全相同、最优阈值相反的两个目标，实际三项读数在十个有支持的世界都没能区分它们。独立求解器也复现了结论。R8 历史数据还显示，按分数分层后，同一类图的结构分数均值在部分方向仍发生变化。下一轮将计算转到改变图表示能否多分对图，同时与原分类器在相同预测阳性数下直接比较。这样可以辨别新增计算究竟改善了图间排序，还是只改变了预测比例。[R11 真实开发对照](../../experiments/mutagenicity/r11_分类阈值的跨域检验_20261121/docs/prior-control-results.md) · [R12 源模拟](../../experiments/mutagenicity/r12_三种图读数与阈值识别_20261121/report.md) · [R8 分档归因](../../experiments/mutagenicity/r8_图结构观察量与类别约束_20261121/docs/conditional-drift.md) · [R13 设计](../../experiments/mutagenicity/r13_目标图归一化与分类排序_20261121/docs/pilot.md)
 
+### 两种 Mutagenicity 划分有多少相同的图
+
+对 R5 登记的两套四域索引按零基图 ID 交叉计数，并以 R7 C 的封存 manifest 核对 H 成员。4337 张图全部复用，4003 张（92.3%）在边数与节点数划分中还属于同一域编号。目标 H 的并集在两种划分下是完全相同的 1290 张图，其中 1194 张（92.6%）保留相同域编号。下表行按边数划分，列按节点数划分，每格是共用留出图数。该核对只用 ID，未用标签或模型预测。[R7 图角色与 ID 哈希](../../experiments/mutagenicity/r7_共同解释与共享更新验证_20261119/docs/r7-protocol.md)
+
+| H 图交集 | 节点 M0 | 节点 M1 | 节点 M2 | 节点 M3 |
+|---|---:|---:|---:|---:|
+| 边数 M0 | 298 | 25 | 0 | 0 |
+| 边数 M1 | 23 | 273 | 11 | 0 |
+| 边数 M2 | 0 | 16 | 296 | 10 |
+| 边数 M3 | 0 | 0 | 11 | 327 |
+
+如果 R13 的两个 Mutagenicity 设置都过线，只能说在同一批分子上对两种分域方式均有收益。PROTEINS 的结论应单列。四个域间反复迁移与增加源种子可检验方向性和训练波动，外部复现需要看从未参与选择的方法在新图上的成绩。公开文献里的同名设置也要核对分母。例如 GALA 的正式分域入口按 PyG 中的有向边条目数除以节点数乘节点数减一，即 `num_edges / (n * (n-1))` 排序。四等份保留 `4 * floor(N/4)` 张，而本项目边数索引保留全体，以无向边数划分。[GALA 原文 §IV](https://sourcefreegraphdomainadaptation.github.io/static/images/GALA_TPAMI24.pdf) · [作者的分域函数](https://github.com/luo-junyu/GALA/blob/7a72305825ab34c326d3687714eb0e9def45f30f/utils/data_splits.py)
+
+对于独立确认，R7-D 只为冻结的 J、M0 源及三个 NCI1 目标登记过 NLL 和 BA 门槛。原 C 未晋级，NCI1 仍封存。将来为新方法做确认，先固定候选、强对照、数据权限和主指标，并另行登记。即使更换数据集名称也应核对原始实体：FRANKENSTEIN 的作者用同一批 4337 个 Ames 分子重做节点属性，适合研究表示变化；TO-UGDA 的 NCI1→NCI109 则改变了受试细胞系和活性终点，适合研究另一种迁移问题。[R7-D 原登记](../../experiments/mutagenicity/r7_共同解释与共享更新验证_20261119/docs/r7-protocol.md) · [FRANKENSTEIN 的构造，§6.1](https://ijcai.org/proceedings/2015/528) · [TO-UGDA 数据集定义](https://pmc.ncbi.nlm.nih.gov/articles/PMC11576983/)
+
 ## 两个会话怎样交接
 
 TSBA-idea 负责问题定义、方法机制、对照与停止规则、证据解释，以及审查后的优化修复。TSBA-experiment 负责实现代码、编写实验配置并执行已商定的验证。实现完成即主动通知策略会话，给出版本或 diff、设计及配置位置、已做验证和未决问题。
