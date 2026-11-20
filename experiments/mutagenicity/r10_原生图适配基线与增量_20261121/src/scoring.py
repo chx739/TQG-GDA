@@ -1,6 +1,8 @@
 """Seal all R10 predictions before opening the matched H labels."""
+import io
 import json
 from pathlib import Path
+import re
 import subprocess
 from uuid import uuid4
 
@@ -57,6 +59,20 @@ def _upstream_role_arrays(repo, plan, roles):
     return data_out, stored
 
 
+def _historical_predictions(archive):
+    values = {}
+    for name in HISTORICAL:
+        z = archive['z_'+name]
+        values['logits_'+name] = np.column_stack((np.zeros_like(z),z))
+        values['actions_'+name] = archive['decision_'+name]
+    return values
+
+
+def _job_predictions(arm, archived):
+    return {'logits_'+arm:archived['logits'].numpy().astype(np.float64),
+            'actions_'+arm:archived['decisions'].numpy()}
+
+
 def make_observation(root, roles, plan, repo):
     complete, receipt = validation.validate_jobs(root,repo)
     held_members = [f'data/H-M{target}.pt' for _,target in plan['directions']]
@@ -90,8 +106,7 @@ def make_observation(root, roles, plan, repo):
             max_error = max(max_error,error)
             torch.testing.assert_close(replay['logits'],archived['logits'],atol=1e-7,rtol=1e-6)
             values = combined.setdefault(key,{})
-            values['logits_'+arm] = archived['logits'].numpy().astype(np.float64)
-            values['actions_'+arm] = archived['decisions'].numpy()
+            values.update(_job_predictions(arm,archived))
         base = attempt.parent
         all_files.append(str((base/'DONE.json').relative_to(root)))
         all_files.extend(str((attempt/rel).relative_to(root)) for rel in json.loads((base/'DONE.json').read_bytes())['files'])
@@ -101,10 +116,7 @@ def make_observation(root, roles, plan, repo):
         expected = {'logits_GRADE','actions_GRADE','logits_SourceOnly','actions_SourceOnly'}
         if observed.keys() != expected:
             raise ValueError(f'{key}: missing paired GRADE and source-only predictions')
-        for name in HISTORICAL:
-            z = historical[key]['z_'+name]
-            observed['logits_'+name] = np.column_stack((np.zeros_like(z),z))
-            observed['actions_'+name] = historical[key]['decision_'+name]
+        observed.update(_historical_predictions(historical[key]))
         path = results/f'{key}.npz'
         observed['ids'] = np.asarray(roles['tasks'][key]['h_ids'])
         with path.open('xb') as stream:
@@ -121,7 +133,38 @@ def make_observation(root, roles, plan, repo):
     seal.rename(root/'OBS.json')
 
 
-def verify_observation(root,roles):
+def _check_prediction_values(key, observed, source):
+    for field, expected in source.items():
+        if not np.array_equal(observed[field],expected):
+            raise PermissionError(f'R10 observation differs from source prediction: {key}/{field}')
+
+
+def _verify_prediction_sources(root,repo,roles,plan,complete,files,frozen):
+    historical, source_lineage = _upstream_role_arrays(repo,plan,roles)
+    lineage = json.loads((root/'observation/lineage.json').read_bytes())
+    error = lineage.get('checkpoint_replay_max_abs_logit_error')
+    if (lineage.get('models') != len(complete) or lineage.get('blocks') != len(roles['tasks'])
+            or lineage.get('historical') != source_lineage or type(error) not in (int,float)
+            or not np.isfinite(error) or error < 0 or not isinstance(lineage.get('evaluation_worktree'),str)
+            or not lineage['evaluation_worktree']):
+        raise PermissionError('Invalid R10 checkpoint replay or historical prediction lineage')
+    for key,arrays in historical.items():
+        _check_prediction_values(key,frozen[key],_historical_predictions(arrays))
+    for _,seed,target,attempt,summary in complete:
+        arm = 'SourceOnly' if target is None else 'GRADE'
+        for direction in summary['prediction_targets']:
+            key = jobs.target_key(seed,direction)
+            path = attempt/f'prediction-M{direction}.pt'
+            blob = path.read_bytes()
+            if r8_inputs.sha(blob) != files[str(path.relative_to(root))]:
+                raise PermissionError(f'Changed R10 job prediction: {key}/{arm}')
+            archived = torch.load(io.BytesIO(blob),map_location='cpu',weights_only=True)
+            values = _job_predictions(arm,archived)
+            values['ids'] = archived['ids'].numpy()
+            _check_prediction_values(key,frozen[key],values)
+
+
+def verify_observation(root,roles,repo=None):
     obs_blob = (root/'OBS.json').read_bytes()
     obs = json.loads(obs_blob)
     input_sha = digest(root/'INPUT.json')
@@ -141,7 +184,7 @@ def verify_observation(root,roles):
         raise PermissionError('Incomplete R10 training receipt')
     expected.update(selected)
     held_members = {f"data/H-M{task['target']}.pt" for task in roles['tasks'].values()}
-    data.read_inputs(root,requested=held_members)
+    _,config = data.read_inputs(root,requested=held_members)
     expected.update(held_members)
     for name,_,_,attempt,_ in complete:
         done_path = f'runs/{name}/DONE.json'
@@ -170,11 +213,14 @@ def verify_observation(root,roles):
                     (name in ('GRADE','SourceOnly') and not np.array_equal(action,z.argmax(axis=1)))):
                 raise PermissionError(f'Invalid R10 logits or decisions: {key}/{name}')
         frozen[key] = row
+    if repo is None:
+        repo = Path(__file__).resolve().parents[4]
+    _verify_prediction_sources(root,repo,roles,config['plan'],complete,files,frozen)
     return r8_inputs.sha(obs_blob), frozen
 
 
 def score(root, repo, roles, plan, output):
-    obs_sha, frozen = verify_observation(root,roles)
+    obs_sha, frozen = verify_observation(root,roles,repo)
     endpoint_rows, pairs, cohorts, label_ids = [],[],[],{}
     archive = Path(roles['r7_archive'])
     original = roles['r7_plan']
@@ -224,7 +270,7 @@ def score(root, repo, roles, plan, output):
                                       accuracy_ci_low=interval[0],accuracy_ci_high=interval[1],
                                       nll_delta=by_method[left]['sampled_nll']-by_method[right]['sampled_nll'],
                                       ba_delta_pp=100*(by_method[left]['balanced_accuracy']-by_method[right]['balanced_accuracy'])))
-    if verify_observation(root,roles)[0]!=obs_sha:
+    if verify_observation(root,roles,repo)[0]!=obs_sha:
         raise PermissionError('R10 observation changed during label evaluation')
     intervals = paired.paired_bootstrap(original,cohorts,phase='P',comparisons=COMPARISONS)
     intervals['interval_rows'] = [row for row in intervals['interval_rows'] if row['metric']!='directional_risk_gap']
@@ -262,10 +308,21 @@ def run(root,repo):
             write_json(staging/'COMPLETE.json',dict(observation_sha256=obs_sha,files=_hash_members(staging,sorted(members))))
             staging.rename(destination)
         complete = json.loads((destination/'COMPLETE.json').read_bytes())
-        obs_sha = verify_observation(root,roles)[0]
+        obs_sha = verify_observation(root,roles,repo)[0]
         if (complete['observation_sha256']!=obs_sha or complete['files'].keys()!=members
                 or complete['files']!=_hash_members(destination,complete['files'])):
             raise PermissionError('Recovered R10 scoring products are not consistent with the sealed observation')
+        label_ids = {str(task['target']):task['h_ids'] for task in roles['tasks'].values()}
+        expected_access = dict(obs_sha256=obs_sha, target_ids=label_ids, evaluated_blocks=len(roles['tasks']))
+        if json.loads((destination/'label-access.json').read_bytes()) != expected_access:
+            raise PermissionError('R10 label access differs from the sealed observation or holdout roles')
+        execution = json.loads((destination/'execution.json').read_bytes())
+        revision = execution.get('code_commit')
+        source_sha = execution.get('scoring_sha256')
+        if (execution.get('trained_with') != config['code_commit']
+                or not isinstance(revision,str) or not re.fullmatch('[0-9a-f]{40}',revision)
+                or not isinstance(source_sha,str) or not re.fullmatch('[0-9a-f]{64}',source_sha)):
+            raise PermissionError('R10 evaluation execution differs from its registered training or source identity')
         output = ['OBS.json', 'evaluation/COMPLETE.json',*(f'evaluation/{name}' for name in complete['files'])]
         record = dict(stage='R10_FINAL',observation_sha256=obs_sha,blocks=10,
                       score_label_pools=['holdout'],files=_hash_members(root,output))

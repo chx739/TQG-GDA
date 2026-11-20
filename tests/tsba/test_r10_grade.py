@@ -186,3 +186,40 @@ class GradeTests(unittest.TestCase):
                 with self.assertRaisesRegex(PermissionError,'worker command'):
                     validation.validate_jobs(root,root,seeds=[3405],allow_missing=True)
                 loads.assert_not_called()
+
+    def test_completed_evaluation_can_reseal_without_reading_labels_again(self):
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+        from experiments.common.io import digest
+        from experiments.mutagenicity.r10_原生图适配基线与增量_20261121.src import scoring
+
+        with TemporaryDirectory() as directory:
+            root=Path(directory)
+            (root/'OBS.json').write_text('{"test":"observation"}')
+            obs_sha=digest(root/'OBS.json')
+            output=root/'evaluation'
+            output.mkdir()
+            for name in ('endpoints.csv','paired-seeds.csv','paired-intervals.json'):
+                (output/name).write_text(f'generated {name}')
+            tasks = {f'{seed}-{target}':dict(target=target,h_ids=[target,10+target])
+                     for seed in PLAN['seeds'] for _,target in PLAN['directions']}
+            config = dict(plan=PLAN,code_commit='a'*40)
+            access = dict(obs_sha256=obs_sha, target_ids={'1':[1,11],'3':[3,13]}, evaluated_blocks=len(tasks))
+            (output/'label-access.json').write_text(json.dumps(access))
+            execution = dict(trained_with=config['code_commit'],code_commit='b'*40,scoring_sha256='c'*64,
+                             started_utc='2026-11-21T00:00:00+00:00')
+            (output/'execution.json').write_text(json.dumps(execution))
+            files={p.name:digest(p) for p in output.iterdir()}
+            (output/'COMPLETE.json').write_text(json.dumps(dict(observation_sha256=obs_sha,files=files)))
+            with patch.object(scoring.data,'read_inputs',return_value=({'tasks':tasks},config)), \
+                 patch.object(scoring,'verify_observation',return_value=(obs_sha,{})), \
+                 patch.object(scoring,'score') as label_score, \
+                 patch.object(scoring.torch,'set_num_threads'), \
+                 patch.object(scoring.torch,'set_num_interop_threads'), \
+                 patch.object(scoring.torch,'use_deterministic_algorithms'):
+                scoring.run(root,root)
+                label_score.assert_not_called()
+            record=json.loads((root/'FINAL.json').read_bytes())
+            self.assertEqual(record['observation_sha256'],obs_sha)
+            for name,sha in record['files'].items():
+                self.assertEqual(digest(root/name),sha)
