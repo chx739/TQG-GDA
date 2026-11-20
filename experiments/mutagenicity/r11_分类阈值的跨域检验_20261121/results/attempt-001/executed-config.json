@@ -1,0 +1,69 @@
+{
+  "plan": {
+    "registration_commit": "5de626e",
+    "pre_score_amendment_commit": "7a03e2f",
+    "protocol": "docs/threshold-transfer.md",
+    "archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-016/C",
+    "r7_final_digest": "a97d6884ee74c456fce8b7c7e3ae9a5a5d6a72e22ac4b7b8835a06bf130a420c",
+    "settings": [
+      "mutagenicity_edge",
+      "mutagenicity_node",
+      "proteins_edge"
+    ],
+    "domains": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "tau": 0.005,
+    "margin_dtype": "float64",
+    "decision": "margin_strictly_greater_than_threshold",
+    "adaptation_order": "sha256_utf8_r11-v1|<setting>|<decimal id>; break hash ties by graph ID",
+    "replay_atol": 1e-12,
+    "gates": {
+      "minimum_mean_accuracy_fraction": [
+        1,
+        100
+      ],
+      "positive_directions_per_setting": 7,
+      "settings_required": 2
+    }
+  },
+  "code_commit": "0157636f2486e1644b4334104fae2261eaffce36",
+  "code_sha256": {
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/configs/threshold-transfer.json": "75145c31901f30d628b6ffa9d53651ab7431c8d369537d38a618e8fac537a358",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/docs/threshold-transfer.md": "8491faa24f6172cb00c1e049aefc3021a91f15d3fce9f6cdd41c93aa2600bbfa",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/inputs.py": "200700156227f954cfc77ed165306c38c105e884aa93604edf43878aafd98d1d",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/run.py": "ea2ed758332cddca70851e0c3c54f9b7fd23e99caeef19c87fa29810a5879674",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/thresholds.py": "388faaeb66ed807eb4b02f1a925448e78b3103f43088344cfb99e5aa6516a1bb",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/scripts/run.py": "482ba3c7f80dcb6b204c91fc7579e140b792bf62c1dccd746c15e88096100412",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/scripts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-u",
+    "-m",
+    "experiments.mutagenicity.r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121.scripts.run",
+    "--config",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/configs/threshold-transfer.json",
+    "--output",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/results/attempt-001"
+  ],
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "started_utc": "2026-11-20T17:37:47.332060+00:00",
+  "versions": {
+    "torch": "2.5.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2"
+  }
+}

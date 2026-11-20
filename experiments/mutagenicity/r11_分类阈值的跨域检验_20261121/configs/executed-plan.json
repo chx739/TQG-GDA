@@ -1,0 +1,38 @@
+{
+  "registration_commit": "5de626e",
+  "pre_score_amendment_commit": "7a03e2f",
+  "protocol": "docs/threshold-transfer.md",
+  "archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-016/C",
+  "r7_final_digest": "a97d6884ee74c456fce8b7c7e3ae9a5a5d6a72e22ac4b7b8835a06bf130a420c",
+  "settings": [
+    "mutagenicity_edge",
+    "mutagenicity_node",
+    "proteins_edge"
+  ],
+  "domains": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "seeds": [
+    3405,
+    3406,
+    3407,
+    3408,
+    3409
+  ],
+  "tau": 0.005,
+  "margin_dtype": "float64",
+  "decision": "margin_strictly_greater_than_threshold",
+  "adaptation_order": "sha256_utf8_r11-v1|<setting>|<decimal id>; break hash ties by graph ID",
+  "replay_atol": 1e-12,
+  "gates": {
+    "minimum_mean_accuracy_fraction": [
+      1,
+      100
+    ],
+    "positive_directions_per_setting": 7,
+    "settings_required": 2
+  }
+}

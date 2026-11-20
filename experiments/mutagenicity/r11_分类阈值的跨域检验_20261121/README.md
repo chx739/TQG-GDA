@@ -1,3 +1,13 @@
 # R11｜固定源模型后，不同目标域是否需要不同的分类阈值？
 
 用历史开发数据做监督诊断。冻结源分类分数，把从本域适配池和另外两个目标域适配池学出的阈值应用到同一批留出图，比较普通 Accuracy。覆盖 Mutagenicity 边数、节点数和 PROTEINS 边数三种划分，各 12 个方向、5 个种子。登记时已核对 180 块的身份和文件字段，尚无本轮计分结果。复用 R7 的分数与按角色读取标签的入口，无需重训图网络。[实施与判读](docs/threshold-transfer.md) · [研究复盘](../../../docs/guides/research-retrospective.md)
+
+已完成 180/180 个块，三个设置达到带标签阈值诊断门槛。[实测报告](report.md) · [实现复核](docs/implementation-check.md)
+
+从仓库根目录运行，选择一个新的结果目录：
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r11_分类阈值的跨域检验_20261121.scripts.run --config experiments/mutagenicity/r11_分类阈值的跨域检验_20261121/configs/threshold-transfer.json --output /tmp/r11-threshold-transfer
+```
+
+复用 R7 的历史封存、R5 角色认证和配对重采样。执行要求可访问原 C 档案与认证标签文件。
