@@ -13,7 +13,7 @@
 
 [R10｜公开图级适配方法在同一批留出图上能多分对多少？](mutagenicity/r10_原生图适配基线与增量_20261121/report.md) 已完成 15 个模型，GRADE 未显示稳定的 Accuracy 适配增量。
 
-[R11｜固定排序后，域专属阈值还有多少留出 Accuracy 空间？](mutagenicity/r11_分类阈值的跨域检验_20261121/report.md) 已完成 180 块，三个设置通过监督诊断门槛。
+[R11｜固定排序后，域专属阈值还有多少留出 Accuracy 空间？](mutagenicity/r11_分类阈值的跨域检验_20261121/report.md) 已完成 180 块，三个设置通过监督诊断门槛。[无标签先验补充](mutagenicity/r11_分类阈值的跨域检验_20261121/docs/prior-control-results.md)完成 180 块，MLLS 未达到门槛。
 
 ## 最新验证：R7 共同解释与共享更新
 

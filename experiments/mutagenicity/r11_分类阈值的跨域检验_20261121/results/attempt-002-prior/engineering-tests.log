@@ -1,0 +1,34 @@
+test_bounded_root_matches_finite_mixture (test_r11_prior.PriorTests.test_bounded_root_matches_finite_mixture) ... ok
+test_em_failure_is_not_replaced_with_root (test_r11_prior.PriorTests.test_em_failure_is_not_replaced_with_root) ... ok
+test_exact_constant_scores_keep_prior_even_after_logit_rounding (test_r11_prior.PriorTests.test_exact_constant_scores_keep_prior_even_after_logit_rounding) ... ok
+test_gate_requires_each_control_and_both_exact_directions (test_r11_prior.PriorTests.test_gate_requires_each_control_and_both_exact_directions) ... ok
+test_incomplete_or_mutated_seal_stops_before_a_or_h_session (test_r11_prior.PriorTests.test_incomplete_or_mutated_seal_stops_before_a_or_h_session) ... ok
+test_main_group_rejects_shifted_a_or_h_ids (test_r11_prior.PriorTests.test_main_group_rejects_shifted_a_or_h_ids) ... ok
+test_same_source_swap_controls_use_unchanged_foreign_priors (test_r11_prior.PriorTests.test_same_source_swap_controls_use_unchanged_foreign_priors) ... ok
+test_source_only_fit_once_and_exact_a_scores (test_r11_prior.PriorTests.test_source_only_fit_once_and_exact_a_scores) ... ok
+test_swap_mean_counts_and_intervals_share_the_same_draw (test_r11_prior.PriorTests.test_swap_mean_counts_and_intervals_share_the_same_draw) ... ok
+test_tiny_nonzero_drift_is_distinct_from_flat (test_r11_prior.PriorTests.test_tiny_nonzero_drift_is_distinct_from_flat) ... ok
+test_all_one_and_all_zero_strict_thresholds (test_r11_thresholds.ThresholdTests.test_all_one_and_all_zero_strict_thresholds) ... ok
+test_equal_distance_secondary_tie_picks_smaller_threshold (test_r11_thresholds.ThresholdTests.test_equal_distance_secondary_tie_picks_smaller_threshold) ... ok
+test_equal_margins_move_together_and_reference_resolves_ties (test_r11_thresholds.ThresholdTests.test_equal_margins_move_together_and_reference_resolves_ties) ... ok
+test_float64_distance_resolves_subnormal_gap_exactly (test_r11_thresholds.ThresholdTests.test_float64_distance_resolves_subnormal_gap_exactly) ... ok
+test_h_upper_matches_independent_fraction_enumeration (test_r11_thresholds.ThresholdTests.test_h_upper_matches_independent_fraction_enumeration) ... ok
+test_label_session_seeks_only_granted_valid_records (test_r11_thresholds.ThresholdTests.test_label_session_seeks_only_granted_valid_records) ... ok
+test_no_new_obs_no_h_decoder (test_r11_thresholds.ThresholdTests.test_no_new_obs_no_h_decoder) ... ok
+test_paired_other_mean_is_formed_inside_each_draw (test_r11_thresholds.ThresholdTests.test_paired_other_mean_is_formed_inside_each_draw) ... ok
+test_same_source_crossed_a_never_reads_h_or_crosses_selected_ids (test_r11_thresholds.ThresholdTests.test_same_source_crossed_a_never_reads_h_or_crosses_selected_ids) ... ok
+test_unsigned_labels_never_underflow_unit_counts (test_r11_thresholds.ThresholdTests.test_unsigned_labels_never_underflow_unit_counts) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.055s
+
+OK
+test_em_recovers_label_shift_and_balanced_prior_cancels (test_r7_prior_control.PriorControlTests.test_em_recovers_label_shift_and_balanced_prior_cancels) ... ok
+test_no_shift_is_identity_with_distinct_scores (test_r7_prior_control.PriorControlTests.test_no_shift_is_identity_with_distinct_scores) ... ok
+test_positive_temperature_fit_recovers_constructed_calibration (test_r7_prior_control.PriorControlTests.test_positive_temperature_fit_recovers_constructed_calibration) ... ok
+test_scoring_rejects_prediction_mutation_before_label_access (test_r7_prior_control.PriorControlTests.test_scoring_rejects_prediction_mutation_before_label_access) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.046s
+
+OK
