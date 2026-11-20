@@ -4,7 +4,7 @@
 
 [作者原文件与一步等价核验](docs/implementation-check.md) · [初始启动记录](results/startup/launch.json) · [生成回归记录](results/startup/r10-tests.log)
 
-从仓库根目录选择新档案路径运行。已有 INPUT 的运行用同路径续跑，已封存的模型会先核验再跳过。
+从仓库根目录选择新档案路径运行。中断后使用下面的独立验收入口续跑。
 
 ```sh
 python -m experiments.mutagenicity.r10_原生图适配基线与增量_20261121.scripts.run prepare --config experiments/mutagenicity/r10_原生图适配基线与增量_20261121/configs/r10-grade.json --root /path/to/new-r10-attempt
@@ -13,3 +13,9 @@ python -m experiments.mutagenicity.r10_原生图适配基线与增量_20261121.s
 ```
 
 本次运行位于 `/home/hxchen/research/GDA/TSBA/experiments/r10/attempt-001`。五个种子的 source-only 各训练一次，推断同种子的两个 H。每个方向单独训练 GRADE。前置检查通过后共安排 15 个模型。H 只在模型和同批历史预测全部重载核验、封存后由评价步骤读取标签。
+
+已有 INPUT 的运行如需续跑，执行下面的命令。已完成的模型须通过版本、程序身份、角色和完整成员校验；不完整模型保留为上一尝试，同配置从起点重做。
+
+```sh
+python -m experiments.mutagenicity.r10_原生图适配基线与增量_20261121.scripts.validate --root /path/to/r10-attempt --resume
+```

@@ -10,7 +10,7 @@ import torch
 from experiments.common.io import digest, write_json
 from experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.src import evaluate, paired, r5_inputs, seals
 from experiments.mutagenicity.r8_图结构观察量与类别约束_20261121.src import inputs as r8_inputs, pilot
-from . import data, jobs, training
+from . import data, jobs, training, validation
 
 HISTORICAL = ('B0','SourceCal','SourceFusion','J_argmax','Joint','TargetSlope')
 METHODS = ('GRADE','SourceOnly',*HISTORICAL)
@@ -56,37 +56,8 @@ def _upstream_role_arrays(repo, plan, roles):
     return data_out, stored
 
 
-def complete_training(root, roles, plan):
-    complete = []
-    epochs = plan['model']['epochs']
-    expected_jobs = [key for key,_,_ in jobs.grid(plan)]
-    for name in expected_jobs:
-        if not (root/'runs'/name/'DONE.json').exists():
-            raise PermissionError(f'All 15 models must finish before R10 H evaluation. Missing {name}.')
-    for name, seed, target in jobs.grid(plan):
-        attempt, done = jobs.read_done(root,name)
-        summary = json.loads((attempt/'summary.json').read_bytes())
-        if (done['seed'] != seed or done['target'] != target or summary['updates'] != epochs
-                or summary['epochs'] != epochs or summary['input_sha256'] != digest(root/'INPUT.json')):
-            raise ValueError(f'Invalid matched training identity or step count: {name}')
-        s = roles['source_fit'][str(seed)]
-        a = roles['tasks'][jobs.target_key(seed,target)]['a_ids'] if target is not None else []
-        trace = [json.loads(line) for line in (attempt/'epochs.jsonl').read_text().splitlines()]
-        trace = [row for row in trace if row['event']=='epoch']
-        if ([row['epoch'] for row in trace] != list(range(1,epochs+1)) or
-            any((row['updates'],row['source_graphs'],row['target_adapt_graphs']) != (1,len(s),len(a)) for row in trace)):
-            raise ValueError(f'Incomplete full-batch coverage: {name}')
-        complete.append((name, seed, target, attempt, summary))
-    for seed in plan['seeds']:
-        group = [summary for _,s,_,_,summary in complete if s==seed]
-        if (len({x['initial_parameter_sha256'] for x in group}) != 1
-                or len({x['source_role_hash'] for x in group}) != 1):
-            raise ValueError(f'Source role or initialization not matched: seed {seed}')
-    return complete
-
-
 def make_observation(root, roles, plan, repo):
-    complete = complete_training(root,roles,plan)
+    complete, receipt = validation.validate_jobs(root,repo)
     held_members = [f'data/H-M{target}.pt' for _,target in plan['directions']]
     data.read_inputs(root, requested=held_members)
     held = {target:torch.load(root/f'data/H-M{target}.pt',map_location='cpu',weights_only=True)
@@ -99,7 +70,7 @@ def make_observation(root, roles, plan, repo):
     results.mkdir()
     combined = {}
     max_error = 0.
-    all_files = ['INPUT.json','roles.json','executed-config.json',*held_members]
+    all_files = ['INPUT.json','roles.json','executed-config.json',*held_members,*receipt['supervision_ledgers']]
     for name,seed,target,attempt,summary in complete:
         model = training.new_model(plan['model'],roles['node_features'],roles['classes'],plan['execution']['device'])
         state = torch.load(attempt/'model.pt',map_location='cpu',weights_only=True)
@@ -140,10 +111,13 @@ def make_observation(root, roles, plan, repo):
         all_files.append(f'observation/{path.name}')
     write_json(results/'lineage.json', dict(models=15,blocks=10,checkpoint_replay_max_abs_logit_error=max_error,
                                              historical=lineage, evaluation_worktree=str(repo)))
-    all_files.append('observation/lineage.json')
+    write_json(results/'training-verification.json',receipt)
+    all_files.extend(['observation/lineage.json','observation/training-verification.json'])
     results.rename(destination)
-    write_json(root/'OBS.json', dict(stage='R10_OBS', input_sha256=digest(root/'INPUT.json'),
-                                     blocks=len(combined), models=len(complete), files=_hash_members(root,all_files)))
+    seal = root/f'.OBS-{uuid4().hex}.json'
+    write_json(seal, dict(stage='R10_OBS', input_sha256=digest(root/'INPUT.json'),
+                          blocks=len(combined), models=len(complete), files=_hash_members(root,all_files)))
+    seal.rename(root/'OBS.json')
 
 
 def verify_observation(root,roles):
@@ -239,16 +213,26 @@ def run(root,repo):
         if not (root/'OBS.json').exists():
             make_observation(root,roles,plan,repo)
             print('R10 OBS sealed',digest(root/'OBS.json'),flush=True)
-        if (root/'evaluation').exists():
-            raise FileExistsError('An existing R10 evaluation needs a separate recovery directory')
-        staging = root/f'.evaluation-{uuid4().hex}'
-        staging.mkdir()
-        commit = subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip()
-        write_json(staging/'execution.json',dict(code_commit=commit,scoring_sha256=digest(Path(__file__)),
-                     trained_with=config['code_commit'],started_utc=jobs.now()))
-        obs_sha = score(root,repo,roles,plan,staging)
-        staging.rename(root/'evaluation')
-        output = ['OBS.json',*(f'evaluation/{p.name}' for p in (root/'evaluation').iterdir())]
-        write_json(root/'FINAL.json',dict(stage='R10_FINAL',observation_sha256=obs_sha,blocks=10,
-                                         score_label_pools=['holdout'],files=_hash_members(root,output)))
+        destination = root/'evaluation'
+        members = {'execution.json','endpoints.csv','paired-seeds.csv','paired-intervals.json','label-access.json'}
+        if not destination.exists():
+            staging = root/f'.evaluation-{uuid4().hex}'
+            staging.mkdir()
+            commit = subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip()
+            write_json(staging/'execution.json',dict(code_commit=commit,scoring_sha256=digest(Path(__file__)),
+                         trained_with=config['code_commit'],started_utc=jobs.now()))
+            obs_sha = score(root,repo,roles,plan,staging)
+            write_json(staging/'COMPLETE.json',dict(observation_sha256=obs_sha,files=_hash_members(staging,sorted(members))))
+            staging.rename(destination)
+        complete = json.loads((destination/'COMPLETE.json').read_bytes())
+        obs_sha = verify_observation(root,roles)[0]
+        if (complete['observation_sha256']!=obs_sha or complete['files'].keys()!=members
+                or complete['files']!=_hash_members(destination,complete['files'])):
+            raise PermissionError('Recovered R10 scoring products are not consistent with the sealed observation')
+        output = ['OBS.json', 'evaluation/COMPLETE.json',*(f'evaluation/{name}' for name in complete['files'])]
+        record = dict(stage='R10_FINAL',observation_sha256=obs_sha,blocks=10,
+                      score_label_pools=['holdout'],files=_hash_members(root,output))
+        final = root/f'.FINAL-{uuid4().hex}.json'
+        write_json(final,record)
+        final.rename(root/'FINAL.json')
         print('R10 FINAL sealed',digest(root/'FINAL.json'),flush=True)

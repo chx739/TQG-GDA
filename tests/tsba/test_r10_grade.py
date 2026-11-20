@@ -143,5 +143,46 @@ class GradeTests(unittest.TestCase):
                 with self.assertRaises(FileNotFoundError):
                     scoring.score(root, root, {'tasks':{}}, PLAN, root)
                 labels.assert_not_called()
-            with self.assertRaises(PermissionError):
-                scoring.complete_training(root, {}, PLAN)
+            with self.assertRaises(FileNotFoundError):
+                scoring.validation.completion_record(root, 'fake', 3405, None, PLAN)
+
+    def test_completion_rejects_wrong_job_identity_and_empty_manifest(self):
+        from tempfile import TemporaryDirectory
+        from experiments.mutagenicity.r10_原生图适配基线与增量_20261121.src import validation
+
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            model = root/'runs/grade-M1-3405'
+            model.mkdir(parents=True)
+            path=model/'DONE.json'
+            for value in (dict(job=model.name,seed=3406,target=3,attempt='attempt-001',files={}),
+                          dict(job=model.name,seed=3405,target=1,attempt='attempt-001',files={})):
+                path.write_text(json.dumps(value))
+                with self.assertRaises(PermissionError):
+                    validation.completion_record(root,model.name,3405,1,PLAN)
+
+    def test_worker_launch_identity_mismatch_fails_before_h_loading(self):
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+        from experiments.mutagenicity.r10_原生图适配基线与增量_20261121.src import validation
+        from experiments.common.io import digest
+
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root/'INPUT.json').write_text('{}')
+            name='source-only-3405'
+            attempt=root/'runs'/name/'attempt-001'
+            attempt.mkdir(parents=True)
+            (attempt.parent/'DONE.json').write_text('{}')
+            process=dict(job=name,pid=19,ppid=4,seed=3405,target=None,attempt='attempt-001',
+                         input_sha256=digest(root/'INPUT.json'),command=['python','unexpected-wrapper'])
+            (attempt/'summary.json').write_text(json.dumps(process))
+            (attempt/'process.json').write_text(json.dumps(process))
+            witness=({(name,19,4):{'command':process['command']}}, {(name,19,4):{'returncode':0}}, [])
+            with patch.object(validation.data,'read_inputs',return_value=({}, {'plan':PLAN})), \
+                 patch.object(validation,'validate_code'), patch.object(validation,'workers',return_value=witness), \
+                 patch.object(validation,'completion_record',return_value=(attempt,{'attempt':'attempt-001'},[1,3])), \
+                 patch.object(validation.torch,'load') as loads:
+                with self.assertRaisesRegex(PermissionError,'worker command'):
+                    validation.validate_jobs(root,root,seeds=[3405],allow_missing=True)
+                loads.assert_not_called()

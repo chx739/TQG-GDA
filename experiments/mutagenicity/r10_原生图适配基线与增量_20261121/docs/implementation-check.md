@@ -9,3 +9,7 @@
 CPU 实际设置为每模型两个 Torch 线程、一个 interop 线程。原生 DataLoader 和 dropout 沿用每进程固定 Torch 全局 RNG，所有臂共享参数初始化。source-only 只迭代 S，适配臂迭代 S 和 A，因此随机数消费随臂区别。训练严格为每轮每域一个 full-batch 和一个 Adam 更新。
 
 持续记录目录为 `/home/hxchen/research/GDA/TSBA/experiments/r10/attempt-001`。模型进程列表见 `supervision/launch-*.jsonl`，每个模型的 PID、每轮覆盖与耗时见 `runs/<job>/attempt-*/process.json` 与 `epochs.jsonl`。完整模型写入独立 DONE 清单，继续运行会验证哈希并跳过已有完整模型，保留中断痕迹。首次启动只先安排首种子的三个模型。其 checkpoint 验证通过后才安排其余种子。
+
+第一种子完成后，独立验收从原档案核验三份模型身份、命令、PID、成功退出、文件集合和哈希、200 行采样覆盖、同初始化及未计分 H 预测。[首种子独立验收](../results/startup/seed-3405-verification.json)
+
+恢复入口先比对原准备提交的训练源码，再校验已完成任务的精确成员集合、监管进程及子进程事件、角色和步数。训练进行时只追加读取核验，不改动原训练代码。评分前，全量验收覆盖 15 个模型，并从 checkpoint 重放两臂的 20 份 H logits。完整评价先写独立暂存目录；若只缺 FINAL，可用 COMPLETE 和 OBS 哈希恢复封存。
