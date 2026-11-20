@@ -7,6 +7,8 @@
 | 合成数据 | [合成实验](synthetic_data/README.md) | E1/E2、控制实验、源后验、静态 score 与 P0 训练预算 |
 | Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R6 结果与 R7 合成验证；跨数据集轮次包含 PROTEINS |
 
+[R8｜独立图结构分数能否为目标类别提供可迁移的约束？](mutagenicity/r8_图结构观察量与类别约束_20261121/README.md) 已登记开发试点。
+
 ## 最新验证：R7 共同解释与共享更新
 
 [R7｜共同解释集合能否支持有用的共享分类更新？](mutagenicity/r7_共同解释与共享更新验证_20261119/README.md) 第十二轮首次通过完整真实 P。全方向 C 中 Mutagenicity 边数划分的 BA 提高 0.53 个百分点，节点数划分接近零，PROTEINS 主比较缺一块。C 整体未通过。
