@@ -12,7 +12,7 @@
 | 使用 | [实验记录规范](guides/experiment-records.md) | 区分计划、实际配置与结果证据 |
 | 使用 | [仓库维护约定](guides/repository.md) | 目录分工与变更范围 |
 | 使用 | [代码审查导航](guides/code-review-guide.md) | 按公式、代码和测试检查实现 |
-| 研究 | [从梯度 TQG 到 R7 的复盘](guides/research-retrospective.md) | 识别机制失效、开发集复用和策略与执行的交接 |
+| 研究 | [从梯度 TQG 到图级适配对照的复盘](guides/research-retrospective.md) | 识别机制失效、开发集复用和策略与执行的交接 |
 
 ## 阅读顺序
 
