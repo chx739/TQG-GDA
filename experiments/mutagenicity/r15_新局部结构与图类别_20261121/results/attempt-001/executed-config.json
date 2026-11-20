@@ -1,0 +1,70 @@
+{
+  "plan": {
+    "registration_commit": "df33155d3ce2bc7b5993e68ba05cc4e4afcce7c1",
+    "r9_observation_sha256": "1041245bd2e37f4392e30ab4edf25e4cacb5fcaf9e3669efe8fd64b4b54e3b64",
+    "setting": "mutagenicity_edge",
+    "source_role": "M0-seed-3405",
+    "allowed_graph_count": 868,
+    "directions": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "minimum_votes": 2,
+    "shrinkage_pseudocount": 2,
+    "step_size": 1,
+    "minimum_accuracy_gain_fraction": [
+      1,
+      200
+    ],
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20261121
+  },
+  "code_commit": "d0d0190241abe1ebf90393d85910ee5e4b972e9e",
+  "git_status": "",
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-u",
+    "-m",
+    "experiments.mutagenicity.r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121.scripts.run",
+    "--output",
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/results/attempt-001"
+  ],
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "started_utc": "2026-11-20T18:49:01.797467+00:00",
+  "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:12:24) [GCC 11.2.0]",
+  "versions": {
+    "torch": "2.5.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2"
+  },
+  "blas_thread_environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "n_torch_threads": 1,
+  "code_and_config_sha256": {
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/configs/source-screen-plan.json": "05fdd6b02f20011c1aaa91f3a9759d265624cb40f6affd9045da00f2f10b33cd",
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/docs/source-screen.md": "198f0bf4aa4499b0f43b4ec70b4980ec9853bf90dbbc8311df58b4c6b8a76920",
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/scripts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/scripts/run.py": "2ea6b13088bc3e0745cb357d8fc069b7c38f01327af25af57a6ab6f3d81cad21",
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/src/scoring.py": "ef426f505c297f7b1560f98350d0c67462d53df5e12529b638020dd25d4f783e",
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/src/screen.py": "23cd2793f5c376ba9b6e47a41a353f7f8c6ef4a578b563fbf9d9fd2e26d342cd",
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/src/source_inputs.py": "9bd3fda1871e64bbb08b48b15139151f2518a1d82f71ea86f77cb6c985837bc0",
+    "experiments/mutagenicity/r15_\u65b0\u5c40\u90e8\u7ed3\u6784\u4e0e\u56fe\u7c7b\u522b_20261121/src/structure.py": "cd4e249e067b0359d2d1dd2dfc2b595f6958de8dd6b986aed60ccfbd2c0d876e",
+    "experiments/common/io.py": "06f1e4efbecfcedc6f355d3674c6a3ddd33bad9b7d00f92256dac84b8aae6b41",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/composition.py": "a028a233240733ebc7d5ac3cde244ad83aa1cca75db3c70cc4c94841764e2755",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/inputs.py": "64ca21753b6b2a0cdf39deaf55266546ac18ea882405818415d756cafd2356f9",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/roles.py": "ad0cd549544506b4e288ed51b36f02dc664cdc436e2bf76e651108a1ce1bb333",
+    "experiments/mutagenicity/r9_\u76ee\u6807\u8fd1\u90bb\u4e0e\u6e90\u6807\u7b7e\u4f20\u9012_20261121/src/wl.py": "a7bb23b58486af49713a2ff4d2d377e18f8d4a365427b3106a6967bfd7c4dbda"
+  },
+  "label_scope": "Reuse sealed R9 D fits. Parse E offsets only after both predictions and the dictionaries are sealed."
+}

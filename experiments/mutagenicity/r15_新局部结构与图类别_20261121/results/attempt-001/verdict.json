@@ -1,0 +1,38 @@
+{
+  "status": "scored",
+  "passed": false,
+  "threshold_fraction": "1/200",
+  "positive_slopes": {
+    "ps0_to_1": true,
+    "ps1_to_0": false
+  },
+  "accuracy": {
+    "B": {
+      "pass_accuracy": false,
+      "equal_direction_gain_fraction": "1/440",
+      "equal_direction_gain_pp": 0.22727272727272727,
+      "per_direction_gain_fractions": {
+        "ps0_to_1": "1/220",
+        "ps1_to_0": "0"
+      }
+    },
+    "swap": {
+      "pass_accuracy": false,
+      "equal_direction_gain_fraction": "1/220",
+      "equal_direction_gain_pp": 0.45454545454545453,
+      "per_direction_gain_fractions": {
+        "ps0_to_1": "1/110",
+        "ps1_to_0": "0"
+      }
+    },
+    "B_same_positive_count": {
+      "pass_accuracy": false,
+      "equal_direction_gain_fraction": "0",
+      "equal_direction_gain_pp": 0.0,
+      "per_direction_gain_fractions": {
+        "ps0_to_1": "0",
+        "ps1_to_0": "0"
+      }
+    }
+  }
+}

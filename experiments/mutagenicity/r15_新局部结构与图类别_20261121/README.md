@@ -15,3 +15,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
 [计划配置](configs/source-screen-plan.json) · [文档索引](docs/README.md)
 
 输入沿用 R9 attempt-001 的 OBS 封存和源图档案，依赖 R9 的源图认证、角色划分与 WL 归一化，以及 R8 对图类型和边的校验。复用 R9 已拟合的源模型并验证原边际与分类动作。先封存两个方向的词典与 E 预测，再按方案判断能否读取两方向的 E 标签。
+
+## 来源内结果
+
+两方向共完成 433 张 E 图的计分。真实对应比 B 与交换对照的等权 Accuracy 分别高 0.227 和 0.455 个百分点，与等阳性数 B 的分类动作一致。反向 NLL 改善斜率为负，筛查未晋级。[报告](report.md) · [执行与封存证据](results/evidence.json)
