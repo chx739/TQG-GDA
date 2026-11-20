@@ -29,6 +29,8 @@ R7 第十四轮两个开发方向的同图结果中，J 用普通 argmax 的平�
 
 ## 真实图怎样判断稳定性
 
+GDABench 的图级附录表 15、16 用相同迁移方向分别报告 Micro-F1 和 Macro-F1。当前任务每张图恰有一个真实类别和一个预测类别，全类别 Micro-F1 在同一批图上恰等于普通 Accuracy。与这组文献对照时，主表可列 Accuracy 和 Macro-F1，按固定预测从同一份混淆矩阵计算。BA 是各类召回的平均，Macro-F1 是各类 F1 的平均，二者在类别不均衡时可给出不同排序。这里新增的是文献对读口径，各轮的晋级规则仍按事前登记判定。[GDABench 附录 E、表 15–16](https://papers.neurips.cc/paper_files/paper/2024/file/a2c548b2ed3141400d86a235eaa6fad0-Supplemental-Datasets_and_Benchmarks_Track.pdf)
+
 PROTEINS 也有直接参照。DSBD 的作者预印本在第 4 节明确 TU 图分类用 Accuracy、报告五次运行的均值，附录表 11 和 12 分别列出 PROTEINS 节点和边划分的十二个方向。我们按数据集和划分分别建表，每个方向先算五种子均值和标准差，再对方向等权。相对同一基线的差值用百分点，保留逐方向的正、平、负以及配对区间。方向共享目标图和源模型，不能把十二方向乘五种子当成六十次独立试验。R10 只有两个开发方向，保留两个原始结果。文献中名为 density 的划分与本仓库按边数或节点数分域须核对图 ID 后才能作直接数值比较。[DSBD §4 与附录 F](https://arxiv.org/html/2604.03154v1) · [R10 同图协议](../../experiments/mutagenicity/r10_原生图适配基线与增量_20261121/docs/matched-grade.md)
 
 R8、R9 又给了一个判断投入的例子。R8 在 M0→M1 上使用本域斜率比使用另一域斜率净少分对两次。R9 把原本逐图不同的票换成域内一张公共票，两个方向的 Accuracy 都提高。前者削弱了斜率来自正确目标才有用的解释，后者说明单纯移动阈值就能解释部分分类收益。R9 两个方向还换了源模型，无法据此断定目标先验可以估准。下一步先固定源模型，测同域和异域阈值在留出图上的差，再决定是否值得设计无标签估计器。[R8 固定均值诊断](../../experiments/mutagenicity/r8_图结构观察量与类别约束_20261121/report.md) · [R9 对照](../../experiments/mutagenicity/r9_目标近邻与源标签传递_20261121/report.md)
