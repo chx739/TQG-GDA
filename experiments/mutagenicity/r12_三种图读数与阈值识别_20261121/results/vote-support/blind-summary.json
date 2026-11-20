@@ -1,0 +1,376 @@
+{
+  "commit": "a21371a",
+  "seed": 3405,
+  "cell_order": "4*size_vote+2*b0_vote+wl_vote",
+  "int64_hash_encoding": "little-endian/signed/8-bytes, contiguous original R11 order",
+  "inputs": "R16 FIT validation margins and IDs; R5 source validation labels only; R5 label-free graph-only inputs; R10 FIT; R7 INPUT adaptation logits checked against R11 UNLABELED; R11 UNLABELED adaptation IDs and holdout B0, WL, Size actions",
+  "settings": {
+    "mutagenicity_edge": {
+      "proposed_accuracies": null,
+      "source_ordered_equal_A_budgets": [
+        747,
+        747,
+        747,
+        761
+      ],
+      "H_constant_Own": 1,
+      "A_empty_strata": 0,
+      "V_missing_class_strata": 0,
+      "fallback_strata": 0,
+      "empty_V_stratum_graph_occurrences": {
+        "a": [
+          0,
+          9006
+        ],
+        "h": [
+          0,
+          3870
+        ]
+      },
+      "vs_arms": {
+        "Static": {
+          "directions_own_can_strictly_win_at_most": 12,
+          "H_disagreements_sum": 477,
+          "max_gain_pp_direction_mean": 11.988084793938448,
+          "H_counts_by_direction": {
+            "0to1": 9,
+            "0to2": 14,
+            "0to3": 156,
+            "1to0": 23,
+            "1to2": 23,
+            "1to3": 121,
+            "2to0": 26,
+            "2to1": 4,
+            "2to3": 27,
+            "3to0": 38,
+            "3to1": 5,
+            "3to2": 31
+          }
+        },
+        "Global": {
+          "directions_own_can_strictly_win_at_most": 7,
+          "H_disagreements_sum": 336,
+          "max_gain_pp_direction_mean": 8.485661388996963,
+          "H_counts_by_direction": {
+            "0to1": 0,
+            "0to2": 0,
+            "0to3": 124,
+            "1to0": 0,
+            "1to2": 0,
+            "1to3": 75,
+            "2to0": 19,
+            "2to1": 4,
+            "2to3": 30,
+            "3to0": 0,
+            "3to1": 53,
+            "3to2": 31
+          }
+        },
+        "OwnLock": {
+          "directions_own_can_strictly_win_at_most": 4,
+          "H_disagreements_sum": 238,
+          "max_gain_pp_direction_mean": 5.909846708509951,
+          "H_counts_by_direction": {
+            "0to1": 0,
+            "0to2": 0,
+            "0to3": 124,
+            "1to0": 0,
+            "1to2": 0,
+            "1to3": 79,
+            "2to0": 11,
+            "2to1": 0,
+            "2to3": 0,
+            "3to0": 0,
+            "3to1": 0,
+            "3to2": 24
+          }
+        },
+        "Other1": {
+          "directions_own_can_strictly_win_at_most": 8,
+          "H_disagreements_sum": 391,
+          "max_gain_pp_direction_mean": 9.830675505101581,
+          "H_counts_by_direction": {
+            "0to1": 0,
+            "0to2": 0,
+            "0to3": 124,
+            "1to0": 0,
+            "1to2": 0,
+            "1to3": 104,
+            "2to0": 11,
+            "2to1": 14,
+            "2to3": 36,
+            "3to0": 25,
+            "3to1": 16,
+            "3to2": 61
+          }
+        },
+        "Other2": {
+          "directions_own_can_strictly_win_at_most": 12,
+          "H_disagreements_sum": 989,
+          "max_gain_pp_direction_mean": 25.540090946574168,
+          "H_counts_by_direction": {
+            "0to1": 133,
+            "0to2": 115,
+            "0to3": 124,
+            "1to0": 159,
+            "1to2": 157,
+            "1to3": 104,
+            "2to0": 19,
+            "2to1": 7,
+            "2to3": 6,
+            "3to0": 73,
+            "3to1": 59,
+            "3to2": 33
+          }
+        }
+      }
+    },
+    "mutagenicity_node": {
+      "proposed_accuracies": null,
+      "source_ordered_equal_A_budgets": [
+        748,
+        748,
+        748,
+        763
+      ],
+      "H_constant_Own": 3,
+      "A_empty_strata": 2,
+      "V_missing_class_strata": 0,
+      "fallback_strata": 2,
+      "empty_V_stratum_graph_occurrences": {
+        "a": [
+          0,
+          9021
+        ],
+        "h": [
+          0,
+          3870
+        ]
+      },
+      "vs_arms": {
+        "Static": {
+          "directions_own_can_strictly_win_at_most": 11,
+          "H_disagreements_sum": 888,
+          "max_gain_pp_direction_mean": 22.91321583391028,
+          "H_counts_by_direction": {
+            "0to1": 10,
+            "0to2": 85,
+            "0to3": 185,
+            "1to0": 26,
+            "1to2": 0,
+            "1to3": 36,
+            "2to0": 29,
+            "2to1": 10,
+            "2to3": 33,
+            "3to0": 148,
+            "3to1": 183,
+            "3to2": 143
+          }
+        },
+        "Global": {
+          "directions_own_can_strictly_win_at_most": 10,
+          "H_disagreements_sum": 1401,
+          "max_gain_pp_direction_mean": 36.18354098682466,
+          "H_counts_by_direction": {
+            "0to1": 108,
+            "0to2": 209,
+            "0to3": 337,
+            "1to0": 0,
+            "1to2": 8,
+            "1to3": 83,
+            "2to0": 0,
+            "2to1": 10,
+            "2to3": 12,
+            "3to0": 148,
+            "3to1": 314,
+            "3to2": 172
+          }
+        },
+        "OwnLock": {
+          "directions_own_can_strictly_win_at_most": 5,
+          "H_disagreements_sum": 484,
+          "max_gain_pp_direction_mean": 12.530588366819943,
+          "H_counts_by_direction": {
+            "0to1": 0,
+            "0to2": 0,
+            "0to3": 101,
+            "1to0": 0,
+            "1to2": 0,
+            "1to3": 14,
+            "2to0": 0,
+            "2to1": 0,
+            "2to3": 0,
+            "3to0": 113,
+            "3to1": 134,
+            "3to2": 122
+          }
+        },
+        "Other1": {
+          "directions_own_can_strictly_win_at_most": 8,
+          "H_disagreements_sum": 396,
+          "max_gain_pp_direction_mean": 10.117535194310973,
+          "H_counts_by_direction": {
+            "0to1": 46,
+            "0to2": 73,
+            "0to3": 168,
+            "1to0": 26,
+            "1to2": 15,
+            "1to3": 14,
+            "2to0": 31,
+            "2to1": 23,
+            "2to3": 0,
+            "3to0": 0,
+            "3to1": 0,
+            "3to2": 0
+          }
+        },
+        "Other2": {
+          "directions_own_can_strictly_win_at_most": 8,
+          "H_disagreements_sum": 756,
+          "max_gain_pp_direction_mean": 19.613878517557918,
+          "H_counts_by_direction": {
+            "0to1": 206,
+            "0to2": 109,
+            "0to3": 101,
+            "1to0": 135,
+            "1to2": 120,
+            "1to3": 36,
+            "2to0": 0,
+            "2to1": 23,
+            "2to3": 26,
+            "3to0": 0,
+            "3to1": 0,
+            "3to2": 0
+          }
+        }
+      }
+    },
+    "proteins_edge": {
+      "proposed_accuracies": null,
+      "source_ordered_equal_A_budgets": [
+        189,
+        181,
+        181,
+        181
+      ],
+      "H_constant_Own": 6,
+      "A_empty_strata": 8,
+      "V_missing_class_strata": 9,
+      "fallback_strata": 15,
+      "empty_V_stratum_graph_occurrences": {
+        "a": [
+          910,
+          2196
+        ],
+        "h": [
+          429,
+          1020
+        ]
+      },
+      "vs_arms": {
+        "Static": {
+          "directions_own_can_strictly_win_at_most": 6,
+          "H_disagreements_sum": 81,
+          "max_gain_pp_direction_mean": 8.169134086231294,
+          "H_counts_by_direction": {
+            "0to1": 0,
+            "0to2": 0,
+            "0to3": 0,
+            "1to0": 2,
+            "1to2": 4,
+            "1to3": 3,
+            "2to0": 10,
+            "2to1": 14,
+            "2to3": 48,
+            "3to0": 0,
+            "3to1": 0,
+            "3to2": 0
+          }
+        },
+        "Global": {
+          "directions_own_can_strictly_win_at_most": 10,
+          "H_disagreements_sum": 336,
+          "max_gain_pp_direction_mean": 32.999433695384724,
+          "H_counts_by_direction": {
+            "0to1": 24,
+            "0to2": 89,
+            "0to3": 83,
+            "1to0": 25,
+            "1to2": 4,
+            "1to3": 3,
+            "2to0": 10,
+            "2to1": 14,
+            "2to3": 48,
+            "3to0": 0,
+            "3to1": 0,
+            "3to2": 36
+          }
+        },
+        "OwnLock": {
+          "directions_own_can_strictly_win_at_most": 10,
+          "H_disagreements_sum": 259,
+          "max_gain_pp_direction_mean": 25.561064900346118,
+          "H_counts_by_direction": {
+            "0to1": 4,
+            "0to2": 8,
+            "0to3": 9,
+            "1to0": 2,
+            "1to2": 0,
+            "1to3": 0,
+            "2to0": 10,
+            "2to1": 14,
+            "2to3": 18,
+            "3to0": 91,
+            "3to1": 63,
+            "3to2": 40
+          }
+        },
+        "Other1": {
+          "directions_own_can_strictly_win_at_most": 4,
+          "H_disagreements_sum": 70,
+          "max_gain_pp_direction_mean": 6.866711604904501,
+          "H_counts_by_direction": {
+            "0to1": 0,
+            "0to2": 0,
+            "0to3": 0,
+            "1to0": 6,
+            "1to2": 11,
+            "1to3": 5,
+            "2to0": 0,
+            "2to1": 0,
+            "2to3": 48,
+            "3to0": 0,
+            "3to1": 0,
+            "3to2": 0
+          }
+        },
+        "Other2": {
+          "directions_own_can_strictly_win_at_most": 4,
+          "H_disagreements_sum": 78,
+          "max_gain_pp_direction_mean": 7.837040043432041,
+          "H_counts_by_direction": {
+            "0to1": 0,
+            "0to2": 0,
+            "0to3": 0,
+            "1to0": 6,
+            "1to2": 0,
+            "1to3": 0,
+            "2to0": 10,
+            "2to1": 14,
+            "2to3": 48,
+            "3to0": 0,
+            "3to1": 0,
+            "3to2": 0
+          }
+        }
+      }
+    }
+  },
+  "input_output_hashes": {
+    "independent.py": "ff940ad22914059cb3e66478660fc2e03e38bc430dcf15f5a09de8c5f504da9a",
+    "actions.csv": "d86d3a55705154cc0d9be2f4820136e51bba66e75f51c91dc77bc637a020ebee",
+    "fits.csv": "e02e4ca9b01459b2b1af8f3f57861bdca2aa63c6c03a2fabe1a33c0749e40855",
+    "counts.json": "1d1c89c0f8b4691081de6ec7d83e89d786a0a9a6540353f7dd07bcd172770f9a",
+    "input-hashes.json": "5e1f7c6c9d07860ba1befeaaf65a8428a141ecf8c444829626aca0f546e71c50"
+  }
+}
