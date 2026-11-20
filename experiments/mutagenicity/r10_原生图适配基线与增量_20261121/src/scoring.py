@@ -15,6 +15,7 @@ from . import data, jobs, training, validation
 HISTORICAL = ('B0','SourceCal','SourceFusion','J_argmax','Joint','TargetSlope')
 METHODS = ('GRADE','SourceOnly',*HISTORICAL)
 COMPARISONS = (('GRADE','SourceOnly'),*((arm,ref) for arm in ('GRADE','SourceOnly') for ref in HISTORICAL))
+EVALUATION_FILES = {'execution.json','endpoints.csv','paired-seeds.csv','paired-intervals.json','label-access.json'}
 
 
 def _hash_members(root, members):
@@ -123,13 +124,53 @@ def make_observation(root, roles, plan, repo):
 def verify_observation(root,roles):
     obs_blob = (root/'OBS.json').read_bytes()
     obs = json.loads(obs_blob)
+    input_sha = digest(root/'INPUT.json')
     expected = {f'observation/{key}.npz' for key in roles['tasks']}
-    if (obs['stage'] != 'R10_OBS' or obs['input_sha256'] != digest(root/'INPUT.json')
-            or obs['blocks'] != 10 or obs['models'] != 15 or not expected <= obs['files'].keys()
-            or obs['files'] != _hash_members(root,obs['files'])):
+    receipt_path = 'observation/training-verification.json'
+    expected.update({'INPUT.json','roles.json','executed-config.json','observation/lineage.json',receipt_path})
+    files = obs.get('files', {})
+    if (obs.get('stage') != 'R10_OBS' or obs.get('input_sha256') != input_sha or
+            obs.get('blocks') != 10 or obs.get('models') != 15 or not expected <= files.keys()):
         raise PermissionError('Invalid R10 observation seal')
-    return r8_inputs.sha(obs_blob), {key:r8_inputs.npz_member((root/f'observation/{key}.npz').read_bytes())
-                                    for key in roles['tasks']}
+    receipt = json.loads((root/receipt_path).read_bytes())
+    selected = receipt.get('supervision_ledgers')
+    if not isinstance(selected,list) or not selected:
+        raise PermissionError('Missing R10 supervision ledger')
+    complete, replayed = validation.validate_jobs(root,None,sealed_ledgers=selected)
+    if len(complete) != 15 or receipt != replayed:
+        raise PermissionError('Incomplete R10 training receipt')
+    expected.update(selected)
+    held_members = {f"data/H-M{task['target']}.pt" for task in roles['tasks'].values()}
+    data.read_inputs(root,requested=held_members)
+    expected.update(held_members)
+    for name,_,_,attempt,_ in complete:
+        done_path = f'runs/{name}/DONE.json'
+        done = json.loads((root/done_path).read_bytes())
+        expected.add(done_path)
+        expected.update(str((attempt/member).relative_to(root)) for member in done['files'])
+    if files.keys() != expected or files != _hash_members(root,expected):
+        raise PermissionError('Missing or changed R10 observation evidence')
+    frozen = {}
+    required_fields = {'ids'} | {f'{field}_{name}' for field in ('actions','logits') for name in METHODS}
+    for key, task in roles['tasks'].items():
+        path = f'observation/{key}.npz'
+        blob = (root/path).read_bytes()
+        if r8_inputs.sha(blob) != files[path]:
+            raise PermissionError(f'Changed R10 prediction file: {key}')
+        row = r8_inputs.npz_member(blob)
+        ids = task['h_ids']
+        if (set(row) != required_fields or not np.issubdtype(row['ids'].dtype,np.integer) or
+                not np.array_equal(row['ids'],ids)):
+            raise PermissionError(f'Invalid R10 observation fields or graph order: {key}')
+        for name in METHODS:
+            z, action = row[f'logits_{name}'], row[f'actions_{name}']
+            if (z.shape != (len(ids),2) or not np.isfinite(z).all() or
+                    action.shape != (len(ids),) or not np.issubdtype(action.dtype,np.integer) or
+                    not np.isin(action,[0,1]).all() or
+                    (name in ('GRADE','SourceOnly') and not np.array_equal(action,z.argmax(axis=1)))):
+                raise PermissionError(f'Invalid R10 logits or decisions: {key}/{name}')
+        frozen[key] = row
+    return r8_inputs.sha(obs_blob), frozen
 
 
 def score(root, repo, roles, plan, output):
@@ -203,18 +244,14 @@ def run(root,repo):
     torch.set_num_interop_threads(plan['execution']['interop_threads'])
     torch.use_deterministic_algorithms(True)
     with jobs.lock(root/'supervisor.lock'):
-        if (root/'FINAL.json').exists():
-            final = json.loads((root/'FINAL.json').read_bytes())
-            if final['files'] != _hash_members(root,final['files']):
-                raise PermissionError('R10 final artifacts changed')
-            verify_observation(root,roles)
-            print('R10 FINAL verified',flush=True)
-            return
+        final_path = root/'FINAL.json'
+        if final_path.exists() and not all((root/p).is_file() for p in ('OBS.json','evaluation/COMPLETE.json')):
+            raise PermissionError('R10 FINAL is missing its observation or evaluation receipt')
         if not (root/'OBS.json').exists():
             make_observation(root,roles,plan,repo)
             print('R10 OBS sealed',digest(root/'OBS.json'),flush=True)
         destination = root/'evaluation'
-        members = {'execution.json','endpoints.csv','paired-seeds.csv','paired-intervals.json','label-access.json'}
+        members = EVALUATION_FILES
         if not destination.exists():
             staging = root/f'.evaluation-{uuid4().hex}'
             staging.mkdir()
@@ -232,7 +269,12 @@ def run(root,repo):
         output = ['OBS.json', 'evaluation/COMPLETE.json',*(f'evaluation/{name}' for name in complete['files'])]
         record = dict(stage='R10_FINAL',observation_sha256=obs_sha,blocks=10,
                       score_label_pools=['holdout'],files=_hash_members(root,output))
+        if final_path.exists():
+            if json.loads(final_path.read_bytes()) != record:
+                raise PermissionError('Invalid R10 final record or missing evaluation evidence')
+            print('R10 FINAL verified',flush=True)
+            return
         final = root/f'.FINAL-{uuid4().hex}.json'
         write_json(final,record)
-        final.rename(root/'FINAL.json')
+        final.rename(final_path)
         print('R10 FINAL sealed',digest(root/'FINAL.json'),flush=True)

@@ -2,6 +2,7 @@
 import json
 import re
 import subprocess
+from pathlib import Path
 
 import torch
 
@@ -20,9 +21,14 @@ def validate_code(config,repo):
             raise PermissionError(f'R10 training code must match the prepared commit before resuming: {rel}')
 
 
-def workers(root):
+def workers(root, selected=None):
     launched, exited, witnesses = {},{},[]
-    for path in sorted((root/'supervision').glob('launch-*.jsonl')):
+    paths = sorted((root/'supervision').glob('launch-*.jsonl'))
+    if selected is not None:
+        paths = [path for path in paths if str(path.relative_to(root)) in selected]
+        if not paths or [str(path.relative_to(root)) for path in paths] != sorted(selected):
+            raise PermissionError('Missing R10 supervision ledger')
+    for path in paths:
         witnesses.append(str(path.relative_to(root)))
         for line in path.read_text().splitlines():
             row = json.loads(line)
@@ -58,11 +64,20 @@ def completion_record(root,name,seed,target,plan):
     return attempt,done,targets
 
 
-def validate_jobs(root,repo,*,seeds=None,allow_missing=False):
+def validate_jobs(root,repo,*,seeds=None,allow_missing=False,sealed_ledgers=None):
     roles,config = data.read_inputs(root)
     plan = config['plan']
-    validate_code(config,repo)
-    starts,exits,ledgers = workers(root)
+    execution_root = root
+    if sealed_ledgers is None:
+        validate_code(config,repo)
+        starts,exits,ledgers = workers(root)
+    else:
+        # Recheck the archived execution, even if the checkout or archive has moved.
+        args = config['command']
+        recorded_root = (args[args.index('--root') + 1] if '--root' in args else
+                         next(arg.split('=',1)[1] for arg in args if arg.startswith('--root=')))
+        execution_root = (Path(config['cwd']) / recorded_root).resolve()
+        starts,exits,ledgers = workers(root,sealed_ledgers)
     expected_input = digest(root/'INPUT.json')
     result,entries,missing = [],[],[]
     for name,seed,target in jobs.grid(plan):
@@ -78,7 +93,7 @@ def validate_jobs(root,repo,*,seeds=None,allow_missing=False):
         launcher = starts.get(identity,{})
         exit_code = exits.get(identity,{}).get('returncode')
         command = process['command']
-        expected_command = ['-u','-m',MODULE,'worker','--root',str(root),'--job',name]
+        expected_command = ['-u','-m',MODULE,'worker','--root',str(execution_root),'--job',name]
         if (summary.get('pid')!=process['pid'] or summary.get('ppid')!=process['ppid']
                 or process['input_sha256']!=expected_input or summary['input_sha256']!=expected_input
                 or (process['job'],process['seed'],process['target'],process['attempt'])!=(name,seed,target,done['attempt'])
