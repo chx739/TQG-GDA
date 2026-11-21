@@ -12,6 +12,8 @@
 
 [第二轮相容范围验证](iteration-02.md)
 
+[原参考模型的风险误差归因方案](original-risk-attribution.md)
+
 [第三轮源任务投影验证](iteration-03.md)
 
 [第四轮源类条件锚定](iteration-04.md)
