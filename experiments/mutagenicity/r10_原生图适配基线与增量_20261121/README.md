@@ -14,6 +14,8 @@
 
 图大小和 PROTEINS 原始属性的源端核对见[结构输入核查](docs/size-support.md)。PROTEINS 的八方向源内筛查已完成。加入按节点类型的属性中位数后，Accuracy 相对 WL＋Size 提升 0.666 pp，两个源组改善，未达继续条件。[登记协议](docs/source-attribute-screen.md) · [实测结果](docs/source-attribute-screen-results.md)
 
+ATC 补充已完成 36 个方向。PROTEINS 同域池比异域池平均高 7.99 个百分点，但低于 R11 曲线池多数，两个 Mutagenicity 划分也低于固定 WL。[协议](docs/target-confidence-selection.md) · [结果](docs/target-confidence-selection-results.md)
+
 从仓库根目录检查 60 个源组与 180 个开发块的角色与历史档案身份。源监督参照沿用 R7 C 的角色、R9 的 WL 表示与 R8 的 logistic 目标、R11 的配对重抽样以及 R13 验证过的历史参照读取方式。
 
 ```sh
@@ -57,3 +59,19 @@ OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments
 ```
 
 如需在评分前人工核对，先加 `--phase freeze`，再用同一目录与 `--phase score --obs-sha256` 传入第一阶段输出的摘要。
+
+## 复算 ATC 选型
+
+冻结阶段复用 R10、R11、R12、R16 与 R7/R5 的认证模型、图和分数。计分阶段只读取已公布的聚合表，先核对独立盲算。
+
+```sh
+round=experiments/mutagenicity/r10_原生图适配基线与增量_20261121
+run=/tmp/r10-atc-replay
+entry=experiments.mutagenicity.r10_原生图适配基线与增量_20261121.scripts.target_confidence_selection
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m "$entry" \
+  --config "$round/configs/target-confidence-selection.json" --output "$run" --phase freeze
+obs=$(sha256sum "$run/OBS.json" | cut -d ' ' -f 1)
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m "$entry" \
+  --config "$round/configs/target-confidence-selection.json" --output "$run" --phase score --obs-sha256 "$obs" \
+  --blind-script "$round/results/attempt-006-target-confidence/independent/tsba_peer_atc_unlabeled_20261121.py"
+```
