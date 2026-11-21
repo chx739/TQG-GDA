@@ -8,6 +8,8 @@
 
 [图大小比例与 ROC 工作点迁移](docs/roc-rate-transfer-results.md)已完成三种设置的 36 个方向。三个设置未达到补种子条件。[登记协议](docs/roc-rate-transfer.md)
 
+[蛋白质的图大小与目标多数类](docs/protein-size-exposure.md)检验同一个单参数源模型用于逐图分类、整池猜多数和设定 GNN 阈值时各能多分对几张图。登记中注明了已经查看的单种子聚合结果。
+
 从仓库根目录运行，选择一个新的结果目录：
 
 ```sh
