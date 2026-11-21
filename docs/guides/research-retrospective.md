@@ -72,6 +72,8 @@ R11 和 R12 给后续迭代留下一个具体判断。即使给 PROTEINS 当前�
 
 对于独立确认，R7-D 只为冻结的 J、M0 源及三个 NCI1 目标登记过 NLL 和 BA 门槛。原 C 未晋级，NCI1 仍封存。将来为新方法做确认，先固定候选、强对照、数据权限和主指标，并另行登记。即使更换数据集名称也应核对原始实体：FRANKENSTEIN 的作者用同一批 4337 个 Ames 分子重做节点属性，适合研究表示变化；TO-UGDA 的 NCI1→NCI109 则改变了受试细胞系和活性终点，适合研究另一种迁移问题。[R7-D 原登记](../../experiments/mutagenicity/r7_共同解释与共享更新验证_20261119/docs/r7-protocol.md) · [FRANKENSTEIN 的构造，§6.1](https://ijcai.org/proceedings/2015/528) · [TO-UGDA 数据集定义](https://pmc.ncbi.nlm.nih.gov/articles/PMC11576983/)
 
+另一个保留相同分类任务的独立确认候选是 Hansen Ames v2。发布方提供 6,512 个化合物的结构、逐条来源和 Ames 二元终点，列出的 Kazius、CCRIS、VITIC 分别有 2,224、2,539、1,194 条。这些数是汇编的来源计数，最终能留出多少新分子仍未知。若扩大数据范围，第一步是将各来源与现有 4,337 个 TU 分子做统一结构识别，剔除跨集重复，明确 TU 的 0 和 Hansen 的 1 都表示致突变，并核对各来源收录的检测定义。数据库来源可以研究所收录分子的组成差异；是否由不同实验室或测量机制导致变化，需要额外元数据。对已见分子改节点码可以精确继承原标签，用于因果诊断；验证自然采样迁移则需要另外的分子。[Hansen 发布页与字段](https://doc.ml.tu-berlin.de/toxbenchmark/) · [原始来源表](https://doc.ml.tu-berlin.de/toxbenchmark/information_v2.html) · [跨来源 Ames 记录与重复检测差异](https://link.springer.com/article/10.1186/1758-2946-3-51)
+
 ## 一轮新方法值得写代码前，能先排除什么
 
 R10 的 180 块给出了一个不用拟合新模型的反例。WL 和 GNN 在约两成图上分歧，但如果一个目标域只能选一个模型，即使提前知道答案，相比给同一源固定选择一个模型，两种 Mutagenicity 的额外 Accuracy 空间也仅为 0.084、0.020 个百分点。只有 PROTEINS 源 2 出现方向反转、两侧配对区间又都排除零的结果。以后提出“域决定用哪个模型”时，先算这种类型的选择在现有冻结预测上能改变多少决策，并明确参照是否也用了事后答案。[R10 配对归因](../../experiments/mutagenicity/r10_原生图适配基线与增量_20261121/docs/classifier-choice.md)
