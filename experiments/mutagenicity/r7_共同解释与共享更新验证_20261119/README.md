@@ -4,6 +4,8 @@
 
 [将 E 改判移植到强源模型](docs/transfer-of-flips-results.md)已完成 180 块。三个设置均未达到相对指定强源模型的收益门槛。[预登记协议](docs/transfer-of-flips.md)
 
+[E 排序收益与强基座等量交换](docs/strong-rank-swaps-results.md)复用原交叉结果。分子节点数设定的 WL 已吸收多数 E 净收益，严格保阳性数后的增量为 +0.032 pp，去域时可转负。[事后诊断协议](docs/strong-rank-swaps.md)
+
 [强源起点重求解](docs/strong-anchor-refit-results.md)已完成单种子 36 个既有开发方向。Full 在三个设置均低于指定强源起点，未达扩种子门槛。[登记协议](docs/strong-anchor-refit.md)
 使用相同完整更新空间的[教师校准对照](docs/strong-anchor-score-teacher.md)检验先验和 GNN 分数斜率能否解释这项更新。
 [八样本算例和 36 个未标记适配池的矩核验](docs/strong-anchor-mechanism.md)说明重新求解何时能改变判决，以及该改变的正确性还取决于什么。
@@ -76,6 +78,31 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```sh
 round=experiments/mutagenicity/r7_共同解释与共享更新验证_20261119
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.transfer_flips --config "$round/configs/transfer-of-flips.json" --output /path/to/new-flip-transfer
+```
+
+### 强基座等量交换归因
+
+从仓库根目录选新的输出路径。第一次运行输出 OBS 摘要。打开 H 类别前必须先核对独立分组和动作概率。原独立包也可在同一数据路径用归档的两个脚本重建。
+
+```sh
+round=experiments/mutagenicity/r7_共同解释与共享更新验证_20261119
+out=/path/to/new-strong-rank-swaps
+entry=experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.strong_rank_swaps
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+python -m "$entry" --config "$round/configs/strong-rank-swaps.json" --output "$out" --phase freeze
+python -m "$entry" --config "$round/configs/strong-rank-swaps.json" --output "$out" --phase verify --obs-sha256 "$obs_sha" --blind /tmp/r7-swap-specific-obs
+python -m "$entry" --config "$round/configs/strong-rank-swaps.json" --output "$out" --phase score --obs-sha256 "$obs_sha"
+```
+
+复核已有 OBS 时，应在空目录重建独立回执，以保留原运行的回执字节。
+
+```sh
+original="$round/results/iteration-12/strong-rank-swaps-001"
+audit=$(mktemp -d)
+cp "$original/OBS.json" "$original/executed-config.json" "$original/blocks.csv" "$original/graphs.csv" "$audit/"
+obs_sha=$(sha256sum "$audit/OBS.json" | cut -d' ' -f1)
+python -m "$entry" --config "$round/configs/strong-rank-swaps.json" --output "$audit" --phase verify --obs-sha256 "$obs_sha" --blind /tmp/r7-swap-specific-obs
+cmp "$audit/blind-verification.json" "$original/blind-verification.json"
 ```
 
 ## 复现强源起点重求解
