@@ -8,7 +8,7 @@ R16 后另行登记一个只看源验证图与无标签适配图的检查，检�
 
 ## 运行
 
-源内补充检验将 R9 的冻结 WL 分数按三个邻域半径分解，使用等预算目标参照估计尺度，观察同一批图的排序及 Accuracy 是否改善。[公式、对照和晋级条件](docs/wl-channel-scale.md)
+源内补充检验将 R9 的冻结 WL 分数按三个邻域半径分解，使用等预算目标参照估计尺度，观察同一批图的排序及 Accuracy 是否改善。[公式、对照和晋级条件](docs/wl-channel-scale.md) · [24 方向实测](docs/wl-channel-scale-results.md)。三个设置均未晋级。
 
 以下入口从仓库根目录运行。预检核验原 buffers 的 B0 逐图 logits、类别与 H 身份，使用冻结的 R10/R11 对照，不读取 H 标签。正式运行先固定全部 S/A 统计及 H 预测，然后读取 H 标签评分。
 
@@ -23,4 +23,18 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 
 ```sh
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.mutagenicity.r13_目标图归一化与分类排序_20261121.scripts.readout_scale --config experiments/mutagenicity/r13_目标图归一化与分类排序_20261121/configs/readout-scale.json --output /tmp/r13-readout-scale
+```
+
+冻结 WL 半径尺度补充也使用独立输出目录。依赖 R9 指向的本机 R5/R10/R7 认证档案，复用 R9/R17 已封存模型和分数。计分入口先核对全部 OBS 和独立盲算，再读取该方向原 E 角色。
+
+```bash
+r13=experiments/mutagenicity/r13_目标图归一化与分类排序_20261121
+run=/tmp/r13-wl-channel-scale
+entry=experiments.mutagenicity.r13_目标图归一化与分类排序_20261121.scripts.wl_channel_scale
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m "$entry" \
+  --config "$r13/configs/wl-channel-scale.json" --output "$run" --phase freeze
+obs_sha=$(sha256sum "$run/OBS.json" | cut -d ' ' -f 1)
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m "$entry" \
+  --config "$r13/configs/wl-channel-scale.json" --output "$run" --phase score --obs-sha256 "$obs_sha" \
+  --blind-dir "$r13/results/attempt-003-wl-channel-scale/independent"
 ```
