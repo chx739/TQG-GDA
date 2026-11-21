@@ -65,6 +65,13 @@ class SizeExposureTests(TestCase):
         self.assertEqual(notes['QuantileOther1']['reference'],2)
         self.assertEqual(notes['QuantileOther1']['p'],'1/2')
 
+    def test_new_prior_preserves_existing_float64_directp_semantics(self):
+        fit = curve.fit(np.ones(6,dtype=np.int64),np.array([1,1,1,1,1,0]))
+        p = curve.exposure_prior(np.ones(3,dtype=np.int64),fit)
+        self.assertEqual(p,F.from_float(5/6))
+        self.assertEqual(curve.roc_rate.quantile(np.array([0.,1.,2.]),p),(-np.inf,3))
+        self.assertEqual(curve.roc_rate.quantile(np.array([0.,1.,2.]),F(5,6)),(0.,2))
+
     def test_best_fixed_scope_and_exchange_gate_are_strict(self):
         cfg = dict(minimum_accuracy_fraction=[1,200],minimum_positive_directions=7)
         rows = [dict(scope='reserve',left='CurveDirectP',right=m,wins=7,accuracy_exact='1/200')

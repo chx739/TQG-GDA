@@ -164,8 +164,14 @@ def exposure_prior(nodes,model):
         raise ValueError('The authenticated A pool is empty')
     origin = model['min_nodes']
     if model['status']=='equal_node_count' and all(n%origin==0 for n in ns):
-        p = F(model['positive'],model['n_source'])
-        return sum(c*p**(n//origin) for n,c in zip(ns,cs,strict=True))/sum(cs)
+        source = F(model['positive'],model['n_source'])
+        exact = sum(c*source**(n//origin) for n,c in zip(ns,cs,strict=True))/sum(cs)
+        p = float(exact)
+        if p==.5 and exact!=F(1,2):
+            p = np.nextafter(.5,1. if exact>F(1,2) else 0.)
+        # DirectP historically takes the exact binary rational of its float64
+        # prior, even when the prior comes from an exactly known ratio.
+        return F.from_float(float(p))
     p = fsum(float(x)*c for x,c in zip(probabilities,cs,strict=True))/sum(cs)
     if model['constant'] is None and abs(p-.5)<=32*np.spacing(.5):
         sign = threshold_sign(ns[0],model) if len(ns)==1 else mixed_pool_sign(ns,cs,model)

@@ -1,6 +1,7 @@
 """Paired evaluation of protein size exposure on the original held-out cohorts."""
 from collections import defaultdict
 from fractions import Fraction as F
+from statistics import stdev
 
 import numpy as np
 
@@ -156,6 +157,18 @@ def gate(cfg,paired):
                 wins={m:rows[m]['wins'] for m in best},gaps_pp={m:float(100*v) for m,v in gaps.items()})
 
 
+def direction_statistics(rows):
+    for (setting,s,t,m),items in group(rows,'setting','source','target','method').items():
+        if len(items)!=5 or len({r['seed'] for r in items})!=5:
+            raise PermissionError('Expected all five registered seeds per direction')
+        fields = {}
+        for name in ('accuracy','macro_f1'):
+            values = [F(r[f'{name}_exact']) for r in items]
+            fields[name+'_mean'] = float(mean(values))
+            fields[name+'_sample_sd'] = stdev(map(float,values))
+        yield dict(setting=setting,source=s,target=t,method=m,seeds=5,**fields)
+
+
 def score(out,stage,archive,cfg,roc_cfg,sha,execution):
     roles,models,pred,v = obs.observed(out,archive,cfg,roc_cfg,sha)
     y,read = cohorts(archive,roles)
@@ -163,7 +176,7 @@ def score(out,stage,archive,cfg,roc_cfg,sha,execution):
     val = validation_audit(archive,models,roles,v)
     endpoints,paired,leave = grouped(cfg,base,pairs)
     results = {'endpoints':base,'paired-blocks':pairs,'summary':endpoints,'paired-summary':paired,
-               'leave-target':leave,'source-validation':val}
+               'leave-target':leave,'source-validation':val,'direction-statistics':list(direction_statistics(base))}
     for name,rows in results.items():
         write_table(stage/f'{name}.csv',rows)
     write_json(stage/'label-access.json',dict(obs_sha256=sha,holdout=read,adaptation_labels_read=False,
