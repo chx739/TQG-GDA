@@ -2,7 +2,7 @@
 
 实验按数据类型和真实数据集归档。索引更新于 2026-11-21。
 
-真实图分类用普通 Accuracy 比较各方向能多分对几张图，主表同时列 Macro-F1。当前有两种不同强度的证据。R7 的单解释头在 Mutagenicity 节点数划分上，从本域目标池获得了一部分等阳性数对照无法解释的排序收益，五个种子均为正。整套方法相对强源分类器的平均 Accuracy 优势仍未稳定建立。R12 已将「图的排序有无信息」和「沿用源域阈值能否多分对图」分别登记。[文献和指标口径](../docs/guides/research-retrospective.md#真实图怎样判断稳定性) · [R7 强基线复查](mutagenicity/r7_共同解释与共享更新验证_20261119/docs/centered-target-update-results.md) · [R12 条件秩协议](mutagenicity/r12_三种图读数与阈值识别_20261121/docs/conditional-rank.md)
+真实图分类用普通 Accuracy 比较各方向能多分对几张图，主表同时列 Macro-F1。当前有两种不同强度的证据。R7 的单解释头在 Mutagenicity 节点数划分上，从本域目标池获得了一部分等阳性数对照无法解释的排序收益，五个种子均为正。整套方法相对强源分类器的平均 Accuracy 优势仍未稳定建立。R12 在单种子 36 个开发方向上观察到，连续分数能在三张硬票都相同的图中区分正负，沿用源端正判比例并以无标签目标池定位阈值，在三个设置均降低 Accuracy。[文献和指标口径](../docs/guides/research-retrospective.md#真实图怎样判断稳定性) · [R7 强基线复查](mutagenicity/r7_共同解释与共享更新验证_20261119/docs/centered-target-update-results.md) · [R12 条件秩实测](mutagenicity/r12_三种图读数与阈值识别_20261121/docs/conditional-rank-results.md)
 
 | 分类 | 阅读入口 | 内容 |
 |---|---|---|

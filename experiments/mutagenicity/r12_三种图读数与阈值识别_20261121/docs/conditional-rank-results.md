@@ -4,6 +4,8 @@
 
 ## 正式无监督比较
 
+在逐图评分前，用已公布的八个票型人数即可证明，这组规则在 PROTEINS 上至多改善 3/12 个方向。多个源对同一目标图共用真实类别后，即使采用允许范围内最有利的类别分布，平均 Accuracy 也至少低于 Size 0.894 个百分点。[开分前的可行上界及复算](conditional-rank-limits.md)
+
 Accuracy 为主要终点。每图一个真实类且只预测一个类时，按所有类别计算的 Micro-F1 等于 Accuracy。表中为 12 个方向等权平均，指标以百分数呈现。分子主起点是 WL，蛋白质主起点是 Size。R7 Centered 使用对应强起点的历史逐图预测。[GDABench 附录 E 表 15 与表 16](https://proceedings.neurips.cc/paper_files/paper/2024/file/a2c548b2ed3141400d86a235eaa6fad0-Paper-Datasets_and_Benchmarks_Track.pdf)
 
 | 方法 | Mutagenicity 边数 Accuracy | Macro-F1 | Mutagenicity 节点数 Accuracy | Macro-F1 | PROTEINS 边数 Accuracy | Macro-F1 |
@@ -78,3 +80,5 @@ HalfRank 相对同折 HalfFour 的 Accuracy 差为 +0.315、−0.923、−0.699 
 - 执行代码为 `bc1eec4fd1242dda370ee5acb499aa43c730587f`，R12 相关 51 项工程回归通过。冻结使用 12 个源 V 的 1,955 条标签记录，复用 R11 等预算 A 的 20,223 个方向图次及 R7/R16 的已封存打分。无模型训练更新。正式评分按 12 个 H 角色打开 2,920 条图标签，应用于 8,760 个方向图次。A 标签未读取。[配置](../configs/conditional-rank.json) · [执行记录](../results/attempt-005-conditional-rank/executed-config.json) · [H 读取回执](../results/attempt-005-conditional-rank/score/h-label-access.json) · [测试日志](../results/attempt-005-conditional-rank/logs/r12-conditional-rank-tests.log)
 - OBS SHA-256 为 `8ddd9ac95477c6759cac6643a38006354a7e2c2c5a606cd7e051d90aa5a1ffb3`，54 个成员。评分前独立核对 43,800 项硬判、48 个源格（含 7 个空格）与 1,989 个候选切分，全部一致。[OBS](../results/attempt-005-conditional-rank/OBS.json) · [盲算比对](../results/attempt-005-conditional-rank/independent-obs-verification.json) · [V 候选表](../results/attempt-005-conditional-rank/source-candidates.csv)
 - FINAL SHA-256 为 `5c9fe3b463723fac5e6f4f8da0eacf70842461e8aec57b8c5b6556157ddf2d54`，47 个成员。归档核对了 720 个端点、756 个方向配对、1,152 项逐格错误和 144 项排序。独立评分复算还核对了 8,760 个分半分配及 26,280 项监督诊断逐图判决，全部一致。结果来自既有开发 H 和单一种子。[FINAL](../results/attempt-005-conditional-rank/score/FINAL.json) · [归档核对](../results/attempt-005-conditional-rank/archive-verification.json) · [独立评分复算](../results/attempt-005-conditional-rank/independent-final-verification.json) · [冻结日志](../results/attempt-005-conditional-rank/logs/r12-conditional-rank-freeze.log) · [评分日志](../results/attempt-005-conditional-rank/logs/r12-conditional-rank-score.log)
+
+策略侧在 `d32c4ab` 将冻结阶段也改为成功后一次发布，源端输入和推断规则沿用正式版本。新入口在原 36 个方向重新冻结，除记录所用提交和命令的配置外，53 个 OBS 成员与正式原件逐字节相同。52 项 R12 工程回归通过。仓库全量运行收集 471 个测试，报告四项既有目录断言失败，涉及 R5 的包入口、R17/R18 的配置索引，以及 R17 历史审查脚本的通配路径。已在本轮之前的 `0c21df4` 核对相同文件状态。
