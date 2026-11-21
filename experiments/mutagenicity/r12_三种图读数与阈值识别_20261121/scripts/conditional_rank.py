@@ -1,11 +1,13 @@
 """Freeze conditional-rank actions, or score them and run the H diagnostics."""
 import argparse
+from contextlib import contextmanager
 from datetime import datetime, timezone
 import importlib.metadata
 import json
 from pathlib import Path
 import subprocess
 import sys
+from tempfile import TemporaryDirectory
 import traceback
 
 from experiments.common import io
@@ -20,6 +22,18 @@ from ..src import (conditional_rank, conditional_rank_observation, conditional_r
 CODE = (io,r5_inputs,seals,r8_inputs,pilot,structural,structural_observation,inputs,prior_run,roc_score,
         roc_transfer,historical,observation,conditional_rank,conditional_rank_observation,conditional_rank_scoring,
         conditional_votes,reverse_vote_observation,reverse_votes,vote_mixture)
+
+
+@contextmanager
+def frozen_output(out):
+    if out.exists():
+        raise FileExistsError(f'Attempt already exists: {out}')
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with TemporaryDirectory(dir=out.parent, prefix=f'.{out.name}-freeze-') as tmp:
+        stage = Path(tmp) / 'attempt'
+        stage.mkdir()
+        yield stage
+        stage.rename(out)
 
 
 def main():
@@ -52,28 +66,31 @@ def main():
     out = args.output.resolve()
     execution = dict(code_commit=revision,command=[sys.executable,*sys.orig_argv[1:]],
                      started_utc=datetime.now(timezone.utc).isoformat(),cwd=str(Path.cwd()))
-    if args.phase=='freeze':
-        out.mkdir(parents=True,exist_ok=False)
-        io.write_json(out/'executed-config.json',dict(**execution,code_sha256=checksums,plan=cfg,training_updates=0,
-                      label_phases={'freeze':['source_validation'],'score':['holdout']},
-                      versions={m:importlib.metadata.version(m) for m in ('torch','torch-geometric','numpy','scipy')}))
-    else:
+    if args.phase=='score':
         record = json.loads((out/'executed-config.json').read_bytes())
         if record['code_sha256']!=checksums or (out/'score').exists():
             raise PermissionError('Conditional-rank scoring requires the frozen code and a pending OBS')
     try:
-        archive = conditional_rank_observation.Archive(repo,here,cfg,old_cfg)
         if args.phase=='freeze':
-            digest = conditional_rank_observation.freeze(out,archive,cfg)
+            with frozen_output(out) as stage:
+                io.write_json(stage/'executed-config.json',dict(**execution,code_sha256=checksums,plan=cfg,training_updates=0,
+                              label_phases={'freeze':['source_validation'],'score':['holdout']},
+                              versions={m:importlib.metadata.version(m) for m in ('torch','torch-geometric','numpy','scipy')}))
+                archive = conditional_rank_observation.Archive(repo,here,cfg,old_cfg)
+                digest = conditional_rank_observation.freeze(stage,archive,cfg)
             print('R12 conditional-rank OBS',digest,flush=True)
         else:
+            archive = conditional_rank_observation.Archive(repo,here,cfg,old_cfg)
             digest = conditional_rank_scoring.score(out,archive,cfg,args.obs_sha256,
                                                     execution=dict(**execution,obs_sha256=args.obs_sha256))
             print('R12 conditional-rank FINAL',digest,flush=True)
     except Exception:
-        name = out/f'execution-failure-{args.phase}.json'
-        if not name.exists():
+        name = (out/'execution-failure-score.json' if args.phase=='score'
+                else out.with_name(out.name+'.execution-failure-freeze.json'))
+        try:
             io.write_json(name,dict(phase=args.phase,traceback=traceback.format_exc()))
+        except OSError:
+            pass  # The original failure remains visible even if its receipt cannot be written.
         raise
 
 

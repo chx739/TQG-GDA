@@ -6,11 +6,28 @@ from unittest import TestCase, mock
 
 import numpy as np
 
+from experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.conditional_rank import frozen_output
 from experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.src import (
     conditional_rank as rank, conditional_rank_observation as obs, conditional_rank_scoring as scoring)
 
 
 class ConditionalRankTests(TestCase):
+    def test_failed_freeze_retries_same_path_and_preserves_published_attempt(self):
+        with TemporaryDirectory() as tmp:
+            out = Path(tmp) / 'runs' / 'attempt'
+            with self.assertRaisesRegex(RuntimeError, 'partial'):
+                with frozen_output(out) as stage:
+                    (stage / 'prediction').write_bytes(b'incomplete')
+                    raise RuntimeError('partial')
+            self.assertFalse(out.exists())
+            with frozen_output(out) as stage:
+                (stage / 'OBS.json').write_bytes(b'sealed')
+            with self.assertRaises(FileExistsError):
+                with frozen_output(out):
+                    self.fail('published attempts must be preserved')
+            self.assertEqual([p.name for p in out.iterdir()], ['OBS.json'])
+            self.assertEqual((out / 'OBS.json').read_bytes(), b'sealed')
+
     def test_max_correct_never_splits_ties_and_prefers_anchor(self):
         g = np.array([2.,2.,1.,0.])
         y = np.array([0,1,1,0],dtype=np.uint8)
