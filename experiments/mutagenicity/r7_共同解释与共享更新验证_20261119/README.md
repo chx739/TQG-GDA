@@ -1,5 +1,7 @@
 # R7 共同解释与共享更新验证
 
+受控补充在原始分子和蛋白图上交换节点类型码表，分别检验能否用一池图恢复编码，以及恢复后能多分对哪些查询图。[角色、预检与分类对照](docs/finite-codebook-control.md)
+
 [第十二轮已有更新头的跨目标域交叉验证](docs/reference-head-crossover-results.md)已完成 180 个评价块。E 在三种开发设置均通过目标匹配门槛，PROTEINS 的匹配增益几乎全由同阳性数对照解释。[预登记协议](docs/reference-head-crossover.md)
 
 [将 E 改判移植到强源模型](docs/transfer-of-flips-results.md)已完成 180 块。三个设置均未达到相对指定强源模型的收益门槛。[预登记协议](docs/transfer-of-flips.md)
