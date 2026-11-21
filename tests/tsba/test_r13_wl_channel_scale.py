@@ -30,6 +30,18 @@ class RadiusScaleTests(unittest.TestCase):
         _, scales = scale.align(x, x, d, f)
         np.testing.assert_array_equal(scales['ratio'], [1., 1., 2.])
 
+    def test_common_scale_centers_total_scores_on_target_reference(self):
+        donor = np.array([[0., 0., 0.], [8., 0., 0.]])
+        reference = np.array([[2., 1., 0.], [4., 3., 0.]])
+        evaluation = np.array([[3.5, 0., 0.], [4., 0., 0.], [5.5, 0., 0.]])
+        intercept = -3.
+        static = evaluation.sum(axis=1) + intercept
+        out, _ = scale.scale_predictions(np.arange(3), static, donor, reference, reference,
+                                         evaluation, intercept)
+        # Target reference scores are 0 and 4. The common SD ratio is 4 / 2.
+        np.testing.assert_array_equal(out['margin_Common'], [-1., 0., 3.])
+        np.testing.assert_array_equal(out['Common'], [False, False, True])
+
     def test_gate_uses_protein_curve_and_exact_required_contrasts(self):
         setting = 'proteins_edge'
         overall = dict.fromkeys(scale.methods(setting), Fraction(1, 2))
