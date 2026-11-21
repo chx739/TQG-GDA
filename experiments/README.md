@@ -7,7 +7,7 @@
 | 分类 | 阅读入口 | 内容 |
 |---|---|---|
 | 合成数据 | [合成实验](synthetic_data/README.md) | E1/E2、控制实验、源后验、静态 score 与 P0 训练预算 |
-| Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R18 的真实图试验与来源内诊断；跨数据集轮次包含 PROTEINS |
+| Mutagenicity | [mutagenicity](mutagenicity/README.md) | R1–R19 的真实图试验与来源内诊断；跨数据集轮次包含 PROTEINS |
 
 [R8｜独立图结构分数能否为目标类别提供可迁移的约束？](mutagenicity/r8_图结构观察量与类别约束_20261121/README.md) 已完成十块开发试点，主臂均零更新，未晋级。[试点报告](mutagenicity/r8_图结构观察量与类别约束_20261121/report.md)
 
@@ -30,6 +30,8 @@
 [R17｜同一目标图的外围结构能否指出应当削弱的分类变化？](mutagenicity/r17_目标图外围与分类一致性_20261121/README.md) 已完成 24 个源内方向，真实配对未达门槛。[实测报告](mutagenicity/r17_目标图外围与分类一致性_20261121/report.md)
 
 [R18｜从源图学到的同类关系能否帮助纠正强分类器？](mutagenicity/r18_跨图同类关系与分类纠错_20261121/README.md) 已完成 24 个源内方向，Full 未胜校准乘积，分类未达门槛。[实测报告](mutagenicity/r18_跨图同类关系与分类纠错_20261121/report.md)
+
+[R19｜目标图的路径闭合率能否纠正分子分类？](mutagenicity/r19_分子路径闭合与分类迁移_20261121/README.md) 已完成无标签结构预检，分类筛查已登记。
 
 ## R7 共同解释与共享更新
 
