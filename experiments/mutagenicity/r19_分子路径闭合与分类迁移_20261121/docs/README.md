@@ -3,3 +3,4 @@
 1. [无标签预检](structure-results.md)给出路径计数和背景率能否在不同图上复测。
 2. [预登记方案](source-screen.md)定义固定源模型、等预算背景和全部对照。
 3. [分类报告](../report.md)列出八方向的同图比较、晋级判定与封存记录。
+4. [固定目标变化补充](target-change-only-results.md)检验原 WL 加单位目标变化时的额外纠错。
