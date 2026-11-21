@@ -4,6 +4,8 @@
 
 [真实图的受控节点编码变化与共同分类更新](finite-codebook-control.md)
 
+[自然大小变化时，编码恢复能否区分真实交换与误报](codebook-size-shift.md)
+
 [S 阶段补充计划](s-separation-followup.md) · [S 阶段实测报告](../report.md)
 
 [第一轮独立分离审计与求解器迭代](iteration-01.md)
