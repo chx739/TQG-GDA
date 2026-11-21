@@ -64,4 +64,14 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 
 [结构词 dropout 的源内实测](docs/feature-dropout-screen.md)在 24 个来源内方向上比较了以真实词频、源词频及打乱后的词频调整分类惩罚。蛋白质有单种子正结果，两种分子划分均落后于静态岭分类器。
 
-[固定模型的补充图评价](docs/feature-dropout-transfer-check.md)沿用上述全部模型，在每个来源内方向未被用作参照的另外一批图上检验分类增量。
+[固定模型的补充图评价](docs/feature-dropout-transfer-check-results.md)完成全部 24 个来源内方向。PROTEINS 相对静态岭的 Accuracy 差由初测 +2.652 pp 降到 +0.005 pp，未达到开启真实域试验的条件。[登记协议](docs/feature-dropout-transfer-check.md)
+
+```sh
+round=experiments/mutagenicity/r9_目标近邻与源标签传递_20261121
+out=/path/to/new-dropout-transfer
+entry=experiments.mutagenicity.r9_目标近邻与源标签传递_20261121.scripts.feature_dropout_transfer
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+python -m "$entry" --config "$round/configs/feature-dropout-transfer-check.json" --output "$out" --phase freeze
+# 将 obs_sha 设为冻结阶段打印的 OBS SHA-256，再打开补充评价标签
+python -m "$entry" --config "$round/configs/feature-dropout-transfer-check.json" --output "$out" --phase score --obs-sha256 "$obs_sha"
+```

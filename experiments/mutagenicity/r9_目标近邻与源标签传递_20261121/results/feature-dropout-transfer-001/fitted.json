@@ -1,0 +1,3342 @@
+{
+  "mutagenicity_edge-M0-small_to_large-seed-3405": {
+    "m": 107,
+    "n_features": 1348,
+    "zero": 768,
+    "params": {
+      "Target": 0.01,
+      "Static": 0.01,
+      "Source": 0.1,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 88,
+          "mse": 0.6383469135239278
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 85,
+          "mse": 0.6242403961773751
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 79,
+          "mse": 0.6830362871985899
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 73,
+          "mse": 0.7829477018549539
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 90,
+          "mse": 0.6354234241381121
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 89,
+          "mse": 0.5941045443756015
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 80,
+          "mse": 0.6624442555710177
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 72,
+          "mse": 0.777821465619472
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 88,
+          "mse": 0.6027100666076218
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.589920479531511
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 81,
+          "mse": 0.6618712156922876
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 72,
+          "mse": 0.7762744913142674
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 87,
+          "mse": 0.6636590298795592
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 85,
+          "mse": 0.6246354412537085
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 81,
+          "mse": 0.6724527915568602
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 73,
+          "mse": 0.7719863840616368
+        }
+      ]
+    },
+    "vocabulary_sha256": "2d69991e79ed8385a2da9588af011456728eb044f6054fce7a278bfa07e3d31c",
+    "protein": null,
+    "initial_member_sha256": "bb96fb6d97573fcb219af4d91cb4cd08e2767b48932910354964b5c0f0519bd9"
+  },
+  "mutagenicity_edge-M0-large_to_small-seed-3405": {
+    "m": 109,
+    "n_features": 2190,
+    "zero": 1623,
+    "params": {
+      "Target": 0.01,
+      "Static": 0.01,
+      "Source": 0.1,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 90,
+          "mse": 0.5622512333952976
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.5317730209736885
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 83,
+          "mse": 0.6290369227575651
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 74,
+          "mse": 0.7590103898767258
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 92,
+          "mse": 0.5342376078110443
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 89,
+          "mse": 0.4916429867098946
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 84,
+          "mse": 0.6047533236017979
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 79,
+          "mse": 0.7464960948817687
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 90,
+          "mse": 0.6077152218175818
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 90,
+          "mse": 0.49622634735766563
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 84,
+          "mse": 0.6101445870506955
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 78,
+          "mse": 0.7497466734427645
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 93,
+          "mse": 0.5171107690030371
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 87,
+          "mse": 0.5211545057806392
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 87,
+          "mse": 0.6246267454853163
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 77,
+          "mse": 0.7550587811903806
+        }
+      ]
+    },
+    "vocabulary_sha256": "bbcefce308bf95c873030542cdd8262bd0e02ea07ae9eadabc6526f0eee9dd6c",
+    "protein": null,
+    "initial_member_sha256": "78b9f7f6218075f1b3c7c0d9ec983f902c7704b6b94692c85528738a5359f0fa"
+  },
+  "mutagenicity_edge-M1-small_to_large-seed-3405": {
+    "m": 102,
+    "n_features": 1399,
+    "zero": 898,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.01,
+      "Source": 0.01,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 89,
+          "mse": 0.4788528160038896
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 89,
+          "mse": 0.41905667803236074
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 84,
+          "mse": 0.4782510200183026
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 81,
+          "mse": 0.6064646974386543
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 89,
+          "mse": 0.4978262403976703
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 87,
+          "mse": 0.41606363131878066
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 86,
+          "mse": 0.46598260370262995
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 81,
+          "mse": 0.6026521393372621
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 91,
+          "mse": 0.591405383051759
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.4169927069853523
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 86,
+          "mse": 0.46408539056265635
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 81,
+          "mse": 0.6025304513094298
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 88,
+          "mse": 0.518967300895205
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 87,
+          "mse": 0.42313996581045943
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 82,
+          "mse": 0.48007188025660924
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 81,
+          "mse": 0.6110060013296179
+        }
+      ]
+    },
+    "vocabulary_sha256": "46a20dc2a050ee1379c56c64ed76e46677afdfdf8eb999f91a5a6f57c5895aaa",
+    "protein": null,
+    "initial_member_sha256": "c903c9910511ef176b233fbef5582f16e9da4a1729f64cfded37bfb72d15b929"
+  },
+  "mutagenicity_edge-M1-large_to_small-seed-3405": {
+    "m": 116,
+    "n_features": 1330,
+    "zero": 852,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.1,
+      "Source": 0.1,
+      "Perm": 0.1
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 86,
+          "mse": 0.7041344239456048
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.6464097084721147
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 83,
+          "mse": 0.7062342773331395
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 81,
+          "mse": 0.7881001653125012
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 88,
+          "mse": 0.6903624172463894
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 89,
+          "mse": 0.6282994898790866
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 85,
+          "mse": 0.6940386096487127
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 80,
+          "mse": 0.7851092970730575
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 89,
+          "mse": 0.662543399712871
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 91,
+          "mse": 0.6288676145401154
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 85,
+          "mse": 0.6940137443154639
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 80,
+          "mse": 0.784425745986222
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 88,
+          "mse": 0.6640747021704753
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.6370874833014174
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 82,
+          "mse": 0.7032700372704368
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 81,
+          "mse": 0.7869361489027626
+        }
+      ]
+    },
+    "vocabulary_sha256": "aeb8b4d30dd78cb71a25e504354db74b5fba6e568431c476d027a26a55567e9a",
+    "protein": null,
+    "initial_member_sha256": "cd2ff7d624db00aaac7692da3164ec0e2070d16355713912fb01150ee7b04379"
+  },
+  "mutagenicity_edge-M2-small_to_large-seed-3405": {
+    "m": 111,
+    "n_features": 1180,
+    "zero": 719,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.1,
+      "Source": 1.0,
+      "Perm": 0.1
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 80,
+          "mse": 1.0500163259221302
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 84,
+          "mse": 0.8237543956786403
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 81,
+          "mse": 0.7577972200009035
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 75,
+          "mse": 0.8517817236071427
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 78,
+          "mse": 0.990345976440303
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 84,
+          "mse": 0.7755453435211366
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 83,
+          "mse": 0.7431005381821906
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 77,
+          "mse": 0.8487805729265236
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 80,
+          "mse": 1.04535171616103
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 83,
+          "mse": 0.787659036353003
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 84,
+          "mse": 0.7451508523501341
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 76,
+          "mse": 0.8484070400253038
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 79,
+          "mse": 0.9150760234728876
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 86,
+          "mse": 0.7701236023168357
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 82,
+          "mse": 0.7558497383154209
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 76,
+          "mse": 0.853129604227608
+        }
+      ]
+    },
+    "vocabulary_sha256": "8d31a38ffef304eb72c33a44483bbb37ac3e93f87062ca3980bedd5df136f51a",
+    "protein": null,
+    "initial_member_sha256": "8efb0615073dcea5f7df425083196f7cd206f5f44614f8fa9ffc68b8a7d783b8"
+  },
+  "mutagenicity_edge-M2-large_to_small-seed-3405": {
+    "m": 107,
+    "n_features": 1430,
+    "zero": 996,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.1,
+      "Source": 0.01,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 88,
+          "mse": 0.5978901029813637
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.5388416917537846
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 88,
+          "mse": 0.593745723637346
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 81,
+          "mse": 0.7031714490547143
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 90,
+          "mse": 0.5400516192651156
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 90,
+          "mse": 0.4897613303445678
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 89,
+          "mse": 0.5664958902935489
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 83,
+          "mse": 0.6903195104378645
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 93,
+          "mse": 0.5344367080815396
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.48371747098118634
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 91,
+          "mse": 0.5601932534707548
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 83,
+          "mse": 0.6893759124080879
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 90,
+          "mse": 0.4800894800152746
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 90,
+          "mse": 0.5086597412944025
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 88,
+          "mse": 0.5967622379481922
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 81,
+          "mse": 0.7030685579471898
+        }
+      ]
+    },
+    "vocabulary_sha256": "7191d9571a06a607f2928dd6399a788e1ef9768202250bc1f459ef8709f25e89",
+    "protein": null,
+    "initial_member_sha256": "b75dd7e8dd284cb22d4423653fe30c7bd1b73827e5e494146f1549ae81d2067b"
+  },
+  "mutagenicity_edge-M3-small_to_large-seed-3405": {
+    "m": 95,
+    "n_features": 1192,
+    "zero": 884,
+    "params": {
+      "Target": 10.0,
+      "Static": 1.0,
+      "Source": 1.0,
+      "Perm": 0.1
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 63,
+          "mse": 0.8623585243823193
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 64,
+          "mse": 0.7460325670450784
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 65,
+          "mse": 0.7564328105124735
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 66,
+          "mse": 0.856740697369987
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 65,
+          "mse": 0.9024408603158341
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 63,
+          "mse": 0.7705414355840154
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 68,
+          "mse": 0.7372849106540644
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 66,
+          "mse": 0.8497058298287674
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 62,
+          "mse": 1.0851748710433948
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 66,
+          "mse": 0.7657552464395606
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 69,
+          "mse": 0.7409330081755934
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 66,
+          "mse": 0.8514611343232305
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 70,
+          "mse": 0.7979397385769824
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 72,
+          "mse": 0.701150780691312
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 66,
+          "mse": 0.7325211169841422
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 67,
+          "mse": 0.8478667991936821
+        }
+      ]
+    },
+    "vocabulary_sha256": "46cd911a60200a13dcf25bacad95984a3ef7363b00c7bf403152edf960bb9a9d",
+    "protein": null,
+    "initial_member_sha256": "b399324f8e7c1d6ca17b3e28e5e4317447c9270a04b10c0a93aa446df01dea06"
+  },
+  "mutagenicity_edge-M3-large_to_small-seed-3405": {
+    "m": 122,
+    "n_features": 1178,
+    "zero": 855,
+    "params": {
+      "Target": 1.0,
+      "Static": 0.1,
+      "Source": 0.1,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 92,
+          "mse": 0.8109817468647972
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 92,
+          "mse": 0.6558486013361272
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 94,
+          "mse": 0.7205699425439318
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 87,
+          "mse": 0.8484925459763474
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 92,
+          "mse": 0.8066281911742437
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 96,
+          "mse": 0.5977035852464667
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 93,
+          "mse": 0.6390264823188055
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 86,
+          "mse": 0.809023927387834
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 96,
+          "mse": 0.8913907409971583
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 96,
+          "mse": 0.5954716948720751
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 94,
+          "mse": 0.6423639795193467
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 86,
+          "mse": 0.8101319830651066
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 94,
+          "mse": 0.6545101209369683
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 92,
+          "mse": 0.6091392693778135
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 93,
+          "mse": 0.6945096796607358
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 85,
+          "mse": 0.8365513761681455
+        }
+      ]
+    },
+    "vocabulary_sha256": "f945432e497b53cb31cf7f8cf91cd24e48ef22ff0ab06210b8d0fa3bcfb95d44",
+    "protein": null,
+    "initial_member_sha256": "9f854ac681e1b8332f37bf96084f8d3e7f11107a1dbecbb7fd72085ca9ca2249"
+  },
+  "mutagenicity_node-M0-small_to_large-seed-3405": {
+    "m": 110,
+    "n_features": 1543,
+    "zero": 929,
+    "params": {
+      "Target": 0.01,
+      "Static": 0.01,
+      "Source": 0.01,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 87,
+          "mse": 0.6652788266309112
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 86,
+          "mse": 0.661853856110253
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 78,
+          "mse": 0.7150079638296637
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 80,
+          "mse": 0.7819228793233833
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 89,
+          "mse": 0.7088963247811172
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 86,
+          "mse": 0.672979054849666
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 80,
+          "mse": 0.7138945325334347
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 78,
+          "mse": 0.7807784445102486
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 89,
+          "mse": 0.7327670468949494
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 86,
+          "mse": 0.6784193929401513
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 80,
+          "mse": 0.7172408991320744
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 78,
+          "mse": 0.7816384962584464
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 90,
+          "mse": 0.6827064569068598
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.6549289196340159
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 80,
+          "mse": 0.7106337363943155
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 78,
+          "mse": 0.7825672732032813
+        }
+      ]
+    },
+    "vocabulary_sha256": "9801a45d867159d9987107604138b518d5e73aa91261dd43eb077838e384d89c",
+    "protein": null,
+    "initial_member_sha256": "6a196505a226c0aee49aa7eb4609516b002d2fc4b0dcb949af85734594263405"
+  },
+  "mutagenicity_node-M0-large_to_small-seed-3405": {
+    "m": 106,
+    "n_features": 2234,
+    "zero": 1656,
+    "params": {
+      "Target": 0.01,
+      "Static": 0.01,
+      "Source": 0.01,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 89,
+          "mse": 0.6119269500146914
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 86,
+          "mse": 0.5819634958202872
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 81,
+          "mse": 0.6600712029051133
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 78,
+          "mse": 0.7419423990852075
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 90,
+          "mse": 0.5520491216246571
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.550731172053768
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 83,
+          "mse": 0.6482917346057783
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 77,
+          "mse": 0.7400924926000735
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 89,
+          "mse": 0.5771512100845385
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.5582418714983012
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 83,
+          "mse": 0.6513650523355268
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 77,
+          "mse": 0.7404215979153106
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 89,
+          "mse": 0.5878472453107818
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 84,
+          "mse": 0.5863511228388928
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 81,
+          "mse": 0.6702476475594623
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 80,
+          "mse": 0.746093144217633
+        }
+      ]
+    },
+    "vocabulary_sha256": "cc0db32d644f624ef6f9fd6f7885864275a5afb672d3a1e644fc93fe92445be5",
+    "protein": null,
+    "initial_member_sha256": "604a5fc63b86b8b402b9b76d079c8879fbd9ce42143bcb18fff1e0a895c57f53"
+  },
+  "mutagenicity_node-M1-small_to_large-seed-3405": {
+    "m": 108,
+    "n_features": 1283,
+    "zero": 791,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.1,
+      "Source": 0.01,
+      "Perm": 0.1
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 85,
+          "mse": 0.7189558994802383
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 86,
+          "mse": 0.6618436691271351
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 81,
+          "mse": 0.6404884240664376
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 79,
+          "mse": 0.6934845697700993
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 82,
+          "mse": 0.7432361883004239
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 83,
+          "mse": 0.6416988996961693
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 82,
+          "mse": 0.6305178801393722
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 79,
+          "mse": 0.6911318001595163
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 86,
+          "mse": 0.7389605939569067
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 85,
+          "mse": 0.6495487850971093
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 82,
+          "mse": 0.63203025804658
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 79,
+          "mse": 0.6910053201946369
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 81,
+          "mse": 0.7501642430004135
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 82,
+          "mse": 0.6866227250476152
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 80,
+          "mse": 0.6459736592522384
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 79,
+          "mse": 0.6927556263170808
+        }
+      ]
+    },
+    "vocabulary_sha256": "4cfd579adb91c2cc6e7562d5d9de9a1febced4c548acb363555cbc929d50b831",
+    "protein": null,
+    "initial_member_sha256": "2419d53769a8a8f1e5e0cbf5508e9097ec07bc44bca970e4713f32e77bd59f0d"
+  },
+  "mutagenicity_node-M1-large_to_small-seed-3405": {
+    "m": 108,
+    "n_features": 1370,
+    "zero": 880,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.01,
+      "Source": 0.1,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 88,
+          "mse": 0.5228465146570105
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 91,
+          "mse": 0.49056333525457824
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 85,
+          "mse": 0.5622994635835818
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 79,
+          "mse": 0.6901448924687469
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 92,
+          "mse": 0.45074964693727687
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 91,
+          "mse": 0.43952642293738614
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 88,
+          "mse": 0.5378108748359758
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 81,
+          "mse": 0.6843257692083213
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 90,
+          "mse": 0.5018127274556675
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 92,
+          "mse": 0.44832980151174484
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 86,
+          "mse": 0.538550293417267
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 80,
+          "mse": 0.6848604887355991
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 89,
+          "mse": 0.5108555352928795
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 88,
+          "mse": 0.49705869429105076
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 85,
+          "mse": 0.5746007306910352
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 78,
+          "mse": 0.6931833123795963
+        }
+      ]
+    },
+    "vocabulary_sha256": "f87b6786905da43cf78d0a9282eb0c140c7fa197a98a472f9cb229196e3bf23e",
+    "protein": null,
+    "initial_member_sha256": "69ed9e754a74f0097b5b2ff567a99de0c52144d39999354ca7e576e910b249b1"
+  },
+  "mutagenicity_node-M2-small_to_large-seed-3405": {
+    "m": 109,
+    "n_features": 1293,
+    "zero": 842,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.1,
+      "Source": 0.1,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 80,
+          "mse": 0.7324454282262084
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 90,
+          "mse": 0.6497018830908312
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 79,
+          "mse": 0.7105049788908727
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 72,
+          "mse": 0.8691620699230636
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 91,
+          "mse": 0.5919749762953296
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 91,
+          "mse": 0.5729958362170587
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 81,
+          "mse": 0.6841846915303301
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 72,
+          "mse": 0.8629142867906722
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 88,
+          "mse": 0.6237941676337336
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 91,
+          "mse": 0.5836965749363255
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 80,
+          "mse": 0.6884261185777384
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 72,
+          "mse": 0.8631100868932792
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 88,
+          "mse": 0.664329720381566
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 87,
+          "mse": 0.6227463448708859
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 81,
+          "mse": 0.7096395877395526
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 72,
+          "mse": 0.8689723916263671
+        }
+      ]
+    },
+    "vocabulary_sha256": "6e291773a69c6ed5232c9a73e724a8563e3a72eb1ae3e69687a7db32d20dfb3a",
+    "protein": null,
+    "initial_member_sha256": "f7ea0fbb3f05b14bbf9aa6f9a9b6065555d8ff13db44840310100e4546d56dd5"
+  },
+  "mutagenicity_node-M2-large_to_small-seed-3405": {
+    "m": 107,
+    "n_features": 1277,
+    "zero": 845,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.1,
+      "Source": 0.1,
+      "Perm": 0.1
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 84,
+          "mse": 0.7549972504482735
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 85,
+          "mse": 0.6650259441118186
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 79,
+          "mse": 0.7244433645144915
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 76,
+          "mse": 0.765934188846268
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 84,
+          "mse": 0.7294064031580598
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 87,
+          "mse": 0.6409297640418152
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 79,
+          "mse": 0.7118938094874169
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 74,
+          "mse": 0.767044426520923
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 83,
+          "mse": 0.7394929563842044
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 86,
+          "mse": 0.631807337200001
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 79,
+          "mse": 0.708991360911205
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 73,
+          "mse": 0.7683381476187413
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 79,
+          "mse": 0.7316685628554165
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 85,
+          "mse": 0.641809034741643
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 78,
+          "mse": 0.7183310235633982
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 72,
+          "mse": 0.7643627716376472
+        }
+      ]
+    },
+    "vocabulary_sha256": "5c848285b55ddced3d077fe6b3494544c4e6e934e937f604e8a19e8c506ab2be",
+    "protein": null,
+    "initial_member_sha256": "7c620ca82a0da570d5ec63f3b172747fd908e8dafc5dfcea23e3a1d7e3e3b1a5"
+  },
+  "mutagenicity_node-M3-small_to_large-seed-3405": {
+    "m": 114,
+    "n_features": 1311,
+    "zero": 951,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.01,
+      "Source": 0.01,
+      "Perm": 0.1
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 80,
+          "mse": 0.8736778923330772
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 84,
+          "mse": 0.7588412998944901
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 82,
+          "mse": 0.767024663339019
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 76,
+          "mse": 0.8548674411159386
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 84,
+          "mse": 0.9452870968437777
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 81,
+          "mse": 0.7721238918827159
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 81,
+          "mse": 0.7637849774848824
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 75,
+          "mse": 0.852724408507803
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 83,
+          "mse": 1.072746246127199
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 82,
+          "mse": 0.7607494836330351
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 78,
+          "mse": 0.7694430023801742
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 75,
+          "mse": 0.8586091512376471
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 82,
+          "mse": 0.8974472172376865
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 82,
+          "mse": 0.7681800367751181
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 81,
+          "mse": 0.7822775700748603
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 75,
+          "mse": 0.8606837481900457
+        }
+      ]
+    },
+    "vocabulary_sha256": "cf0f59e21e4844ad9769f2ab7cd723ff533df5a82a33d6ac12d585764f4361b3",
+    "protein": null,
+    "initial_member_sha256": "3145ace44e5b7c164eeabaf317d54265e1fc8f669c9ccead15db643aab2495bb"
+  },
+  "mutagenicity_node-M3-large_to_small-seed-3405": {
+    "m": 103,
+    "n_features": 1056,
+    "zero": 762,
+    "params": {
+      "Target": 1.0,
+      "Static": 0.01,
+      "Source": 0.1,
+      "Perm": 0.1
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 71,
+          "mse": 0.7902044338251755
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 73,
+          "mse": 0.7347443801918079
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 77,
+          "mse": 0.7413540196600229
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 75,
+          "mse": 0.840123845512395
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 79,
+          "mse": 0.7823214196680833
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 78,
+          "mse": 0.6235396195069454
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 78,
+          "mse": 0.6761746671244607
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 77,
+          "mse": 0.8132407709742038
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 76,
+          "mse": 0.8396141994438777
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 81,
+          "mse": 0.604020098291074
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 79,
+          "mse": 0.6738083269437057
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 76,
+          "mse": 0.8134199100043329
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 75,
+          "mse": 0.7916479844213204
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 79,
+          "mse": 0.6856612728124988
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 77,
+          "mse": 0.7207026839408015
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 74,
+          "mse": 0.8319015171779283
+        }
+      ]
+    },
+    "vocabulary_sha256": "73b40a3d3ccd2c402cbd61789da3bc71791962b0cf161a9d21f3b43cf0fcc97a",
+    "protein": null,
+    "initial_member_sha256": "0bea6ff9807fbc04645120c124cd7f70fb7b8b53dc3a86887bb4c1d63a2eff26"
+  },
+  "proteins_edge-M0-small_to_large-seed-3405": {
+    "m": 29,
+    "n_features": 4185,
+    "zero": 3737,
+    "params": {
+      "Target": 10.0,
+      "Static": 1.0,
+      "Source": 10.0,
+      "Perm": 10.0
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 20,
+          "mse": 0.9022649062930248
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 21,
+          "mse": 0.8111379383778046
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 23,
+          "mse": 0.675958892670713
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 23,
+          "mse": 0.6375839424223173
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 22,
+          "mse": 0.8347138273437029
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 22,
+          "mse": 0.7794952169539665
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 24,
+          "mse": 0.6641404625490479
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 23,
+          "mse": 0.6355187009510697
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 21,
+          "mse": 1.396939558266771
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 21,
+          "mse": 0.8380271042217328
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 23,
+          "mse": 0.6626964340352776
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 23,
+          "mse": 0.6352779646082133
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 20,
+          "mse": 0.9457510406974311
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 20,
+          "mse": 0.7823825430427686
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 23,
+          "mse": 0.6688427019291378
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 23,
+          "mse": 0.6375516794455669
+        }
+      ]
+    },
+    "vocabulary_sha256": "ad178fbda50fe3c130fa439eb7cf90d74ee5a03cb962f989770a7c86e1f893e1",
+    "protein": {
+      "n_source": 110,
+      "positive": 27,
+      "negative": 83,
+      "min_nodes": 38,
+      "max_nodes": 94,
+      "status": "brentq",
+      "rate": 0.024590683116217954,
+      "constant": null,
+      "converged": true,
+      "iterations": 10,
+      "derivative": 0.0,
+      "nll": 0.5776174938896661,
+      "positive_exposure": 1571,
+      "negative_sizes": [
+        [
+          38,
+          2
+        ],
+        [
+          40,
+          1
+        ],
+        [
+          42,
+          2
+        ],
+        [
+          43,
+          3
+        ],
+        [
+          44,
+          2
+        ],
+        [
+          46,
+          4
+        ],
+        [
+          47,
+          3
+        ],
+        [
+          48,
+          4
+        ],
+        [
+          49,
+          1
+        ],
+        [
+          50,
+          7
+        ],
+        [
+          51,
+          1
+        ],
+        [
+          52,
+          3
+        ],
+        [
+          54,
+          4
+        ],
+        [
+          55,
+          3
+        ],
+        [
+          56,
+          1
+        ],
+        [
+          57,
+          1
+        ],
+        [
+          58,
+          5
+        ],
+        [
+          59,
+          6
+        ],
+        [
+          60,
+          6
+        ],
+        [
+          61,
+          2
+        ],
+        [
+          62,
+          2
+        ],
+        [
+          63,
+          2
+        ],
+        [
+          64,
+          2
+        ],
+        [
+          66,
+          4
+        ],
+        [
+          67,
+          1
+        ],
+        [
+          69,
+          1
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          71,
+          1
+        ],
+        [
+          72,
+          2
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          74,
+          1
+        ],
+        [
+          76,
+          1
+        ],
+        [
+          79,
+          1
+        ],
+        [
+          80,
+          1
+        ],
+        [
+          84,
+          1
+        ]
+      ]
+    },
+    "initial_member_sha256": "e5ba08babc9f6cdae48e78bd3aed52d635c97401c6cb78b2cbcc810b6d2134d5"
+  },
+  "proteins_edge-M0-large_to_small-seed-3405": {
+    "m": 27,
+    "n_features": 8919,
+    "zero": 8509,
+    "params": {
+      "Target": 0.01,
+      "Static": 0.1,
+      "Source": 0.1,
+      "Perm": 0.1
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 25,
+          "mse": 0.42966480883471503
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 24,
+          "mse": 0.43597208743981136
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 23,
+          "mse": 0.4721052702135224
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 23,
+          "mse": 0.4993741493130428
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 24,
+          "mse": 0.4583842505102237
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 24,
+          "mse": 0.4577560963145371
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 23,
+          "mse": 0.4736809003379665
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 23,
+          "mse": 0.4993491298218454
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 24,
+          "mse": 0.5902554184849971
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 24,
+          "mse": 0.470239564257555
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 23,
+          "mse": 0.470979678439114
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 23,
+          "mse": 0.49912369023598435
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 23,
+          "mse": 0.46565331916149727
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 24,
+          "mse": 0.47058948904052766
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 23,
+          "mse": 0.4842570291242274
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 23,
+          "mse": 0.5014528068397992
+        }
+      ]
+    },
+    "vocabulary_sha256": "fe95ebd57bcbb58a3a2a50ad915f6168f8b45720b238ddf86d554abe0cb5624b",
+    "protein": {
+      "n_source": 112,
+      "positive": 9,
+      "negative": 103,
+      "min_nodes": 56,
+      "max_nodes": 620,
+      "status": "brentq",
+      "rate": 0.023349243127075252,
+      "constant": null,
+      "converged": true,
+      "iterations": 12,
+      "derivative": 0.0,
+      "nll": 0.29266112796411864,
+      "positive_exposure": 970,
+      "negative_sizes": [
+        [
+          56,
+          1
+        ],
+        [
+          58,
+          1
+        ],
+        [
+          66,
+          1
+        ],
+        [
+          69,
+          3
+        ],
+        [
+          70,
+          3
+        ],
+        [
+          71,
+          1
+        ],
+        [
+          72,
+          1
+        ],
+        [
+          73,
+          1
+        ],
+        [
+          74,
+          1
+        ],
+        [
+          75,
+          1
+        ],
+        [
+          76,
+          1
+        ],
+        [
+          77,
+          2
+        ],
+        [
+          78,
+          1
+        ],
+        [
+          80,
+          2
+        ],
+        [
+          82,
+          2
+        ],
+        [
+          83,
+          1
+        ],
+        [
+          84,
+          2
+        ],
+        [
+          85,
+          2
+        ],
+        [
+          86,
+          1
+        ],
+        [
+          87,
+          2
+        ],
+        [
+          88,
+          4
+        ],
+        [
+          91,
+          1
+        ],
+        [
+          93,
+          1
+        ],
+        [
+          94,
+          3
+        ],
+        [
+          95,
+          2
+        ],
+        [
+          96,
+          4
+        ],
+        [
+          98,
+          1
+        ],
+        [
+          99,
+          2
+        ],
+        [
+          100,
+          1
+        ],
+        [
+          101,
+          2
+        ],
+        [
+          102,
+          1
+        ],
+        [
+          103,
+          1
+        ],
+        [
+          105,
+          1
+        ],
+        [
+          108,
+          3
+        ],
+        [
+          111,
+          1
+        ],
+        [
+          113,
+          1
+        ],
+        [
+          116,
+          2
+        ],
+        [
+          117,
+          1
+        ],
+        [
+          122,
+          2
+        ],
+        [
+          123,
+          1
+        ],
+        [
+          125,
+          1
+        ],
+        [
+          126,
+          2
+        ],
+        [
+          133,
+          2
+        ],
+        [
+          134,
+          1
+        ],
+        [
+          136,
+          1
+        ],
+        [
+          139,
+          1
+        ],
+        [
+          146,
+          1
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          148,
+          2
+        ],
+        [
+          151,
+          1
+        ],
+        [
+          152,
+          2
+        ],
+        [
+          153,
+          1
+        ],
+        [
+          154,
+          1
+        ],
+        [
+          156,
+          1
+        ],
+        [
+          157,
+          1
+        ],
+        [
+          159,
+          1
+        ],
+        [
+          162,
+          1
+        ],
+        [
+          168,
+          1
+        ],
+        [
+          170,
+          1
+        ],
+        [
+          180,
+          2
+        ],
+        [
+          186,
+          1
+        ],
+        [
+          189,
+          1
+        ],
+        [
+          208,
+          1
+        ],
+        [
+          226,
+          1
+        ],
+        [
+          229,
+          1
+        ],
+        [
+          246,
+          1
+        ],
+        [
+          273,
+          1
+        ],
+        [
+          285,
+          1
+        ],
+        [
+          328,
+          1
+        ],
+        [
+          336,
+          1
+        ],
+        [
+          481,
+          1
+        ],
+        [
+          504,
+          1
+        ],
+        [
+          620,
+          1
+        ]
+      ]
+    },
+    "initial_member_sha256": "a79fb8a807926be3afb3e141759d0a6d07ed939ceb5400f39d232be1af463d66"
+  },
+  "proteins_edge-M1-small_to_large-seed-3405": {
+    "m": 30,
+    "n_features": 2459,
+    "zero": 2255,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.01,
+      "Source": 0.1,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 20,
+          "mse": 1.1269962212286815
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 21,
+          "mse": 1.031494705449115
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 20,
+          "mse": 0.964264800900786
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 20,
+          "mse": 0.9063341299832135
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 22,
+          "mse": 0.9356557287435164
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 21,
+          "mse": 0.9489300678780703
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 20,
+          "mse": 0.9427183483822519
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 20,
+          "mse": 0.904358802242554
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 20,
+          "mse": 1.4204726947412578
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 22,
+          "mse": 1.0716486763817157
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 20,
+          "mse": 0.9731841254899447
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 20,
+          "mse": 0.9063997421789662
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 22,
+          "mse": 1.0721507638093546
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 21,
+          "mse": 1.0172314229976118
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 20,
+          "mse": 0.9597055708501413
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 20,
+          "mse": 0.9058950639871778
+        }
+      ]
+    },
+    "vocabulary_sha256": "ddecfd3fd773e2d71c3f769e784a4a2ad95f7151d629f1d34f80976a3c12d070",
+    "protein": {
+      "n_source": 112,
+      "positive": 31,
+      "negative": 81,
+      "min_nodes": 22,
+      "max_nodes": 60,
+      "status": "brentq",
+      "rate": 0.04113640694001889,
+      "constant": null,
+      "converged": true,
+      "iterations": 9,
+      "derivative": 0.0,
+      "nll": 0.6280977434423024,
+      "positive_exposure": 1008,
+      "negative_sizes": [
+        [
+          22,
+          2
+        ],
+        [
+          23,
+          4
+        ],
+        [
+          24,
+          2
+        ],
+        [
+          25,
+          2
+        ],
+        [
+          26,
+          3
+        ],
+        [
+          27,
+          12
+        ],
+        [
+          28,
+          5
+        ],
+        [
+          29,
+          4
+        ],
+        [
+          30,
+          16
+        ],
+        [
+          31,
+          9
+        ],
+        [
+          32,
+          10
+        ],
+        [
+          33,
+          1
+        ],
+        [
+          34,
+          4
+        ],
+        [
+          35,
+          2
+        ],
+        [
+          36,
+          3
+        ],
+        [
+          38,
+          1
+        ],
+        [
+          56,
+          1
+        ]
+      ]
+    },
+    "initial_member_sha256": "8cc889f6d99bc7c03054f1d5e27e287d8e9722c06ab3f6aa9ec5fb923b695e47"
+  },
+  "proteins_edge-M1-large_to_small-seed-3405": {
+    "m": 24,
+    "n_features": 3156,
+    "zero": 2979,
+    "params": {
+      "Target": 1.0,
+      "Static": 1.0,
+      "Source": 1.0,
+      "Perm": 1.0
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 18,
+          "mse": 1.0215813171004842
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 20,
+          "mse": 0.581210521364565
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 21,
+          "mse": 0.4695808763965473
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 20,
+          "mse": 0.5116363567371736
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 19,
+          "mse": 0.5919741414352333
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 19,
+          "mse": 0.5493380230778769
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 21,
+          "mse": 0.4679077498252988
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 20,
+          "mse": 0.5092106152908404
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 13,
+          "mse": 2.504215765104107
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 17,
+          "mse": 0.8667923861361769
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 20,
+          "mse": 0.4737503959716782
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 20,
+          "mse": 0.5084758502061762
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 17,
+          "mse": 1.173437988803965
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 20,
+          "mse": 0.6781665729866305
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 20,
+          "mse": 0.46709165756247134
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 20,
+          "mse": 0.5101888689247429
+        }
+      ]
+    },
+    "vocabulary_sha256": "f6571781ada2372119d844fdcb52f2f27fb80d6d14457ac1c769ab9d6e154a2a",
+    "protein": {
+      "n_source": 112,
+      "positive": 29,
+      "negative": 83,
+      "min_nodes": 29,
+      "max_nodes": 64,
+      "status": "brentq",
+      "rate": 0.034591232174075115,
+      "constant": null,
+      "converged": true,
+      "iterations": 9,
+      "derivative": 0.0,
+      "nll": 0.593729680216601,
+      "positive_exposure": 1160,
+      "negative_sizes": [
+        [
+          30,
+          2
+        ],
+        [
+          31,
+          2
+        ],
+        [
+          32,
+          4
+        ],
+        [
+          33,
+          5
+        ],
+        [
+          34,
+          8
+        ],
+        [
+          35,
+          3
+        ],
+        [
+          36,
+          10
+        ],
+        [
+          37,
+          5
+        ],
+        [
+          38,
+          10
+        ],
+        [
+          39,
+          8
+        ],
+        [
+          40,
+          5
+        ],
+        [
+          41,
+          3
+        ],
+        [
+          42,
+          5
+        ],
+        [
+          43,
+          4
+        ],
+        [
+          44,
+          2
+        ],
+        [
+          45,
+          1
+        ],
+        [
+          47,
+          2
+        ],
+        [
+          48,
+          2
+        ],
+        [
+          52,
+          1
+        ],
+        [
+          55,
+          1
+        ]
+      ]
+    },
+    "initial_member_sha256": "ae212fade12685f5a20854d69c8da14b93e1c4ba0a88b7ace56cade6649904bd"
+  },
+  "proteins_edge-M2-small_to_large-seed-3405": {
+    "m": 27,
+    "n_features": 1554,
+    "zero": 1391,
+    "params": {
+      "Target": 10.0,
+      "Static": 10.0,
+      "Source": 10.0,
+      "Perm": 10.0
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 15,
+          "mse": 1.7065708628890603
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 16,
+          "mse": 1.0368005937064981
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 14,
+          "mse": 0.889155641999029
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 19,
+          "mse": 0.9144148752370028
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 16,
+          "mse": 1.0338331238714547
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 15,
+          "mse": 0.9682358366277387
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 15,
+          "mse": 0.8944021367936735
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 17,
+          "mse": 0.9174636060907766
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 15,
+          "mse": 1.7653579469459133
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 16,
+          "mse": 1.089672116324526
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 15,
+          "mse": 0.909430347756893
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 17,
+          "mse": 0.9173899076709539
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 15,
+          "mse": 1.5339576945905018
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 16,
+          "mse": 1.063959626230484
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 15,
+          "mse": 0.9119729519106962
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 17,
+          "mse": 0.9189193189133023
+        }
+      ]
+    },
+    "vocabulary_sha256": "18a6e80eb22b2ca5c9acd46acf9ed66accf6bfc3c15068197c07402a71693c12",
+    "protein": {
+      "n_source": 115,
+      "positive": 57,
+      "negative": 58,
+      "min_nodes": 13,
+      "max_nodes": 24,
+      "status": "brentq",
+      "rate": 0.03832605983016357,
+      "constant": null,
+      "converged": true,
+      "iterations": 11,
+      "derivative": -2.2737367544323206e-13,
+      "nll": 0.6867552716292558,
+      "positive_exposure": 1036,
+      "negative_sizes": [
+        [
+          14,
+          3
+        ],
+        [
+          15,
+          1
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          17,
+          6
+        ],
+        [
+          18,
+          7
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          20,
+          15
+        ],
+        [
+          21,
+          6
+        ],
+        [
+          22,
+          2
+        ],
+        [
+          23,
+          3
+        ]
+      ]
+    },
+    "initial_member_sha256": "93729ba007bd4776cd5e4e3c6b4761233a76055b4c3a9099e027c7acd8d5e79b"
+  },
+  "proteins_edge-M2-large_to_small-seed-3405": {
+    "m": 29,
+    "n_features": 1812,
+    "zero": 1645,
+    "params": {
+      "Target": 0.1,
+      "Static": 0.1,
+      "Source": 1.0,
+      "Perm": 1.0
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 16,
+          "mse": 1.1375212460663982
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 18,
+          "mse": 0.8887100797296593
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 18,
+          "mse": 0.92063757240181
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 14,
+          "mse": 1.0479975669726462
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 19,
+          "mse": 0.8814699293233501
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 19,
+          "mse": 0.8665078978289572
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 18,
+          "mse": 0.8993015185924862
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 14,
+          "mse": 1.0419610593236748
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 17,
+          "mse": 1.8490866260259478
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 19,
+          "mse": 0.8989155630681286
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 19,
+          "mse": 0.8860508092213834
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 14,
+          "mse": 1.0418463325576428
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 17,
+          "mse": 1.2067357111579722
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 18,
+          "mse": 0.9155931019779495
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 20,
+          "mse": 0.9181845852095604
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 12,
+          "mse": 1.052515243583396
+        }
+      ]
+    },
+    "vocabulary_sha256": "1365740fbc1dc0a222466c7305e2dc187b020df67263e846191086b446eda3bd",
+    "protein": {
+      "n_source": 107,
+      "positive": 37,
+      "negative": 70,
+      "min_nodes": 18,
+      "max_nodes": 28,
+      "status": "brentq",
+      "rate": 0.0458053089489492,
+      "constant": null,
+      "converged": true,
+      "iterations": 10,
+      "derivative": -1.1368683772161603e-13,
+      "nll": 0.6505890367918717,
+      "positive_exposure": 861,
+      "negative_sizes": [
+        [
+          18,
+          2
+        ],
+        [
+          19,
+          3
+        ],
+        [
+          20,
+          4
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          23,
+          17
+        ],
+        [
+          24,
+          13
+        ],
+        [
+          25,
+          3
+        ],
+        [
+          26,
+          5
+        ],
+        [
+          27,
+          4
+        ],
+        [
+          28,
+          3
+        ]
+      ]
+    },
+    "initial_member_sha256": "72ad06aae1f17a01783e789c25c02a3aad1327297a2895dca0f3d97691d2161b"
+  },
+  "proteins_edge-M3-small_to_large-seed-3405": {
+    "m": 31,
+    "n_features": 440,
+    "zero": 352,
+    "params": {
+      "Target": 1.0,
+      "Static": 1.0,
+      "Source": 1.0,
+      "Perm": 1.0
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 27,
+          "mse": 0.7727692324073504
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 26,
+          "mse": 0.44814031717515673
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 28,
+          "mse": 0.32038569559826874
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 28,
+          "mse": 0.3381188475235917
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 27,
+          "mse": 0.4013590159405082
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 28,
+          "mse": 0.365125968525614
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 28,
+          "mse": 0.32129646091367303
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 28,
+          "mse": 0.33686913473649005
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 26,
+          "mse": 0.572765271684991
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 27,
+          "mse": 0.4038126240783723
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 28,
+          "mse": 0.32639515899250243
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 28,
+          "mse": 0.3385871159782773
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 27,
+          "mse": 0.5690863592082491
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 28,
+          "mse": 0.39984759919786
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 28,
+          "mse": 0.3262165146210471
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 28,
+          "mse": 0.33942579718210975
+        }
+      ]
+    },
+    "vocabulary_sha256": "dcc82b78541415f6b9ccabaf4f5d678f183fcb1929da3b04dc204121b514d660",
+    "protein": {
+      "n_source": 111,
+      "positive": 94,
+      "negative": 17,
+      "min_nodes": 4,
+      "max_nodes": 10,
+      "status": "brentq",
+      "rate": 0.023273405055314767,
+      "constant": null,
+      "converged": true,
+      "iterations": 9,
+      "derivative": 0.0,
+      "nll": 0.4206903453119692,
+      "positive_exposure": 667,
+      "negative_sizes": [
+        [
+          4,
+          1
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          9,
+          2
+        ],
+        [
+          10,
+          4
+        ]
+      ]
+    },
+    "initial_member_sha256": "ce4ecdafca36ba19e8942fd7c3bf1d00b6a8c3a81766fd3a236d99f2df4402bd"
+  },
+  "proteins_edge-M3-large_to_small-seed-3405": {
+    "m": 24,
+    "n_features": 1024,
+    "zero": 958,
+    "params": {
+      "Target": 1.0,
+      "Static": 1.0,
+      "Source": 0.1,
+      "Perm": 0.01
+    },
+    "selection": {
+      "Target": [
+        {
+          "lam": 0.01,
+          "n_correct": 15,
+          "mse": 1.0543159179726223
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 15,
+          "mse": 0.9749992435527216
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 15,
+          "mse": 0.9258675365680871
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 14,
+          "mse": 0.9546193270485204
+        }
+      ],
+      "Static": [
+        {
+          "lam": 0.01,
+          "n_correct": 15,
+          "mse": 1.1697889328493973
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 14,
+          "mse": 1.0772032290716385
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 15,
+          "mse": 0.9322696068232036
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 14,
+          "mse": 0.9463423119678582
+        }
+      ],
+      "Source": [
+        {
+          "lam": 0.01,
+          "n_correct": 16,
+          "mse": 1.6073127195559802
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 16,
+          "mse": 1.1384014121202248
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 14,
+          "mse": 0.9405142763747376
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 14,
+          "mse": 0.9496805212428164
+        }
+      ],
+      "Perm": [
+        {
+          "lam": 0.01,
+          "n_correct": 15,
+          "mse": 0.9606042613323965
+        },
+        {
+          "lam": 0.1,
+          "n_correct": 14,
+          "mse": 0.967366451805273
+        },
+        {
+          "lam": 1.0,
+          "n_correct": 14,
+          "mse": 0.9471848760035844
+        },
+        {
+          "lam": 10.0,
+          "n_correct": 14,
+          "mse": 0.9610371219409098
+        }
+      ]
+    },
+    "vocabulary_sha256": "e49468b9ffef2f30cd938cea1ab61cac9354986f498a4dfab2f3027f107bbe92",
+    "protein": {
+      "n_source": 113,
+      "positive": 76,
+      "negative": 37,
+      "min_nodes": 9,
+      "max_nodes": 20,
+      "status": "brentq",
+      "rate": 0.030813369945927305,
+      "constant": null,
+      "converged": true,
+      "iterations": 10,
+      "derivative": -2.2737367544323206e-13,
+      "nll": 0.632765090040209,
+      "positive_exposure": 977,
+      "negative_sizes": [
+        [
+          10,
+          2
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          15,
+          5
+        ],
+        [
+          16,
+          3
+        ]
+      ]
+    },
+    "initial_member_sha256": "f7661bf63e606a0233ac3c4f2fd30a65294f668dfdea5772d592404367dedc40"
+  }
+}
