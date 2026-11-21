@@ -61,3 +61,5 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments
 ```
 
 也可先加 `--phase freeze`，随后对同一目录使用 `--phase score --obs-sha256` 并传入第一阶段输出的 OBS 摘要。
+
+[结构词 dropout 的源内实测](docs/feature-dropout-screen.md)在 24 个来源内方向上比较了以真实词频、源词频及打乱后的词频调整分类惩罚。蛋白质有单种子正结果，两种分子划分均落后于静态岭分类器。
