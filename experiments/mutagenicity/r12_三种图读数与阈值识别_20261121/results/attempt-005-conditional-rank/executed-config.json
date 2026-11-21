@@ -1,0 +1,84 @@
+{
+  "code_commit": "bc1eec4fd1242dda370ee5acb499aa43c730587f",
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-m",
+    "experiments.mutagenicity.r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121.scripts.conditional_rank",
+    "--config",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/configs/conditional-rank.json",
+    "--output",
+    "/home/hxchen/research/GDA/TSBA/experiments/r12/attempt-005-conditional-rank",
+    "--phase",
+    "freeze"
+  ],
+  "started_utc": "2026-11-20T23:57:30.580058+00:00",
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "code_sha256": {
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/configs/conditional-rank.json": "3f0f535c88e6e4428af3e1e17c11f8d67ac8d55dbd55de1198395da19b3a4f98",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/configs/conditional-votes.json": "ddf72f63a5c6b464e7bda31044490f5f9e11d8de3a3a552e45b0aa093a7a689c",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/docs/conditional-rank.md": "8be7584398f937d673789fbb13cbc5cd5d986fd3528ee5bf12d52d8bc90ed1a3",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/scripts/conditional_rank.py": "950b6b930b49eedaa7e1eb3dd20bae9d0541f256f368cc738bc59b4d281656d5",
+    "experiments/common/io.py": "06f1e4efbecfcedc6f355d3674c6a3ddd33bad9b7d00f92256dac84b8aae6b41",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/r5_inputs.py": "a45a0b4bd19e8da89c2f65f8801ef0d00a97a2ac9f92af81862355df73901d6a",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/seals.py": "b1e4e91a7aa2304bb9d43af06babe419aa4f6cbc8932a00bf7c8f55776fa3133",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/inputs.py": "99cf6601df28b70b55a9ef554365578e6e6e8be79ea2a398cb90f3ec85e3af4f",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/pilot.py": "c23db9d8be3fa6885ae6e0aac3013bdf2b94452fc7b354f7d6cb1579a0d8627b",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/structural.py": "7b47e062c480980d1b68ddaf4a89a04bc0d8afbbf6a915f90512e31647b0079b",
+    "experiments/mutagenicity/r10_\u539f\u751f\u56fe\u9002\u914d\u57fa\u7ebf\u4e0e\u589e\u91cf_20261121/src/structural_observation.py": "bc021724474e72ce28e17db6a6f3a2e49ee6d21a105b56de561b14bb9df33cfe",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/inputs.py": "200700156227f954cfc77ed165306c38c105e884aa93604edf43878aafd98d1d",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/prior_run.py": "21c6bb41b1c099861faf4c962cb30b6f337c336adce91fe81da2fd2c80006f88",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/roc_score.py": "6e9d83c44c46f49a501d90d98cd6ee84b9c6b407f5b88b17dda9911e07e6430a",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/roc_transfer.py": "383ca6f7a5796a95cf76ed2c7d55eb233364833ef00d2e02a9ecf2c54c997be1",
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/src/historical.py": "b21399709abd17a7c35968130f00b2a21fb057de7fbfcbc93c080f404a722026",
+    "experiments/mutagenicity/r13_\u76ee\u6807\u56fe\u5f52\u4e00\u5316\u4e0e\u5206\u7c7b\u6392\u5e8f_20261121/src/observation.py": "5bd8d827f0118491843d248993c50e7461bbb79232aaa30470fda66e6e0d57c7",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/src/conditional_rank.py": "49153189ac39b39b2b39e0fcdac14554624d6c342dac077c03a9ba64fcb119b2",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/src/conditional_rank_observation.py": "cf43baed59669996ddaa37de170979438739b3babe722a0590acf6047f4a9aa4",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/src/conditional_rank_scoring.py": "8de9791efee4a490f82534c9e2c4aa2c6e67062dbe7a2921eb277411cfc2dba6",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/src/conditional_votes.py": "5f138463d0b561dab199750080253d7d99dc11064f41bcbf32373593779b6c78",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/src/reverse_vote_observation.py": "f2d5772314548df7982af81b69e76688432910572e34480921937b51584a5f14",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/src/reverse_votes.py": "394afb239a6f37bde5fb01508fcb48e300cdee117b2b99edafec3b1c038da3ad",
+    "experiments/mutagenicity/r12_\u4e09\u79cd\u56fe\u8bfb\u6570\u4e0e\u9608\u503c\u8bc6\u522b_20261121/src/vote_mixture.py": "37083a641dc6d3fc0dd26e0a1981c01c3187f9ed022351366867b58ea77b2ddb"
+  },
+  "plan": {
+    "registration_commit": "735e661ea1deafd30b934bc7cb506e7fc70d86ae",
+    "protocol": "docs/conditional-rank.md",
+    "historical_config": "configs/conditional-votes.json",
+    "historical_attempt": "results/attempt-002-conditional-votes",
+    "historical_obs_sha256": "fde4616cad09f0c9c184a2feeeec9d1c243ddae14ad56755b5ec10a8cfb05d51",
+    "centered_attempt": "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/results/iteration-12/centered-target-update-001",
+    "centered_obs_sha256": "d368a37deb6659904c79260d9d2d739c0cc0766581e0e1d76023379cfb53413f",
+    "centered_parent_obs_sha256": "cadd75220d2b7a57cc644c4f57f9907b354881e27da15bbeb1b33d757b042665",
+    "settings": [
+      "mutagenicity_edge",
+      "mutagenicity_node",
+      "proteins_edge"
+    ],
+    "domains": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "pilot_seed": 3405,
+    "minimum_accuracy_fraction": [
+      1,
+      200
+    ],
+    "minimum_positive_directions": 7
+  },
+  "training_updates": 0,
+  "label_phases": {
+    "freeze": [
+      "source_validation"
+    ],
+    "score": [
+      "holdout"
+    ]
+  },
+  "versions": {
+    "torch": "2.5.1",
+    "torch-geometric": "2.6.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2"
+  }
+}

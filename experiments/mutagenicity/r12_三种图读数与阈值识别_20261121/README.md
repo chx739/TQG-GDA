@@ -14,6 +14,8 @@ R11 显示，用 A 的标签选择阈值能改善分类，直接从分类分数�
 
 [反向验证试验](docs/reverse-vote-check-results.md)复用这 36 个方向。结构近邻回传在三个设置均胜过 RowPerm，但低于原强源起点及源端直接选表，未晋级。[登记协议](docs/reverse-vote-check.md) · [RowPerm 对照](docs/reverse-vote-identification.md)
 
+[条件秩试验](docs/conditional-rank-results.md)完成 36 个方向。B0 连续分数在相同票型内保留了排序信息，OwnRank 的 Accuracy 未达到晋级条件。[登记协议](docs/conditional-rank.md) · [源端证据](docs/conditional-rank-source.md) · [改判方向界](docs/conditional-rank-limits.md)
+
 ## 运行源内筛查
 
 从仓库根目录使用同一配置。鉴权预检核对八组 S/V、冻结分数和图记录，无需解码标签。正式运行使用新的输出路径。
@@ -56,6 +58,18 @@ out=/path/to/new-reverse-vote-attempt
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
 python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.reverse_vote_check --config "$round/configs/reverse-vote-check.json" --output "$out" --phase freeze
 python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.reverse_vote_check --config "$round/configs/reverse-vote-check.json" --output "$out" --phase score --obs-sha256 "$obs_sha"
+```
+
+## 运行条件秩试验
+
+从仓库根目录选新的输出路径。先冻结 36 个方向的预测。核验 OBS 后，使用冻结阶段打印的 SHA-256 设置 `obs_sha`，统一评分并执行两项 H 诊断。评分成功后一次性发布到该次运行的 `score/` 目录。
+
+```sh
+round=experiments/mutagenicity/r12_三种图读数与阈值识别_20261121
+out=/path/to/new-conditional-rank-attempt
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.conditional_rank --config "$round/configs/conditional-rank.json" --output "$out" --phase freeze
+python -m experiments.mutagenicity.r12_三种图读数与阈值识别_20261121.scripts.conditional_rank --config "$round/configs/conditional-rank.json" --output "$out" --phase score --obs-sha256 "$obs_sha"
 ```
 
 [四个票型的能力上界与逐格纠错](docs/reverse-vote-diagnosis.md)说明为何在当前三个开发设置中，四格规则即使知道目标真类也达不到七个改善方向，并量化原 GNN 的第三张票能提供多少额外区分。
