@@ -1,5 +1,7 @@
 # R7 共同解释与共享更新验证
 
+[原参考算法在真实图上的风险归因](docs/original-risk-attribution-results.md)复用第二轮两个方向、五个种子。留出图上逐图分配误差均大于比例项，多个解释减轻了单参考更新的损害，两方向的平均 Accuracy 仍低于源模型。[归因协议](docs/original-risk-attribution.md) · [逐块结果](results/iteration-02/original-risk-attribution-001/score/attribution.csv)
+
 受控补充在原始分子和蛋白图上交换节点类型码表，分别检验能否用一池图恢复编码，以及恢复后能多分对哪些查询图。[角色、预检与分类对照](docs/finite-codebook-control.md)
 
 [第十二轮已有更新头的跨目标域交叉验证](docs/reference-head-crossover-results.md)已完成 180 个评价块。E 在三种开发设置均通过目标匹配门槛，PROTEINS 的匹配增益几乎全由同阳性数对照解释。[预登记协议](docs/reference-head-crossover.md)
@@ -34,6 +36,17 @@
 [独立分离审计与第一轮迭代](docs/iteration-01.md) · [第二轮实测](docs/iteration-02.md) · [第三轮投影实测](docs/iteration-03.md) · [第四轮源类条件锚定](docs/iteration-04.md) · [第五轮源混合模板](docs/iteration-05.md) · [第六轮判别后验锚定](docs/iteration-06.md) · [第七轮类别质量约束](docs/iteration-07.md) · [第八轮混合模板与类别质量](docs/iteration-08.md) · [第九轮角向解释](docs/iteration-09.md) · [第十轮图读出成对对照](docs/iteration-10.md) · [第十一轮候选后验置信度](docs/iteration-11.md) · [第十二轮较低后验强度](docs/iteration-12.md) · [第十三轮均衡分类和合成扩展](docs/iteration-13.md) · [第十四轮固定类别比例锚点](docs/iteration-14.md)
 
 [第十四轮 P 五种子损失与排序复盘](docs/iteration-14-p-risk-replay.md) · [十块源校准与 MLLS 对照及复现入口](docs/accuracy-and-prior-control-results.md)
+
+## 复现原参考算法的误差归因
+
+从仓库根目录运行。先在新目录冻结预测；第二条命令的 `obs_sha` 取第一条命令打印的 OBS SHA-256。原档案路径、环境版本和已执行命令见[实际配置](results/iteration-02/original-risk-attribution-001/executed-config.json)。
+
+```bash
+r7=experiments/mutagenicity/r7_共同解释与共享更新验证_20261119
+replay_dir=/tmp/r7-original-risk-replay
+python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.original_risk_attribution --config "$r7/configs/original-risk-attribution.json" --output "$replay_dir" --phase freeze
+python -m experiments.mutagenicity.r7_共同解释与共享更新验证_20261119.scripts.original_risk_attribution --config "$r7/configs/original-risk-attribution.json" --output "$replay_dir" --phase score --obs-sha256 "$obs_sha"
+```
 
 ## 合成阶段执行
 

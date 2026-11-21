@@ -36,6 +36,8 @@ M0→M1 的 A 上，比例项的五种子有符号均值仅 +0.0017，其绝对�
 
 逐项对照 40 行风险归因、60 行分类端点和 236 行候选风险及上界（含单列的参考解释），风险与上界最大差为 4.45e−16 以内。独立审阅还用线性规划直接求每一行的上下界，最大差小于 8e−16。两块的 A 最坏风险在数值上并列；改取另一候选，H 的任一归因分项改变量小于 0.000125 nats/图，各项翻号判断一致。注册提交曾指向并列规则补记前的文档，正式运行前已修正绑定。已跟踪的 61 项 R7 回归通过。
 
+仓库归档保留两级封存及其成员共 25 个文件。[实际执行配置](../results/iteration-02/original-risk-attribution-001/executed-config.json) · [全部候选的风险上下界](../results/iteration-02/original-risk-attribution-001/candidate-risk-bounds.csv) · [候选风险与真实损失归因](../results/iteration-02/original-risk-attribution-001/score/attribution.csv) · [E 更新的预警检查](../results/iteration-02/original-risk-attribution-001/score/e-warnings.csv) · [分类准确率](../results/iteration-02/original-risk-attribution-001/score/endpoint-summary.csv) · [并列敏感度](../results/iteration-02/original-risk-attribution-001/score/a-tie-sensitivity.csv) · [最终封存](../results/iteration-02/original-risk-attribution-001/score/FINAL.json)
+
 ## 研究决定
 
 暂停在原参考族里继续调类别比例、相容宽度或扩跑 36 个开发方向。下一项值得检验的假设应说明，源标签与无标签目标图的哪条可观测关系，可以识别正类总量相近、但对具体图给出不同类别证据的候选。在能找到符合原观测阈值、又对同一更新发出风险警告的具体参数时，可先检验有限搜索的遗漏。当前结果没有穷举连续解释族。两批开发图已经多次使用，本轮提供失效诊断，其他源域与独立数据上的分类收益仍待验证。

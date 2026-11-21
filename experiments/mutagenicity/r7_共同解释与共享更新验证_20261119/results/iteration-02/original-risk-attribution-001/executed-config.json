@@ -1,0 +1,70 @@
+{
+  "code_commit": "7708107f62086fb23403f0e77e8473a358243f44",
+  "plan": {
+    "registration_commit": "4dd160ec56254fc8cdbc4949bfc824df8db879e6",
+    "protocol": "docs/original-risk-attribution.md",
+    "archive": "/home/hxchen/research/GDA/TSBA/experiments/r7/attempt-004/P",
+    "source_execution_commit": "f905a6fd176870cfee72adb37df609f14f9552cc",
+    "source_obs_digest": "6c7217251868cedba3738b821046a922b2a3793798f0d96d43fd4a4212ca5621",
+    "source_final_digest": "7833a53608e075b6bdf4c61dea6f6dc09b2d2cebd63967f293a5d47bb88bbc0d",
+    "setting": "mutagenicity_edge",
+    "source": 0,
+    "targets": [
+      1,
+      3
+    ],
+    "seeds": [
+      3405,
+      3406,
+      3407,
+      3408,
+      3409
+    ],
+    "tau": 0.005,
+    "dimensions": 16,
+    "worst_tie_tolerance": 1e-12,
+    "absolute_replay_tolerance": 1e-10
+  },
+  "code_sha256": {
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/configs/original-risk-attribution.json": "58d8b0d241192fc2f7ae5cca71691296051d70e0fd45a3277c44aaac00a6497f",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/docs/original-risk-attribution.md": "f52205e2e3a0d09fba1a9879f3a03684e4b5ee0a6708a5a78c6b8692b93e4e75",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/scripts/original_risk_attribution.py": "3112beb7acf8b841528647d7582e32d7199eae66dcfb00248ae2b09c48d00539",
+    "experiments/common/io.py": "06f1e4efbecfcedc6f355d3674c6a3ddd33bad9b7d00f92256dac84b8aae6b41",
+    "experiments/mutagenicity/r8_\u56fe\u7ed3\u6784\u89c2\u5bdf\u91cf\u4e0e\u7c7b\u522b\u7ea6\u675f_20261121/src/pilot.py": "c23db9d8be3fa6885ae6e0aac3013bdf2b94452fc7b354f7d6cb1579a0d8627b",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/inputs.py": "200700156227f954cfc77ed165306c38c105e884aa93604edf43878aafd98d1d",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/prior_run.py": "21c6bb41b1c099861faf4c962cb30b6f337c336adce91fe81da2fd2c80006f88",
+    "experiments/mutagenicity/r11_\u5206\u7c7b\u9608\u503c\u7684\u8de8\u57df\u68c0\u9a8c_20261121/src/roc_transfer.py": "383ca6f7a5796a95cf76ed2c7d55eb233364833ef00d2e02a9ecf2c54c997be1",
+    "tsba/shared_update/explanations.py": "fead24e4134b22e81a5d0f2f86f964a50b96c41a51d41c068fa07ea8b26b4bab",
+    "tsba/shared_update/solver.py": "1271a29b21c3b0dc35b22e5e22f64e53f2758bf998b6d761b370219b8cf3a82f",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/decisions.py": "e101c3f8cf6d1b43ae12a7a8cb5e2f40ef56a9b3799f1cf976e27e05750bb27c",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/evaluate.py": "c87f8fe658e06aaed9c8d3fc913c6976b9ed05f02d662e1f803773e43bf5fbb0",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/fit.py": "5c0e881a9a8a4bba78bcf063afcee54d4dcaf02e825f93e3d9bdd95dfbde99f4",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/frozen_moment.py": "d9755cf19ff37ebd1a9c958115f4eba15586d36d3025f61deefc2d02638c4b28",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/frozen_moment_observation.py": "3f63abedb193d480a6f76c1108bd5eb80233a6fd727d0a2a9fbacb0e3109abd3",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/frozen_moment_scoring.py": "de47ed4307bab841cee8063c59654495a3b8090662f12396f7b4b818f1349778",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/p_risk_replay.py": "7cddeba318b7daa37c0d3cca08af009bcbae1f3794acbd6cc372c517b46fafd4",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/r5_inputs.py": "a45a0b4bd19e8da89c2f65f8801ef0d00a97a2ac9f92af81862355df73901d6a",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/restored_separation.py": "1d792fbe682545b4e5ac6c03b5a8c741cb31e87309e893ac74ed7dfc46dc628a",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/src/seals.py": "b1e4e91a7aa2304bb9d43af06babe419aa4f6cbc8932a00bf7c8f55776fa3133"
+  },
+  "cwd": "/home/hxchen/research/GDA/TSBA/repository",
+  "command": [
+    "/home/hxchen/anaconda3/envs/bfn4jet/bin/python",
+    "-m",
+    "experiments.mutagenicity.r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119.scripts.original_risk_attribution",
+    "--config",
+    "experiments/mutagenicity/r7_\u5171\u540c\u89e3\u91ca\u4e0e\u5171\u4eab\u66f4\u65b0\u9a8c\u8bc1_20261119/configs/original-risk-attribution.json",
+    "--output",
+    "/home/hxchen/research/GDA/TSBA/experiments/r7/original-risk-attribution-001",
+    "--phase",
+    "freeze"
+  ],
+  "started_utc": "2026-11-21T05:11:31.773581+00:00",
+  "versions": {
+    "numpy": "1.26.4",
+    "scipy": "1.15.2",
+    "torch": "2.5.1",
+    "torch-geometric": "2.6.1"
+  },
+  "target_label_roles": []
+}
