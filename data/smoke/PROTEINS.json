@@ -1,0 +1,55 @@
+{
+  "dataset": "PROTEINS",
+  "node_type_provenance": "Original TU categorical secondary structure element type, supplied as a node label.",
+  "typed_edges": false,
+  "roles": {
+    "train": [
+      21,
+      29,
+      32,
+      40,
+      703,
+      714,
+      724,
+      725
+    ],
+    "val": [
+      11,
+      28,
+      898,
+      909
+    ],
+    "A": [
+      207,
+      222,
+      598,
+      618
+    ],
+    "H": [
+      1003,
+      30,
+      37,
+      163
+    ]
+  },
+  "source_labels": {
+    "train": "PROTEINS_train_labels.json",
+    "val": "PROTEINS_val_labels.json"
+  },
+  "provenance": {
+    "setting": "proteins_edge",
+    "source_domain": 0,
+    "target_domain": 1,
+    "seed": 3405,
+    "id_base": 0,
+    "selection": "Source R5 fit and validation: n <= 64 and m <= 120 (smoke runtime budget). First 4 fit and 2 validation IDs per class in ascending order. Mutagenicity fit prioritizes source graph 425 (first eligible training ID containing bond type 2) to exercise all source bond labels. Target R7 adapt and holdout: first 4 IDs each in historical manifest order.",
+    "input_root": "TSBA/experiments",
+    "source_sha256": {
+      "r5/proteins_edge/attempt-001/source_labels/M0/seed3405_fit.pt": "95f73f7e16f5b09ac6da3acdbeb607012aa494e8f449553e597f6417d2b096bc",
+      "r5/proteins_edge/attempt-001/source_labels/M0/seed3405_validation.pt": "0b71c887c491a6b37ca2ca420b90ea9855e20fd74b458cf186f53e774ef60e74",
+      "r5/proteins_edge/attempt-001/roles/M0/seed3405.json": "e77fb7ba16d8ec92c8a53f4724f4e557516594e389e2c8a9d011b567b3546360",
+      "r7/attempt-016/C/blocks/proteins_edge-M0_to_M1-seed-3405/manifest.json": "ba2a455af5ac47d98982e4f79718fb4ceb45c2d657cc3e2d8e7cdb1a4dab1eb7"
+    }
+  },
+  "tu_index": "PROTEINS_tu_index.json"
+}

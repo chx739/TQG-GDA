@@ -1,0 +1,55 @@
+{
+  "dataset": "Mutagenicity",
+  "node_type_provenance": "Original TU atom type, supplied as a node label.",
+  "typed_edges": true,
+  "roles": {
+    "train": [
+      4,
+      8,
+      9,
+      14,
+      20,
+      34,
+      42,
+      425
+    ],
+    "val": [
+      3,
+      13,
+      91,
+      175
+    ],
+    "A": [
+      3570,
+      3739,
+      3759,
+      3977
+    ],
+    "H": [
+      3597,
+      3768,
+      3842,
+      3913
+    ]
+  },
+  "source_labels": {
+    "train": "Mutagenicity_train_labels.json",
+    "val": "Mutagenicity_val_labels.json"
+  },
+  "provenance": {
+    "setting": "mutagenicity_edge",
+    "source_domain": 0,
+    "target_domain": 1,
+    "seed": 3405,
+    "id_base": 0,
+    "selection": "Source R5 fit and validation: n <= 64 and m <= 120 (smoke runtime budget). First 4 fit and 2 validation IDs per class in ascending order. Mutagenicity fit prioritizes source graph 425 (first eligible training ID containing bond type 2) to exercise all source bond labels. Target R7 adapt and holdout: first 4 IDs each in historical manifest order.",
+    "input_root": "TSBA/experiments",
+    "source_sha256": {
+      "r5/mutagenicity_edge/attempt-001/source_labels/M0/seed3405_fit.pt": "c8ff8f249f88834afdfa16ae88d12e131d3b8b40480a90712406c34753d8b67b",
+      "r5/mutagenicity_edge/attempt-001/source_labels/M0/seed3405_validation.pt": "d5a98fc41ed39cdccd0bd119ca0a2859948ac6863339e8a2efbdc5e6f6caa6c5",
+      "r5/mutagenicity_edge/attempt-001/roles/M0/seed3405.json": "fda05122be51b76e57448cc6666ded3d6e19d2a948dc2a18a0d6ed5e3ddfd0f7",
+      "r7/attempt-020/P/blocks/mutagenicity_edge-M0_to_M1-seed-3405/manifest.json": "1cb6f61957cdae9396dd918efbe5c03951852707245ab698dddba4ebea262ba1"
+    }
+  },
+  "tu_index": "Mutagenicity_tu_index.json"
+}
